@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Test with Results Submission</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+    }
+    /* Style for the name entry section */
+    #startSection {
+      text-align: center;
+      margin: 20px 0;
+    }
+    /* Hide the quiz section until the user starts the quiz */
+    #quizSection {
+      display: none;
+      background: #fff;
+      padding: 20px;
+      border: 2px solid #ccc;
+      margin-top: 20px;
+    }
+    .question {
+      margin-bottom: 15px;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    .timer {
+      font-size: 20px;
+      color: red;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #result {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 20px;
+      background: #e9ffe9;
+      padding: 10px;
+      border: 1px solid #4CAF50;
+      white-space: pre-line;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Quiz Test</h1>
+  
+  <!-- Step 1: Name Entry Section -->
+  <div id="startSection">
+    <label for="userName">Enter Your Name:</label>
+    <input type="text" id="userName" placeholder="Your name">
+    <button id="startBtn">Start Quiz</button>
+  </div>
+  
+  <!-- Step 2: Quiz Section (hidden initially) -->
+  <div id="quizSection">
+    <div class="timer" id="timer">Time Left: 02:00</div>
+    <form id="quizForm">
+      <!-- Questions 1 to 25 (Article 1: Pakistan’s jails) -->
+      <div class="question">
+        <p>1. According to the report, Pakistan's jails house more than 102,000 prisoners in facilities built for fewer than:</p>
+        <label><input type="radio" name="q1" value="A"> 66,000</label>
+        <label><input type="radio" name="q1" value="B"> 80,000</label>
+        <label><input type="radio" name="q1" value="C"> 50,000</label>
+        <label><input type="radio" name="q1" value="D"> 100,000</label>
+      </div>
+      
+      <div class="question">
+        <p>2. In Punjab, prisons are operating at a staggering capacity of:</p>
+        <label><input type="radio" name="q2" value="A"> 100%</label>
+        <label><input type="radio" name="q2" value="B"> 173.6%</label>
+        <label><input type="radio" name="q2" value="C"> 355%</label>
+        <label><input type="radio" name="q2" value="D"> 50%</label>
+      </div>
+      
+      <div class="question">
+        <p>3. Karachi Central Jail operates at an overcapacity of approximately:</p>
+        <label><input type="radio" name="q3" value="A"> 100%</label>
+        <label><input type="radio" name="q3" value="B"> 173.6%</label>
+        <label><input type="radio" name="q3" value="C"> 355%</label>
+        <label><input type="radio" name="q3" value="D"> 200%</label>
+      </div>
+      
+      <div class="question">
+        <p>4. What fraction of inmates remain under trial?</p>
+        <label><input type="radio" name="q4" value="A"> One-quarter</label>
+        <label><input type="radio" name="q4" value="B"> Half</label>
+        <label><input type="radio" name="q4" value="C"> Three-quarters</label>
+        <label><input type="radio" name="q4" value="D"> All</label>
+      </div>
+      
+      <div class="question">
+        <p>5. Which province constructed 13 new jails since 2010?</p>
+        <label><input type="radio" name="q5" value="A"> Sindh</label>
+        <label><input type="radio" name="q5" value="B"> Punjab</label>
+        <label><input type="radio" name="q5" value="C"> KP</label>
+        <label><input type="radio" name="q5" value="D"> Balochistan</label>
+      </div>
+      
+      <div class="question">
+        <p>6. Punjab houses 61,813 prisoners in facilities meant for how many prisoners?</p>
+        <label><input type="radio" name="q6" value="A"> 37,217</label>
+        <label><input type="radio" name="q6" value="B"> 50,000</label>
+        <label><input type="radio" name="q6" value="C"> 61,813</label>
+        <label><input type="radio" name="q6" value="D"> 102,000</label>
+      </div>
+      
+      <div class="question">
+        <p>7. Which provinces are mentioned as lagging behind in prison reforms?</p>
+        <label><input type="radio" name="q7" value="A"> Punjab only</label>
+        <label><input type="radio" name="q7" value="B"> Sindh only</label>
+        <label><input type="radio" name="q7" value="C"> Sindh, KP, and Balochistan</label>
+        <label><input type="radio" name="q7" value="D"> All provinces</label>
+      </div>
+      
+      <div class="question">
+        <p>8. The 2022 amendment that exacerbated overcrowding is to which act?</p>
+        <label><input type="radio" name="q8" value="A"> Penal Code</label>
+        <label><input type="radio" name="q8" value="B"> Control of Narcotic Substances Act</label>
+        <label><input type="radio" name="q8" value="C"> Prison Reform Act</label>
+        <label><input type="radio" name="q8" value="D"> Human Rights Act</label>
+      </div>
+      
+      <div class="question">
+        <p>9. Nearly what percentage of Punjab’s prisoners are drug offenders?</p>
+        <label><input type="radio" name="q9" value="A"> 10%</label>
+        <label><input type="radio" name="q9" value="B"> 30%</label>
+        <label><input type="radio" name="q9" value="C"> 50%</label>
+        <label><input type="radio" name="q9" value="D"> 70%</label>
+      </div>
+      
+      <div class="question">
+        <p>10. In 2023, what was the conviction rate for narcotics cases in Punjab?</p>
+        <label><input type="radio" name="q10" value="A"> 2%</label>
+        <label><input type="radio" name="q10" value="B"> 10%</label>
+        <label><input type="radio" name="q10" value="C"> 30%</label>
+        <label><input type="radio" name="q10" value="D"> 50%</label>
+      </div>
+      
+      <div class="question">
+        <p>11. Which factors contribute to inhumane prison conditions?</p>
+        <label><input type="radio" name="q11" value="A"> Good food</label>
+        <label><input type="radio" name="q11" value="B"> Poor sanitation, malnutrition, and lack of healthcare</label>
+        <label><input type="radio" name="q11" value="C"> High security</label>
+        <label><input type="radio" name="q11" value="D"> Overstaffing</label>
+      </div>
+      
+      <div class="question">
+        <p>12. How are prisoners often forced to sleep due to overcrowding?</p>
+        <label><input type="radio" name="q12" value="A"> In individual cells</label>
+        <label><input type="radio" name="q12" value="B"> On the floor</label>
+        <label><input type="radio" name="q12" value="C"> In shifts</label>
+        <label><input type="radio" name="q12" value="D"> Outdoors</label>
+      </div>
+      
+      <div class="question">
+        <p>13. Which tragic case highlighted mental health issues in prisons?</p>
+        <label><input type="radio" name="q13" value="A"> Ali Khan</label>
+        <label><input type="radio" name="q13" value="B"> Khizar Hayat</label>
+        <label><input type="radio" name="q13" value="C"> Muhammad Ali</label>
+        <label><input type="radio" name="q13" value="D"> Ahmed Shah</label>
+      </div>
+      
+      <div class="question">
+        <p>14. The case of Khizar Hayat underscores the crisis in:</p>
+        <label><input type="radio" name="q14" value="A"> Education</label>
+        <label><input type="radio" name="q14" value="B"> Mental health in prisons</label>
+        <label><input type="radio" name="q14" value="C"> Transportation</label>
+        <label><input type="radio" name="q14" value="D"> Nutrition</label>
+      </div>
+      
+      <div class="question">
+        <p>15. Which measure is suggested to reduce the undertrial population?</p>
+        <label><input type="radio" name="q15" value="A"> Longer sentences</label>
+        <label><input type="radio" name="q15" value="B"> Bail reforms and expedited court proceedings</label>
+        <label><input type="radio" name="q15" value="C"> More jails</label>
+        <label><input type="radio" name="q15" value="D"> Stricter laws</label>
+      </div>
+      
+      <div class="question">
+        <p>16. Which independent body is proposed to oversee prison conditions?</p>
+        <label><input type="radio" name="q16" value="A"> National Assembly</label>
+        <label><input type="radio" name="q16" value="B"> NCHR</label>
+        <label><input type="radio" name="q16" value="C"> Police</label>
+        <label><input type="radio" name="q16" value="D"> Ministry of Justice</label>
+      </div>
+      
+      <div class="question">
+        <p>17. What should be integrated into prison management for rehabilitation?</p>
+        <label><input type="radio" name="q17" value="A"> Vocational training and education</label>
+        <label><input type="radio" name="q17" value="B"> Strict discipline</label>
+        <label><input type="radio" name="q17" value="C"> Solitary confinement</label>
+        <label><input type="radio" name="q17" value="D"> No change</label>
+      </div>
+      
+      <div class="question">
+        <p>18. What alternative sentencing is suggested?</p>
+        <label><input type="radio" name="q18" value="A"> Life imprisonment</label>
+        <label><input type="radio" name="q18" value="B"> Death penalty</label>
+        <label><input type="radio" name="q18" value="C"> Community service and alternative sentencing</label>
+        <label><input type="radio" name="q18" value="D"> Extended jail time</label>
+      </div>
+      
+      <div class="question">
+        <p>19. Which province has yet to implement its Draft Prison Rules, 2022?</p>
+        <label><input type="radio" name="q19" value="A"> Sindh</label>
+        <label><input type="radio" name="q19" value="B"> KP</label>
+        <label><input type="radio" name="q19" value="C"> Balochistan</label>
+        <label><input type="radio" name="q19" value="D"> Punjab</label>
+      </div>
+      
+      <div class="question">
+        <p>20. What is needed to improve prisoner welfare?</p>
+        <label><input type="radio" name="q20" value="A"> Building more prisons</label>
+        <label><input type="radio" name="q20" value="B"> Implementation of reforms</label>
+        <label><input type="radio" name="q20" value="C"> Hiring more guards</label>
+        <label><input type="radio" name="q20" value="D"> Reducing sentences</label>
+      </div>
+      
+      <div class="question">
+        <p>21. Drug-related prisoners in Punjab often serve:</p>
+        <label><input type="radio" name="q21" value="A"> Short sentences</label>
+        <label><input type="radio" name="q21" value="B"> Disproportionately long sentences</label>
+        <label><input type="radio" name="q21" value="C"> No sentences</label>
+        <label><input type="radio" name="q21" value="D"> Community service</label>
+      </div>
+      
+      <div class="question">
+        <p>22. What percentage of prisoners in Punjab are drug offenders?</p>
+        <label><input type="radio" name="q22" value="A"> 10%</label>
+        <label><input type="radio" name="q22" value="B"> 30%</label>
+        <label><input type="radio" name="q22" value="C"> 50%</label>
+        <label><input type="radio" name="q22" value="D"> 70%</label>
+      </div>
+      
+      <div class="question">
+        <p>23. Which mechanism is suggested for prisoner complaints?</p>
+        <label><input type="radio" name="q23" value="A"> In-house complaints</label>
+        <label><input type="radio" name="q23" value="B"> Police reporting</label>
+        <label><input type="radio" name="q23" value="C"> Independent prisoner complaint mechanism by NCHR</label>
+        <label><input type="radio" name="q23" value="D"> No mechanism</label>
+      </div>
+      
+      <div class="question">
+        <p>24. The overall description of Pakistan's prison system in the report is:</p>
+        <label><input type="radio" name="q24" value="A"> Efficient</label>
+        <label><input type="radio" name="q24" value="B"> Overcrowded and broken</label>
+        <label><input type="radio" name="q24" value="C"> Modernized</label>
+        <label><input type="radio" name="q24" value="D"> Safe</label>
+      </div>
+      
+      <div class="question">
+        <p>25. What is urgently needed to resolve the prison crisis?</p>
+        <label><input type="radio" name="q25" value="A"> More reports</label>
+        <label><input type="radio" name="q25" value="B"> Political will and implementation of reforms</label>
+        <label><input type="radio" name="q25" value="C"> Increased funding only</label>
+        <label><input type="radio" name="q25" value="D"> Longer sentences</label>
+      </div>
+      
+      <!-- Questions 26 to 50 (Article 2: Driving in Karachi) -->
+      <div class="question">
+        <p>26. What is the driving situation in Karachi described as?</p>
+        <label><input type="radio" name="q26" value="A"> Calm</label>
+        <label><input type="radio" name="q26" value="B"> Hazardous with chaos</label>
+        <label><input type="radio" name="q26" value="C"> Efficient</label>
+        <label><input type="radio" name="q26" value="D"> Well-regulated</label>
+      </div>
+      
+      <div class="question">
+        <p>27. Deadly accidents in Karachi mostly involve which type of vehicles?</p>
+        <label><input type="radio" name="q27" value="A"> Motorcycles</label>
+        <label><input type="radio" name="q27" value="B"> Heavy vehicles</label>
+        <label><input type="radio" name="q27" value="C"> Cars</label>
+        <label><input type="radio" name="q27" value="D"> Bicycles</label>
+      </div>
+      
+      <div class="question">
+        <p>28. Where did the latest fatal accident occur as mentioned in the article?</p>
+        <label><input type="radio" name="q28" value="A"> Clifton</label>
+        <label><input type="radio" name="q28" value="B"> Malir</label>
+        <label><input type="radio" name="q28" value="C"> Saddar</label>
+        <label><input type="radio" name="q28" value="D"> Gulshan</label>
+      </div>
+      
+      <div class="question">
+        <p>29. What happened a day before the latest accident in Karachi?</p>
+        <label><input type="radio" name="q29" value="A"> A public bus accident</label>
+        <label><input type="radio" name="q29" value="B"> An industrialist and his son died after being hit by a trailer</label>
+        <label><input type="radio" name="q29" value="C"> A robbery</label>
+        <label><input type="radio" name="q29" value="D"> A protest</label>
+      </div>
+      
+      <div class="question">
+        <p>30. During what time is the movement of heavy vehicles prohibited?</p>
+        <label><input type="radio" name="q30" value="A"> Night</label>
+        <label><input type="radio" name="q30" value="B"> Daylight hours</label>
+        <label><input type="radio" name="q30" value="C"> Evening</label>
+        <label><input type="radio" name="q30" value="D"> Early morning</label>
+      </div>
+      
+      <div class="question">
+        <p>31. How many fatalities have been reported in Karachi so far this year?</p>
+        <label><input type="radio" name="q31" value="A"> Over 50</label>
+        <label><input type="radio" name="q31" value="B"> Over 130</label>
+        <label><input type="radio" name="q31" value="C"> Over 500</label>
+        <label><input type="radio" name="q31" value="D"> Over 1000</label>
+      </div>
+      
+      <div class="question">
+        <p>32. Approximately how many people have been injured in Karachi this year?</p>
+        <label><input type="radio" name="q32" value="A"> 500</label>
+        <label><input type="radio" name="q32" value="B"> 1,000</label>
+        <label><input type="radio" name="q32" value="C"> More than 1,800</label>
+        <label><input type="radio" name="q32" value="D"> 2,500</label>
+      </div>
+      
+      <div class="question">
+        <p>33. Around how many people were killed in Karachi last year?</p>
+        <label><input type="radio" name="q33" value="A"> 100</label>
+        <label><input type="radio" name="q33" value="B"> 250</label>
+        <label><input type="radio" name="q33" value="C"> 500</label>
+        <label><input type="radio" name="q33" value="D"> 750</label>
+      </div>
+      
+      <div class="question">
+        <p>34. What reaction has been observed following fatal traffic accidents?</p>
+        <label><input type="radio" name="q34" value="A"> Celebrations</label>
+        <label><input type="radio" name="q34" value="B"> Protests with torching of vehicles</label>
+        <label><input type="radio" name="q34" value="C"> Indifference</label>
+        <label><input type="radio" name="q34" value="D"> Increased traffic fines</label>
+      </div>
+      
+      <div class="question">
+        <p>35. What has the Sindh government formed to address road safety?</p>
+        <label><input type="radio" name="q35" value="A"> A new police force</label>
+        <label><input type="radio" name="q35" value="B"> A committee</label>
+        <label><input type="radio" name="q35" value="C"> A public awareness campaign</label>
+        <label><input type="radio" name="q35" value="D"> A legal task force</label>
+      </div>
+      
+      <div class="question">
+        <p>36. Who is mostly blamed for the hazardous driving conditions?</p>
+        <label><input type="radio" name="q36" value="A"> The public only</label>
+        <label><input type="radio" name="q36" value="B"> The state for failing to enforce traffic rules</label>
+        <label><input type="radio" name="q36" value="C"> Foreign drivers</label>
+        <label><input type="radio" name="q36" value="D"> Car manufacturers</label>
+      </div>
+      
+      <div class="question">
+        <p>37. What are traffic policemen often preoccupied with instead of enforcing rules?</p>
+        <label><input type="radio" name="q37" value="A"> Patrolling highways</label>
+        <label><input type="radio" name="q37" value="B"> Shaking down motorcyclists and small vehicle drivers</label>
+        <label><input type="radio" name="q37" value="C"> Fixing road signs</label>
+        <label><input type="radio" name="q37" value="D"> Organizing events</label>
+      </div>
+      
+      <div class="question">
+        <p>38. How can drivers sometimes avoid traffic fines?</p>
+        <label><input type="radio" name="q38" value="A"> By obeying all rules</label>
+        <label><input type="radio" name="q38" value="B"> By stuffing notes into officers' pockets</label>
+        <label><input type="radio" name="q38" value="C"> By driving slowly</label>
+        <label><input type="radio" name="q38" value="D"> By wearing seat belts</label>
+      </div>
+      
+      <div class="question">
+        <p>39. What is suggested to be deployed to enforce traffic rules more effectively?</p>
+        <label><input type="radio" name="q39" value="A"> A professional and honest traffic police force</label>
+        <label><input type="radio" name="q39" value="B"> More cameras</label>
+        <label><input type="radio" name="q39" value="C"> More road signs</label>
+        <label><input type="radio" name="q39" value="D"> A volunteer force</label>
+      </div>
+      
+      <div class="question">
+        <p>40. Which police force is mentioned as having a comparatively better record?</p>
+        <label><input type="radio" name="q40" value="A"> City Police</label>
+        <label><input type="radio" name="q40" value="B"> Highway Patrol</label>
+        <label><input type="radio" name="q40" value="C"> Motorway Police</label>
+        <label><input type="radio" name="q40" value="D"> Riot Police</label>
+      </div>
+      
+      <div class="question">
+        <p>41. What model is recommended to be emulated for better road safety?</p>
+        <label><input type="radio" name="q41" value="A"> The model of the Motorway Police</label>
+        <label><input type="radio" name="q41" value="B"> The local police model</label>
+        <label><input type="radio" name="q41" value="C"> Community policing</label>
+        <label><input type="radio" name="q41" value="D"> Private security</label>
+      </div>
+      
+      <div class="question">
+        <p>42. What is recommended for monitoring heavy vehicles in the city?</p>
+        <label><input type="radio" name="q42" value="A"> No monitoring</label>
+        <label><input type="radio" name="q42" value="B"> Strict vigilance during prohibited hours</label>
+        <label><input type="radio" name="q42" value="C"> Random checks only</label>
+        <label><input type="radio" name="q42" value="D"> Self-reporting</label>
+      </div>
+      
+      <div class="question">
+        <p>43. How is the behavior of the public on the roads described?</p>
+        <label><input type="radio" name="q43" value="A"> Very disciplined</label>
+        <label><input type="radio" name="q43" value="B"> Routinely breaking the law</label>
+        <label><input type="radio" name="q43" value="C"> Cooperative</label>
+        <label><input type="radio" name="q43" value="D"> Alert</label>
+      </div>
+      
+      <div class="question">
+        <p>44. According to the article, what is essential for making roads safer?</p>
+        <label><input type="radio" name="q44" value="A"> Higher speed limits</label>
+        <label><input type="radio" name="q44" value="B"> Drivers displaying civic sense</label>
+        <label><input type="radio" name="q44" value="C"> More lanes</label>
+        <label><input type="radio" name="q44" value="D"> Free parking</label>
+      </div>
+      
+      <div class="question">
+        <p>45. Who is mostly responsible for hazardous road conditions?</p>
+        <label><input type="radio" name="q45" value="A"> The state for not enforcing rules</label>
+        <label><input type="radio" name="q45" value="B"> Foreign drivers</label>
+        <label><input type="radio" name="q45" value="C"> Car manufacturers</label>
+        <label><input type="radio" name="q45" value="D"> Private companies</label>
+      </div>
+      
+      <div class="question">
+        <p>46. What effect has the frequency of fatal accidents had on law and order?</p>
+        <label><input type="radio" name="q46" value="A"> Improved security</label>
+        <label><input type="radio" name="q46" value="B"> Led to law and order situations</label>
+        <label><input type="radio" name="q46" value="C"> No effect</label>
+        <label><input type="radio" name="q46" value="D"> Reduced crime</label>
+      </div>
+      
+      <div class="question">
+        <p>47. What do media figures report about fatalities in Karachi this year?</p>
+        <label><input type="radio" name="q47" value="A"> Fewer than 50</label>
+        <label><input type="radio" name="q47" value="B"> Over 130</label>
+        <label><input type="radio" name="q47" value="C"> Over 500</label>
+        <label><input type="radio" name="q47" value="D"> Zero fatalities</label>
+      </div>
+      
+      <div class="question">
+        <p>48. What is the main task of the committee formed by the Sindh government?</p>
+        <label><input type="radio" name="q48" value="A"> To organize road races</label>
+        <label><input type="radio" name="q48" value="B"> To oversee road safety</label>
+        <label><input type="radio" name="q48" value="C"> To increase taxes</label>
+        <label><input type="radio" name="q48" value="D"> To build new roads</label>
+      </div>
+      
+      <div class="question">
+        <p>49. What type of police force is recommended to check violators?</p>
+        <label><input type="radio" name="q49" value="A"> A professional and honest traffic police force</label>
+        <label><input type="radio" name="q49" value="B"> Volunteer community watch</label>
+        <label><input type="radio" name="q49" value="C"> Private security</label>
+        <label><input type="radio" name="q49" value="D"> Military police</label>
+      </div>
+      
+      <div class="question">
+        <p>50. What is the overall recommendation for improving road safety?</p>
+        <label><input type="radio" name="q50" value="A"> Enforcing traffic rules and encouraging civic sense</label>
+        <label><input type="radio" name="q50" value="B"> Building more roads</label>
+        <label><input type="radio" name="q50" value="C"> Reducing speed limits</label>
+        <label><input type="radio" name="q50" value="D"> Removing traffic signs</label>
+      </div>
+      
+      <button type="button" id="submitBtn">Submit Quiz</button>
+    </form>
+    <div id="result"></div>
+  </div>
+  
+  <!-- Step 3: Hidden Formspree Form for Sending Results -->
+  <form id="resultForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+    <input type="hidden" name="studentName" id="studentName">
+    <input type="hidden" name="resultMessage" id="resultMessage">
+    <button type="submit">Send</button>
+  </form>
+  
+  <script>
+    let timeLeft = 120; // 2 minutes in seconds
+    let timerInterval;
+    
+    // When the user clicks "Start Quiz"
+    document.getElementById("startBtn").addEventListener("click", function() {
+      const userName = document.getElementById("userName").value.trim();
+      if (userName === "") {
+        alert("Please enter your name before starting the quiz.");
+        return;
+      }
+      // Hide the name entry section and show the quiz section
+      document.getElementById("startSection").style.display = "none";
+      document.getElementById("quizSection").style.display = "block";
+      startTimer();
+    });
+    
+    // Start the countdown timer
+    function startTimer() {
+      timerInterval = setInterval(function() {
+        timeLeft--;
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+        document.getElementById("timer").textContent = "Time Left: " +
+          (minutes < 10 ? "0" : "") + minutes + ":" +
+          (seconds < 10 ? "0" : "") + seconds;
+        // If time runs out, automatically submit the quiz
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          submitQuiz();
+        }
+      }, 1000);
+    }
+    
+    // When the user clicks "Submit Quiz" or when time is up
+    document.getElementById("submitBtn").addEventListener("click", submitQuiz);
+    
+    function submitQuiz() {
+      // Stop the timer
+      clearInterval(timerInterval);
+      
+      const form = document.getElementById("quizForm");
+      const formData = new FormData(form);
+      let score = 0, attempted = 0;
+      
+      // Define the correct answers for all 50 questions
+      const correctAnswers = {
+        q1: "A", q2: "B", q3: "C", q4: "C", q5: "B",
+        q6: "A", q7: "C", q8: "B", q9: "B", q10: "A",
+        q11: "B", q12: "C", q13: "B", q14: "B", q15: "B",
+        q16: "B", q17: "A", q18: "C", q19: "D", q20: "B",
+        q21: "B", q22: "B", q23: "C", q24: "B", q25: "B",
+        q26: "B", q27: "B", q28: "B", q29: "B", q30: "B",
+        q31: "B", q32: "C", q33: "C", q34: "B", q35: "B",
+        q36: "B", q37: "B", q38: "B", q39: "A", q40: "C",
+        q41: "A", q42: "B", q43: "B", q44: "B", q45: "A",
+        q46: "B", q47: "B", q48: "B", q49: "A", q50: "A"
+      };
+      
+      // Loop through each question (q1 to q50)
+      for (let i = 1; i <= 50; i++) {
+        let q = "q" + i;
+        if (formData.has(q)) {
+          attempted++;
+          if (formData.get(q) === correctAnswers[q]) {
+            score++;
+          }
+        }
+      }
+      
+      // Get student's name and calculate time taken
+      const userName = document.getElementById("userName").value;
+      const timeTaken = 120 - timeLeft;
+      
+      // Create a result message
+      const resultText = 
+        "Name: " + userName + "\n" +
+        "Attempted: " + attempted + " question(s)\n" +
+        "Score: " + score + " out of 50\n" +
+        "Time Taken: " + timeTaken + " second(s)";
+      
+      // Display the result on the page
+      document.getElementById("result").textContent = resultText;
+      
+      // Fill in the hidden Formspree form fields with the result data
+      document.getElementById("studentName").value = userName;
+      document.getElementById("resultMessage").value = resultText;
+      
+      // Automatically submit the hidden Formspree form to send your results
+      document.getElementById("resultForm").submit();
+      
+      // Disable the quiz form so no further changes can be made
+      Array.from(form.elements).forEach(el => el.disabled = true);
+    }
+  </script>
+</body>
+</html>
