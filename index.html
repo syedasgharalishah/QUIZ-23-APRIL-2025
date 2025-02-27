@@ -1,380 +1,516 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 26 February 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 27 February 2025</title>
   <style>
-    /* Overall styling */
+    /* Base styling */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f4f4;
-      /* Disable text selection */
-      -webkit-user-select: none; 
+      /* Final instruction: disable text selection */
+      user-select: none;
+      -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
-      user-select: none;
     }
     header {
-      background: linear-gradient(135deg, #222, #555);
+      background-color: #333;
       color: #fff;
       padding: 20px;
       text-align: center;
     }
     footer {
-      background: #222;
+      background-color: #333;
       color: #fff;
       padding: 10px;
       text-align: center;
-      font-size: 0.9em;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
     }
     .container {
-      width: 80%;
-      margin: 20px auto;
+      max-width: 800px;
+      margin: 80px auto 80px;
       padding: 20px;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    #nameEntry, #quizSection, #resultsSection {
+    #nameEntry {
       margin-bottom: 20px;
+      text-align: center;
     }
-    input[type="text"] {
+    #nameEntry input {
       padding: 5px;
-      width: 200px;
-      margin-bottom: 10px;
+      font-size: 16px;
     }
-    button {
-      padding: 10px 15px;
-      background: #333;
-      color: #fff;
-      border: none;
+    #nameEntry button {
+      padding: 6px 12px;
+      font-size: 16px;
+      margin-left: 10px;
       cursor: pointer;
-      margin-top: 10px;
     }
-    button:hover {
-      background: #555;
+    #quizSection {
+      display: none;
     }
     .timer {
-      font-size: 1.2em;
+      font-size: 18px;
       font-weight: bold;
-      margin-bottom: 15px;
+      text-align: center;
+      margin-bottom: 20px;
     }
     .question {
-      margin-bottom: 15px;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 10px;
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ccc;
     }
-    label {
+    .question p {
+      margin: 0 0 8px 0;
+    }
+    .question label {
       display: block;
-      margin: 5px 0;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+    #submitQuizButton {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      white-space: pre-wrap;
     }
   </style>
+</head>
+<body>
+  <header>
+    <h1>QUIZ FOR CSS ASPIRANTS 27 February 2025</h1>
+    <!-- Additional design elements can be added here -->
+  </header>
+  
+  <div class="container">
+    <!-- Name Entry Section -->
+    <div id="nameEntry">
+      <label for="studentName">Enter your name:</label>
+      <input type="text" id="studentName" />
+      <button id="startQuizButton">Start Quiz</button>
+    </div>
+    
+    <!-- Quiz Section -->
+    <div id="quizSection">
+      <div class="timer" id="timerDisplay">10:00</div>
+      <form id="quizForm">
+        <!-- Article 1 Questions (Q1 to Q20) -->
+        <h2>Article 1 Questions</h2>
+        <div class="question">
+          <p>1. What is the main challenge mentioned for Pakistani banks?</p>
+          <label><input type="radio" name="q1" value="a" data-correct="true"> Rapid tech disruptions</label>
+          <label><input type="radio" name="q1" value="b"> High interest rates</label>
+          <label><input type="radio" name="q1" value="c"> Political instability</label>
+          <label><input type="radio" name="q1" value="d"> Lack of customer trust</label>
+        </div>
+        <div class="question">
+          <p>2. Which group is noted as being complacent in Article 1?</p>
+          <label><input type="radio" name="q2" value="a"> Tech startups</label>
+          <label><input type="radio" name="q2" value="b" data-correct="true"> Bankers</label>
+          <label><input type="radio" name="q2" value="c"> Small businesses</label>
+          <label><input type="radio" name="q2" value="d"> Farmers</label>
+        </div>
+        <div class="question">
+          <p>3. What has made bankers complacent according to Article 1?</p>
+          <label><input type="radio" name="q3" value="a" data-correct="true"> The traditional banking model</label>
+          <label><input type="radio" name="q3" value="b"> New technology investments</label>
+          <label><input type="radio" name="q3" value="c"> Government regulations</label>
+          <label><input type="radio" name="q3" value="d"> Global competition</label>
+        </div>
+        <div class="question">
+          <p>4. What risk is associated with risk-free lending?</p>
+          <label><input type="radio" name="q4" value="a"> Credit risk</label>
+          <label><input type="radio" name="q4" value="b" data-correct="true"> Complacency risk</label>
+          <label><input type="radio" name="q4" value="c"> Market risk</label>
+          <label><input type="radio" name="q4" value="d"> Operational risk</label>
+        </div>
+        <div class="question">
+          <p>5. Which event highlighted the massive tax burden on banks?</p>
+          <label><input type="radio" name="q5" value="a"> Financial Summit</label>
+          <label><input type="radio" name="q5" value="b"> Banking Conference</label>
+          <label><input type="radio" name="q5" value="c" data-correct="true"> Pakistan Banking Summit</label>
+          <label><input type="radio" name="q5" value="d"> Economic Forum</label>
+        </div>
+        <div class="question">
+          <p>6. Which sector has been largely ignored by profit-oriented bankers?</p>
+          <label><input type="radio" name="q6" value="a"> Large corporations</label>
+          <label><input type="radio" name="q6" value="b"> Rural populations</label>
+          <label><input type="radio" name="q6" value="c" data-correct="true"> Smallholder farmers</label>
+          <label><input type="radio" name="q6" value="d"> Tech companies</label>
+        </div>
+        <div class="question">
+          <p>7. How long has the banking sector been transitioning according to Article 1?</p>
+          <label><input type="radio" name="q7" value="a" data-correct="true"> Three and a half decades</label>
+          <label><input type="radio" name="q7" value="b"> Two decades</label>
+          <label><input type="radio" name="q7" value="c"> One century</label>
+          <label><input type="radio" name="q7" value="d"> A decade</label>
+        </div>
+        <div class="question">
+          <p>8. What has helped governments finance their deficits?</p>
+          <label><input type="radio" name="q8" value="a"> Tax reforms</label>
+          <label><input type="radio" name="q8" value="b" data-correct="true"> Banking sector growth</label>
+          <label><input type="radio" name="q8" value="c"> International loans</label>
+          <label><input type="radio" name="q8" value="d"> Stock markets</label>
+        </div>
+        <div class="question">
+          <p>9. Which technological advancement is mentioned as disruptive?</p>
+          <label><input type="radio" name="q9" value="a" data-correct="true"> AI</label>
+          <label><input type="radio" name="q9" value="b"> Blockchain</label>
+          <label><input type="radio" name="q9" value="c"> Cloud Computing</label>
+          <label><input type="radio" name="q9" value="d"> Internet of Things</label>
+        </div>
+        <div class="question">
+          <p>10. What is a potential consequence of delaying digital adoption?</p>
+          <label><input type="radio" name="q10" value="a"> Increased profits</label>
+          <label><input type="radio" name="q10" value="b" data-correct="true"> Industry decline</label>
+          <label><input type="radio" name="q10" value="c"> Market saturation</label>
+          <label><input type="radio" name="q10" value="d"> Better customer service</label>
+        </div>
+        <div class="question">
+          <p>11. Which investment is crucial for banks to meet future demands?</p>
+          <label><input type="radio" name="q11" value="a" data-correct="true"> Human resource development</label>
+          <label><input type="radio" name="q11" value="b"> Real estate</label>
+          <label><input type="radio" name="q11" value="c"> Foreign investments</label>
+          <label><input type="radio" name="q11" value="d"> Gold reserves</label>
+        </div>
+        <div class="question">
+          <p>12. What does the traditional banking model primarily rely on?</p>
+          <label><input type="radio" name="q12" value="a"> Risky lending</label>
+          <label><input type="radio" name="q12" value="b" data-correct="true"> Risk-free lending</label>
+          <label><input type="radio" name="q12" value="c"> Microfinance</label>
+          <label><input type="radio" name="q12" value="d"> Crowdfunding</label>
+        </div>
+        <div class="question">
+          <p>13. What is a key factor for the banking industry to survive in the next 10 years?</p>
+          <label><input type="radio" name="q13" value="a"> Maintaining old models</label>
+          <label><input type="radio" name="q13" value="b"> Reducing digital investments</label>
+          <label><input type="radio" name="q13" value="c" data-correct="true"> Adopting new technologies</label>
+          <label><input type="radio" name="q13" value="d"> Increasing interest rates</label>
+        </div>
+        <div class="question">
+          <p>14. What has the banking sector largely ignored?</p>
+          <label><input type="radio" name="q14" value="a"> Urban populations</label>
+          <label><input type="radio" name="q14" value="b"> International trade</label>
+          <label><input type="radio" name="q14" value="c" data-correct="true"> Lower-income groups</label>
+          <label><input type="radio" name="q14" value="d"> Corporate loans</label>
+        </div>
+        <div class="question">
+          <p>15. Which issue was discussed at the Pakistan Banking Summit?</p>
+          <label><input type="radio" name="q15" value="a"> Digital innovation</label>
+          <label><input type="radio" name="q15" value="b"> Windfall levy</label>
+          <label><input type="radio" name="q15" value="c" data-correct="true"> Massive tax burden</label>
+          <label><input type="radio" name="q15" value="d"> Loan defaults</label>
+        </div>
+        <div class="question">
+          <p>16. How have banks helped in the growth of the digital space?</p>
+          <label><input type="radio" name="q16" value="a" data-correct="true"> Investing in mobile apps</label>
+          <label><input type="radio" name="q16" value="b"> Building brick-and-mortar branches</label>
+          <label><input type="radio" name="q16" value="c"> Reducing online services</label>
+          <label><input type="radio" name="q16" value="d"> Focusing on cash transactions</label>
+        </div>
+        <div class="question">
+          <p>17. What role can conferences play for banks?</p>
+          <label><input type="radio" name="q17" value="a"> Solving all problems</label>
+          <label><input type="radio" name="q17" value="b" data-correct="true"> Highlighting issues</label>
+          <label><input type="radio" name="q17" value="c"> Increasing profits</label>
+          <label><input type="radio" name="q17" value="d"> Reducing risks</label>
+        </div>
+        <div class="question">
+          <p>18. Which sector is criticized for not receiving adequate support?</p>
+          <label><input type="radio" name="q18" value="a"> Large corporations</label>
+          <label><input type="radio" name="q18" value="b"> Tech startups</label>
+          <label><input type="radio" name="q18" value="c" data-correct="true"> Small businesses</label>
+          <label><input type="radio" name="q18" value="d"> Financial institutions</label>
+        </div>
+        <div class="question">
+          <p>19. What is essential for banks to remain competitive?</p>
+          <label><input type="radio" name="q19" value="a"> Ignoring tech trends</label>
+          <label><input type="radio" name="q19" value="b" data-correct="true"> Embracing technology</label>
+          <label><input type="radio" name="q19" value="c"> Reducing loan amounts</label>
+          <label><input type="radio" name="q19" value="d"> Increasing fees</label>
+        </div>
+        <div class="question">
+          <p>20. What does Article 1 suggest banks need to invest in?</p>
+          <label><input type="radio" name="q20" value="a"> Traditional marketing</label>
+          <label><input type="radio" name="q20" value="b" data-correct="true"> Digital technology and AI</label>
+          <label><input type="radio" name="q20" value="c"> Real estate</label>
+          <label><input type="radio" name="q20" value="d"> Manual processes</label>
+        </div>
+        
+        <!-- Article 2 Questions (Q21 to Q40) -->
+        <h2>Article 2 Questions</h2>
+        <div class="question">
+          <p>21. What is one of the key obstacles in Pakistan-Afghanistan relations?</p>
+          <label><input type="radio" name="q21" value="a" data-correct="true"> Demarcation of the common frontier</label>
+          <label><input type="radio" name="q21" value="b"> Trade agreements</label>
+          <label><input type="radio" name="q21" value="c"> Cultural exchange</label>
+          <label><input type="radio" name="q21" value="d"> Economic sanctions</label>
+        </div>
+        <div class="question">
+          <p>22. What has frequently resulted from border disputes according to Article 2?</p>
+          <label><input type="radio" name="q22" value="a"> Increased tourism</label>
+          <label><input type="radio" name="q22" value="b" data-correct="true"> Closure of border crossings</label>
+          <label><input type="radio" name="q22" value="c"> Free trade</label>
+          <label><input type="radio" name="q22" value="d"> Diplomatic visits</label>
+        </div>
+        <div class="question">
+          <p>23. What action reportedly started at the Torkham crossing?</p>
+          <label><input type="radio" name="q23" value="a"> Trade negotiations</label>
+          <label><input type="radio" name="q23" value="b"> Construction of a bunker</label>
+          <label><input type="radio" name="q23" value="c" data-correct="true"> Bunker construction by Afghan Taliban forces</label>
+          <label><input type="radio" name="q23" value="d"> Peace talks</label>
+        </div>
+        <div class="question">
+          <p>24. How long was the Torkham crossing closed as mentioned in Article 2?</p>
+          <label><input type="radio" name="q24" value="a"> Two days</label>
+          <label><input type="radio" name="q24" value="b" data-correct="true"> Five days</label>
+          <label><input type="radio" name="q24" value="c"> One week</label>
+          <label><input type="radio" name="q24" value="d"> Ten days</label>
+        </div>
+        <div class="question">
+          <p>25. What is one economic impact of border closures mentioned?</p>
+          <label><input type="radio" name="q25" value="a"> Increased investments</label>
+          <label><input type="radio" name="q25" value="b" data-correct="true"> Losses worth millions</label>
+          <label><input type="radio" name="q25" value="c"> Booming trade</label>
+          <label><input type="radio" name="q25" value="d"> Job creation</label>
+        </div>
+        <div class="question">
+          <p>26. Which crossing is mentioned in Article 2?</p>
+          <label><input type="radio" name="q26" value="a"> Torkham crossing</label>
+          <label><input type="radio" name="q26" value="b" data-correct="true"> Torkham crossing</label>
+          <label><input type="radio" name="q26" value="c"> Attari crossing</label>
+          <label><input type="radio" name="q26" value="d"> Wagah crossing</label>
+        </div>
+        <div class="question">
+          <p>27. What is a key requirement for resolving border disputes?</p>
+          <label><input type="radio" name="q27" value="a"> Increased military presence</label>
+          <label><input type="radio" name="q27" value="b"> Economic sanctions</label>
+          <label><input type="radio" name="q27" value="c" data-correct="true"> High-level border management mechanism</label>
+          <label><input type="radio" name="q27" value="d"> Diplomatic isolation</label>
+        </div>
+        <div class="question">
+          <p>28. What causes the exchange of fire at the border?</p>
+          <label><input type="radio" name="q28" value="a"> Trade disputes</label>
+          <label><input type="radio" name="q28" value="b" data-correct="true"> Construction in disputed areas</label>
+          <label><input type="radio" name="q28" value="c"> Cultural differences</label>
+          <label><input type="radio" name="q28" value="d"> Weather conditions</label>
+        </div>
+        <div class="question">
+          <p>29. What does the Afghan side need to recognize to resolve disputes?</p>
+          <label><input type="radio" name="q29" value="a"> Economic benefits</label>
+          <label><input type="radio" name="q29" value="b"> Cultural ties</label>
+          <label><input type="radio" name="q29" value="c" data-correct="true"> Durand Line as the frontier</label>
+          <label><input type="radio" name="q29" value="d"> Political alliances</label>
+        </div>
+        <div class="question">
+          <p>30. What is the consequence of closing the border?</p>
+          <label><input type="radio" name="q30" value="a"> Boost in tourism</label>
+          <label><input type="radio" name="q30" value="b" data-correct="true"> Cut off business interests</label>
+          <label><input type="radio" name="q30" value="c"> Increased trade</label>
+          <label><input type="radio" name="q30" value="d"> Better security</label>
+        </div>
+        <div class="question">
+          <p>31. Which group is heavily impacted by border closures?</p>
+          <label><input type="radio" name="q31" value="a" data-correct="true"> Local workers</label>
+          <label><input type="radio" name="q31" value="b"> Tourists</label>
+          <label><input type="radio" name="q31" value="c"> Foreign investors</label>
+          <label><input type="radio" name="q31" value="d"> Government officials</label>
+        </div>
+        <div class="question">
+          <p>32. What is needed to prevent disputes from escalating?</p>
+          <label><input type="radio" name="q32" value="a"> Military intervention</label>
+          <label><input type="radio" name="q32" value="b" data-correct="true"> Preventive border management</label>
+          <label><input type="radio" name="q32" value="c"> Increased tariffs</label>
+          <label><input type="radio" name="q32" value="d"> More border checkpoints</label>
+        </div>
+        <div class="question">
+          <p>33. What does Article 2 suggest is essential for the local economy?</p>
+          <label><input type="radio" name="q33" value="a"> Trade</label>
+          <label><input type="radio" name="q33" value="b" data-correct="true"> Uninterrupted border crossings</label>
+          <label><input type="radio" name="q33" value="c"> Tourism</label>
+          <label><input type="radio" name="q33" value="d"> Agriculture</label>
+        </div>
+        <div class="question">
+          <p>34. What is a result of the lack of information exchange at the border?</p>
+          <label><input type="radio" name="q34" value="a"> Strengthened relations</label>
+          <label><input type="radio" name="q34" value="b"> Data sharing</label>
+          <label><input type="radio" name="q34" value="c" data-correct="true"> Misunderstandings</label>
+          <label><input type="radio" name="q34" value="d"> Improved trade</label>
+        </div>
+        <div class="question">
+          <p>35. What has not been adequately addressed according to Article 2?</p>
+          <label><input type="radio" name="q35" value="a"> Infrastructure</label>
+          <label><input type="radio" name="q35" value="b"> Diplomatic relations</label>
+          <label><input type="radio" name="q35" value="c" data-correct="true"> Underlying factors fueling differences</label>
+          <label><input type="radio" name="q35" value="d"> Cultural exchange</label>
+        </div>
+        <div class="question">
+          <p>36. What mechanism is suggested to resolve border disputes?</p>
+          <label><input type="radio" name="q36" value="a"> International arbitration</label>
+          <label><input type="radio" name="q36" value="b" data-correct="true"> Boundary management mechanism</label>
+          <label><input type="radio" name="q36" value="c"> Military supervision</label>
+          <label><input type="radio" name="q36" value="d"> Economic sanctions</label>
+        </div>
+        <div class="question">
+          <p>37. What issue does border closure affect aside from trade?</p>
+          <label><input type="radio" name="q37" value="a" data-correct="true"> People’s movement</label>
+          <label><input type="radio" name="q37" value="b"> Internet connectivity</label>
+          <label><input type="radio" name="q37" value="c"> Energy supply</label>
+          <label><input type="radio" name="q37" value="d"> Tourism</label>
+        </div>
+        <div class="question">
+          <p>38. What is the underlying reason for frequent closures?</p>
+          <label><input type="radio" name="q38" value="a"> Efficient management</label>
+          <label><input type="radio" name="q38" value="b" data-correct="true"> Unresolved bilateral differences</label>
+          <label><input type="radio" name="q38" value="c"> Weather conditions</label>
+          <label><input type="radio" name="q38" value="d"> Technological upgrades</label>
+        </div>
+        <div class="question">
+          <p>39. Which group suffers from the border closures?</p>
+          <label><input type="radio" name="q39" value="a"> Tourists</label>
+          <label><input type="radio" name="q39" value="b"> Businessmen</label>
+          <label><input type="radio" name="q39" value="c" data-correct="true"> Local workers</label>
+          <label><input type="radio" name="q39" value="d"> Government officials</label>
+        </div>
+        <div class="question">
+          <p>40. What is needed for a permanent resolution of border issues?</p>
+          <label><input type="radio" name="q40" value="a"> Prolonged military presence</label>
+          <label><input type="radio" name="q40" value="b" data-correct="true"> Clear border demarcation</label>
+          <label><input type="radio" name="q40" value="c"> Economic investments</label>
+          <label><input type="radio" name="q40" value="d"> Cultural exchange programs</label>
+        </div>
+        
+        <!-- Article 3 Questions (Q41 to Q50) -->
+        <h2>Article 3 Questions</h2>
+        <div class="question">
+          <p>41. Which city is described as an economic powerhouse in Article 3?</p>
+          <label><input type="radio" name="q41" value="a" data-correct="true"> Karachi</label>
+          <label><input type="radio" name="q41" value="b"> Lahore</label>
+          <label><input type="radio" name="q41" value="c"> Islamabad</label>
+          <label><input type="radio" name="q41" value="d"> Peshawar</label>
+        </div>
+        <div class="question">
+          <p>42. What issue is Karachi facing according to Article 3?</p>
+          <label><input type="radio" name="q42" value="a"> Overpopulation</label>
+          <label><input type="radio" name="q42" value="b" data-correct="true"> Polio vaccination refusals</label>
+          <label><input type="radio" name="q42" value="c"> Traffic congestion</label>
+          <label><input type="radio" name="q42" value="d"> Air pollution</label>
+        </div>
+        <div class="question">
+          <p>43. How many vaccine refusals have been reported in Karachi?</p>
+          <label><input type="radio" name="q43" value="a"> 10,000</label>
+          <label><input type="radio" name="q43" value="b"> 20,000</label>
+          <label><input type="radio" name="q43" value="c"> 30,000</label>
+          <label><input type="radio" name="q43" value="d" data-correct="true"> 41,800</label>
+        </div>
+        <div class="question">
+          <p>44. What percentage of refusals in Sindh does Karachi account for?</p>
+          <label><input type="radio" name="q44" value="a"> 50%</label>
+          <label><input type="radio" name="q44" value="b"> 75%</label>
+          <label><input type="radio" name="q44" value="c"> 85%</label>
+          <label><input type="radio" name="q44" value="d" data-correct="true"> 97%</label>
+        </div>
+        <div class="question">
+          <p>45. What is a promising development in Karachi’s polio drive?</p>
+          <label><input type="radio" name="q45" value="a"> Increased funding</label>
+          <label><input type="radio" name="q45" value="b"> Better infrastructure</label>
+          <label><input type="radio" name="q45" value="c"> New vaccine types</label>
+          <label><input type="radio" name="q45" value="d" data-correct="true"> Fractional Inactivated Poliovirus Vaccine</label>
+        </div>
+        <div class="question">
+          <p>46. What challenge is highlighted regarding vaccination teams?</p>
+          <label><input type="radio" name="q46" value="a"> Overstaffing</label>
+          <label><input type="radio" name="q46" value="b"> Underreporting</label>
+          <label><input type="radio" name="q46" value="c" data-correct="true"> Overstating vaccinations for compensation</label>
+          <label><input type="radio" name="q46" value="d"> Lack of training</label>
+        </div>
+        <div class="question">
+          <p>47. What is a key factor for improving polio drive effectiveness?</p>
+          <label><input type="radio" name="q47" value="a"> Higher incentives</label>
+          <label><input type="radio" name="q47" value="b"> Better logistics</label>
+          <label><input type="radio" name="q47" value="c" data-correct="true"> Community engagement</label>
+          <label><input type="radio" name="q47" value="d"> More vaccines</label>
+        </div>
+        <div class="question">
+          <p>48. What does Article 3 identify as a major risk for polio transmission?</p>
+          <label><input type="radio" name="q48" value="a"> Air pollution</label>
+          <label><input type="radio" name="q48" value="b"> Overcrowding</label>
+          <label><input type="radio" name="q48" value="c" data-correct="true"> Continuous movement of people</label>
+          <label><input type="radio" name="q48" value="d"> Poor sanitation</label>
+        </div>
+        <div class="question">
+          <p>49. What is identified as a challenge in eradicating polio in Karachi?</p>
+          <label><input type="radio" name="q49" value="a"> High vaccination rates</label>
+          <label><input type="radio" name="q49" value="b" data-correct="true"> Mistrust in public health initiatives</label>
+          <label><input type="radio" name="q49" value="c"> Abundance of resources</label>
+          <label><input type="radio" name="q49" value="d"> Overqualified staff</label>
+        </div>
+        <div class="question">
+          <p>50. What must the government strengthen to improve vaccination uptake?</p>
+          <label><input type="radio" name="q50" value="a"> Compensation structure</label>
+          <label><input type="radio" name="q50" value="b"> Media campaigns</label>
+          <label><input type="radio" name="q50" value="c"> Public awareness</label>
+          <label><input type="radio" name="q50" value="d" data-correct="true"> Community engagement</label>
+        </div>
+        <button type="button" id="submitQuizButton">Submit Quiz</button>
+      </form>
+      <div class="result" id="resultDisplay" style="display:none;"></div>
+    </div>
+  </div>
+  
+  <!-- Hidden form for Formspree submission -->
+  <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+    <input type="text" name="studentName" id="formStudentName">
+    <input type="text" name="attemptedQuestions" id="formAttemptedQuestions">
+    <input type="text" name="score" id="formScore">
+    <input type="text" name="timeTaken" id="formTimeTaken">
+  </form>
+  
+  <footer>
+    <p>Contact us: 03265762698</p>
+    <p>For more information, please get in touch!</p>
+  </footer>
+  
   <script>
     // Disable right-click and common inspect shortcuts
     document.addEventListener('contextmenu', function(e) {
       e.preventDefault();
     });
-    document.onkeydown = function(e) {
-      // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+    document.addEventListener('keydown', function(e) {
+      // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
       if (e.keyCode === 123 || 
          (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
          (e.ctrlKey && e.keyCode === 85)) {
-        return false;
+        e.preventDefault();
       }
-    };
+    });
 
-    // Global variables
-    var timer;
-    var timeLeft = 600; // 10 minutes in seconds
-    var startTime;
+    let timer;
+    let timeLeft = 600; // 10 minutes = 600 seconds
+    let startTime;
 
-    // Questions derived from Article 1 (25 questions)
-    var article1Questions = [
-      {
-        question: "According to Article 1, what is the main issue with Pakistan’s jails?",
-        options: ["Overcrowding", "Lack of security", "Modern facilities", "Underpopulation"],
-        answer: "Overcrowding"
-      },
-      {
-        question: "How many prisoners are crammed into spaces built for fewer than?",
-        options: ["50,000", "66,000", "80,000", "100,000"],
-        answer: "66,000"
-      },
-      {
-        question: "At what percentage of capacity is Punjab operating?",
-        options: ["100%", "150%", "173.6%", "200%"],
-        answer: "173.6%"
-      },
-      {
-        question: "Which jail is mentioned as operating at 355% overcapacity?",
-        options: ["Lahore Central Jail", "Karachi Central Jail", "Islamabad Jail", "Peshawar Jail"],
-        answer: "Karachi Central Jail"
-      },
-      {
-        question: "What fraction of inmates remain under trial?",
-        options: ["Half", "Two-thirds", "Three-quarters", "All"],
-        answer: "Three-quarters"
-      },
-      {
-        question: "How many new jails has Punjab constructed since 2010?",
-        options: ["10", "13", "15", "20"],
-        answer: "13"
-      },
-      {
-        question: "Punjab houses prisoners in facilities meant for fewer than how many?",
-        options: ["37,217", "50,000", "61,813", "70,000"],
-        answer: "37,217"
-      },
-      {
-        question: "Which Act’s amendment exacerbated overcrowding?",
-        options: ["The Prison Act", "The Human Rights Act", "The Control of Narcotic Substances Act", "The Justice Act"],
-        answer: "The Control of Narcotic Substances Act"
-      },
-      {
-        question: "Approximately what percentage of Punjab’s prisoners are drug offenders?",
-        options: ["10%", "20%", "30%", "40%"],
-        answer: "30%"
-      },
-      {
-        question: "What key issue regarding health is highlighted in Article 1?",
-        options: ["Excellent healthcare", "Lack of healthcare", "Optional healthcare", "Over-medication"],
-        answer: "Lack of healthcare"
-      },
-      {
-        question: "Which inhumane conditions are mentioned?",
-        options: ["Luxury rooms", "Regular meals", "Poor sanitation and malnutrition", "Ample recreation"],
-        answer: "Poor sanitation and malnutrition"
-      },
-      {
-        question: "Due to overcrowding, prisoners often sleep:",
-        options: ["On beds", "In shifts", "On the floor", "Standing up"],
-        answer: "In shifts"
-      },
-      {
-        question: "What crisis is bred by overcrowding?",
-        options: ["Economic crisis", "Political crisis", "Mental health crisis", "Technological crisis"],
-        answer: "Mental health crisis"
-      },
-      {
-        question: "Who is Khizar Hayat?",
-        options: ["A prison warden", "A reformer", "A mentally ill prisoner", "A judge"],
-        answer: "A mentally ill prisoner"
-      },
-      {
-        question: "Which provinces have updated their legal frameworks for prisons?",
-        options: ["Punjab and Balochistan", "Sindh and KP", "Sindh and Punjab", "KP and Balochistan"],
-        answer: "Sindh and KP"
-      },
-      {
-        question: "Which province has yet to implement its Draft Prison Rules, 2022?",
-        options: ["Sindh", "KP", "Punjab", "Balochistan"],
-        answer: "Punjab"
-      },
-      {
-        question: "What alternative to incarceration is suggested?",
-        options: ["Longer sentences", "Community service and alternative sentencing", "More prisons", "Harsh punishments"],
-        answer: "Community service and alternative sentencing"
-      },
-      {
-        question: "Which reforms can thin out the undertrial population?",
-        options: ["New jails", "Bail reforms and expedited court proceedings", "Increased security", "More trials"],
-        answer: "Bail reforms and expedited court proceedings"
-      },
-      {
-        question: "What independent mechanism is recommended?",
-        options: ["Parole system", "Independent prisoner complaint mechanism", "Extra guards", "Media reporting"],
-        answer: "Independent prisoner complaint mechanism"
-      },
-      {
-        question: "Which organization should conduct surprise inspections?",
-        options: ["NCHR", "Police", "Ministry of Justice", "NGO"],
-        answer: "NCHR"
-      },
-      {
-        question: "What should be integrated into prison management for rehabilitation?",
-        options: ["Vocational training and education", "Increased punishment", "Isolation", "No change"],
-        answer: "Vocational training and education"
-      },
-      {
-        question: "For people with psychosocial disabilities, Article 1 suggests:",
-        options: ["Indefinite detention", "Treatment instead of jailing", "Extra punishment", "Isolation"],
-        answer: "Treatment instead of jailing"
-      },
-      {
-        question: "What does Article 1 imply about committees and reports?",
-        options: ["They are enough", "They are not enough", "They are irrelevant", "They are harmful"],
-        answer: "They are not enough"
-      },
-      {
-        question: "What is urgently needed to address the prison crisis?",
-        options: ["More reports", "Political will and implementation of proposals", "Increased incarceration", "International aid"],
-        answer: "Political will and implementation of proposals"
-      }
-    ];
-
-    // Questions derived from Article 2 (25 questions)
-    var article2Questions = [
-      {
-        question: "According to Article 2, what is a major hazard of driving in Karachi?",
-        options: ["Smooth roads", "Hazardous conditions", "Efficient traffic", "Low congestion"],
-        answer: "Hazardous conditions"
-      },
-      {
-        question: "What is a common cause of deadly accidents in Karachi?",
-        options: ["Heavy vehicles", "Bicycles", "Pedestrians", "Cars"],
-        answer: "Heavy vehicles"
-      },
-      {
-        question: "Where did the latest accident occur?",
-        options: ["Malir", "Lyari", "Clifton", "Gulshan"],
-        answer: "Malir"
-      },
-      {
-        question: "What happened on the ICI bridge?",
-        options: ["A parade", "A collision with a trailer", "Road repair", "Traffic jam"],
-        answer: "A collision with a trailer"
-      },
-      {
-        question: "Which type of vehicle is prohibited during daylight hours?",
-        options: ["Buses", "Heavy vehicles", "Motorcycles", "Trucks"],
-        answer: "Heavy vehicles"
-      },
-      {
-        question: "How many fatalities have been reported in Karachi so far this year?",
-        options: ["50", "100", "130", "200"],
-        answer: "130"
-      },
-      {
-        question: "Approximately how many people have been injured in Karachi accidents this year?",
-        options: ["500", "1,000", "1,800", "2,500"],
-        answer: "1,800"
-      },
-      {
-        question: "Around how many people were killed in Karachi last year?",
-        options: ["300", "400", "500", "600"],
-        answer: "500"
-      },
-      {
-        question: "What consequence has the frequency of fatal accidents led to?",
-        options: ["Traffic improvements", "Law and order situations", "Public celebrations", "Increased tourism"],
-        answer: "Law and order situations"
-      },
-      {
-        question: "What do protesters do to errant vehicles?",
-        options: ["Repair them", "Torch them", "Ignore them", "Polish them"],
-        answer: "Torch them"
-      },
-      {
-        question: "Which government formed a committee to oversee road safety?",
-        options: ["Federal Government", "Sindh Government", "Local Authorities", "Police Department"],
-        answer: "Sindh Government"
-      },
-      {
-        question: "Which police force is noted for having a better record?",
-        options: ["City Police", "Traffic Police", "Motorway Police", "Highway Patrol"],
-        answer: "Motorway Police"
-      },
-      {
-        question: "What is recommended to be strictly monitored during prohibited hours?",
-        options: ["Light vehicles", "Heavy vehicles", "Bicycles", "Ambulances"],
-        answer: "Heavy vehicles"
-      },
-      {
-        question: "Who does Article 2 mostly blame for dangerous roads?",
-        options: ["The drivers", "The state", "The weather", "Foreigners"],
-        answer: "The state"
-      },
-      {
-        question: "What issue is highlighted about traffic policemen?",
-        options: ["They are very busy", "They enforce rules strictly", "They often shake down motorcyclists", "They use advanced technology"],
-        answer: "They often shake down motorcyclists"
-      },
-      {
-        question: "Which group of drivers is often ignored by traffic policemen?",
-        options: ["Motorcyclists", "Drivers of smaller vehicles", "Drivers in fancier cars", "Truck drivers"],
-        answer: "Drivers in fancier cars"
-      },
-      {
-        question: "What method is mentioned as a way for drivers to avoid infractions?",
-        options: ["Speeding", "Parking", "Bribery", "Honesty"],
-        answer: "Bribery"
-      },
-      {
-        question: "Which police model is suggested as a role model?",
-        options: ["Local Police", "Motorway Police", "Traffic Police", "Community Patrol"],
-        answer: "Motorway Police"
-      },
-      {
-        question: "What time-related restriction is imposed on heavy vehicles?",
-        options: ["Night only", "Daylight prohibited", "24/7", "Weekends only"],
-        answer: "Daylight prohibited"
-      },
-      {
-        question: "What is essential for making roads safer?",
-        options: ["Better roads", "Strict enforcement of rules", "More vehicles", "Lax regulations"],
-        answer: "Strict enforcement of rules"
-      },
-      {
-        question: "What overall tone does Article 2 adopt regarding road safety?",
-        options: ["Optimistic", "Pessimistic", "Neutral", "Encouraging"],
-        answer: "Pessimistic"
-      },
-      {
-        question: "How is public behavior on the roads described?",
-        options: ["Highly responsible", "Careless", "Law-abiding", "Well-organized"],
-        answer: "Careless"
-      },
-      {
-        question: "What has the government formed to address road safety issues?",
-        options: ["A task force", "A committee", "A new law", "A technological system"],
-        answer: "A committee"
-      },
-      {
-        question: "Whose performance does not inspire confidence according to Article 2?",
-        options: ["Motorway Police", "Traffic committees", "Local drivers", "Road engineers"],
-        answer: "Traffic committees"
-      }
-    ];
-
-    // Combine the two sets to form 50 questions
-    var allQuestions = article1Questions.concat(article2Questions);
-
-    // Function to start the quiz
-    function startQuiz() {
-      var name = document.getElementById('studentName').value.trim();
-      var phone = document.getElementById('studentPhone').value.trim();
-      if(name === "" || phone === ""){
-        alert("Please enter a valid name and phone number.");
+    document.getElementById('startQuizButton').addEventListener('click', function() {
+      const name = document.getElementById('studentName').value.trim();
+      if (name === '') {
+        alert('Please enter your name.');
         return;
       }
-      // Hide the name entry section and reveal the quiz
-      document.getElementById('nameEntry').style.display = "none";
-      document.getElementById('quizSection').style.display = "block";
       startTime = new Date();
+      document.getElementById('nameEntry').style.display = 'none';
+      document.getElementById('quizSection').style.display = 'block';
       startTimer();
-      renderQuestions();
-    }
+    });
 
-    // Render questions dynamically into the quiz section
-    function renderQuestions() {
-      var quizContainer = document.getElementById('questionsContainer');
-      for(var i = 0; i < allQuestions.length; i++){
-        var q = allQuestions[i];
-        var questionDiv = document.createElement('div');
-        questionDiv.className = "question";
-        questionDiv.innerHTML = "<p><strong>Q" + (i+1) + ":</strong> " + q.question + "</p>";
-        for(var j = 0; j < q.options.length; j++){
-          var option = q.options[j];
-          // Mark the correct answer with a data attribute
-          var isCorrect = (option === q.answer) ? "data-correct='true'" : "";
-          questionDiv.innerHTML += "<label><input type='radio' name='q" + (i+1) + "' value='" + option + "' " + isCorrect + "> " + option + "</label>";
-        }
-        quizContainer.appendChild(questionDiv);
-      }
-    }
-
-    // Timer functionality
     function startTimer() {
       timer = setInterval(function() {
         if(timeLeft <= 0) {
@@ -382,91 +518,55 @@
           submitQuiz();
         } else {
           timeLeft--;
-          var minutes = Math.floor(timeLeft / 60);
-          var seconds = timeLeft % 60;
-          document.getElementById('timer').innerText = "Time Left: " + minutes + "m " + seconds + "s";
+          const minutes = Math.floor(timeLeft / 60);
+          const seconds = timeLeft % 60;
+          document.getElementById('timerDisplay').textContent =
+            (minutes < 10 ? '0' + minutes : minutes) + ':' +
+            (seconds < 10 ? '0' + seconds : seconds);
         }
       }, 1000);
     }
 
-    // Calculate results, display them, and submit hidden form data via Formspree
+    document.getElementById('submitQuizButton').addEventListener('click', submitQuiz);
+
     function submitQuiz() {
       clearInterval(timer);
-      var score = 0;
-      var attempted = 0;
-      for(var i = 1; i <= allQuestions.length; i++){
-        var options = document.getElementsByName('q' + i);
-        for(var j = 0; j < options.length; j++){
-          if(options[j].checked){
-            attempted++;
-            if(options[j].getAttribute('data-correct') === "true"){
+      const endTime = new Date();
+      const timeTaken = Math.floor((endTime - startTime) / 1000); // seconds
+      let score = 0;
+      let attempted = 0;
+      const totalQuestions = 50;
+
+      for (let i = 1; i <= totalQuestions; i++) {
+        const radios = document.getElementsByName('q' + i);
+        let answered = false;
+        for (const radio of radios) {
+          if (radio.checked) {
+            answered = true;
+            if (radio.getAttribute('data-correct') === 'true') {
               score++;
             }
-            break;
           }
         }
+        if(answered) attempted++;
       }
-      var endTime = new Date();
-      var timeTaken = Math.floor((endTime - startTime) / 1000);
-      document.getElementById('quizSection').style.display = "none";
-      document.getElementById('resultsSection').style.display = "block";
-      document.getElementById('resultName').innerText = document.getElementById('studentName').value;
-      document.getElementById('resultAttempted').innerText = attempted;
-      document.getElementById('resultScore').innerText = score;
-      document.getElementById('resultTime').innerText = timeTaken + " seconds";
-      
-      // Fill the hidden form and auto-submit via Formspree
-      document.getElementById('formName').value = document.getElementById('studentName').value;
-      document.getElementById('formAttempted').value = attempted;
+
+      const studentName = document.getElementById('studentName').value.trim();
+      const resultText =
+        'Name: ' + studentName + '\n' +
+        'Questions Attempted: ' + attempted + '/' + totalQuestions + '\n' +
+        'Score: ' + score + '\n' +
+        'Time Taken: ' + timeTaken + ' seconds';
+      document.getElementById('resultDisplay').style.display = 'block';
+      document.getElementById('resultDisplay').textContent = resultText;
+
+      // Fill and auto-submit hidden form to Formspree
+      document.getElementById('formStudentName').value = studentName;
+      document.getElementById('formAttemptedQuestions').value = attempted;
       document.getElementById('formScore').value = score;
-      document.getElementById('formTime').value = timeTaken;
+      document.getElementById('formTimeTaken').value = timeTaken;
       document.getElementById('hiddenForm').submit();
     }
   </script>
-</head>
-<body>
-  <header>
-    <h1>QUIZ FOR CSS ASPIRANTS 26 February 2025</h1>
-  </header>
-  <div class="container">
-    <!-- Name Entry Section -->
-    <section id="nameEntry">
-      <h2>Enter Your Details</h2>
-      <label for="studentName">Name:</label>
-      <input type="text" id="studentName" name="studentName"><br><br>
-      <label for="studentPhone">Phone Number:</label>
-      <input type="text" id="studentPhone" name="studentPhone"><br><br>
-      <button onclick="startQuiz()">Start Quiz</button>
-    </section>
-    
-    <!-- Quiz Section (hidden until valid entry) -->
-    <section id="quizSection" style="display:none;">
-      <div class="timer" id="timer">Time Left: 10m 0s</div>
-      <div id="questionsContainer"></div>
-      <br>
-      <button onclick="submitQuiz()">Submit Quiz</button>
-    </section>
-    
-    <!-- Results Display -->
-    <section id="resultsSection" style="display:none;">
-      <h2>Quiz Results</h2>
-      <p><strong>Name:</strong> <span id="resultName"></span></p>
-      <p><strong>Questions Attempted:</strong> <span id="resultAttempted"></span></p>
-      <p><strong>Score:</strong> <span id="resultScore"></span></p>
-      <p><strong>Time Taken:</strong> <span id="resultTime"></span></p>
-    </section>
-    
-    <!-- Hidden Form for Formspree submission -->
-    <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-      <input type="hidden" id="formName" name="name">
-      <input type="hidden" id="formAttempted" name="attempted">
-      <input type="hidden" id="formScore" name="score">
-      <input type="hidden" id="formTime" name="time">
-    </form>
-  </div>
-  <footer>
-    <p>Contact us: 03265762698</p>
-    <p>For more information, call now!</p>
-  </footer>
 </body>
 </html>
