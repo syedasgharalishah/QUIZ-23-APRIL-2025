@@ -1,572 +1,720 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 27 February 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QUIZ FOR CSS ASPIRANTS 28 February 2025</title>
   <style>
-    /* Base styling */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      /* Final instruction: disable text selection */
-      user-select: none;
+    /* Disable text selection and right-click */
+    * {
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
+      user-select: none;
     }
-    header {
-      background-color: #333;
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+    header, footer {
+      background: #003366;
       color: #fff;
+      padding: 10px 20px;
+      text-align: center;
+    }
+    header img {
+      max-height: 80px;
+      vertical-align: middle;
+      margin-right: 20px;
+    }
+    header h1 {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0;
+      font-size: 24px;
+    }
+    #name-entry, #quiz-section, #results-section {
+      background: #fff;
+      margin: 20px auto;
       padding: 20px;
-      text-align: center;
-    }
-    footer {
-      background-color: #333;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-    .container {
       max-width: 800px;
-      margin: 80px auto 80px;
-      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    #nameEntry {
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    #nameEntry input {
-      padding: 5px;
-      font-size: 16px;
-    }
-    #nameEntry button {
-      padding: 6px 12px;
-      font-size: 16px;
-      margin-left: 10px;
-      cursor: pointer;
-    }
-    #quizSection {
+    #quiz-section, #results-section {
       display: none;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question h3 {
+      margin-bottom: 5px;
+    }
+    .options label {
+      display: block;
+      margin: 5px 0;
+      cursor: pointer;
     }
     .timer {
       font-size: 18px;
       font-weight: bold;
-      text-align: center;
-      margin-bottom: 20px;
+      text-align: right;
+      margin-bottom: 10px;
     }
-    .question {
-      margin-bottom: 20px;
-      padding: 10px;
-      border: 1px solid #ccc;
-    }
-    .question p {
-      margin: 0 0 8px 0;
-    }
-    .question label {
-      display: block;
-      margin-bottom: 5px;
-      cursor: pointer;
-    }
-    #submitQuizButton {
-      display: block;
-      margin: 20px auto;
+    button {
+      background: #003366;
+      color: #fff;
+      border: none;
       padding: 10px 20px;
-      font-size: 16px;
       cursor: pointer;
+      font-size: 16px;
+      border-radius: 3px;
     }
-    .result {
-      margin-top: 20px;
-      padding: 20px;
-      border: 1px solid #ccc;
-      white-space: pre-wrap;
+    button:hover {
+      background: #002244;
     }
   </style>
-</head>
-<body>
-  <header>
-    <h1>QUIZ FOR CSS ASPIRANTS 27 February 2025</h1>
-    <!-- Additional design elements can be added here -->
-  </header>
-  
-  <div class="container">
-    <!-- Name Entry Section -->
-    <div id="nameEntry">
-      <label for="studentName">Enter your name:</label>
-      <input type="text" id="studentName" />
-      <button id="startQuizButton">Start Quiz</button>
-    </div>
-    
-    <!-- Quiz Section -->
-    <div id="quizSection">
-      <div class="timer" id="timerDisplay">10:00</div>
-      <form id="quizForm">
-        <!-- Article 1 Questions (Q1 to Q20) -->
-        <h2>Article 1 Questions</h2>
-        <div class="question">
-          <p>1. What is the main challenge mentioned for Pakistani banks?</p>
-          <label><input type="radio" name="q1" value="a" data-correct="true"> Rapid tech disruptions</label>
-          <label><input type="radio" name="q1" value="b"> High interest rates</label>
-          <label><input type="radio" name="q1" value="c"> Political instability</label>
-          <label><input type="radio" name="q1" value="d"> Lack of customer trust</label>
-        </div>
-        <div class="question">
-          <p>2. Which group is noted as being complacent in Article 1?</p>
-          <label><input type="radio" name="q2" value="a"> Tech startups</label>
-          <label><input type="radio" name="q2" value="b" data-correct="true"> Bankers</label>
-          <label><input type="radio" name="q2" value="c"> Small businesses</label>
-          <label><input type="radio" name="q2" value="d"> Farmers</label>
-        </div>
-        <div class="question">
-          <p>3. What has made bankers complacent according to Article 1?</p>
-          <label><input type="radio" name="q3" value="a" data-correct="true"> The traditional banking model</label>
-          <label><input type="radio" name="q3" value="b"> New technology investments</label>
-          <label><input type="radio" name="q3" value="c"> Government regulations</label>
-          <label><input type="radio" name="q3" value="d"> Global competition</label>
-        </div>
-        <div class="question">
-          <p>4. What risk is associated with risk-free lending?</p>
-          <label><input type="radio" name="q4" value="a"> Credit risk</label>
-          <label><input type="radio" name="q4" value="b" data-correct="true"> Complacency risk</label>
-          <label><input type="radio" name="q4" value="c"> Market risk</label>
-          <label><input type="radio" name="q4" value="d"> Operational risk</label>
-        </div>
-        <div class="question">
-          <p>5. Which event highlighted the massive tax burden on banks?</p>
-          <label><input type="radio" name="q5" value="a"> Financial Summit</label>
-          <label><input type="radio" name="q5" value="b"> Banking Conference</label>
-          <label><input type="radio" name="q5" value="c" data-correct="true"> Pakistan Banking Summit</label>
-          <label><input type="radio" name="q5" value="d"> Economic Forum</label>
-        </div>
-        <div class="question">
-          <p>6. Which sector has been largely ignored by profit-oriented bankers?</p>
-          <label><input type="radio" name="q6" value="a"> Large corporations</label>
-          <label><input type="radio" name="q6" value="b"> Rural populations</label>
-          <label><input type="radio" name="q6" value="c" data-correct="true"> Smallholder farmers</label>
-          <label><input type="radio" name="q6" value="d"> Tech companies</label>
-        </div>
-        <div class="question">
-          <p>7. How long has the banking sector been transitioning according to Article 1?</p>
-          <label><input type="radio" name="q7" value="a" data-correct="true"> Three and a half decades</label>
-          <label><input type="radio" name="q7" value="b"> Two decades</label>
-          <label><input type="radio" name="q7" value="c"> One century</label>
-          <label><input type="radio" name="q7" value="d"> A decade</label>
-        </div>
-        <div class="question">
-          <p>8. What has helped governments finance their deficits?</p>
-          <label><input type="radio" name="q8" value="a"> Tax reforms</label>
-          <label><input type="radio" name="q8" value="b" data-correct="true"> Banking sector growth</label>
-          <label><input type="radio" name="q8" value="c"> International loans</label>
-          <label><input type="radio" name="q8" value="d"> Stock markets</label>
-        </div>
-        <div class="question">
-          <p>9. Which technological advancement is mentioned as disruptive?</p>
-          <label><input type="radio" name="q9" value="a" data-correct="true"> AI</label>
-          <label><input type="radio" name="q9" value="b"> Blockchain</label>
-          <label><input type="radio" name="q9" value="c"> Cloud Computing</label>
-          <label><input type="radio" name="q9" value="d"> Internet of Things</label>
-        </div>
-        <div class="question">
-          <p>10. What is a potential consequence of delaying digital adoption?</p>
-          <label><input type="radio" name="q10" value="a"> Increased profits</label>
-          <label><input type="radio" name="q10" value="b" data-correct="true"> Industry decline</label>
-          <label><input type="radio" name="q10" value="c"> Market saturation</label>
-          <label><input type="radio" name="q10" value="d"> Better customer service</label>
-        </div>
-        <div class="question">
-          <p>11. Which investment is crucial for banks to meet future demands?</p>
-          <label><input type="radio" name="q11" value="a" data-correct="true"> Human resource development</label>
-          <label><input type="radio" name="q11" value="b"> Real estate</label>
-          <label><input type="radio" name="q11" value="c"> Foreign investments</label>
-          <label><input type="radio" name="q11" value="d"> Gold reserves</label>
-        </div>
-        <div class="question">
-          <p>12. What does the traditional banking model primarily rely on?</p>
-          <label><input type="radio" name="q12" value="a"> Risky lending</label>
-          <label><input type="radio" name="q12" value="b" data-correct="true"> Risk-free lending</label>
-          <label><input type="radio" name="q12" value="c"> Microfinance</label>
-          <label><input type="radio" name="q12" value="d"> Crowdfunding</label>
-        </div>
-        <div class="question">
-          <p>13. What is a key factor for the banking industry to survive in the next 10 years?</p>
-          <label><input type="radio" name="q13" value="a"> Maintaining old models</label>
-          <label><input type="radio" name="q13" value="b"> Reducing digital investments</label>
-          <label><input type="radio" name="q13" value="c" data-correct="true"> Adopting new technologies</label>
-          <label><input type="radio" name="q13" value="d"> Increasing interest rates</label>
-        </div>
-        <div class="question">
-          <p>14. What has the banking sector largely ignored?</p>
-          <label><input type="radio" name="q14" value="a"> Urban populations</label>
-          <label><input type="radio" name="q14" value="b"> International trade</label>
-          <label><input type="radio" name="q14" value="c" data-correct="true"> Lower-income groups</label>
-          <label><input type="radio" name="q14" value="d"> Corporate loans</label>
-        </div>
-        <div class="question">
-          <p>15. Which issue was discussed at the Pakistan Banking Summit?</p>
-          <label><input type="radio" name="q15" value="a"> Digital innovation</label>
-          <label><input type="radio" name="q15" value="b"> Windfall levy</label>
-          <label><input type="radio" name="q15" value="c" data-correct="true"> Massive tax burden</label>
-          <label><input type="radio" name="q15" value="d"> Loan defaults</label>
-        </div>
-        <div class="question">
-          <p>16. How have banks helped in the growth of the digital space?</p>
-          <label><input type="radio" name="q16" value="a" data-correct="true"> Investing in mobile apps</label>
-          <label><input type="radio" name="q16" value="b"> Building brick-and-mortar branches</label>
-          <label><input type="radio" name="q16" value="c"> Reducing online services</label>
-          <label><input type="radio" name="q16" value="d"> Focusing on cash transactions</label>
-        </div>
-        <div class="question">
-          <p>17. What role can conferences play for banks?</p>
-          <label><input type="radio" name="q17" value="a"> Solving all problems</label>
-          <label><input type="radio" name="q17" value="b" data-correct="true"> Highlighting issues</label>
-          <label><input type="radio" name="q17" value="c"> Increasing profits</label>
-          <label><input type="radio" name="q17" value="d"> Reducing risks</label>
-        </div>
-        <div class="question">
-          <p>18. Which sector is criticized for not receiving adequate support?</p>
-          <label><input type="radio" name="q18" value="a"> Large corporations</label>
-          <label><input type="radio" name="q18" value="b"> Tech startups</label>
-          <label><input type="radio" name="q18" value="c" data-correct="true"> Small businesses</label>
-          <label><input type="radio" name="q18" value="d"> Financial institutions</label>
-        </div>
-        <div class="question">
-          <p>19. What is essential for banks to remain competitive?</p>
-          <label><input type="radio" name="q19" value="a"> Ignoring tech trends</label>
-          <label><input type="radio" name="q19" value="b" data-correct="true"> Embracing technology</label>
-          <label><input type="radio" name="q19" value="c"> Reducing loan amounts</label>
-          <label><input type="radio" name="q19" value="d"> Increasing fees</label>
-        </div>
-        <div class="question">
-          <p>20. What does Article 1 suggest banks need to invest in?</p>
-          <label><input type="radio" name="q20" value="a"> Traditional marketing</label>
-          <label><input type="radio" name="q20" value="b" data-correct="true"> Digital technology and AI</label>
-          <label><input type="radio" name="q20" value="c"> Real estate</label>
-          <label><input type="radio" name="q20" value="d"> Manual processes</label>
-        </div>
-        
-        <!-- Article 2 Questions (Q21 to Q40) -->
-        <h2>Article 2 Questions</h2>
-        <div class="question">
-          <p>21. What is one of the key obstacles in Pakistan-Afghanistan relations?</p>
-          <label><input type="radio" name="q21" value="a" data-correct="true"> Demarcation of the common frontier</label>
-          <label><input type="radio" name="q21" value="b"> Trade agreements</label>
-          <label><input type="radio" name="q21" value="c"> Cultural exchange</label>
-          <label><input type="radio" name="q21" value="d"> Economic sanctions</label>
-        </div>
-        <div class="question">
-          <p>22. What has frequently resulted from border disputes according to Article 2?</p>
-          <label><input type="radio" name="q22" value="a"> Increased tourism</label>
-          <label><input type="radio" name="q22" value="b" data-correct="true"> Closure of border crossings</label>
-          <label><input type="radio" name="q22" value="c"> Free trade</label>
-          <label><input type="radio" name="q22" value="d"> Diplomatic visits</label>
-        </div>
-        <div class="question">
-          <p>23. What action reportedly started at the Torkham crossing?</p>
-          <label><input type="radio" name="q23" value="a"> Trade negotiations</label>
-          <label><input type="radio" name="q23" value="b"> Construction of a bunker</label>
-          <label><input type="radio" name="q23" value="c" data-correct="true"> Bunker construction by Afghan Taliban forces</label>
-          <label><input type="radio" name="q23" value="d"> Peace talks</label>
-        </div>
-        <div class="question">
-          <p>24. How long was the Torkham crossing closed as mentioned in Article 2?</p>
-          <label><input type="radio" name="q24" value="a"> Two days</label>
-          <label><input type="radio" name="q24" value="b" data-correct="true"> Five days</label>
-          <label><input type="radio" name="q24" value="c"> One week</label>
-          <label><input type="radio" name="q24" value="d"> Ten days</label>
-        </div>
-        <div class="question">
-          <p>25. What is one economic impact of border closures mentioned?</p>
-          <label><input type="radio" name="q25" value="a"> Increased investments</label>
-          <label><input type="radio" name="q25" value="b" data-correct="true"> Losses worth millions</label>
-          <label><input type="radio" name="q25" value="c"> Booming trade</label>
-          <label><input type="radio" name="q25" value="d"> Job creation</label>
-        </div>
-        <div class="question">
-          <p>26. Which crossing is mentioned in Article 2?</p>
-          <label><input type="radio" name="q26" value="a"> Torkham crossing</label>
-          <label><input type="radio" name="q26" value="b" data-correct="true"> Torkham crossing</label>
-          <label><input type="radio" name="q26" value="c"> Attari crossing</label>
-          <label><input type="radio" name="q26" value="d"> Wagah crossing</label>
-        </div>
-        <div class="question">
-          <p>27. What is a key requirement for resolving border disputes?</p>
-          <label><input type="radio" name="q27" value="a"> Increased military presence</label>
-          <label><input type="radio" name="q27" value="b"> Economic sanctions</label>
-          <label><input type="radio" name="q27" value="c" data-correct="true"> High-level border management mechanism</label>
-          <label><input type="radio" name="q27" value="d"> Diplomatic isolation</label>
-        </div>
-        <div class="question">
-          <p>28. What causes the exchange of fire at the border?</p>
-          <label><input type="radio" name="q28" value="a"> Trade disputes</label>
-          <label><input type="radio" name="q28" value="b" data-correct="true"> Construction in disputed areas</label>
-          <label><input type="radio" name="q28" value="c"> Cultural differences</label>
-          <label><input type="radio" name="q28" value="d"> Weather conditions</label>
-        </div>
-        <div class="question">
-          <p>29. What does the Afghan side need to recognize to resolve disputes?</p>
-          <label><input type="radio" name="q29" value="a"> Economic benefits</label>
-          <label><input type="radio" name="q29" value="b"> Cultural ties</label>
-          <label><input type="radio" name="q29" value="c" data-correct="true"> Durand Line as the frontier</label>
-          <label><input type="radio" name="q29" value="d"> Political alliances</label>
-        </div>
-        <div class="question">
-          <p>30. What is the consequence of closing the border?</p>
-          <label><input type="radio" name="q30" value="a"> Boost in tourism</label>
-          <label><input type="radio" name="q30" value="b" data-correct="true"> Cut off business interests</label>
-          <label><input type="radio" name="q30" value="c"> Increased trade</label>
-          <label><input type="radio" name="q30" value="d"> Better security</label>
-        </div>
-        <div class="question">
-          <p>31. Which group is heavily impacted by border closures?</p>
-          <label><input type="radio" name="q31" value="a" data-correct="true"> Local workers</label>
-          <label><input type="radio" name="q31" value="b"> Tourists</label>
-          <label><input type="radio" name="q31" value="c"> Foreign investors</label>
-          <label><input type="radio" name="q31" value="d"> Government officials</label>
-        </div>
-        <div class="question">
-          <p>32. What is needed to prevent disputes from escalating?</p>
-          <label><input type="radio" name="q32" value="a"> Military intervention</label>
-          <label><input type="radio" name="q32" value="b" data-correct="true"> Preventive border management</label>
-          <label><input type="radio" name="q32" value="c"> Increased tariffs</label>
-          <label><input type="radio" name="q32" value="d"> More border checkpoints</label>
-        </div>
-        <div class="question">
-          <p>33. What does Article 2 suggest is essential for the local economy?</p>
-          <label><input type="radio" name="q33" value="a"> Trade</label>
-          <label><input type="radio" name="q33" value="b" data-correct="true"> Uninterrupted border crossings</label>
-          <label><input type="radio" name="q33" value="c"> Tourism</label>
-          <label><input type="radio" name="q33" value="d"> Agriculture</label>
-        </div>
-        <div class="question">
-          <p>34. What is a result of the lack of information exchange at the border?</p>
-          <label><input type="radio" name="q34" value="a"> Strengthened relations</label>
-          <label><input type="radio" name="q34" value="b"> Data sharing</label>
-          <label><input type="radio" name="q34" value="c" data-correct="true"> Misunderstandings</label>
-          <label><input type="radio" name="q34" value="d"> Improved trade</label>
-        </div>
-        <div class="question">
-          <p>35. What has not been adequately addressed according to Article 2?</p>
-          <label><input type="radio" name="q35" value="a"> Infrastructure</label>
-          <label><input type="radio" name="q35" value="b"> Diplomatic relations</label>
-          <label><input type="radio" name="q35" value="c" data-correct="true"> Underlying factors fueling differences</label>
-          <label><input type="radio" name="q35" value="d"> Cultural exchange</label>
-        </div>
-        <div class="question">
-          <p>36. What mechanism is suggested to resolve border disputes?</p>
-          <label><input type="radio" name="q36" value="a"> International arbitration</label>
-          <label><input type="radio" name="q36" value="b" data-correct="true"> Boundary management mechanism</label>
-          <label><input type="radio" name="q36" value="c"> Military supervision</label>
-          <label><input type="radio" name="q36" value="d"> Economic sanctions</label>
-        </div>
-        <div class="question">
-          <p>37. What issue does border closure affect aside from trade?</p>
-          <label><input type="radio" name="q37" value="a" data-correct="true"> People’s movement</label>
-          <label><input type="radio" name="q37" value="b"> Internet connectivity</label>
-          <label><input type="radio" name="q37" value="c"> Energy supply</label>
-          <label><input type="radio" name="q37" value="d"> Tourism</label>
-        </div>
-        <div class="question">
-          <p>38. What is the underlying reason for frequent closures?</p>
-          <label><input type="radio" name="q38" value="a"> Efficient management</label>
-          <label><input type="radio" name="q38" value="b" data-correct="true"> Unresolved bilateral differences</label>
-          <label><input type="radio" name="q38" value="c"> Weather conditions</label>
-          <label><input type="radio" name="q38" value="d"> Technological upgrades</label>
-        </div>
-        <div class="question">
-          <p>39. Which group suffers from the border closures?</p>
-          <label><input type="radio" name="q39" value="a"> Tourists</label>
-          <label><input type="radio" name="q39" value="b"> Businessmen</label>
-          <label><input type="radio" name="q39" value="c" data-correct="true"> Local workers</label>
-          <label><input type="radio" name="q39" value="d"> Government officials</label>
-        </div>
-        <div class="question">
-          <p>40. What is needed for a permanent resolution of border issues?</p>
-          <label><input type="radio" name="q40" value="a"> Prolonged military presence</label>
-          <label><input type="radio" name="q40" value="b" data-correct="true"> Clear border demarcation</label>
-          <label><input type="radio" name="q40" value="c"> Economic investments</label>
-          <label><input type="radio" name="q40" value="d"> Cultural exchange programs</label>
-        </div>
-        
-        <!-- Article 3 Questions (Q41 to Q50) -->
-        <h2>Article 3 Questions</h2>
-        <div class="question">
-          <p>41. Which city is described as an economic powerhouse in Article 3?</p>
-          <label><input type="radio" name="q41" value="a" data-correct="true"> Karachi</label>
-          <label><input type="radio" name="q41" value="b"> Lahore</label>
-          <label><input type="radio" name="q41" value="c"> Islamabad</label>
-          <label><input type="radio" name="q41" value="d"> Peshawar</label>
-        </div>
-        <div class="question">
-          <p>42. What issue is Karachi facing according to Article 3?</p>
-          <label><input type="radio" name="q42" value="a"> Overpopulation</label>
-          <label><input type="radio" name="q42" value="b" data-correct="true"> Polio vaccination refusals</label>
-          <label><input type="radio" name="q42" value="c"> Traffic congestion</label>
-          <label><input type="radio" name="q42" value="d"> Air pollution</label>
-        </div>
-        <div class="question">
-          <p>43. How many vaccine refusals have been reported in Karachi?</p>
-          <label><input type="radio" name="q43" value="a"> 10,000</label>
-          <label><input type="radio" name="q43" value="b"> 20,000</label>
-          <label><input type="radio" name="q43" value="c"> 30,000</label>
-          <label><input type="radio" name="q43" value="d" data-correct="true"> 41,800</label>
-        </div>
-        <div class="question">
-          <p>44. What percentage of refusals in Sindh does Karachi account for?</p>
-          <label><input type="radio" name="q44" value="a"> 50%</label>
-          <label><input type="radio" name="q44" value="b"> 75%</label>
-          <label><input type="radio" name="q44" value="c"> 85%</label>
-          <label><input type="radio" name="q44" value="d" data-correct="true"> 97%</label>
-        </div>
-        <div class="question">
-          <p>45. What is a promising development in Karachi’s polio drive?</p>
-          <label><input type="radio" name="q45" value="a"> Increased funding</label>
-          <label><input type="radio" name="q45" value="b"> Better infrastructure</label>
-          <label><input type="radio" name="q45" value="c"> New vaccine types</label>
-          <label><input type="radio" name="q45" value="d" data-correct="true"> Fractional Inactivated Poliovirus Vaccine</label>
-        </div>
-        <div class="question">
-          <p>46. What challenge is highlighted regarding vaccination teams?</p>
-          <label><input type="radio" name="q46" value="a"> Overstaffing</label>
-          <label><input type="radio" name="q46" value="b"> Underreporting</label>
-          <label><input type="radio" name="q46" value="c" data-correct="true"> Overstating vaccinations for compensation</label>
-          <label><input type="radio" name="q46" value="d"> Lack of training</label>
-        </div>
-        <div class="question">
-          <p>47. What is a key factor for improving polio drive effectiveness?</p>
-          <label><input type="radio" name="q47" value="a"> Higher incentives</label>
-          <label><input type="radio" name="q47" value="b"> Better logistics</label>
-          <label><input type="radio" name="q47" value="c" data-correct="true"> Community engagement</label>
-          <label><input type="radio" name="q47" value="d"> More vaccines</label>
-        </div>
-        <div class="question">
-          <p>48. What does Article 3 identify as a major risk for polio transmission?</p>
-          <label><input type="radio" name="q48" value="a"> Air pollution</label>
-          <label><input type="radio" name="q48" value="b"> Overcrowding</label>
-          <label><input type="radio" name="q48" value="c" data-correct="true"> Continuous movement of people</label>
-          <label><input type="radio" name="q48" value="d"> Poor sanitation</label>
-        </div>
-        <div class="question">
-          <p>49. What is identified as a challenge in eradicating polio in Karachi?</p>
-          <label><input type="radio" name="q49" value="a"> High vaccination rates</label>
-          <label><input type="radio" name="q49" value="b" data-correct="true"> Mistrust in public health initiatives</label>
-          <label><input type="radio" name="q49" value="c"> Abundance of resources</label>
-          <label><input type="radio" name="q49" value="d"> Overqualified staff</label>
-        </div>
-        <div class="question">
-          <p>50. What must the government strengthen to improve vaccination uptake?</p>
-          <label><input type="radio" name="q50" value="a"> Compensation structure</label>
-          <label><input type="radio" name="q50" value="b"> Media campaigns</label>
-          <label><input type="radio" name="q50" value="c"> Public awareness</label>
-          <label><input type="radio" name="q50" value="d" data-correct="true"> Community engagement</label>
-        </div>
-        <button type="button" id="submitQuizButton">Submit Quiz</button>
-      </form>
-      <div class="result" id="resultDisplay" style="display:none;"></div>
-    </div>
-  </div>
-  
-  <!-- Hidden form for Formspree submission -->
-  <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-    <input type="text" name="studentName" id="formStudentName">
-    <input type="text" name="attemptedQuestions" id="formAttemptedQuestions">
-    <input type="text" name="score" id="formScore">
-    <input type="text" name="timeTaken" id="formTimeTaken">
-  </form>
-  
-  <footer>
-    <p>Contact us: 03265762698</p>
-    <p>For more information, please get in touch!</p>
-  </footer>
-  
   <script>
-    // Disable right-click and common inspect shortcuts
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    });
-    document.addEventListener('keydown', function(e) {
-      // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-      if (e.keyCode === 123 || 
-         (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
-         (e.ctrlKey && e.keyCode === 85)) {
-        e.preventDefault();
-      }
-    });
+    // Disable right-click
+    document.addEventListener('contextmenu', event => event.preventDefault());
 
-    let timer;
-    let timeLeft = 600; // 10 minutes = 600 seconds
+    let totalTime = 600; // 10 minutes in seconds
+    let timerInterval;
+    let quizStarted = false;
     let startTime;
 
-    document.getElementById('startQuizButton').addEventListener('click', function() {
-      const name = document.getElementById('studentName').value.trim();
-      if (name === '') {
-        alert('Please enter your name.');
+    function startQuiz() {
+      const nameInput = document.getElementById('student-name');
+      if(nameInput.value.trim() === "") {
+        alert("Please enter your name to start the quiz.");
         return;
       }
+      // Hide name entry section and show quiz
+      document.getElementById('name-entry').style.display = "none";
+      document.getElementById('quiz-section').style.display = "block";
+      document.getElementById('display-student-name').textContent = nameInput.value.trim();
+      quizStarted = true;
       startTime = new Date();
-      document.getElementById('nameEntry').style.display = 'none';
-      document.getElementById('quizSection').style.display = 'block';
-      startTimer();
-    });
-
-    function startTimer() {
-      timer = setInterval(function() {
-        if(timeLeft <= 0) {
-          clearInterval(timer);
-          submitQuiz();
-        } else {
-          timeLeft--;
-          const minutes = Math.floor(timeLeft / 60);
-          const seconds = timeLeft % 60;
-          document.getElementById('timerDisplay').textContent =
-            (minutes < 10 ? '0' + minutes : minutes) + ':' +
-            (seconds < 10 ? '0' + seconds : seconds);
-        }
-      }, 1000);
+      // Start timer
+      timerInterval = setInterval(updateTimer, 1000);
     }
 
-    document.getElementById('submitQuizButton').addEventListener('click', submitQuiz);
+    function updateTimer() {
+      if(totalTime <= 0) {
+        clearInterval(timerInterval);
+        submitQuiz();
+        return;
+      }
+      totalTime--;
+      let minutes = Math.floor(totalTime / 60);
+      let seconds = totalTime % 60;
+      document.getElementById('timer').textContent = "Time Remaining: " + minutes + "m " + seconds + "s";
+    }
 
     function submitQuiz() {
-      clearInterval(timer);
+      if(!quizStarted) return;
+      clearInterval(timerInterval);
       const endTime = new Date();
-      const timeTaken = Math.floor((endTime - startTime) / 1000); // seconds
-      let score = 0;
-      let attempted = 0;
+      const timeTaken = Math.floor((endTime - startTime) / 1000);
+      const form = document.getElementById('quiz-form');
       const totalQuestions = 50;
+      let attempted = 0;
+      let score = 0;
 
-      for (let i = 1; i <= totalQuestions; i++) {
-        const radios = document.getElementsByName('q' + i);
+      // Loop through each question
+      for(let i = 1; i <= totalQuestions; i++){
+        const options = document.getElementsByName('q' + i);
         let answered = false;
-        for (const radio of radios) {
-          if (radio.checked) {
-            answered = true;
-            if (radio.getAttribute('data-correct') === 'true') {
+        for(let option of options) {
+          if(option.checked) {
+            attempted++;
+            // Compare value with data-correct attribute stored in the question container
+            const qContainer = document.getElementById('question' + i);
+            const correctAnswer = qContainer.getAttribute('data-answer');
+            if(option.value === correctAnswer) {
               score++;
             }
+            answered = true;
+            break;
           }
         }
-        if(answered) attempted++;
       }
 
-      const studentName = document.getElementById('studentName').value.trim();
-      const resultText =
-        'Name: ' + studentName + '\n' +
-        'Questions Attempted: ' + attempted + '/' + totalQuestions + '\n' +
-        'Score: ' + score + '\n' +
-        'Time Taken: ' + timeTaken + ' seconds';
-      document.getElementById('resultDisplay').style.display = 'block';
-      document.getElementById('resultDisplay').textContent = resultText;
+      // Display results
+      document.getElementById('quiz-section').style.display = "none";
+      const resultsDiv = document.getElementById('results-section');
+      resultsDiv.innerHTML = "<h2>Quiz Results</h2>" +
+        "<p><strong>Name:</strong> " + document.getElementById('student-name').value.trim() + "</p>" +
+        "<p><strong>Questions Attempted:</strong> " + attempted + " out of " + totalQuestions + "</p>" +
+        "<p><strong>Score:</strong> " + score + " correct answers</p>" +
+        "<p><strong>Time Taken:</strong> " + timeTaken + " seconds</p>";
+      resultsDiv.style.display = "block";
 
-      // Fill and auto-submit hidden form to Formspree
-      document.getElementById('formStudentName').value = studentName;
-      document.getElementById('formAttemptedQuestions').value = attempted;
-      document.getElementById('formScore').value = score;
-      document.getElementById('formTimeTaken').value = timeTaken;
-      document.getElementById('hiddenForm').submit();
+      // Submit hidden Formspree form with results
+      document.getElementById('fs-name').value = document.getElementById('student-name').value.trim();
+      document.getElementById('fs-attempted').value = attempted;
+      document.getElementById('fs-score').value = score;
+      document.getElementById('fs-time').value = timeTaken;
+      document.getElementById('fs-form').submit();
     }
   </script>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Header Image">
+    <h1>QUIZ FOR CSS ASPIRANTS 28 February 2025</h1>
+    <div style="margin-top: 5px; font-size: 18px;">SYED ASGHAR ALI SHAH</div>
+  </header>
+
+  <!-- Name Entry Section -->
+  <div id="name-entry">
+    <h2>Enter Your Name to Start the Quiz</h2>
+    <input type="text" id="student-name" placeholder="Your Name" style="width: 100%; padding: 10px; font-size: 16px;">
+    <br><br>
+    <button onclick="startQuiz()">Start Quiz</button>
+  </div>
+
+  <!-- Quiz Section -->
+  <div id="quiz-section">
+    <div class="timer" id="timer">Time Remaining: 10m 0s</div>
+    <div style="margin-bottom: 20px;">
+      <strong>Student:</strong> <span id="display-student-name"></span>
+    </div>
+    <form id="quiz-form">
+      <!-- Editorial 1 Questions (20) -->
+      <div style="border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 20px;">
+        <h2>Editorial 1 Questions</h2>
+        <!-- Q1 -->
+        <div class="question" id="question1" data-answer="A">
+          <h3>1. Who is the Minister for Law, Justice and Human Rights mentioned in Editorial 1?</h3>
+          <div class="options">
+            <label><input type="radio" name="q1" value="A"> A. Azam Nazeer Tarar</label>
+            <label><input type="radio" name="q1" value="B"> B. Nawaz Sharif</label>
+            <label><input type="radio" name="q1" value="C"> C. Imran Khan</label>
+            <label><input type="radio" name="q1" value="D"> D. Shah Mahmood Qureshi</label>
+          </div>
+        </div>
+        <!-- Q2 -->
+        <div class="question" id="question2" data-answer="A">
+          <h3>2. Which international body did he address?</h3>
+          <div class="options">
+            <label><input type="radio" name="q2" value="A"> A. UN Human Rights Council</label>
+            <label><input type="radio" name="q2" value="B"> B. UN General Assembly</label>
+            <label><input type="radio" name="q2" value="C"> C. EU Parliament</label>
+            <label><input type="radio" name="q2" value="D"> D. G7 Summit</label>
+          </div>
+        </div>
+        <!-- Q3 -->
+        <div class="question" id="question3" data-answer="A">
+          <h3>3. Which amendment was mentioned in Editorial 1?</h3>
+          <div class="options">
+            <label><input type="radio" name="q3" value="A"> A. 26th Amendment</label>
+            <label><input type="radio" name="q3" value="B"> B. 25th Amendment</label>
+            <label><input type="radio" name="q3" value="C"> C. 27th Amendment</label>
+            <label><input type="radio" name="q3" value="D"> D. 24th Amendment</label>
+          </div>
+        </div>
+        <!-- Q4 -->
+        <div class="question" id="question4" data-answer="A">
+          <h3>4. How did Freedom House classify Pakistan?</h3>
+          <div class="options">
+            <label><input type="radio" name="q4" value="A"> A. Partly free</label>
+            <label><input type="radio" name="q4" value="B"> B. Free</label>
+            <label><input type="radio" name="q4" value="C"> C. Not free</label>
+            <label><input type="radio" name="q4" value="D"> D. Fully democratic</label>
+          </div>
+        </div>
+        <!-- Q5 -->
+        <div class="question" id="question5" data-answer="A">
+          <h3>5. How many points were deducted from Pakistan’s ranking by Freedom House?</h3>
+          <div class="options">
+            <label><input type="radio" name="q5" value="A"> A. Three points</label>
+            <label><input type="radio" name="q5" value="B"> B. Two points</label>
+            <label><input type="radio" name="q5" value="C"> C. Four points</label>
+            <label><input type="radio" name="q5" value="D"> D. One point</label>
+          </div>
+        </div>
+        <!-- Q6 -->
+        <div class="question" id="question6" data-answer="A">
+          <h3>6. What was Pakistan’s Democracy Index score drop as reported by the Economist Intelligence Unit?</h3>
+          <div class="options">
+            <label><input type="radio" name="q6" value="A"> A. From 3.25 to 2.84</label>
+            <label><input type="radio" name="q6" value="B"> B. From 3.50 to 3.00</label>
+            <label><input type="radio" name="q6" value="C"> C. From 2.50 to 2.00</label>
+            <label><input type="radio" name="q6" value="D"> D. From 4.00 to 3.75</label>
+          </div>
+        </div>
+        <!-- Q7 -->
+        <div class="question" id="question7" data-answer="A">
+          <h3>7. How many ranks did Pakistan lose in the index?</h3>
+          <div class="options">
+            <label><input type="radio" name="q7" value="A"> A. Six ranks</label>
+            <label><input type="radio" name="q7" value="B"> B. Five ranks</label>
+            <label><input type="radio" name="q7" value="C"> C. Seven ranks</label>
+            <label><input type="radio" name="q7" value="D"> D. Eight ranks</label>
+          </div>
+        </div>
+        <!-- Q8 -->
+        <div class="question" id="question8" data-answer="A">
+          <h3>8. How is Pakistan classified by the Economist Intelligence Unit?</h3>
+          <div class="options">
+            <label><input type="radio" name="q8" value="A"> A. Authoritarian regime</label>
+            <label><input type="radio" name="q8" value="B"> B. Democratic regime</label>
+            <label><input type="radio" name="q8" value="C"> C. Hybrid regime</label>
+            <label><input type="radio" name="q8" value="D"> D. Semi-authoritarian regime</label>
+          </div>
+        </div>
+        <!-- Q9 -->
+        <div class="question" id="question9" data-answer="A">
+          <h3>9. What event did the opposition parties attempt to hold?</h3>
+          <div class="options">
+            <label><input type="radio" name="q9" value="A"> A. A two-day moot on the Constitution</label>
+            <label><input type="radio" name="q9" value="B"> B. A rally</label>
+            <label><input type="radio" name="q9" value="C"> C. A press conference</label>
+            <label><input type="radio" name="q9" value="D"> D. A meeting with the minister</label>
+          </div>
+        </div>
+        <!-- Q10 -->
+        <div class="question" id="question10" data-answer="A">
+          <h3>10. How many venues were the opposition turned away from?</h3>
+          <div class="options">
+            <label><input type="radio" name="q10" value="A"> A. Three venues</label>
+            <label><input type="radio" name="q10" value="B"> B. Two venues</label>
+            <label><input type="radio" name="q10" value="C"> C. Four venues</label>
+            <label><input type="radio" name="q10" value="D"> D. One venue</label>
+          </div>
+        </div>
+        <!-- Q11 -->
+        <div class="question" id="question11" data-answer="A">
+          <h3>11. Where did the opposition eventually hold their moot?</h3>
+          <div class="options">
+            <label><input type="radio" name="q11" value="A"> A. In a less prominent location</label>
+            <label><input type="radio" name="q11" value="B"> B. In the hotel ballroom</label>
+            <label><input type="radio" name="q11" value="C"> C. In a government building</label>
+            <label><input type="radio" name="q11" value="D"> D. Outdoors</label>
+          </div>
+        </div>
+        <!-- Q12 -->
+        <div class="question" id="question12" data-answer="A">
+          <h3>12. Where were the discussions held after the hotel intervention?</h3>
+          <div class="options">
+            <label><input type="radio" name="q12" value="A"> A. In the hotel’s lobby</label>
+            <label><input type="radio" name="q12" value="B"> B. In a conference room</label>
+            <label><input type="radio" name="q12" value="C"> C. In a restaurant</label>
+            <label><input type="radio" name="q12" value="D"> D. In the auditorium</label>
+          </div>
+        </div>
+        <!-- Q13 -->
+        <div class="question" id="question13" data-answer="A">
+          <h3>13. What does Editorial 1 imply about the regime’s commitment to human rights?</h3>
+          <div class="options">
+            <label><input type="radio" name="q13" value="A"> A. It pays lip service only</label>
+            <label><input type="radio" name="q13" value="B"> B. It is fully committed</label>
+            <label><input type="radio" name="q13" value="C"> C. It has improved significantly</label>
+            <label><input type="radio" name="q13" value="D"> D. It is not mentioned</label>
+          </div>
+        </div>
+        <!-- Q14 -->
+        <div class="question" id="question14" data-answer="A">
+          <h3>14. Which index is mentioned as tracking rights and liberties?</h3>
+          <div class="options">
+            <label><input type="radio" name="q14" value="A"> A. Freedom House index</label>
+            <label><input type="radio" name="q14" value="B"> B. Global Corruption Index</label>
+            <label><input type="radio" name="q14" value="C"> C. Human Development Index</label>
+            <label><input type="radio" name="q14" value="D"> D. Economic Freedom Index</label>
+          </div>
+        </div>
+        <!-- Q15 -->
+        <div class="question" id="question15" data-answer="A">
+          <h3>15. Which think tank is mentioned in Editorial 1?</h3>
+          <div class="options">
+            <label><input type="radio" name="q15" value="A"> A. Freedom House</label>
+            <label><input type="radio" name="q15" value="B"> B. Brookings Institution</label>
+            <label><input type="radio" name="q15" value="C"> C. Council on Foreign Relations</label>
+            <label><input type="radio" name="q15" value="D"> D. Carnegie Endowment</label>
+          </div>
+        </div>
+        <!-- Q16 -->
+        <div class="question" id="question16" data-answer="A">
+          <h3>16. What has the 26th Amendment come to be known for?</h3>
+          <div class="options">
+            <label><input type="radio" name="q16" value="A"> A. Not upholding people’s rights</label>
+            <label><input type="radio" name="q16" value="B"> B. Protecting rights</label>
+            <label><input type="radio" name="q16" value="C"> C. Improving corruption</label>
+            <label><input type="radio" name="q16" value="D"> D. Enhancing democracy</label>
+          </div>
+        </div>
+        <!-- Q17 -->
+        <div class="question" id="question17" data-answer="A">
+          <h3>17. What event coincided with Mr Tarar’s UN address?</h3>
+          <div class="options">
+            <label><input type="radio" name="q17" value="A"> A. The hotel conference incident</label>
+            <label><input type="radio" name="q17" value="B"> B. A press release</label>
+            <label><input type="radio" name="q17" value="C"> C. A protest</label>
+            <label><input type="radio" name="q17" value="D"> D. A sports event</label>
+          </div>
+        </div>
+        <!-- Q18 -->
+        <div class="question" id="question18" data-answer="A">
+          <h3>18. What does the term "lip service" imply?</h3>
+          <div class="options">
+            <label><input type="radio" name="q18" value="A"> A. Insincere commitment</label>
+            <label><input type="radio" name="q18" value="B"> B. Genuine effort</label>
+            <label><input type="radio" name="q18" value="C"> C. A detailed plan</label>
+            <label><input type="radio" name="q18" value="D"> D. Legal compliance</label>
+          </div>
+        </div>
+        <!-- Q19 -->
+        <div class="question" id="question19" data-answer="A">
+          <h3>19. What experience highlights government interference in the opposition’s event?</h3>
+          <div class="options">
+            <label><input type="radio" name="q19" value="A"> A. Being turned away from venues</label>
+            <label><input type="radio" name="q19" value="B"> B. Receiving support</label>
+            <label><input type="radio" name="q19" value="C"> C. Publishing articles</label>
+            <label><input type="radio" name="q19" value="D"> D. Organizing protests</label>
+          </div>
+        </div>
+        <!-- Q20 -->
+        <div class="question" id="question20" data-answer="A">
+          <h3>20. What is the overall tone regarding Pakistan’s human rights situation?</h3>
+          <div class="options">
+            <label><input type="radio" name="q20" value="A"> A. Critical</label>
+            <label><input type="radio" name="q20" value="B"> B. Optimistic</label>
+            <label><input type="radio" name="q20" value="C"> C. Neutral</label>
+            <label><input type="radio" name="q20" value="D"> D. Celebratory</label>
+          </div>
+        </div>
+      </div>
+      <!-- Editorial 2 Questions (20) -->
+      <div style="border-bottom: 1px solid #ccc; padding-bottom: 10px; margin-bottom: 20px;">
+        <h2>Editorial 2 Questions</h2>
+        <!-- Q21 -->
+        <div class="question" id="question21" data-answer="A">
+          <h3>21. Which month is mentioned in Editorial 2?</h3>
+          <div class="options">
+            <label><input type="radio" name="q21" value="A"> A. Ramazan</label>
+            <label><input type="radio" name="q21" value="B"> B. Shawwal</label>
+            <label><input type="radio" name="q21" value="C"> C. Muharram</label>
+            <label><input type="radio" name="q21" value="D"> D. Rajab</label>
+          </div>
+        </div>
+        <!-- Q22 -->
+        <div class="question" id="question22" data-answer="A">
+          <h3>22. Which food products are mentioned as having price hikes?</h3>
+          <div class="options">
+            <label><input type="radio" name="q22" value="A"> A. Fruit, sugar, gram flour</label>
+            <label><input type="radio" name="q22" value="B"> B. Meat, milk, bread</label>
+            <label><input type="radio" name="q22" value="C"> C. Rice, lentils, oil</label>
+            <label><input type="radio" name="q22" value="D"> D. Vegetables, spices, salt</label>
+          </div>
+        </div>
+        <!-- Q23 -->
+        <div class="question" id="question23" data-answer="A">
+          <h3>23. What economic phenomenon is described?</h3>
+          <div class="options">
+            <label><input type="radio" name="q23" value="A"> A. Price spiral</label>
+            <label><input type="radio" name="q23" value="B"> B. Recession</label>
+            <label><input type="radio" name="q23" value="C"> C. Inflation decline</label>
+            <label><input type="radio" name="q23" value="D"> D. Deflation</label>
+          </div>
+        </div>
+        <!-- Q24 -->
+        <div class="question" id="question24" data-answer="A">
+          <h3>24. What is the main cause of high prices during Ramazan?</h3>
+          <div class="options">
+            <label><input type="radio" name="q24" value="A"> A. High demand and limited supply</label>
+            <label><input type="radio" name="q24" value="B"> B. Excessive imports</label>
+            <label><input type="radio" name="q24" value="C"> C. Government policies</label>
+            <label><input type="radio" name="q24" value="D"> D. Increased production</label>
+          </div>
+        </div>
+        <!-- Q25 -->
+        <div class="question" id="question25" data-answer="A">
+          <h3>25. Which consumer behavior contributes to the price hike?</h3>
+          <div class="options">
+            <label><input type="radio" name="q25" value="A"> A. Buying more than needed</label>
+            <label><input type="radio" name="q25" value="B"> B. Buying less</label>
+            <label><input type="radio" name="q25" value="C"> C. Bulk buying for resale</label>
+            <label><input type="radio" name="q25" value="D"> D. Saving excessively</label>
+          </div>
+        </div>
+        <!-- Q26 -->
+        <div class="question" id="question26" data-answer="A">
+          <h3>26. Who else procures foodstuffs in bulk besides regular consumers?</h3>
+          <div class="options">
+            <label><input type="radio" name="q26" value="A"> A. Charities and individuals distributing rations</label>
+            <label><input type="radio" name="q26" value="B"> B. Retailers</label>
+            <label><input type="radio" name="q26" value="C"> C. Manufacturers</label>
+            <label><input type="radio" name="q26" value="D"> D. Importers</label>
+          </div>
+        </div>
+        <!-- Q27 -->
+        <div class="question" id="question27" data-answer="A">
+          <h3>27. What factor is partly blamed for the price hikes?</h3>
+          <div class="options">
+            <label><input type="radio" name="q27" value="A"> A. Greed of unscrupulous traders</label>
+            <label><input type="radio" name="q27" value="B"> B. Climate change</label>
+            <label><input type="radio" name="q27" value="C"> C. Over-regulation</label>
+            <label><input type="radio" name="q27" value="D"> D. Natural disasters</label>
+          </div>
+        </div>
+        <!-- Q28 -->
+        <div class="question" id="question28" data-answer="A">
+          <h3>28. What measure is suggested to help low-income citizens?</h3>
+          <div class="options">
+            <label><input type="radio" name="q28" value="A"> A. Direct targeted subsidies</label>
+            <label><input type="radio" name="q28" value="B"> B. Import tariffs</label>
+            <label><input type="radio" name="q28" value="C"> C. Tax hikes</label>
+            <label><input type="radio" name="q28" value="D"> D. Price freezes</label>
+          </div>
+        </div>
+        <!-- Q29 -->
+        <div class="question" id="question29" data-answer="A">
+          <h3>29. What intervention is suggested for general consumers?</h3>
+          <div class="options">
+            <label><input type="radio" name="q29" value="A"> A. Strengthening price control mechanisms</label>
+            <label><input type="radio" name="q29" value="B"> B. Increasing production</label>
+            <label><input type="radio" name="q29" value="C"> C. Reducing subsidies</label>
+            <label><input type="radio" name="q29" value="D"> D. Deregulation</label>
+          </div>
+        </div>
+        <!-- Q30 -->
+        <div class="question" id="question30" data-answer="A">
+          <h3>30. What type of market is mentioned for subsidized items?</h3>
+          <div class="options">
+            <label><input type="radio" name="q30" value="A"> A. Ramazan bazaars</label>
+            <label><input type="radio" name="q30" value="B"> B. Online markets</label>
+            <label><input type="radio" name="q30" value="C"> C. Government auctions</label>
+            <label><input type="radio" name="q30" value="D"> D. Private malls</label>
+          </div>
+        </div>
+        <!-- Q31 -->
+        <div class="question" id="question31" data-answer="A">
+          <h3>31. What concern is raised about the products in these markets?</h3>
+          <div class="options">
+            <label><input type="radio" name="q31" value="A"> A. Quality of products</label>
+            <label><input type="radio" name="q31" value="B"> B. Quantity available</label>
+            <label><input type="radio" name="q31" value="C"> C. Location of markets</label>
+            <label><input type="radio" name="q31" value="D"> D. Packaging</label>
+          </div>
+        </div>
+        <!-- Q32 -->
+        <div class="question" id="question32" data-answer="A">
+          <h3>32. What role do Utility Stores play according to the editorial?</h3>
+          <div class="options">
+            <label><input type="radio" name="q32" value="A"> A. Their uncertain future increases need for subsidized bazaars</label>
+            <label><input type="radio" name="q32" value="B"> B. They control prices</label>
+            <label><input type="radio" name="q32" value="C"> C. They ensure quality</label>
+            <label><input type="radio" name="q32" value="D"> D. They reduce demand</label>
+          </div>
+        </div>
+        <!-- Q33 -->
+        <div class="question" id="question33" data-answer="A">
+          <h3>33. How does the editorial describe the authorities’ interventions?</h3>
+          <div class="options">
+            <label><input type="radio" name="q33" value="A"> A. Theatrical interventions</label>
+            <label><input type="radio" name="q33" value="B"> B. Immediate fixes</label>
+            <label><input type="radio" name="q33" value="C"> C. Transparent measures</label>
+            <label><input type="radio" name="q33" value="D"> D. Non-existent</label>
+          </div>
+        </div>
+        <!-- Q34 -->
+        <div class="question" id="question34" data-answer="A">
+          <h3>34. What might consumers do if the state fails to intervene?</h3>
+          <div class="options">
+            <label><input type="radio" name="q34" value="A"> A. Boycott expensive fruit</label>
+            <label><input type="radio" name="q34" value="B"> B. Buy in bulk</label>
+            <label><input type="radio" name="q34" value="C"> C. Seek alternatives</label>
+            <label><input type="radio" name="q34" value="D"> D. Increase consumption</label>
+          </div>
+        </div>
+        <!-- Q35 -->
+        <div class="question" id="question35" data-answer="A">
+          <h3>35. What does the phrase "direct action" imply?</h3>
+          <div class="options">
+            <label><input type="radio" name="q35" value="A"> A. Consumers boycotting overpriced items</label>
+            <label><input type="radio" name="q35" value="B"> B. Government regulation</label>
+            <label><input type="radio" name="q35" value="C"> C. Increased purchases</label>
+            <label><input type="radio" name="q35" value="D"> D. International aid</label>
+          </div>
+        </div>
+        <!-- Q36 -->
+        <div class="question" id="question36" data-answer="A">
+          <h3>36. Which economic principle is referenced?</h3>
+          <div class="options">
+            <label><input type="radio" name="q36" value="A"> A. Laws of supply and demand</label>
+            <label><input type="radio" name="q36" value="B"> B. Monetary policy</label>
+            <label><input type="radio" name="q36" value="C"> C. Fiscal deficit</label>
+            <label><input type="radio" name="q36" value="D"> D. Trade surplus</label>
+          </div>
+        </div>
+        <!-- Q37 -->
+        <div class="question" id="question37" data-answer="A">
+          <h3>37. How does the price spiral affect working people?</h3>
+          <div class="options">
+            <label><input type="radio" name="q37" value="A"> A. It makes arranging a decent iftar or sehr spread hard</label>
+            <label><input type="radio" name="q37" value="B"> B. It increases their income</label>
+            <label><input type="radio" name="q37" value="C"> C. It boosts employment</label>
+            <label><input type="radio" name="q37" value="D"> D. It lowers costs</label>
+          </div>
+        </div>
+        <!-- Q38 -->
+        <div class="question" id="question38" data-answer="A">
+          <h3>38. What is the intended outcome of targeted subsidies?</h3>
+          <div class="options">
+            <label><input type="radio" name="q38" value="A"> A. To help low-income citizens arrange decent meals</label>
+            <label><input type="radio" name="q38" value="B"> B. To increase government revenue</label>
+            <label><input type="radio" name="q38" value="C"> C. To boost exports</label>
+            <label><input type="radio" name="q38" value="D"> D. To promote healthy eating</label>
+          </div>
+        </div>
+        <!-- Q39 -->
+        <div class="question" id="question39" data-answer="A">
+          <h3>39. How is the current price control described?</h3>
+          <div class="options">
+            <label><input type="radio" name="q39" value="A"> A. Lacking, especially during Ramazan</label>
+            <label><input type="radio" name="q39" value="B"> B. Excellent</label>
+            <label><input type="radio" name="q39" value="C"> C. Irrelevant</label>
+            <label><input type="radio" name="q39" value="D"> D. Too strict</label>
+          </div>
+        </div>
+        <!-- Q40 -->
+        <div class="question" id="question40" data-answer="A">
+          <h3>40. What is essential for the state regarding price control?</h3>
+          <div class="options">
+            <label><input type="radio" name="q40" value="A"> A. Effective price control year-round</label>
+            <label><input type="radio" name="q40" value="B"> B. Occasional interventions</label>
+            <label><input type="radio" name="q40" value="C"> C. No intervention</label>
+            <label><input type="radio" name="q40" value="D"> D. Privatization of markets</label>
+          </div>
+        </div>
+      </div>
+      <!-- Editorial 3 Questions (10) -->
+      <div>
+        <h2>Editorial 3 Questions</h2>
+        <!-- Q41 -->
+        <div class="question" id="question41" data-answer="A">
+          <h3>41. What did the Trump administration share on social media?</h3>
+          <div class="options">
+            <label><input type="radio" name="q41" value="A"> A. An AI-generated video of 'Trump Gaza'</label>
+            <label><input type="radio" name="q41" value="B"> B. A press release</label>
+            <label><input type="radio" name="q41" value="C"> C. A documentary</label>
+            <label><input type="radio" name="q41" value="D"> D. A photo gallery</label>
+          </div>
+        </div>
+        <!-- Q42 -->
+        <div class="question" id="question42" data-answer="A">
+          <h3>42. How is the 'Trump Gaza' video described?</h3>
+          <div class="options">
+            <label><input type="radio" name="q42" value="A"> A. Grotesque</label>
+            <label><input type="radio" name="q42" value="B"> B. Uplifting</label>
+            <label><input type="radio" name="q42" value="C"> C. Informative</label>
+            <label><input type="radio" name="q42" value="D"> D. Humorous</label>
+          </div>
+        </div>
+        <!-- Q43 -->
+        <div class="question" id="question43" data-answer="A">
+          <h3>43. Who is depicted sipping cocktails in the video?</h3>
+          <div class="options">
+            <label><input type="radio" name="q43" value="A"> A. Donald Trump and Benjamin Netanyahu</label>
+            <label><input type="radio" name="q43" value="B"> B. Donald Trump and Joe Biden</label>
+            <label><input type="radio" name="q43" value="C"> C. Netanyahu and Barack Obama</label>
+            <label><input type="radio" name="q43" value="D"> D. Elon Musk and Bill Gates</label>
+          </div>
+        </div>
+        <!-- Q44 -->
+        <div class="question" id="question44" data-answer="A">
+          <h3>44. Which unusual element appears alongside Trump in the video?</h3>
+          <div class="options">
+            <label><input type="radio" name="q44" value="A"> A. Elon Musk dancing under a shower of cash</label>
+            <label><input type="radio" name="q44" value="B"> B. Bill Gates giving a speech</label>
+            <label><input type="radio" name="q44" value="C"> C. A dancing statue</label>
+            <label><input type="radio" name="q44" value="D"> D. A cartoon character</label>
+          </div>
+        </div>
+        <!-- Q45 -->
+        <div class="question" id="question45" data-answer="A">
+          <h3>45. What effect does the video have regarding Palestinian suffering?</h3>
+          <div class="options">
+            <label><input type="radio" name="q45" value="A"> A. It trivialises their suffering</label>
+            <label><input type="radio" name="q45" value="B"> B. It highlights resilience</label>
+            <label><input type="radio" name="q45" value="C"> C. It offers solutions</label>
+            <label><input type="radio" name="q45" value="D"> D. It ignores the issue</label>
+          </div>
+        </div>
+        <!-- Q46 -->
+        <div class="question" id="question46" data-answer="A">
+          <h3>46. What plan did the Trump administration reportedly float?</h3>
+          <div class="options">
+            <label><input type="radio" name="q46" value="A"> A. To forcibly relocate Palestinians</label>
+            <label><input type="radio" name="q46" value="B"> B. To provide humanitarian aid</label>
+            <label><input type="radio" name="q46" value="C"> C. To rebuild infrastructure</label>
+            <label><input type="radio" name="q46" value="D"> D. To create a new state</label>
+          </div>
+        </div>
+        <!-- Q47 -->
+        <div class="question" id="question47" data-answer="A">
+          <h3>47. Which neighboring countries rejected the plan?</h3>
+          <div class="options">
+            <label><input type="radio" name="q47" value="A"> A. Jordan and Egypt</label>
+            <label><input type="radio" name="q47" value="B"> B. Saudi Arabia and UAE</label>
+            <label><input type="radio" name="q47" value="C"> C. Turkey and Iran</label>
+            <label><input type="radio" name="q47" value="D"> D. Lebanon and Syria</label>
+          </div>
+        </div>
+        <!-- Q48 -->
+        <div class="question" id="question48" data-answer="A">
+          <h3>48. How does the video portray Gaza?</h3>
+          <div class="options">
+            <label><input type="radio" name="q48" value="A"> A. As a beachfront playground for the wealthy</label>
+            <label><input type="radio" name="q48" value="B"> B. As a war zone</label>
+            <label><input type="radio" name="q48" value="C"> C. As a historical site</label>
+            <label><input type="radio" name="q48" value="D"> D. As a commercial hub</label>
+          </div>
+        </div>
+        <!-- Q49 -->
+        <div class="question" id="question49" data-answer="A">
+          <h3>49. Which phrase is used in the video?</h3>
+          <div class="options">
+            <label><input type="radio" name="q49" value="A"> A. "Donald's coming to set you free"</label>
+            <label><input type="radio" name="q49" value="B"> B. "Freedom for all"</label>
+            <label><input type="radio" name="q49" value="C"> C. "Together we rise"</label>
+            <label><input type="radio" name="q49" value="D"> D. "Power to the people"</label>
+          </div>
+        </div>
+        <!-- Q50 -->
+        <div class="question" id="question50" data-answer="A">
+          <h3>50. What overall vision does the editorial attribute to the Trump administration regarding Gaza?</h3>
+          <div class="options">
+            <label><input type="radio" name="q50" value="A"> A. A colonial fantasy</label>
+            <label><input type="radio" name="q50" value="B"> B. A humanitarian effort</label>
+            <label><input type="radio" name="q50" value="C"> C. A diplomatic solution</label>
+            <label><input type="radio" name="q50" value="D"> D. A cultural exchange</label>
+          </div>
+        </div>
+      </div>
+      <br>
+      <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+    </form>
+  </div>
+
+  <!-- Results Section -->
+  <div id="results-section"></div>
+
+  <!-- Hidden Form for Formspree -->
+  <form id="fs-form" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+    <input type="hidden" name="student_name" id="fs-name">
+    <input type="hidden" name="questions_attempted" id="fs-attempted">
+    <input type="hidden" name="score" id="fs-score">
+    <input type="hidden" name="time_taken" id="fs-time">
+  </form>
+
+  <!-- Footer Section -->
+  <footer>
+    <p>For inquiries call: 03265762698</p>
+    <p>Contact us now for more information!</p>
+  </footer>
 </body>
 </html>
