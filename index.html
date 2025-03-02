@@ -2,547 +2,592 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QUIZ FOR CSS ASPIRANTS 1 March 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 2 March 2025</title>
   <style>
-    /* Global Styles and Disable Text Selection */
-    body {
+    /* Disable text selection */
+    html, body, * {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
       margin: 0;
       padding: 0;
+    }
+    body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      user-select: none;
-      -webkit-user-select: none;
+      background-color: #f5f5f5;
     }
     header, footer {
       background-color: #333;
       color: #fff;
-      padding: 20px;
       text-align: center;
+      padding: 20px;
     }
     header img {
       max-width: 100px;
-      margin-top: 10px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 10px;
     }
     .container {
-      max-width: 900px;
+      width: 80%;
+      max-width: 1000px;
       margin: 20px auto;
+      background: #fff;
       padding: 20px;
-      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    .hidden {
+    #nameEntry {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    #nameEntry input[type="text"] {
+      padding: 10px;
+      width: 60%;
+      font-size: 16px;
+    }
+    #nameEntry button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    #quizSection {
       display: none;
     }
-    button {
+    .timer {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: right;
+      margin-bottom: 20px;
+    }
+    .question {
+      margin-bottom: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .question p {
+      margin-bottom: 10px;
+    }
+    .question input[type="radio"] {
+      margin-right: 10px;
+    }
+    #quizForm button {
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
-      margin-top: 10px;
-    }
-    .quiz-section {
       margin-top: 20px;
-    }
-    .question {
-      margin-bottom: 15px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #ddd;
-    }
-    .question p {
-      margin: 5px 0;
-    }
-    .question label {
       display: block;
-      margin: 5px 0;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .timer {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 20px;
+    #resultSection {
       text-align: center;
-    }
-    .results {
-      margin-top: 20px;
       padding: 20px;
-      border: 1px solid #ccc;
     }
   </style>
-  <script>
-    let timeLeft = 600; // 10 minutes in seconds
-    let timerInterval;
-
-    // Start the 10-minute countdown timer
-    function startTimer() {
-      timerInterval = setInterval(function() {
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          submitQuiz();
-        } else {
-          timeLeft--;
-          document.getElementById("timer").innerText = "Time Left: " + Math.floor(timeLeft / 60) + "m " + (timeLeft % 60) + "s";
-        }
-      }, 1000);
-    }
-
-    // Start Quiz after validating non-empty name input
-    function startQuiz() {
-      const nameInput = document.getElementById("nameInput").value.trim();
-      if (nameInput === "") {
-        alert("Please enter your name.");
-        return;
-      }
-      document.getElementById("userNameDisplay").innerText = nameInput;
-      document.getElementById("nameSection").classList.add("hidden");
-      document.getElementById("quizSection").classList.remove("hidden");
-      startTimer();
-    }
-
-    // Calculate results, display them, and auto-submit hidden Formspree form
-    function submitQuiz() {
-      clearInterval(timerInterval);
-      const totalQuestions = 50;
-      let attempted = 0;
-      let score = 0;
-      for (let i = 1; i <= totalQuestions; i++) {
-        const options = document.getElementsByName("q" + i);
-        for (let opt of options) {
-          if (opt.checked) {
-            attempted++;
-            if (opt.value === "correct") {
-              score++;
-            }
-            break;
-          }
-        }
-      }
-      const timeTaken = 600 - timeLeft;
-      const resultDiv = document.getElementById("resultSection");
-      resultDiv.innerHTML =
-        "<h2>Results</h2>" +
-        "<p>Name: " + document.getElementById("userNameDisplay").innerText + "</p>" +
-        "<p>Attempted: " + attempted + " out of " + totalQuestions + "</p>" +
-        "<p>Score: " + score + " out of " + totalQuestions + "</p>" +
-        "<p>Time Taken: " + Math.floor(timeTaken / 60) + "m " + (timeTaken % 60) + "s</p>";
-      
-      // Fill and auto-submit the hidden Formspree form
-      document.getElementById("hiddenName").value = document.getElementById("userNameDisplay").innerText;
-      document.getElementById("hiddenAttempted").value = attempted;
-      document.getElementById("hiddenScore").value = score;
-      document.getElementById("hiddenTime").value = Math.floor(timeTaken / 60) + "m " + (timeTaken % 60) + "s";
-      document.getElementById("resultForm").submit();
-      
-      document.getElementById("quizSection").classList.add("hidden");
-      resultDiv.classList.remove("hidden");
-    }
-
-    // Disable right-click and common keyboard shortcuts to prevent copying/inspection
-    document.addEventListener("contextmenu", function(e) {
-      e.preventDefault();
-    });
-    document.addEventListener("keydown", function(e) {
-      if (e.ctrlKey && (e.key === "c" || e.key === "u" || e.key === "s" || e.key === "p")) {
-        e.preventDefault();
-      }
-    });
-  </script>
 </head>
-<body oncontextmenu="return false;">
+<body>
   <header>
-    <h1>QUIZ FOR CSS ASPIRANTS 1 March 2025</h1>
-    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
-    <p>SYED ASGHAR ALI SHAH</p>
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Logo">
+    <h1>QUIZ FOR CSS ASPIRANTS 2 March 2025</h1>
+    <h2>SYED ASGHAR ALI SHAH</h2>
   </header>
   
   <div class="container">
     <!-- Name Entry Section -->
-    <div id="nameSection">
-      <h2>Enter Your Name to Start the Quiz</h2>
-      <input type="text" id="nameInput" placeholder="Your Name">
-      <br>
-      <button onclick="startQuiz()">Start Quiz</button>
+    <div id="nameEntry">
+      <label for="studentName">Enter your name:</label>
+      <input type="text" id="studentName" name="studentName" autocomplete="off">
+      <button id="startQuizBtn">Start Quiz</button>
     </div>
     
     <!-- Quiz Section -->
-    <div id="quizSection" class="hidden">
-      <div class="timer" id="timer">Time Left: 10m 0s</div>
-      <!-- Hidden element to store user's name -->
-      <div id="userNameDisplay" style="display:none;"></div>
+    <div id="quizSection">
+      <div class="timer" id="timer">10:00</div>
       <form id="quizForm">
-        <h3>Editorial 1 Questions</h3>
-        <!-- Editorial 1: 20 Questions -->
-        <div class="question">
-          <p>1. Which think tank compiled the one-year performance report of the 16th National Assembly?</p>
-          <label><input type="radio" name="q1" value="correct"> Pildat</label>
-          <label><input type="radio" name="q1" value="wrong"> NADRA</label>
-          <label><input type="radio" name="q1" value="wrong"> Supreme Court</label>
-          <label><input type="radio" name="q1" value="wrong"> Ministry of Law</label>
+        <!-- Editorial 1 Questions (20) -->
+        <h2>Editorial 1 Questions</h2>
+        <div class="question" id="q1">
+          <p>Q1. According to Editorial 1, what was the main criticism regarding the 26th Amendment?</p>
+          <input type="radio" name="q1" value="A" data-correct="false"> A. It was unanimously supported by the judiciary.<br>
+          <input type="radio" name="q1" value="B" data-correct="true"> B. It was feared to be abused by the government.<br>
+          <input type="radio" name="q1" value="C" data-correct="false"> C. It streamlined judicial procedures.<br>
+          <input type="radio" name="q1" value="D" data-correct="false"> D. It increased transparency in appointments.<br>
         </div>
-        <div class="question">
-          <p>2. How many laws did the 16th National Assembly pass in its first year?</p>
-          <label><input type="radio" name="q2" value="correct"> 47</label>
-          <label><input type="radio" name="q2" value="wrong"> 21</label>
-          <label><input type="radio" name="q2" value="wrong"> 35</label>
-          <label><input type="radio" name="q2" value="wrong"> 60</label>
+        <div class="question" id="q2">
+          <p>Q2. In Editorial 1, what is implied by the term "vae victis"?</p>
+          <input type="radio" name="q2" value="A" data-correct="true"> A. The vanquished must accept their fate.<br>
+          <input type="radio" name="q2" value="B" data-correct="false"> B. The victorious are always right.<br>
+          <input type="radio" name="q2" value="C" data-correct="false"> C. Justice is blind.<br>
+          <input type="radio" name="q2" value="D" data-correct="false"> D. Power corrupts absolutely.<br>
         </div>
-        <div class="question">
-          <p>3. The output was nearly how many times the average passed by previous assemblies?</p>
-          <label><input type="radio" name="q3" value="correct"> Seven times</label>
-          <label><input type="radio" name="q3" value="wrong"> Three times</label>
-          <label><input type="radio" name="q3" value="wrong"> Five times</label>
-          <label><input type="radio" name="q3" value="wrong"> Ten times</label>
+        <div class="question" id="q3">
+          <p>Q3. What does Editorial 1 suggest about the recent expansion of the Constitutional Bench?</p>
+          <input type="radio" name="q3" value="A" data-correct="false"> A. It was based solely on legal qualifications.<br>
+          <input type="radio" name="q3" value="B" data-correct="true"> B. It was politically motivated.<br>
+          <input type="radio" name="q3" value="C" data-correct="false"> C. It ensured a balanced representation.<br>
+          <input type="radio" name="q3" value="D" data-correct="false"> D. It was mandated by constitutional reforms.<br>
         </div>
-        <div class="question">
-          <p>4. Which act was amended to allegedly deny opposition candidates a fair chance?</p>
-          <label><input type="radio" name="q4" value="correct"> Elections Act of 2017</label>
-          <label><input type="radio" name="q4" value="wrong"> Peaceful Assembly Act</label>
-          <label><input type="radio" name="q4" value="wrong"> Public Order Act</label>
-          <label><input type="radio" name="q4" value="wrong"> Members of Parliament Act</label>
+        <div class="question" id="q4">
+          <p>Q4. Which term best describes the process of appointing judges as mentioned in Editorial 1?</p>
+          <input type="radio" name="q4" value="A" data-correct="false"> A. Transparent<br>
+          <input type="radio" name="q4" value="B" data-correct="false"> B. Meritocratic<br>
+          <input type="radio" name="q4" value="C" data-correct="true"> C. Arbitrary<br>
+          <input type="radio" name="q4" value="D" data-correct="false"> D. Collaborative<br>
         </div>
-        <div class="question">
-          <p>5. How many amendments were made to the Elections Act of 2017?</p>
-          <label><input type="radio" name="q5" value="correct"> Three</label>
-          <label><input type="radio" name="q5" value="wrong"> Two</label>
-          <label><input type="radio" name="q5" value="wrong"> One</label>
-          <label><input type="radio" name="q5" value="wrong"> Four</label>
+        <div class="question" id="q5">
+          <p>Q5. Which group was notably ignored in the expansion of the bench according to Editorial 1?</p>
+          <input type="radio" name="q5" value="A" data-correct="false"> A. Newly appointed judges<br>
+          <input type="radio" name="q5" value="B" data-correct="true"> B. Senior, experienced judges<br>
+          <input type="radio" name="q5" value="C" data-correct="false"> C. Judges from lower courts<br>
+          <input type="radio" name="q5" value="D" data-correct="false"> D. Judges with political affiliations<br>
         </div>
-        <div class="question">
-          <p>6. Which law rendered public meetings subject to local administration’s whims?</p>
-          <label><input type="radio" name="q6" value="correct"> Peaceful Assembly and Public Order Act</label>
-          <label><input type="radio" name="q6" value="wrong"> Peca Amendment</label>
-          <label><input type="radio" name="q6" value="wrong"> Elections Act</label>
-          <label><input type="radio" name="q6" value="wrong"> Cabinet Expansion Act</label>
+        <div class="question" id="q6">
+          <p>Q6. What is the consequence of a publicly perceived skewed system, as per Editorial 1?</p>
+          <input type="radio" name="q6" value="A" data-correct="true"> A. Erosion of trust in the judiciary<br>
+          <input type="radio" name="q6" value="B" data-correct="false"> B. Increase in public support<br>
+          <input type="radio" name="q6" value="C" data-correct="false"> C. Strengthening of judicial decisions<br>
+          <input type="radio" name="q6" value="D" data-correct="false"> D. Promotion of legal reforms<br>
         </div>
-        <div class="question">
-          <p>7. Which amendment brought the judiciary "to heel"?</p>
-          <label><input type="radio" name="q7" value="correct"> 26th Amendment</label>
-          <label><input type="radio" name="q7" value="wrong"> 15th Amendment</label>
-          <label><input type="radio" name="q7" value="wrong"> Members Amendment</label>
-          <label><input type="radio" name="q7" value="wrong"> Pildat Amendment</label>
+        <div class="question" id="q7">
+          <p>Q7. What does Editorial 1 imply about the reasoning provided for judicial appointments?</p>
+          <input type="radio" name="q7" value="A" data-correct="false"> A. It is detailed and transparent<br>
+          <input type="radio" name="q7" value="B" data-correct="true"> B. It lacks clear justification<br>
+          <input type="radio" name="q7" value="C" data-correct="false"> C. It is based on merit only<br>
+          <input type="radio" name="q7" value="D" data-correct="false"> D. It is supported by public opinion<br>
         </div>
-        <div class="question">
-          <p>8. What is the new monthly salary for parliamentarians?</p>
-          <label><input type="radio" name="q8" value="correct"> Rs519,000</label>
-          <label><input type="radio" name="q8" value="wrong"> Rs188,000</label>
-          <label><input type="radio" name="q8" value="wrong"> Rs300,000</label>
-          <label><input type="radio" name="q8" value="wrong"> Rs600,000</label>
+        <div class="question" id="q8">
+          <p>Q8. What criticism is made about the Constitutional Bench in Editorial 1?</p>
+          <input type="radio" name="q8" value="A" data-correct="false"> A. It has too many experienced judges<br>
+          <input type="radio" name="q8" value="B" data-correct="true"> B. It is composed of 'like-minded' individuals<br>
+          <input type="radio" name="q8" value="C" data-correct="false"> C. It is too diverse in opinion<br>
+          <input type="radio" name="q8" value="D" data-correct="false"> D. It is slow in decision making<br>
         </div>
-        <div class="question">
-          <p>9. The increased legislative output was used to:</p>
-          <label><input type="radio" name="q9" value="correct"> Improve the government's lot at the country's expense</label>
-          <label><input type="radio" name="q9" value="wrong"> Strengthen democracy</label>
-          <label><input type="radio" name="q9" value="wrong"> Enhance transparency</label>
-          <label><input type="radio" name="q9" value="wrong"> Improve public services</label>
+        <div class="question" id="q9">
+          <p>Q9. Which principle is referenced in Editorial 1 to describe the situation?</p>
+          <input type="radio" name="q9" value="A" data-correct="false"> A. Nemo dat quod non habet<br>
+          <input type="radio" name="q9" value="B" data-correct="false"> B. Caveat emptor<br>
+          <input type="radio" name="q9" value="C" data-correct="true"> C. Vae victis<br>
+          <input type="radio" name="q9" value="D" data-correct="false"> D. None of the above<br>
         </div>
-        <div class="question">
-          <p>10. What does the Pildat president regret about the law passing process?</p>
-          <label><input type="radio" name="q10" value="correct"> Hasty passing without meaningful debate</label>
-          <label><input type="radio" name="q10" value="wrong"> Excessive debate</label>
-          <label><input type="radio" name="q10" value="wrong"> Not enough laws passed</label>
-          <label><input type="radio" name="q10" value="wrong"> Delays in legislation</label>
+        <div class="question" id="q10">
+          <p>Q10. What aspect of the judicial appointments is highlighted in Editorial 1?</p>
+          <input type="radio" name="q10" value="A" data-correct="false"> A. Their transparency<br>
+          <input type="radio" name="q10" value="B" data-correct="false"> B. Their legal merit<br>
+          <input type="radio" name="q10" value="C" data-correct="true"> C. Their political motivation<br>
+          <input type="radio" name="q10" value="D" data-correct="false"> D. Their public approval<br>
         </div>
-        <div class="question">
-          <p>11. The 16th National Assembly convened for:</p>
-          <label><input type="radio" name="q11" value="correct"> Fewer days and hours than the preceding assembly</label>
-          <label><input type="radio" name="q11" value="wrong"> More days and hours</label>
-          <label><input type="radio" name="q11" value="wrong"> The same number of days and hours</label>
-          <label><input type="radio" name="q11" value="wrong"> Extended sessions</label>
+        <div class="question" id="q11">
+          <p>Q11. Which element is missing in the appointment process according to Editorial 1?</p>
+          <input type="radio" name="q11" value="A" data-correct="false"> A. Public justification<br>
+          <input type="radio" name="q11" value="B" data-correct="true"> B. Merit-based evaluation<br>
+          <input type="radio" name="q11" value="C" data-correct="false"> C. Judicial consensus<br>
+          <input type="radio" name="q11" value="D" data-correct="false"> D. Media coverage<br>
         </div>
-        <div class="question">
-          <p>12. The parliament was described as acting as a:</p>
-          <label><input type="radio" name="q12" value="correct"> Rubber stamp</label>
-          <label><input type="radio" name="q12" value="wrong"> Dynamic forum</label>
-          <label><input type="radio" name="q12" value="wrong"> Innovative body</label>
-          <label><input type="radio" name="q12" value="wrong"> Effective legislature</label>
+        <div class="question" id="q12">
+          <p>Q12. Which word best describes the decision-making process in the bench expansion?</p>
+          <input type="radio" name="q12" value="A" data-correct="false"> A. Systematic<br>
+          <input type="radio" name="q12" value="B" data-correct="true"> B. Arbitrary<br>
+          <input type="radio" name="q12" value="C" data-correct="false"> C. Consistent<br>
+          <input type="radio" name="q12" value="D" data-correct="false"> D. Logical<br>
         </div>
-        <div class="question">
-          <p>13. Which act's amendments are still protested by media, lawyers, and civil society?</p>
-          <label><input type="radio" name="q13" value="correct"> Peca</label>
-          <label><input type="radio" name="q13" value="wrong"> Elections Act</label>
-          <label><input type="radio" name="q13" value="wrong"> Public Order Act</label>
-          <label><input type="radio" name="q13" value="wrong"> Judiciary Act</label>
+        <div class="question" id="q13">
+          <p>Q13. What is the implied outcome of the bench's political control?</p>
+          <input type="radio" name="q13" value="A" data-correct="true"> A. Loss of public trust<br>
+          <input type="radio" name="q13" value="B" data-correct="false"> B. Increase in efficiency<br>
+          <input type="radio" name="q13" value="C" data-correct="false"> C. Enhanced legal clarity<br>
+          <input type="radio" name="q13" value="D" data-correct="false"> D. More balanced decisions<br>
         </div>
-        <div class="question">
-          <p>14. What was doubled on the eve of the Assembly’s first anniversary?</p>
-          <label><input type="radio" name="q14" value="correct"> Size of the federal cabinet</label>
-          <label><input type="radio" name="q14" value="wrong"> Number of laws passed</label>
-          <label><input type="radio" name="q14" value="wrong"> Public debate sessions</label>
-          <label><input type="radio" name="q14" value="wrong"> Parliament sessions</label>
+        <div class="question" id="q14">
+          <p>Q14. Which factor is NOT mentioned as a justification for the bench expansion?</p>
+          <input type="radio" name="q14" value="A" data-correct="false"> A. Political convenience<br>
+          <input type="radio" name="q14" value="B" data-correct="true"> B. Legal necessity<br>
+          <input type="radio" name="q14" value="C" data-correct="false"> C. Appointment of like-minded individuals<br>
+          <input type="radio" name="q14" value="D" data-correct="false"> D. Lack of experienced judges<br>
         </div>
-        <div class="question">
-          <p>15. How many ministers did the prime minister have before cabinet expansion?</p>
-          <label><input type="radio" name="q15" value="correct"> 21</label>
-          <label><input type="radio" name="q15" value="wrong"> 24</label>
-          <label><input type="radio" name="q15" value="wrong"> 30</label>
-          <label><input type="radio" name="q15" value="wrong"> 15</label>
+        <div class="question" id="q15">
+          <p>Q15. Which of the following best reflects the tone of Editorial 1?</p>
+          <input type="radio" name="q15" value="A" data-correct="true"> A. Critical<br>
+          <input type="radio" name="q15" value="B" data-correct="false"> B. Supportive<br>
+          <input type="radio" name="q15" value="C" data-correct="false"> C. Neutral<br>
+          <input type="radio" name="q15" value="D" data-correct="false"> D. Indifferent<br>
         </div>
-        <div class="question">
-          <p>16. The expanded cabinet was mainly for:</p>
-          <label><input type="radio" name="q16" value="correct"> Paying salaries, perks, and privileges</label>
-          <label><input type="radio" name="q16" value="wrong"> Improving policy</label>
-          <label><input type="radio" name="q16" value="wrong"> Streamlining governance</label>
-          <label><input type="radio" name="q16" value="wrong"> Cutting costs</label>
+        <div class="question" id="q16">
+          <p>Q16. What was ignored during the appointment process in Editorial 1?</p>
+          <input type="radio" name="q16" value="A" data-correct="false"> A. Experience and seniority<br>
+          <input type="radio" name="q16" value="B" data-correct="true"> B. Merit and experience<br>
+          <input type="radio" name="q16" value="C" data-correct="false"> C. Public opinion<br>
+          <input type="radio" name="q16" value="D" data-correct="false"> D. Political neutrality<br>
         </div>
-        <div class="question">
-          <p>17. Increased legislative output should not be mistaken for:</p>
-          <label><input type="radio" name="q17" value="correct"> Enhanced efficiency</label>
-          <label><input type="radio" name="q17" value="wrong"> Increased transparency</label>
-          <label><input type="radio" name="q17" value="wrong"> Improved law quality</label>
-          <label><input type="radio" name="q17" value="wrong"> Stronger democracy</label>
+        <div class="question" id="q17">
+          <p>Q17. Which term describes the appointments as per Editorial 1?</p>
+          <input type="radio" name="q17" value="A" data-correct="false"> A. Transparent<br>
+          <input type="radio" name="q17" value="B" data-correct="true"> B. Politically motivated<br>
+          <input type="radio" name="q17" value="C" data-correct="false"> C. Merit-based<br>
+          <input type="radio" name="q17" value="D" data-correct="false"> D. Collaborative<br>
         </div>
-        <div class="question">
-          <p>18. How did the Assembly regard public perceptions in its first year?</p>
-          <label><input type="radio" name="q18" value="correct"> They were unbothered</label>
-          <label><input type="radio" name="q18" value="wrong"> They were highly responsive</label>
-          <label><input type="radio" name="q18" value="wrong"> They actively sought feedback</label>
-          <label><input type="radio" name="q18" value="wrong"> They prioritized public opinion</label>
+        <div class="question" id="q18">
+          <p>Q18. What does the lack of explanation for judicial decisions lead to?</p>
+          <input type="radio" name="q18" value="A" data-correct="true"> A. Reduced public trust<br>
+          <input type="radio" name="q18" value="B" data-correct="false"> B. Greater accountability<br>
+          <input type="radio" name="q18" value="C" data-correct="false"> C. Increased transparency<br>
+          <input type="radio" name="q18" value="D" data-correct="false"> D. More balanced decisions<br>
         </div>
-        <div class="question">
-          <p>19. How were many laws passed according to the editorial?</p>
-          <label><input type="radio" name="q19" value="correct"> Hurriedly</label>
-          <label><input type="radio" name="q19" value="wrong"> Deliberately</label>
-          <label><input type="radio" name="q19" value="wrong"> Meticulously</label>
-          <label><input type="radio" name="q19" value="wrong"> Slowly</label>
+        <div class="question" id="q19">
+          <p>Q19. What issue is central to Editorial 1 regarding the judiciary?</p>
+          <input type="radio" name="q19" value="A" data-correct="false"> A. Excessive transparency<br>
+          <input type="radio" name="q19" value="B" data-correct="false"> B. Judicial independence<br>
+          <input type="radio" name="q19" value="C" data-correct="true"> C. Political interference<br>
+          <input type="radio" name="q19" value="D" data-correct="false"> D. Legal reform<br>
         </div>
-        <div class="question">
-          <p>20. The legislative output was compared to:</p>
-          <label><input type="radio" name="q20" value="correct"> Average output of previous assemblies</label>
-          <label><input type="radio" name="q20" value="wrong"> Output of other countries</label>
-          <label><input type="radio" name="q20" value="wrong"> Historical data from the 1900s</label>
-          <label><input type="radio" name="q20" value="wrong"> Projected future output</label>
-        </div>
-        
-        <h3>Editorial 2 Questions</h3>
-        <!-- Editorial 2: 20 Questions -->
-        <div class="question">
-          <p>21. In which district did the bombing of Darul Uloom Haqqania occur?</p>
-          <label><input type="radio" name="q21" value="correct"> Nowshera</label>
-          <label><input type="radio" name="q21" value="wrong"> Peshawar</label>
-          <label><input type="radio" name="q21" value="wrong"> Mardan</label>
-          <label><input type="radio" name="q21" value="wrong"> Swat</label>
-        </div>
-        <div class="question">
-          <p>22. Which institution was targeted in the attack?</p>
-          <label><input type="radio" name="q22" value="correct"> Darul Uloom Haqqania</label>
-          <label><input type="radio" name="q22" value="wrong"> University of KP</label>
-          <label><input type="radio" name="q22" value="wrong"> Islamic Seminary of Lahore</label>
-          <label><input type="radio" name="q22" value="wrong"> Madressah of Karachi</label>
-        </div>
-        <div class="question">
-          <p>23. Who was the head of Darul Uloom Haqqania who lost his life?</p>
-          <label><input type="radio" name="q23" value="correct"> Maulana Hamidul Haq Haqqani</label>
-          <label><input type="radio" name="q23" value="wrong"> Maulana Samiul Haq</label>
-          <label><input type="radio" name="q23" value="wrong"> Maulana Abdul Qadir</label>
-          <label><input type="radio" name="q23" value="wrong"> Maulana Tariq</label>
-        </div>
-        <div class="question">
-          <p>24. Maulana Hamidul Haq Haqqani was seen as the religious heir of which figure?</p>
-          <label><input type="radio" name="q24" value="correct"> Maulana Samiul Haq</label>
-          <label><input type="radio" name="q24" value="wrong"> Maulana Tariq</label>
-          <label><input type="radio" name="q24" value="wrong"> Maulana Fazl</label>
-          <label><input type="radio" name="q24" value="wrong"> Maulana Umer</label>
-        </div>
-        <div class="question">
-          <p>25. What was the reported nature of the blast?</p>
-          <label><input type="radio" name="q25" value="correct"> Suicide blast</label>
-          <label><input type="radio" name="q25" value="wrong"> Accidental explosion</label>
-          <label><input type="radio" name="q25" value="wrong"> Bomb disposal mishap</label>
-          <label><input type="radio" name="q25" value="wrong"> Remote detonation</label>
-        </div>
-        <div class="question">
-          <p>26. Which group was suggested as possibly involved in the attack?</p>
-          <label><input type="radio" name="q26" value="correct"> Islamic State</label>
-          <label><input type="radio" name="q26" value="wrong"> Al-Qaeda</label>
-          <label><input type="radio" name="q26" value="wrong"> TTP</label>
-          <label><input type="radio" name="q26" value="wrong"> Lashkar-e-Taiba</label>
-        </div>
-        <div class="question">
-          <p>27. Which official hinted at the involvement of Islamic State?</p>
-          <label><input type="radio" name="q27" value="correct"> Afghan interior ministry</label>
-          <label><input type="radio" name="q27" value="wrong"> Pakistani army</label>
-          <label><input type="radio" name="q27" value="wrong"> Local police</label>
-          <label><input type="radio" name="q27" value="wrong"> Civil society group</label>
-        </div>
-        <div class="question">
-          <p>28. How is the relationship between the Afghan Taliban and IS described?</p>
-          <label><input type="radio" name="q28" value="correct"> No love lost</label>
-          <label><input type="radio" name="q28" value="wrong"> Close allies</label>
-          <label><input type="radio" name="q28" value="wrong"> Supportive</label>
-          <label><input type="radio" name="q28" value="wrong"> Indifferent</label>
-        </div>
-        <div class="question">
-          <p>29. The attack signified a potential security challenge in which province?</p>
-          <label><input type="radio" name="q29" value="correct"> KP</label>
-          <label><input type="radio" name="q29" value="wrong"> Sindh</label>
-          <label><input type="radio" name="q29" value="wrong"> Punjab</label>
-          <label><input type="radio" name="q29" value="wrong"> Balochistan</label>
-        </div>
-        <div class="question">
-          <p>30. The bombing marked a departure from targeting which group?</p>
-          <label><input type="radio" name="q30" value="correct"> Security personnel and government officials</label>
-          <label><input type="radio" name="q30" value="wrong"> Peaceful protesters</label>
-          <label><input type="radio" name="q30" value="wrong"> Political figures</label>
-          <label><input type="radio" name="q30" value="wrong"> Business leaders</label>
-        </div>
-        <div class="question">
-          <p>31. Which group besides IS is noted for terrorist activities in KP?</p>
-          <label><input type="radio" name="q31" value="correct"> TTP</label>
-          <label><input type="radio" name="q31" value="wrong"> BLA</label>
-          <label><input type="radio" name="q31" value="wrong"> MQM</label>
-          <label><input type="radio" name="q31" value="wrong"> Lashkar-e-Jhangvi</label>
-        </div>
-        <div class="question">
-          <p>32. The attack was referred to as:</p>
-          <label><input type="radio" name="q32" value="correct"> A tragedy</label>
-          <label><input type="radio" name="q32" value="wrong"> A success</label>
-          <label><input type="radio" name="q32" value="wrong"> An accident</label>
-          <label><input type="radio" name="q32" value="wrong"> A protest</label>
-        </div>
-        <div class="question">
-          <p>33. Who condemned the attack while blaming "enemies of religion"?</p>
-          <label><input type="radio" name="q33" value="correct"> An Afghan interior ministry official</label>
-          <label><input type="radio" name="q33" value="wrong"> A local journalist</label>
-          <label><input type="radio" name="q33" value="wrong"> A religious leader</label>
-          <label><input type="radio" name="q33" value="wrong"> A Pakistani minister</label>
-        </div>
-        <div class="question">
-          <p>34. Which characteristic is NOT associated with IS in the editorial?</p>
-          <label><input type="radio" name="q34" value="correct"> Support for democratic values</label>
-          <label><input type="radio" name="q34" value="wrong"> Global pretensions</label>
-          <label><input type="radio" name="q34" value="wrong"> Medieval outlook</label>
-          <label><input type="radio" name="q34" value="wrong"> Sectarian outlook</label>
-        </div>
-        <div class="question">
-          <p>35. The attack shifted focus to targeting which group?</p>
-          <label><input type="radio" name="q35" value="correct"> Religious figures</label>
-          <label><input type="radio" name="q35" value="wrong"> Political leaders</label>
-          <label><input type="radio" name="q35" value="wrong"> Foreign diplomats</label>
-          <label><input type="radio" name="q35" value="wrong"> Business tycoons</label>
-        </div>
-        <div class="question">
-          <p>36. What is necessary to establish the facts of the attack?</p>
-          <label><input type="radio" name="q36" value="correct"> A thorough probe</label>
-          <label><input type="radio" name="q36" value="wrong"> Immediate retribution</label>
-          <label><input type="radio" name="q36" value="wrong"> A public opinion poll</label>
-          <label><input type="radio" name="q36" value="wrong"> Media speculation</label>
-        </div>
-        <div class="question">
-          <p>37. Which characteristic is NOT associated with IS in the editorial?</p>
-          <label><input type="radio" name="q37" value="correct"> Support for democratic values</label>
-          <label><input type="radio" name="q37" value="wrong"> Global pretensions</label>
-          <label><input type="radio" name="q37" value="wrong"> Medieval outlook</label>
-          <label><input type="radio" name="q37" value="wrong"> Sectarian outlook</label>
-        </div>
-        <div class="question">
-          <p>38. The attack was seen as a departure from targeting which type of individuals?</p>
-          <label><input type="radio" name="q38" value="correct"> Security personnel</label>
-          <label><input type="radio" name="q38" value="wrong"> Business executives</label>
-          <label><input type="radio" name="q38" value="wrong"> Celebrities</label>
-          <label><input type="radio" name="q38" value="wrong"> Foreign diplomats</label>
-        </div>
-        <div class="question">
-          <p>39. What is necessary to uncover the full details of the attack?</p>
-          <label><input type="radio" name="q39" value="correct"> A thorough probe</label>
-          <label><input type="radio" name="q39" value="wrong"> Quick judgment</label>
-          <label><input type="radio" name="q39" value="wrong"> Public opinion</label>
-          <label><input type="radio" name="q39" value="wrong"> Media analysis</label>
-        </div>
-        <div class="question">
-          <p>40. The attack signifies which potential challenge for the region?</p>
-          <label><input type="radio" name="q40" value="correct"> Fresh security challenge</label>
-          <label><input type="radio" name="q40" value="wrong"> Economic downturn</label>
-          <label><input type="radio" name="q40" value="wrong"> Improved diplomatic ties</label>
-          <label><input type="radio" name="q40" value="wrong"> Increased tourism</label>
+        <div class="question" id="q20">
+          <p>Q20. What does Editorial 1 suggest about the legitimacy of the Constitutional Bench?</p>
+          <input type="radio" name="q20" value="A" data-correct="true"> A. It is undermined by political manipulation<br>
+          <input type="radio" name="q20" value="B" data-correct="false"> B. It is bolstered by experienced judges<br>
+          <input type="radio" name="q20" value="C" data-correct="false"> C. It is strengthened by transparency<br>
+          <input type="radio" name="q20" value="D" data-correct="false"> D. It is independent of politics<br>
         </div>
         
-        <h3>Editorial 3 Questions</h3>
-        <!-- Editorial 3: 10 Questions -->
-        <div class="question">
-          <p>41. Which victim's murder is highlighted as a flashpoint for Karachi's crime concerns?</p>
-          <label><input type="radio" name="q41" value="correct"> Mustafa Amir</label>
-          <label><input type="radio" name="q41" value="wrong"> Noor Mukadam</label>
-          <label><input type="radio" name="q41" value="wrong"> Sara Inam</label>
-          <label><input type="radio" name="q41" value="wrong"> Shahzeb Khan</label>
+        <!-- Editorial 2 Questions (20) -->
+        <h2>Editorial 2 Questions</h2>
+        <div class="question" id="q21">
+          <p>Q21. What did Aaqib Javed take responsibility for in Editorial 2?</p>
+          <input type="radio" name="q21" value="A" data-correct="false"> A. The team’s success<br>
+          <input type="radio" name="q21" value="B" data-correct="true"> B. The dismal Champions Trophy campaign<br>
+          <input type="radio" name="q21" value="C" data-correct="false"> C. The team’s victory in the ODI series<br>
+          <input type="radio" name="q21" value="D" data-correct="false"> D. The team’s improved performance<br>
         </div>
-        <div class="question">
-          <p>42. Where was Mustafa Amir kidnapped and murdered?</p>
-          <label><input type="radio" name="q42" value="correct"> DHA</label>
-          <label><input type="radio" name="q42" value="wrong"> Lyari</label>
-          <label><input type="radio" name="q42" value="wrong"> Clifton</label>
-          <label><input type="radio" name="q42" value="wrong"> Gulshan-e-Iqbal</label>
+        <div class="question" id="q22">
+          <p>Q22. According to Editorial 2, what was a significant factor in Pakistan’s poor performance?</p>
+          <input type="radio" name="q22" value="A" data-correct="false"> A. Excessive experience<br>
+          <input type="radio" name="q22" value="B" data-correct="true"> B. Lack of trust and time<br>
+          <input type="radio" name="q22" value="C" data-correct="false"> C. Overconfidence<br>
+          <input type="radio" name="q22" value="D" data-correct="false"> D. Strong team management<br>
         </div>
-        <div class="question">
-          <p>43. Which method was notably used in Mustafa Amir's murder?</p>
-          <label><input type="radio" name="q43" value="correct"> Body set alight</label>
-          <label><input type="radio" name="q43" value="wrong"> Stabbing</label>
-          <label><input type="radio" name="q43" value="wrong"> Poisoning</label>
-          <label><input type="radio" name="q43" value="wrong"> Shooting</label>
+        <div class="question" id="q23">
+          <p>Q23. Who among the following is NOT mentioned as one of Pakistan’s best players in Editorial 2?</p>
+          <input type="radio" name="q23" value="A" data-correct="true"> A. A player not mentioned<br>
+          <input type="radio" name="q23" value="B" data-correct="false"> B. Babar Azam<br>
+          <input type="radio" name="q23" value="C" data-correct="false"> C. Mohammad Rizwan<br>
+          <input type="radio" name="q23" value="D" data-correct="false"> D. Shaheen Shah Afridi<br>
         </div>
-        <div class="question">
-          <p>44. The murder of Mustafa Amir exposed what major issue?</p>
-          <label><input type="radio" name="q44" value="correct"> An influential narcotics ring</label>
-          <label><input type="radio" name="q44" value="wrong"> Political corruption</label>
-          <label><input type="radio" name="q44" value="wrong"> Media manipulation</label>
-          <label><input type="radio" name="q44" value="wrong"> Economic disparity</label>
+        <div class="question" id="q24">
+          <p>Q24. What was blamed for Pakistan’s dismal performance in Editorial 2?</p>
+          <input type="radio" name="q24" value="A" data-correct="false"> A. Overconfidence<br>
+          <input type="radio" name="q24" value="B" data-correct="true"> B. Lack of trust and time<br>
+          <input type="radio" name="q24" value="C" data-correct="false"> C. Excessive pressure<br>
+          <input type="radio" name="q24" value="D" data-correct="false"> D. Poor coaching<br>
         </div>
-        <div class="question">
-          <p>45. Which murder is NOT mentioned in the editorial?</p>
-          <label><input type="radio" name="q45" value="correct"> Murder of Ahmed Khan</label>
-          <label><input type="radio" name="q45" value="wrong"> Murder of Noor Mukadam</label>
-          <label><input type="radio" name="q45" value="wrong"> Murder of Sara Inam</label>
-          <label><input type="radio" name="q45" value="wrong"> Murder of Shahzeb Khan</label>
+        <div class="question" id="q25">
+          <p>Q25. What does Editorial 2 suggest about Pakistan’s position in recent tournaments?</p>
+          <input type="radio" name="q25" value="A" data-correct="false"> A. They have dominated the tournaments<br>
+          <input type="radio" name="q25" value="B" data-correct="true"> B. They have returned to a disappointing state<br>
+          <input type="radio" name="q25" value="C" data-correct="false"> C. They have shown consistent improvement<br>
+          <input type="radio" name="q25" value="D" data-correct="false"> D. They have maintained their form<br>
         </div>
-        <div class="question">
-          <p>46. The incident is used to highlight which broader issue?</p>
-          <label><input type="radio" name="q46" value="correct"> Escalation in modern crime</label>
-          <label><input type="radio" name="q46" value="wrong"> Political instability</label>
-          <label><input type="radio" name="q46" value="wrong"> Religious intolerance</label>
-          <label><input type="radio" name="q46" value="wrong"> Corruption in police</label>
+        <div class="question" id="q26">
+          <p>Q26. Which tournament's performance is NOT mentioned in Editorial 2?</p>
+          <input type="radio" name="q26" value="A" data-correct="false"> A. Champions Trophy<br>
+          <input type="radio" name="q26" value="B" data-correct="true"> B. T20 World Cup<br>
+          <input type="radio" name="q26" value="C" data-correct="false"> C. ODI World Cup<br>
+          <input type="radio" name="q26" value="D" data-correct="false"> D. World Test Championship<br>
         </div>
-        <div class="question">
-          <p>47. Which substance's abuse is specifically mentioned as a concern in Karachi?</p>
-          <label><input type="radio" name="q47" value="correct"> Synthetic narcotics (ice)</label>
-          <label><input type="radio" name="q47" value="wrong"> Alcohol</label>
-          <label><input type="radio" name="q47" value="wrong"> Opium</label>
-          <label><input type="radio" name="q47" value="wrong"> Cocaine</label>
+        <div class="question" id="q27">
+          <p>Q27. According to Editorial 2, what is required for Pakistan cricket to improve?</p>
+          <input type="radio" name="q27" value="A" data-correct="false"> A. Immediate replacement of players<br>
+          <input type="radio" name="q27" value="B" data-correct="true"> B. A long-term plan and reset<br>
+          <input type="radio" name="q27" value="C" data-correct="false"> C. More reliance on experienced players<br>
+          <input type="radio" name="q27" value="D" data-correct="false"> D. Increased investment in stadiums<br>
         </div>
-        <div class="question">
-          <p>48. According to a report, what fraction of households in Karachi were affected by drug abuse?</p>
-          <label><input type="radio" name="q48" value="correct"> Every fourth household</label>
-          <label><input type="radio" name="q48" value="wrong"> Every second household</label>
-          <label><input type="radio" name="q48" value="wrong"> Every tenth household</label>
-          <label><input type="radio" name="q48" value="wrong"> Every household</label>
+        <div class="question" id="q28">
+          <p>Q28. Who is identified as having blamed the lack of trust in Editorial 2?</p>
+          <input type="radio" name="q28" value="A" data-correct="false"> A. Babar Azam<br>
+          <input type="radio" name="q28" value="B" data-correct="true"> B. Azhar Mahmood<br>
+          <input type="radio" name="q28" value="C" data-correct="false"> C. Mohammad Rizwan<br>
+          <input type="radio" name="q28" value="D" data-correct="false"> D. Aaqib Javed<br>
         </div>
-        <div class="question">
-          <p>49. Who formed the special investigation team in Karachi?</p>
-          <label><input type="radio" name="q49" value="correct"> City police chief</label>
-          <label><input type="radio" name="q49" value="wrong"> Federal agency</label>
-          <label><input type="radio" name="q49" value="wrong"> Local government</label>
-          <label><input type="radio" name="q49" value="wrong"> Ministry of Interior</label>
+        <div class="question" id="q29">
+          <p>Q29. What is the main critique regarding Pakistan cricket as per Editorial 2?</p>
+          <input type="radio" name="q29" value="A" data-correct="true"> A. Lack of consistency and trust<br>
+          <input type="radio" name="q29" value="B" data-correct="false"> B. Overreliance on new talent<br>
+          <input type="radio" name="q29" value="C" data-correct="false"> C. Too many experienced players<br>
+          <input type="radio" name="q29" value="D" data-correct="false"> D. Excessive focus on batting<br>
         </div>
-        <div class="question">
-          <p>50. What does the editorial suggest is necessary to prevent further tragedies?</p>
-          <label><input type="radio" name="q50" value="correct"> Expand drug crackdown</label>
-          <label><input type="radio" name="q50" value="wrong"> Increase political rallies</label>
-          <label><input type="radio" name="q50" value="wrong"> Enhance public transportation</label>
-          <label><input type="radio" name="q50" value="wrong"> Boost economic growth</label>
+        <div class="question" id="q30">
+          <p>Q30. What does Editorial 2 indicate about the use of home conditions?</p>
+          <input type="radio" name="q30" value="A" data-correct="false"> A. They were optimally used<br>
+          <input type="radio" name="q30" value="B" data-correct="true"> B. They were not utilized effectively<br>
+          <input type="radio" name="q30" value="C" data-correct="false"> C. They provided a significant advantage<br>
+          <input type="radio" name="q30" value="D" data-correct="false"> D. They led to improved performances<br>
         </div>
+        <div class="question" id="q31">
+          <p>Q31. What issue did Pakistan face in the World Test Championship?</p>
+          <input type="radio" name="q31" value="A" data-correct="false"> A. They topped the table<br>
+          <input type="radio" name="q31" value="B" data-correct="true"> B. They finished at the bottom<br>
+          <input type="radio" name="q31" value="C" data-correct="false"> C. They performed consistently well<br>
+          <input type="radio" name="q31" value="D" data-correct="false"> D. They had mixed results<br>
+        </div>
+        <div class="question" id="q32">
+          <p>Q32. Which tournament did Pakistan fail in, as mentioned in Editorial 2?</p>
+          <input type="radio" name="q32" value="A" data-correct="true"> A. T20 tournaments<br>
+          <input type="radio" name="q32" value="B" data-correct="false"> B. ODI tournaments<br>
+          <input type="radio" name="q32" value="C" data-correct="false"> C. Test series<br>
+          <input type="radio" name="q32" value="D" data-correct="false"> D. Domestic leagues<br>
+        </div>
+        <div class="question" id="q33">
+          <p>Q33. What does Editorial 2 suggest is needed from the Pakistan Cricket Board?</p>
+          <input type="radio" name="q33" value="A" data-correct="true"> A. Quick and decisive action<br>
+          <input type="radio" name="q33" value="B" data-correct="false"> B. Continued status quo<br>
+          <input type="radio" name="q33" value="C" data-correct="false"> C. More experimentation with formats<br>
+          <input type="radio" name="q33" value="D" data-correct="false"> D. Delegation of responsibilities<br>
+        </div>
+        <div class="question" id="q34">
+          <p>Q34. Which of the following is a criticism mentioned in Editorial 2?</p>
+          <input type="radio" name="q34" value="A" data-correct="true"> A. The team's lack of trust and time<br>
+          <input type="radio" name="q34" value="B" data-correct="false"> B. Overconfidence of players<br>
+          <input type="radio" name="q34" value="C" data-correct="false"> C. Excessive pressure from sponsors<br>
+          <input type="radio" name="q34" value="D" data-correct="false"> D. Overdependence on foreign coaches<br>
+        </div>
+        <div class="question" id="q35">
+          <p>Q35. How many major tournaments does Editorial 2 reference?</p>
+          <input type="radio" name="q35" value="A" data-correct="false"> A. Two<br>
+          <input type="radio" name="q35" value="B" data-correct="false"> B. Three<br>
+          <input type="radio" name="q35" value="C" data-correct="true"> C. Four<br>
+          <input type="radio" name="q35" value="D" data-correct="false"> D. Five<br>
+        </div>
+        <div class="question" id="q36">
+          <p>Q36. What does Editorial 2 imply about the future of Pakistan cricket?</p>
+          <input type="radio" name="q36" value="A" data-correct="true"> A. It needs a complete reset<br>
+          <input type="radio" name="q36" value="B" data-correct="false"> B. It will naturally improve<br>
+          <input type="radio" name="q36" value="C" data-correct="false"> C. It should rely on current strategies<br>
+          <input type="radio" name="q36" value="D" data-correct="false"> D. It will depend on luck<br>
+        </div>
+        <div class="question" id="q37">
+          <p>Q37. Which aspect is highlighted as a problem in Pakistan cricket in Editorial 2?</p>
+          <input type="radio" name="q37" value="A" data-correct="false"> A. Over-reliance on new talent<br>
+          <input type="radio" name="q37" value="B" data-correct="true"> B. The lack of trust and time<br>
+          <input type="radio" name="q37" value="C" data-correct="false"> C. The abundance of experienced players<br>
+          <input type="radio" name="q37" value="D" data-correct="false"> D. Strong leadership in the team<br>
+        </div>
+        <div class="question" id="q38">
+          <p>Q38. Who among the following pledged to work harder and return stronger?</p>
+          <input type="radio" name="q38" value="A" data-correct="false"> A. Aaqib Javed<br>
+          <input type="radio" name="q38" value="B" data-correct="false"> B. Azhar Mahmood<br>
+          <input type="radio" name="q38" value="C" data-correct="true"> C. Mohammad Rizwan<br>
+          <input type="radio" name="q38" value="D" data-correct="false"> D. Babar Azam<br>
+        </div>
+        <div class="question" id="q39">
+          <p>Q39. Which of the following best describes the critique in Editorial 2?</p>
+          <input type="radio" name="q39" value="A" data-correct="false"> A. It praises the current team management<br>
+          <input type="radio" name="q39" value="B" data-correct="true"> B. It calls for a reset in team strategy<br>
+          <input type="radio" name="q39" value="C" data-correct="false"> C. It encourages reliance on experience<br>
+          <input type="radio" name="q39" value="D" data-correct="false"> D. It supports the status quo<br>
+        </div>
+        <div class="question" id="q40">
+          <p>Q40. What does Editorial 2 suggest about the role of former Pakistan greats?</p>
+          <input type="radio" name="q40" value="A" data-correct="false"> A. They should be ignored<br>
+          <input type="radio" name="q40" value="B" data-correct="true"> B. They advocate for merit-based selections<br>
+          <input type="radio" name="q40" value="C" data-correct="false"> C. They are responsible for current failures<br>
+          <input type="radio" name="q40" value="D" data-correct="false"> D. They should manage the team<br>
+        </div>
+        
+        <!-- Editorial 3 Questions (10) -->
+        <h2>Editorial 3 Questions</h2>
+        <div class="question" id="q41">
+          <p>Q41. What is the main theme of Editorial 3?</p>
+          <input type="radio" name="q41" value="A" data-correct="true"> A. Political control over local governments<br>
+          <input type="radio" name="q41" value="B" data-correct="false"> B. Economic reforms<br>
+          <input type="radio" name="q41" value="C" data-correct="false"> C. Social welfare improvements<br>
+          <input type="radio" name="q41" value="D" data-correct="false"> D. Environmental policies<br>
+        </div>
+        <div class="question" id="q42">
+          <p>Q42. According to Editorial 3, why are local governments disliked by major political parties?</p>
+          <input type="radio" name="q42" value="A" data-correct="false"> A. They demand too much autonomy<br>
+          <input type="radio" name="q42" value="B" data-correct="true"> B. They threaten political patronage<br>
+          <input type="radio" name="q42" value="C" data-correct="false"> C. They are financially unstable<br>
+          <input type="radio" name="q42" value="D" data-correct="false"> D. They have excessive power<br>
+        </div>
+        <div class="question" id="q43">
+          <p>Q43. What has been the impact of dissolving LG institutions in Punjab as per Editorial 3?</p>
+          <input type="radio" name="q43" value="A" data-correct="true"> A. Loss of local representation<br>
+          <input type="radio" name="q43" value="B" data-correct="false"> B. Improved local governance<br>
+          <input type="radio" name="q43" value="C" data-correct="false"> C. Increased bureaucracy<br>
+          <input type="radio" name="q43" value="D" data-correct="false"> D. Enhanced political participation<br>
+        </div>
+        <div class="question" id="q44">
+          <p>Q44. What constitutional issue is raised in Editorial 3 regarding local governments?</p>
+          <input type="radio" name="q44" value="A" data-correct="false"> A. Their excessive financial power<br>
+          <input type="radio" name="q44" value="B" data-correct="true"> B. The lack of a detailed constitutional framework<br>
+          <input type="radio" name="q44" value="C" data-correct="false"> C. Their administrative overreach<br>
+          <input type="radio" name="q44" value="D" data-correct="false"> D. Their democratic legitimacy<br>
+        </div>
+        <div class="question" id="q45">
+          <p>Q45. How do major political parties view local governments as per Editorial 3?</p>
+          <input type="radio" name="q45" value="A" data-correct="true"> A. As a threat to their control<br>
+          <input type="radio" name="q45" value="B" data-correct="false"> B. As a means to enhance democracy<br>
+          <input type="radio" name="q45" value="C" data-correct="false"> C. As partners in governance<br>
+          <input type="radio" name="q45" value="D" data-correct="false"> D. As independent bodies<br>
+        </div>
+        <div class="question" id="q46">
+          <p>Q46. What reason is given for the delay in holding LG polls in Punjab?</p>
+          <input type="radio" name="q46" value="A" data-correct="false"> A. Financial constraints<br>
+          <input type="radio" name="q46" value="B" data-correct="true"> B. Political reluctance<br>
+          <input type="radio" name="q46" value="C" data-correct="false"> C. Administrative inefficiency<br>
+          <input type="radio" name="q46" value="D" data-correct="false"> D. Voter apathy<br>
+        </div>
+        <div class="question" id="q47">
+          <p>Q47. What constitutional duty regarding local governments is mentioned in Editorial 3?</p>
+          <input type="radio" name="q47" value="A" data-correct="true"> A. Establishment of LG systems<br>
+          <input type="radio" name="q47" value="B" data-correct="false"> B. Dissolution of LG systems<br>
+          <input type="radio" name="q47" value="C" data-correct="false"> C. Centralization of power<br>
+          <input type="radio" name="q47" value="D" data-correct="false"> D. Privatization of services<br>
+        </div>
+        <div class="question" id="q48">
+          <p>Q48. How is the delay in LG polls justified in Editorial 3?</p>
+          <input type="radio" name="q48" value="A" data-correct="false"> A. Due to administrative efficiency<br>
+          <input type="radio" name="q48" value="B" data-correct="true"> B. As a means to alter the legal framework<br>
+          <input type="radio" name="q48" value="C" data-correct="false"> C. Because of financial constraints<br>
+          <input type="radio" name="q48" value="D" data-correct="false"> D. Due to voter apathy<br>
+        </div>
+        <div class="question" id="q49">
+          <p>Q49. What is the underlying reason for delaying LG polls as per Editorial 3?</p>
+          <input type="radio" name="q49" value="A" data-correct="false"> A. Improving local administration<br>
+          <input type="radio" name="q49" value="B" data-correct="true"> B. Political advantage<br>
+          <input type="radio" name="q49" value="C" data-correct="false"> C. Financial reallocation<br>
+          <input type="radio" name="q49" value="D" data-correct="false"> D. Encouraging voter turnout<br>
+        </div>
+        <div class="question" id="q50">
+          <p>Q50. What challenge does Punjab face regarding LG polls?</p>
+          <input type="radio" name="q50" value="A" data-correct="true"> A. Political interference<br>
+          <input type="radio" name="q50" value="B" data-correct="false"> B. Excessive funding<br>
+          <input type="radio" name="q50" value="C" data-correct="false"> C. Administrative delays<br>
+          <input type="radio" name="q50" value="D" data-correct="false"> D. Voter disinterest<br>
+        </div>
+        <button type="button" id="submitQuizBtn">Submit Quiz</button>
       </form>
-      <button onclick="submitQuiz()">Submit Quiz</button>
     </div>
     
-    <!-- Results Section -->
-    <div id="resultSection" class="hidden results"></div>
-    
-    <!-- Hidden Formspree Form -->
-    <form id="resultForm" action="https://formspree.io/f/xwpvddea" method="POST" class="hidden">
-      <input type="hidden" id="hiddenName" name="name">
-      <input type="hidden" id="hiddenAttempted" name="attempted">
-      <input type="hidden" id="hiddenScore" name="score">
-      <input type="hidden" id="hiddenTime" name="time">
-    </form>
+    <!-- Result Section -->
+    <div id="resultSection" style="display:none;">
+      <h2>Quiz Results</h2>
+      <p id="resultName"></p>
+      <p id="resultAttempted"></p>
+      <p id="resultScore"></p>
+      <p id="resultTime"></p>
+    </div>
   </div>
   
   <footer>
-    <p>Contact: 03265762698 | Call us for more details</p>
+    <p>Contact: 03265762698</p>
+    <p>Call now for more information!</p>
   </footer>
+  
+  <!-- Hidden Form for Formspree Submission -->
+  <form action="https://formspree.io/f/xwpvddea" method="POST" id="hiddenForm" style="display:none;">
+    <input type="hidden" name="name" id="formName">
+    <input type="hidden" name="attempted" id="formAttempted">
+    <input type="hidden" name="score" id="formScore">
+    <input type="hidden" name="timeTaken" id="formTime">
+  </form>
+  
+  <script>
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    // Disable key shortcuts for inspection (F12, Ctrl+Shift+I/J, Ctrl+U)
+    document.onkeydown = function(e) {
+      if (e.keyCode === 123 || 
+         (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || 
+         (e.ctrlKey && e.keyCode === 85)) {
+          return false;
+      }
+    };
+    
+    // Global variables for timer and quiz start time
+    let timerInterval;
+    let timeLeft = 600; // 10 minutes in seconds
+    let quizStartedTime;
+    
+    // Start Quiz button event
+    document.getElementById('startQuizBtn').addEventListener('click', function() {
+      const name = document.getElementById('studentName').value.trim();
+      if (name === '') {
+        alert('Please enter your name to start the quiz.');
+        return;
+      }
+      // Hide name entry and show quiz section
+      document.getElementById('nameEntry').style.display = 'none';
+      document.getElementById('quizSection').style.display = 'block';
+      quizStartedTime = new Date();
+      startTimer();
+    });
+    
+    // Start timer function
+    function startTimer() {
+      updateTimerDisplay();
+      timerInterval = setInterval(function() {
+        timeLeft--;
+        updateTimerDisplay();
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          submitQuiz();
+        }
+      }, 1000);
+    }
+    
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeLeft / 60);
+      const seconds = timeLeft % 60;
+      document.getElementById('timer').textContent =
+        (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
+    }
+    
+    // Submit Quiz button event
+    document.getElementById('submitQuizBtn').addEventListener('click', function() {
+      submitQuiz();
+    });
+    
+    // Function to calculate results and submit the quiz
+    function submitQuiz() {
+      clearInterval(timerInterval);
+      const form = document.getElementById('quizForm');
+      const formData = new FormData(form);
+      let attempted = 0;
+      let score = 0;
+      // Loop through all 50 questions
+      for (let i = 1; i <= 50; i++) {
+        const qName = 'q' + i;
+        const radios = document.getElementsByName(qName);
+        for (let radio of radios) {
+          if (radio.checked) {
+            attempted++;
+            if (radio.getAttribute('data-correct') === 'true') {
+              score++;
+            }
+          }
+        }
+      }
+      const quizEndTime = new Date();
+      const timeTaken = Math.floor((quizEndTime - quizStartedTime) / 1000);
+      const studentName = document.getElementById('studentName').value.trim();
+      
+      // Display results
+      document.getElementById('resultName').textContent = 'Name: ' + studentName;
+      document.getElementById('resultAttempted').textContent = 'Questions Attempted: ' + attempted;
+      document.getElementById('resultScore').textContent = 'Score: ' + score;
+      document.getElementById('resultTime').textContent = 'Time Taken: ' + timeTaken + ' seconds';
+      
+      document.getElementById('quizSection').style.display = 'none';
+      document.getElementById('resultSection').style.display = 'block';
+      
+      // Fill hidden form and submit to Formspree
+      document.getElementById('formName').value = studentName;
+      document.getElementById('formAttempted').value = attempted;
+      document.getElementById('formScore').value = score;
+      document.getElementById('formTime').value = timeTaken;
+      document.getElementById('hiddenForm').submit();
+    }
+  </script>
 </body>
 </html>
