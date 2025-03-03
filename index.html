@@ -2,23 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 2 March 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 3 March 2025</title>
   <style>
-    /* Disable text selection */
-    html, body, * {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
       margin: 0;
       padding: 0;
     }
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-    }
     header, footer {
-      background-color: #333;
+      background: #333;
       color: #fff;
       text-align: center;
       padding: 20px;
@@ -27,565 +20,688 @@
       max-width: 100px;
       border-radius: 50%;
       display: block;
-      margin: 0 auto 10px;
+      margin: 10px auto;
     }
     .container {
-      width: 80%;
-      max-width: 1000px;
-      margin: 20px auto;
-      background: #fff;
       padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    #nameEntry {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    #nameEntry input[type="text"] {
-      padding: 10px;
-      width: 60%;
-      font-size: 16px;
-    }
-    #nameEntry button {
-      padding: 10px 20px;
-      font-size: 16px;
-      margin-left: 10px;
-      cursor: pointer;
-    }
-    #quizSection {
+    .hidden {
       display: none;
     }
-    .timer {
-      font-size: 20px;
-      font-weight: bold;
-      text-align: right;
-      margin-bottom: 20px;
+    /* Disable text selection */
+    * {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
     .question {
+      background: #fff;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .options {
+      margin: 10px 0 0 20px;
+    }
+    #timer {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
       margin-bottom: 20px;
-      padding: 15px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
     }
-    .question p {
-      margin-bottom: 10px;
+    input[type="radio"] {
+      margin-right: 8px;
     }
-    .question input[type="radio"] {
-      margin-right: 10px;
+    input[type="text"] {
+      padding: 8px;
+      font-size: 16px;
+      width: 300px;
     }
-    #quizForm button {
+    button {
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
-      margin-top: 20px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    #resultSection {
-      text-align: center;
-      padding: 20px;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Logo">
-    <h1>QUIZ FOR CSS ASPIRANTS 2 March 2025</h1>
-    <h2>SYED ASGHAR ALI SHAH</h2>
+    <h1>QUIZ FOR CSS ASPIRANTS 3 March 2025</h1>
+    <p>SYED ASGHAR ALI SHAH</p>
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
   </header>
-  
+
   <div class="container">
     <!-- Name Entry Section -->
     <div id="nameEntry">
-      <label for="studentName">Enter your name:</label>
-      <input type="text" id="studentName" name="studentName" autocomplete="off">
+      <h2>Enter Your Name to Start the Quiz</h2>
+      <input type="text" id="studentNameInput" placeholder="Your Name">
+      <br>
       <button id="startQuizBtn">Start Quiz</button>
     </div>
-    
+
     <!-- Quiz Section -->
-    <div id="quizSection">
-      <div class="timer" id="timer">10:00</div>
+    <div id="quizSection" class="hidden">
+      <div id="timer">10:00</div>
       <form id="quizForm">
-        <!-- Editorial 1 Questions (20) -->
-        <h2>Editorial 1 Questions</h2>
-        <div class="question" id="q1">
-          <p>Q1. According to Editorial 1, what was the main criticism regarding the 26th Amendment?</p>
-          <input type="radio" name="q1" value="A" data-correct="false"> A. It was unanimously supported by the judiciary.<br>
-          <input type="radio" name="q1" value="B" data-correct="true"> B. It was feared to be abused by the government.<br>
-          <input type="radio" name="q1" value="C" data-correct="false"> C. It streamlined judicial procedures.<br>
-          <input type="radio" name="q1" value="D" data-correct="false"> D. It increased transparency in appointments.<br>
+        <!-- Editorial 1 Questions (Questions 1-20) -->
+        <div class="question">
+          <p><strong>1. Which two figures are mentioned as dismantling USAID?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q1" value="A">Barack Obama and Mark Zuckerberg</label><br>
+            <label><input type="radio" name="q1" value="B">Donald Trump and Elon Musk</label><br>
+            <label><input type="radio" name="q1" value="C">Joe Biden and Jeff Bezos</label><br>
+            <label><input type="radio" name="q1" value="D">Narendra Modi and Xi Jinping</label>
+          </div>
         </div>
-        <div class="question" id="q2">
-          <p>Q2. In Editorial 1, what is implied by the term "vae victis"?</p>
-          <input type="radio" name="q2" value="A" data-correct="true"> A. The vanquished must accept their fate.<br>
-          <input type="radio" name="q2" value="B" data-correct="false"> B. The victorious are always right.<br>
-          <input type="radio" name="q2" value="C" data-correct="false"> C. Justice is blind.<br>
-          <input type="radio" name="q2" value="D" data-correct="false"> D. Power corrupts absolutely.<br>
+        <div class="question">
+          <p><strong>2. Which agency is undergoing restructuring in the editorial?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q2" value="A">UNICEF</label><br>
+            <label><input type="radio" name="q2" value="B">World Bank</label><br>
+            <label><input type="radio" name="q2" value="C">IMF</label><br>
+            <label><input type="radio" name="q2" value="D">USAID</label>
+          </div>
         </div>
-        <div class="question" id="q3">
-          <p>Q3. What does Editorial 1 suggest about the recent expansion of the Constitutional Bench?</p>
-          <input type="radio" name="q3" value="A" data-correct="false"> A. It was based solely on legal qualifications.<br>
-          <input type="radio" name="q3" value="B" data-correct="true"> B. It was politically motivated.<br>
-          <input type="radio" name="q3" value="C" data-correct="false"> C. It ensured a balanced representation.<br>
-          <input type="radio" name="q3" value="D" data-correct="false"> D. It was mandated by constitutional reforms.<br>
+        <div class="question">
+          <p><strong>3. What sectors did USAID primarily fund?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q3" value="A">Health, Education, and Climate</label><br>
+            <label><input type="radio" name="q3" value="B">Military and Defense</label><br>
+            <label><input type="radio" name="q3" value="C">Technology and Innovation</label><br>
+            <label><input type="radio" name="q3" value="D">Sports and Culture</label>
+          </div>
         </div>
-        <div class="question" id="q4">
-          <p>Q4. Which term best describes the process of appointing judges as mentioned in Editorial 1?</p>
-          <input type="radio" name="q4" value="A" data-correct="false"> A. Transparent<br>
-          <input type="radio" name="q4" value="B" data-correct="false"> B. Meritocratic<br>
-          <input type="radio" name="q4" value="C" data-correct="true"> C. Arbitrary<br>
-          <input type="radio" name="q4" value="D" data-correct="false"> D. Collaborative<br>
+        <div class="question">
+          <p><strong>4. According to media reports, how many projects in Pakistan were axed?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q4" value="A">25 projects</label><br>
+            <label><input type="radio" name="q4" value="B">50 projects</label><br>
+            <label><input type="radio" name="q4" value="C">39 projects</label><br>
+            <label><input type="radio" name="q4" value="D">15 projects</label>
+          </div>
         </div>
-        <div class="question" id="q5">
-          <p>Q5. Which group was notably ignored in the expansion of the bench according to Editorial 1?</p>
-          <input type="radio" name="q5" value="A" data-correct="false"> A. Newly appointed judges<br>
-          <input type="radio" name="q5" value="B" data-correct="true"> B. Senior, experienced judges<br>
-          <input type="radio" name="q5" value="C" data-correct="false"> C. Judges from lower courts<br>
-          <input type="radio" name="q5" value="D" data-correct="false"> D. Judges with political affiliations<br>
+        <div class="question">
+          <p><strong>5. What monetary term is used to describe the cost of the axed projects?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q5" value="A">Millions</label><br>
+            <label><input type="radio" name="q5" value="B">Hundreds of millions</label><br>
+            <label><input type="radio" name="q5" value="C">Billions</label><br>
+            <label><input type="radio" name="q5" value="D">Trillions</label>
+          </div>
         </div>
-        <div class="question" id="q6">
-          <p>Q6. What is the consequence of a publicly perceived skewed system, as per Editorial 1?</p>
-          <input type="radio" name="q6" value="A" data-correct="true"> A. Erosion of trust in the judiciary<br>
-          <input type="radio" name="q6" value="B" data-correct="false"> B. Increase in public support<br>
-          <input type="radio" name="q6" value="C" data-correct="false"> C. Strengthening of judicial decisions<br>
-          <input type="radio" name="q6" value="D" data-correct="false"> D. Promotion of legal reforms<br>
+        <div class="question">
+          <p><strong>6. What major consequence is reported for USAID workers?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q6" value="A">Promotions</label><br>
+            <label><input type="radio" name="q6" value="B">Transfers abroad</label><br>
+            <label><input type="radio" name="q6" value="C">Salary increases</label><br>
+            <label><input type="radio" name="q6" value="D">Job losses</label>
+          </div>
         </div>
-        <div class="question" id="q7">
-          <p>Q7. What does Editorial 1 imply about the reasoning provided for judicial appointments?</p>
-          <input type="radio" name="q7" value="A" data-correct="false"> A. It is detailed and transparent<br>
-          <input type="radio" name="q7" value="B" data-correct="true"> B. It lacks clear justification<br>
-          <input type="radio" name="q7" value="C" data-correct="false"> C. It is based on merit only<br>
-          <input type="radio" name="q7" value="D" data-correct="false"> D. It is supported by public opinion<br>
+        <div class="question">
+          <p><strong>7. Who does the editorial say has a duty to support humanitarian endeavours?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q7" value="A">Developing nations</label><br>
+            <label><input type="radio" name="q7" value="B">Western states, particularly the US</label><br>
+            <label><input type="radio" name="q7" value="C">European Union</label><br>
+            <label><input type="radio" name="q7" value="D">Asian economies</label>
+          </div>
         </div>
-        <div class="question" id="q8">
-          <p>Q8. What criticism is made about the Constitutional Bench in Editorial 1?</p>
-          <input type="radio" name="q8" value="A" data-correct="false"> A. It has too many experienced judges<br>
-          <input type="radio" name="q8" value="B" data-correct="true"> B. It is composed of 'like-minded' individuals<br>
-          <input type="radio" name="q8" value="C" data-correct="false"> C. It is too diverse in opinion<br>
-          <input type="radio" name="q8" value="D" data-correct="false"> D. It is slow in decision making<br>
+        <div class="question">
+          <p><strong>8. What is described as morally unacceptable in the text?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q8" value="A">Spending on health programmes</label><br>
+            <label><input type="radio" name="q8" value="B">Investing in education</label><br>
+            <label><input type="radio" name="q8" value="C">Spending billions on destruction then cutting reconstruction aid</label><br>
+            <label><input type="radio" name="q8" value="D">Supporting renewable energy</label>
+          </div>
         </div>
-        <div class="question" id="q9">
-          <p>Q9. Which principle is referenced in Editorial 1 to describe the situation?</p>
-          <input type="radio" name="q9" value="A" data-correct="false"> A. Nemo dat quod non habet<br>
-          <input type="radio" name="q9" value="B" data-correct="false"> B. Caveat emptor<br>
-          <input type="radio" name="q9" value="C" data-correct="true"> C. Vae victis<br>
-          <input type="radio" name="q9" value="D" data-correct="false"> D. None of the above<br>
+        <div class="question">
+          <p><strong>9. What syndrome is mentioned as a problem in developing states?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q9" value="A">Addiction syndrome</label><br>
+            <label><input type="radio" name="q9" value="B">Dependency syndrome</label><br>
+            <label><input type="radio" name="q9" value="C">Recovery syndrome</label><br>
+            <label><input type="radio" name="q9" value="D">Transition syndrome</label>
+          </div>
         </div>
-        <div class="question" id="q10">
-          <p>Q10. What aspect of the judicial appointments is highlighted in Editorial 1?</p>
-          <input type="radio" name="q10" value="A" data-correct="false"> A. Their transparency<br>
-          <input type="radio" name="q10" value="B" data-correct="false"> B. Their legal merit<br>
-          <input type="radio" name="q10" value="C" data-correct="true"> C. Their political motivation<br>
-          <input type="radio" name="q10" value="D" data-correct="false"> D. Their public approval<br>
+        <div class="question">
+          <p><strong>10. Who is identified as primarily responsible for providing essential services?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q10" value="A">International NGOs</label><br>
+            <label><input type="radio" name="q10" value="B">Private sector companies</label><br>
+            <label><input type="radio" name="q10" value="C">Foreign aid agencies</label><br>
+            <label><input type="radio" name="q10" value="D">Governments of developing nations</label>
+          </div>
         </div>
-        <div class="question" id="q11">
-          <p>Q11. Which element is missing in the appointment process according to Editorial 1?</p>
-          <input type="radio" name="q11" value="A" data-correct="false"> A. Public justification<br>
-          <input type="radio" name="q11" value="B" data-correct="true"> B. Merit-based evaluation<br>
-          <input type="radio" name="q11" value="C" data-correct="false"> C. Judicial consensus<br>
-          <input type="radio" name="q11" value="D" data-correct="false"> D. Media coverage<br>
+        <div class="question">
+          <p><strong>11. What potential opportunity does the USAID closure provide?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q11" value="A">A chance to seek more foreign aid</label><br>
+            <label><input type="radio" name="q11" value="B">An opportunity for privatization</label><br>
+            <label><input type="radio" name="q11" value="C">An opportunity to take responsibility for local development</label><br>
+            <label><input type="radio" name="q11" value="D">A reason to protest internationally</label>
+          </div>
         </div>
-        <div class="question" id="q12">
-          <p>Q12. Which word best describes the decision-making process in the bench expansion?</p>
-          <input type="radio" name="q12" value="A" data-correct="false"> A. Systematic<br>
-          <input type="radio" name="q12" value="B" data-correct="true"> B. Arbitrary<br>
-          <input type="radio" name="q12" value="C" data-correct="false"> C. Consistent<br>
-          <input type="radio" name="q12" value="D" data-correct="false"> D. Logical<br>
+        <div class="question">
+          <p><strong>12. Which critical area is mentioned as needing increased funding?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q12" value="A">Infrastructure</label><br>
+            <label><input type="radio" name="q12" value="B">Defense</label><br>
+            <label><input type="radio" name="q12" value="C">Healthcare</label><br>
+            <label><input type="radio" name="q12" value="D">Technology</label>
+          </div>
         </div>
-        <div class="question" id="q13">
-          <p>Q13. What is the implied outcome of the bench's political control?</p>
-          <input type="radio" name="q13" value="A" data-correct="true"> A. Loss of public trust<br>
-          <input type="radio" name="q13" value="B" data-correct="false"> B. Increase in efficiency<br>
-          <input type="radio" name="q13" value="C" data-correct="false"> C. Enhanced legal clarity<br>
-          <input type="radio" name="q13" value="D" data-correct="false"> D. More balanced decisions<br>
+        <div class="question">
+          <p><strong>13. Which group is urged to adapt its policies to secure alternative funding?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q13" value="A">Multinational corporations</label><br>
+            <label><input type="radio" name="q13" value="B">Civil society groups</label><br>
+            <label><input type="radio" name="q13" value="C">Local municipalities</label><br>
+            <label><input type="radio" name="q13" value="D">International banks</label>
+          </div>
         </div>
-        <div class="question" id="q14">
-          <p>Q14. Which factor is NOT mentioned as a justification for the bench expansion?</p>
-          <input type="radio" name="q14" value="A" data-correct="false"> A. Political convenience<br>
-          <input type="radio" name="q14" value="B" data-correct="true"> B. Legal necessity<br>
-          <input type="radio" name="q14" value="C" data-correct="false"> C. Appointment of like-minded individuals<br>
-          <input type="radio" name="q14" value="D" data-correct="false"> D. Lack of experienced judges<br>
+        <div class="question">
+          <p><strong>14. What does the editorial advise instead of lamenting over lost billions?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q14" value="A">Focusing on future investments</label><br>
+            <label><input type="radio" name="q14" value="B">Increasing imports</label><br>
+            <label><input type="radio" name="q14" value="C">Raising taxes</label><br>
+            <label><input type="radio" name="q14" value="D">Taking responsibility for self-development</label>
+          </div>
         </div>
-        <div class="question" id="q15">
-          <p>Q15. Which of the following best reflects the tone of Editorial 1?</p>
-          <input type="radio" name="q15" value="A" data-correct="true"> A. Critical<br>
-          <input type="radio" name="q15" value="B" data-correct="false"> B. Supportive<br>
-          <input type="radio" name="q15" value="C" data-correct="false"> C. Neutral<br>
-          <input type="radio" name="q15" value="D" data-correct="false"> D. Indifferent<br>
+        <div class="question">
+          <p><strong>15. What does the editorial imply about shedding tears for lost billions?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q15" value="A">It is pointless because funds won’t return</label><br>
+            <label><input type="radio" name="q15" value="B">It is necessary for healing</label><br>
+            <label><input type="radio" name="q15" value="C">It shows solidarity</label><br>
+            <label><input type="radio" name="q15" value="D">It is a sign of weakness</label>
+          </div>
         </div>
-        <div class="question" id="q16">
-          <p>Q16. What was ignored during the appointment process in Editorial 1?</p>
-          <input type="radio" name="q16" value="A" data-correct="false"> A. Experience and seniority<br>
-          <input type="radio" name="q16" value="B" data-correct="true"> B. Merit and experience<br>
-          <input type="radio" name="q16" value="C" data-correct="false"> C. Public opinion<br>
-          <input type="radio" name="q16" value="D" data-correct="false"> D. Political neutrality<br>
+        <div class="question">
+          <p><strong>16. What does the text say will no longer be sent from Washington?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q16" value="A">Military aid</label><br>
+            <label><input type="radio" name="q16" value="B">Technical expertise</label><br>
+            <label><input type="radio" name="q16" value="C">Lost billions</label><br>
+            <label><input type="radio" name="q16" value="D">Educational scholarships</label>
+          </div>
         </div>
-        <div class="question" id="q17">
-          <p>Q17. Which term describes the appointments as per Editorial 1?</p>
-          <input type="radio" name="q17" value="A" data-correct="false"> A. Transparent<br>
-          <input type="radio" name="q17" value="B" data-correct="true"> B. Politically motivated<br>
-          <input type="radio" name="q17" value="C" data-correct="false"> C. Merit-based<br>
-          <input type="radio" name="q17" value="D" data-correct="false"> D. Collaborative<br>
+        <div class="question">
+          <p><strong>17. Besides disbursing aid, what else did USAID fund?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q17" value="A">Sports tournaments</label><br>
+            <label><input type="radio" name="q17" value="B">Projects to save lives and prevent disease</label><br>
+            <label><input type="radio" name="q17" value="C">Cultural festivals</label><br>
+            <label><input type="radio" name="q17" value="D">Military operations</label>
+          </div>
         </div>
-        <div class="question" id="q18">
-          <p>Q18. What does the lack of explanation for judicial decisions lead to?</p>
-          <input type="radio" name="q18" value="A" data-correct="true"> A. Reduced public trust<br>
-          <input type="radio" name="q18" value="B" data-correct="false"> B. Greater accountability<br>
-          <input type="radio" name="q18" value="C" data-correct="false"> C. Increased transparency<br>
-          <input type="radio" name="q18" value="D" data-correct="false"> D. More balanced decisions<br>
+        <div class="question">
+          <p><strong>18. Which countries are mentioned as having been bombed and invaded?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q18" value="A">South Korea, Japan, and Vietnam</label><br>
+            <label><input type="radio" name="q18" value="B">Germany, Italy, and Spain</label><br>
+            <label><input type="radio" name="q18" value="C">Brazil, Argentina, and Chile</label><br>
+            <label><input type="radio" name="q18" value="D">Iraq, Afghanistan, and Syria</label>
+          </div>
         </div>
-        <div class="question" id="q19">
-          <p>Q19. What issue is central to Editorial 1 regarding the judiciary?</p>
-          <input type="radio" name="q19" value="A" data-correct="false"> A. Excessive transparency<br>
-          <input type="radio" name="q19" value="B" data-correct="false"> B. Judicial independence<br>
-          <input type="radio" name="q19" value="C" data-correct="true"> C. Political interference<br>
-          <input type="radio" name="q19" value="D" data-correct="false"> D. Legal reform<br>
+        <div class="question">
+          <p><strong>19. According to the editorial, who should be held accountable for social sector duties?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q19" value="A">Developing countries’ governments</label><br>
+            <label><input type="radio" name="q19" value="B">International organizations</label><br>
+            <label><input type="radio" name="q19" value="C">Local communities</label><br>
+            <label><input type="radio" name="q19" value="D">Foreign investors</label>
+          </div>
         </div>
-        <div class="question" id="q20">
-          <p>Q20. What does Editorial 1 suggest about the legitimacy of the Constitutional Bench?</p>
-          <input type="radio" name="q20" value="A" data-correct="true"> A. It is undermined by political manipulation<br>
-          <input type="radio" name="q20" value="B" data-correct="false"> B. It is bolstered by experienced judges<br>
-          <input type="radio" name="q20" value="C" data-correct="false"> C. It is strengthened by transparency<br>
-          <input type="radio" name="q20" value="D" data-correct="false"> D. It is independent of politics<br>
+        <div class="question">
+          <p><strong>20. What must states do in response to the USAID shake-up?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q20" value="A">Increase their dependency on aid</label><br>
+            <label><input type="radio" name="q20" value="B">Develop contingency plans and take responsibility</label><br>
+            <label><input type="radio" name="q20" value="C">Cut funding for local projects</label><br>
+            <label><input type="radio" name="q20" value="D">Lobby for more international support</label>
+          </div>
         </div>
-        
-        <!-- Editorial 2 Questions (20) -->
-        <h2>Editorial 2 Questions</h2>
-        <div class="question" id="q21">
-          <p>Q21. What did Aaqib Javed take responsibility for in Editorial 2?</p>
-          <input type="radio" name="q21" value="A" data-correct="false"> A. The team’s success<br>
-          <input type="radio" name="q21" value="B" data-correct="true"> B. The dismal Champions Trophy campaign<br>
-          <input type="radio" name="q21" value="C" data-correct="false"> C. The team’s victory in the ODI series<br>
-          <input type="radio" name="q21" value="D" data-correct="false"> D. The team’s improved performance<br>
+
+        <!-- Editorial 2 Questions (Questions 21-40) -->
+        <div class="question">
+          <p><strong>21. What does the SSDO report reveal about the justice system?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q21" value="A">It efficiently protects women</label><br>
+            <label><input type="radio" name="q21" value="B">It is reformed and fair</label><br>
+            <label><input type="radio" name="q21" value="C">It is rapidly modernizing</label><br>
+            <label><input type="radio" name="q21" value="D">It has failed to protect women</label>
+          </div>
         </div>
-        <div class="question" id="q22">
-          <p>Q22. According to Editorial 2, what was a significant factor in Pakistan’s poor performance?</p>
-          <input type="radio" name="q22" value="A" data-correct="false"> A. Excessive experience<br>
-          <input type="radio" name="q22" value="B" data-correct="true"> B. Lack of trust and time<br>
-          <input type="radio" name="q22" value="C" data-correct="false"> C. Overconfidence<br>
-          <input type="radio" name="q22" value="D" data-correct="false"> D. Strong team management<br>
+        <div class="question">
+          <p><strong>22. What is the reported conviction rate for honour killings and rape?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q22" value="A">1.5%</label><br>
+            <label><input type="radio" name="q22" value="B">0.5%</label><br>
+            <label><input type="radio" name="q22" value="C">2%</label><br>
+            <label><input type="radio" name="q22" value="D">5%</label>
+          </div>
         </div>
-        <div class="question" id="q23">
-          <p>Q23. Who among the following is NOT mentioned as one of Pakistan’s best players in Editorial 2?</p>
-          <input type="radio" name="q23" value="A" data-correct="true"> A. A player not mentioned<br>
-          <input type="radio" name="q23" value="B" data-correct="false"> B. Babar Azam<br>
-          <input type="radio" name="q23" value="C" data-correct="false"> C. Mohammad Rizwan<br>
-          <input type="radio" name="q23" value="D" data-correct="false"> D. Shaheen Shah Afridi<br>
+        <div class="question">
+          <p><strong>23. What is the kidnapping conviction rate mentioned?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q23" value="A">0.5%</label><br>
+            <label><input type="radio" name="q23" value="B">1.0%</label><br>
+            <label><input type="radio" name="q23" value="C">0.1%</label><br>
+            <label><input type="radio" name="q23" value="D">2.0%</label>
+          </div>
         </div>
-        <div class="question" id="q24">
-          <p>Q24. What was blamed for Pakistan’s dismal performance in Editorial 2?</p>
-          <input type="radio" name="q24" value="A" data-correct="false"> A. Overconfidence<br>
-          <input type="radio" name="q24" value="B" data-correct="true"> B. Lack of trust and time<br>
-          <input type="radio" name="q24" value="C" data-correct="false"> C. Excessive pressure<br>
-          <input type="radio" name="q24" value="D" data-correct="false"> D. Poor coaching<br>
+        <div class="question">
+          <p><strong>24. On average, how many domestic violence cases are reported per day in Pakistan in 2024?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q24" value="A">6</label><br>
+            <label><input type="radio" name="q24" value="B">10</label><br>
+            <label><input type="radio" name="q24" value="C">8</label><br>
+            <label><input type="radio" name="q24" value="D">12</label>
+          </div>
         </div>
-        <div class="question" id="q25">
-          <p>Q25. What does Editorial 2 suggest about Pakistan’s position in recent tournaments?</p>
-          <input type="radio" name="q25" value="A" data-correct="false"> A. They have dominated the tournaments<br>
-          <input type="radio" name="q25" value="B" data-correct="true"> B. They have returned to a disappointing state<br>
-          <input type="radio" name="q25" value="C" data-correct="false"> C. They have shown consistent improvement<br>
-          <input type="radio" name="q25" value="D" data-correct="false"> D. They have maintained their form<br>
+        <div class="question">
+          <p><strong>25. How many honour killings are reported on average per day?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q25" value="A">1</label><br>
+            <label><input type="radio" name="q25" value="B">4</label><br>
+            <label><input type="radio" name="q25" value="C">3</label><br>
+            <label><input type="radio" name="q25" value="D">2</label>
+          </div>
         </div>
-        <div class="question" id="q26">
-          <p>Q26. Which tournament's performance is NOT mentioned in Editorial 2?</p>
-          <input type="radio" name="q26" value="A" data-correct="false"> A. Champions Trophy<br>
-          <input type="radio" name="q26" value="B" data-correct="true"> B. T20 World Cup<br>
-          <input type="radio" name="q26" value="C" data-correct="false"> C. ODI World Cup<br>
-          <input type="radio" name="q26" value="D" data-correct="false"> D. World Test Championship<br>
+        <div class="question">
+          <p><strong>26. In which province were only 20 rape cases convicted out of 4,641?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q26" value="A">Sindh</label><br>
+            <label><input type="radio" name="q26" value="B">Punjab</label><br>
+            <label><input type="radio" name="q26" value="C">Balochistan</label><br>
+            <label><input type="radio" name="q26" value="D">Khyber Pakhtunkhwa</label>
+          </div>
         </div>
-        <div class="question" id="q27">
-          <p>Q27. According to Editorial 2, what is required for Pakistan cricket to improve?</p>
-          <input type="radio" name="q27" value="A" data-correct="false"> A. Immediate replacement of players<br>
-          <input type="radio" name="q27" value="B" data-correct="true"> B. A long-term plan and reset<br>
-          <input type="radio" name="q27" value="C" data-correct="false"> C. More reliance on experienced players<br>
-          <input type="radio" name="q27" value="D" data-correct="false"> D. Increased investment in stadiums<br>
+        <div class="question">
+          <p><strong>27. Which provinces recorded zero rape convictions?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q27" value="A">Sindh and Balochistan</label><br>
+            <label><input type="radio" name="q27" value="B">Punjab and Sindh</label><br>
+            <label><input type="radio" name="q27" value="C">Balochistan and Punjab</label><br>
+            <label><input type="radio" name="q27" value="D">Khyber Pakhtunkhwa and Sindh</label>
+          </div>
         </div>
-        <div class="question" id="q28">
-          <p>Q28. Who is identified as having blamed the lack of trust in Editorial 2?</p>
-          <input type="radio" name="q28" value="A" data-correct="false"> A. Babar Azam<br>
-          <input type="radio" name="q28" value="B" data-correct="true"> B. Azhar Mahmood<br>
-          <input type="radio" name="q28" value="C" data-correct="false"> C. Mohammad Rizwan<br>
-          <input type="radio" name="q28" value="D" data-correct="false"> D. Aaqib Javed<br>
+        <div class="question">
+          <p><strong>28. What factor is cited as contributing to poor handling of GBV cases?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q28" value="A">Advanced technology</label><br>
+            <label><input type="radio" name="q28" value="B">Excessive funding</label><br>
+            <label><input type="radio" name="q28" value="C">Patriarchal norms</label><br>
+            <label><input type="radio" name="q28" value="D">Efficient bureaucracy</label>
+          </div>
         </div>
-        <div class="question" id="q29">
-          <p>Q29. What is the main critique regarding Pakistan cricket as per Editorial 2?</p>
-          <input type="radio" name="q29" value="A" data-correct="true"> A. Lack of consistency and trust<br>
-          <input type="radio" name="q29" value="B" data-correct="false"> B. Overreliance on new talent<br>
-          <input type="radio" name="q29" value="C" data-correct="false"> C. Too many experienced players<br>
-          <input type="radio" name="q29" value="D" data-correct="false"> D. Excessive focus on batting<br>
+        <div class="question">
+          <p><strong>29. Which informal systems are mentioned for settling cases out of court?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q29" value="A">Courts and tribunals</label><br>
+            <label><input type="radio" name="q29" value="B">Mediation centers</label><br>
+            <label><input type="radio" name="q29" value="C">International arbitration</label><br>
+            <label><input type="radio" name="q29" value="D">Jirgas and panchayats</label>
+          </div>
         </div>
-        <div class="question" id="q30">
-          <p>Q30. What does Editorial 2 indicate about the use of home conditions?</p>
-          <input type="radio" name="q30" value="A" data-correct="false"> A. They were optimally used<br>
-          <input type="radio" name="q30" value="B" data-correct="true"> B. They were not utilized effectively<br>
-          <input type="radio" name="q30" value="C" data-correct="false"> C. They provided a significant advantage<br>
-          <input type="radio" name="q30" value="D" data-correct="false"> D. They led to improved performances<br>
+        <div class="question">
+          <p><strong>30. What challenge in investigations is highlighted?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q30" value="A">Inadequate evidence collection</label><br>
+            <label><input type="radio" name="q30" value="B">Too many witnesses</label><br>
+            <label><input type="radio" name="q30" value="C">Excessive funding</label><br>
+            <label><input type="radio" name="q30" value="D">Rapid case closure</label>
+          </div>
         </div>
-        <div class="question" id="q31">
-          <p>Q31. What issue did Pakistan face in the World Test Championship?</p>
-          <input type="radio" name="q31" value="A" data-correct="false"> A. They topped the table<br>
-          <input type="radio" name="q31" value="B" data-correct="true"> B. They finished at the bottom<br>
-          <input type="radio" name="q31" value="C" data-correct="false"> C. They performed consistently well<br>
-          <input type="radio" name="q31" value="D" data-correct="false"> D. They had mixed results<br>
+        <div class="question">
+          <p><strong>31. What measure is recommended to build trust with GBV victims?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q31" value="A">Increasing male officers</label><br>
+            <label><input type="radio" name="q31" value="B">Hiring more female officers</label><br>
+            <label><input type="radio" name="q31" value="C">Reducing police numbers</label><br>
+            <label><input type="radio" name="q31" value="D">Implementing stricter punishments</label>
+          </div>
         </div>
-        <div class="question" id="q32">
-          <p>Q32. Which tournament did Pakistan fail in, as mentioned in Editorial 2?</p>
-          <input type="radio" name="q32" value="A" data-correct="true"> A. T20 tournaments<br>
-          <input type="radio" name="q32" value="B" data-correct="false"> B. ODI tournaments<br>
-          <input type="radio" name="q32" value="C" data-correct="false"> C. Test series<br>
-          <input type="radio" name="q32" value="D" data-correct="false"> D. Domestic leagues<br>
+        <div class="question">
+          <p><strong>32. What percentage of the police force is currently female?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q32" value="A">Less than 2%</label><br>
+            <label><input type="radio" name="q32" value="B">5%</label><br>
+            <label><input type="radio" name="q32" value="C">10%</label><br>
+            <label><input type="radio" name="q32" value="D">15%</label>
+          </div>
         </div>
-        <div class="question" id="q33">
-          <p>Q33. What does Editorial 2 suggest is needed from the Pakistan Cricket Board?</p>
-          <input type="radio" name="q33" value="A" data-correct="true"> A. Quick and decisive action<br>
-          <input type="radio" name="q33" value="B" data-correct="false"> B. Continued status quo<br>
-          <input type="radio" name="q33" value="C" data-correct="false"> C. More experimentation with formats<br>
-          <input type="radio" name="q33" value="D" data-correct="false"> D. Delegation of responsibilities<br>
+        <div class="question">
+          <p><strong>33. What judicial reform is suggested for handling GBV cases?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q33" value="A">Abolishing courts</label><br>
+            <label><input type="radio" name="q33" value="B">Outsourcing justice</label><br>
+            <label><input type="radio" name="q33" value="C">Creating fast-track courts</label><br>
+            <label><input type="radio" name="q33" value="D">Increasing legal fees</label>
+          </div>
         </div>
-        <div class="question" id="q34">
-          <p>Q34. Which of the following is a criticism mentioned in Editorial 2?</p>
-          <input type="radio" name="q34" value="A" data-correct="true"> A. The team's lack of trust and time<br>
-          <input type="radio" name="q34" value="B" data-correct="false"> B. Overconfidence of players<br>
-          <input type="radio" name="q34" value="C" data-correct="false"> C. Excessive pressure from sponsors<br>
-          <input type="radio" name="q34" value="D" data-correct="false"> D. Overdependence on foreign coaches<br>
+        <div class="question">
+          <p><strong>34. What improvement is advised for law-enforcement agencies?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q34" value="A">Reducing digital records</label><br>
+            <label><input type="radio" name="q34" value="B">Increasing manpower only</label><br>
+            <label><input type="radio" name="q34" value="C">Digitally tracking cases</label><br>
+            <label><input type="radio" name="q34" value="D">Eliminating forensic units</label>
+          </div>
         </div>
-        <div class="question" id="q35">
-          <p>Q35. How many major tournaments does Editorial 2 reference?</p>
-          <input type="radio" name="q35" value="A" data-correct="false"> A. Two<br>
-          <input type="radio" name="q35" value="B" data-correct="false"> B. Three<br>
-          <input type="radio" name="q35" value="C" data-correct="true"> C. Four<br>
-          <input type="radio" name="q35" value="D" data-correct="false"> D. Five<br>
+        <div class="question">
+          <p><strong>35. Which of the following is NOT mentioned as a challenge in the justice process?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q35" value="A">Inadequate evidence collection</label><br>
+            <label><input type="radio" name="q35" value="B">Victim intimidation</label><br>
+            <label><input type="radio" name="q35" value="C">Overfunding of legal aid</label><br>
+            <label><input type="radio" name="q35" value="D">Procedural delays</label>
+          </div>
         </div>
-        <div class="question" id="q36">
-          <p>Q36. What does Editorial 2 imply about the future of Pakistan cricket?</p>
-          <input type="radio" name="q36" value="A" data-correct="true"> A. It needs a complete reset<br>
-          <input type="radio" name="q36" value="B" data-correct="false"> B. It will naturally improve<br>
-          <input type="radio" name="q36" value="C" data-correct="false"> C. It should rely on current strategies<br>
-          <input type="radio" name="q36" value="D" data-correct="false"> D. It will depend on luck<br>
+        <div class="question">
+          <p><strong>36. What does GBV stand for?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q36" value="A">Gender-Based Violence</label><br>
+            <label><input type="radio" name="q36" value="B">Global Banking Venture</label><br>
+            <label><input type="radio" name="q36" value="C">General Business Value</label><br>
+            <label><input type="radio" name="q36" value="D">Government Budget Variation</label>
+          </div>
         </div>
-        <div class="question" id="q37">
-          <p>Q37. Which aspect is highlighted as a problem in Pakistan cricket in Editorial 2?</p>
-          <input type="radio" name="q37" value="A" data-correct="false"> A. Over-reliance on new talent<br>
-          <input type="radio" name="q37" value="B" data-correct="true"> B. The lack of trust and time<br>
-          <input type="radio" name="q37" value="C" data-correct="false"> C. The abundance of experienced players<br>
-          <input type="radio" name="q37" value="D" data-correct="false"> D. Strong leadership in the team<br>
+        <div class="question">
+          <p><strong>37. What type of court is recommended to expedite GBV cases?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q37" value="A">Regular courts</label><br>
+            <label><input type="radio" name="q37" value="B">International courts</label><br>
+            <label><input type="radio" name="q37" value="C">Military courts</label><br>
+            <label><input type="radio" name="q37" value="D">Fast-track courts</label>
+          </div>
         </div>
-        <div class="question" id="q38">
-          <p>Q38. Who among the following pledged to work harder and return stronger?</p>
-          <input type="radio" name="q38" value="A" data-correct="false"> A. Aaqib Javed<br>
-          <input type="radio" name="q38" value="B" data-correct="false"> B. Azhar Mahmood<br>
-          <input type="radio" name="q38" value="C" data-correct="true"> C. Mohammad Rizwan<br>
-          <input type="radio" name="q38" value="D" data-correct="false"> D. Babar Azam<br>
+        <div class="question">
+          <p><strong>38. Which aspect is recommended for digital improvement in policing?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q38" value="A">Digital evidence collection</label><br>
+            <label><input type="radio" name="q38" value="B">Social media marketing</label><br>
+            <label><input type="radio" name="q38" value="C">Uniform design</label><br>
+            <label><input type="radio" name="q38" value="D">Employee benefits</label>
+          </div>
         </div>
-        <div class="question" id="q39">
-          <p>Q39. Which of the following best describes the critique in Editorial 2?</p>
-          <input type="radio" name="q39" value="A" data-correct="false"> A. It praises the current team management<br>
-          <input type="radio" name="q39" value="B" data-correct="true"> B. It calls for a reset in team strategy<br>
-          <input type="radio" name="q39" value="C" data-correct="false"> C. It encourages reliance on experience<br>
-          <input type="radio" name="q39" value="D" data-correct="false"> D. It supports the status quo<br>
+        <div class="question">
+          <p><strong>39. How does social stigma affect case reporting?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q39" value="A">It increases case registration</label><br>
+            <label><input type="radio" name="q39" value="B">It prevents many cases from being reported</label><br>
+            <label><input type="radio" name="q39" value="C">It speeds up the process</label><br>
+            <label><input type="radio" name="q39" value="D">It leads to better evidence collection</label>
+          </div>
         </div>
-        <div class="question" id="q40">
-          <p>Q40. What does Editorial 2 suggest about the role of former Pakistan greats?</p>
-          <input type="radio" name="q40" value="A" data-correct="false"> A. They should be ignored<br>
-          <input type="radio" name="q40" value="B" data-correct="true"> B. They advocate for merit-based selections<br>
-          <input type="radio" name="q40" value="C" data-correct="false"> C. They are responsible for current failures<br>
-          <input type="radio" name="q40" value="D" data-correct="false"> D. They should manage the team<br>
+        <div class="question">
+          <p><strong>40. Which reform is NOT recommended in the editorial?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q40" value="A">Hiring more female officers</label><br>
+            <label><input type="radio" name="q40" value="B">Expanding legal aid</label><br>
+            <label><input type="radio" name="q40" value="C">Outlawing out-of-court settlements</label><br>
+            <label><input type="radio" name="q40" value="D">Establishing fast-track courts</label>
+          </div>
         </div>
-        
-        <!-- Editorial 3 Questions (10) -->
-        <h2>Editorial 3 Questions</h2>
-        <div class="question" id="q41">
-          <p>Q41. What is the main theme of Editorial 3?</p>
-          <input type="radio" name="q41" value="A" data-correct="true"> A. Political control over local governments<br>
-          <input type="radio" name="q41" value="B" data-correct="false"> B. Economic reforms<br>
-          <input type="radio" name="q41" value="C" data-correct="false"> C. Social welfare improvements<br>
-          <input type="radio" name="q41" value="D" data-correct="false"> D. Environmental policies<br>
+
+        <!-- Editorial 3 Questions (Questions 41-50) -->
+        <div class="question">
+          <p><strong>41. Which group’s complicity is exposed in the botched rescue attempt for the Adriana?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q41" value="A">Italian coast guards</label><br>
+            <label><input type="radio" name="q41" value="B">British naval forces</label><br>
+            <label><input type="radio" name="q41" value="C">Greek authorities</label><br>
+            <label><input type="radio" name="q41" value="D">Spanish rescuers</label>
+          </div>
         </div>
-        <div class="question" id="q42">
-          <p>Q42. According to Editorial 3, why are local governments disliked by major political parties?</p>
-          <input type="radio" name="q42" value="A" data-correct="false"> A. They demand too much autonomy<br>
-          <input type="radio" name="q42" value="B" data-correct="true"> B. They threaten political patronage<br>
-          <input type="radio" name="q42" value="C" data-correct="false"> C. They are financially unstable<br>
-          <input type="radio" name="q42" value="D" data-correct="false"> D. They have excessive power<br>
+        <div class="question">
+          <p><strong>42. How many people were onboard the Adriana when it sank?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q42" value="A">700</label><br>
+            <label><input type="radio" name="q42" value="B">350</label><br>
+            <label><input type="radio" name="q42" value="C">82</label><br>
+            <label><input type="radio" name="q42" value="D">500</label>
+          </div>
         </div>
-        <div class="question" id="q43">
-          <p>Q43. What has been the impact of dissolving LG institutions in Punjab as per Editorial 3?</p>
-          <input type="radio" name="q43" value="A" data-correct="true"> A. Loss of local representation<br>
-          <input type="radio" name="q43" value="B" data-correct="false"> B. Improved local governance<br>
-          <input type="radio" name="q43" value="C" data-correct="false"> C. Increased bureaucracy<br>
-          <input type="radio" name="q43" value="D" data-correct="false"> D. Enhanced political participation<br>
+        <div class="question">
+          <p><strong>43. How many Pakistanis were reported to be onboard the Adriana?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q43" value="A">100</label><br>
+            <label><input type="radio" name="q43" value="B">82</label><br>
+            <label><input type="radio" name="q43" value="C">500</label><br>
+            <label><input type="radio" name="q43" value="D">350</label>
+          </div>
         </div>
-        <div class="question" id="q44">
-          <p>Q44. What constitutional issue is raised in Editorial 3 regarding local governments?</p>
-          <input type="radio" name="q44" value="A" data-correct="false"> A. Their excessive financial power<br>
-          <input type="radio" name="q44" value="B" data-correct="true"> B. The lack of a detailed constitutional framework<br>
-          <input type="radio" name="q44" value="C" data-correct="false"> C. Their administrative overreach<br>
-          <input type="radio" name="q44" value="D" data-correct="false"> D. Their democratic legitimacy<br>
+        <div class="question">
+          <p><strong>44. How many bodies were retrieved from the Adriana?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q44" value="A">350</label><br>
+            <label><input type="radio" name="q44" value="B">82</label><br>
+            <label><input type="radio" name="q44" value="C">700</label><br>
+            <label><input type="radio" name="q44" value="D">100</label>
+          </div>
         </div>
-        <div class="question" id="q45">
-          <p>Q45. How do major political parties view local governments as per Editorial 3?</p>
-          <input type="radio" name="q45" value="A" data-correct="true"> A. As a threat to their control<br>
-          <input type="radio" name="q45" value="B" data-correct="false"> B. As a means to enhance democracy<br>
-          <input type="radio" name="q45" value="C" data-correct="false"> C. As partners in governance<br>
-          <input type="radio" name="q45" value="D" data-correct="false"> D. As independent bodies<br>
+        <div class="question">
+          <p><strong>45. What instruction did Greek rescue officials reportedly give to the captain?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q45" value="A">Inform the approaching boat that passengers do not want to land in Greece</label><br>
+            <label><input type="radio" name="q45" value="B">Direct the boat to return to port</label><br>
+            <label><input type="radio" name="q45" value="C">Head immediately for Italy</label><br>
+            <label><input type="radio" name="q45" value="D">Maintain current course</label>
+          </div>
         </div>
-        <div class="question" id="q46">
-          <p>Q46. What reason is given for the delay in holding LG polls in Punjab?</p>
-          <input type="radio" name="q46" value="A" data-correct="false"> A. Financial constraints<br>
-          <input type="radio" name="q46" value="B" data-correct="true"> B. Political reluctance<br>
-          <input type="radio" name="q46" value="C" data-correct="false"> C. Administrative inefficiency<br>
-          <input type="radio" name="q46" value="D" data-correct="false"> D. Voter apathy<br>
+        <div class="question">
+          <p><strong>46. Who confirmed the foul play in the rescue attempts?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q46" value="A">A Greek official</label><br>
+            <label><input type="radio" name="q46" value="B">An Italian reporter</label><br>
+            <label><input type="radio" name="q46" value="C">A Pakistani survivor</label><br>
+            <label><input type="radio" name="q46" value="D">A UN representative</label>
+          </div>
         </div>
-        <div class="question" id="q47">
-          <p>Q47. What constitutional duty regarding local governments is mentioned in Editorial 3?</p>
-          <input type="radio" name="q47" value="A" data-correct="true"> A. Establishment of LG systems<br>
-          <input type="radio" name="q47" value="B" data-correct="false"> B. Dissolution of LG systems<br>
-          <input type="radio" name="q47" value="C" data-correct="false"> C. Centralization of power<br>
-          <input type="radio" name="q47" value="D" data-correct="false"> D. Privatization of services<br>
+        <div class="question">
+          <p><strong>47. How many Pakistanis were lost in the boat tragedy off the Libyan coast?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q47" value="A">6</label><br>
+            <label><input type="radio" name="q47" value="B">16</label><br>
+            <label><input type="radio" name="q47" value="C">10</label><br>
+            <label><input type="radio" name="q47" value="D">37</label>
+          </div>
         </div>
-        <div class="question" id="q48">
-          <p>Q48. How is the delay in LG polls justified in Editorial 3?</p>
-          <input type="radio" name="q48" value="A" data-correct="false"> A. Due to administrative efficiency<br>
-          <input type="radio" name="q48" value="B" data-correct="true"> B. As a means to alter the legal framework<br>
-          <input type="radio" name="q48" value="C" data-correct="false"> C. Because of financial constraints<br>
-          <input type="radio" name="q48" value="D" data-correct="false"> D. Due to voter apathy<br>
+        <div class="question">
+          <p><strong>48. According to the law minister, how many human traffickers were arrested?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q48" value="A">458</label><br>
+            <label><input type="radio" name="q48" value="B">700</label><br>
+            <label><input type="radio" name="q48" value="C">63</label><br>
+            <label><input type="radio" name="q48" value="D">1,638</label>
+          </div>
         </div>
-        <div class="question" id="q49">
-          <p>Q49. What is the underlying reason for delaying LG polls as per Editorial 3?</p>
-          <input type="radio" name="q49" value="A" data-correct="false"> A. Improving local administration<br>
-          <input type="radio" name="q49" value="B" data-correct="true"> B. Political advantage<br>
-          <input type="radio" name="q49" value="C" data-correct="false"> C. Financial reallocation<br>
-          <input type="radio" name="q49" value="D" data-correct="false"> D. Encouraging voter turnout<br>
+        <div class="question">
+          <p><strong>49. Which countries are cited as providing skill training to youth?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q49" value="A">India and Bangladesh</label><br>
+            <label><input type="radio" name="q49" value="B">Pakistan and India</label><br>
+            <label><input type="radio" name="q49" value="C">Pakistan and Bangladesh</label><br>
+            <label><input type="radio" name="q49" value="D">Greece and Italy</label>
+          </div>
         </div>
-        <div class="question" id="q50">
-          <p>Q50. What challenge does Punjab face regarding LG polls?</p>
-          <input type="radio" name="q50" value="A" data-correct="true"> A. Political interference<br>
-          <input type="radio" name="q50" value="B" data-correct="false"> B. Excessive funding<br>
-          <input type="radio" name="q50" value="C" data-correct="false"> C. Administrative delays<br>
-          <input type="radio" name="q50" value="D" data-correct="false"> D. Voter disinterest<br>
+        <div class="question">
+          <p><strong>50. What is referred to as the 'white man’s true burden'?</strong></p>
+          <div class="options">
+            <label><input type="radio" name="q50" value="A">Economic development</label><br>
+            <label><input type="radio" name="q50" value="B">Human trafficking</label><br>
+            <label><input type="radio" name="q50" value="C">Western nations’ role in racism and xenophobia</label><br>
+            <label><input type="radio" name="q50" value="D">Rescue operations</label>
+          </div>
         </div>
+        <br>
         <button type="button" id="submitQuizBtn">Submit Quiz</button>
       </form>
     </div>
-    
-    <!-- Result Section -->
-    <div id="resultSection" style="display:none;">
+
+    <!-- Results Section -->
+    <div id="resultSection" class="hidden">
       <h2>Quiz Results</h2>
-      <p id="resultName"></p>
-      <p id="resultAttempted"></p>
-      <p id="resultScore"></p>
-      <p id="resultTime"></p>
+      <p id="resultText"></p>
     </div>
+
+    <!-- Hidden Form for Formspree -->
+    <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+      <input type="text" name="studentName" id="formStudentName">
+      <input type="text" name="attempted" id="formAttempted">
+      <input type="text" name="score" id="formScore">
+      <input type="text" name="timeTaken" id="formTimeTaken">
+    </form>
   </div>
-  
+
   <footer>
-    <p>Contact: 03265762698</p>
-    <p>Call now for more information!</p>
+    <p>Contact: 03265762698 | For more information, get in touch!</p>
   </footer>
-  
-  <!-- Hidden Form for Formspree Submission -->
-  <form action="https://formspree.io/f/xwpvddea" method="POST" id="hiddenForm" style="display:none;">
-    <input type="hidden" name="name" id="formName">
-    <input type="hidden" name="attempted" id="formAttempted">
-    <input type="hidden" name="score" id="formScore">
-    <input type="hidden" name="timeTaken" id="formTime">
-  </form>
-  
+
   <script>
     // Disable right-click context menu
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    // Disable key shortcuts for inspection (F12, Ctrl+Shift+I/J, Ctrl+U)
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+    // Disable key combinations that might reveal source
     document.onkeydown = function(e) {
       if (e.keyCode === 123 || 
-         (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || 
-         (e.ctrlKey && e.keyCode === 85)) {
-          return false;
+          (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
+          (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83))) {
+        return false;
       }
     };
-    
-    // Global variables for timer and quiz start time
-    let timerInterval;
-    let timeLeft = 600; // 10 minutes in seconds
-    let quizStartedTime;
-    
-    // Start Quiz button event
+
+    // Correct answers mapping for 50 questions
+    var correctAnswers = {
+      // Editorial 1: Q1-Q20
+      q1: "B",
+      q2: "D",
+      q3: "A",
+      q4: "C",
+      q5: "B",
+      q6: "D",
+      q7: "B",
+      q8: "C",
+      q9: "B",
+      q10: "D",
+      q11: "C",
+      q12: "C",
+      q13: "B",
+      q14: "D",
+      q15: "A",
+      q16: "C",
+      q17: "B",
+      q18: "D",
+      q19: "A",
+      q20: "B",
+      // Editorial 2: Q21-Q40
+      q21: "D",
+      q22: "B",
+      q23: "C",
+      q24: "A",
+      q25: "D",
+      q26: "B",
+      q27: "A",
+      q28: "C",
+      q29: "D",
+      q30: "A",
+      q31: "B",
+      q32: "C",
+      q33: "D",
+      q34: "A",
+      q35: "C",  // (Note: For Q35, the correct answer is "Overfunding of legal aid" which is option C)
+      q36: "A",
+      q37: "D",
+      q38: "A",
+      q39: "B",
+      q40: "C",
+      // Editorial 3: Q41-Q50
+      q41: "C",
+      q42: "A",
+      q43: "D",
+      q44: "B",
+      q45: "A",
+      q46: "C",
+      q47: "B",
+      q48: "D",
+      q49: "A",
+      q50: "C"
+    };
+
+    var timerInterval;
+    var quizStartTime;
+
     document.getElementById('startQuizBtn').addEventListener('click', function() {
-      const name = document.getElementById('studentName').value.trim();
-      if (name === '') {
-        alert('Please enter your name to start the quiz.');
+      var studentName = document.getElementById('studentNameInput').value.trim();
+      if(studentName === "") {
+        alert("Please enter your name to start the quiz.");
         return;
       }
-      // Hide name entry and show quiz section
-      document.getElementById('nameEntry').style.display = 'none';
-      document.getElementById('quizSection').style.display = 'block';
-      quizStartedTime = new Date();
-      startTimer();
+      document.getElementById('nameEntry').classList.add('hidden');
+      document.getElementById('quizSection').classList.remove('hidden');
+      quizStartTime = new Date();
+      startTimer(600); // 10 minutes = 600 seconds
     });
-    
-    // Start timer function
-    function startTimer() {
-      updateTimerDisplay();
+
+    function startTimer(duration) {
+      var timer = duration, minutes, seconds;
       timerInterval = setInterval(function() {
-        timeLeft--;
-        updateTimerDisplay();
-        if (timeLeft <= 0) {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        document.getElementById('timer').textContent = minutes + ":" + seconds;
+        if (--timer < 0) {
           clearInterval(timerInterval);
           submitQuiz();
         }
       }, 1000);
     }
-    
-    function updateTimerDisplay() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      document.getElementById('timer').textContent =
-        (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
-    }
-    
-    // Submit Quiz button event
-    document.getElementById('submitQuizBtn').addEventListener('click', function() {
-      submitQuiz();
-    });
-    
-    // Function to calculate results and submit the quiz
+
+    document.getElementById('submitQuizBtn').addEventListener('click', submitQuiz);
+
     function submitQuiz() {
       clearInterval(timerInterval);
-      const form = document.getElementById('quizForm');
-      const formData = new FormData(form);
-      let attempted = 0;
-      let score = 0;
-      // Loop through all 50 questions
-      for (let i = 1; i <= 50; i++) {
-        const qName = 'q' + i;
-        const radios = document.getElementsByName(qName);
-        for (let radio of radios) {
-          if (radio.checked) {
+      var totalQuestions = 50;
+      var score = 0, attempted = 0;
+      for (var i = 1; i <= totalQuestions; i++) {
+        var qName = "q" + i;
+        var radios = document.getElementsByName(qName);
+        for (var j = 0; j < radios.length; j++) {
+          if (radios[j].checked) {
             attempted++;
-            if (radio.getAttribute('data-correct') === 'true') {
+            if (radios[j].value === correctAnswers[qName]) {
               score++;
             }
+            break;
           }
         }
       }
-      const quizEndTime = new Date();
-      const timeTaken = Math.floor((quizEndTime - quizStartedTime) / 1000);
-      const studentName = document.getElementById('studentName').value.trim();
-      
-      // Display results
-      document.getElementById('resultName').textContent = 'Name: ' + studentName;
-      document.getElementById('resultAttempted').textContent = 'Questions Attempted: ' + attempted;
-      document.getElementById('resultScore').textContent = 'Score: ' + score;
-      document.getElementById('resultTime').textContent = 'Time Taken: ' + timeTaken + ' seconds';
-      
-      document.getElementById('quizSection').style.display = 'none';
-      document.getElementById('resultSection').style.display = 'block';
-      
-      // Fill hidden form and submit to Formspree
-      document.getElementById('formName').value = studentName;
+      var endTime = new Date();
+      var timeTaken = Math.floor((endTime - quizStartTime) / 1000);
+      var studentName = document.getElementById('studentNameInput').value;
+      var resultHTML = "Name: " + studentName + "<br>" +
+                       "Questions Attempted: " + attempted + " / 50<br>" +
+                       "Score: " + score + " / 50<br>" +
+                       "Time Taken: " + timeTaken + " seconds";
+      document.getElementById('resultText').innerHTML = resultHTML;
+      document.getElementById('quizSection').classList.add('hidden');
+      document.getElementById('resultSection').classList.remove('hidden');
+
+      // Fill and auto-submit the hidden form
+      document.getElementById('formStudentName').value = studentName;
       document.getElementById('formAttempted').value = attempted;
       document.getElementById('formScore').value = score;
-      document.getElementById('formTime').value = timeTaken;
+      document.getElementById('formTimeTaken').value = timeTaken;
       document.getElementById('hiddenForm').submit();
     }
   </script>
