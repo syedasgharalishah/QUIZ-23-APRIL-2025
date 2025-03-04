@@ -2,708 +2,503 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 3 March 2025</title>
+  <title>Quiz for CSS Aspirants 4 March 2025</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      margin: 0;
-      padding: 0;
-    }
-    header, footer {
-      background: #333;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-    }
-    header img {
-      max-width: 100px;
-      border-radius: 50%;
-      display: block;
-      margin: 10px auto;
-    }
-    .container {
-      padding: 20px;
-    }
-    .hidden {
-      display: none;
-    }
-    /* Disable text selection */
+    /* Disable text selection on the whole page */
     * {
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
     }
-    .question {
-      background: #fff;
-      margin-bottom: 15px;
-      padding: 10px;
-      border-radius: 5px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
     }
-    .options {
-      margin: 10px 0 0 20px;
-    }
-    #timer {
-      font-size: 20px;
-      font-weight: bold;
+    header, footer {
+      background-color: #333;
+      color: #fff;
       text-align: center;
-      margin-bottom: 20px;
+      padding: 15px 0;
     }
-    input[type="radio"] {
-      margin-right: 8px;
+    header img {
+      max-height: 80px;
+      vertical-align: middle;
+      margin-right: 15px;
     }
-    input[type="text"] {
-      padding: 8px;
+    header h1 {
+      display: inline-block;
+      font-size: 24px;
+      vertical-align: middle;
+      margin: 0;
+    }
+    #name-entry, #quiz-section, #result-section {
+      max-width: 800px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    #name-entry input[type="text"] {
+      width: 60%;
+      padding: 10px;
       font-size: 16px;
-      width: 300px;
     }
-    button {
+    #name-entry button, #quiz-section button {
       padding: 10px 20px;
       font-size: 16px;
       cursor: pointer;
-      margin-top: 10px;
+      margin-left: 10px;
+    }
+    .question {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .question p {
+      font-weight: bold;
+    }
+    .question label {
+      display: block;
+      margin: 5px 0;
+      cursor: pointer;
+    }
+    #timer {
+      font-size: 18px;
+      font-weight: bold;
+      text-align: right;
+      margin-bottom: 15px;
+      color: #d9534f;
+    }
+    footer p {
+      margin: 5px 0;
     }
   </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
+  <!-- Header Section -->
   <header>
-    <h1>QUIZ FOR CSS ASPIRANTS 3 March 2025</h1>
-    <p>SYED ASGHAR ALI SHAH</p>
-    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA_" alt="User Image">
+    <h1>SYED ASGHAR ALI SHAH - QUIZ FOR CSS ASPIRANTS 4 March 2025</h1>
   </header>
 
-  <div class="container">
-    <!-- Name Entry Section -->
-    <div id="nameEntry">
-      <h2>Enter Your Name to Start the Quiz</h2>
-      <input type="text" id="studentNameInput" placeholder="Your Name">
-      <br>
-      <button id="startQuizBtn">Start Quiz</button>
-    </div>
+  <!-- Name Entry Section -->
+  <div id="name-entry">
+    <p>Please enter your name to start the quiz:</p>
+    <input type="text" id="studentNameInput" placeholder="Enter your name">
+    <button id="startQuizBtn">Start Quiz</button>
+  </div>
 
-    <!-- Quiz Section -->
-    <div id="quizSection" class="hidden">
-      <div id="timer">10:00</div>
-      <form id="quizForm">
-        <!-- Editorial 1 Questions (Questions 1-20) -->
-        <div class="question">
-          <p><strong>1. Which two figures are mentioned as dismantling USAID?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q1" value="A">Barack Obama and Mark Zuckerberg</label><br>
-            <label><input type="radio" name="q1" value="B">Donald Trump and Elon Musk</label><br>
-            <label><input type="radio" name="q1" value="C">Joe Biden and Jeff Bezos</label><br>
-            <label><input type="radio" name="q1" value="D">Narendra Modi and Xi Jinping</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>2. Which agency is undergoing restructuring in the editorial?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q2" value="A">UNICEF</label><br>
-            <label><input type="radio" name="q2" value="B">World Bank</label><br>
-            <label><input type="radio" name="q2" value="C">IMF</label><br>
-            <label><input type="radio" name="q2" value="D">USAID</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>3. What sectors did USAID primarily fund?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q3" value="A">Health, Education, and Climate</label><br>
-            <label><input type="radio" name="q3" value="B">Military and Defense</label><br>
-            <label><input type="radio" name="q3" value="C">Technology and Innovation</label><br>
-            <label><input type="radio" name="q3" value="D">Sports and Culture</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>4. According to media reports, how many projects in Pakistan were axed?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q4" value="A">25 projects</label><br>
-            <label><input type="radio" name="q4" value="B">50 projects</label><br>
-            <label><input type="radio" name="q4" value="C">39 projects</label><br>
-            <label><input type="radio" name="q4" value="D">15 projects</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>5. What monetary term is used to describe the cost of the axed projects?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q5" value="A">Millions</label><br>
-            <label><input type="radio" name="q5" value="B">Hundreds of millions</label><br>
-            <label><input type="radio" name="q5" value="C">Billions</label><br>
-            <label><input type="radio" name="q5" value="D">Trillions</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>6. What major consequence is reported for USAID workers?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q6" value="A">Promotions</label><br>
-            <label><input type="radio" name="q6" value="B">Transfers abroad</label><br>
-            <label><input type="radio" name="q6" value="C">Salary increases</label><br>
-            <label><input type="radio" name="q6" value="D">Job losses</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>7. Who does the editorial say has a duty to support humanitarian endeavours?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q7" value="A">Developing nations</label><br>
-            <label><input type="radio" name="q7" value="B">Western states, particularly the US</label><br>
-            <label><input type="radio" name="q7" value="C">European Union</label><br>
-            <label><input type="radio" name="q7" value="D">Asian economies</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>8. What is described as morally unacceptable in the text?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q8" value="A">Spending on health programmes</label><br>
-            <label><input type="radio" name="q8" value="B">Investing in education</label><br>
-            <label><input type="radio" name="q8" value="C">Spending billions on destruction then cutting reconstruction aid</label><br>
-            <label><input type="radio" name="q8" value="D">Supporting renewable energy</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>9. What syndrome is mentioned as a problem in developing states?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q9" value="A">Addiction syndrome</label><br>
-            <label><input type="radio" name="q9" value="B">Dependency syndrome</label><br>
-            <label><input type="radio" name="q9" value="C">Recovery syndrome</label><br>
-            <label><input type="radio" name="q9" value="D">Transition syndrome</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>10. Who is identified as primarily responsible for providing essential services?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q10" value="A">International NGOs</label><br>
-            <label><input type="radio" name="q10" value="B">Private sector companies</label><br>
-            <label><input type="radio" name="q10" value="C">Foreign aid agencies</label><br>
-            <label><input type="radio" name="q10" value="D">Governments of developing nations</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>11. What potential opportunity does the USAID closure provide?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q11" value="A">A chance to seek more foreign aid</label><br>
-            <label><input type="radio" name="q11" value="B">An opportunity for privatization</label><br>
-            <label><input type="radio" name="q11" value="C">An opportunity to take responsibility for local development</label><br>
-            <label><input type="radio" name="q11" value="D">A reason to protest internationally</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>12. Which critical area is mentioned as needing increased funding?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q12" value="A">Infrastructure</label><br>
-            <label><input type="radio" name="q12" value="B">Defense</label><br>
-            <label><input type="radio" name="q12" value="C">Healthcare</label><br>
-            <label><input type="radio" name="q12" value="D">Technology</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>13. Which group is urged to adapt its policies to secure alternative funding?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q13" value="A">Multinational corporations</label><br>
-            <label><input type="radio" name="q13" value="B">Civil society groups</label><br>
-            <label><input type="radio" name="q13" value="C">Local municipalities</label><br>
-            <label><input type="radio" name="q13" value="D">International banks</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>14. What does the editorial advise instead of lamenting over lost billions?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q14" value="A">Focusing on future investments</label><br>
-            <label><input type="radio" name="q14" value="B">Increasing imports</label><br>
-            <label><input type="radio" name="q14" value="C">Raising taxes</label><br>
-            <label><input type="radio" name="q14" value="D">Taking responsibility for self-development</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>15. What does the editorial imply about shedding tears for lost billions?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q15" value="A">It is pointless because funds won’t return</label><br>
-            <label><input type="radio" name="q15" value="B">It is necessary for healing</label><br>
-            <label><input type="radio" name="q15" value="C">It shows solidarity</label><br>
-            <label><input type="radio" name="q15" value="D">It is a sign of weakness</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>16. What does the text say will no longer be sent from Washington?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q16" value="A">Military aid</label><br>
-            <label><input type="radio" name="q16" value="B">Technical expertise</label><br>
-            <label><input type="radio" name="q16" value="C">Lost billions</label><br>
-            <label><input type="radio" name="q16" value="D">Educational scholarships</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>17. Besides disbursing aid, what else did USAID fund?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q17" value="A">Sports tournaments</label><br>
-            <label><input type="radio" name="q17" value="B">Projects to save lives and prevent disease</label><br>
-            <label><input type="radio" name="q17" value="C">Cultural festivals</label><br>
-            <label><input type="radio" name="q17" value="D">Military operations</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>18. Which countries are mentioned as having been bombed and invaded?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q18" value="A">South Korea, Japan, and Vietnam</label><br>
-            <label><input type="radio" name="q18" value="B">Germany, Italy, and Spain</label><br>
-            <label><input type="radio" name="q18" value="C">Brazil, Argentina, and Chile</label><br>
-            <label><input type="radio" name="q18" value="D">Iraq, Afghanistan, and Syria</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>19. According to the editorial, who should be held accountable for social sector duties?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q19" value="A">Developing countries’ governments</label><br>
-            <label><input type="radio" name="q19" value="B">International organizations</label><br>
-            <label><input type="radio" name="q19" value="C">Local communities</label><br>
-            <label><input type="radio" name="q19" value="D">Foreign investors</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>20. What must states do in response to the USAID shake-up?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q20" value="A">Increase their dependency on aid</label><br>
-            <label><input type="radio" name="q20" value="B">Develop contingency plans and take responsibility</label><br>
-            <label><input type="radio" name="q20" value="C">Cut funding for local projects</label><br>
-            <label><input type="radio" name="q20" value="D">Lobby for more international support</label>
-          </div>
-        </div>
-
-        <!-- Editorial 2 Questions (Questions 21-40) -->
-        <div class="question">
-          <p><strong>21. What does the SSDO report reveal about the justice system?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q21" value="A">It efficiently protects women</label><br>
-            <label><input type="radio" name="q21" value="B">It is reformed and fair</label><br>
-            <label><input type="radio" name="q21" value="C">It is rapidly modernizing</label><br>
-            <label><input type="radio" name="q21" value="D">It has failed to protect women</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>22. What is the reported conviction rate for honour killings and rape?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q22" value="A">1.5%</label><br>
-            <label><input type="radio" name="q22" value="B">0.5%</label><br>
-            <label><input type="radio" name="q22" value="C">2%</label><br>
-            <label><input type="radio" name="q22" value="D">5%</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>23. What is the kidnapping conviction rate mentioned?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q23" value="A">0.5%</label><br>
-            <label><input type="radio" name="q23" value="B">1.0%</label><br>
-            <label><input type="radio" name="q23" value="C">0.1%</label><br>
-            <label><input type="radio" name="q23" value="D">2.0%</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>24. On average, how many domestic violence cases are reported per day in Pakistan in 2024?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q24" value="A">6</label><br>
-            <label><input type="radio" name="q24" value="B">10</label><br>
-            <label><input type="radio" name="q24" value="C">8</label><br>
-            <label><input type="radio" name="q24" value="D">12</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>25. How many honour killings are reported on average per day?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q25" value="A">1</label><br>
-            <label><input type="radio" name="q25" value="B">4</label><br>
-            <label><input type="radio" name="q25" value="C">3</label><br>
-            <label><input type="radio" name="q25" value="D">2</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>26. In which province were only 20 rape cases convicted out of 4,641?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q26" value="A">Sindh</label><br>
-            <label><input type="radio" name="q26" value="B">Punjab</label><br>
-            <label><input type="radio" name="q26" value="C">Balochistan</label><br>
-            <label><input type="radio" name="q26" value="D">Khyber Pakhtunkhwa</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>27. Which provinces recorded zero rape convictions?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q27" value="A">Sindh and Balochistan</label><br>
-            <label><input type="radio" name="q27" value="B">Punjab and Sindh</label><br>
-            <label><input type="radio" name="q27" value="C">Balochistan and Punjab</label><br>
-            <label><input type="radio" name="q27" value="D">Khyber Pakhtunkhwa and Sindh</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>28. What factor is cited as contributing to poor handling of GBV cases?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q28" value="A">Advanced technology</label><br>
-            <label><input type="radio" name="q28" value="B">Excessive funding</label><br>
-            <label><input type="radio" name="q28" value="C">Patriarchal norms</label><br>
-            <label><input type="radio" name="q28" value="D">Efficient bureaucracy</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>29. Which informal systems are mentioned for settling cases out of court?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q29" value="A">Courts and tribunals</label><br>
-            <label><input type="radio" name="q29" value="B">Mediation centers</label><br>
-            <label><input type="radio" name="q29" value="C">International arbitration</label><br>
-            <label><input type="radio" name="q29" value="D">Jirgas and panchayats</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>30. What challenge in investigations is highlighted?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q30" value="A">Inadequate evidence collection</label><br>
-            <label><input type="radio" name="q30" value="B">Too many witnesses</label><br>
-            <label><input type="radio" name="q30" value="C">Excessive funding</label><br>
-            <label><input type="radio" name="q30" value="D">Rapid case closure</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>31. What measure is recommended to build trust with GBV victims?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q31" value="A">Increasing male officers</label><br>
-            <label><input type="radio" name="q31" value="B">Hiring more female officers</label><br>
-            <label><input type="radio" name="q31" value="C">Reducing police numbers</label><br>
-            <label><input type="radio" name="q31" value="D">Implementing stricter punishments</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>32. What percentage of the police force is currently female?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q32" value="A">Less than 2%</label><br>
-            <label><input type="radio" name="q32" value="B">5%</label><br>
-            <label><input type="radio" name="q32" value="C">10%</label><br>
-            <label><input type="radio" name="q32" value="D">15%</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>33. What judicial reform is suggested for handling GBV cases?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q33" value="A">Abolishing courts</label><br>
-            <label><input type="radio" name="q33" value="B">Outsourcing justice</label><br>
-            <label><input type="radio" name="q33" value="C">Creating fast-track courts</label><br>
-            <label><input type="radio" name="q33" value="D">Increasing legal fees</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>34. What improvement is advised for law-enforcement agencies?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q34" value="A">Reducing digital records</label><br>
-            <label><input type="radio" name="q34" value="B">Increasing manpower only</label><br>
-            <label><input type="radio" name="q34" value="C">Digitally tracking cases</label><br>
-            <label><input type="radio" name="q34" value="D">Eliminating forensic units</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>35. Which of the following is NOT mentioned as a challenge in the justice process?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q35" value="A">Inadequate evidence collection</label><br>
-            <label><input type="radio" name="q35" value="B">Victim intimidation</label><br>
-            <label><input type="radio" name="q35" value="C">Overfunding of legal aid</label><br>
-            <label><input type="radio" name="q35" value="D">Procedural delays</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>36. What does GBV stand for?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q36" value="A">Gender-Based Violence</label><br>
-            <label><input type="radio" name="q36" value="B">Global Banking Venture</label><br>
-            <label><input type="radio" name="q36" value="C">General Business Value</label><br>
-            <label><input type="radio" name="q36" value="D">Government Budget Variation</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>37. What type of court is recommended to expedite GBV cases?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q37" value="A">Regular courts</label><br>
-            <label><input type="radio" name="q37" value="B">International courts</label><br>
-            <label><input type="radio" name="q37" value="C">Military courts</label><br>
-            <label><input type="radio" name="q37" value="D">Fast-track courts</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>38. Which aspect is recommended for digital improvement in policing?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q38" value="A">Digital evidence collection</label><br>
-            <label><input type="radio" name="q38" value="B">Social media marketing</label><br>
-            <label><input type="radio" name="q38" value="C">Uniform design</label><br>
-            <label><input type="radio" name="q38" value="D">Employee benefits</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>39. How does social stigma affect case reporting?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q39" value="A">It increases case registration</label><br>
-            <label><input type="radio" name="q39" value="B">It prevents many cases from being reported</label><br>
-            <label><input type="radio" name="q39" value="C">It speeds up the process</label><br>
-            <label><input type="radio" name="q39" value="D">It leads to better evidence collection</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>40. Which reform is NOT recommended in the editorial?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q40" value="A">Hiring more female officers</label><br>
-            <label><input type="radio" name="q40" value="B">Expanding legal aid</label><br>
-            <label><input type="radio" name="q40" value="C">Outlawing out-of-court settlements</label><br>
-            <label><input type="radio" name="q40" value="D">Establishing fast-track courts</label>
-          </div>
-        </div>
-
-        <!-- Editorial 3 Questions (Questions 41-50) -->
-        <div class="question">
-          <p><strong>41. Which group’s complicity is exposed in the botched rescue attempt for the Adriana?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q41" value="A">Italian coast guards</label><br>
-            <label><input type="radio" name="q41" value="B">British naval forces</label><br>
-            <label><input type="radio" name="q41" value="C">Greek authorities</label><br>
-            <label><input type="radio" name="q41" value="D">Spanish rescuers</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>42. How many people were onboard the Adriana when it sank?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q42" value="A">700</label><br>
-            <label><input type="radio" name="q42" value="B">350</label><br>
-            <label><input type="radio" name="q42" value="C">82</label><br>
-            <label><input type="radio" name="q42" value="D">500</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>43. How many Pakistanis were reported to be onboard the Adriana?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q43" value="A">100</label><br>
-            <label><input type="radio" name="q43" value="B">82</label><br>
-            <label><input type="radio" name="q43" value="C">500</label><br>
-            <label><input type="radio" name="q43" value="D">350</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>44. How many bodies were retrieved from the Adriana?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q44" value="A">350</label><br>
-            <label><input type="radio" name="q44" value="B">82</label><br>
-            <label><input type="radio" name="q44" value="C">700</label><br>
-            <label><input type="radio" name="q44" value="D">100</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>45. What instruction did Greek rescue officials reportedly give to the captain?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q45" value="A">Inform the approaching boat that passengers do not want to land in Greece</label><br>
-            <label><input type="radio" name="q45" value="B">Direct the boat to return to port</label><br>
-            <label><input type="radio" name="q45" value="C">Head immediately for Italy</label><br>
-            <label><input type="radio" name="q45" value="D">Maintain current course</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>46. Who confirmed the foul play in the rescue attempts?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q46" value="A">A Greek official</label><br>
-            <label><input type="radio" name="q46" value="B">An Italian reporter</label><br>
-            <label><input type="radio" name="q46" value="C">A Pakistani survivor</label><br>
-            <label><input type="radio" name="q46" value="D">A UN representative</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>47. How many Pakistanis were lost in the boat tragedy off the Libyan coast?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q47" value="A">6</label><br>
-            <label><input type="radio" name="q47" value="B">16</label><br>
-            <label><input type="radio" name="q47" value="C">10</label><br>
-            <label><input type="radio" name="q47" value="D">37</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>48. According to the law minister, how many human traffickers were arrested?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q48" value="A">458</label><br>
-            <label><input type="radio" name="q48" value="B">700</label><br>
-            <label><input type="radio" name="q48" value="C">63</label><br>
-            <label><input type="radio" name="q48" value="D">1,638</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>49. Which countries are cited as providing skill training to youth?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q49" value="A">India and Bangladesh</label><br>
-            <label><input type="radio" name="q49" value="B">Pakistan and India</label><br>
-            <label><input type="radio" name="q49" value="C">Pakistan and Bangladesh</label><br>
-            <label><input type="radio" name="q49" value="D">Greece and Italy</label>
-          </div>
-        </div>
-        <div class="question">
-          <p><strong>50. What is referred to as the 'white man’s true burden'?</strong></p>
-          <div class="options">
-            <label><input type="radio" name="q50" value="A">Economic development</label><br>
-            <label><input type="radio" name="q50" value="B">Human trafficking</label><br>
-            <label><input type="radio" name="q50" value="C">Western nations’ role in racism and xenophobia</label><br>
-            <label><input type="radio" name="q50" value="D">Rescue operations</label>
-          </div>
-        </div>
-        <br>
-        <button type="button" id="submitQuizBtn">Submit Quiz</button>
-      </form>
-    </div>
-
-    <!-- Results Section -->
-    <div id="resultSection" class="hidden">
-      <h2>Quiz Results</h2>
-      <p id="resultText"></p>
-    </div>
-
-    <!-- Hidden Form for Formspree -->
-    <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-      <input type="text" name="studentName" id="formStudentName">
-      <input type="text" name="attempted" id="formAttempted">
-      <input type="text" name="score" id="formScore">
-      <input type="text" name="timeTaken" id="formTimeTaken">
+  <!-- Quiz Section (hidden until name is entered) -->
+  <div id="quiz-section" style="display:none;">
+    <div id="timer">Time Left: 10:00</div>
+    <form id="quizForm">
+      <div id="quiz-questions">
+        <!-- Quiz questions will be injected here -->
+      </div>
+      <button type="button" id="submitQuizBtn">Submit Quiz</button>
     </form>
   </div>
 
+  <!-- Result Section (hidden until quiz is submitted) -->
+  <div id="result-section" style="display:none;">
+    <h2>Quiz Results</h2>
+    <p id="resultText"></p>
+  </div>
+
+  <!-- Hidden Form for Formspree Submission -->
+  <form id="result-form" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+    <input type="hidden" name="studentName" id="form-studentName">
+    <input type="hidden" name="attempted" id="form-attempted">
+    <input type="hidden" name="score" id="form-score">
+    <input type="hidden" name="timeTaken" id="form-timeTaken">
+  </form>
+
+  <!-- Footer Section -->
   <footer>
-    <p>Contact: 03265762698 | For more information, get in touch!</p>
+    <p>Contact us: 03265762698</p>
+    <p>Call now for more details!</p>
   </footer>
 
   <script>
-    // Disable right-click context menu
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    });
-    // Disable key combinations that might reveal source
-    document.onkeydown = function(e) {
-      if (e.keyCode === 123 || 
-          (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
-          (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 83))) {
-        return false;
+    // Disable right-click
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // Array of 50 questions (20 from Editorial 1, 20 from Editorial 2, 10 from Editorial 3)
+    const questions = [
+      // Editorial 1 Questions
+      {
+        question: "What is the funding amount mentioned for the IMF programme?",
+        options: ["$7bn", "$5bn", "$10bn", "$3bn"],
+        answer: "$7bn"
+      },
+      {
+        question: "Which city is hosting the IMF delegation?",
+        options: ["Islamabad", "Karachi", "Lahore", "Peshawar"],
+        answer: "Islamabad"
+      },
+      {
+        question: "What criteria is being evaluated by the IMF delegation in Pakistan?",
+        options: ["Quantitative performance, structural benchmarks, and indicative targets", "Political stability", "Military strength", "Public opinion"],
+        answer: "Quantitative performance, structural benchmarks, and indicative targets"
+      },
+      {
+        question: "What technical issue is noted in the IMF review?",
+        options: ["Delays in meeting deadlines", "Lack of funding", "Staff shortages", "Communication breakdown"],
+        answer: "Delays in meeting deadlines"
+      },
+      {
+        question: "Which tax-related legislation is delayed according to the editorial?",
+        options: ["Agriculture tax", "Income tax", "Sales tax", "Corporate tax"],
+        answer: "Agriculture tax"
+      },
+      {
+        question: "What major concern remains despite the IMF review?",
+        options: ["Failure to meet the tax target", "Increase in public spending", "High inflation", "Currency devaluation"],
+        answer: "Failure to meet the tax target"
+      },
+      {
+        question: "Officials believe the IMF will overlook tax slippages due to what factors?",
+        options: ["Higher-than-targeted primary budget surplus and revenue-to-GDP ratio", "Political alliances", "Lower deficit", "Strong economic growth"],
+        answer: "Higher-than-targeted primary budget surplus and revenue-to-GDP ratio"
+      },
+      {
+        question: "According to the editorial, what contributed to the tax shortfall?",
+        options: ["Reduced tax collection from imports, sluggish LSM growth, and drop in inflation", "Increased tax collection, economic boom", "Higher taxes, improved exports", "Reduced spending"],
+        answer: "Reduced tax collection from imports, sluggish LSM growth, and drop in inflation"
+      },
+      {
+        question: "What does the decline in the stock market indicate?",
+        options: ["Investors' anxiety", "Market correction", "Strong economic performance", "Government stability"],
+        answer: "Investors' anxiety"
+      },
+      {
+        question: "How is the IMF’s review of Pakistan’s performance expected to progress?",
+        options: ["Smoothly without harsh new conditions", "With severe restrictions", "Indefinitely postponed", "Rapid economic reforms"],
+        answer: "Smoothly without harsh new conditions"
+      },
+      {
+        question: "What is the inflation rate mentioned in the editorial?",
+        options: ["1.4%", "2.5%", "3.0%", "0.9%"],
+        answer: "1.4%"
+      },
+      {
+        question: "What is the approximate surplus of the current account?",
+        options: ["Over $600m", "Over $1bn", "Over $200m", "Over $800m"],
+        answer: "Over $600m"
+      },
+      {
+        question: "How much are remittances reported to have jumped to monthly?",
+        options: ["Over $3bn", "Over $1bn", "Over $500m", "Over $2bn"],
+        answer: "Over $3bn"
+      },
+      {
+        question: "Which economic sector is described as showing resilience?",
+        options: ["Exports", "Manufacturing", "Retail", "Tourism"],
+        answer: "Exports"
+      },
+      {
+        question: "What negative impacts have accompanied financial support from the IMF and bilateral lenders?",
+        options: ["Domestic growth slowdown, rising unemployment and poverty", "High inflation, increased spending", "Currency devaluation, budget surplus", "Improved employment rates"],
+        answer: "Domestic growth slowdown, rising unemployment and poverty"
+      },
+      {
+        question: "Which presidency is mentioned as impacting global economic and political order?",
+        options: ["Second Trump presidency", "Biden presidency", "Obama presidency", "Merkel's leadership"],
+        answer: "Second Trump presidency"
+      },
+      {
+        question: "What could be affected if there are hiccups in the IMF programme?",
+        options: ["Plans to raise funds from international bond markets", "Local government policies", "Foreign investments in real estate", "Tourism revenue"],
+        answer: "Plans to raise funds from international bond markets"
+      },
+      {
+        question: "What is expected to be strengthened by the success of the IMF review?",
+        options: ["Economic stability and sovereign credit rating", "Military expenditure", "Tourism industry", "Local infrastructure projects"],
+        answer: "Economic stability and sovereign credit rating"
+      },
+      {
+        question: "What do officials insist about the IMF's review?",
+        options: ["All bases have been covered", "It has been delayed indefinitely", "It lacks sufficient data", "It requires external intervention"],
+        answer: "All bases have been covered"
+      },
+      {
+        question: "How is the rupee performing according to the editorial?",
+        options: ["It has held steady", "It has depreciated rapidly", "It has appreciated significantly", "It has been highly volatile"],
+        answer: "It has held steady"
+      },
+      // Editorial 2 Questions
+      {
+        question: "Which region is directly affected by cross-border terrorism?",
+        options: ["KP", "Sindh", "Punjab", "Balochistan"],
+        answer: "KP"
+      },
+      {
+        question: "KP shares a long border with which country?",
+        options: ["Afghanistan", "India", "Iran", "China"],
+        answer: "Afghanistan"
+      },
+      {
+        question: "What kind of links exist between people on both sides of the border?",
+        options: ["Tribal, cultural, and linguistic links", "Economic, political, and technological links", "Sporting, educational, and social links", "No links exist"],
+        answer: "Tribal, cultural, and linguistic links"
+      },
+      {
+        question: "Who is primarily responsible for bilateral negotiations with foreign powers?",
+        options: ["The centre", "The provinces", "Local governments", "Independent bodies"],
+        answer: "The centre"
+      },
+      {
+        question: "Which government is seeking dialogue with the Afghan Taliban?",
+        options: ["KP government", "Federal government", "Punjab government", "Sindh government"],
+        answer: "KP government"
+      },
+      {
+        question: "Who is the KP Chief Minister mentioned in the editorial?",
+        options: ["Ali Amin Gandapur", "Imran Khan", "Shehbaz Sharif", "Bilawal Bhutto"],
+        answer: "Ali Amin Gandapur"
+      },
+      {
+        question: "What method is proposed for negotiations with the Afghan side?",
+        options: ["Through a tribal jirga", "Direct talks without mediation", "Military intervention", "Online conferencing"],
+        answer: "Through a tribal jirga"
+      },
+      {
+        question: "According to Mr Gandapur, what is key to establishing lasting peace?",
+        options: ["Negotiations", "Economic sanctions", "Military strength", "Political isolation"],
+        answer: "Negotiations"
+      },
+      {
+        question: "What is suggested to be the sole prerogative of the centre in foreign policy?",
+        options: ["Bilateral negotiations", "Trade agreements", "Defense pacts", "Cultural exchanges"],
+        answer: "Bilateral negotiations"
+      },
+      {
+        question: "What idea has the KP administration been pushing?",
+        options: ["Direct talks through tribal diplomacy", "Independent foreign policy", "Economic isolation", "Military alliances"],
+        answer: "Direct talks through tribal diplomacy"
+      },
+      {
+        question: "Talks with the Afghan Taliban should remain aligned with what policies?",
+        options: ["Security and foreign policies", "Economic and social policies", "Environmental policies", "Local administrative policies"],
+        answer: "Security and foreign policies"
+      },
+      {
+        question: "Who should lead the peace initiative according to the editorial?",
+        options: ["Foreign ministry with professional diplomats", "Local KP government", "Tribal elders", "Provincial councils"],
+        answer: "Foreign ministry with professional diplomats"
+      },
+      {
+        question: "What would be the consequence if provinces pursued independent foreign relations?",
+        options: ["Negative effect on the cohesion of foreign policy", "Enhanced regional cooperation", "Increased trade", "Improved local governance"],
+        answer: "Negative effect on the cohesion of foreign policy"
+      },
+      {
+        question: "Which provinces are mentioned as needing to provide input for foreign policy?",
+        options: ["All four provinces", "Only KP", "Only Punjab and Sindh", "Only Balochistan"],
+        answer: "All four provinces"
+      },
+      {
+        question: "What should not become a victim of political differences according to the editorial?",
+        options: ["Foreign policy", "Local governance", "Economic policies", "Education policies"],
+        answer: "Foreign policy"
+      },
+      {
+        question: "What type of talks are to be aligned with security and foreign policies?",
+        options: ["Talks with the Afghan Taliban", "Trade negotiations", "Environmental accords", "Cultural exchange programs"],
+        answer: "Talks with the Afghan Taliban"
+      },
+      {
+        question: "What proposal related to tribal diplomacy was mentioned in the previous year?",
+        options: ["Direct talks with Kabul", "Economic reforms", "Military training programs", "Cultural festivals"],
+        answer: "Direct talks with Kabul"
+      },
+      {
+        question: "What might be harmful if provinces take solo actions in foreign policy?",
+        options: ["The coherence of foreign policy", "Local elections", "Trade benefits", "Cultural events"],
+        answer: "The coherence of foreign policy"
+      },
+      {
+        question: "According to the editorial, who should control external relations?",
+        options: ["The centre", "Individual provinces", "Local governments", "International agencies"],
+        answer: "The centre"
+      },
+      {
+        question: "What is crucial for maintaining Pakistan's ties with neighbours?",
+        options: ["Cohesion in foreign policy", "Economic competition", "Political isolation", "Military alliances"],
+        answer: "Cohesion in foreign policy"
+      },
+      // Editorial 3 Questions
+      {
+        question: "What is the central controversy in Editorial 3?",
+        options: ["Dispute over detection of polio cases in Mandi Bahauddin", "Debate over economic policies", "Conflict over trade agreements", "Disagreement on educational reforms"],
+        answer: "Dispute over detection of polio cases in Mandi Bahauddin"
+      },
+      {
+        question: "Which agency confirmed the presence of the polio virus?",
+        options: ["National Institute of Health", "World Health Organization", "Local hospital", "Ministry of Education"],
+        answer: "National Institute of Health"
+      },
+      {
+        question: "What was Punjab officials' argument regarding the polio case?",
+        options: ["The child does not meet the clinical criteria", "The case is a clear example", "It is a false positive", "It should be reported immediately"],
+        answer: "The child does not meet the clinical criteria"
+      },
+      {
+        question: "How does the editorial view mild cases of polio?",
+        options: ["Indicators of progress in immunisation", "A sign of vaccine failure", "Evidence of misdiagnosis", "A cause for alarm"],
+        answer: "Indicators of progress in immunisation"
+      },
+      {
+        question: "What does the controversy surrounding the polio case highlight?",
+        options: ["Complacency", "Excellence in healthcare", "Financial mismanagement", "Effective surveillance"],
+        answer: "Complacency"
+      },
+      {
+        question: "According to the NIH epidemiologist, what may seem like bad news today?",
+        options: ["Good news for tomorrow", "A disaster", "A permanent setback", "An anomaly"],
+        answer: "Good news for tomorrow"
+      },
+      {
+        question: "What does the detection of mild polio cases represent?",
+        options: ["Success of the surveillance system", "Failure of the vaccination drive", "Economic inefficiency", "Political negligence"],
+        answer: "Success of the surveillance system"
+      },
+      {
+        question: "What is required for the eradication of polio according to the editorial?",
+        options: ["Immediate response to every confirmed case", "Delaying action until confirmed by multiple sources", "Reducing immunisation efforts", "Ignoring mild cases"],
+        answer: "Immediate response to every confirmed case"
+      },
+      {
+        question: "What should federal and provincial authorities prioritize?",
+        options: ["Unity over division", "Political differences", "Economic competition", "Jurisdictional disputes"],
+        answer: "Unity over division"
+      },
+      {
+        question: "According to the editorial, Pakistan is one of how many countries still battling polio?",
+        options: ["Two", "Three", "Five", "Ten"],
+        answer: "Two"
       }
-    };
+    ];
 
-    // Correct answers mapping for 50 questions
-    var correctAnswers = {
-      // Editorial 1: Q1-Q20
-      q1: "B",
-      q2: "D",
-      q3: "A",
-      q4: "C",
-      q5: "B",
-      q6: "D",
-      q7: "B",
-      q8: "C",
-      q9: "B",
-      q10: "D",
-      q11: "C",
-      q12: "C",
-      q13: "B",
-      q14: "D",
-      q15: "A",
-      q16: "C",
-      q17: "B",
-      q18: "D",
-      q19: "A",
-      q20: "B",
-      // Editorial 2: Q21-Q40
-      q21: "D",
-      q22: "B",
-      q23: "C",
-      q24: "A",
-      q25: "D",
-      q26: "B",
-      q27: "A",
-      q28: "C",
-      q29: "D",
-      q30: "A",
-      q31: "B",
-      q32: "C",
-      q33: "D",
-      q34: "A",
-      q35: "C",  // (Note: For Q35, the correct answer is "Overfunding of legal aid" which is option C)
-      q36: "A",
-      q37: "D",
-      q38: "A",
-      q39: "B",
-      q40: "C",
-      // Editorial 3: Q41-Q50
-      q41: "C",
-      q42: "A",
-      q43: "D",
-      q44: "B",
-      q45: "A",
-      q46: "C",
-      q47: "B",
-      q48: "D",
-      q49: "A",
-      q50: "C"
-    };
+    let quizStartTime, timerInterval, timeLeft = 600; // 600 seconds = 10 minutes
 
-    var timerInterval;
-    var quizStartTime;
-
-    document.getElementById('startQuizBtn').addEventListener('click', function() {
-      var studentName = document.getElementById('studentNameInput').value.trim();
-      if(studentName === "") {
-        alert("Please enter your name to start the quiz.");
-        return;
+    // Fisher-Yates shuffle algorithm to randomize arrays
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
       }
-      document.getElementById('nameEntry').classList.add('hidden');
-      document.getElementById('quizSection').classList.remove('hidden');
-      quizStartTime = new Date();
-      startTimer(600); // 10 minutes = 600 seconds
-    });
+      return array;
+    }
 
-    function startTimer(duration) {
-      var timer = duration, minutes, seconds;
-      timerInterval = setInterval(function() {
-        minutes = parseInt(timer / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-        document.getElementById('timer').textContent = minutes + ":" + seconds;
-        if (--timer < 0) {
+    // Render the quiz questions into the quiz section
+    function renderQuiz() {
+      const quizContainer = document.getElementById("quiz-questions");
+      quizContainer.innerHTML = ""; // clear previous content if any
+      questions.forEach((q, index) => {
+        // Create a copy of the options array and shuffle it
+        const optionsShuffled = shuffle([...q.options]);
+        const questionDiv = document.createElement("div");
+        questionDiv.className = "question";
+        questionDiv.id = "question-" + index;
+
+        const questionText = document.createElement("p");
+        questionText.textContent = (index + 1) + ". " + q.question;
+        questionDiv.appendChild(questionText);
+
+        // For each option, create a radio input wrapped in a label
+        optionsShuffled.forEach(option => {
+          const label = document.createElement("label");
+          const input = document.createElement("input");
+          input.type = "radio";
+          input.name = "q" + index;
+          input.value = option;
+          label.appendChild(input);
+          label.insertAdjacentText("beforeend", " " + option);
+          questionDiv.appendChild(label);
+        });
+        quizContainer.appendChild(questionDiv);
+      });
+    }
+
+    // Start the countdown timer
+    function startTimer() {
+      const timerDisplay = document.getElementById("timer");
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        timerDisplay.textContent = "Time Left: " + 
+          (minutes < 10 ? "0" + minutes : minutes) + ":" + 
+          (seconds < 10 ? "0" + seconds : seconds);
+        if (timeLeft <= 0) {
           clearInterval(timerInterval);
           submitQuiz();
         }
       }, 1000);
     }
 
-    document.getElementById('submitQuizBtn').addEventListener('click', submitQuiz);
-
+    // Handle quiz submission
     function submitQuiz() {
       clearInterval(timerInterval);
-      var totalQuestions = 50;
-      var score = 0, attempted = 0;
-      for (var i = 1; i <= totalQuestions; i++) {
-        var qName = "q" + i;
-        var radios = document.getElementsByName(qName);
-        for (var j = 0; j < radios.length; j++) {
-          if (radios[j].checked) {
-            attempted++;
-            if (radios[j].value === correctAnswers[qName]) {
-              score++;
-            }
-            break;
+      const quizForm = document.getElementById("quizForm");
+      const totalQuestions = questions.length;
+      let score = 0, attempted = 0;
+
+      // Check each question's selected answer
+      questions.forEach((q, index) => {
+        const selected = document.querySelector('input[name="q' + index + '"]:checked');
+        if (selected) {
+          attempted++;
+          if (selected.value === q.answer) {
+            score++;
           }
         }
-      }
-      var endTime = new Date();
-      var timeTaken = Math.floor((endTime - quizStartTime) / 1000);
-      var studentName = document.getElementById('studentNameInput').value;
-      var resultHTML = "Name: " + studentName + "<br>" +
-                       "Questions Attempted: " + attempted + " / 50<br>" +
-                       "Score: " + score + " / 50<br>" +
-                       "Time Taken: " + timeTaken + " seconds";
-      document.getElementById('resultText').innerHTML = resultHTML;
-      document.getElementById('quizSection').classList.add('hidden');
-      document.getElementById('resultSection').classList.remove('hidden');
+      });
+      
+      const timeTaken = 600 - timeLeft;
+      const studentName = document.getElementById("studentNameInput").value.trim();
 
-      // Fill and auto-submit the hidden form
-      document.getElementById('formStudentName').value = studentName;
-      document.getElementById('formAttempted').value = attempted;
-      document.getElementById('formScore').value = score;
-      document.getElementById('formTimeTaken').value = timeTaken;
-      document.getElementById('hiddenForm').submit();
+      // Display results
+      document.getElementById("resultText").innerHTML =
+        "<strong>Name:</strong> " + studentName + "<br>" +
+        "<strong>Questions Attempted:</strong> " + attempted + " out of " + totalQuestions + "<br>" +
+        "<strong>Score:</strong> " + score + "<br>" +
+        "<strong>Time Taken:</strong> " + Math.floor(timeTaken/60) + " min " + (timeTaken % 60) + " sec";
+
+      document.getElementById("quiz-section").style.display = "none";
+      document.getElementById("result-section").style.display = "block";
+
+      // Fill and auto-submit the hidden form via Formspree
+      document.getElementById("form-studentName").value = studentName;
+      document.getElementById("form-attempted").value = attempted;
+      document.getElementById("form-score").value = score;
+      document.getElementById("form-timeTaken").value = timeTaken;
+      document.getElementById("result-form").submit();
     }
+
+    // Event listener for starting the quiz
+    document.getElementById("startQuizBtn").addEventListener("click", function() {
+      const studentName = document.getElementById("studentNameInput").value.trim();
+      if (studentName === "") {
+        alert("Please enter your name to start the quiz.");
+        return;
+      }
+      // Hide the name entry and show the quiz section
+      document.getElementById("name-entry").style.display = "none";
+      document.getElementById("quiz-section").style.display = "block";
+      renderQuiz();
+      startTimer();
+      quizStartTime = new Date();
+    });
+
+    // Event listener for manual quiz submission
+    document.getElementById("submitQuizBtn").addEventListener("click", function() {
+      submitQuiz();
+    });
   </script>
 </body>
 </html>
