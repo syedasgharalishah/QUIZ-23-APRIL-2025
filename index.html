@@ -2,716 +2,315 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 6 March 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 7 March 2025</title>
   <style>
-    /* Basic reset and background */
+    /* Basic reset and styling */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f2f2f2;
+      background: #f4f4f4;
       user-select: none;
       -webkit-user-select: none;
       -moz-user-select: none;
-      -ms-user-select: none;
     }
-    header, footer {
-      background-color: #003366;
+    header {
+      background: #333;
       color: #fff;
+      padding: 20px;
       text-align: center;
-      padding: 20px 0;
+      position: relative;
     }
     header img {
-      max-width: 100px;
-      border-radius: 50%;
+      max-width: 150px;
+      display: block;
+      margin: 10px auto;
     }
-    header h1, header h2 {
-      margin: 5px;
+    footer {
+      background: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
     }
-    #nameSection, #quizSection, #resultSection {
-      max-width: 800px;
-      margin: 20px auto;
-      background: #fff;
+    .container {
+      max-width: 900px;
+      margin: 80px auto 120px;
       padding: 20px;
-      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    #quizSection {
+    .hidden {
       display: none;
     }
-    .question {
+    .quiz-question {
       margin-bottom: 20px;
+      padding: 10px;
       border-bottom: 1px solid #ddd;
-      padding-bottom: 10px;
     }
-    .question h3 {
-      margin-bottom: 10px;
-    }
-    .options label {
-      display: block;
-      margin-bottom: 5px;
-      cursor: pointer;
+    .quiz-question p {
+      font-weight: bold;
     }
     .timer {
       font-size: 18px;
       font-weight: bold;
-      text-align: right;
       margin-bottom: 20px;
+      text-align: right;
+    }
+    input[type="radio"] {
+      margin-right: 10px;
     }
     button {
-      background-color: #003366;
-      color: #fff;
-      border: none;
       padding: 10px 20px;
+      margin-top: 20px;
       cursor: pointer;
-      border-radius: 4px;
     }
-    button:hover {
-      background-color: #0055a5;
+    /* Disable text selection for all elements */
+    * {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
   </style>
   <script>
-    // Disable right-click and common inspect shortcuts
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    });
+    // Prevent right-click and F12 key (developer tools)
+    document.addEventListener('contextmenu', event => event.preventDefault());
     document.onkeydown = function(e) {
-      if(e.keyCode === 123 || // F12
-         (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || // Ctrl+Shift+I/J
-         (e.ctrlKey && e.keyCode === 85)) { // Ctrl+U
+      if (e.keyCode === 123) { // F12 key
         return false;
       }
     };
 
-    // Global variables
+    // Global variables for timer and quiz
     let timerInterval;
-    let timeRemaining = 600; // 10 minutes in seconds
+    let timeLeft = 600; // 10 minutes in seconds
     let startTime;
-    let studentName = "";
+    let questions = [
+      // === Editorial 1 Questions (20) ===
+      {question: "According to the Global Terrorism Index 2025, which country ranks second in the world?", options: ["Pakistan", "Burkina Faso", "Syria", "Afghanistan"], correct: "Pakistan"},
+      {question: "Which banned group has been waging a bloody campaign against the state and people of Pakistan?", options: ["TTP", "BLA", "IS-K", "Taliban"], correct: "TTP"},
+      {question: "In 2023, how many terrorist attacks occurred in Pakistan?", options: ["517", "1,099", "96%", "200"], correct: "517"},
+      {question: "How many terrorist incidents occurred in the previous year?", options: ["1,099", "517", "800", "900"], correct: "1,099"},
+      {question: "What percentage of attacks affected KP and Balochistan?", options: ["96%", "50%", "75%", "80%"], correct: "96%"},
+      {question: "Which organization carried out the deadliest terrorist rampage in 2024 at the Quetta railway station?", options: ["BLA", "TTP", "Taliban", "IS-K"], correct: "BLA"},
+      {question: "Which militant group is reported to be among the world’s top four deadliest terrorist outfits?", options: ["TTP", "BLA", "IS-K", "None"], correct: "TTP"},
+      {question: "What does the index recommend Pakistan adopt to tackle militant threats?", options: ["Military, political, and socioeconomic measures", "Only military measures", "Only economic measures", "No measures"], correct: "Military, political, and socioeconomic measures"},
+      {question: "Which border dispute complicates Pakistan's counterterrorism efforts?", options: ["Torkham", "Waziristan", "Kashmir", "Khyber Pass"], correct: "Torkham"},
+      {question: "What significant factor gives impetus to the TTP and other groups?", options: ["Taliban takeover of Afghanistan", "Economic decline", "Political infighting", "International sanctions"], correct: "Taliban takeover of Afghanistan"},
+      {question: "According to the editorial, which part of the country is worst affected by militant violence?", options: ["KP and Balochistan", "Sindh", "Punjab", "Islamabad"], correct: "KP and Balochistan"},
+      {question: "Which terrorist incident is described as a suicide bombing?", options: ["Quetta railway station", "Kabul airport", "Torkham border", "None"], correct: "Quetta railway station"},
+      {question: "How did the number of terrorist attacks change from 2023 to the previous year?", options: ["Increased from 517 to 1,099", "Decreased from 1,099 to 517", "Remained the same", "Not mentioned"], correct: "Increased from 517 to 1,099"},
+      {question: "Which group is mentioned as being responsible for a significant portion of the attacks?", options: ["TTP", "BLA", "Taliban", "IS-K"], correct: "TTP"},
+      {question: "What challenge complicates counterterrorism in Pakistan aside from militant violence?", options: ["Poor relations with Afghan Taliban", "Economic sanctions", "Media censorship", "Political stability"], correct: "Poor relations with Afghan Taliban"},
+      {question: "Which militant group's safe havens in Afghanistan are cited as a complication?", options: ["TTP", "BLA", "IS-K", "None"], correct: "TTP"},
+      {question: "What event is likened to Pakistan’s situation nearly two decades ago?", options: ["A previous terrorist insurgency", "Economic recession", "Political coup", "Natural disaster"], correct: "A previous terrorist insurgency"},
+      {question: "According to the editorial, what issue are some institutions more concerned with than the terrorism crisis?", options: ["Digital terrorism", "Economic sanctions", "Climate change", "Cybersecurity"], correct: "Digital terrorism"},
+      {question: "What is essential for an effective counterterrorism strategy, according to the editorial?", options: ["Cooperation with foreign partners", "Isolating the military", "Focusing solely on military tactics", "Ignoring political measures"], correct: "Cooperation with foreign partners"},
+      {question: "What is described as a major terrorism crisis if not addressed properly?", options: ["The dreams of economic revival and national harmony", "Economic revival", "National harmony", "None"], correct: "The dreams of economic revival and national harmony"},
+      
+      // === Editorial 2 Questions (20) ===
+      {question: "Which US president credited Pakistan for arresting the mastermind behind the 2021 Kabul airport bombing?", options: ["Donald Trump", "Joe Biden", "Barack Obama", "George W. Bush"], correct: "Donald Trump"},
+      {question: "How many American soldiers were killed in the 2021 Kabul airport bombing?", options: ["13", "170", "7", "20"], correct: "13"},
+      {question: "How many Afghan citizens were killed in the same incident?", options: ["170", "13", "50", "100"], correct: "170"},
+      {question: "What kind of commendation did Pakistan receive in the US parliament?", options: ["Surprise commendation", "Formal award", "Diplomatic note", "No commendation"], correct: "Surprise commendation"},
+      {question: "Who quickly thanked Trump for appreciating Pakistan’s role in counterterrorism efforts?", options: ["Prime Minister Shehbaz Sharif", "Imran Khan", "Nawaz Sharif", "None"], correct: "Prime Minister Shehbaz Sharif"},
+      {question: "What did TV pundits interpret from the development in the US parliament?", options: ["Thaw in relations between Washington and Islamabad", "Economic aid", "Military alliance", "Increased sanctions"], correct: "Thaw in relations between Washington and Islamabad"},
+      {question: "According to the editorial, what might be Trump's motive behind his statement?", options: ["Scoring political points against Joe Biden", "Showing genuine gratitude", "Improving diplomatic relations", "None"], correct: "Scoring political points against Joe Biden"},
+      {question: "Who is blamed for the botched US withdrawal from Afghanistan?", options: ["Joe Biden", "Donald Trump", "Barack Obama", "George W. Bush"], correct: "Joe Biden"},
+      {question: "What did Trump refer to the arrested terrorist as?", options: ["A monster", "A hero", "A victim", "An unknown"], correct: "A monster"},
+      {question: "What might Pakistan face according to a new Reuters report?", options: ["US visa restrictions", "Economic sanctions", "Military intervention", "Trade embargoes"], correct: "US visa restrictions"},
+      {question: "Which country's security and vetting risks are under review for visa restrictions?", options: ["Pakistan", "Canada", "Australia", "Germany"], correct: "Pakistan"},
+      {question: "How did the opposition camp feel about Trump's endorsement?", options: ["Disappointed", "Excited", "Indifferent", "Relieved"], correct: "Disappointed"},
+      {question: "What does Trump's speech in Congress primarily focus on?", options: ["Arrest of the mastermind behind the Kabul airport bombing", "Economic policy", "Healthcare reform", "Education"], correct: "Arrest of the mastermind behind the Kabul airport bombing"},
+      {question: "Who did Trump blame for the US withdrawal from Afghanistan?", options: ["Joe Biden", "The military", "Congress", "No one"], correct: "Joe Biden"},
+      {question: "What was Pakistan's role in counterterrorism efforts, as mentioned in the editorial?", options: ["Denying safe havens to terrorists", "Providing safe havens", "Ignoring terrorism", "None"], correct: "Denying safe havens to terrorists"},
+      {question: "Which action suggests that US-Pakistan relations might not improve significantly?", options: ["Constantly seeking US approval", "Strengthening alliances", "Increasing trade", "None"], correct: "Constantly seeking US approval"},
+      {question: "What is the tone of the editorial regarding Pakistan’s diplomatic equation with Washington?", options: ["Skeptical", "Optimistic", "Indifferent", "Hopeful"], correct: "Skeptical"},
+      {question: "What did Trump aim to demonstrate through his statement, according to the editorial?", options: ["Strength against Biden’s perceived weakness", "Genuine diplomacy", "Economic support", "Military strategy"], correct: "Strength against Biden’s perceived weakness"},
+      {question: "Which media reaction does the editorial mention?", options: ["Thrilled TV pundits", "Criticized news anchors", "Ignored by media", "None"], correct: "Thrilled TV pundits"},
+      {question: "What does the editorial warn Pakistan should avoid doing?", options: ["Giving more leverage by constantly seeking US approval", "Improving counterterrorism", "Strengthening diplomacy", "Engaging in political reform"], correct: "Giving more leverage by constantly seeking US approval"},
+      
+      // === Editorial 3 Questions (10) ===
+      {question: "Which organization provided the report on power tariffs for Pakistan's energy-intensive industries in 2024?", options: ["International Energy Agency", "World Bank", "IMF", "UN"], correct: "International Energy Agency"},
+      {question: "What was the average power tariff for energy-intensive industries in Pakistan in 2024?", options: ["13.5 cents per kWh", "6.3 cents per kWh", "7.7 cents per kWh", "11.5 cents per kWh"], correct: "13.5 cents per kWh"},
+      {question: "What was the industrial electricity price in the US in 2024?", options: ["6.3 cents per kWh", "7.7 cents per kWh", "11.5 cents per kWh", "13.5 cents per kWh"], correct: "6.3 cents per kWh"},
+      {question: "What was the industrial electricity price in China in 2024?", options: ["7.7 cents per kWh", "6.3 cents per kWh", "11.5 cents per kWh", "13.5 cents per kWh"], correct: "7.7 cents per kWh"},
+      {question: "What was the industrial electricity price in the EU in 2024?", options: ["11.5 cents per kWh", "6.3 cents per kWh", "7.7 cents per kWh", "13.5 cents per kWh"], correct: "11.5 cents per kWh"},
+      {question: "What was Norway's industrial electricity price in 2024?", options: ["4.7 cents per kWh", "6.3 cents per kWh", "7.7 cents per kWh", "11.5 cents per kWh"], correct: "4.7 cents per kWh"},
+      {question: "By what percentage were Pakistan's industrial electricity prices higher than the EU's?", options: ["18%", "10%", "25%", "5%"], correct: "18%"},
+      {question: "What is one major consequence of high electricity prices mentioned in the editorial?", options: ["Reduced international competitiveness", "Increased foreign investment", "Improved industrial output", "Enhanced trade balance"], correct: "Reduced international competitiveness"},
+      {question: "What challenge does the reduction of energy subsidies under IMF pressure pose?", options: ["Adversely impacting export competitiveness", "Boosting industrial productivity", "Lowering production costs", "Improving export finance"], correct: "Adversely impacting export competitiveness"},
+      {question: "What long-term solution is suggested to address Pakistan’s energy challenges?", options: ["Deep power sector reforms", "Increased subsidies", "Temporary fixes", "Relying on imported fossil fuels"], correct: "Deep power sector reforms"}
+    ];
 
-    // Answer key for 50 questions (answers are set to different letters per question)
-    const answerKey = {
-      // Editorial 1 (Questions 1-20)
-      "q1": "B", "q2": "C", "q3": "A", "q4": "D", "q5": "B",
-      "q6": "C", "q7": "D", "q8": "A", "q9": "B", "q10": "C",
-      "q11": "D", "q12": "A", "q13": "B", "q14": "C", "q15": "D",
-      "q16": "A", "q17": "B", "q18": "C", "q19": "D", "q20": "A",
-      // Editorial 2 (Questions 21-40)
-      "q21": "B", "q22": "C", "q23": "D", "q24": "A", "q25": "D",
-      "q26": "C", "q27": "D", "q28": "D", "q29": "D", "q30": "C",
-      "q31": "D", "q32": "D", "q33": "B", "q34": "D", "q35": "D",
-      "q36": "C", "q37": "C", "q38": "D", "q39": "D", "q40": "D",
-      // Editorial 3 (Questions 41-50)
-      "q41": "B", "q42": "C", "q43": "D", "q44": "D", "q45": "B",
-      "q46": "D", "q47": "D", "q48": "D", "q49": "C", "q50": "C"
-    };
+    // Function to shuffle an array (Fisher-Yates algorithm)
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+         const j = Math.floor(Math.random() * (i + 1));
+         [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
 
-    // Start quiz: verify name entry and reveal quiz section
+    // Start quiz after valid name entry
     function startQuiz() {
-      studentName = document.getElementById("studentName").value.trim();
-      if(studentName === "") {
+      var nameInput = document.getElementById('nameInput').value.trim();
+      if(nameInput === ""){
         alert("Please enter your name.");
         return;
       }
-      document.getElementById("nameSection").style.display = "none";
-      document.getElementById("quizSection").style.display = "block";
+      // Set the user's name in the display element
+      document.getElementById('userNameDisplay').innerText = "Welcome, " + nameInput;
+      document.getElementById('nameEntry').classList.add('hidden');
+      document.getElementById('quizSection').classList.remove('hidden');
       startTime = new Date();
+      renderQuiz();
       startTimer();
     }
 
-    // Timer functionality
+    // Dynamically render quiz questions and randomize answer options
+    function renderQuiz() {
+      var quizContainer = document.getElementById('quizContainer');
+      quizContainer.innerHTML = "";
+      questions.forEach(function(q, index) {
+        var optionsShuffled = shuffle(q.options.slice());
+        var questionDiv = document.createElement('div');
+        questionDiv.className = "quiz-question";
+        var questionTitle = document.createElement('p');
+        questionTitle.innerText = (index+1) + ". " + q.question;
+        questionDiv.appendChild(questionTitle);
+        optionsShuffled.forEach(function(opt) {
+          var label = document.createElement('label');
+          var radio = document.createElement('input');
+          radio.type = "radio";
+          radio.name = "question" + index;
+          radio.value = opt;
+          label.appendChild(radio);
+          label.appendChild(document.createTextNode(opt));
+          questionDiv.appendChild(label);
+          questionDiv.appendChild(document.createElement('br'));
+        });
+        quizContainer.appendChild(questionDiv);
+      });
+    }
+
+    // Timer functions
     function startTimer() {
       updateTimerDisplay();
-      timerInterval = setInterval(function() {
-        timeRemaining--;
+      timerInterval = setInterval(function(){
+        timeLeft--;
         updateTimerDisplay();
-        if(timeRemaining <= 0) {
+        if(timeLeft <= 0){
           clearInterval(timerInterval);
           submitQuiz();
         }
       }, 1000);
     }
+
     function updateTimerDisplay() {
-      let minutes = Math.floor(timeRemaining / 60);
-      let seconds = timeRemaining % 60;
-      document.getElementById("timer").textContent = "Time Remaining: " + minutes + "m " + seconds + "s";
+      var minutes = Math.floor(timeLeft / 60);
+      var seconds = timeLeft % 60;
+      document.getElementById('timer').innerText = "Time Left: " + minutes + "m " + seconds + "s";
     }
 
-    // Submit quiz: calculate results, display them, and auto-submit hidden form via Formspree
+    // Calculate results and submit quiz
     function submitQuiz() {
       clearInterval(timerInterval);
-      let score = 0;
-      let attempted = 0;
-      for(let i = 1; i <= 50; i++){
-        let qName = "q" + i;
-        let options = document.getElementsByName(qName);
-        for(let option of options) {
-          if(option.checked) {
+      var score = 0;
+      var attempted = 0;
+      questions.forEach(function(q, index){
+        var radios = document.getElementsByName("question" + index);
+        Array.from(radios).forEach(function(radio){
+          if(radio.checked){
             attempted++;
-            if(option.value === answerKey[qName]) {
+            if(radio.value === q.correct){
               score++;
             }
-            break;
           }
-        }
-      }
-      let endTime = new Date();
-      let timeTaken = Math.floor((endTime - startTime) / 1000);
-      let resultHTML = "<h2>Results</h2>" +
-          "<p><strong>Name:</strong> " + studentName + "</p>" +
-          "<p><strong>Questions Attempted:</strong> " + attempted + " / 50</p>" +
-          "<p><strong>Score:</strong> " + score + " / 50</p>" +
-          "<p><strong>Time Taken:</strong> " + timeTaken + " seconds</p>";
-      document.getElementById("resultSection").innerHTML = resultHTML;
-      document.getElementById("quizSection").style.display = "none";
-      document.getElementById("resultSection").style.display = "block";
-      // Fill hidden form and submit via Formspree
-      document.getElementById("hiddenName").value = studentName;
-      document.getElementById("hiddenAttempted").value = attempted;
-      document.getElementById("hiddenScore").value = score;
-      document.getElementById("hiddenTime").value = timeTaken;
-      document.getElementById("resultForm").submit();
+        });
+      });
+      var endTime = new Date();
+      var timeTaken = Math.floor((endTime - startTime) / 1000);
+      displayResults(score, attempted, timeTaken);
+      submitForm(document.getElementById('userNameDisplay').innerText, attempted, score, timeTaken);
+    }
+
+    // Display results on the page
+    function displayResults(score, attempted, timeTaken) {
+      document.getElementById('quizSection').classList.add('hidden');
+      var resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = "<h2>Quiz Results</h2>" +
+                             "<p>" + document.getElementById('userNameDisplay').innerText + "</p>" +
+                             "<p>Questions Attempted: " + attempted + " out of " + questions.length + "</p>" +
+                             "<p>Score: " + score + " / " + questions.length + "</p>" +
+                             "<p>Time Taken: " + timeTaken + " seconds</p>";
+      resultsDiv.classList.remove('hidden');
+    }
+
+    // Submit results via a hidden Formspree form
+    function submitForm(name, attempted, score, timeTaken) {
+      var form = document.createElement('form');
+      form.method = "POST";
+      form.action = "https://formspree.io/f/xwpvddea";
+      form.style.display = "none";
+      
+      var nameField = document.createElement('input');
+      nameField.name = "name";
+      nameField.value = name;
+      form.appendChild(nameField);
+      
+      var attemptedField = document.createElement('input');
+      attemptedField.name = "attempted";
+      attemptedField.value = attempted;
+      form.appendChild(attemptedField);
+      
+      var scoreField = document.createElement('input');
+      scoreField.name = "score";
+      scoreField.value = score;
+      form.appendChild(scoreField);
+      
+      var timeField = document.createElement('input');
+      timeField.name = "timeTaken";
+      timeField.value = timeTaken;
+      form.appendChild(timeField);
+      
+      document.body.appendChild(form);
+      form.submit();
     }
   </script>
 </head>
 <body>
   <header>
-    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Profile Image">
-    <h1>QUIZ FOR CSS ASPIRANTS 6 March 2025</h1>
-    <h2>SYED ASGHAR ALI SHAH</h2>
+    <h1>QUIZ FOR CSS ASPIRANTS 7 March 2025</h1>
+    <p>SYED ASGHAR ALI SHAH</p>
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
   </header>
-
-  <!-- Name Entry Section -->
-  <div id="nameSection">
-    <h2>Enter Your Name to Start the Quiz</h2>
-    <input type="text" id="studentName" placeholder="Your Name">
-    <button onclick="startQuiz()">Start Quiz</button>
+  
+  <div class="container">
+    <div id="nameEntry">
+      <h2>Enter Your Name to Start the Quiz</h2>
+      <input type="text" id="nameInput" placeholder="Your Name">
+      <button onclick="startQuiz()">Start Quiz</button>
+      <p>Your quiz will begin once you enter your name.</p>
+    </div>
+    
+    <div id="quizSection" class="hidden">
+      <div id="timer" class="timer"></div>
+      <!-- Display user's name -->
+      <h3 id="userNameDisplay"></h3>
+      <div id="quizContainer"></div>
+      <button onclick="submitQuiz()">Submit Quiz</button>
+    </div>
+    
+    <div id="results" class="hidden"></div>
   </div>
-
-  <!-- Quiz Section -->
-  <div id="quizSection">
-    <div class="timer" id="timer">Time Remaining: 10m 0s</div>
-    <form id="quizForm">
-      <!-- Editorial 1: Questions 1-20 -->
-      <div class="question">
-        <h3>1. Who is the Prime Minister mentioned in Editorial 1?</h3>
-        <div class="options">
-          <label><input type="radio" name="q1" value="C"> Nawaz Sharif</label>
-          <label><input type="radio" name="q1" value="B"> Shehbaz Sharif</label>
-          <label><input type="radio" name="q1" value="A"> Imran Khan</label>
-          <label><input type="radio" name="q1" value="D"> Bilawal Bhutto</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>2. What was celebrated by the Prime Minister?</h3>
-        <div class="options">
-          <label><input type="radio" name="q2" value="A"> National Independence Day</label>
-          <label><input type="radio" name="q2" value="B"> Economic Summit</label>
-          <label><input type="radio" name="q2" value="C"> Government's one-year performance scorecard</label>
-          <label><input type="radio" name="q2" value="D"> National Budget Announcement</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>3. What major economic achievement was highlighted?</h3>
-        <div class="options">
-          <label><input type="radio" name="q3" value="A"> Macroeconomic stabilization</label>
-          <label><input type="radio" name="q3" value="B"> Industrial growth</label>
-          <label><input type="radio" name="q3" value="C"> Technological advancements</label>
-          <label><input type="radio" name="q3" value="D"> Cultural renaissance</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>4. What external organization assisted the government?</h3>
-        <div class="options">
-          <label><input type="radio" name="q4" value="A"> World Bank</label>
-          <label><input type="radio" name="q4" value="B"> United Nations</label>
-          <label><input type="radio" name="q4" value="C"> OECD</label>
-          <label><input type="radio" name="q4" value="D"> IMF</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>5. Which factor contributed to the stabilization?</h3>
-        <div class="options">
-          <label><input type="radio" name="q5" value="A"> Tax cuts</label>
-          <label><input type="radio" name="q5" value="B"> Bailout package</label>
-          <label><input type="radio" name="q5" value="C"> Foreign investments</label>
-          <label><input type="radio" name="q5" value="D"> Increased exports</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>6. What negative impact is mentioned in relation to market adjustments?</h3>
-        <div class="options">
-          <label><input type="radio" name="q6" value="A"> Increased unemployment</label>
-          <label><input type="radio" name="q6" value="B"> Inflation surge</label>
-          <label><input type="radio" name="q6" value="C"> Inflicted pain on ordinary citizens</label>
-          <label><input type="radio" name="q6" value="D"> Reduced exports</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>7. What did the Prime Minister express about the performance scorecard?</h3>
-        <div class="options">
-          <label><input type="radio" name="q7" value="A"> Criticized policy failures</label>
-          <label><input type="radio" name="q7" value="B"> Ignored public opinion</label>
-          <label><input type="radio" name="q7" value="C"> Focused on international recognition</label>
-          <label><input type="radio" name="q7" value="D"> Celebrated government success</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>8. What is expected to happen when economic growth pressure builds?</h3>
-        <div class="options">
-          <label><input type="radio" name="q8" value="A"> The macroeconomic stability will seem meaningless</label>
-          <label><input type="radio" name="q8" value="B"> Public support will increase</label>
-          <label><input type="radio" name="q8" value="C"> Investments will rise</label>
-          <label><input type="radio" name="q8" value="D"> Unemployment will drop</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>9. What have ordinary people experienced over the past three years?</h3>
-        <div class="options">
-          <label><input type="radio" name="q9" value="A"> Growth in savings</label>
-          <label><input type="radio" name="q9" value="B"> Decimation of purchasing power</label>
-          <label><input type="radio" name="q9" value="C"> Stability in employment</label>
-          <label><input type="radio" name="q9" value="D"> Increase in income</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>10. What challenge does the government face according to the editorial?</h3>
-        <div class="options">
-          <label><input type="radio" name="q10" value="A"> Reducing national debt</label>
-          <label><input type="radio" name="q10" value="B"> Expanding military</label>
-          <label><input type="radio" name="q10" value="C"> Managing public expectations</label>
-          <label><input type="radio" name="q10" value="D"> Boosting tourism</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>11. What must the government deliver to avoid pitfalls?</h3>
-        <div class="options">
-          <label><input type="radio" name="q11" value="A"> A path to prosperity</label>
-          <label><input type="radio" name="q11" value="B"> New constitution</label>
-          <label><input type="radio" name="q11" value="C"> Higher tariffs</label>
-          <label><input type="radio" name="q11" value="D"> Political reforms</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>12. Which factor is mentioned as affecting the government's survival?</h3>
-        <div class="options">
-          <label><input type="radio" name="q12" value="A"> Seismic changes in international finance</label>
-          <label><input type="radio" name="q12" value="B"> Technological disruptions</label>
-          <label><input type="radio" name="q12" value="C"> Natural disasters</label>
-          <label><input type="radio" name="q12" value="D"> Agricultural issues</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>13. What did the Prime Minister extol in his statement?</h3>
-        <div class="options">
-          <label><input type="radio" name="q13" value="A"> Social reforms</label>
-          <label><input type="radio" name="q13" value="B"> Macroeconomic stability</label>
-          <label><input type="radio" name="q13" value="C"> Healthcare improvements</label>
-          <label><input type="radio" name="q13" value="D"> Educational reforms</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>14. What has been the impact on social conditions?</h3>
-        <div class="options">
-          <label><input type="radio" name="q14" value="A"> Significant progress</label>
-          <label><input type="radio" name="q14" value="B"> Radical changes</label>
-          <label><input type="radio" name="q14" value="C"> No improvement</label>
-          <label><input type="radio" name="q14" value="D"> Mixed results</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>15. What method has the government used to respond to challenges?</h3>
-        <div class="options">
-          <label><input type="radio" name="q15" value="A"> Diplomatic negotiations</label>
-          <label><input type="radio" name="q15" value="B"> Social programs</label>
-          <label><input type="radio" name="q15" value="C"> Technological investments</label>
-          <label><input type="radio" name="q15" value="D"> Use of overt and excessive power</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>16. What will prove counterproductive according to the text?</h3>
-        <div class="options">
-          <label><input type="radio" name="q16" value="A"> Economic reforms</label>
-          <label><input type="radio" name="q16" value="B"> Foreign aid</label>
-          <label><input type="radio" name="q16" value="C"> Tax policies</label>
-          <label><input type="radio" name="q16" value="D"> Excessive use of power</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>17. What does the editorial imply about public sentiment?</h3>
-        <div class="options">
-          <label><input type="radio" name="q17" value="A"> It is irrelevant</label>
-          <label><input type="radio" name="q17" value="B"> It cannot improve until the state acts according to public wishes</label>
-          <label><input type="radio" name="q17" value="C"> It is improving steadily</label>
-          <label><input type="radio" name="q17" value="D"> It is controlled by media</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>18. What is necessary for genuine economic growth?</h3>
-        <div class="options">
-          <label><input type="radio" name="q18" value="A"> Increase in foreign investments</label>
-          <label><input type="radio" name="q18" value="B"> Tax reductions</label>
-          <label><input type="radio" name="q18" value="C"> Improvement in public sentiment</label>
-          <label><input type="radio" name="q18" value="D"> Military expansion</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>19. What political price is mentioned in the editorial?</h3>
-        <div class="options">
-          <label><input type="radio" name="q19" value="A"> Minor setbacks</label>
-          <label><input type="radio" name="q19" value="B"> Public indifference</label>
-          <label><input type="radio" name="q19" value="C"> Economic penalties</label>
-          <label><input type="radio" name="q19" value="D"> Immense political price for stability</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>20. What priority is recommended for the government?</h3>
-        <div class="options">
-          <label><input type="radio" name="q20" value="A"> Increasing defense spending</label>
-          <label><input type="radio" name="q20" value="B"> Technological innovation</label>
-          <label><input type="radio" name="q20" value="C"> Expanding trade</label>
-          <label><input type="radio" name="q20" value="D"> Socio-political stabilisation</label>
-        </div>
-      </div>
-
-      <!-- Editorial 2: Questions 21-40 -->
-      <div class="question">
-        <h3>21. Who is the Balochistan National Party chief mentioned?</h3>
-        <div class="options">
-          <label><input type="radio" name="q21" value="A"> Imran Khan</label>
-          <label><input type="radio" name="q21" value="B"> Akhtar Mengal</label>
-          <label><input type="radio" name="q21" value="C"> Nawaz Sharif</label>
-          <label><input type="radio" name="q21" value="D"> Asif Ali Zardari</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>22. What does Mr. Mengal’s disillusionment indicate?</h3>
-        <div class="options">
-          <label><input type="radio" name="q22" value="A"> Support for current policies</label>
-          <label><input type="radio" name="q22" value="B"> Concerns for democratically inclined Pakistanis</label>
-          <label><input type="radio" name="q22" value="C"> Economic growth</label>
-          <label><input type="radio" name="q22" value="D"> National stability</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>23. Where did Mr. Mengal express his disappointment?</h3>
-        <div class="options">
-          <label><input type="radio" name="q23" value="A"> Parliament</label>
-          <label><input type="radio" name="q23" value="B"> Government office</label>
-          <label><input type="radio" name="q23" value="C"> Television studio</label>
-          <label><input type="radio" name="q23" value="D"> Kot Wadh residence</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>24. What did Mr. Mengal claim was captured?</h3>
-        <div class="options">
-          <label><input type="radio" name="q24" value="A"> Electoral process</label>
-          <label><input type="radio" name="q24" value="B"> Judicial system</label>
-          <label><input type="radio" name="q24" value="C"> Economic policy</label>
-          <label><input type="radio" name="q24" value="D"> Social reforms</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>25. According to Mr. Mengal, what is not intact in the country?</h3>
-        <div class="options">
-          <label><input type="radio" name="q25" value="A"> Economy</label>
-          <label><input type="radio" name="q25" value="B"> Education</label>
-          <label><input type="radio" name="q25" value="C"> Healthcare</label>
-          <label><input type="radio" name="q25" value="D"> Neither politics nor democracy</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>26. What did past political alliances do according to the editorial?</h3>
-        <div class="options">
-          <label><input type="radio" name="q26" value="A"> Invested heavily in development</label>
-          <label><input type="radio" name="q26" value="B"> Implemented reforms</label>
-          <label><input type="radio" name="q26" value="C"> Abandoned their commitments to Balochistan</label>
-          <label><input type="radio" name="q26" value="D"> Strengthened democracy</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>27. What were the Baloch people originally asking for?</h3>
-        <div class="options">
-          <label><input type="radio" name="q27" value="A"> Military support</label>
-          <label><input type="radio" name="q27" value="B"> Economic subsidies</label>
-          <label><input type="radio" name="q27" value="C"> Tax reductions</label>
-          <label><input type="radio" name="q27" value="D"> Development, basic facilities, constitutional rights</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>28. What are the Baloch people now agitating against?</h3>
-        <div class="options">
-          <label><input type="radio" name="q28" value="A"> Government investments</label>
-          <label><input type="radio" name="q28" value="B"> Media censorship</label>
-          <label><input type="radio" name="q28" value="C"> Foreign interventions</label>
-          <label><input type="radio" name="q28" value="D"> Unconstitutional actions and rights violations</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>29. How is Mr. Mengal described in terms of political participation?</h3>
-        <div class="options">
-          <label><input type="radio" name="q29" value="A"> A passive observer</label>
-          <label><input type="radio" name="q29" value="B"> A controversial figure</label>
-          <label><input type="radio" name="q29" value="C"> A newcomer</label>
-          <label><input type="radio" name="q29" value="D"> One of the few deeply invested Baloch nationalists</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>30. What metaphor is used to describe Mr. Mengal’s opinion?</h3>
-        <div class="options">
-          <label><input type="radio" name="q30" value="A"> Tip of the iceberg</label>
-          <label><input type="radio" name="q30" value="B"> Smoking gun</label>
-          <label><input type="radio" name="q30" value="C"> Canary in the coalmine</label>
-          <label><input type="radio" name="q30" value="D"> Lightning rod</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>31. What does Mr. Mengal’s opinion indicate?</h3>
-        <div class="options">
-          <label><input type="radio" name="q31" value="A"> Economic growth</label>
-          <label><input type="radio" name="q31" value="B"> Cultural achievements</label>
-          <label><input type="radio" name="q31" value="C"> Technological progress</label>
-          <label><input type="radio" name="q31" value="D"> How well-meaning citizens view their relationship with the state</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>32. What must the state do as unrest grows?</h3>
-        <div class="options">
-          <label><input type="radio" name="q32" value="A"> Increase military spending</label>
-          <label><input type="radio" name="q32" value="B"> Expand trade</label>
-          <label><input type="radio" name="q32" value="C"> Ignore local concerns</label>
-          <label><input type="radio" name="q32" value="D"> Recalibrate its strategies</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>33. What is a prudent measure mentioned in the editorial?</h3>
-        <div class="options">
-          <label><input type="radio" name="q33" value="A"> Cut down public spending</label>
-          <label><input type="radio" name="q33" value="B"> Cede more space to local representatives</label>
-          <label><input type="radio" name="q33" value="C"> Reduce transparency</label>
-          <label><input type="radio" name="q33" value="D"> Increase taxes</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>34. What complaint is made about the Balochistan Assembly?</h3>
-        <div class="options">
-          <label><input type="radio" name="q34" value="A"> Too powerful</label>
-          <label><input type="radio" name="q34" value="B"> Well-funded</label>
-          <label><input type="radio" name="q34" value="C"> Efficient</label>
-          <label><input type="radio" name="q34" value="D"> Not representative of its constituents</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>35. What action did Mr. Mengal take regarding the National Assembly?</h3>
-        <div class="options">
-          <label><input type="radio" name="q35" value="A"> He supported reforms</label>
-          <label><input type="radio" name="q35" value="B"> He was elected</label>
-          <label><input type="radio" name="q35" value="C"> He was expelled</label>
-          <label><input type="radio" name="q35" value="D"> He resigned</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>36. What is necessary for keeping public representatives engaged?</h3>
-        <div class="options">
-          <label><input type="radio" name="q36" value="A"> Using technology</label>
-          <label><input type="radio" name="q36" value="B"> Increasing salaries</label>
-          <label><input type="radio" name="q36" value="C"> Continuing political participation</label>
-          <label><input type="radio" name="q36" value="D"> Foreign endorsements</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>37. What right do the citizens of Balochistan have?</h3>
-        <div class="options">
-          <label><input type="radio" name="q37" value="A"> To join the military</label>
-          <label><input type="radio" name="q37" value="B"> To ignore the government</label>
-          <label><input type="radio" name="q37" value="C"> To shape provincial policies</label>
-          <label><input type="radio" name="q37" value="D"> To receive subsidies</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>38. What should be restored as a priority?</h3>
-        <div class="options">
-          <label><input type="radio" name="q38" value="A"> Economic stability</label>
-          <label><input type="radio" name="q38" value="B"> Social programs</label>
-          <label><input type="radio" name="q38" value="C"> International relations</label>
-          <label><input type="radio" name="q38" value="D"> Their right to shape policies</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>39. What is the overall tone of the editorial regarding democracy?</h3>
-        <div class="options">
-          <label><input type="radio" name="q39" value="A"> Optimistic</label>
-          <label><input type="radio" name="q39" value="B"> Indifferent</label>
-          <label><input type="radio" name="q39" value="C"> Neutral</label>
-          <label><input type="radio" name="q39" value="D"> Concerned</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>40. What key issue is highlighted in the editorial?</h3>
-        <div class="options">
-          <label><input type="radio" name="q40" value="A"> High taxes</label>
-          <label><input type="radio" name="q40" value="B"> Economic prosperity</label>
-          <label><input type="radio" name="q40" value="C"> Technological innovation</label>
-          <label><input type="radio" name="q40" value="D"> Lack of fair elections</label>
-        </div>
-      </div>
-
-      <!-- Editorial 3: Questions 41-50 -->
-      <div class="question">
-        <h3>41. What species of bear is discussed?</h3>
-        <div class="options">
-          <label><input type="radio" name="q41" value="A"> Grizzly bear</label>
-          <label><input type="radio" name="q41" value="B"> Asian black bear</label>
-          <label><input type="radio" name="q41" value="C"> Polar bear</label>
-          <label><input type="radio" name="q41" value="D"> Sun bear</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>42. What is the name of the bear rescued from Jauharabad?</h3>
-        <div class="options">
-          <label><input type="radio" name="q42" value="A"> Sunny</label>
-          <label><input type="radio" name="q42" value="B"> Buddy</label>
-          <label><input type="radio" name="q42" value="C"> Rocky</label>
-          <label><input type="radio" name="q42" value="D"> Shadow</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>43. How many fights was Rocky forced into?</h3>
-        <div class="options">
-          <label><input type="radio" name="q43" value="A"> 20</label>
-          <label><input type="radio" name="q43" value="B"> 10</label>
-          <label><input type="radio" name="q43" value="C"> 50</label>
-          <label><input type="radio" name="q43" value="D"> 35</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>44. Where was Rocky rescued to?</h3>
-        <div class="options">
-          <label><input type="radio" name="q44" value="A"> Lahore Zoo</label>
-          <label><input type="radio" name="q44" value="B"> Karachi Wildlife Park</label>
-          <label><input type="radio" name="q44" value="C"> Peshawar Sanctuary</label>
-          <label><input type="radio" name="q44" value="D"> Islamabad’s Animal Rescue and Rehabilitation Centre</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>45. What cruel practice is associated with dancing bears?</h3>
-        <div class="options">
-          <label><input type="radio" name="q45" value="A"> Feeding live animals</label>
-          <label><input type="radio" name="q45" value="B"> Removal of teeth</label>
-          <label><input type="radio" name="q45" value="C"> Using cages</label>
-          <label><input type="radio" name="q45" value="D"> Excessive breeding</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>46. What is used to control the bears?</h3>
-        <div class="options">
-          <label><input type="radio" name="q46" value="A"> Leashes</label>
-          <label><input type="radio" name="q46" value="B"> Muzzles</label>
-          <label><input type="radio" name="q46" value="C"> Tranquilizers</label>
-          <label><input type="radio" name="q46" value="D"> Nose rings</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>47. Which traditional practices are condemned?</h3>
-        <div class="options">
-          <label><input type="radio" name="q47" value="A"> Bullfighting</label>
-          <label><input type="radio" name="q47" value="B"> Camel wrestling</label>
-          <label><input type="radio" name="q47" value="C"> Dog racing</label>
-          <label><input type="radio" name="q47" value="D"> Bear baiting and dancing bears</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>48. Which organization is commended for rescue operations?</h3>
-        <div class="options">
-          <label><input type="radio" name="q48" value="A"> WWF</label>
-          <label><input type="radio" name="q48" value="B"> PETA</label>
-          <label><input type="radio" name="q48" value="C"> Animal Planet</label>
-          <label><input type="radio" name="q48" value="D"> Four Paws International</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>49. What is needed to permanently eradicate these practices?</h3>
-        <div class="options">
-          <label><input type="radio" name="q49" value="A"> More rescue centres</label>
-          <label><input type="radio" name="q49" value="B"> Celebrity endorsements</label>
-          <label><input type="radio" name="q49" value="C"> Strengthened legislation with harsher penalties</label>
-          <label><input type="radio" name="q49" value="D"> International funding</label>
-        </div>
-      </div>
-
-      <div class="question">
-        <h3>50. What symbolic act is associated with Sunny?</h3>
-        <div class="options">
-          <label><input type="radio" name="q50" value="A"> Her renaming</label>
-          <label><input type="radio" name="q50" value="B"> Her release into the wild</label>
-          <label><input type="radio" name="q50" value="C"> Removal of her nose ring</label>
-          <label><input type="radio" name="q50" value="D"> Her rehabilitation</label>
-        </div>
-      </div>
-      <br>
-      <button type="button" onclick="submitQuiz()">Submit Quiz</button>
-    </form>
-  </div>
-
-  <!-- Results Section -->
-  <div id="resultSection" style="display:none;"></div>
-
-  <!-- Hidden Form for Formspree submission -->
-  <form id="resultForm" style="display:none;" action="https://formspree.io/f/xwpvddea" method="POST">
-    <input type="hidden" name="name" id="hiddenName">
-    <input type="hidden" name="attempted" id="hiddenAttempted">
-    <input type="hidden" name="score" id="hiddenScore">
-    <input type="hidden" name="time" id="hiddenTime">
-  </form>
-
+  
   <footer>
     <p>Contact us at: 03265762698</p>
-    <p>For more information, get in touch now!</p>
+    <p>Call us now for more information!</p>
   </footer>
 </body>
 </html>
