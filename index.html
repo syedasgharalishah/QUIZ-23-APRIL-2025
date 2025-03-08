@@ -1,316 +1,600 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 7 March 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 8 March 2025</title>
   <style>
-    /* Basic reset and styling */
+    /* Disable text selection and context menu */
     body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
       user-select: none;
       -webkit-user-select: none;
       -moz-user-select: none;
+      -ms-user-select: none;
     }
-    header {
-      background: #333;
+    /* Basic styling for header, footer, and container */
+    header, footer {
+      background-color: #333;
       color: #fff;
-      padding: 20px;
       text-align: center;
-      position: relative;
+      padding: 15px;
+    }
+    header h1, footer p {
+      margin: 5px;
     }
     header img {
-      max-width: 150px;
+      max-height: 80px;
       display: block;
       margin: 10px auto;
     }
-    footer {
-      background: #333;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
     .container {
-      max-width: 900px;
-      margin: 80px auto 120px;
+      width: 90%;
+      max-width: 1000px;
+      margin: 20px auto;
       padding: 20px;
-      background: #fff;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      background-color: #f4f4f4;
+      border-radius: 8px;
     }
-    .hidden {
+    h2 {
+      text-align: center;
+    }
+    /* Hide quiz and results sections by default */
+    #quizSection, #resultSection {
       display: none;
     }
-    .quiz-question {
-      margin-bottom: 20px;
+    fieldset {
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
       padding: 10px;
-      border-bottom: 1px solid #ddd;
+      background: #fff;
     }
-    .quiz-question p {
+    legend {
       font-weight: bold;
+    }
+    label {
+      display: block;
+      margin: 5px 0;
     }
     .timer {
       font-size: 18px;
       font-weight: bold;
-      margin-bottom: 20px;
       text-align: right;
-    }
-    input[type="radio"] {
-      margin-right: 10px;
+      margin-bottom: 15px;
     }
     button {
+      display: block;
+      margin: 20px auto;
       padding: 10px 20px;
-      margin-top: 20px;
+      font-size: 16px;
       cursor: pointer;
-    }
-    /* Disable text selection for all elements */
-    * {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
     }
   </style>
   <script>
-    // Prevent right-click and F12 key (developer tools)
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.onkeydown = function(e) {
-      if (e.keyCode === 123) { // F12 key
-        return false;
-      }
-    };
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    }, false);
 
-    // Global variables for timer and quiz
+    let totalTime = 600; // 10 minutes in seconds
     let timerInterval;
-    let timeLeft = 600; // 10 minutes in seconds
     let startTime;
-    let questions = [
-      // === Editorial 1 Questions (20) ===
-      {question: "According to the Global Terrorism Index 2025, which country ranks second in the world?", options: ["Pakistan", "Burkina Faso", "Syria", "Afghanistan"], correct: "Pakistan"},
-      {question: "Which banned group has been waging a bloody campaign against the state and people of Pakistan?", options: ["TTP", "BLA", "IS-K", "Taliban"], correct: "TTP"},
-      {question: "In 2023, how many terrorist attacks occurred in Pakistan?", options: ["517", "1,099", "96%", "200"], correct: "517"},
-      {question: "How many terrorist incidents occurred in the previous year?", options: ["1,099", "517", "800", "900"], correct: "1,099"},
-      {question: "What percentage of attacks affected KP and Balochistan?", options: ["96%", "50%", "75%", "80%"], correct: "96%"},
-      {question: "Which organization carried out the deadliest terrorist rampage in 2024 at the Quetta railway station?", options: ["BLA", "TTP", "Taliban", "IS-K"], correct: "BLA"},
-      {question: "Which militant group is reported to be among the world’s top four deadliest terrorist outfits?", options: ["TTP", "BLA", "IS-K", "None"], correct: "TTP"},
-      {question: "What does the index recommend Pakistan adopt to tackle militant threats?", options: ["Military, political, and socioeconomic measures", "Only military measures", "Only economic measures", "No measures"], correct: "Military, political, and socioeconomic measures"},
-      {question: "Which border dispute complicates Pakistan's counterterrorism efforts?", options: ["Torkham", "Waziristan", "Kashmir", "Khyber Pass"], correct: "Torkham"},
-      {question: "What significant factor gives impetus to the TTP and other groups?", options: ["Taliban takeover of Afghanistan", "Economic decline", "Political infighting", "International sanctions"], correct: "Taliban takeover of Afghanistan"},
-      {question: "According to the editorial, which part of the country is worst affected by militant violence?", options: ["KP and Balochistan", "Sindh", "Punjab", "Islamabad"], correct: "KP and Balochistan"},
-      {question: "Which terrorist incident is described as a suicide bombing?", options: ["Quetta railway station", "Kabul airport", "Torkham border", "None"], correct: "Quetta railway station"},
-      {question: "How did the number of terrorist attacks change from 2023 to the previous year?", options: ["Increased from 517 to 1,099", "Decreased from 1,099 to 517", "Remained the same", "Not mentioned"], correct: "Increased from 517 to 1,099"},
-      {question: "Which group is mentioned as being responsible for a significant portion of the attacks?", options: ["TTP", "BLA", "Taliban", "IS-K"], correct: "TTP"},
-      {question: "What challenge complicates counterterrorism in Pakistan aside from militant violence?", options: ["Poor relations with Afghan Taliban", "Economic sanctions", "Media censorship", "Political stability"], correct: "Poor relations with Afghan Taliban"},
-      {question: "Which militant group's safe havens in Afghanistan are cited as a complication?", options: ["TTP", "BLA", "IS-K", "None"], correct: "TTP"},
-      {question: "What event is likened to Pakistan’s situation nearly two decades ago?", options: ["A previous terrorist insurgency", "Economic recession", "Political coup", "Natural disaster"], correct: "A previous terrorist insurgency"},
-      {question: "According to the editorial, what issue are some institutions more concerned with than the terrorism crisis?", options: ["Digital terrorism", "Economic sanctions", "Climate change", "Cybersecurity"], correct: "Digital terrorism"},
-      {question: "What is essential for an effective counterterrorism strategy, according to the editorial?", options: ["Cooperation with foreign partners", "Isolating the military", "Focusing solely on military tactics", "Ignoring political measures"], correct: "Cooperation with foreign partners"},
-      {question: "What is described as a major terrorism crisis if not addressed properly?", options: ["The dreams of economic revival and national harmony", "Economic revival", "National harmony", "None"], correct: "The dreams of economic revival and national harmony"},
-      
-      // === Editorial 2 Questions (20) ===
-      {question: "Which US president credited Pakistan for arresting the mastermind behind the 2021 Kabul airport bombing?", options: ["Donald Trump", "Joe Biden", "Barack Obama", "George W. Bush"], correct: "Donald Trump"},
-      {question: "How many American soldiers were killed in the 2021 Kabul airport bombing?", options: ["13", "170", "7", "20"], correct: "13"},
-      {question: "How many Afghan citizens were killed in the same incident?", options: ["170", "13", "50", "100"], correct: "170"},
-      {question: "What kind of commendation did Pakistan receive in the US parliament?", options: ["Surprise commendation", "Formal award", "Diplomatic note", "No commendation"], correct: "Surprise commendation"},
-      {question: "Who quickly thanked Trump for appreciating Pakistan’s role in counterterrorism efforts?", options: ["Prime Minister Shehbaz Sharif", "Imran Khan", "Nawaz Sharif", "None"], correct: "Prime Minister Shehbaz Sharif"},
-      {question: "What did TV pundits interpret from the development in the US parliament?", options: ["Thaw in relations between Washington and Islamabad", "Economic aid", "Military alliance", "Increased sanctions"], correct: "Thaw in relations between Washington and Islamabad"},
-      {question: "According to the editorial, what might be Trump's motive behind his statement?", options: ["Scoring political points against Joe Biden", "Showing genuine gratitude", "Improving diplomatic relations", "None"], correct: "Scoring political points against Joe Biden"},
-      {question: "Who is blamed for the botched US withdrawal from Afghanistan?", options: ["Joe Biden", "Donald Trump", "Barack Obama", "George W. Bush"], correct: "Joe Biden"},
-      {question: "What did Trump refer to the arrested terrorist as?", options: ["A monster", "A hero", "A victim", "An unknown"], correct: "A monster"},
-      {question: "What might Pakistan face according to a new Reuters report?", options: ["US visa restrictions", "Economic sanctions", "Military intervention", "Trade embargoes"], correct: "US visa restrictions"},
-      {question: "Which country's security and vetting risks are under review for visa restrictions?", options: ["Pakistan", "Canada", "Australia", "Germany"], correct: "Pakistan"},
-      {question: "How did the opposition camp feel about Trump's endorsement?", options: ["Disappointed", "Excited", "Indifferent", "Relieved"], correct: "Disappointed"},
-      {question: "What does Trump's speech in Congress primarily focus on?", options: ["Arrest of the mastermind behind the Kabul airport bombing", "Economic policy", "Healthcare reform", "Education"], correct: "Arrest of the mastermind behind the Kabul airport bombing"},
-      {question: "Who did Trump blame for the US withdrawal from Afghanistan?", options: ["Joe Biden", "The military", "Congress", "No one"], correct: "Joe Biden"},
-      {question: "What was Pakistan's role in counterterrorism efforts, as mentioned in the editorial?", options: ["Denying safe havens to terrorists", "Providing safe havens", "Ignoring terrorism", "None"], correct: "Denying safe havens to terrorists"},
-      {question: "Which action suggests that US-Pakistan relations might not improve significantly?", options: ["Constantly seeking US approval", "Strengthening alliances", "Increasing trade", "None"], correct: "Constantly seeking US approval"},
-      {question: "What is the tone of the editorial regarding Pakistan’s diplomatic equation with Washington?", options: ["Skeptical", "Optimistic", "Indifferent", "Hopeful"], correct: "Skeptical"},
-      {question: "What did Trump aim to demonstrate through his statement, according to the editorial?", options: ["Strength against Biden’s perceived weakness", "Genuine diplomacy", "Economic support", "Military strategy"], correct: "Strength against Biden’s perceived weakness"},
-      {question: "Which media reaction does the editorial mention?", options: ["Thrilled TV pundits", "Criticized news anchors", "Ignored by media", "None"], correct: "Thrilled TV pundits"},
-      {question: "What does the editorial warn Pakistan should avoid doing?", options: ["Giving more leverage by constantly seeking US approval", "Improving counterterrorism", "Strengthening diplomacy", "Engaging in political reform"], correct: "Giving more leverage by constantly seeking US approval"},
-      
-      // === Editorial 3 Questions (10) ===
-      {question: "Which organization provided the report on power tariffs for Pakistan's energy-intensive industries in 2024?", options: ["International Energy Agency", "World Bank", "IMF", "UN"], correct: "International Energy Agency"},
-      {question: "What was the average power tariff for energy-intensive industries in Pakistan in 2024?", options: ["13.5 cents per kWh", "6.3 cents per kWh", "7.7 cents per kWh", "11.5 cents per kWh"], correct: "13.5 cents per kWh"},
-      {question: "What was the industrial electricity price in the US in 2024?", options: ["6.3 cents per kWh", "7.7 cents per kWh", "11.5 cents per kWh", "13.5 cents per kWh"], correct: "6.3 cents per kWh"},
-      {question: "What was the industrial electricity price in China in 2024?", options: ["7.7 cents per kWh", "6.3 cents per kWh", "11.5 cents per kWh", "13.5 cents per kWh"], correct: "7.7 cents per kWh"},
-      {question: "What was the industrial electricity price in the EU in 2024?", options: ["11.5 cents per kWh", "6.3 cents per kWh", "7.7 cents per kWh", "13.5 cents per kWh"], correct: "11.5 cents per kWh"},
-      {question: "What was Norway's industrial electricity price in 2024?", options: ["4.7 cents per kWh", "6.3 cents per kWh", "7.7 cents per kWh", "11.5 cents per kWh"], correct: "4.7 cents per kWh"},
-      {question: "By what percentage were Pakistan's industrial electricity prices higher than the EU's?", options: ["18%", "10%", "25%", "5%"], correct: "18%"},
-      {question: "What is one major consequence of high electricity prices mentioned in the editorial?", options: ["Reduced international competitiveness", "Increased foreign investment", "Improved industrial output", "Enhanced trade balance"], correct: "Reduced international competitiveness"},
-      {question: "What challenge does the reduction of energy subsidies under IMF pressure pose?", options: ["Adversely impacting export competitiveness", "Boosting industrial productivity", "Lowering production costs", "Improving export finance"], correct: "Adversely impacting export competitiveness"},
-      {question: "What long-term solution is suggested to address Pakistan’s energy challenges?", options: ["Deep power sector reforms", "Increased subsidies", "Temporary fixes", "Relying on imported fossil fuels"], correct: "Deep power sector reforms"}
-    ];
 
-    // Function to shuffle an array (Fisher-Yates algorithm)
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-         const j = Math.floor(Math.random() * (i + 1));
-         [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
-    // Start quiz after valid name entry
     function startQuiz() {
-      var nameInput = document.getElementById('nameInput').value.trim();
-      if(nameInput === ""){
-        alert("Please enter your name.");
+      let name = document.getElementById('nameInput').value.trim();
+      if (name === "") {
+        alert("Please enter your name to start the quiz.");
         return;
       }
-      // Set the user's name in the display element
-      document.getElementById('userNameDisplay').innerText = "Welcome, " + nameInput;
-      document.getElementById('nameEntry').classList.add('hidden');
-      document.getElementById('quizSection').classList.remove('hidden');
+      document.getElementById('studentNameDisplay').innerText = name;
+      document.getElementById('nameSection').style.display = "none";
+      document.getElementById('quizSection').style.display = "block";
       startTime = new Date();
-      renderQuiz();
       startTimer();
     }
 
-    // Dynamically render quiz questions and randomize answer options
-    function renderQuiz() {
-      var quizContainer = document.getElementById('quizContainer');
-      quizContainer.innerHTML = "";
-      questions.forEach(function(q, index) {
-        var optionsShuffled = shuffle(q.options.slice());
-        var questionDiv = document.createElement('div');
-        questionDiv.className = "quiz-question";
-        var questionTitle = document.createElement('p');
-        questionTitle.innerText = (index+1) + ". " + q.question;
-        questionDiv.appendChild(questionTitle);
-        optionsShuffled.forEach(function(opt) {
-          var label = document.createElement('label');
-          var radio = document.createElement('input');
-          radio.type = "radio";
-          radio.name = "question" + index;
-          radio.value = opt;
-          label.appendChild(radio);
-          label.appendChild(document.createTextNode(opt));
-          questionDiv.appendChild(label);
-          questionDiv.appendChild(document.createElement('br'));
-        });
-        quizContainer.appendChild(questionDiv);
-      });
-    }
-
-    // Timer functions
     function startTimer() {
-      updateTimerDisplay();
-      timerInterval = setInterval(function(){
-        timeLeft--;
-        updateTimerDisplay();
-        if(timeLeft <= 0){
+      timerInterval = setInterval(function() {
+        if (totalTime <= 0) {
           clearInterval(timerInterval);
           submitQuiz();
+        } else {
+          totalTime--;
+          let minutes = Math.floor(totalTime / 60);
+          let seconds = totalTime % 60;
+          document.getElementById('timerDisplay').innerText = "Time Remaining: " + minutes + "m " + seconds + "s";
         }
       }, 1000);
     }
 
-    function updateTimerDisplay() {
-      var minutes = Math.floor(timeLeft / 60);
-      var seconds = timeLeft % 60;
-      document.getElementById('timer').innerText = "Time Left: " + minutes + "m " + seconds + "s";
-    }
-
-    // Calculate results and submit quiz
     function submitQuiz() {
       clearInterval(timerInterval);
-      var score = 0;
-      var attempted = 0;
-      questions.forEach(function(q, index){
-        var radios = document.getElementsByName("question" + index);
-        Array.from(radios).forEach(function(radio){
-          if(radio.checked){
-            attempted++;
-            if(radio.value === q.correct){
-              score++;
-            }
+      let form = document.getElementById('quizForm');
+      let formData = new FormData(form);
+      let score = 0;
+      let attempted = 0;
+      // Mapping of correct answers for each question (q1 to q50)
+      const answers = {
+        q1: "A",  q2: "B",  q3: "A",  q4: "A",  q5: "B",
+        q6: "A",  q7: "A",  q8: "A",  q9: "A",  q10: "B",
+        q11: "A", q12: "C", q13: "B", q14: "A", q15: "B",
+        q16: "C", q17: "B", q18: "B", q19: "A", q20: "A",
+        q21: "C", q22: "A", q23: "A", q24: "A", q25: "B",
+        q26: "A", q27: "C", q28: "B", q29: "A", q30: "A",
+        q31: "A", q32: "A", q33: "A", q34: "A", q35: "A",
+        q36: "B", q37: "A", q38: "A", q39: "A", q40: "C",
+        q41: "A", q42: "B", q43: "D", q44: "A", q45: "A",
+        q46: "A", q47: "C", q48: "A", q49: "A", q50: "A"
+      };
+
+      for (let i = 1; i <= 50; i++) {
+        let q = "q" + i;
+        let answer = formData.get(q);
+        if (answer) {
+          attempted++;
+          if (answer === answers[q]) {
+            score++;
           }
-        });
-      });
-      var endTime = new Date();
-      var timeTaken = Math.floor((endTime - startTime) / 1000);
-      displayResults(score, attempted, timeTaken);
-      submitForm(document.getElementById('userNameDisplay').innerText, attempted, score, timeTaken);
-    }
+        }
+      }
+      let endTime = new Date();
+      let timeTaken = Math.floor((endTime - startTime) / 1000);
+      document.getElementById('quizSection').style.display = "none";
+      document.getElementById('resultSection').style.display = "block";
+      document.getElementById('resultDisplay').innerHTML = "<h2>Quiz Results</h2>" +
+        "<p>Name: " + document.getElementById('studentNameDisplay').innerText + "</p>" +
+        "<p>Questions Attempted: " + attempted + " / 50</p>" +
+        "<p>Score: " + score + " / 50</p>" +
+        "<p>Time Taken: " + timeTaken + " seconds</p>";
 
-    // Display results on the page
-    function displayResults(score, attempted, timeTaken) {
-      document.getElementById('quizSection').classList.add('hidden');
-      var resultsDiv = document.getElementById('results');
-      resultsDiv.innerHTML = "<h2>Quiz Results</h2>" +
-                             "<p>" + document.getElementById('userNameDisplay').innerText + "</p>" +
-                             "<p>Questions Attempted: " + attempted + " out of " + questions.length + "</p>" +
-                             "<p>Score: " + score + " / " + questions.length + "</p>" +
-                             "<p>Time Taken: " + timeTaken + " seconds</p>";
-      resultsDiv.classList.remove('hidden');
-    }
-
-    // Submit results via a hidden Formspree form
-    function submitForm(name, attempted, score, timeTaken) {
-      var form = document.createElement('form');
-      form.method = "POST";
-      form.action = "https://formspree.io/f/xwpvddea";
-      form.style.display = "none";
-      
-      var nameField = document.createElement('input');
-      nameField.name = "name";
-      nameField.value = name;
-      form.appendChild(nameField);
-      
-      var attemptedField = document.createElement('input');
-      attemptedField.name = "attempted";
-      attemptedField.value = attempted;
-      form.appendChild(attemptedField);
-      
-      var scoreField = document.createElement('input');
-      scoreField.name = "score";
-      scoreField.value = score;
-      form.appendChild(scoreField);
-      
-      var timeField = document.createElement('input');
-      timeField.name = "timeTaken";
-      timeField.value = timeTaken;
-      form.appendChild(timeField);
-      
-      document.body.appendChild(form);
-      form.submit();
+      // Auto-submit results to Formspree via hidden form
+      let hiddenForm = document.getElementById('hiddenForm');
+      hiddenForm.name.value = document.getElementById('studentNameDisplay').innerText;
+      hiddenForm.attempted.value = attempted;
+      hiddenForm.score.value = score;
+      hiddenForm.time.value = timeTaken;
+      hiddenForm.submit();
     }
   </script>
 </head>
-<body>
+<body oncontextmenu="return false;">
   <header>
-    <h1>QUIZ FOR CSS ASPIRANTS 7 March 2025</h1>
+    <h1>QUIZ FOR CSS ASPIRANTS 8 March 2025</h1>
     <p>SYED ASGHAR ALI SHAH</p>
-    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&amp;Key-Pair-Id=K2ZIVPTIP2VGHC&amp;Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Banner">
   </header>
-  
   <div class="container">
-    <div id="nameEntry">
+    <!-- Name Entry Section -->
+    <section id="nameSection">
       <h2>Enter Your Name to Start the Quiz</h2>
       <input type="text" id="nameInput" placeholder="Your Name">
       <button onclick="startQuiz()">Start Quiz</button>
-      <p>Your quiz will begin once you enter your name.</p>
-    </div>
-    
-    <div id="quizSection" class="hidden">
-      <div id="timer" class="timer"></div>
-      <!-- Display user's name -->
-      <h3 id="userNameDisplay"></h3>
-      <div id="quizContainer"></div>
-      <button onclick="submitQuiz()">Submit Quiz</button>
-    </div>
-    
-    <div id="results" class="hidden"></div>
+    </section>
+    <p style="text-align:center; font-weight:bold;" id="studentNameDisplay"></p>
+    <!-- Quiz Section -->
+    <section id="quizSection">
+      <div class="timer" id="timerDisplay">Time Remaining: 10m 0s</div>
+      <form id="quizForm">
+        <!-- Editorial 1: 20 Questions -->
+        <fieldset>
+          <legend>1. In the sentence "IS the state deliberately unconversant with the desolation faced by females?", which word functions as an adverb modifying "unconversant"?</legend>
+          <label><input type="radio" name="q1" value="A"> deliberately</label>
+          <label><input type="radio" name="q1" value="B"> unconversant</label>
+          <label><input type="radio" name="q1" value="C"> faced</label>
+          <label><input type="radio" name="q1" value="D"> desolation</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>2. In the phrase "global communities applaud women’s contributions", what part of speech is "global"?</legend>
+          <label><input type="radio" name="q2" value="A"> noun</label>
+          <label><input type="radio" name="q2" value="B"> adjective</label>
+          <label><input type="radio" name="q2" value="C"> verb</label>
+          <label><input type="radio" name="q2" value="D"> adverb</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>3. Identify the preposition in the sentence "On International Women’s Day, global communities applaud women’s contributions."</legend>
+          <label><input type="radio" name="q3" value="A"> on</label>
+          <label><input type="radio" name="q3" value="B"> global</label>
+          <label><input type="radio" name="q3" value="C"> communities</label>
+          <label><input type="radio" name="q3" value="D"> contributions</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>4. In the sentence "Take regressive societies and conflict zones — Afghanistan and Gaza — where women endure adversities", what is the function of the dash (—)?</legend>
+          <label><input type="radio" name="q4" value="A"> to indicate a break</label>
+          <label><input type="radio" name="q4" value="B"> to show possession</label>
+          <label><input type="radio" name="q4" value="C"> to form a compound adjective</label>
+          <label><input type="radio" name="q4" value="D"> to introduce a list</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>5. Which word in "they are made invisible through moral policing" is a past participle used as an adjective?</legend>
+          <label><input type="radio" name="q5" value="A"> invisible</label>
+          <label><input type="radio" name="q5" value="B"> made</label>
+          <label><input type="radio" name="q5" value="C"> policing</label>
+          <label><input type="radio" name="q5" value="D"> moral</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>6. In the sentence "with scanty access to knowledge and opportunities", which word acts as an adjective?</legend>
+          <label><input type="radio" name="q6" value="A"> scanty</label>
+          <label><input type="radio" name="q6" value="B"> access</label>
+          <label><input type="radio" name="q6" value="C"> knowledge</label>
+          <label><input type="radio" name="q6" value="D"> opportunities</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>7. Choose the correct synonym for "encumbered" as used in "Pakistan’s women, largely encumbered by poverty".</legend>
+          <label><input type="radio" name="q7" value="A"> burdened</label>
+          <label><input type="radio" name="q7" value="B"> elevated</label>
+          <label><input type="radio" name="q7" value="C"> liberated</label>
+          <label><input type="radio" name="q7" value="D"> admired</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>8. Identify the antonym of "regressive" from the options below.</legend>
+          <label><input type="radio" name="q8" value="A"> progressive</label>
+          <label><input type="radio" name="q8" value="B"> backward</label>
+          <label><input type="radio" name="q8" value="C"> conservative</label>
+          <label><input type="radio" name="q8" value="D"> traditional</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>9. In the sentence "women endure adversities that beggar description", which verb best describes "beggar"?</legend>
+          <label><input type="radio" name="q9" value="A"> trouble</label>
+          <label><input type="radio" name="q9" value="B"> assist</label>
+          <label><input type="radio" name="q9" value="C"> ignore</label>
+          <label><input type="radio" name="q9" value="D"> support</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>10. Which part of speech is "empowerment" in the context "towards empowerment"?</legend>
+          <label><input type="radio" name="q10" value="A"> verb</label>
+          <label><input type="radio" name="q10" value="B"> noun</label>
+          <label><input type="radio" name="q10" value="C"> adjective</label>
+          <label><input type="radio" name="q10" value="D"> adverb</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>11. What is the correct preposition to fill in: "a country devoid ___ opportunities"?</legend>
+          <label><input type="radio" name="q11" value="A"> of</label>
+          <label><input type="radio" name="q11" value="B"> in</label>
+          <label><input type="radio" name="q11" value="C"> with</label>
+          <label><input type="radio" name="q11" value="D"> at</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>12. Identify the error in "the reluctance shown by our leadership to liberate the country’s institutions".</legend>
+          <label><input type="radio" name="q12" value="A"> Incorrect verb form</label>
+          <label><input type="radio" name="q12" value="B"> Incorrect use of preposition</label>
+          <label><input type="radio" name="q12" value="C"> No error</label>
+          <label><input type="radio" name="q12" value="D"> Incorrect adjective order</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>13. In the phrase "visceral language and culture of patriarchy", what function does "visceral" serve?</legend>
+          <label><input type="radio" name="q13" value="A"> noun</label>
+          <label><input type="radio" name="q13" value="B"> adjective</label>
+          <label><input type="radio" name="q13" value="C"> adverb</label>
+          <label><input type="radio" name="q13" value="D"> conjunction</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>14. Choose the correct synonym for "beggar description" from the following options.</legend>
+          <label><input type="radio" name="q14" value="A"> defy description</label>
+          <label><input type="radio" name="q14" value="B"> exceed description</label>
+          <label><input type="radio" name="q14" value="C"> understate</label>
+          <label><input type="radio" name="q14" value="D"> misdescribe</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>15. In "women endure adversities that beggar description", what is the grammatical function of "that"?</legend>
+          <label><input type="radio" name="q15" value="A"> pronoun</label>
+          <label><input type="radio" name="q15" value="B"> conjunction</label>
+          <label><input type="radio" name="q15" value="C"> adjective</label>
+          <label><input type="radio" name="q15" value="D"> preposition</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>16. Which word is a compound adjective in the sentence "a feminist future"?</legend>
+          <label><input type="radio" name="q16" value="A"> feminist</label>
+          <label><input type="radio" name="q16" value="B"> future</label>
+          <label><input type="radio" name="q16" value="C"> feminist future</label>
+          <label><input type="radio" name="q16" value="D"> none</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>17. Identify the part of speech for the word "moral" in "moral policing".</legend>
+          <label><input type="radio" name="q17" value="A"> noun</label>
+          <label><input type="radio" name="q17" value="B"> adjective</label>
+          <label><input type="radio" name="q17" value="C"> verb</label>
+          <label><input type="radio" name="q17" value="D"> adverb</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>18. In the sentence "63,000 cases of violence against women were reported", what is the function of "against"?</legend>
+          <label><input type="radio" name="q18" value="A"> conjunction</label>
+          <label><input type="radio" name="q18" value="B"> preposition</label>
+          <label><input type="radio" name="q18" value="C"> adverb</label>
+          <label><input type="radio" name="q18" value="D"> noun</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>19. From the phrase "grim literacy and high school dropout rates", which word best describes the adjective modifying "literacy"?</legend>
+          <label><input type="radio" name="q19" value="A"> grim</label>
+          <label><input type="radio" name="q19" value="B"> high</label>
+          <label><input type="radio" name="q19" value="C"> dropout</label>
+          <label><input type="radio" name="q19" value="D"> rates</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>20. In "for a country devoid of them", identify the prepositional phrase.</legend>
+          <label><input type="radio" name="q20" value="A"> devoid of them</label>
+          <label><input type="radio" name="q20" value="B"> for a country</label>
+          <label><input type="radio" name="q20" value="C"> a country devoid</label>
+          <label><input type="radio" name="q20" value="D"> of them</label>
+        </fieldset>
+
+        <!-- Editorial 2: 20 Questions -->
+        <fieldset>
+          <legend>21. In "AS the Gaza ceasefire faces an uncertain future", what part of speech is "uncertain"?</legend>
+          <label><input type="radio" name="q21" value="A"> noun</label>
+          <label><input type="radio" name="q21" value="B"> verb</label>
+          <label><input type="radio" name="q21" value="C"> adjective</label>
+          <label><input type="radio" name="q21" value="D"> adverb</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>22. Identify the preposition in "for the occupied Palestinian territory’s governance".</legend>
+          <label><input type="radio" name="q22" value="A"> for</label>
+          <label><input type="radio" name="q22" value="B"> occupied</label>
+          <label><input type="radio" name="q22" value="C"> territory’s</label>
+          <label><input type="radio" name="q22" value="D"> governance</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>23. In "the Arab League has supported the plan", what is the function of "supported"?</legend>
+          <label><input type="radio" name="q23" value="A"> verb</label>
+          <label><input type="radio" name="q23" value="B"> noun</label>
+          <label><input type="radio" name="q23" value="C"> adjective</label>
+          <label><input type="radio" name="q23" value="D"> preposition</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>24. Which word in "a multibillion-dollar reconstruction of Gaza" acts as a compound adjective?</legend>
+          <label><input type="radio" name="q24" value="A"> multibillion-dollar</label>
+          <label><input type="radio" name="q24" value="B"> reconstruction</label>
+          <label><input type="radio" name="q24" value="C"> Gaza</label>
+          <label><input type="radio" name="q24" value="D"> none</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>25. In "shipping the Gazans off to other Arab states", what is the role of "off"?</legend>
+          <label><input type="radio" name="q25" value="A"> preposition</label>
+          <label><input type="radio" name="q25" value="B"> adverb</label>
+          <label><input type="radio" name="q25" value="C"> conjunction</label>
+          <label><input type="radio" name="q25" value="D"> adjective</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>26. Which term is an antonym for "devastated" as used in "the devastated Strip"?</legend>
+          <label><input type="radio" name="q26" value="A"> flourishing</label>
+          <label><input type="radio" name="q26" value="B"> ruined</label>
+          <label><input type="radio" name="q26" value="C"> damaged</label>
+          <label><input type="radio" name="q26" value="D"> dilapidated</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>27. In the sentence "an official stated that 'President Trump stands by his vision'", which word is a proper noun?</legend>
+          <label><input type="radio" name="q27" value="A"> official</label>
+          <label><input type="radio" name="q27" value="B"> stated</label>
+          <label><input type="radio" name="q27" value="C"> Trump</label>
+          <label><input type="radio" name="q27" value="D"> by</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>28. What part of speech is "monstrous" in "Donald Trump’s monstrous ‘Riviera’ plan"?</legend>
+          <label><input type="radio" name="q28" value="A"> noun</label>
+          <label><input type="radio" name="q28" value="B"> adjective</label>
+          <label><input type="radio" name="q28" value="C"> adverb</label>
+          <label><input type="radio" name="q28" value="D"> verb</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>29. In "the Arab world has endorsed a new proposal", which word functions as the main verb?</legend>
+          <label><input type="radio" name="q29" value="A"> endorsed</label>
+          <label><input type="radio" name="q29" value="B"> has</label>
+          <label><input type="radio" name="q29" value="C"> proposal</label>
+          <label><input type="radio" name="q29" value="D"> new</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>30. Identify the synonym for "garish" in the context "garish real estate project".</legend>
+          <label><input type="radio" name="q30" value="A"> flashy</label>
+          <label><input type="radio" name="q30" value="B"> dull</label>
+          <label><input type="radio" name="q30" value="C"> simple</label>
+          <label><input type="radio" name="q30" value="D"> plain</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>31. Which preposition correctly completes the sentence: "reconstruction ___ Gaza"?</legend>
+          <label><input type="radio" name="q31" value="A"> of</label>
+          <label><input type="radio" name="q31" value="B"> for</label>
+          <label><input type="radio" name="q31" value="C"> in</label>
+          <label><input type="radio" name="q31" value="D"> to</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>32. In "non-Palestinian administration", which part of speech is "non-Palestinian"?</legend>
+          <label><input type="radio" name="q32" value="A"> adjective</label>
+          <label><input type="radio" name="q32" value="B"> noun</label>
+          <label><input type="radio" name="q32" value="C"> verb</label>
+          <label><input type="radio" name="q32" value="D"> adverb</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>33. In the sentence "Washington and Tel Aviv will also want Hamas out of the picture", which conjunction is used?</legend>
+          <label><input type="radio" name="q33" value="A"> and</label>
+          <label><input type="radio" name="q33" value="B"> or</label>
+          <label><input type="radio" name="q33" value="C"> but</label>
+          <label><input type="radio" name="q33" value="D"> nor</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>34. Which word in "extermination" best functions as a noun?</legend>
+          <label><input type="radio" name="q34" value="A"> extermination</label>
+          <label><input type="radio" name="q34" value="B"> threatened</label>
+          <label><input type="radio" name="q34" value="C"> released</label>
+          <label><input type="radio" name="q34" value="D"> hostages</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>35. Identify the correct synonym for "non-starter" in the sentence "Mr Trump’s plan is a non-starter".</legend>
+          <label><input type="radio" name="q35" value="A"> impractical</label>
+          <label><input type="radio" name="q35" value="B"> successful</label>
+          <label><input type="radio" name="q35" value="C"> innovative</label>
+          <label><input type="radio" name="q35" value="D"> effective</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>36. What part of speech is "rebuilt" in "governance and rebuilding"?</legend>
+          <label><input type="radio" name="q36" value="A"> noun</label>
+          <label><input type="radio" name="q36" value="B"> verb</label>
+          <label><input type="radio" name="q36" value="C"> adjective</label>
+          <label><input type="radio" name="q36" value="D"> adverb</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>37. In the sentence "it is very difficult to foresee this plan working", which word functions as an adverb?</legend>
+          <label><input type="radio" name="q37" value="A"> very</label>
+          <label><input type="radio" name="q37" value="B"> difficult</label>
+          <label><input type="radio" name="q37" value="C"> foresee</label>
+          <label><input type="radio" name="q37" value="D"> working</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>38. Choose the antonym for "crucial" as used in "their riyals and dirhams are crucial for the plan’s success".</legend>
+          <label><input type="radio" name="q38" value="A"> insignificant</label>
+          <label><input type="radio" name="q38" value="B"> vital</label>
+          <label><input type="radio" name="q38" value="C"> important</label>
+          <label><input type="radio" name="q38" value="D"> essential</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>39. In "if circumstances allow", what is the role of "if"?</legend>
+          <label><input type="radio" name="q39" value="A"> conjunction</label>
+          <label><input type="radio" name="q39" value="B"> preposition</label>
+          <label><input type="radio" name="q39" value="C"> adverb</label>
+          <label><input type="radio" name="q39" value="D"> noun</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>40. Which word best describes the phrase "occupied territories"?</legend>
+          <label><input type="radio" name="q40" value="A"> uninhabited</label>
+          <label><input type="radio" name="q40" value="B"> contested</label>
+          <label><input type="radio" name="q40" value="C"> controlled</label>
+          <label><input type="radio" name="q40" value="D"> vacant</label>
+        </fieldset>
+
+        <!-- Editorial 3: 10 Questions -->
+        <fieldset>
+          <legend>41. In "the government says it is going to make prospective buyers of PIA an offer they can’t refuse", what part of speech is "prospective"?</legend>
+          <label><input type="radio" name="q41" value="A"> adjective</label>
+          <label><input type="radio" name="q41" value="B"> noun</label>
+          <label><input type="radio" name="q41" value="C"> verb</label>
+          <label><input type="radio" name="q41" value="D"> adverb</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>42. Identify the grammatical error in "what that offer is going to be will not be known".</legend>
+          <label><input type="radio" name="q42" value="A"> Incorrect tense</label>
+          <label><input type="radio" name="q42" value="B"> No error</label>
+          <label><input type="radio" name="q42" value="C"> Subject-verb agreement</label>
+          <label><input type="radio" name="q42" value="D"> Wrong preposition</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>43. In "expressions of interest", which word is a noun?</legend>
+          <label><input type="radio" name="q43" value="A"> expressions</label>
+          <label><input type="radio" name="q43" value="B"> of</label>
+          <label><input type="radio" name="q43" value="C"> interest</label>
+          <label><input type="radio" name="q43" value="D"> both expressions and interest</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>44. Choose the correct synonym for "debt-ridden" as used in "acquiring the debt-ridden airline".</legend>
+          <label><input type="radio" name="q44" value="A"> indebted</label>
+          <label><input type="radio" name="q44" value="B"> profitable</label>
+          <label><input type="radio" name="q44" value="C"> debt-free</label>
+          <label><input type="radio" name="q44" value="D"> successful</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>45. In the phrase "the hole of $4.3m in the exchequer", which word is used as a noun?</legend>
+          <label><input type="radio" name="q45" value="A"> hole</label>
+          <label><input type="radio" name="q45" value="B"> of</label>
+          <label><input type="radio" name="q45" value="C"> in</label>
+          <label><input type="radio" name="q45" value="D"> exchequer</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>46. What is the function of "by" in "revive the airline by injecting fresh equity"?</legend>
+          <label><input type="radio" name="q46" value="A"> preposition</label>
+          <label><input type="radio" name="q46" value="B"> conjunction</label>
+          <label><input type="radio" name="q46" value="C"> adverb</label>
+          <label><input type="radio" name="q46" value="D"> noun</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>47. In "managed professionally", what part of speech is "professionally"?</legend>
+          <label><input type="radio" name="q47" value="A"> noun</label>
+          <label><input type="radio" name="q47" value="B"> verb</label>
+          <label><input type="radio" name="q47" value="C"> adverb</label>
+          <label><input type="radio" name="q47" value="D"> adjective</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>48. Which phrase best describes the action of "injecting the required equity"?</legend>
+          <label><input type="radio" name="q48" value="A"> capital infusion</label>
+          <label><input type="radio" name="q48" value="B"> capital withdrawal</label>
+          <label><input type="radio" name="q48" value="C"> asset liquidation</label>
+          <label><input type="radio" name="q48" value="D"> cost-cutting</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>49. In "privatisation of SOEs", what does SOEs stand for?</legend>
+          <label><input type="radio" name="q49" value="A"> State-Owned Enterprises</label>
+          <label><input type="radio" name="q49" value="B"> Sovereign Economic Entities</label>
+          <label><input type="radio" name="q49" value="C"> Special Operational Entities</label>
+          <label><input type="radio" name="q49" value="D"> Standard Organizational Enterprises</label>
+        </fieldset>
+
+        <fieldset>
+          <legend>50. Identify the correct antonym for "loss-making" as used in "successful sale of loss-making PIA".</legend>
+          <label><input type="radio" name="q50" value="A"> profitable</label>
+          <label><input type="radio" name="q50" value="B"> unsuccessful</label>
+          <label><input type="radio" name="q50" value="C"> failing</label>
+          <label><input type="radio" name="q50" value="D"> bankrupt</label>
+        </fieldset>
+
+        <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+      </form>
+    </section>
+
+    <!-- Results Section -->
+    <section id="resultSection">
+      <div id="resultDisplay"></div>
+    </section>
+
+    <!-- Hidden Form for Formspree Submission -->
+    <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+      <input type="text" name="name">
+      <input type="text" name="attempted">
+      <input type="text" name="score">
+      <input type="text" name="time">
+    </form>
   </div>
-  
   <footer>
-    <p>Contact us at: 03265762698</p>
-    <p>Call us now for more information!</p>
+    <p>Contact: 03265762698 | Call Now!</p>
   </footer>
 </body>
 </html>
