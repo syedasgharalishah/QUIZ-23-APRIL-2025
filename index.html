@@ -2,749 +2,547 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 12 March 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz for CSS Aspirants 13 March 2025</title>
   <style>
-    /* Reset and disable text selection */
-    * {
+    /* General resets and non-selectable text */
+    html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      font-family: Arial, sans-serif;
       user-select: none;
+    }
+    * {
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
+      user-select: none;
     }
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      overflow-x: hidden;
-    }
-    header, footer {
-      background: #333;
+    /* Header styling */
+    header {
+      background-color: #333;
       color: #fff;
       text-align: center;
-      padding: 20px 10px;
+      padding: 20px;
+      position: relative;
     }
     header img {
       max-width: 100px;
       display: block;
-      margin: 0 auto 10px;
+      margin: 0 auto 10px auto;
     }
     header h1 {
+      margin: 10px 0;
       font-size: 24px;
-      margin-bottom: 5px;
     }
-    header h2 {
+    header p {
+      margin: 5px 0;
       font-size: 16px;
-      font-weight: normal;
     }
-    #name-entry, #quiz-section, #result-section {
+    /* Container for main content */
+    .container {
       max-width: 800px;
-      margin: 20px auto;
-      background: #fff;
-      border: 1px solid #ddd;
+      margin: auto;
       padding: 20px;
-      border-radius: 5px;
     }
-    #name-entry input[type="text"] {
-      width: 80%;
+    /* Name entry section */
+    #name-entry {
+      text-align: center;
+      margin-top: 20px;
+    }
+    #name-entry input {
       padding: 10px;
-      margin-right: 10px;
       font-size: 16px;
+      width: 60%;
+      margin-right: 10px;
     }
     #name-entry button {
       padding: 10px 20px;
       font-size: 16px;
+      background-color: #333;
+      color: #fff;
+      border: none;
       cursor: pointer;
     }
-    .question {
-      margin-bottom: 20px;
-      border-bottom: 1px dashed #ccc;
-      padding-bottom: 10px;
+    /* Quiz section styling */
+    #quiz-section {
+      display: none;
+      margin-top: 20px;
     }
-    .question h3 {
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-    .options label {
-      display: block;
-      margin-bottom: 5px;
-      cursor: pointer;
-    }
-    #timer {
+    .timer {
       font-size: 18px;
       font-weight: bold;
       text-align: right;
       margin-bottom: 10px;
     }
-    #submit-btn {
-      padding: 10px 20px;
-      font-size: 18px;
-      cursor: pointer;
-      background: #333;
-      color: #fff;
-      border: none;
-      border-radius: 3px;
+    .question {
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ccc;
     }
-    #result-section {
-      display: none;
+    .question p {
+      margin: 0 0 10px 0;
     }
-    footer p {
+    .options {
+      list-style-type: none;
+      padding: 0;
+    }
+    .options li {
       margin: 5px 0;
     }
-    /* Disable right-click */
-    body {
-      -webkit-touch-callout: none;
+    #quizForm button,
+    #quiz-section > button {
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    #quizForm button:hover,
+    #quiz-section > button:hover {
+      background-color: #555;
+    }
+    /* Results styling */
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #333;
+      background-color: #f9f9f9;
+      display: none;
+    }
+    /* Footer styling */
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
     }
   </style>
 </head>
-<body oncontextmenu="return false" oncopy="return false" oncut="return false" onpaste="return false">
-  <!-- Header with Image, Title, and Name -->
+<body>
   <header>
-    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
-    <h1>QUIZ FOR CSS ASPIRANTS 12 March 2025</h1>
-    <h2>Designed by SYED ASGHAR ALI SHAH</h2>
+    <!-- Your image as logo -->
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Logo">
+    <h1>QUIZ FOR CSS ASPIRANTS 13 March 2025</h1>
+    <p>SYED ASGHAR ALI SHAH</p>
   </header>
-
-  <!-- Name Entry Section -->
-  <section id="name-entry">
-    <h2>Enter Your Name to Start the Quiz</h2>
-    <input type="text" id="studentName" placeholder="Your Name">
-    <button id="start-btn">Start Quiz</button>
-  </section>
-
-  <!-- Quiz Section (hidden until name is entered) -->
-  <section id="quiz-section" style="display:none;">
-    <div id="timer">Time Left: 10:00</div>
-    <form id="quiz-form">
-      <!-- Questions will be injected here by JavaScript -->
-    </form>
-    <button id="submit-btn">Submit Quiz</button>
-  </section>
-
-  <!-- Result Section -->
-  <section id="result-section">
-    <h2>Quiz Results</h2>
-    <p id="result-details"></p>
-  </section>
-
-  <!-- Hidden Form for Formspree Submission -->
-  <form id="hidden-form" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-    <input type="hidden" name="name" id="form-name">
-    <input type="hidden" name="attempted" id="form-attempted">
-    <input type="hidden" name="score" id="form-score">
-    <input type="hidden" name="timeTaken" id="form-timeTaken">
-  </form>
-
+  
+  <div class="container">
+    <!-- Name Entry Section -->
+    <div id="name-entry">
+      <h2>Enter Your Name to Start the Quiz</h2>
+      <input type="text" id="studentName" placeholder="Your Name">
+      <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+    
+    <!-- Quiz Section -->
+    <div id="quiz-section">
+      <div class="timer" id="timer">Time Remaining: 10:00</div>
+      <form id="quizForm">
+        <!-- Quiz questions will be generated dynamically -->
+      </form>
+      <button onclick="submitQuiz()">Submit Quiz</button>
+      <div id="result">
+        <h2>Results</h2>
+        <p id="resultText"></p>
+      </div>
+    </div>
+  </div>
+  
   <footer>
-    <p>Contact: 03265762698</p>
-    <p>Call us now to register for more quizzes and updates.</p>
+    <p>Contact us at: 03265762698</p>
+    <p>Call Now for More Information!</p>
   </footer>
-
+  
+  <!-- Hidden Form for Formspree submission -->
+  <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+    <input type="hidden" name="studentName" id="formStudentName">
+    <input type="hidden" name="attempted" id="formAttempted">
+    <input type="hidden" name="score" id="formScore">
+    <input type="hidden" name="timeTaken" id="formTimeTaken">
+  </form>
+  
   <script>
-    // Disable certain key events
-    document.addEventListener("keydown", function(e) {
-      // disable F12, Ctrl+Shift+I/J, Ctrl+U
-      if(e.keyCode === 123 || 
-        (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
-        (e.ctrlKey && e.keyCode === 85)) {
-        e.preventDefault();
-      }
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
     });
 
-    // Utility function to shuffle an array
+    // Array containing 50 questions (20 Editorial 1, 20 Editorial 2, 10 Editorial 3)
+    const questions = [
+      /* ---------- Editorial 1 Questions (20) ---------- */
+      {
+        question: "Editorial 1: In the phrase 'shrinking writ', what does 'writ' most nearly mean?",
+        options: ["authority", "writing", "order", "document"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: Which word best replaces 'rude' in 'rude wake-up call'?",
+        options: ["harsh", "polite", "gentle", "mild"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: Identify the preposition in the sentence: '...in a desolate region...'",
+        options: ["in", "desolate", "region", "a"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: 'Waylay' in the context of the article most nearly means:",
+        options: ["ambush", "escort", "avoid", "protect"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: Which part of speech is 'traumatic' in 'traumatic experience'?",
+        options: ["adjective", "noun", "verb", "adverb"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: What is the synonym of 'curtailed' as used in 'freedom of movement has been greatly curtailed'?",
+        options: ["restricted", "expanded", "ignored", "promoted"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: Choose the correct preposition: 'singled ___' in the phrase 'singled out'.",
+        options: ["out", "in", "up", "over"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: 'Platitudes' in the passage most nearly means:",
+        options: ["clichéd remarks", "innovative ideas", "serious promises", "strong criticisms"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: Which of the following is an antonym for 'stability' as used in the article?",
+        options: ["instability", "balance", "order", "harmony"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: What does 'fiefdoms' most nearly refer to in the context of the passage?",
+        options: ["areas of control", "festive events", "government policies", "legal documents"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: Identify the adverb in: 'security men bravely fought the terrorists.'",
+        options: ["bravely", "fought", "security", "men"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: Which word in the passage functions as a conjunction?",
+        options: ["and", "terrorists", "passengers", "traumatic"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: In the sentence 'The rulers must act now to save Balochistan.', what is the verb?",
+        options: ["act", "rulers", "now", "Balochistan"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: What is the correct tense of the verb in 'Passengers have recounted...'?",
+        options: ["present perfect", "past simple", "past continuous", "future perfect"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: Which of the following best describes the tone of Editorial 1?",
+        options: ["urgent", "humorous", "indifferent", "optimistic"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: In the context of the passage, 'singled out' means:",
+        options: ["targeted", "selected", "ignored", "praised"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: Identify the noun in the phrase 'militants' fiefdoms'.",
+        options: ["fiefdoms", "militants", "both", "none"],
+        answer: 2
+      },
+      {
+        question: "Editorial 1: The term 'counterterrorism operation' is best described as a:",
+        options: ["military action", "political campaign", "economic reform", "diplomatic mission"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: What does the word 'traumatic' describe in the passage?",
+        options: ["experience", "militants", "security", "operation"],
+        answer: 0
+      },
+      {
+        question: "Editorial 1: Which preposition correctly completes: '...operated ___ the province.'?",
+        options: ["throughout", "beyond", "inside", "under"],
+        answer: 0
+      },
+      /* ---------- Editorial 2 Questions (20) ---------- */
+      {
+        question: "Editorial 2: What is the main pollutant discussed in Editorial 2?",
+        options: ["PM2.5", "CO2", "Ozone", "NOx"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: Which country is mentioned as having earned a bronze medal in air pollution rankings?",
+        options: ["Pakistan", "Bangladesh", "Chad", "India"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: What unit is used to measure the pollutant concentration in the article?",
+        options: ["micrograms per cubic metre", "parts per million", "percentage", "PPM"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: 'Staggering' in the context of the article most nearly means:",
+        options: ["astonishing", "small", "acceptable", "normal"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: Identify the adjective in the sentence: 'Such toxic air had great ramifications.'",
+        options: ["toxic", "air", "had", "ramifications"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: What does 'threshold' mean as used in the passage?",
+        options: ["limit", "beginning", "center", "end"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: In 'school closures', what part of speech is 'closures'?",
+        options: ["noun", "verb", "adjective", "adverb"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: Which preposition is correctly used in the phrase 'exceed ___ 200μg/m³'?",
+        options: ["above", "beyond", "over", "more than"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: The term 'vehicular emissions' most nearly refers to:",
+        options: ["car exhaust", "factory waste", "industrial smoke", "chemical runoff"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: 'Inept' is closest in meaning to:",
+        options: ["incompetent", "skilled", "efficient", "capable"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: Which of the following best describes the tone of Editorial 2?",
+        options: ["critical", "joyful", "optimistic", "neutral"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: What is the antonym of 'toxic'?",
+        options: ["healthy", "poisonous", "dangerous", "hazardous"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: The phrase 'information vacuum' implies a lack of:",
+        options: ["information", "education", "resources", "communication"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: Which word in Editorial 2 is a synonym for 'sporadic'?",
+        options: ["occasional", "frequent", "consistent", "regular"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: Identify the noun in the sentence: 'Pollution recognises no borders.'",
+        options: ["Pollution", "recognises", "no", "borders"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: In the context of the article, 'deterioration' most nearly means:",
+        options: ["decline", "improvement", "stability", "growth"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: Which preposition correctly fits: '...contribute ___ transboundary contamination'?",
+        options: ["to", "for", "at", "by"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: 'Regulate' in the article is best understood as:",
+        options: ["control", "ignore", "increase", "facilitate"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: What is the meaning of 'shuttered' in 'shuttered public spaces'?",
+        options: ["closed", "opened", "decorated", "expanded"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: 'Ramifications' in the passage most nearly means:",
+        options: ["consequences", "causes", "solutions", "rewards"],
+        answer: 0
+      },
+      {
+        question: "Editorial 2: The phrase 'lost productivity' most closely refers to:",
+        options: ["economic loss", "increased production", "higher profits", "improved efficiency"],
+        answer: 0
+      },
+      /* ---------- Editorial 3 Questions (10) ---------- */
+      {
+        question: "Editorial 3: What part of speech is 'commitments' in the sentence 'the government makes commitments'?",
+        options: ["noun", "verb", "adjective", "adverb"],
+        answer: 0
+      },
+      {
+        question: "Editorial 3: 'Wriggle out of' means to:",
+        options: ["avoid responsibility", "accept challenges", "embrace duties", "face consequences"],
+        answer: 0
+      },
+      {
+        question: "Editorial 3: Which part of speech is 'grid levy' in this context?",
+        options: ["noun", "verb", "adjective", "adverb"],
+        answer: 0
+      },
+      {
+        question: "Editorial 3: What is the primary purpose of the grid levy according to the article?",
+        options: ["discourage self-generation", "reduce taxes", "increase exports", "improve efficiency"],
+        answer: 0
+      },
+      {
+        question: "Editorial 3: Identify the verb in: 'The policymakers had been delaying the levy.'",
+        options: ["delaying", "had", "policymakers", "levy"],
+        answer: 0
+      },
+      {
+        question: "Editorial 3: In the context of the article, 'tough stance' means:",
+        options: ["firm position", "weak argument", "lenient approach", "uncertain decision"],
+        answer: 0
+      },
+      {
+        question: "Editorial 3: 'Captive power' in the passage refers to:",
+        options: ["self-generated electricity", "grid power", "renewable energy", "exported energy"],
+        answer: 0
+      },
+      {
+        question: "Editorial 3: The word 'subsequently' in the article is a/an:",
+        options: ["adverb", "noun", "verb", "adjective"],
+        answer: 0
+      },
+      {
+        question: "Editorial 3: Which term best describes the 'plant efficiencies' mentioned in the text?",
+        options: ["improvements", "declines", "errors", "problems"],
+        answer: 0
+      },
+      {
+        question: "Editorial 3: The phrase 'value-added products' most nearly means:",
+        options: ["products with extra features", "basic commodities", "raw materials", "export-only items"],
+        answer: 0
+      }
+    ];
+    
+    // Function to shuffle an array (Fisher-Yates algorithm)
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
       }
-      return array;
     }
-
-    // Questions Array: 50 Questions (20 Editorial 1, 20 Editorial 2, 10 Editorial 3)
-    // Each question object contains: question, options (array of {text, isCorrect})
-    const questions = [
-      // === Editorial 1 Questions (20) ===
-      {
-        question: "According to the editorial, what was the effect of six consecutive cuts of 1,000bps in the key policy interest rate?",
-        options: [
-          { text: "They paused monetary easing", isCorrect: true },
-          { text: "They accelerated monetary easing", isCorrect: false },
-          { text: "They increased the policy rate", isCorrect: false },
-          { text: "They stabilized the economic growth", isCorrect: false }
-        ]
-      },
-      {
-        question: "In the context of the editorial, the phrase 'inherent volatility' primarily refers to the unpredictable fluctuations in which prices?",
-        options: [
-          { text: "Food and energy prices", isCorrect: true },
-          { text: "Housing and education costs", isCorrect: false },
-          { text: "Automobile and electronics prices", isCorrect: false },
-          { text: "Healthcare and technology prices", isCorrect: false }
-        ]
-      },
-      {
-        question: "Identify the correct preposition in the sentence: 'The current account is being used ____ make foreign debt payments.'",
-        options: [
-          { text: "to", isCorrect: true },
-          { text: "for", isCorrect: false },
-          { text: "by", isCorrect: false },
-          { text: "in", isCorrect: false }
-        ]
-      },
-      {
-        question: "Choose the synonym for 'fragile' as used in the context of macro stability.",
-        options: [
-          { text: "Delicate", isCorrect: true },
-          { text: "Robust", isCorrect: false },
-          { text: "Resilient", isCorrect: false },
-          { text: "Sturdy", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which of the following best represents the meaning of 'downward trend' in the context of inflation?",
-        options: [
-          { text: "A decrease", isCorrect: true },
-          { text: "An increase", isCorrect: false },
-          { text: "Stability", isCorrect: false },
-          { text: "Fluctuation", isCorrect: false }
-        ]
-      },
-      {
-        question: "Select the grammatically correct sentence:",
-        options: [
-          { text: "Rising imports have increased the current account deficit.", isCorrect: true },
-          { text: "The current account deficit is increased due to rising imports.", isCorrect: false },
-          { text: "The rising imports current account deficit increased.", isCorrect: false },
-          { text: "Increased current account deficit by rising imports.", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which term from the editorial indicates a slight reduction in international reserves?",
-        options: [
-          { text: "dropped slightly", isCorrect: true },
-          { text: "increased marginally", isCorrect: false },
-          { text: "soared", isCorrect: false },
-          { text: "remained constant", isCorrect: false }
-        ]
-      },
-      {
-        question: "Fill in the blank: 'The exchange rate remains ______ despite external pressures.'",
-        options: [
-          { text: "stable", isCorrect: true },
-          { text: "volatile", isCorrect: false },
-          { text: "erratic", isCorrect: false },
-          { text: "unpredictable", isCorrect: false }
-        ]
-      },
-      {
-        question: "What does 'bps' in the context of the editorial stand for?",
-        options: [
-          { text: "Basis Points", isCorrect: true },
-          { text: "Billion Pounds", isCorrect: false },
-          { text: "Business Points", isCorrect: false },
-          { text: "Basic Price", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which preposition correctly completes the sentence: 'The surplus was accumulated ____ rising remittances'?",
-        options: [
-          { text: "through", isCorrect: true },
-          { text: "by", isCorrect: false },
-          { text: "with", isCorrect: false },
-          { text: "from", isCorrect: false }
-        ]
-      },
-      {
-        question: "What grammatical function does the word 'though' serve in the sentence: 'Though CPI inflation is down to just 1.4pc...'",
-        options: [
-          { text: "Conjunction", isCorrect: true },
-          { text: "Preposition", isCorrect: false },
-          { text: "Adverb", isCorrect: false },
-          { text: "Interjection", isCorrect: false }
-        ]
-      },
-      {
-        question: "Select the correct punctuation: 'Key macro indicators have improved ____ but Pakistan is still not out of the woods.'",
-        options: [
-          { text: ";", isCorrect: true },
-          { text: ",", isCorrect: false },
-          { text: ".", isCorrect: false },
-          { text: ":", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which of these sentences uses the passive voice correctly?",
-        options: [
-          { text: "The inflation rate was decreased by the policy measures.", isCorrect: true },
-          { text: "The monetary policy decreased the inflation rate.", isCorrect: false },
-          { text: "The inflation rate has been decreased by the monetary policy.", isCorrect: false },
-          { text: "The policy measures decrease the inflation rate.", isCorrect: false }
-        ]
-      },
-      {
-        question: "Identify the error in the following sentence: 'The fiscal and external sectors remain under stress, impeding the consolidation of the nascent recovery.'",
-        options: [
-          { text: "No error", isCorrect: true },
-          { text: "Missing comma", isCorrect: false },
-          { text: "Subject-verb disagreement", isCorrect: false },
-          { text: "Incorrect tense", isCorrect: false }
-        ]
-      },
-      {
-        question: "Fill in the blank with the correct preposition: 'Rising imports due ____ an uptick in economic activity.'",
-        options: [
-          { text: "to", isCorrect: true },
-          { text: "at", isCorrect: false },
-          { text: "in", isCorrect: false },
-          { text: "on", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which word is an antonym of 'easing' as used in the monetary policy context?",
-        options: [
-          { text: "Tightening", isCorrect: true },
-          { text: "Relaxing", isCorrect: false },
-          { text: "Loosening", isCorrect: false },
-          { text: "Stabilizing", isCorrect: false }
-        ]
-      },
-      {
-        question: "What is the main purpose of the State Bank's decision as described in the editorial?",
-        options: [
-          { text: "To stabilize inflation", isCorrect: true },
-          { text: "To continue monetary easing", isCorrect: false },
-          { text: "To expand the fiscal deficit", isCorrect: false },
-          { text: "To boost private sector credit", isCorrect: false }
-        ]
-      },
-      {
-        question: "Choose the option with the correct subject-verb agreement: 'The series of cuts ____ a significant impact on the economy.'",
-        options: [
-          { text: "has", isCorrect: true },
-          { text: "have", isCorrect: false },
-          { text: "had", isCorrect: false },
-          { text: "having", isCorrect: false }
-        ]
-      },
-      {
-        question: "Select the grammatically correct usage of a prepositional phrase:",
-        options: [
-          { text: "Owing to the economic challenges", isCorrect: true },
-          { text: "Due of the economic challenges", isCorrect: false },
-          { text: "Because of the economic challenges", isCorrect: false },
-          { text: "On account the economic challenges", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which sentence best uses parallel structure?",
-        options: [
-          { text: "The policy aims to reduce inflation, control imports, and stabilize exchange rates.", isCorrect: true },
-          { text: "The policy aims to reduce inflation, controlling imports, and stabilizing exchange rates.", isCorrect: false },
-          { text: "The policy aims at reducing inflation, to control imports, and stabilization of exchange rates.", isCorrect: false },
-          { text: "The policy aims at reducing inflation, controlling imports, and stabilize exchange rates.", isCorrect: false }
-        ]
-      },
-      // === Editorial 2 Questions (20) ===
-      {
-        question: "In the context of the editorial, which city did anti-Assad militants march into?",
-        options: [
-          { text: "Damascus", isCorrect: true },
-          { text: "Aleppo", isCorrect: false },
-          { text: "Homs", isCorrect: false },
-          { text: "Latakia", isCorrect: false }
-        ]
-      },
-      {
-        question: "What role did Ahmad al-Sharaa assume as mentioned in the editorial?",
-        options: [
-          { text: "Rebel leader and interim President", isCorrect: true },
-          { text: "Minister of Defense", isCorrect: false },
-          { text: "Chief of Staff", isCorrect: false },
-          { text: "Foreign Minister", isCorrect: false }
-        ]
-      },
-      {
-        question: "Fill in the blank: 'There would be no place for such bloodshed ____ the new Syria.'",
-        options: [
-          { text: "in", isCorrect: true },
-          { text: "on", isCorrect: false },
-          { text: "at", isCorrect: false },
-          { text: "for", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which group was primarily targeted in the rampage described in the editorial?",
-        options: [
-          { text: "Alawi community", isCorrect: true },
-          { text: "Sunni civilians", isCorrect: false },
-          { text: "Kurdish minority", isCorrect: false },
-          { text: "Christian community", isCorrect: false }
-        ]
-      },
-      {
-        question: "Identify the preposition used correctly in the sentence: 'Eyewitnesses say children were slaughtered ___ pro-government militants.'",
-        options: [
-          { text: "by", isCorrect: true },
-          { text: "with", isCorrect: false },
-          { text: "from", isCorrect: false },
-          { text: "of", isCorrect: false }
-        ]
-      },
-      {
-        question: "Select the sentence that maintains proper subject-verb agreement:",
-        options: [
-          { text: "Many foreign militants have been given positions in the administration.", isCorrect: true },
-          { text: "Many foreign militants has been given positions in the administration.", isCorrect: false },
-          { text: "Many foreign militants are given positions in the administration.", isCorrect: false },
-          { text: "Many foreign militants is given positions in the administration.", isCorrect: false }
-        ]
-      },
-      {
-        question: "What does the term 'rampage' most closely mean as used in the editorial?",
-        options: [
-          { text: "Uncontrolled violence", isCorrect: true },
-          { text: "Peaceful demonstration", isCorrect: false },
-          { text: "Organized protest", isCorrect: false },
-          { text: "Diplomatic negotiation", isCorrect: false }
-        ]
-      },
-      {
-        question: "Identify the antonym for 'extremist' as used in the context of the editorial.",
-        options: [
-          { text: "Moderate", isCorrect: true },
-          { text: "Radical", isCorrect: false },
-          { text: "Fanatical", isCorrect: false },
-          { text: "Extreme", isCorrect: false }
-        ]
-      },
-      {
-        question: "Fill in the blank: 'The interim Syrian leader has promised ______ for the recent massacres.'",
-        options: [
-          { text: "accountability", isCorrect: true },
-          { text: "immunity", isCorrect: false },
-          { text: "exoneration", isCorrect: false },
-          { text: "relief", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which sentence correctly uses the colon for emphasis?",
-        options: [
-          { text: "Syria has one clear objective: disarm foreign forces.", isCorrect: true },
-          { text: "Syria has one clear objective, disarm foreign forces.", isCorrect: false },
-          { text: "Syria has one clear objective - disarm foreign forces.", isCorrect: false },
-          { text: "Syria: has one clear objective disarm foreign forces.", isCorrect: false }
-        ]
-      },
-      {
-        question: "What is the meaning of 'interventionist' in the context of the editorial?",
-        options: [
-          { text: "Involved in external affairs", isCorrect: true },
-          { text: "Non-interfering", isCorrect: false },
-          { text: "Neutral", isCorrect: false },
-          { text: "Passive", isCorrect: false }
-        ]
-      },
-      {
-        question: "Identify the error in the following sentence: 'The transition from religious militancy to democratic statecraft is proving to be difficult one.'",
-        options: [
-          { text: "Missing article", isCorrect: true },
-          { text: "Incorrect tense", isCorrect: false },
-          { text: "Subject-verb disagreement", isCorrect: false },
-          { text: "No error", isCorrect: false }
-        ]
-      },
-      {
-        question: "Select the grammatically correct sentence:",
-        options: [
-          { text: "Foreign forces must stop their intervention in Syria.", isCorrect: true },
-          { text: "Foreign forces must stopped their intervention in Syria.", isCorrect: false },
-          { text: "Foreign forces stopping their intervention in Syria.", isCorrect: false },
-          { text: "Foreign forces must be stopped their intervention in Syria.", isCorrect: false }
-        ]
-      },
-      {
-        question: "Choose the correct synonym for 'bloodshed' as used in the context of the editorial.",
-        options: [
-          { text: "Massacre", isCorrect: true },
-          { text: "Celebration", isCorrect: false },
-          { text: "Assembly", isCorrect: false },
-          { text: "Discussion", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which sentence uses a correct prepositional phrase?",
-        options: [
-          { text: "The rebel leader promised to end bloodshed on the new Syria.", isCorrect: true },
-          { text: "The rebel leader promised to end bloodshed in new Syria.", isCorrect: false },
-          { text: "The rebel leader promised to end bloodshed of the new Syria.", isCorrect: false },
-          { text: "The rebel leader promised to end bloodshed at the new Syria.", isCorrect: false }
-        ]
-      },
-      {
-        question: "Fill in the blank with the appropriate preposition: 'Clashes broke out ____ armed loyalists and government forces.'",
-        options: [
-          { text: "between", isCorrect: true },
-          { text: "among", isCorrect: false },
-          { text: "with", isCorrect: false },
-          { text: "by", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which of the following is an antonym for 'triumphant' as used in the context of the militants' march?",
-        options: [
-          { text: "Defeated", isCorrect: true },
-          { text: "Victorious", isCorrect: false },
-          { text: "Successful", isCorrect: false },
-          { text: "Triumphal", isCorrect: false }
-        ]
-      },
-      {
-        question: "Identify the function of the phrase 'last December' in the sentence: 'There were valid fears of sectarian and religious bloodshed when anti-Assad militants triumphantly marched into Damascus last December.'",
-        options: [
-          { text: "Adverbial phrase", isCorrect: true },
-          { text: "Noun phrase", isCorrect: false },
-          { text: "Verb phrase", isCorrect: false },
-          { text: "Prepositional phrase", isCorrect: false }
-        ]
-      },
-      {
-        question: "Choose the sentence with correct punctuation:",
-        options: [
-          { text: "Eyewitnesses say children were slaughtered by militants.", isCorrect: true },
-          { text: "Eyewitnesses say, children were slaughtered by militants.", isCorrect: false },
-          { text: "Eyewitnesses, say children were slaughtered by militants.", isCorrect: false },
-          { text: "Eyewitnesses say children were slaughtered, by militants.", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which option correctly uses a semicolon?",
-        options: [
-          { text: "Syria is in turmoil; however, stability is hard to achieve.", isCorrect: true },
-          { text: "Syria is in turmoil, however, stability is hard to achieve.", isCorrect: false },
-          { text: "Syria is in turmoil however; stability is hard to achieve.", isCorrect: false },
-          { text: "Syria is in turmoil however, stability is hard to achieve.", isCorrect: false }
-        ]
-      },
-      // === Editorial 3 Questions (10) ===
-      {
-        question: "In the context of the editorial, what does the term 'vani' refer to?",
-        options: [
-          { text: "A form of compensation", isCorrect: true },
-          { text: "A traditional celebration", isCorrect: false },
-          { text: "A monetary fine", isCorrect: false },
-          { text: "A legal contract", isCorrect: false }
-        ]
-      },
-      {
-        question: "What extreme action did Adil take in response to the injustice described?",
-        options: [
-          { text: "He consumed poison", isCorrect: true },
-          { text: "He filed a complaint", isCorrect: false },
-          { text: "He sought legal help", isCorrect: false },
-          { text: "He organized a protest", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which preposition correctly fills the blank: 'A father has to end his life ____ save his daughter’s.'",
-        options: [
-          { text: "to", isCorrect: true },
-          { text: "in order to", isCorrect: false },
-          { text: "for", isCorrect: false },
-          { text: "with", isCorrect: false }
-        ]
-      },
-      {
-        question: "Select the correct sentence regarding the practice of 'vani':",
-        options: [
-          { text: "Vani is a barbaric custom.", isCorrect: true },
-          { text: "Vani are barbaric customs.", isCorrect: false },
-          { text: "Vani is a barbaric customs.", isCorrect: false },
-          { text: "Vani are a barbaric custom.", isCorrect: false }
-        ]
-      },
-      {
-        question: "What is the grammatical role of the word 'only' in the sentence: 'The fact that police action came only after a man’s suicide speaks volumes.'",
-        options: [
-          { text: "Adverb", isCorrect: true },
-          { text: "Noun", isCorrect: false },
-          { text: "Adjective", isCorrect: false },
-          { text: "Conjunction", isCorrect: false }
-        ]
-      },
-      {
-        question: "Fill in the blank: 'Child marriage laws criminalise underage marriage, and the Prevention of Anti-Women Practices Act, 2011, makes it ______ to give women as compensation.'",
-        options: [
-          { text: "illegal", isCorrect: true },
-          { text: "legal", isCorrect: false },
-          { text: "acceptable", isCorrect: false },
-          { text: "customary", isCorrect: false }
-        ]
-      },
-      {
-        question: "Identify the antonym of 'punished' in the context of the editorial.",
-        options: [
-          { text: "Rewarded", isCorrect: true },
-          { text: "Condemned", isCorrect: false },
-          { text: "Sentenced", isCorrect: false },
-          { text: "Penalized", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which sentence is grammatically correct?",
-        options: [
-          { text: "Educational campaigns are essential but meaningless without enforcement.", isCorrect: true },
-          { text: "Educational campaigns are essential, but are meaningless without enforcement.", isCorrect: false },
-          { text: "Educational campaigns are essential, but it is meaningless without enforcement.", isCorrect: false },
-          { text: "Educational campaigns are essential, but meaningless without enforcement.", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which word best replaces 'inadequate' in the sentence: 'The state’s response was inadequate, failing to protect its citizens'?",
-        options: [
-          { text: "Insufficient", isCorrect: true },
-          { text: "Excessive", isCorrect: false },
-          { text: "Overwhelming", isCorrect: false },
-          { text: "Dismal", isCorrect: false }
-        ]
-      },
-      {
-        question: "Fill in the blank: 'The state must dismantle all panchayats ______ practising such rulings.'",
-        options: [
-          { text: "practising", isCorrect: true },
-          { text: "practicing", isCorrect: false },
-          { text: "practised", isCorrect: false },
-          { text: "practicingly", isCorrect: false }
-        ]
-      }
-    ];
-
-    // Shuffle options for every question so the sequence is different each time.
+    
+    // Randomize answer options for every question
     questions.forEach(q => {
-      q.options = shuffle(q.options);
-    });
-
-    const startBtn = document.getElementById('start-btn');
-    const nameEntrySection = document.getElementById('name-entry');
-    const quizSection = document.getElementById('quiz-section');
-    const quizForm = document.getElementById('quiz-form');
-    const submitBtn = document.getElementById('submit-btn');
-    const timerDisplay = document.getElementById('timer');
-    const resultSection = document.getElementById('result-section');
-    const resultDetails = document.getElementById('result-details');
-
-    let timerInterval;
-    let timeLeft = 600; // 10 minutes in seconds
-    let quizStartTime;
-
-    // Function to start the timer and update every second
-    function startTimer() {
-      quizStartTime = new Date();
-      timerInterval = setInterval(() => {
-        timeLeft--;
-        let minutes = Math.floor(timeLeft / 60);
-        let seconds = timeLeft % 60;
-        timerDisplay.textContent = `Time Left: ${minutes < 10 ? '0'+minutes : minutes}:${seconds < 10 ? '0'+seconds : seconds}`;
-        if (timeLeft <= 0) {
-          clearInterval(timerInterval);
-          submitQuiz(); // Auto-submit when time runs out
+      const paired = q.options.map((opt, idx) => ({ opt, idx }));
+      shuffle(paired);
+      q.options = paired.map(item => item.opt);
+      // Update the answer index based on the shuffled order
+      for (let i = 0; i < paired.length; i++) {
+        if (paired[i].idx === q.answer) {
+          q.answer = i;
+          break;
         }
-      }, 1000);
-    }
-
-    // Function to render all questions into the quiz form
-    function renderQuestions() {
+      }
+    });
+    
+    // Dynamically generate the quiz questions into the form
+    function generateQuiz() {
+      const quizForm = document.getElementById('quizForm');
       quizForm.innerHTML = "";
       questions.forEach((q, index) => {
         const questionDiv = document.createElement('div');
-        questionDiv.className = "question";
-        const qHeader = document.createElement('h3');
-        qHeader.textContent = `Q${index + 1}. ${q.question}`;
-        questionDiv.appendChild(qHeader);
-
-        const optionsDiv = document.createElement('div');
-        optionsDiv.className = "options";
+        questionDiv.className = 'question';
+        const qText = document.createElement('p');
+        qText.innerText = (index + 1) + ". " + q.question;
+        questionDiv.appendChild(qText);
+        const optionsList = document.createElement('ul');
+        optionsList.className = 'options';
         q.options.forEach((option, optIndex) => {
-          const optionLabel = document.createElement('label');
-          const radioInput = document.createElement('input');
-          radioInput.type = "radio";
-          radioInput.name = `question-${index}`;
-          radioInput.value = option.text;
-          // Save a data attribute if this is the correct answer
-          if(option.isCorrect) {
-            radioInput.setAttribute('data-correct', 'true');
-          }
-          optionLabel.appendChild(radioInput);
-          optionLabel.append(" " + option.text);
-          optionsDiv.appendChild(optionLabel);
+          const li = document.createElement('li');
+          li.innerHTML = `<input type="radio" name="q${index}" value="${optIndex}"> ${option}`;
+          optionsList.appendChild(li);
         });
-        questionDiv.appendChild(optionsDiv);
+        questionDiv.appendChild(optionsList);
         quizForm.appendChild(questionDiv);
       });
     }
-
-    // Start button click handler
-    startBtn.addEventListener('click', () => {
-      const studentName = document.getElementById('studentName').value.trim();
-      if(studentName === "") {
+    
+    let timerInterval;
+    let totalTime = 600; // 10 minutes in seconds
+    let startTime;
+    
+    // Start the countdown timer
+    function startTimer() {
+      startTime = Date.now();
+      timerInterval = setInterval(() => {
+        totalTime--;
+        const minutes = Math.floor(totalTime / 60);
+        const seconds = totalTime % 60;
+        document.getElementById('timer').innerText = "Time Remaining: " +
+          (minutes < 10 ? "0" + minutes : minutes) + ":" +
+          (seconds < 10 ? "0" + seconds : seconds);
+        if (totalTime <= 0) {
+          clearInterval(timerInterval);
+          submitQuiz();
+        }
+      }, 1000);
+    }
+    
+    // Start quiz after valid name entry
+    function startQuiz() {
+      const name = document.getElementById('studentName').value.trim();
+      if (name === "") {
         alert("Please enter your name to start the quiz.");
         return;
       }
-      // Hide name entry and show quiz section
-      nameEntrySection.style.display = "none";
-      quizSection.style.display = "block";
-      renderQuestions();
+      document.getElementById('name-entry').style.display = 'none';
+      document.getElementById('quiz-section').style.display = 'block';
+      generateQuiz();
       startTimer();
-    });
-
-    // Function to calculate and display results, then submit the hidden form via Formspree
+    }
+    
+    // Submit quiz, calculate results, display them, and auto-submit hidden form
     function submitQuiz() {
       clearInterval(timerInterval);
-      const studentName = document.getElementById('studentName').value.trim();
-      let totalAttempted = 0;
+      const name = document.getElementById('studentName').value.trim();
       let score = 0;
-      const totalQuestions = questions.length;
-
-      // Check each question for a selected answer
-      for(let i = 0; i < totalQuestions; i++){
-        const radios = document.getElementsByName(`question-${i}`);
-        let answered = false;
-        for(let radio of radios) {
-          if(radio.checked) {
-            answered = true;
-            totalAttempted++;
-            if(radio.getAttribute('data-correct') === 'true') {
+      let attempted = 0;
+      questions.forEach((q, index) => {
+        const radios = document.getElementsByName('q' + index);
+        for (let radio of radios) {
+          if (radio.checked) {
+            attempted++;
+            if (parseInt(radio.value) === q.answer) {
               score++;
             }
             break;
           }
         }
-      }
-      const quizEndTime = new Date();
-      const timeTakenSec = Math.floor((quizEndTime - quizStartTime) / 1000);
-      const minutesTaken = Math.floor(timeTakenSec / 60);
-      const secondsTaken = timeTakenSec % 60;
-
-      // Display results
-      resultDetails.innerHTML = `
-        <strong>Name:</strong> ${studentName}<br>
-        <strong>Questions Attempted:</strong> ${totalAttempted} / ${totalQuestions}<br>
-        <strong>Score:</strong> ${score} / ${totalQuestions}<br>
-        <strong>Time Taken:</strong> ${minutesTaken < 10 ? '0'+minutesTaken : minutesTaken}:${secondsTaken < 10 ? '0'+secondsTaken : secondsTaken}
-      `;
-      resultSection.style.display = "block";
-      quizSection.style.display = "none";
-
-      // Fill and auto-submit the hidden Formspree form
-      document.getElementById('form-name').value = studentName;
-      document.getElementById('form-attempted').value = totalAttempted;
-      document.getElementById('form-score').value = score;
-      document.getElementById('form-timeTaken').value = `${minutesTaken}:${secondsTaken < 10 ? '0'+secondsTaken : secondsTaken}`;
-      document.getElementById('hidden-form').submit();
+      });
+      const timeTaken = Math.floor((Date.now() - startTime) / 1000);
+      document.getElementById('resultText').innerHTML =
+        "<strong>Name:</strong> " + name + "<br>" +
+        "<strong>Questions Attempted:</strong> " + attempted + " / " + questions.length + "<br>" +
+        "<strong>Score:</strong> " + score + "<br>" +
+        "<strong>Time Taken:</strong> " + timeTaken + " seconds";
+      document.getElementById('result').style.display = 'block';
+      
+      // Fill in and auto-submit the hidden Formspree form
+      document.getElementById('formStudentName').value = name;
+      document.getElementById('formAttempted').value = attempted;
+      document.getElementById('formScore').value = score;
+      document.getElementById('formTimeTaken').value = timeTaken;
+      document.getElementById('hiddenForm').submit();
     }
-
-    // Submit button click handler
-    submitBtn.addEventListener('click', submitQuiz);
   </script>
 </body>
 </html>
