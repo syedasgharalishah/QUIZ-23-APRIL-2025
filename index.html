@@ -2,77 +2,59 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 14 March 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 15 March 2025</title>
   <style>
-    /* Global Styles and disable text selection */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f4f4f4;
-      user-select: none;
+    /* Disable text selection on the entire page */
+    * {
       -webkit-user-select: none;
+      -moz-user-select: none;
       -ms-user-select: none;
+      user-select: none;
     }
-    /* Header */
-    header {
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+    }
+    header, footer {
       background: #333;
       color: #fff;
-      padding: 20px;
       text-align: center;
-      position: relative;
+      padding: 20px 10px;
     }
     header img {
-      height: 50px;
-      position: absolute;
-      left: 20px;
-      top: 10px;
+      max-width: 80px;
+      vertical-align: middle;
     }
-    header h1, header p {
-      margin: 0;
-      padding: 0;
+    header h1 {
+      display: inline-block;
+      margin: 0 10px;
+      vertical-align: middle;
+      font-size: 24px;
     }
-    /* Container */
+    header p {
+      margin: 5px 0 0;
+      font-size: 16px;
+    }
     .container {
-      max-width: 800px;
-      margin: 80px auto 100px auto;
-      padding: 20px;
+      max-width: 900px;
+      margin: 20px auto;
       background: #fff;
-      border-radius: 5px;
+      padding: 20px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    /* Name Entry */
-    .name-entry {
-      text-align: center;
-      margin-top: 20px;
+    #nameSection, #quizSection, #resultSection {
+      margin: 20px 0;
     }
-    .name-entry input[type="text"] {
-      padding: 10px;
+    input[type="text"] {
+      width: 80%;
+      padding: 8px;
       font-size: 16px;
-      width: 60%;
-      margin: 10px 0;
+      margin-right: 10px;
     }
-    .name-entry button {
-      padding: 10px 20px;
+    button {
+      padding: 8px 16px;
       font-size: 16px;
-      cursor: pointer;
-    }
-    /* Quiz Section */
-    .quiz-section {
-      margin-top: 20px;
-    }
-    .question {
-      background: #eef;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 5px;
-    }
-    .question p {
-      font-weight: bold;
-    }
-    .options label {
-      display: block;
-      margin: 5px 0;
       cursor: pointer;
     }
     .timer {
@@ -81,684 +63,653 @@
       text-align: right;
       margin-bottom: 10px;
     }
-    /* Result Section */
-    .result {
-      background: #e0ffe0;
-      padding: 15px;
-      margin-top: 20px;
-      border: 1px solid #b3ffb3;
-      border-radius: 5px;
-      text-align: center;
-    }
-    /* Footer */
-    footer {
-      background: #333;
-      color: #fff;
+    .question {
+      margin-bottom: 20px;
       padding: 10px;
-      text-align: center;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
+      border-bottom: 1px solid #ddd;
     }
-    /* Hidden class */
-    .hidden {
-      display: none;
+    .question p {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+    .options {
+      list-style-type: none;
+      padding: 0;
+    }
+    .options li {
+      margin-bottom: 8px;
+    }
+    /* Prevent copy-paste via user selection and context menu */
+    body {
+      -webkit-touch-callout: none;
     }
   </style>
   <script>
-    // Disable right-click and common inspect shortcuts
+    // Disable right-click context menu
     document.addEventListener('contextmenu', function(e) {
       e.preventDefault();
-    });
-    document.onkeydown = function(e) {
-      if (e.keyCode === 123 ||
-          (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
-          (e.ctrlKey && e.keyCode === 85)) {
-        e.preventDefault();
-        return false;
-      }
-    };
+    }, false);
 
-    let timer;
-    let timeLeft = 600; // 10 minutes in seconds
-    let startTime;
+    var timeRemaining = 600; // 10 minutes = 600 seconds
+    var timerInterval;
 
     function startQuiz() {
-      const name = document.getElementById('studentName').value.trim();
+      var name = document.getElementById('nameInput').value.trim();
       if(name === "") {
         alert("Please enter your name.");
         return;
       }
-      // Hide name entry and show quiz section
-      document.getElementById('nameEntry').classList.add('hidden');
-      document.getElementById('quizSection').classList.remove('hidden');
-      document.getElementById('welcomeName').textContent = name;
-      startTime = new Date();
+      document.getElementById('userNameDisplay').innerText = name;
+      document.getElementById('nameSection').style.display = "none";
+      document.getElementById('quizSection').style.display = "block";
       startTimer();
-      shuffleAllOptions();
     }
 
     function startTimer() {
-      timer = setInterval(function() {
-        if(timeLeft <= 0) {
-          clearInterval(timer);
+      updateTimerDisplay();
+      timerInterval = setInterval(function() {
+        timeRemaining--;
+        if(timeRemaining <= 0) {
+          clearInterval(timerInterval);
           submitQuiz();
-        } else {
-          timeLeft--;
-          const minutes = Math.floor(timeLeft / 60);
-          const seconds = timeLeft % 60;
-          document.getElementById('timerDisplay').textContent = 'Time Remaining: ' + minutes + "m " + seconds + "s";
         }
+        updateTimerDisplay();
       }, 1000);
     }
 
-    // Shuffle answer options in each question so that their order is different each time
-    function shuffleAllOptions() {
-      const questions = document.querySelectorAll('.options');
-      questions.forEach(function(optionsDiv) {
-        const options = Array.from(optionsDiv.children);
-        for (let i = options.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          optionsDiv.insertBefore(options[j], options[i]);
-        }
-      });
+    function updateTimerDisplay() {
+      var minutes = Math.floor(timeRemaining / 60);
+      var seconds = timeRemaining % 60;
+      document.getElementById('timer').innerText = "Time Remaining: " + minutes + "m " + seconds + "s";
     }
 
     function submitQuiz() {
-      clearInterval(timer);
-      const endTime = new Date();
-      const timeTaken = Math.floor((endTime - startTime) / 1000);
-      const name = document.getElementById('studentName').value.trim();
-      const questions = document.querySelectorAll('.question');
-      let attempted = 0;
-      let score = 0;
-      
-      questions.forEach(function(q) {
-        const options = q.querySelectorAll('input[type="radio"]');
-        options.forEach(function(option) {
-          if(option.checked) {
+      clearInterval(timerInterval);
+      var totalQuestions = 50;
+      var attempted = 0;
+      var score = 0;
+      for(var i = 1; i <= totalQuestions; i++){
+        var radios = document.getElementsByName("q" + i);
+        for(var j = 0; j < radios.length; j++){
+          if(radios[j].checked){
             attempted++;
-            if(option.getAttribute('data-correct') === 'true') {
+            if(radios[j].value === "correct"){
               score++;
             }
+            break;
           }
-        });
-      });
+        }
+      }
+      var timeTaken = 600 - timeRemaining;
+      document.getElementById('quizSection').style.display = "none";
+      var resultDiv = document.getElementById('resultSection');
+      resultDiv.innerHTML = "<h2>Results</h2>" +
+                            "<p><strong>Name:</strong> " + document.getElementById('userNameDisplay').innerText + "</p>" +
+                            "<p><strong>Questions Attempted:</strong> " + attempted + "</p>" +
+                            "<p><strong>Score:</strong> " + score + " out of " + totalQuestions + "</p>" +
+                            "<p><strong>Time Taken:</strong> " + timeTaken + " seconds</p>";
       
-      document.getElementById('resultDisplay').innerHTML =
-        "<h2>Quiz Results</h2>" +
-        "<p>Name: " + name + "</p>" +
-        "<p>Questions Attempted: " + attempted + " out of 50</p>" +
-        "<p>Score: " + score + " correct answers</p>" +
-        "<p>Time Taken: " + timeTaken + " seconds</p>";
-      
-      document.getElementById('quizSection').classList.add('hidden');
-      document.getElementById('resultSection').classList.remove('hidden');
-      
-      // Auto-submit hidden form via Formspree
-      const form = document.getElementById('hiddenForm');
-      form.elements['name'].value = name;
-      form.elements['attempted'].value = attempted;
-      form.elements['score'].value = score;
-      form.elements['timeTaken'].value = timeTaken;
+      // Fill and submit the hidden form via Formspree
+      var form = document.getElementById('hiddenForm');
+      form.name.value = document.getElementById('userNameDisplay').innerText;
+      form.attempted.value = attempted;
+      form.score.value = score;
+      form.time.value = timeTaken;
       form.submit();
     }
   </script>
 </head>
 <body>
   <header>
-    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Logo">
-    <h1>QUIZ FOR CSS ASPIRANTS 14 March 2025</h1>
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
+    <h1>QUIZ FOR CSS ASPIRANTS 15 March 2025</h1>
     <p>SYED ASGHAR ALI SHAH</p>
   </header>
 
   <div class="container">
     <!-- Name Entry Section -->
-    <div id="nameEntry" class="name-entry">
-      <h2>Please Enter Your Name to Start the Quiz</h2>
-      <input type="text" id="studentName" placeholder="Enter your name">
-      <br>
+    <div id="nameSection">
+      <h2>Enter Your Name to Start the Quiz</h2>
+      <input type="text" id="nameInput" placeholder="Your Name">
       <button onclick="startQuiz()">Start Quiz</button>
     </div>
     
-    <!-- Quiz Section (hidden until name is entered) -->
-    <div id="quizSection" class="quiz-section hidden">
-      <div class="timer" id="timerDisplay">Time Remaining: 10m 0s</div>
-      <h2>Welcome, <span id="welcomeName"></span>! Answer the following questions:</h2>
+    <!-- Hidden element to display user's name later -->
+    <div id="userName" style="display:none;">
+      <p>Name: <span id="userNameDisplay"></span></p>
+    </div>
+    
+    <!-- Quiz Section (initially hidden) -->
+    <div id="quizSection" style="display:none;">
+      <div class="timer" id="timer">Time Remaining: 10m 0s</div>
       <form id="quizForm">
-        <!-- ================== Editorial 1 Questions (20) ================== -->
+        <!-- Editorial 1 Questions (20 questions) -->
+        <h3>Editorial 1 Questions</h3>
         <!-- Q1 -->
         <div class="question">
-          <p>Q1 (Editorial 1): In the sentence "the government begins to calibrate some kind of a response only after the event", the word <em>calibrate</em> most nearly means:</p>
-          <div class="options">
-            <label><input type="radio" name="q1" data-correct="false"> Adjust precisely</label>
-            <label><input type="radio" name="q1" data-correct="true"> Measure accurately</label>
-            <label><input type="radio" name="q1" data-correct="false"> Alter randomly</label>
-            <label><input type="radio" name="q1" data-correct="false"> Estimate roughly</label>
-          </div>
+          <p>1. Identify the correct preposition in the sentence: "The decision ___ significantly revise the policy was bold."</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q1" value="incorrect"> on</label></li>
+            <li><label><input type="radio" name="q1" value="correct"> to</label></li>
+            <li><label><input type="radio" name="q1" value="incorrect"> at</label></li>
+            <li><label><input type="radio" name="q1" value="incorrect"> for</label></li>
+          </ul>
         </div>
         <!-- Q2 -->
         <div class="question">
-          <p>Q2 (Editorial 1): Which preposition correctly fills the blank?<br>
-          "The government begins to calibrate some kind ____ a response only after the event."</p>
-          <div class="options">
-            <label><input type="radio" name="q2" data-correct="false"> in</label>
-            <label><input type="radio" name="q2" data-correct="true"> of</label>
-            <label><input type="radio" name="q2" data-correct="false"> for</label>
-            <label><input type="radio" name="q2" data-correct="false"> to</label>
-          </div>
+          <p>2. In the revised net-metering policy, what is the buyback rate for surplus solar electricity?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q2" value="correct"> Rs10 per unit</label></li>
+            <li><label><input type="radio" name="q2" value="incorrect"> Rs27 per unit</label></li>
+            <li><label><input type="radio" name="q2" value="incorrect"> Rs42 per unit</label></li>
+            <li><label><input type="radio" name="q2" value="incorrect"> Rs48 per unit</label></li>
+          </ul>
         </div>
         <!-- Q3 -->
         <div class="question">
-          <p>Q3 (Editorial 1): Identify the grammatical error in the sentence below:<br>
-          "With a long history of terrorist attacks in the country, it is a pity that the government begins to calibrate a response after the event."</p>
-          <div class="options">
-            <label><input type="radio" name="q3" data-correct="false"> Misplaced modifier</label>
-            <label><input type="radio" name="q3" data-correct="true"> Faulty parallelism</label>
-            <label><input type="radio" name="q3" data-correct="false"> Incorrect tense</label>
-            <label><input type="radio" name="q3" data-correct="false"> Missing article</label>
-          </div>
+          <p>3. Choose the correct synonym for "revised" as used in the context of policy changes.</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q3" value="incorrect"> Rejected</label></li>
+            <li><label><input type="radio" name="q3" value="correct"> Amended</label></li>
+            <li><label><input type="radio" name="q3" value="incorrect"> Ignored</label></li>
+            <li><label><input type="radio" name="q3" value="incorrect"> Dismissed</label></li>
+          </ul>
         </div>
         <!-- Q4 -->
         <div class="question">
-          <p>Q4 (Editorial 1): Which word in the sentence functions as a subordinating conjunction?<br>
-          "Instead of taking steps to pre-empt, or at least minimise, them..."</p>
-          <div class="options">
-            <label><input type="radio" name="q4" data-correct="false"> taking</label>
-            <label><input type="radio" name="q4" data-correct="true"> instead of</label>
-            <label><input type="radio" name="q4" data-correct="false"> pre-empt</label>
-            <label><input type="radio" name="q4" data-correct="false"> minimise</label>
-          </div>
+          <p>4. Which term best describes the surplus electricity that is bought by distribution companies?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q4" value="incorrect"> Deficit</label></li>
+            <li><label><input type="radio" name="q4" value="incorrect"> Shortfall</label></li>
+            <li><label><input type="radio" name="q4" value="correct"> Surplus</label></li>
+            <li><label><input type="radio" name="q4" value="incorrect"> Scarcity</label></li>
+          </ul>
         </div>
         <!-- Q5 -->
         <div class="question">
-          <p>Q5 (Editorial 1): Choose the synonym for <em>minimise</em> as used in the editorial.</p>
-          <div class="options">
-            <label><input type="radio" name="q5" data-correct="false"> Exaggerate</label>
-            <label><input type="radio" name="q5" data-correct="true"> Reduce</label>
-            <label><input type="radio" name="q5" data-correct="false"> Complicate</label>
-            <label><input type="radio" name="q5" data-correct="false"> Intensify</label>
-          </div>
+          <p>5. In the sentence "The revised tariffs will apply to new distributed solar consumers," what part of speech is "revised"?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q5" value="correct"> Adjective</label></li>
+            <li><label><input type="radio" name="q5" value="incorrect"> Verb</label></li>
+            <li><label><input type="radio" name="q5" value="incorrect"> Noun</label></li>
+            <li><label><input type="radio" name="q5" value="incorrect"> Adverb</label></li>
+          </ul>
         </div>
         <!-- Q6 -->
         <div class="question">
-          <p>Q6 (Editorial 1): What is the antonym of <em>pre-empt</em> as used in the context?</p>
-          <div class="options">
-            <label><input type="radio" name="q6" data-correct="false"> Prevent</label>
-            <label><input type="radio" name="q6" data-correct="false"> Forestall</label>
-            <label><input type="radio" name="q6" data-correct="true"> React</label>
-            <label><input type="radio" name="q6" data-correct="false"> Anticipate</label>
-          </div>
+          <p>6. Choose the correct preposition to fill the blank: "This policy aims ___ achieve energy equity."</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q6" value="correct"> to</label></li>
+            <li><label><input type="radio" name="q6" value="incorrect"> for</label></li>
+            <li><label><input type="radio" name="q6" value="incorrect"> with</label></li>
+            <li><label><input type="radio" name="q6" value="incorrect"> by</label></li>
+          </ul>
         </div>
         <!-- Q7 -->
         <div class="question">
-          <p>Q7 (Editorial 1): In the phrase "a pity", the article "a" is used correctly because it functions as:</p>
-          <div class="options">
-            <label><input type="radio" name="q7" data-correct="true"> An indefinite article preceding a singular noun</label>
-            <label><input type="radio" name="q7" data-correct="false"> A demonstrative pronoun</label>
-            <label><input type="radio" name="q7" data-correct="false"> A possessive adjective</label>
-            <label><input type="radio" name="q7" data-correct="false"> A definite article</label>
-          </div>
+          <p>7. What does the term "net-metering" primarily refer to?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q7" value="correct"> A system of measuring electricity consumption and generation</label></li>
+            <li><label><input type="radio" name="q7" value="incorrect"> A method of billing based on peak usage</label></li>
+            <li><label><input type="radio" name="q7" value="incorrect"> A financial incentive for consumers</label></li>
+            <li><label><input type="radio" name="q7" value="incorrect"> A pricing strategy for power distribution</label></li>
+          </ul>
         </div>
         <!-- Q8 -->
         <div class="question">
-          <p>Q8 (Editorial 1): Which option best replaces <em>event</em> without changing the sentence’s meaning?</p>
-          <div class="options">
-            <label><input type="radio" name="q8" data-correct="false"> Incident</label>
-            <label><input type="radio" name="q8" data-correct="true"> Occurrence</label>
-            <label><input type="radio" name="q8" data-correct="false"> Episode</label>
-            <label><input type="radio" name="q8" data-correct="false"> Situation</label>
-          </div>
+          <p>8. Which option best describes the impact of the revised policy on existing contracts?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q8" value="incorrect"> Immediate changes for all contracts</label></li>
+            <li><label><input type="radio" name="q8" value="correct"> Changes after the expiry of seven-year contracts</label></li>
+            <li><label><input type="radio" name="q8" value="incorrect"> No changes will be applied</label></li>
+            <li><label><input type="radio" name="q8" value="incorrect"> New contracts only</label></li>
+          </ul>
         </div>
         <!-- Q9 -->
         <div class="question">
-          <p>Q9 (Editorial 1): In the sentence, what part of speech is the word <em>government</em>?</p>
-          <div class="options">
-            <label><input type="radio" name="q9" data-correct="true"> Noun</label>
-            <label><input type="radio" name="q9" data-correct="false"> Verb</label>
-            <label><input type="radio" name="q9" data-correct="false"> Adjective</label>
-            <label><input type="radio" name="q9" data-correct="false"> Adverb</label>
-          </div>
+          <p>9. Identify the error in the sentence: "Consumers who have surplus power will benefit, because the policy is cost effective."</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q9" value="incorrect"> No error</label></li>
+            <li><label><input type="radio" name="q9" value="correct"> "cost effective" should be hyphenated</label></li>
+            <li><label><input type="radio" name="q9" value="incorrect"> "surplus power" should be singular</label></li>
+            <li><label><input type="radio" name="q9" value="incorrect"> "because" is misused</label></li>
+          </ul>
         </div>
         <!-- Q10 -->
         <div class="question">
-          <p>Q10 (Editorial 1): Identify the error in punctuation in this sentence from the editorial.</p>
-          <div class="options">
-            <label><input type="radio" name="q10" data-correct="false"> Missing comma after "attacks"</label>
-            <label><input type="radio" name="q10" data-correct="true"> Unnecessary comma before "only"</label>
-            <label><input type="radio" name="q10" data-correct="false"> Missing semicolon</label>
-            <label><input type="radio" name="q10" data-correct="false"> Extra period at the end</label>
-          </div>
+          <p>10. What is the primary reason for the policy revision as mentioned in Editorial 1?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q10" value="correct"> To achieve energy price equity</label></li>
+            <li><label><input type="radio" name="q10" value="incorrect"> To increase profit margins</label></li>
+            <li><label><input type="radio" name="q10" value="incorrect"> To boost solar panel sales</label></li>
+            <li><label><input type="radio" name="q10" value="incorrect"> To reduce operational costs</label></li>
+          </ul>
         </div>
         <!-- Q11 -->
         <div class="question">
-          <p>Q11 (Editorial 1): Select the sentence that correctly uses the comparative form of "long" in a context similar to the editorial.</p>
-          <div class="options">
-            <label><input type="radio" name="q11" data-correct="false"> This is the longuest response.</label>
-            <label><input type="radio" name="q11" data-correct="true"> This response is longer than the previous one.</label>
-            <label><input type="radio" name="q11" data-correct="false"> This response is more long than the other.</label>
-            <label><input type="radio" name="q11" data-correct="false"> This is long than that.</label>
-          </div>
+          <p>11. Which word in "down by nearly 63pc" indicates a measurement?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q11" value="incorrect"> nearly</label></li>
+            <li><label><input type="radio" name="q11" value="correct"> 63pc</label></li>
+            <li><label><input type="radio" name="q11" value="incorrect"> down</label></li>
+            <li><label><input type="radio" name="q11" value="incorrect"> by</label></li>
+          </ul>
         </div>
         <!-- Q12 -->
         <div class="question">
-          <p>Q12 (Editorial 1): What is the function of the phrase "or at least minimise, them" in the sentence?</p>
-          <div class="options">
-            <label><input type="radio" name="q12" data-correct="false"> It serves as an independent clause.</label>
-            <label><input type="radio" name="q12" data-correct="true"> It provides an alternative explanation.</label>
-            <label><input type="radio" name="q12" data-correct="false"> It is an appositive.</label>
-            <label><input type="radio" name="q12" data-correct="false"> It acts as a direct object.</label>
-          </div>
+          <p>12. Which preposition best fits the sentence: "The tariffs are set ___ be competitive."</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q12" value="correct"> to</label></li>
+            <li><label><input type="radio" name="q12" value="incorrect"> for</label></li>
+            <li><label><input type="radio" name="q12" value="incorrect"> with</label></li>
+            <li><label><input type="radio" name="q12" value="incorrect"> on</label></li>
+          </ul>
         </div>
         <!-- Q13 -->
         <div class="question">
-          <p>Q13 (Editorial 1): Which is the best passive voice transformation of this sentence?<br>
-          "The government calibrates a response after the event."</p>
-          <div class="options">
-            <label><input type="radio" name="q13" data-correct="false"> A response is calibrating by the government.</label>
-            <label><input type="radio" name="q13" data-correct="true"> A response is calibrated by the government after the event.</label>
-            <label><input type="radio" name="q13" data-correct="false"> The event calibrates a response by the government.</label>
-            <label><input type="radio" name="q13" data-correct="false"> The government is calibrating a response.</label>
-          </div>
+          <p>13. What does the term "grid power" refer to in the context of the passage?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q13" value="correct"> Electricity supplied by the national grid</label></li>
+            <li><label><input type="radio" name="q13" value="incorrect"> Solar power generated locally</label></li>
+            <li><label><input type="radio" name="q13" value="incorrect"> Backup generator power</label></li>
+            <li><label><input type="radio" name="q13" value="incorrect"> Imported electricity</label></li>
+          </ul>
         </div>
         <!-- Q14 -->
         <div class="question">
-          <p>Q14 (Editorial 1): Identify the prepositional phrase in this sentence from the editorial.</p>
-          <div class="options">
-            <label><input type="radio" name="q14" data-correct="false"> with a long history</label>
-            <label><input type="radio" name="q14" data-correct="true"> in the country</label>
-            <label><input type="radio" name="q14" data-correct="false"> after the event</label>
-            <label><input type="radio" name="q14" data-correct="false"> of terrorist attacks</label>
-          </div>
+          <p>14. Which option correctly replaces the word "instal" in the passage?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q14" value="incorrect"> Install</label></li>
+            <li><label><input type="radio" name="q14" value="correct"> Set up</label></li>
+            <li><label><input type="radio" name="q14" value="incorrect"> Initiate</label></li>
+            <li><label><input type="radio" name="q14" value="incorrect"> Establish</label></li>
+          </ul>
         </div>
         <!-- Q15 -->
         <div class="question">
-          <p>Q15 (Editorial 1): Which sentence demonstrates correct subject-verb agreement?</p>
-          <div class="options">
-            <label><input type="radio" name="q15" data-correct="false"> The government are responding quickly.</label>
-            <label><input type="radio" name="q15" data-correct="true"> The government is responding quickly.</label>
-            <label><input type="radio" name="q15" data-correct="false"> The governments is responding quickly.</label>
-            <label><input type="radio" name="q15" data-correct="false"> The government respond quickly.</label>
-          </div>
+          <p>15. Identify the adjective in the sentence: "Consumers find solar power cost-effective."</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q15" value="incorrect"> find</label></li>
+            <li><label><input type="radio" name="q15" value="incorrect"> power</label></li>
+            <li><label><input type="radio" name="q15" value="correct"> cost-effective</label></li>
+            <li><label><input type="radio" name="q15" value="incorrect"> solar</label></li>
+          </ul>
         </div>
         <!-- Q16 -->
         <div class="question">
-          <p>Q16 (Editorial 1): Select the sentence where the adverb is correctly placed.</p>
-          <div class="options">
-            <label><input type="radio" name="q16" data-correct="false"> The government quickly calibrates a response only after the event.</label>
-            <label><input type="radio" name="q16" data-correct="true"> Quickly, the government calibrates a response only after the event.</label>
-            <label><input type="radio" name="q16" data-correct="false"> The government calibrates a response only quickly after the event.</label>
-            <label><input type="radio" name="q16" data-correct="false"> The government calibrates quickly a response only after the event.</label>
-          </div>
+          <p>16. Which option best describes the term "buyback" as used in the passage?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q16" value="incorrect"> Selling electricity to consumers</label></li>
+            <li><label><input type="radio" name="q16" value="correct"> Purchasing surplus electricity from consumers</label></li>
+            <li><label><input type="radio" name="q16" value="incorrect"> Lending money to solar panel owners</label></li>
+            <li><label><input type="radio" name="q16" value="incorrect"> Investing in renewable energy</label></li>
+          </ul>
         </div>
         <!-- Q17 -->
         <div class="question">
-          <p>Q17 (Editorial 1): Which sentence from the editorial uses a colon correctly?</p>
-          <div class="options">
-            <label><input type="radio" name="q17" data-correct="false"> The government’s plan: to calibrate a response after the event.</label>
-            <label><input type="radio" name="q17" data-correct="true"> The government has one clear goal: to ensure security.</label>
-            <label><input type="radio" name="q17" data-correct="false"> The government, has one goal: security.</label>
-            <label><input type="radio" name="q17" data-correct="false"> The government: calibrates its response after the event.</label>
-          </div>
+          <p>17. Fill in the blank with the correct preposition: "Export surplus electrons ___ the grid."</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q17" value="incorrect"> by</label></li>
+            <li><label><input type="radio" name="q17" value="correct"> to</label></li>
+            <li><label><input type="radio" name="q17" value="incorrect"> from</label></li>
+            <li><label><input type="radio" name="q17" value="incorrect"> with</label></li>
+          </ul>
         </div>
         <!-- Q18 -->
         <div class="question">
-          <p>Q18 (Editorial 1): Identify the sentence with correct parallel structure.</p>
-          <div class="options">
-            <label><input type="radio" name="q18" data-correct="false"> The government must act quickly and with determination, and must be decisive.</label>
-            <label><input type="radio" name="q18" data-correct="true"> The government must act quickly, decisively, and with determination.</label>
-            <label><input type="radio" name="q18" data-correct="false"> The government must act quickly and it must be decisive.</label>
-            <label><input type="radio" name="q18" data-correct="false"> The government must act quickly, and with determination.</label>
-          </div>
+          <p>18. Which grammatical structure is used in "The tariffs will apply to new distributed solar consumers"?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q18" value="correct"> Simple Future Tense</label></li>
+            <li><label><input type="radio" name="q18" value="incorrect"> Past Perfect Tense</label></li>
+            <li><label><input type="radio" name="q18" value="incorrect"> Present Continuous Tense</label></li>
+            <li><label><input type="radio" name="q18" value="incorrect"> Conditional Tense</label></li>
+          </ul>
         </div>
         <!-- Q19 -->
         <div class="question">
-          <p>Q19 (Editorial 1): Choose the correct form of the verb to complete this sentence:<br>
-          "The government ____ to calibrate its response after the event."</p>
-          <div class="options">
-            <label><input type="radio" name="q19" data-correct="false"> attempt</label>
-            <label><input type="radio" name="q19" data-correct="true"> attempts</label>
-            <label><input type="radio" name="q19" data-correct="false"> attempted</label>
-            <label><input type="radio" name="q19" data-correct="false"> attempting</label>
-          </div>
+          <p>19. Identify the part of speech for "significantly" in the sentence "significantly revise down buyback prices".</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q19" value="incorrect"> Noun</label></li>
+            <li><label><input type="radio" name="q19" value="correct"> Adverb</label></li>
+            <li><label><input type="radio" name="q19" value="incorrect"> Adjective</label></li>
+            <li><label><input type="radio" name="q19" value="incorrect"> Preposition</label></li>
+          </ul>
         </div>
         <!-- Q20 -->
         <div class="question">
-          <p>Q20 (Editorial 1): Select the option that best corrects the error in the sentence from Editorial 1.</p>
-          <div class="options">
-            <label><input type="radio" name="q20" data-correct="false"> The government calibrate its response only after the event.</label>
-            <label><input type="radio" name="q20" data-correct="false"> The government begins calibrating a response only after the event.</label>
-            <label><input type="radio" name="q20" data-correct="true"> The government begins to calibrate its response only after the event.</label>
-            <label><input type="radio" name="q20" data-correct="false"> The government begins calibrating its response only after event.</label>
-          </div>
+          <p>20. What is the implication of the revised policy on payback periods for new solar installations?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q20" value="incorrect"> They will become shorter</label></li>
+            <li><label><input type="radio" name="q20" value="correct"> They may increase</label></li>
+            <li><label><input type="radio" name="q20" value="incorrect"> They will remain the same</label></li>
+            <li><label><input type="radio" name="q20" value="incorrect"> They will be eliminated</label></li>
+          </ul>
         </div>
-        
-        <!-- ================== Editorial 2 Questions (20) ================== -->
+
+        <!-- Editorial 2 Questions (20 questions) -->
+        <h3>Editorial 2 Questions</h3>
         <!-- Q21 -->
         <div class="question">
-          <p>Q21 (Editorial 2): In the context of the new agriculture income tax laws, which word best replaces <em>scrutinising</em>?</p>
-          <div class="options">
-            <label><input type="radio" name="q21" data-correct="false"> Ignoring</label>
-            <label><input type="radio" name="q21" data-correct="true"> Examining</label>
-            <label><input type="radio" name="q21" data-correct="false"> Overlooking</label>
-            <label><input type="radio" name="q21" data-correct="false"> Neglecting</label>
-          </div>
+          <p>21. What is the main focus of Editorial 2?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q21" value="incorrect"> Economic reforms</label></li>
+            <li><label><input type="radio" name="q21" value="correct"> Combating Islamophobia</label></li>
+            <li><label><input type="radio" name="q21" value="incorrect"> Technological advancements</label></li>
+            <li><label><input type="radio" name="q21" value="incorrect"> Environmental policies</label></li>
+          </ul>
         </div>
         <!-- Q22 -->
         <div class="question">
-          <p>Q22 (Editorial 2): Which preposition best completes the sentence?<br>
-          "The collection of agriculture income tax is scheduled to start ____ July."</p>
-          <div class="options">
-            <label><input type="radio" name="q22" data-correct="true"> from</label>
-            <label><input type="radio" name="q22" data-correct="false"> in</label>
-            <label><input type="radio" name="q22" data-correct="false"> on</label>
-            <label><input type="radio" name="q22" data-correct="false"> at</label>
-          </div>
+          <p>22. According to Editorial 2, which organization reported a 73% rise in Islamophobic assaults in Britain?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q22" value="incorrect"> CAIR</label></li>
+            <li><label><input type="radio" name="q22" value="correct"> Tell MAMA</label></li>
+            <li><label><input type="radio" name="q22" value="incorrect"> UN General Assembly</label></li>
+            <li><label><input type="radio" name="q22" value="incorrect"> Big Tech</label></li>
+          </ul>
         </div>
         <!-- Q23 -->
         <div class="question">
-          <p>Q23 (Editorial 2): Identify the error in subject-verb agreement in this sentence from Editorial 2.</p>
-          <div class="options">
-            <label><input type="radio" name="q23" data-correct="false"> The provinces is ready.</label>
-            <label><input type="radio" name="q23" data-correct="true"> The provinces are ready.</label>
-            <label><input type="radio" name="q23" data-correct="false"> The province are ready.</label>
-            <label><input type="radio" name="q23" data-correct="false"> The province is ready.</label>
-          </div>
+          <p>23. Identify the correct antonym of "toxic" as used in the context of prejudice.</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q23" value="incorrect"> Harmful</label></li>
+            <li><label><input type="radio" name="q23" value="incorrect"> Poisonous</label></li>
+            <li><label><input type="radio" name="q23" value="correct"> Beneficial</label></li>
+            <li><label><input type="radio" name="q23" value="incorrect"> Deadly</label></li>
+          </ul>
         </div>
         <!-- Q24 -->
         <div class="question">
-          <p>Q24 (Editorial 2): Choose the correct synonym for <em>aligning</em> as used in the editorial.</p>
-          <div class="options">
-            <label><input type="radio" name="q24" data-correct="false"> Disarranging</label>
-            <label><input type="radio" name="q24" data-correct="true"> Harmonizing</label>
-            <label><input type="radio" name="q24" data-correct="false"> Disorganizing</label>
-            <label><input type="radio" name="q24" data-correct="false"> Clashing</label>
-          </div>
+          <p>24. Which term best describes the rise in anti-Muslim incidents as mentioned in the editorial?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q24" value="incorrect"> Decline</label></li>
+            <li><label><input type="radio" name="q24" value="incorrect"> Stability</label></li>
+            <li><label><input type="radio" name="q24" value="correct"> Surge</label></li>
+            <li><label><input type="radio" name="q24" value="incorrect"> Reduction</label></li>
+          </ul>
         </div>
         <!-- Q25 -->
         <div class="question">
-          <p>Q25 (Editorial 2): In the phrase "effective collection of the tax", what part of speech is <em>effective</em>?</p>
-          <div class="options">
-            <label><input type="radio" name="q25" data-correct="true"> Adjective</label>
-            <label><input type="radio" name="q25" data-correct="false"> Adverb</label>
-            <label><input type="radio" name="q25" data-correct="false"> Noun</label>
-            <label><input type="radio" name="q25" data-correct="false"> Verb</label>
-          </div>
+          <p>25. What does the term "far-right" refer to in the context of the article?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q25" value="correct"> Extremist political groups</label></li>
+            <li><label><input type="radio" name="q25" value="incorrect"> Liberal movements</label></li>
+            <li><label><input type="radio" name="q25" value="incorrect"> Centrist parties</label></li>
+            <li><label><input type="radio" name="q25" value="incorrect"> Progressive organizations</label></li>
+          </ul>
         </div>
         <!-- Q26 -->
         <div class="question">
-          <p>Q26 (Editorial 2): Select the antonym of <em>explosive</em> in the context of political resistance.</p>
-          <div class="options">
-            <label><input type="radio" name="q26" data-correct="false"> Volatile</label>
-            <label><input type="radio" name="q26" data-correct="true"> Stable</label>
-            <label><input type="radio" name="q26" data-correct="false"> Fiery</label>
-            <label><input type="radio" name="q26" data-correct="false"> Intense</label>
-          </div>
+          <p>26. Which preposition correctly fills the blank: "There is a rise ___ anti-Muslim sentiment."</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q26" value="incorrect"> in</label></li>
+            <li><label><input type="radio" name="q26" value="correct"> of</label></li>
+            <li><label><input type="radio" name="q26" value="incorrect"> at</label></li>
+            <li><label><input type="radio" name="q26" value="incorrect"> for</label></li>
+          </ul>
         </div>
         <!-- Q27 -->
         <div class="question">
-          <p>Q27 (Editorial 2): Which option best describes the function of the word <em>benchmark</em> in the sentence?</p>
-          <div class="options">
-            <label><input type="radio" name="q27" data-correct="false"> A standard of measurement</label>
-            <label><input type="radio" name="q27" data-correct="true"> A reference point</label>
-            <label><input type="radio" name="q27" data-correct="false"> A target to achieve</label>
-            <label><input type="radio" name="q27" data-correct="false"> An estimate</label>
-          </div>
+          <p>27. What does the phrase "anti-Muslim bias" mean?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q27" value="incorrect"> Favoring Muslims</label></li>
+            <li><label><input type="radio" name="q27" value="correct"> Prejudice against Muslims</label></li>
+            <li><label><input type="radio" name="q27" value="incorrect"> Neutrality towards religion</label></li>
+            <li><label><input type="radio" name="q27" value="incorrect"> Support for Muslim causes</label></li>
+          </ul>
         </div>
         <!-- Q28 -->
         <div class="question">
-          <p>Q28 (Editorial 2): Identify the preposition that best fits the blank in the sentence:<br>
-          "The provinces are in the same boat ____ their preparedness."</p>
-          <div class="options">
-            <label><input type="radio" name="q28" data-correct="true"> regarding</label>
-            <label><input type="radio" name="q28" data-correct="false"> for</label>
-            <label><input type="radio" name="q28" data-correct="false"> about</label>
-            <label><input type="radio" name="q28" data-correct="false"> with</label>
-          </div>
+          <p>28. Identify the correct synonym for "prejudice" as used in the article.</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q28" value="incorrect"> Tolerance</label></li>
+            <li><label><input type="radio" name="q28" value="correct"> Bias</label></li>
+            <li><label><input type="radio" name="q28" value="incorrect"> Equality</label></li>
+            <li><label><input type="radio" name="q28" value="incorrect"> Fairness</label></li>
+          </ul>
         </div>
         <!-- Q29 -->
         <div class="question">
-          <p>Q29 (Editorial 2): Choose the best passive construction for a sentence from Editorial 2.</p>
-          <div class="options">
-            <label><input type="radio" name="q29" data-correct="false"> The tax laws are implementing by the provinces.</label>
-            <label><input type="radio" name="q29" data-correct="true"> The new tax rates are being implemented by the provinces.</label>
-            <label><input type="radio" name="q29" data-correct="false"> The provinces implement the new tax rates.</label>
-            <label><input type="radio" name="q29" data-correct="false"> The new tax rates implement themselves.</label>
-          </div>
+          <p>29. Which part of speech is "anti-Muslim" in the phrase "anti-Muslim bias"?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q29" value="correct"> Adjective</label></li>
+            <li><label><input type="radio" name="q29" value="incorrect"> Noun</label></li>
+            <li><label><input type="radio" name="q29" value="incorrect"> Adverb</label></li>
+            <li><label><input type="radio" name="q29" value="incorrect"> Preposition</label></li>
+          </ul>
         </div>
         <!-- Q30 -->
         <div class="question">
-          <p>Q30 (Editorial 2): What is the function of the word <em>comprehensive</em> in the sentence?</p>
-          <div class="options">
-            <label><input type="radio" name="q30" data-correct="false"> It is a noun describing the tax.</label>
-            <label><input type="radio" name="q30" data-correct="true"> It is an adjective describing the framework.</label>
-            <label><input type="radio" name="q30" data-correct="false"> It is an adverb modifying the verb.</label>
-            <label><input type="radio" name="q30" data-correct="false"> It is a pronoun referring to the provinces.</label>
-          </div>
+          <p>30. Which option correctly expresses the meaning of "xenophobic"?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q30" value="incorrect"> Open-minded</label></li>
+            <li><label><input type="radio" name="q30" value="correct"> Fearful of foreigners</label></li>
+            <li><label><input type="radio" name="q30" value="incorrect"> Supportive of immigration</label></li>
+            <li><label><input type="radio" name="q30" value="incorrect"> Inclusive</label></li>
+          </ul>
         </div>
         <!-- Q31 -->
         <div class="question">
-          <p>Q31 (Editorial 2): Select the correct form of the verb to complete the sentence from Editorial 2.</p>
-          <div class="options">
-            <label><input type="radio" name="q31" data-correct="false"> The provinces has prepared.</label>
-            <label><input type="radio" name="q31" data-correct="true"> The provinces have prepared.</label>
-            <label><input type="radio" name="q31" data-correct="false"> The provinces preparing.</label>
-            <label><input type="radio" name="q31" data-correct="false"> The provinces was prepared.</label>
-          </div>
+          <p>31. Identify the error in the sentence: "Far-right groups is exploiting the conflict."</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q31" value="correct"> "is" should be "are"</label></li>
+            <li><label><input type="radio" name="q31" value="incorrect"> "groups" should be singular</label></li>
+            <li><label><input type="radio" name="q31" value="incorrect"> "exploiting" is incorrect</label></li>
+            <li><label><input type="radio" name="q31" value="incorrect"> No error</label></li>
+          </ul>
         </div>
         <!-- Q32 -->
         <div class="question">
-          <p>Q32 (Editorial 2): Identify the sentence with the correct use of the article.</p>
-          <div class="options">
-            <label><input type="radio" name="q32" data-correct="false"> The IMF mission reviewed a progress.</label>
-            <label><input type="radio" name="q32" data-correct="true"> The IMF mission reviewed the progress.</label>
-            <label><input type="radio" name="q32" data-correct="false"> An IMF mission reviewed progress.</label>
-            <label><input type="radio" name="q32" data-correct="false"> IMF mission reviewed the progress.</label>
-          </div>
+          <p>32. Which preposition best completes the sentence: "He spoke ___ the audience at the rally."</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q32" value="incorrect"> on</label></li>
+            <li><label><input type="radio" name="q32" value="correct"> to</label></li>
+            <li><label><input type="radio" name="q32" value="incorrect"> for</label></li>
+            <li><label><input type="radio" name="q32" value="incorrect"> with</label></li>
+          </ul>
         </div>
         <!-- Q33 -->
         <div class="question">
-          <p>Q33 (Editorial 2): Which sentence best demonstrates correct punctuation?</p>
-          <div class="options">
-            <label><input type="radio" name="q33" data-correct="false"> The tax, collection is scheduled to start in July.</label>
-            <label><input type="radio" name="q33" data-correct="true"> The tax collection is scheduled to start in July.</label>
-            <label><input type="radio" name="q33" data-correct="false"> The tax collection is scheduled, to start in July.</label>
-            <label><input type="radio" name="q33" data-correct="false"> The tax collection is scheduled to, start in July.</label>
-          </div>
+          <p>33. What is the role of online platforms as suggested in the article?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q33" value="incorrect"> To promote hate speech</label></li>
+            <li><label><input type="radio" name="q33" value="correct"> To tackle hate speech</label></li>
+            <li><label><input type="radio" name="q33" value="incorrect"> To ignore violent acts</label></li>
+            <li><label><input type="radio" name="q33" value="incorrect"> To support far-right groups</label></li>
+          </ul>
         </div>
         <!-- Q34 -->
         <div class="question">
-          <p>Q34 (Editorial 2): Choose the correct comparative form of the adjective from Editorial 2.</p>
-          <div class="options">
-            <label><input type="radio" name="q34" data-correct="false"> More explosive</label>
-            <label><input type="radio" name="q34" data-correct="true"> Less explosive</label>
-            <label><input type="radio" name="q34" data-correct="false"> Explosiver</label>
-            <label><input type="radio" name="q34" data-correct="false"> Most explosive</label>
-          </div>
+          <p>34. Which phrase best replaces "to combat" in the context of the article?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q34" value="incorrect"> To ignore</label></li>
+            <li><label><input type="radio" name="q34" value="correct"> To fight against</label></li>
+            <li><label><input type="radio" name="q34" value="incorrect"> To accept</label></li>
+            <li><label><input type="radio" name="q34" value="incorrect"> To support</label></li>
+          </ul>
         </div>
         <!-- Q35 -->
         <div class="question">
-          <p>Q35 (Editorial 2): Identify the prepositional phrase that indicates time in a sentence from Editorial 2.</p>
-          <div class="options">
-            <label><input type="radio" name="q35" data-correct="false"> On the provinces</label>
-            <label><input type="radio" name="q35" data-correct="true"> From July</label>
-            <label><input type="radio" name="q35" data-correct="false"> In the provinces</label>
-            <label><input type="radio" name="q35" data-correct="false"> By the deadline</label>
-          </div>
+          <p>35. What type of bias is discussed in Editorial 2?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q35" value="incorrect"> Racial bias</label></li>
+            <li><label><input type="radio" name="q35" value="incorrect"> Gender bias</label></li>
+            <li><label><input type="radio" name="q35" value="correct"> Anti-Muslim bias</label></li>
+            <li><label><input type="radio" name="q35" value="incorrect"> Economic bias</label></li>
+          </ul>
         </div>
         <!-- Q36 -->
         <div class="question">
-          <p>Q36 (Editorial 2): Identify the capitalization error in the following sentence from Editorial 2.</p>
-          <div class="options">
-            <label><input type="radio" name="q36" data-correct="true"> "imf" should be capitalized</label>
-            <label><input type="radio" name="q36" data-correct="false"> "Punjab" should be lowercase</label>
-            <label><input type="radio" name="q36" data-correct="false"> "Sindh" should be lowercase</label>
-            <label><input type="radio" name="q36" data-correct="false"> No error</label>
-          </div>
+          <p>36. Identify the correct preposition: "The resolution was adopted ___ the UN General Assembly."</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q36" value="correct"> by</label></li>
+            <li><label><input type="radio" name="q36" value="incorrect"> at</label></li>
+            <li><label><input type="radio" name="q36" value="incorrect"> for</label></li>
+            <li><label><input type="radio" name="q36" value="incorrect"> on</label></li>
+          </ul>
         </div>
         <!-- Q37 -->
         <div class="question">
-          <p>Q37 (Editorial 2): Which of the following is the best synonym for <em>levy</em> as used in the editorial?</p>
-          <div class="options">
-            <label><input type="radio" name="q37" data-correct="false"> Abolish</label>
-            <label><input type="radio" name="q37" data-correct="true"> Impose</label>
-            <label><input type="radio" name="q37" data-correct="false"> Reduce</label>
-            <label><input type="radio" name="q37" data-correct="false"> Ignore</label>
-          </div>
+          <p>37. Which word in Editorial 2 best describes the actions of far-right groups?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q37" value="incorrect"> Moderate</label></li>
+            <li><label><input type="radio" name="q37" value="incorrect"> Tolerant</label></li>
+            <li><label><input type="radio" name="q37" value="correct"> Extremist</label></li>
+            <li><label><input type="radio" name="q37" value="incorrect"> Liberal</label></li>
+          </ul>
         </div>
         <!-- Q38 -->
         <div class="question">
-          <p>Q38 (Editorial 2): Select the option that best corrects the error in word order in a sentence from Editorial 2.</p>
-          <div class="options">
-            <label><input type="radio" name="q38" data-correct="false"> The provinces are prepared the tax collection effectively.</label>
-            <label><input type="radio" name="q38" data-correct="true"> The provinces are effectively prepared for tax collection.</label>
-            <label><input type="radio" name="q38" data-correct="false"> Effectively, the provinces prepared tax collection.</label>
-            <label><input type="radio" name="q38" data-correct="false"> The provinces are prepared effectively tax collection.</label>
-          </div>
+          <p>38. What does the term "bigotry" mean as used in the context of the article?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q38" value="correct"> Intolerance towards a particular group</label></li>
+            <li><label><input type="radio" name="q38" value="incorrect"> Acceptance of differences</label></li>
+            <li><label><input type="radio" name="q38" value="incorrect"> Open-mindedness</label></li>
+            <li><label><input type="radio" name="q38" value="incorrect"> Neutrality</label></li>
+          </ul>
         </div>
         <!-- Q39 -->
         <div class="question">
-          <p>Q39 (Editorial 2): Which option demonstrates the correct usage of "their" in a sentence from Editorial 2?</p>
-          <div class="options">
-            <label><input type="radio" name="q39" data-correct="false"> Their contribution is insignificant.</label>
-            <label><input type="radio" name="q39" data-correct="true"> The provinces improved their tax collection.</label>
-            <label><input type="radio" name="q39" data-correct="false"> Their provinces is ready.</label>
-            <label><input type="radio" name="q39" data-correct="false"> The tax collection is their ineffective.</label>
-          </div>
+          <p>39. Choose the correct synonym for "demonising" as used in the article.</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q39" value="incorrect"> Praising</label></li>
+            <li><label><input type="radio" name="q39" value="incorrect"> Celebrating</label></li>
+            <li><label><input type="radio" name="q39" value="correct"> Vilifying</label></li>
+            <li><label><input type="radio" name="q39" value="incorrect"> Admiring</label></li>
+          </ul>
         </div>
         <!-- Q40 -->
         <div class="question">
-          <p>Q40 (Editorial 2): Identify the correct way to express a negative condition in a sentence from Editorial 2.</p>
-          <div class="options">
-            <label><input type="radio" name="q40" data-correct="false"> Unless the provinces do not enforce the tax, there will be no progress.</label>
-            <label><input type="radio" name="q40" data-correct="true"> If the provinces do not enforce the tax, there will be no progress.</label>
-            <label><input type="radio" name="q40" data-correct="false"> Unless the provinces enforce the tax, there will be no progress.</label>
-            <label><input type="radio" name="q40" data-correct="false"> If the provinces enforce not the tax, there will be no progress.</label>
-          </div>
+          <p>40. Which phrase best captures the call-to-action regarding combating hate speech?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q40" value="incorrect"> Stay silent</label></li>
+            <li><label><input type="radio" name="q40" value="correct"> Speak up against hate</label></li>
+            <li><label><input type="radio" name="q40" value="incorrect"> Ignore the issue</label></li>
+            <li><label><input type="radio" name="q40" value="incorrect"> Accept hate</label></li>
+          </ul>
         </div>
-        
-        <!-- ================== Editorial 3 Questions (10) ================== -->
+
+        <!-- Editorial 3 Questions (10 questions) -->
+        <h3>Editorial 3 Questions</h3>
         <!-- Q41 -->
         <div class="question">
-          <p>Q41 (Editorial 3): In the statement about the gender pay gap, the word <em>systemic</em> is used as a(n):</p>
-          <div class="options">
-            <label><input type="radio" name="q41" data-correct="false"> Noun</label>
-            <label><input type="radio" name="q41" data-correct="true"> Adjective</label>
-            <label><input type="radio" name="q41" data-correct="false"> Verb</label>
-            <label><input type="radio" name="q41" data-correct="false"> Adverb</label>
-          </div>
+          <p>41. What is the primary objective of the educational programme in Editorial 3?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q41" value="correct"> To provide complete educational support to children of prisoners</label></li>
+            <li><label><input type="radio" name="q41" value="incorrect"> To reform the prison system</label></li>
+            <li><label><input type="radio" name="q41" value="incorrect"> To reduce prison populations</label></li>
+            <li><label><input type="radio" name="q41" value="incorrect"> To privatize education</label></li>
+          </ul>
         </div>
         <!-- Q42 -->
         <div class="question">
-          <p>Q42 (Editorial 3): Which preposition best completes the sentence?<br>
-          "The gender pay gap has decreased ____ 25pc from 33pc in 2018."</p>
-          <div class="options">
-            <label><input type="radio" name="q42" data-correct="true"> to</label>
-            <label><input type="radio" name="q42" data-correct="false"> from</label>
-            <label><input type="radio" name="q42" data-correct="false"> by</label>
-            <label><input type="radio" name="q42" data-correct="false"> of</label>
-          </div>
+          <p>42. According to Editorial 3, what should be established in each city to support juveniles?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q42" value="incorrect"> Prisons</label></li>
+            <li><label><input type="radio" name="q42" value="correct"> Remand homes</label></li>
+            <li><label><input type="radio" name="q42" value="incorrect"> Rehabilitation centers</label></li>
+            <li><label><input type="radio" name="q42" value="incorrect"> Correctional facilities</label></li>
+          </ul>
         </div>
         <!-- Q43 -->
         <div class="question">
-          <p>Q43 (Editorial 3): Identify the part of speech of the word <em>disparate</em> in the editorial.</p>
-          <div class="options">
-            <label><input type="radio" name="q43" data-correct="false"> Verb</label>
-            <label><input type="radio" name="q43" data-correct="true"> Adjective</label>
-            <label><input type="radio" name="q43" data-correct="false"> Adverb</label>
-            <label><input type="radio" name="q43" data-correct="false"> Noun</label>
-          </div>
+          <p>43. Identify the part of speech for "juvenile" in the context of the passage.</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q43" value="incorrect"> Noun</label></li>
+            <li><label><input type="radio" name="q43" value="incorrect"> Verb</label></li>
+            <li><label><input type="radio" name="q43" value="correct"> Adjective</label></li>
+            <li><label><input type="radio" name="q43" value="incorrect"> Adverb</label></li>
+          </ul>
         </div>
         <!-- Q44 -->
         <div class="question">
-          <p>Q44 (Editorial 3): Choose the synonym for <em>diplomatically</em> as used in the editorial.</p>
-          <div class="options">
-            <label><input type="radio" name="q44" data-correct="false"> Bluntly</label>
-            <label><input type="radio" name="q44" data-correct="true"> Tactfully</label>
-            <label><input type="radio" name="q44" data-correct="false"> Abruptly</label>
-            <label><input type="radio" name="q44" data-correct="false"> Roughly</label>
-          </div>
+          <p>44. What does the programme in Editorial 3 primarily aim to prevent?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q44" value="incorrect"> Educational disparity</label></li>
+            <li><label><input type="radio" name="q44" value="incorrect"> Juvenile delinquency</label></li>
+            <li><label><input type="radio" name="q44" value="correct"> Inadequate education for children of prisoners</label></li>
+            <li><label><input type="radio" name="q44" value="incorrect"> Overcrowding in prisons</label></li>
+          </ul>
         </div>
         <!-- Q45 -->
         <div class="question">
-          <p>Q45 (Editorial 3): Which of the following is the antonym of <em>discrimination</em> as discussed in the editorial?</p>
-          <div class="options">
-            <label><input type="radio" name="q45" data-correct="false"> Bias</label>
-            <label><input type="radio" name="q45" data-correct="true"> Equality</label>
-            <label><input type="radio" name="q45" data-correct="false"> Prejudice</label>
-            <label><input type="radio" name="q45" data-correct="false"> Inequality</label>
-          </div>
+          <p>45. Identify the grammatical error in the sentence: "Children in prison have often been treated like adult criminals."</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q45" value="incorrect"> No error</label></li>
+            <li><label><input type="radio" name="q45" value="correct"> The comparison is improper</label></li>
+            <li><label><input type="radio" name="q45" value="incorrect"> Misplaced modifier</label></li>
+            <li><label><input type="radio" name="q45" value="incorrect"> Verb tense error</label></li>
+          </ul>
         </div>
         <!-- Q46 -->
         <div class="question">
-          <p>Q46 (Editorial 3): Select the sentence with proper adverb placement from Editorial 3.</p>
-          <div class="options">
-            <label><input type="radio" name="q46" data-correct="false"> Women earn Rs750 per hour fairly compared to men.</label>
-            <label><input type="radio" name="q46" data-correct="true"> Women earn, on average, Rs750 per hour compared to Rs1000 for men.</label>
-            <label><input type="radio" name="q46" data-correct="false"> Women fairly earn Rs750 per hour compared to men.</label>
-            <label><input type="radio" name="q46" data-correct="false"> Women earn Rs750 per hour, fairly, compared to men.</label>
-          </div>
+          <p>46. Choose the correct synonym for "reformative" as used in the context of the passage.</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q46" value="incorrect"> Punitive</label></li>
+            <li><label><input type="radio" name="q46" value="correct"> Corrective</label></li>
+            <li><label><input type="radio" name="q46" value="incorrect"> Restrictive</label></li>
+            <li><label><input type="radio" name="q46" value="incorrect"> Lenient</label></li>
+          </ul>
         </div>
         <!-- Q47 -->
         <div class="question">
-          <p>Q47 (Editorial 3): In the context of Editorial 3, what does the term <em>wage inequality</em> most nearly mean?</p>
-          <div class="options">
-            <label><input type="radio" name="q47" data-correct="false"> Equal wages for all</label>
-            <label><input type="radio" name="q47" data-correct="true"> Unequal pay between genders</label>
-            <label><input type="radio" name="q47" data-correct="false"> High overall wages</label>
-            <label><input type="radio" name="q47" data-correct="false"> Standardized wages</label>
-          </div>
+          <p>47. Which option correctly completes the sentence: "The children were provided ___ educational support in jails."</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q47" value="correct"> with</label></li>
+            <li><label><input type="radio" name="q47" value="incorrect"> by</label></li>
+            <li><label><input type="radio" name="q47" value="incorrect"> at</label></li>
+            <li><label><input type="radio" name="q47" value="incorrect"> from</label></li>
+          </ul>
         </div>
         <!-- Q48 -->
         <div class="question">
-          <p>Q48 (Editorial 3): Identify the grammatical function of the word <em>informal</em> in a sentence from the editorial.</p>
-          <div class="options">
-            <label><input type="radio" name="q48" data-correct="false"> Noun functioning as subject</label>
-            <label><input type="radio" name="q48" data-correct="true"> Adjective modifying a noun</label>
-            <label><input type="radio" name="q48" data-correct="false"> Adverb modifying a verb</label>
-            <label><input type="radio" name="q48" data-correct="false"> Verb in past tense</label>
-          </div>
+          <p>48. What is the tone of the passage in Editorial 3?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q48" value="incorrect"> Sarcastic</label></li>
+            <li><label><input type="radio" name="q48" value="correct"> Concerned</label></li>
+            <li><label><input type="radio" name="q48" value="incorrect"> Humorous</label></li>
+            <li><label><input type="radio" name="q48" value="incorrect"> Indifferent</label></li>
+          </ul>
         </div>
         <!-- Q49 -->
         <div class="question">
-          <p>Q49 (Editorial 3): Choose the correct form of the verb in a sentence regarding the gender gap.</p>
-          <div class="options">
-            <label><input type="radio" name="q49" data-correct="false"> The gap widen over time.</label>
-            <label><input type="radio" name="q49" data-correct="true"> The gap widens over time.</label>
-            <label><input type="radio" name="q49" data-correct="false"> The gap widened over time.</label>
-            <label><input type="radio" name="q49" data-correct="false"> The gap widening over time.</label>
-          </div>
+          <p>49. Identify the correct part of speech for "educational" in the sentence "educational support".</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q49" value="incorrect"> Noun</label></li>
+            <li><label><input type="radio" name="q49" value="correct"> Adjective</label></li>
+            <li><label><input type="radio" name="q49" value="incorrect"> Verb</label></li>
+            <li><label><input type="radio" name="q49" value="incorrect"> Adverb</label></li>
+          </ul>
         </div>
         <!-- Q50 -->
         <div class="question">
-          <p>Q50 (Editorial 3): Select the option that best corrects the punctuation error in a sentence from Editorial 3.</p>
-          <div class="options">
-            <label><input type="radio" name="q50" data-correct="false"> The report, by the ILO, shows a 25pc gap.</label>
-            <label><input type="radio" name="q50" data-correct="true"> The report by the ILO shows a 25pc gap.</label>
-            <label><input type="radio" name="q50" data-correct="false"> The report, by the ILO shows, a 25pc gap.</label>
-            <label><input type="radio" name="q50" data-correct="false"> The report by the ILO, shows a 25pc gap.</label>
-          </div>
+          <p>50. What does the term "delinquency" refer to in the context of the passage?</p>
+          <ul class="options">
+            <li><label><input type="radio" name="q50" value="incorrect"> Academic failure</label></li>
+            <li><label><input type="radio" name="q50" value="incorrect"> Criminal behavior</label></li>
+            <li><label><input type="radio" name="q50" value="correct"> Minor criminal behavior</label></li>
+            <li><label><input type="radio" name="q50" value="incorrect"> Physical abuse</label></li>
+          </ul>
         </div>
-        <br>
-        <button type="button" onclick="submitQuiz()">Submit Quiz</button>
       </form>
+      <button onclick="submitQuiz()">Submit Quiz</button>
     </div>
     
-    <!-- Result Section -->
-    <div id="resultSection" class="result hidden"></div>
+    <!-- Results Section -->
+    <div id="resultSection"></div>
   </div>
-  
+
   <footer>
-    <p>Contact us at: 03265762698</p>
-    <p>For more details, call now!</p>
+    <p>Contact: 03265762698</p>
+    <p>Call us for more information!</p>
   </footer>
-  
-  <!-- Hidden Form for Formspree Submission -->
-  <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" class="hidden">
-    <input type="hidden" name="name">
-    <input type="hidden" name="attempted">
-    <input type="hidden" name="score">
-    <input type="hidden" name="timeTaken">
+
+  <!-- Hidden form to submit results via Formspree -->
+  <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+    <input type="text" name="name">
+    <input type="text" name="attempted">
+    <input type="text" name="score">
+    <input type="text" name="time">
   </form>
 </body>
 </html>
