@@ -2,714 +2,743 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 15 March 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 16 March 2025</title>
   <style>
-    /* Disable text selection on the entire page */
-    * {
+    /* Disable text selection */
+    body, header, footer, .quiz-container, .question, .result, input, button, p, h1, h2, h3, li, label {
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
     }
+    /* Basic styling */
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
     }
-    header, footer {
-      background: #333;
+    header {
+      background-color: #333;
       color: #fff;
+      padding: 20px;
       text-align: center;
-      padding: 20px 10px;
+      position: relative;
     }
     header img {
-      max-width: 80px;
-      vertical-align: middle;
+      width: 100px;
+      height: auto;
+      position: absolute;
+      left: 20px;
+      top: 20px;
     }
-    header h1 {
-      display: inline-block;
-      margin: 0 10px;
-      vertical-align: middle;
-      font-size: 24px;
-    }
-    header p {
-      margin: 5px 0 0;
-      font-size: 16px;
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
     }
     .container {
-      max-width: 900px;
+      padding: 20px;
+      margin-bottom: 70px;
+    }
+    .name-entry, .quiz-section, .result-section {
       margin: 20px auto;
+      max-width: 800px;
       background: #fff;
       padding: 20px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    #nameSection, #quizSection, #resultSection {
-      margin: 20px 0;
+    .quiz-section {
+      display: none;
     }
-    input[type="text"] {
-      width: 80%;
-      padding: 8px;
-      font-size: 16px;
-      margin-right: 10px;
+    .question {
+      margin-bottom: 20px;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
     }
-    button {
-      padding: 8px 16px;
-      font-size: 16px;
-      cursor: pointer;
+    .question h3 {
+      margin-bottom: 10px;
     }
-    .timer {
+    .question ul {
+      list-style: none;
+      padding: 0;
+    }
+    .question li {
+      margin-bottom: 5px;
+    }
+    #timer {
       font-size: 18px;
       font-weight: bold;
       text-align: right;
       margin-bottom: 10px;
     }
-    .question {
-      margin-bottom: 20px;
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }
-    .question p {
+    button {
+      padding: 10px 20px;
       font-size: 16px;
-      margin-bottom: 8px;
-    }
-    .options {
-      list-style-type: none;
-      padding: 0;
-    }
-    .options li {
-      margin-bottom: 8px;
-    }
-    /* Prevent copy-paste via user selection and context menu */
-    body {
-      -webkit-touch-callout: none;
+      cursor: pointer;
     }
   </style>
   <script>
-    // Disable right-click context menu
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    }, false);
+    // Disable right-click and copy
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.oncopy = function(e){ e.preventDefault(); return false; };
 
-    var timeRemaining = 600; // 10 minutes = 600 seconds
-    var timerInterval;
+    // Questions array – 20 from Editorial 1, 20 from Editorial 2, 10 from Editorial 3
+    let questions = [
+      // Editorial 1 Questions (1-20)
+      {
+        id: 1,
+        question: "Editorial 1: In the sentence 'The successful conclusion of the first performance review...', what part of speech is the word 'successful'?",
+        options: [
+          { text: "Adjective", correct: true },
+          { text: "Adverb", correct: false },
+          { text: "Noun", correct: false },
+          { text: "Verb", correct: false }
+        ]
+      },
+      {
+        id: 2,
+        question: "Editorial 1: Identify the preposition in the phrase 'of the IMF’s extended $7bn funding programme'.",
+        options: [
+          { text: "of", correct: true },
+          { text: "extended", correct: false },
+          { text: "programme", correct: false },
+          { text: "IMF’s", correct: false }
+        ]
+      },
+      {
+        id: 3,
+        question: "Editorial 1: In 'a positive development for the cash-strapped economy', which word is a compound adjective?",
+        options: [
+          { text: "cash-strapped", correct: true },
+          { text: "positive", correct: false },
+          { text: "development", correct: false },
+          { text: "economy", correct: false }
+        ]
+      },
+      {
+        id: 4,
+        question: "Editorial 1: What is the synonym for 'consolidation' in the context of fiscal policies?",
+        options: [
+          { text: "merger", correct: false },
+          { text: "strengthening", correct: true },
+          { text: "deterioration", correct: false },
+          { text: "reduction", correct: false }
+        ]
+      },
+      {
+        id: 5,
+        question: "Editorial 1: Which is the antonym for 'durable'?",
+        options: [
+          { text: "temporary", correct: true },
+          { text: "long-lasting", correct: false },
+          { text: "stable", correct: false },
+          { text: "solid", correct: false }
+        ]
+      },
+      {
+        id: 6,
+        question: "Editorial 1: In 'tight monetary policy', what is the function of 'tight'?",
+        options: [
+          { text: "Adjective", correct: true },
+          { text: "Adverb", correct: false },
+          { text: "Noun", correct: false },
+          { text: "Preposition", correct: false }
+        ]
+      },
+      {
+        id: 7,
+        question: "Editorial 1: Identify the error (if any) in 'the discussions have made considerable progress in several areas'.",
+        options: [
+          { text: "No error", correct: true },
+          { text: "Subject-verb disagreement", correct: false },
+          { text: "Incorrect preposition", correct: false },
+          { text: "Wrong tense", correct: false }
+        ]
+      },
+      {
+        id: 8,
+        question: "Editorial 1: In 'fiscal consolidation for durable reduction in public debt', what is the function of 'for'?",
+        options: [
+          { text: "Preposition", correct: true },
+          { text: "Conjunction", correct: false },
+          { text: "Article", correct: false },
+          { text: "Verb", correct: false }
+        ]
+      },
+      {
+        id: 9,
+        question: "Editorial 1: Choose the correct synonym for 'impediment' as used in the text.",
+        options: [
+          { text: "obstacle", correct: true },
+          { text: "advantage", correct: false },
+          { text: "benefit", correct: false },
+          { text: "solution", correct: false }
+        ]
+      },
+      {
+        id: 10,
+        question: "Editorial 1: Which word in 'programme implementation has been strong' acts as a noun?",
+        options: [
+          { text: "implementation", correct: true },
+          { text: "programme", correct: false },
+          { text: "strong", correct: false },
+          { text: "has", correct: false }
+        ]
+      },
+      {
+        id: 11,
+        question: "Editorial 1: In the context 'benchmark targets', what role does 'benchmark' serve?",
+        options: [
+          { text: "Adjective", correct: true },
+          { text: "Noun", correct: false },
+          { text: "Adverb", correct: false },
+          { text: "Verb", correct: false }
+        ]
+      },
+      {
+        id: 12,
+        question: "Editorial 1: In 'the government would be doing them and itself a favour', which is the reflexive pronoun?",
+        options: [
+          { text: "itself", correct: true },
+          { text: "them", correct: false },
+          { text: "government", correct: false },
+          { text: "favour", correct: false }
+        ]
+      },
+      {
+        id: 13,
+        question: "Editorial 1: What is the meaning of 'jettison' as used in the article?",
+        options: [
+          { text: "discard", correct: true },
+          { text: "embrace", correct: false },
+          { text: "increase", correct: false },
+          { text: "reinforce", correct: false }
+        ]
+      },
+      {
+        id: 14,
+        question: "Editorial 1: Identify the correct part of speech for 'structural' in 'structural reform agenda'.",
+        options: [
+          { text: "Adjective", correct: true },
+          { text: "Noun", correct: false },
+          { text: "Adverb", correct: false },
+          { text: "Verb", correct: false }
+        ]
+      },
+      {
+        id: 15,
+        question: "Editorial 1: In 'facing a formidable political challenge', which word is the determiner?",
+        options: [
+          { text: "a", correct: true },
+          { text: "formidable", correct: false },
+          { text: "political", correct: false },
+          { text: "challenge", correct: false }
+        ]
+      },
+      {
+        id: 16,
+        question: "Editorial 1: What is the antonym of 'cash-strapped' as implied in the article?",
+        options: [
+          { text: "wealthy", correct: true },
+          { text: "impoverished", correct: false },
+          { text: "bankrupt", correct: false },
+          { text: "debt-ridden", correct: false }
+        ]
+      },
+      {
+        id: 17,
+        question: "Editorial 1: Which word in 'program implementation has been strong' is not functioning as an adverb?",
+        options: [
+          { text: "has", correct: false },
+          { text: "been", correct: false },
+          { text: "strong", correct: false },
+          { text: "None of the above", correct: true }
+        ]
+      },
+      {
+        id: 18,
+        question: "Editorial 1: Identify the preposition in 'in several areas'.",
+        options: [
+          { text: "in", correct: true },
+          { text: "several", correct: false },
+          { text: "areas", correct: false },
+          { text: "none", correct: false }
+        ]
+      },
+      {
+        id: 19,
+        question: "Editorial 1: What part of speech is 'extended' in '$7bn funding programme'?",
+        options: [
+          { text: "Adjective", correct: true },
+          { text: "Adverb", correct: false },
+          { text: "Verb", correct: false },
+          { text: "Noun", correct: false }
+        ]
+      },
+      {
+        id: 20,
+        question: "Editorial 1: In 'fiscal year', what role does 'fiscal' play?",
+        options: [
+          { text: "Adjective", correct: true },
+          { text: "Noun", correct: false },
+          { text: "Verb", correct: false },
+          { text: "Adverb", correct: false }
+        ]
+      },
+      // Editorial 2 Questions (21-40)
+      {
+        id: 21,
+        question: "Editorial 2: In 'Pakistan Crypto Council has been formed', what part of speech is 'formed'?",
+        options: [
+          { text: "Verb", correct: true },
+          { text: "Noun", correct: false },
+          { text: "Adjective", correct: false },
+          { text: "Adverb", correct: false }
+        ]
+      },
+      {
+        id: 22,
+        question: "Editorial 2: Identify the antonym for 'centralised' as used in the article.",
+        options: [
+          { text: "Decentralized", correct: true },
+          { text: "Unified", correct: false },
+          { text: "Consolidated", correct: false },
+          { text: "Restricted", correct: false }
+        ]
+      },
+      {
+        id: 23,
+        question: "Editorial 2: What is the meaning of 'pivotal' in 'a pivotal role'?",
+        options: [
+          { text: "Crucial", correct: true },
+          { text: "Insignificant", correct: false },
+          { text: "Secondary", correct: false },
+          { text: "Optional", correct: false }
+        ]
+      },
+      {
+        id: 24,
+        question: "Editorial 2: In 'regulate and integrate blockchain technology', which word is a coordinating conjunction?",
+        options: [
+          { text: "and", correct: true },
+          { text: "blockchain", correct: false },
+          { text: "technology", correct: false },
+          { text: "integrate", correct: false }
+        ]
+      },
+      {
+        id: 25,
+        question: "Editorial 2: Which word in 'the council is set to play a pivotal role' acts as an adjective?",
+        options: [
+          { text: "pivotal", correct: true },
+          { text: "play", correct: false },
+          { text: "role", correct: false },
+          { text: "set", correct: false }
+        ]
+      },
+      {
+        id: 26,
+        question: "Editorial 2: Identify the synonym for 'innovation' as used in the article.",
+        options: [
+          { text: "creativity", correct: true },
+          { text: "tradition", correct: false },
+          { text: "stagnation", correct: false },
+          { text: "regulation", correct: false }
+        ]
+      },
+      {
+        id: 27,
+        question: "Editorial 2: In 'digital assets into its financial landscape', what part of speech is 'digital'?",
+        options: [
+          { text: "Adjective", correct: true },
+          { text: "Noun", correct: false },
+          { text: "Verb", correct: false },
+          { text: "Adverb", correct: false }
+        ]
+      },
+      {
+        id: 28,
+        question: "Editorial 2: What is the antonym of 'regulated' in the context of the article?",
+        options: [
+          { text: "Unregulated", correct: true },
+          { text: "Strict", correct: false },
+          { text: "Monitored", correct: false },
+          { text: "Controlled", correct: false }
+        ]
+      },
+      {
+        id: 29,
+        question: "Editorial 2: Identify the preposition in 'after a delegation representing American interests'.",
+        options: [
+          { text: "after", correct: true },
+          { text: "representing", correct: false },
+          { text: "American", correct: false },
+          { text: "interests", correct: false }
+        ]
+      },
+      {
+        id: 30,
+        question: "Editorial 2: In 'cryptocurrency and blockchain technologies', which word functions as a conjunction?",
+        options: [
+          { text: "and", correct: true },
+          { text: "cryptocurrency", correct: false },
+          { text: "blockchain", correct: false },
+          { text: "technologies", correct: false }
+        ]
+      },
+      {
+        id: 31,
+        question: "Editorial 2: In 'to hawk its wares', what does 'hawk' mean?",
+        options: [
+          { text: "sell aggressively", correct: true },
+          { text: "admire", correct: false },
+          { text: "inspect", correct: false },
+          { text: "discard", correct: false }
+        ]
+      },
+      {
+        id: 32,
+        question: "Editorial 2: What is the grammatical role of 'merely' in 'merely weeks after a delegation'?",
+        options: [
+          { text: "Adverb", correct: true },
+          { text: "Adjective", correct: false },
+          { text: "Preposition", correct: false },
+          { text: "Conjunction", correct: false }
+        ]
+      },
+      {
+        id: 33,
+        question: "Editorial 2: Identify the synonym for 'integration' as used in the article.",
+        options: [
+          { text: "incorporation", correct: true },
+          { text: "separation", correct: false },
+          { text: "isolation", correct: false },
+          { text: "division", correct: false }
+        ]
+      },
+      {
+        id: 34,
+        question: "Editorial 2: In 'the state is still quite devoted to the idea of centralised control', which word is an adverb?",
+        options: [
+          { text: "quite", correct: true },
+          { text: "devoted", correct: false },
+          { text: "centralised", correct: false },
+          { text: "control", correct: false }
+        ]
+      },
+      {
+        id: 35,
+        question: "Editorial 2: What is the antonym of 'devoted' as used in the article?",
+        options: [
+          { text: "indifferent", correct: true },
+          { text: "loyal", correct: false },
+          { text: "committed", correct: false },
+          { text: "attached", correct: false }
+        ]
+      },
+      {
+        id: 36,
+        question: "Editorial 2: In 'while the financial system remains tightly regulated', identify the preposition.",
+        options: [
+          { text: "in", correct: true },
+          { text: "while", correct: false },
+          { text: "remains", correct: false },
+          { text: "tightly", correct: false }
+        ]
+      },
+      {
+        id: 37,
+        question: "Editorial 2: Choose the correct meaning of 'snake oil salesmen' in the context.",
+        options: [
+          { text: "Fraudsters", correct: true },
+          { text: "Experts", correct: false },
+          { text: "Investors", correct: false },
+          { text: "Regulators", correct: false }
+        ]
+      },
+      {
+        id: 38,
+        question: "Editorial 2: What part of speech is 'technologies' in 'cryptocurrency and blockchain technologies'?",
+        options: [
+          { text: "Noun", correct: true },
+          { text: "Adjective", correct: false },
+          { text: "Verb", correct: false },
+          { text: "Adverb", correct: false }
+        ]
+      },
+      {
+        id: 39,
+        question: "Editorial 2: Identify the preposition in 'into its financial landscape'.",
+        options: [
+          { text: "into", correct: true },
+          { text: "financial", correct: false },
+          { text: "its", correct: false },
+          { text: "landscape", correct: false }
+        ]
+      },
+      {
+        id: 40,
+        question: "Editorial 2: In 'regulate and integrate', which word functions as a verb?",
+        options: [
+          { text: "regulate", correct: true },
+          { text: "and", correct: false },
+          { text: "integrate", correct: false },
+          { text: "none", correct: false }
+        ]
+      },
+      // Editorial 3 Questions (41-50)
+      {
+        id: 41,
+        question: "Editorial 3: In 'Pakistan’s children in prison have often been treated like adult criminals', which word acts as a simile indicator?",
+        options: [
+          { text: "like", correct: true },
+          { text: "often", correct: false },
+          { text: "been", correct: false },
+          { text: "treated", correct: false }
+        ]
+      },
+      {
+        id: 42,
+        question: "Editorial 3: Identify the preposition in 'in a dark space'.",
+        options: [
+          { text: "in", correct: true },
+          { text: "dark", correct: false },
+          { text: "a", correct: false },
+          { text: "space", correct: false }
+        ]
+      },
+      {
+        id: 43,
+        question: "Editorial 3: What is the antonym of 'juvenile' as used in 'juvenile offenders'?",
+        options: [
+          { text: "adult", correct: true },
+          { text: "young", correct: false },
+          { text: "immature", correct: false },
+          { text: "minor", correct: false }
+        ]
+      },
+      {
+        id: 44,
+        question: "Editorial 3: In 'complete educational support', what part of speech is 'complete'?",
+        options: [
+          { text: "Adjective", correct: true },
+          { text: "Adverb", correct: false },
+          { text: "Noun", correct: false },
+          { text: "Verb", correct: false }
+        ]
+      },
+      {
+        id: 45,
+        question: "Editorial 3: Identify the synonym for 'prison' in the context of the article.",
+        options: [
+          { text: "penitentiary", correct: true },
+          { text: "academy", correct: false },
+          { text: "home", correct: false },
+          { text: "school", correct: false }
+        ]
+      },
+      {
+        id: 46,
+        question: "Editorial 3: In 'treated like adult criminals', which word functions as a conjunction?",
+        options: [
+          { text: "none", correct: true },
+          { text: "like", correct: false },
+          { text: "and", correct: false },
+          { text: "treated", correct: false }
+        ]
+      },
+      {
+        id: 47,
+        question: "Editorial 3: What is the correct antonym for 'treated' in a reformed context?",
+        options: [
+          { text: "ignored", correct: true },
+          { text: "acknowledged", correct: false },
+          { text: "admired", correct: false },
+          { text: "criticized", correct: false }
+        ]
+      },
+      {
+        id: 48,
+        question: "Editorial 3: In 'programme to educate 4,684 children', what is the function of 'to educate'?",
+        options: [
+          { text: "Infinitive of purpose", correct: true },
+          { text: "Gerund", correct: false },
+          { text: "Participle", correct: false },
+          { text: "Adjective", correct: false }
+        ]
+      },
+      {
+        id: 49,
+        question: "Editorial 3: Identify the adverb in 'often been treated like adult criminals'.",
+        options: [
+          { text: "often", correct: true },
+          { text: "treated", correct: false },
+          { text: "been", correct: false },
+          { text: "like", correct: false }
+        ]
+      },
+      {
+        id: 50,
+        question: "Editorial 3: In 'the Sindh government’s programme', what role does 'government’s' play?",
+        options: [
+          { text: "Possessive adjective", correct: true },
+          { text: "Noun", correct: false },
+          { text: "Verb", correct: false },
+          { text: "Adverb", correct: false }
+        ]
+      }
+    ];
 
+    let timerInterval;
+    let totalTime = 600; // 10 minutes in seconds
+    let startTime;
+
+    // Shuffle function for arrays
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+          let j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Called when "Start Quiz" is clicked
     function startQuiz() {
-      var name = document.getElementById('nameInput').value.trim();
-      if(name === "") {
-        alert("Please enter your name.");
+      const nameInput = document.getElementById("username").value.trim();
+      if (nameInput === "") {
+        alert("Please enter your name to start the quiz.");
         return;
       }
-      document.getElementById('userNameDisplay').innerText = name;
-      document.getElementById('nameSection').style.display = "none";
-      document.getElementById('quizSection').style.display = "block";
-      startTimer();
+      document.getElementById("nameEntry").style.display = "none";
+      document.getElementById("quizSection").style.display = "block";
+      startTime = new Date();
+      // Start the countdown timer
+      timerInterval = setInterval(updateTimer, 1000);
+      // Render the quiz questions
+      renderQuestions();
     }
 
-    function startTimer() {
-      updateTimerDisplay();
-      timerInterval = setInterval(function() {
-        timeRemaining--;
-        if(timeRemaining <= 0) {
-          clearInterval(timerInterval);
-          submitQuiz();
-        }
-        updateTimerDisplay();
-      }, 1000);
+    // Update timer every second
+    function updateTimer() {
+      const timerElement = document.getElementById("timer");
+      totalTime--;
+      let minutes = Math.floor(totalTime / 60);
+      let seconds = totalTime % 60;
+      timerElement.innerText = "Time Remaining: " + minutes + "m " + seconds + "s";
+      if (totalTime <= 0) {
+        clearInterval(timerInterval);
+        submitQuiz();
+      }
     }
 
-    function updateTimerDisplay() {
-      var minutes = Math.floor(timeRemaining / 60);
-      var seconds = timeRemaining % 60;
-      document.getElementById('timer').innerText = "Time Remaining: " + minutes + "m " + seconds + "s";
+    // Render quiz questions with randomized question and option order
+    function renderQuestions() {
+      let shuffledQuestions = shuffle(questions.slice());
+      const quizContainer = document.getElementById("quizContainer");
+      quizContainer.innerHTML = "";
+      shuffledQuestions.forEach((q, index) => {
+        // Randomize options for each question
+        let options = shuffle(q.options.slice());
+        let questionDiv = document.createElement("div");
+        questionDiv.className = "question";
+        let questionTitle = document.createElement("h3");
+        questionTitle.innerText = "Q" + (index + 1) + ": " + q.question;
+        questionDiv.appendChild(questionTitle);
+        let optionsList = document.createElement("ul");
+        options.forEach(option => {
+          let listItem = document.createElement("li");
+          let radioInput = document.createElement("input");
+          radioInput.type = "radio";
+          radioInput.name = "question" + q.id;
+          radioInput.value = option.text;
+          listItem.appendChild(radioInput);
+          let label = document.createElement("label");
+          label.innerText = option.text;
+          listItem.appendChild(label);
+          optionsList.appendChild(listItem);
+        });
+        questionDiv.appendChild(optionsList);
+        quizContainer.appendChild(questionDiv);
+      });
     }
 
+    // Called when "Submit Quiz" is clicked or time runs out
     function submitQuiz() {
       clearInterval(timerInterval);
-      var totalQuestions = 50;
-      var attempted = 0;
-      var score = 0;
-      for(var i = 1; i <= totalQuestions; i++){
-        var radios = document.getElementsByName("q" + i);
-        for(var j = 0; j < radios.length; j++){
-          if(radios[j].checked){
+      const endTime = new Date();
+      const timeTaken = Math.floor((endTime - startTime) / 1000);
+      const nameInput = document.getElementById("username").value.trim();
+      let score = 0;
+      let attempted = 0;
+      // Evaluate each question using the original questions array (IDs remain same)
+      questions.forEach(q => {
+        let radios = document.getElementsByName("question" + q.id);
+        radios.forEach(radio => {
+          if (radio.checked) {
             attempted++;
-            if(radios[j].value === "correct"){
+            let option = q.options.find(opt => opt.text === radio.value);
+            if (option && option.correct) {
               score++;
             }
-            break;
           }
-        }
-      }
-      var timeTaken = 600 - timeRemaining;
-      document.getElementById('quizSection').style.display = "none";
-      var resultDiv = document.getElementById('resultSection');
-      resultDiv.innerHTML = "<h2>Results</h2>" +
-                            "<p><strong>Name:</strong> " + document.getElementById('userNameDisplay').innerText + "</p>" +
-                            "<p><strong>Questions Attempted:</strong> " + attempted + "</p>" +
-                            "<p><strong>Score:</strong> " + score + " out of " + totalQuestions + "</p>" +
-                            "<p><strong>Time Taken:</strong> " + timeTaken + " seconds</p>";
+        });
+      });
+      // Hide quiz section and display results
+      document.getElementById("quizSection").style.display = "none";
+      document.getElementById("resultSection").style.display = "block";
+      document.getElementById("result").innerHTML = "<h2>Quiz Results</h2>" +
+        "<p>Name: " + nameInput + "</p>" +
+        "<p>Questions Attempted: " + attempted + " / 50</p>" +
+        "<p>Score: " + score + " / 50</p>" +
+        "<p>Time Taken: " + timeTaken + " seconds</p>";
       
-      // Fill and submit the hidden form via Formspree
-      var form = document.getElementById('hiddenForm');
-      form.name.value = document.getElementById('userNameDisplay').innerText;
-      form.attempted.value = attempted;
-      form.score.value = score;
-      form.time.value = timeTaken;
-      form.submit();
+      // Fill hidden Formspree form and submit
+      document.getElementById("studentName").value = nameInput;
+      document.getElementById("attempted").value = attempted;
+      document.getElementById("score").value = score;
+      document.getElementById("timeTaken").value = timeTaken;
+      document.getElementById("hiddenForm").submit();
     }
   </script>
 </head>
 <body>
   <header>
-    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
-    <h1>QUIZ FOR CSS ASPIRANTS 15 March 2025</h1>
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Logo">
+    <h1>QUIZ FOR CSS ASPIRANTS 16 March 2025</h1>
     <p>SYED ASGHAR ALI SHAH</p>
   </header>
-
   <div class="container">
-    <!-- Name Entry Section -->
-    <div id="nameSection">
-      <h2>Enter Your Name to Start the Quiz</h2>
-      <input type="text" id="nameInput" placeholder="Your Name">
+    <!-- Name entry section -->
+    <div id="nameEntry" class="name-entry">
+      <h2>Enter Your Name</h2>
+      <input type="text" id="username" placeholder="Your Name">
       <button onclick="startQuiz()">Start Quiz</button>
     </div>
-    
-    <!-- Hidden element to display user's name later -->
-    <div id="userName" style="display:none;">
-      <p>Name: <span id="userNameDisplay"></span></p>
-    </div>
-    
-    <!-- Quiz Section (initially hidden) -->
-    <div id="quizSection" style="display:none;">
-      <div class="timer" id="timer">Time Remaining: 10m 0s</div>
-      <form id="quizForm">
-        <!-- Editorial 1 Questions (20 questions) -->
-        <h3>Editorial 1 Questions</h3>
-        <!-- Q1 -->
-        <div class="question">
-          <p>1. Identify the correct preposition in the sentence: "The decision ___ significantly revise the policy was bold."</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q1" value="incorrect"> on</label></li>
-            <li><label><input type="radio" name="q1" value="correct"> to</label></li>
-            <li><label><input type="radio" name="q1" value="incorrect"> at</label></li>
-            <li><label><input type="radio" name="q1" value="incorrect"> for</label></li>
-          </ul>
-        </div>
-        <!-- Q2 -->
-        <div class="question">
-          <p>2. In the revised net-metering policy, what is the buyback rate for surplus solar electricity?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q2" value="correct"> Rs10 per unit</label></li>
-            <li><label><input type="radio" name="q2" value="incorrect"> Rs27 per unit</label></li>
-            <li><label><input type="radio" name="q2" value="incorrect"> Rs42 per unit</label></li>
-            <li><label><input type="radio" name="q2" value="incorrect"> Rs48 per unit</label></li>
-          </ul>
-        </div>
-        <!-- Q3 -->
-        <div class="question">
-          <p>3. Choose the correct synonym for "revised" as used in the context of policy changes.</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q3" value="incorrect"> Rejected</label></li>
-            <li><label><input type="radio" name="q3" value="correct"> Amended</label></li>
-            <li><label><input type="radio" name="q3" value="incorrect"> Ignored</label></li>
-            <li><label><input type="radio" name="q3" value="incorrect"> Dismissed</label></li>
-          </ul>
-        </div>
-        <!-- Q4 -->
-        <div class="question">
-          <p>4. Which term best describes the surplus electricity that is bought by distribution companies?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q4" value="incorrect"> Deficit</label></li>
-            <li><label><input type="radio" name="q4" value="incorrect"> Shortfall</label></li>
-            <li><label><input type="radio" name="q4" value="correct"> Surplus</label></li>
-            <li><label><input type="radio" name="q4" value="incorrect"> Scarcity</label></li>
-          </ul>
-        </div>
-        <!-- Q5 -->
-        <div class="question">
-          <p>5. In the sentence "The revised tariffs will apply to new distributed solar consumers," what part of speech is "revised"?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q5" value="correct"> Adjective</label></li>
-            <li><label><input type="radio" name="q5" value="incorrect"> Verb</label></li>
-            <li><label><input type="radio" name="q5" value="incorrect"> Noun</label></li>
-            <li><label><input type="radio" name="q5" value="incorrect"> Adverb</label></li>
-          </ul>
-        </div>
-        <!-- Q6 -->
-        <div class="question">
-          <p>6. Choose the correct preposition to fill the blank: "This policy aims ___ achieve energy equity."</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q6" value="correct"> to</label></li>
-            <li><label><input type="radio" name="q6" value="incorrect"> for</label></li>
-            <li><label><input type="radio" name="q6" value="incorrect"> with</label></li>
-            <li><label><input type="radio" name="q6" value="incorrect"> by</label></li>
-          </ul>
-        </div>
-        <!-- Q7 -->
-        <div class="question">
-          <p>7. What does the term "net-metering" primarily refer to?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q7" value="correct"> A system of measuring electricity consumption and generation</label></li>
-            <li><label><input type="radio" name="q7" value="incorrect"> A method of billing based on peak usage</label></li>
-            <li><label><input type="radio" name="q7" value="incorrect"> A financial incentive for consumers</label></li>
-            <li><label><input type="radio" name="q7" value="incorrect"> A pricing strategy for power distribution</label></li>
-          </ul>
-        </div>
-        <!-- Q8 -->
-        <div class="question">
-          <p>8. Which option best describes the impact of the revised policy on existing contracts?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q8" value="incorrect"> Immediate changes for all contracts</label></li>
-            <li><label><input type="radio" name="q8" value="correct"> Changes after the expiry of seven-year contracts</label></li>
-            <li><label><input type="radio" name="q8" value="incorrect"> No changes will be applied</label></li>
-            <li><label><input type="radio" name="q8" value="incorrect"> New contracts only</label></li>
-          </ul>
-        </div>
-        <!-- Q9 -->
-        <div class="question">
-          <p>9. Identify the error in the sentence: "Consumers who have surplus power will benefit, because the policy is cost effective."</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q9" value="incorrect"> No error</label></li>
-            <li><label><input type="radio" name="q9" value="correct"> "cost effective" should be hyphenated</label></li>
-            <li><label><input type="radio" name="q9" value="incorrect"> "surplus power" should be singular</label></li>
-            <li><label><input type="radio" name="q9" value="incorrect"> "because" is misused</label></li>
-          </ul>
-        </div>
-        <!-- Q10 -->
-        <div class="question">
-          <p>10. What is the primary reason for the policy revision as mentioned in Editorial 1?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q10" value="correct"> To achieve energy price equity</label></li>
-            <li><label><input type="radio" name="q10" value="incorrect"> To increase profit margins</label></li>
-            <li><label><input type="radio" name="q10" value="incorrect"> To boost solar panel sales</label></li>
-            <li><label><input type="radio" name="q10" value="incorrect"> To reduce operational costs</label></li>
-          </ul>
-        </div>
-        <!-- Q11 -->
-        <div class="question">
-          <p>11. Which word in "down by nearly 63pc" indicates a measurement?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q11" value="incorrect"> nearly</label></li>
-            <li><label><input type="radio" name="q11" value="correct"> 63pc</label></li>
-            <li><label><input type="radio" name="q11" value="incorrect"> down</label></li>
-            <li><label><input type="radio" name="q11" value="incorrect"> by</label></li>
-          </ul>
-        </div>
-        <!-- Q12 -->
-        <div class="question">
-          <p>12. Which preposition best fits the sentence: "The tariffs are set ___ be competitive."</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q12" value="correct"> to</label></li>
-            <li><label><input type="radio" name="q12" value="incorrect"> for</label></li>
-            <li><label><input type="radio" name="q12" value="incorrect"> with</label></li>
-            <li><label><input type="radio" name="q12" value="incorrect"> on</label></li>
-          </ul>
-        </div>
-        <!-- Q13 -->
-        <div class="question">
-          <p>13. What does the term "grid power" refer to in the context of the passage?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q13" value="correct"> Electricity supplied by the national grid</label></li>
-            <li><label><input type="radio" name="q13" value="incorrect"> Solar power generated locally</label></li>
-            <li><label><input type="radio" name="q13" value="incorrect"> Backup generator power</label></li>
-            <li><label><input type="radio" name="q13" value="incorrect"> Imported electricity</label></li>
-          </ul>
-        </div>
-        <!-- Q14 -->
-        <div class="question">
-          <p>14. Which option correctly replaces the word "instal" in the passage?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q14" value="incorrect"> Install</label></li>
-            <li><label><input type="radio" name="q14" value="correct"> Set up</label></li>
-            <li><label><input type="radio" name="q14" value="incorrect"> Initiate</label></li>
-            <li><label><input type="radio" name="q14" value="incorrect"> Establish</label></li>
-          </ul>
-        </div>
-        <!-- Q15 -->
-        <div class="question">
-          <p>15. Identify the adjective in the sentence: "Consumers find solar power cost-effective."</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q15" value="incorrect"> find</label></li>
-            <li><label><input type="radio" name="q15" value="incorrect"> power</label></li>
-            <li><label><input type="radio" name="q15" value="correct"> cost-effective</label></li>
-            <li><label><input type="radio" name="q15" value="incorrect"> solar</label></li>
-          </ul>
-        </div>
-        <!-- Q16 -->
-        <div class="question">
-          <p>16. Which option best describes the term "buyback" as used in the passage?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q16" value="incorrect"> Selling electricity to consumers</label></li>
-            <li><label><input type="radio" name="q16" value="correct"> Purchasing surplus electricity from consumers</label></li>
-            <li><label><input type="radio" name="q16" value="incorrect"> Lending money to solar panel owners</label></li>
-            <li><label><input type="radio" name="q16" value="incorrect"> Investing in renewable energy</label></li>
-          </ul>
-        </div>
-        <!-- Q17 -->
-        <div class="question">
-          <p>17. Fill in the blank with the correct preposition: "Export surplus electrons ___ the grid."</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q17" value="incorrect"> by</label></li>
-            <li><label><input type="radio" name="q17" value="correct"> to</label></li>
-            <li><label><input type="radio" name="q17" value="incorrect"> from</label></li>
-            <li><label><input type="radio" name="q17" value="incorrect"> with</label></li>
-          </ul>
-        </div>
-        <!-- Q18 -->
-        <div class="question">
-          <p>18. Which grammatical structure is used in "The tariffs will apply to new distributed solar consumers"?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q18" value="correct"> Simple Future Tense</label></li>
-            <li><label><input type="radio" name="q18" value="incorrect"> Past Perfect Tense</label></li>
-            <li><label><input type="radio" name="q18" value="incorrect"> Present Continuous Tense</label></li>
-            <li><label><input type="radio" name="q18" value="incorrect"> Conditional Tense</label></li>
-          </ul>
-        </div>
-        <!-- Q19 -->
-        <div class="question">
-          <p>19. Identify the part of speech for "significantly" in the sentence "significantly revise down buyback prices".</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q19" value="incorrect"> Noun</label></li>
-            <li><label><input type="radio" name="q19" value="correct"> Adverb</label></li>
-            <li><label><input type="radio" name="q19" value="incorrect"> Adjective</label></li>
-            <li><label><input type="radio" name="q19" value="incorrect"> Preposition</label></li>
-          </ul>
-        </div>
-        <!-- Q20 -->
-        <div class="question">
-          <p>20. What is the implication of the revised policy on payback periods for new solar installations?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q20" value="incorrect"> They will become shorter</label></li>
-            <li><label><input type="radio" name="q20" value="correct"> They may increase</label></li>
-            <li><label><input type="radio" name="q20" value="incorrect"> They will remain the same</label></li>
-            <li><label><input type="radio" name="q20" value="incorrect"> They will be eliminated</label></li>
-          </ul>
-        </div>
-
-        <!-- Editorial 2 Questions (20 questions) -->
-        <h3>Editorial 2 Questions</h3>
-        <!-- Q21 -->
-        <div class="question">
-          <p>21. What is the main focus of Editorial 2?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q21" value="incorrect"> Economic reforms</label></li>
-            <li><label><input type="radio" name="q21" value="correct"> Combating Islamophobia</label></li>
-            <li><label><input type="radio" name="q21" value="incorrect"> Technological advancements</label></li>
-            <li><label><input type="radio" name="q21" value="incorrect"> Environmental policies</label></li>
-          </ul>
-        </div>
-        <!-- Q22 -->
-        <div class="question">
-          <p>22. According to Editorial 2, which organization reported a 73% rise in Islamophobic assaults in Britain?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q22" value="incorrect"> CAIR</label></li>
-            <li><label><input type="radio" name="q22" value="correct"> Tell MAMA</label></li>
-            <li><label><input type="radio" name="q22" value="incorrect"> UN General Assembly</label></li>
-            <li><label><input type="radio" name="q22" value="incorrect"> Big Tech</label></li>
-          </ul>
-        </div>
-        <!-- Q23 -->
-        <div class="question">
-          <p>23. Identify the correct antonym of "toxic" as used in the context of prejudice.</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q23" value="incorrect"> Harmful</label></li>
-            <li><label><input type="radio" name="q23" value="incorrect"> Poisonous</label></li>
-            <li><label><input type="radio" name="q23" value="correct"> Beneficial</label></li>
-            <li><label><input type="radio" name="q23" value="incorrect"> Deadly</label></li>
-          </ul>
-        </div>
-        <!-- Q24 -->
-        <div class="question">
-          <p>24. Which term best describes the rise in anti-Muslim incidents as mentioned in the editorial?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q24" value="incorrect"> Decline</label></li>
-            <li><label><input type="radio" name="q24" value="incorrect"> Stability</label></li>
-            <li><label><input type="radio" name="q24" value="correct"> Surge</label></li>
-            <li><label><input type="radio" name="q24" value="incorrect"> Reduction</label></li>
-          </ul>
-        </div>
-        <!-- Q25 -->
-        <div class="question">
-          <p>25. What does the term "far-right" refer to in the context of the article?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q25" value="correct"> Extremist political groups</label></li>
-            <li><label><input type="radio" name="q25" value="incorrect"> Liberal movements</label></li>
-            <li><label><input type="radio" name="q25" value="incorrect"> Centrist parties</label></li>
-            <li><label><input type="radio" name="q25" value="incorrect"> Progressive organizations</label></li>
-          </ul>
-        </div>
-        <!-- Q26 -->
-        <div class="question">
-          <p>26. Which preposition correctly fills the blank: "There is a rise ___ anti-Muslim sentiment."</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q26" value="incorrect"> in</label></li>
-            <li><label><input type="radio" name="q26" value="correct"> of</label></li>
-            <li><label><input type="radio" name="q26" value="incorrect"> at</label></li>
-            <li><label><input type="radio" name="q26" value="incorrect"> for</label></li>
-          </ul>
-        </div>
-        <!-- Q27 -->
-        <div class="question">
-          <p>27. What does the phrase "anti-Muslim bias" mean?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q27" value="incorrect"> Favoring Muslims</label></li>
-            <li><label><input type="radio" name="q27" value="correct"> Prejudice against Muslims</label></li>
-            <li><label><input type="radio" name="q27" value="incorrect"> Neutrality towards religion</label></li>
-            <li><label><input type="radio" name="q27" value="incorrect"> Support for Muslim causes</label></li>
-          </ul>
-        </div>
-        <!-- Q28 -->
-        <div class="question">
-          <p>28. Identify the correct synonym for "prejudice" as used in the article.</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q28" value="incorrect"> Tolerance</label></li>
-            <li><label><input type="radio" name="q28" value="correct"> Bias</label></li>
-            <li><label><input type="radio" name="q28" value="incorrect"> Equality</label></li>
-            <li><label><input type="radio" name="q28" value="incorrect"> Fairness</label></li>
-          </ul>
-        </div>
-        <!-- Q29 -->
-        <div class="question">
-          <p>29. Which part of speech is "anti-Muslim" in the phrase "anti-Muslim bias"?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q29" value="correct"> Adjective</label></li>
-            <li><label><input type="radio" name="q29" value="incorrect"> Noun</label></li>
-            <li><label><input type="radio" name="q29" value="incorrect"> Adverb</label></li>
-            <li><label><input type="radio" name="q29" value="incorrect"> Preposition</label></li>
-          </ul>
-        </div>
-        <!-- Q30 -->
-        <div class="question">
-          <p>30. Which option correctly expresses the meaning of "xenophobic"?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q30" value="incorrect"> Open-minded</label></li>
-            <li><label><input type="radio" name="q30" value="correct"> Fearful of foreigners</label></li>
-            <li><label><input type="radio" name="q30" value="incorrect"> Supportive of immigration</label></li>
-            <li><label><input type="radio" name="q30" value="incorrect"> Inclusive</label></li>
-          </ul>
-        </div>
-        <!-- Q31 -->
-        <div class="question">
-          <p>31. Identify the error in the sentence: "Far-right groups is exploiting the conflict."</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q31" value="correct"> "is" should be "are"</label></li>
-            <li><label><input type="radio" name="q31" value="incorrect"> "groups" should be singular</label></li>
-            <li><label><input type="radio" name="q31" value="incorrect"> "exploiting" is incorrect</label></li>
-            <li><label><input type="radio" name="q31" value="incorrect"> No error</label></li>
-          </ul>
-        </div>
-        <!-- Q32 -->
-        <div class="question">
-          <p>32. Which preposition best completes the sentence: "He spoke ___ the audience at the rally."</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q32" value="incorrect"> on</label></li>
-            <li><label><input type="radio" name="q32" value="correct"> to</label></li>
-            <li><label><input type="radio" name="q32" value="incorrect"> for</label></li>
-            <li><label><input type="radio" name="q32" value="incorrect"> with</label></li>
-          </ul>
-        </div>
-        <!-- Q33 -->
-        <div class="question">
-          <p>33. What is the role of online platforms as suggested in the article?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q33" value="incorrect"> To promote hate speech</label></li>
-            <li><label><input type="radio" name="q33" value="correct"> To tackle hate speech</label></li>
-            <li><label><input type="radio" name="q33" value="incorrect"> To ignore violent acts</label></li>
-            <li><label><input type="radio" name="q33" value="incorrect"> To support far-right groups</label></li>
-          </ul>
-        </div>
-        <!-- Q34 -->
-        <div class="question">
-          <p>34. Which phrase best replaces "to combat" in the context of the article?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q34" value="incorrect"> To ignore</label></li>
-            <li><label><input type="radio" name="q34" value="correct"> To fight against</label></li>
-            <li><label><input type="radio" name="q34" value="incorrect"> To accept</label></li>
-            <li><label><input type="radio" name="q34" value="incorrect"> To support</label></li>
-          </ul>
-        </div>
-        <!-- Q35 -->
-        <div class="question">
-          <p>35. What type of bias is discussed in Editorial 2?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q35" value="incorrect"> Racial bias</label></li>
-            <li><label><input type="radio" name="q35" value="incorrect"> Gender bias</label></li>
-            <li><label><input type="radio" name="q35" value="correct"> Anti-Muslim bias</label></li>
-            <li><label><input type="radio" name="q35" value="incorrect"> Economic bias</label></li>
-          </ul>
-        </div>
-        <!-- Q36 -->
-        <div class="question">
-          <p>36. Identify the correct preposition: "The resolution was adopted ___ the UN General Assembly."</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q36" value="correct"> by</label></li>
-            <li><label><input type="radio" name="q36" value="incorrect"> at</label></li>
-            <li><label><input type="radio" name="q36" value="incorrect"> for</label></li>
-            <li><label><input type="radio" name="q36" value="incorrect"> on</label></li>
-          </ul>
-        </div>
-        <!-- Q37 -->
-        <div class="question">
-          <p>37. Which word in Editorial 2 best describes the actions of far-right groups?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q37" value="incorrect"> Moderate</label></li>
-            <li><label><input type="radio" name="q37" value="incorrect"> Tolerant</label></li>
-            <li><label><input type="radio" name="q37" value="correct"> Extremist</label></li>
-            <li><label><input type="radio" name="q37" value="incorrect"> Liberal</label></li>
-          </ul>
-        </div>
-        <!-- Q38 -->
-        <div class="question">
-          <p>38. What does the term "bigotry" mean as used in the context of the article?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q38" value="correct"> Intolerance towards a particular group</label></li>
-            <li><label><input type="radio" name="q38" value="incorrect"> Acceptance of differences</label></li>
-            <li><label><input type="radio" name="q38" value="incorrect"> Open-mindedness</label></li>
-            <li><label><input type="radio" name="q38" value="incorrect"> Neutrality</label></li>
-          </ul>
-        </div>
-        <!-- Q39 -->
-        <div class="question">
-          <p>39. Choose the correct synonym for "demonising" as used in the article.</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q39" value="incorrect"> Praising</label></li>
-            <li><label><input type="radio" name="q39" value="incorrect"> Celebrating</label></li>
-            <li><label><input type="radio" name="q39" value="correct"> Vilifying</label></li>
-            <li><label><input type="radio" name="q39" value="incorrect"> Admiring</label></li>
-          </ul>
-        </div>
-        <!-- Q40 -->
-        <div class="question">
-          <p>40. Which phrase best captures the call-to-action regarding combating hate speech?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q40" value="incorrect"> Stay silent</label></li>
-            <li><label><input type="radio" name="q40" value="correct"> Speak up against hate</label></li>
-            <li><label><input type="radio" name="q40" value="incorrect"> Ignore the issue</label></li>
-            <li><label><input type="radio" name="q40" value="incorrect"> Accept hate</label></li>
-          </ul>
-        </div>
-
-        <!-- Editorial 3 Questions (10 questions) -->
-        <h3>Editorial 3 Questions</h3>
-        <!-- Q41 -->
-        <div class="question">
-          <p>41. What is the primary objective of the educational programme in Editorial 3?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q41" value="correct"> To provide complete educational support to children of prisoners</label></li>
-            <li><label><input type="radio" name="q41" value="incorrect"> To reform the prison system</label></li>
-            <li><label><input type="radio" name="q41" value="incorrect"> To reduce prison populations</label></li>
-            <li><label><input type="radio" name="q41" value="incorrect"> To privatize education</label></li>
-          </ul>
-        </div>
-        <!-- Q42 -->
-        <div class="question">
-          <p>42. According to Editorial 3, what should be established in each city to support juveniles?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q42" value="incorrect"> Prisons</label></li>
-            <li><label><input type="radio" name="q42" value="correct"> Remand homes</label></li>
-            <li><label><input type="radio" name="q42" value="incorrect"> Rehabilitation centers</label></li>
-            <li><label><input type="radio" name="q42" value="incorrect"> Correctional facilities</label></li>
-          </ul>
-        </div>
-        <!-- Q43 -->
-        <div class="question">
-          <p>43. Identify the part of speech for "juvenile" in the context of the passage.</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q43" value="incorrect"> Noun</label></li>
-            <li><label><input type="radio" name="q43" value="incorrect"> Verb</label></li>
-            <li><label><input type="radio" name="q43" value="correct"> Adjective</label></li>
-            <li><label><input type="radio" name="q43" value="incorrect"> Adverb</label></li>
-          </ul>
-        </div>
-        <!-- Q44 -->
-        <div class="question">
-          <p>44. What does the programme in Editorial 3 primarily aim to prevent?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q44" value="incorrect"> Educational disparity</label></li>
-            <li><label><input type="radio" name="q44" value="incorrect"> Juvenile delinquency</label></li>
-            <li><label><input type="radio" name="q44" value="correct"> Inadequate education for children of prisoners</label></li>
-            <li><label><input type="radio" name="q44" value="incorrect"> Overcrowding in prisons</label></li>
-          </ul>
-        </div>
-        <!-- Q45 -->
-        <div class="question">
-          <p>45. Identify the grammatical error in the sentence: "Children in prison have often been treated like adult criminals."</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q45" value="incorrect"> No error</label></li>
-            <li><label><input type="radio" name="q45" value="correct"> The comparison is improper</label></li>
-            <li><label><input type="radio" name="q45" value="incorrect"> Misplaced modifier</label></li>
-            <li><label><input type="radio" name="q45" value="incorrect"> Verb tense error</label></li>
-          </ul>
-        </div>
-        <!-- Q46 -->
-        <div class="question">
-          <p>46. Choose the correct synonym for "reformative" as used in the context of the passage.</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q46" value="incorrect"> Punitive</label></li>
-            <li><label><input type="radio" name="q46" value="correct"> Corrective</label></li>
-            <li><label><input type="radio" name="q46" value="incorrect"> Restrictive</label></li>
-            <li><label><input type="radio" name="q46" value="incorrect"> Lenient</label></li>
-          </ul>
-        </div>
-        <!-- Q47 -->
-        <div class="question">
-          <p>47. Which option correctly completes the sentence: "The children were provided ___ educational support in jails."</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q47" value="correct"> with</label></li>
-            <li><label><input type="radio" name="q47" value="incorrect"> by</label></li>
-            <li><label><input type="radio" name="q47" value="incorrect"> at</label></li>
-            <li><label><input type="radio" name="q47" value="incorrect"> from</label></li>
-          </ul>
-        </div>
-        <!-- Q48 -->
-        <div class="question">
-          <p>48. What is the tone of the passage in Editorial 3?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q48" value="incorrect"> Sarcastic</label></li>
-            <li><label><input type="radio" name="q48" value="correct"> Concerned</label></li>
-            <li><label><input type="radio" name="q48" value="incorrect"> Humorous</label></li>
-            <li><label><input type="radio" name="q48" value="incorrect"> Indifferent</label></li>
-          </ul>
-        </div>
-        <!-- Q49 -->
-        <div class="question">
-          <p>49. Identify the correct part of speech for "educational" in the sentence "educational support".</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q49" value="incorrect"> Noun</label></li>
-            <li><label><input type="radio" name="q49" value="correct"> Adjective</label></li>
-            <li><label><input type="radio" name="q49" value="incorrect"> Verb</label></li>
-            <li><label><input type="radio" name="q49" value="incorrect"> Adverb</label></li>
-          </ul>
-        </div>
-        <!-- Q50 -->
-        <div class="question">
-          <p>50. What does the term "delinquency" refer to in the context of the passage?</p>
-          <ul class="options">
-            <li><label><input type="radio" name="q50" value="incorrect"> Academic failure</label></li>
-            <li><label><input type="radio" name="q50" value="incorrect"> Criminal behavior</label></li>
-            <li><label><input type="radio" name="q50" value="correct"> Minor criminal behavior</label></li>
-            <li><label><input type="radio" name="q50" value="incorrect"> Physical abuse</label></li>
-          </ul>
-        </div>
-      </form>
+    <!-- Quiz section -->
+    <div id="quizSection" class="quiz-section">
+      <div id="timer">Time Remaining: 10m 0s</div>
+      <div id="quizContainer"></div>
       <button onclick="submitQuiz()">Submit Quiz</button>
     </div>
-    
-    <!-- Results Section -->
-    <div id="resultSection"></div>
+    <!-- Results section -->
+    <div id="resultSection" class="result-section" style="display:none;">
+      <div id="result"></div>
+    </div>
   </div>
-
   <footer>
-    <p>Contact: 03265762698</p>
-    <p>Call us for more information!</p>
+    <p>Contact: 03265762698 | For more quizzes, visit our website!</p>
   </footer>
-
-  <!-- Hidden form to submit results via Formspree -->
+  <!-- Hidden form for Formspree submission -->
   <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-    <input type="text" name="name">
-    <input type="text" name="attempted">
-    <input type="text" name="score">
-    <input type="text" name="time">
+    <input type="hidden" name="studentName" id="studentName">
+    <input type="hidden" name="attempted" id="attempted">
+    <input type="hidden" name="score" id="score">
+    <input type="hidden" name="timeTaken" id="timeTaken">
   </form>
 </body>
 </html>
