@@ -2,743 +2,534 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 16 March 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz for CSS Aspirants 17 March 2025</title>
   <style>
-    /* Disable text selection */
-    body, header, footer, .quiz-container, .question, .result, input, button, p, h1, h2, h3, li, label {
+    /* Disable text selection on entire page */
+    body, * {
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
-    }
-    /* Basic styling */
-    body {
-      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f5f5f5;
     }
+    /* Header styling */
     header {
-      background-color: #333;
-      color: #fff;
+      background: #2c3e50;
+      color: #ecf0f1;
       padding: 20px;
       text-align: center;
       position: relative;
     }
     header img {
-      width: 100px;
-      height: auto;
-      position: absolute;
-      left: 20px;
-      top: 20px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      vertical-align: middle;
     }
+    header h1 {
+      display: inline;
+      font-size: 24px;
+      margin: 0 10px;
+    }
+    header span.name {
+      font-size: 18px;
+      margin-left: 10px;
+    }
+    /* Footer styling */
     footer {
-      background-color: #333;
-      color: #fff;
+      background: #2c3e50;
+      color: #ecf0f1;
       text-align: center;
       padding: 10px;
       position: fixed;
-      width: 100%;
       bottom: 0;
+      width: 100%;
     }
+    /* Container styling */
     .container {
       padding: 20px;
-      margin-bottom: 70px;
+      margin-bottom: 60px; /* leave space for footer */
     }
-    .name-entry, .quiz-section, .result-section {
-      margin: 20px auto;
-      max-width: 800px;
-      background: #fff;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    /* Name entry styling */
+    #nameEntry {
+      text-align: center;
+      margin: 20px;
     }
-    .quiz-section {
+    #nameEntry input {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+    }
+    #nameEntry button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    /* Quiz section styling */
+    #quizSection {
       display: none;
     }
     .question {
       margin-bottom: 20px;
       padding: 10px;
-      border-bottom: 1px solid #ccc;
+      border: 1px solid #bdc3c7;
+      border-radius: 5px;
     }
-    .question h3 {
+    .question p {
       margin-bottom: 10px;
     }
-    .question ul {
-      list-style: none;
-      padding: 0;
-    }
-    .question li {
+    .options label {
+      display: block;
       margin-bottom: 5px;
     }
     #timer {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: bold;
-      text-align: right;
-      margin-bottom: 10px;
+      text-align: center;
+      margin-bottom: 20px;
     }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
+    /* Result display styling */
+    #result {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      border: 2px solid #27ae60;
+      border-radius: 5px;
+      background-color: #ecf0f1;
     }
   </style>
   <script>
-    // Disable right-click and copy
+    // Disable right-click context menu to hinder copying or inspecting
     document.addEventListener('contextmenu', event => event.preventDefault());
-    document.oncopy = function(e){ e.preventDefault(); return false; };
 
-    // Questions array – 20 from Editorial 1, 20 from Editorial 2, 10 from Editorial 3
-    let questions = [
-      // Editorial 1 Questions (1-20)
-      {
-        id: 1,
-        question: "Editorial 1: In the sentence 'The successful conclusion of the first performance review...', what part of speech is the word 'successful'?",
-        options: [
-          { text: "Adjective", correct: true },
-          { text: "Adverb", correct: false },
-          { text: "Noun", correct: false },
-          { text: "Verb", correct: false }
-        ]
-      },
-      {
-        id: 2,
-        question: "Editorial 1: Identify the preposition in the phrase 'of the IMF’s extended $7bn funding programme'.",
-        options: [
-          { text: "of", correct: true },
-          { text: "extended", correct: false },
-          { text: "programme", correct: false },
-          { text: "IMF’s", correct: false }
-        ]
-      },
-      {
-        id: 3,
-        question: "Editorial 1: In 'a positive development for the cash-strapped economy', which word is a compound adjective?",
-        options: [
-          { text: "cash-strapped", correct: true },
-          { text: "positive", correct: false },
-          { text: "development", correct: false },
-          { text: "economy", correct: false }
-        ]
-      },
-      {
-        id: 4,
-        question: "Editorial 1: What is the synonym for 'consolidation' in the context of fiscal policies?",
-        options: [
-          { text: "merger", correct: false },
-          { text: "strengthening", correct: true },
-          { text: "deterioration", correct: false },
-          { text: "reduction", correct: false }
-        ]
-      },
-      {
-        id: 5,
-        question: "Editorial 1: Which is the antonym for 'durable'?",
-        options: [
-          { text: "temporary", correct: true },
-          { text: "long-lasting", correct: false },
-          { text: "stable", correct: false },
-          { text: "solid", correct: false }
-        ]
-      },
-      {
-        id: 6,
-        question: "Editorial 1: In 'tight monetary policy', what is the function of 'tight'?",
-        options: [
-          { text: "Adjective", correct: true },
-          { text: "Adverb", correct: false },
-          { text: "Noun", correct: false },
-          { text: "Preposition", correct: false }
-        ]
-      },
-      {
-        id: 7,
-        question: "Editorial 1: Identify the error (if any) in 'the discussions have made considerable progress in several areas'.",
-        options: [
-          { text: "No error", correct: true },
-          { text: "Subject-verb disagreement", correct: false },
-          { text: "Incorrect preposition", correct: false },
-          { text: "Wrong tense", correct: false }
-        ]
-      },
-      {
-        id: 8,
-        question: "Editorial 1: In 'fiscal consolidation for durable reduction in public debt', what is the function of 'for'?",
-        options: [
-          { text: "Preposition", correct: true },
-          { text: "Conjunction", correct: false },
-          { text: "Article", correct: false },
-          { text: "Verb", correct: false }
-        ]
-      },
-      {
-        id: 9,
-        question: "Editorial 1: Choose the correct synonym for 'impediment' as used in the text.",
-        options: [
-          { text: "obstacle", correct: true },
-          { text: "advantage", correct: false },
-          { text: "benefit", correct: false },
-          { text: "solution", correct: false }
-        ]
-      },
-      {
-        id: 10,
-        question: "Editorial 1: Which word in 'programme implementation has been strong' acts as a noun?",
-        options: [
-          { text: "implementation", correct: true },
-          { text: "programme", correct: false },
-          { text: "strong", correct: false },
-          { text: "has", correct: false }
-        ]
-      },
-      {
-        id: 11,
-        question: "Editorial 1: In the context 'benchmark targets', what role does 'benchmark' serve?",
-        options: [
-          { text: "Adjective", correct: true },
-          { text: "Noun", correct: false },
-          { text: "Adverb", correct: false },
-          { text: "Verb", correct: false }
-        ]
-      },
-      {
-        id: 12,
-        question: "Editorial 1: In 'the government would be doing them and itself a favour', which is the reflexive pronoun?",
-        options: [
-          { text: "itself", correct: true },
-          { text: "them", correct: false },
-          { text: "government", correct: false },
-          { text: "favour", correct: false }
-        ]
-      },
-      {
-        id: 13,
-        question: "Editorial 1: What is the meaning of 'jettison' as used in the article?",
-        options: [
-          { text: "discard", correct: true },
-          { text: "embrace", correct: false },
-          { text: "increase", correct: false },
-          { text: "reinforce", correct: false }
-        ]
-      },
-      {
-        id: 14,
-        question: "Editorial 1: Identify the correct part of speech for 'structural' in 'structural reform agenda'.",
-        options: [
-          { text: "Adjective", correct: true },
-          { text: "Noun", correct: false },
-          { text: "Adverb", correct: false },
-          { text: "Verb", correct: false }
-        ]
-      },
-      {
-        id: 15,
-        question: "Editorial 1: In 'facing a formidable political challenge', which word is the determiner?",
-        options: [
-          { text: "a", correct: true },
-          { text: "formidable", correct: false },
-          { text: "political", correct: false },
-          { text: "challenge", correct: false }
-        ]
-      },
-      {
-        id: 16,
-        question: "Editorial 1: What is the antonym of 'cash-strapped' as implied in the article?",
-        options: [
-          { text: "wealthy", correct: true },
-          { text: "impoverished", correct: false },
-          { text: "bankrupt", correct: false },
-          { text: "debt-ridden", correct: false }
-        ]
-      },
-      {
-        id: 17,
-        question: "Editorial 1: Which word in 'program implementation has been strong' is not functioning as an adverb?",
-        options: [
-          { text: "has", correct: false },
-          { text: "been", correct: false },
-          { text: "strong", correct: false },
-          { text: "None of the above", correct: true }
-        ]
-      },
-      {
-        id: 18,
-        question: "Editorial 1: Identify the preposition in 'in several areas'.",
-        options: [
-          { text: "in", correct: true },
-          { text: "several", correct: false },
-          { text: "areas", correct: false },
-          { text: "none", correct: false }
-        ]
-      },
-      {
-        id: 19,
-        question: "Editorial 1: What part of speech is 'extended' in '$7bn funding programme'?",
-        options: [
-          { text: "Adjective", correct: true },
-          { text: "Adverb", correct: false },
-          { text: "Verb", correct: false },
-          { text: "Noun", correct: false }
-        ]
-      },
-      {
-        id: 20,
-        question: "Editorial 1: In 'fiscal year', what role does 'fiscal' play?",
-        options: [
-          { text: "Adjective", correct: true },
-          { text: "Noun", correct: false },
-          { text: "Verb", correct: false },
-          { text: "Adverb", correct: false }
-        ]
-      },
-      // Editorial 2 Questions (21-40)
-      {
-        id: 21,
-        question: "Editorial 2: In 'Pakistan Crypto Council has been formed', what part of speech is 'formed'?",
-        options: [
-          { text: "Verb", correct: true },
-          { text: "Noun", correct: false },
-          { text: "Adjective", correct: false },
-          { text: "Adverb", correct: false }
-        ]
-      },
-      {
-        id: 22,
-        question: "Editorial 2: Identify the antonym for 'centralised' as used in the article.",
-        options: [
-          { text: "Decentralized", correct: true },
-          { text: "Unified", correct: false },
-          { text: "Consolidated", correct: false },
-          { text: "Restricted", correct: false }
-        ]
-      },
-      {
-        id: 23,
-        question: "Editorial 2: What is the meaning of 'pivotal' in 'a pivotal role'?",
-        options: [
-          { text: "Crucial", correct: true },
-          { text: "Insignificant", correct: false },
-          { text: "Secondary", correct: false },
-          { text: "Optional", correct: false }
-        ]
-      },
-      {
-        id: 24,
-        question: "Editorial 2: In 'regulate and integrate blockchain technology', which word is a coordinating conjunction?",
-        options: [
-          { text: "and", correct: true },
-          { text: "blockchain", correct: false },
-          { text: "technology", correct: false },
-          { text: "integrate", correct: false }
-        ]
-      },
-      {
-        id: 25,
-        question: "Editorial 2: Which word in 'the council is set to play a pivotal role' acts as an adjective?",
-        options: [
-          { text: "pivotal", correct: true },
-          { text: "play", correct: false },
-          { text: "role", correct: false },
-          { text: "set", correct: false }
-        ]
-      },
-      {
-        id: 26,
-        question: "Editorial 2: Identify the synonym for 'innovation' as used in the article.",
-        options: [
-          { text: "creativity", correct: true },
-          { text: "tradition", correct: false },
-          { text: "stagnation", correct: false },
-          { text: "regulation", correct: false }
-        ]
-      },
-      {
-        id: 27,
-        question: "Editorial 2: In 'digital assets into its financial landscape', what part of speech is 'digital'?",
-        options: [
-          { text: "Adjective", correct: true },
-          { text: "Noun", correct: false },
-          { text: "Verb", correct: false },
-          { text: "Adverb", correct: false }
-        ]
-      },
-      {
-        id: 28,
-        question: "Editorial 2: What is the antonym of 'regulated' in the context of the article?",
-        options: [
-          { text: "Unregulated", correct: true },
-          { text: "Strict", correct: false },
-          { text: "Monitored", correct: false },
-          { text: "Controlled", correct: false }
-        ]
-      },
-      {
-        id: 29,
-        question: "Editorial 2: Identify the preposition in 'after a delegation representing American interests'.",
-        options: [
-          { text: "after", correct: true },
-          { text: "representing", correct: false },
-          { text: "American", correct: false },
-          { text: "interests", correct: false }
-        ]
-      },
-      {
-        id: 30,
-        question: "Editorial 2: In 'cryptocurrency and blockchain technologies', which word functions as a conjunction?",
-        options: [
-          { text: "and", correct: true },
-          { text: "cryptocurrency", correct: false },
-          { text: "blockchain", correct: false },
-          { text: "technologies", correct: false }
-        ]
-      },
-      {
-        id: 31,
-        question: "Editorial 2: In 'to hawk its wares', what does 'hawk' mean?",
-        options: [
-          { text: "sell aggressively", correct: true },
-          { text: "admire", correct: false },
-          { text: "inspect", correct: false },
-          { text: "discard", correct: false }
-        ]
-      },
-      {
-        id: 32,
-        question: "Editorial 2: What is the grammatical role of 'merely' in 'merely weeks after a delegation'?",
-        options: [
-          { text: "Adverb", correct: true },
-          { text: "Adjective", correct: false },
-          { text: "Preposition", correct: false },
-          { text: "Conjunction", correct: false }
-        ]
-      },
-      {
-        id: 33,
-        question: "Editorial 2: Identify the synonym for 'integration' as used in the article.",
-        options: [
-          { text: "incorporation", correct: true },
-          { text: "separation", correct: false },
-          { text: "isolation", correct: false },
-          { text: "division", correct: false }
-        ]
-      },
-      {
-        id: 34,
-        question: "Editorial 2: In 'the state is still quite devoted to the idea of centralised control', which word is an adverb?",
-        options: [
-          { text: "quite", correct: true },
-          { text: "devoted", correct: false },
-          { text: "centralised", correct: false },
-          { text: "control", correct: false }
-        ]
-      },
-      {
-        id: 35,
-        question: "Editorial 2: What is the antonym of 'devoted' as used in the article?",
-        options: [
-          { text: "indifferent", correct: true },
-          { text: "loyal", correct: false },
-          { text: "committed", correct: false },
-          { text: "attached", correct: false }
-        ]
-      },
-      {
-        id: 36,
-        question: "Editorial 2: In 'while the financial system remains tightly regulated', identify the preposition.",
-        options: [
-          { text: "in", correct: true },
-          { text: "while", correct: false },
-          { text: "remains", correct: false },
-          { text: "tightly", correct: false }
-        ]
-      },
-      {
-        id: 37,
-        question: "Editorial 2: Choose the correct meaning of 'snake oil salesmen' in the context.",
-        options: [
-          { text: "Fraudsters", correct: true },
-          { text: "Experts", correct: false },
-          { text: "Investors", correct: false },
-          { text: "Regulators", correct: false }
-        ]
-      },
-      {
-        id: 38,
-        question: "Editorial 2: What part of speech is 'technologies' in 'cryptocurrency and blockchain technologies'?",
-        options: [
-          { text: "Noun", correct: true },
-          { text: "Adjective", correct: false },
-          { text: "Verb", correct: false },
-          { text: "Adverb", correct: false }
-        ]
-      },
-      {
-        id: 39,
-        question: "Editorial 2: Identify the preposition in 'into its financial landscape'.",
-        options: [
-          { text: "into", correct: true },
-          { text: "financial", correct: false },
-          { text: "its", correct: false },
-          { text: "landscape", correct: false }
-        ]
-      },
-      {
-        id: 40,
-        question: "Editorial 2: In 'regulate and integrate', which word functions as a verb?",
-        options: [
-          { text: "regulate", correct: true },
-          { text: "and", correct: false },
-          { text: "integrate", correct: false },
-          { text: "none", correct: false }
-        ]
-      },
-      // Editorial 3 Questions (41-50)
-      {
-        id: 41,
-        question: "Editorial 3: In 'Pakistan’s children in prison have often been treated like adult criminals', which word acts as a simile indicator?",
-        options: [
-          { text: "like", correct: true },
-          { text: "often", correct: false },
-          { text: "been", correct: false },
-          { text: "treated", correct: false }
-        ]
-      },
-      {
-        id: 42,
-        question: "Editorial 3: Identify the preposition in 'in a dark space'.",
-        options: [
-          { text: "in", correct: true },
-          { text: "dark", correct: false },
-          { text: "a", correct: false },
-          { text: "space", correct: false }
-        ]
-      },
-      {
-        id: 43,
-        question: "Editorial 3: What is the antonym of 'juvenile' as used in 'juvenile offenders'?",
-        options: [
-          { text: "adult", correct: true },
-          { text: "young", correct: false },
-          { text: "immature", correct: false },
-          { text: "minor", correct: false }
-        ]
-      },
-      {
-        id: 44,
-        question: "Editorial 3: In 'complete educational support', what part of speech is 'complete'?",
-        options: [
-          { text: "Adjective", correct: true },
-          { text: "Adverb", correct: false },
-          { text: "Noun", correct: false },
-          { text: "Verb", correct: false }
-        ]
-      },
-      {
-        id: 45,
-        question: "Editorial 3: Identify the synonym for 'prison' in the context of the article.",
-        options: [
-          { text: "penitentiary", correct: true },
-          { text: "academy", correct: false },
-          { text: "home", correct: false },
-          { text: "school", correct: false }
-        ]
-      },
-      {
-        id: 46,
-        question: "Editorial 3: In 'treated like adult criminals', which word functions as a conjunction?",
-        options: [
-          { text: "none", correct: true },
-          { text: "like", correct: false },
-          { text: "and", correct: false },
-          { text: "treated", correct: false }
-        ]
-      },
-      {
-        id: 47,
-        question: "Editorial 3: What is the correct antonym for 'treated' in a reformed context?",
-        options: [
-          { text: "ignored", correct: true },
-          { text: "acknowledged", correct: false },
-          { text: "admired", correct: false },
-          { text: "criticized", correct: false }
-        ]
-      },
-      {
-        id: 48,
-        question: "Editorial 3: In 'programme to educate 4,684 children', what is the function of 'to educate'?",
-        options: [
-          { text: "Infinitive of purpose", correct: true },
-          { text: "Gerund", correct: false },
-          { text: "Participle", correct: false },
-          { text: "Adjective", correct: false }
-        ]
-      },
-      {
-        id: 49,
-        question: "Editorial 3: Identify the adverb in 'often been treated like adult criminals'.",
-        options: [
-          { text: "often", correct: true },
-          { text: "treated", correct: false },
-          { text: "been", correct: false },
-          { text: "like", correct: false }
-        ]
-      },
-      {
-        id: 50,
-        question: "Editorial 3: In 'the Sindh government’s programme', what role does 'government’s' play?",
-        options: [
-          { text: "Possessive adjective", correct: true },
-          { text: "Noun", correct: false },
-          { text: "Verb", correct: false },
-          { text: "Adverb", correct: false }
-        ]
-      }
-    ];
-
+    // Global variables
+    let questions = [];
     let timerInterval;
-    let totalTime = 600; // 10 minutes in seconds
+    let totalTime = 600; // 10 minutes = 600 seconds
     let startTime;
 
-    // Shuffle function for arrays
+    // Helper function to shuffle an array (Fisher-Yates shuffle)
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
-          let j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
       }
       return array;
     }
 
-    // Called when "Start Quiz" is clicked
+    // Function to generate quiz questions dynamically
+    function loadQuiz() {
+      // Editorial 1 – 20 questions
+      let editorial1 = [
+        {
+          question: "According to Editorial 1, terrorism can be eradicated if the ______ points of the revised National Action Plan are focused on?",
+          options: ["14", "12", "16", "10"],
+          correct: "14"
+        },
+        {
+          question: "Editorial 1 suggests that the kinetic aspects of NAP are ______ in dealing with insurgencies.",
+          options: ["essential", "optional", "trivial", "irrelevant"],
+          correct: "essential"
+        },
+        {
+          question: "Which phrase best describes the description of Balochistan's poverty in Editorial 1?",
+          options: ["medieval poverty", "modern poverty", "affluent", "industrial poverty"],
+          correct: "medieval poverty"
+        },
+        {
+          question: "In Editorial 1, the term 'alacrity' most nearly means:",
+          options: ["eagerness", "slowness", "hesitation", "indifference"],
+          correct: "eagerness"
+        },
+        {
+          question: "Editorial 1 mentions that failure to implement NAP's non-kinetic measures may lead to:",
+          options: ["a bloody cycle of violence", "economic prosperity", "social harmony", "political stability"],
+          correct: "a bloody cycle of violence"
+        },
+        {
+          question: "The DG ISPR in Editorial 1 implies that focusing on the 14 points will help to:",
+          options: ["eradicate terrorism", "increase terrorism", "reduce funding", "improve tourism"],
+          correct: "eradicate terrorism"
+        },
+        {
+          question: "What does Editorial 1 imply about the state of insecurity due to armed groups?",
+          options: ["It is untenable", "It is acceptable", "It is improving", "It is negligible"],
+          correct: "It is untenable"
+        },
+        {
+          question: "Editorial 1 states that conventional approaches are ______ in responding to terrorism.",
+          options: ["inadequate", "sufficient", "effective", "timely"],
+          correct: "inadequate"
+        },
+        {
+          question: "Which word in Editorial 1 best describes the non-kinetic measures required?",
+          options: ["complementary", "subordinate", "irrelevant", "dominant"],
+          correct: "complementary"
+        },
+        {
+          question: "The phrase 'existential threats' in Editorial 1 most nearly means:",
+          options: ["life-threatening", "minor issues", "insignificant", "temporary"],
+          correct: "life-threatening"
+        },
+        {
+          question: "Editorial 1 indicates that the reconciliation process should be led by ______.",
+          options: ["political elements from across Pakistan", "military alone", "foreign experts", "local insurgents"],
+          correct: "political elements from across Pakistan"
+        },
+        {
+          question: "Which of the following is NOT mentioned as a part of NAP in Editorial 1?",
+          options: ["non-kinetic measures", "reconciliation process", "mineral wealth extraction", "kinetic aspects"],
+          correct: "mineral wealth extraction"
+        },
+        {
+          question: "The term 'alacrity' is used in Editorial 1 to emphasize the need for ______ action.",
+          options: ["prompt", "delayed", "inefficient", "careless"],
+          correct: "prompt"
+        },
+        {
+          question: "According to Editorial 1, which group must be neutralized to restore peace?",
+          options: ["armed groups threatening peace", "diplomats", "business leaders", "foreign investors"],
+          correct: "armed groups threatening peace"
+        },
+        {
+          question: "Which preposition best fills the blank: 'The province sits ______ a treasure of mineral wealth' as per Editorial 1?",
+          options: ["on", "in", "at", "by"],
+          correct: "on"
+        },
+        {
+          question: "Editorial 1 mentions 'terrorism' mainly in relation to:",
+          options: ["hijackings and insurgency", "natural disasters", "economic reforms", "cultural festivals"],
+          correct: "hijackings and insurgency"
+        },
+        {
+          question: "Which part of speech is the word 'conventional' as used in Editorial 1?",
+          options: ["adjective", "noun", "adverb", "verb"],
+          correct: "adjective"
+        },
+        {
+          question: "Identify the antonym of 'non-kinetic' as implied in Editorial 1.",
+          options: ["kinetic", "static", "inert", "passive"],
+          correct: "kinetic"
+        },
+        {
+          question: "Editorial 1 implies that armed groups that threaten peace should be ______.",
+          options: ["neutralized", "supported", "ignored", "rewarded"],
+          correct: "neutralized"
+        },
+        {
+          question: "Which sentence best reflects the idea from Editorial 1?",
+          options: ["Ignoring socio-political issues may intensify terrorism", "Delayed action is acceptable", "Strict conventional methods are adequate", "Terrorism is inevitable without external aid"],
+          correct: "Ignoring socio-political issues may intensify terrorism"
+        }
+      ];
+
+      // Editorial 2 – 20 questions
+      let editorial2 = [
+        {
+          question: "According to Editorial 2, the US retreat from global climate finance commitments may affect Pakistan's ______.",
+          options: ["wheat harvest", "technology sector", "tourism industry", "education system"],
+          correct: "wheat harvest"
+        },
+        {
+          question: "Which term best describes the water crisis in Editorial 2?",
+          options: ["imminent", "resolved", "distant", "hypothetical"],
+          correct: "imminent"
+        },
+        {
+          question: "Editorial 2 states that the Tarbela and Mangla dams are approaching ______ levels.",
+          options: ["dead", "optimal", "excessive", "flooded"],
+          correct: "dead"
+        },
+        {
+          question: "What percentage water shortage is predicted for Punjab and Sindh in Editorial 2?",
+          options: ["35%", "50%", "25%", "45%"],
+          correct: "35%"
+        },
+        {
+          question: "Which of the following measures is suggested in Editorial 2 for water conservation?",
+          options: ["Drip irrigation", "Flooding", "Overwatering", "Dew harvesting"],
+          correct: "Drip irrigation"
+        },
+        {
+          question: "Editorial 2 highlights a global pledge at COP29 to boost climate finance to ______ annually by 2035.",
+          options: ["$300bn", "$500bn", "$200bn", "$400bn"],
+          correct: "$300bn"
+        },
+        {
+          question: "Which country's reduction in climate finance is discussed in Editorial 2?",
+          options: ["US", "UK", "Germany", "France"],
+          correct: "US"
+        },
+        {
+          question: "According to Editorial 2, which organization provided the figures on climate finance in 2022?",
+          options: ["OECD", "IMF", "World Bank", "UN"],
+          correct: "OECD"
+        },
+        {
+          question: "Editorial 2 mentions devastating floods in which year?",
+          options: ["2022", "2020", "2021", "2019"],
+          correct: "2022"
+        },
+        {
+          question: "Which of the following is a suggested method for domestic resource mobilisation in Editorial 2?",
+          options: ["Green bonds", "Foreign loans", "Tax exemptions", "Military spending"],
+          correct: "Green bonds"
+        },
+        {
+          question: "Editorial 2 points out that agriculture consumes over what percentage of water resources?",
+          options: ["90%", "50%", "70%", "30%"],
+          correct: "90%"
+        },
+        {
+          question: "Which phrase best describes the state of international climate finance in Editorial 2?",
+          options: ["crumbling", "booming", "stable", "expanding"],
+          correct: "crumbling"
+        },
+        {
+          question: "What is the main threat to food security mentioned in Editorial 2?",
+          options: ["Agricultural disruptions", "Technological advancements", "Increased exports", "Economic growth"],
+          correct: "Agricultural disruptions"
+        },
+        {
+          question: "The term 'climate-resilient' in Editorial 2 refers to:",
+          options: ["infrastructure that can withstand climate change", "traditional buildings", "temporary shelters", "luxurious apartments"],
+          correct: "infrastructure that can withstand climate change"
+        },
+        {
+          question: "Which region is primarily affected by the water crisis according to Editorial 2?",
+          options: ["Punjab and Sindh", "Balochistan", "KP", "Gilgit-Baltistan"],
+          correct: "Punjab and Sindh"
+        },
+        {
+          question: "Editorial 2 suggests that which alliance should be strengthened to tackle climate challenges?",
+          options: ["regional climate alliances", "military alliances", "trade alliances", "cultural alliances"],
+          correct: "regional climate alliances"
+        },
+        {
+          question: "Which year does Editorial 2 reference as a critical time for the wheat crop's final watering?",
+          options: ["2022", "2021", "2023", "2020"],
+          correct: "2022"
+        },
+        {
+          question: "In Editorial 2, 'adaptation funding' refers to funds for:",
+          options: ["climate adaptation measures", "sports development", "military upgrades", "space exploration"],
+          correct: "climate adaptation measures"
+        },
+        {
+          question: "Which country is mentioned as a major donor that is now cutting aid in Editorial 2?",
+          options: ["UK", "China", "India", "Brazil"],
+          correct: "UK"
+        },
+        {
+          question: "The phrase 'perfect storm' in Editorial 2 is used to describe:",
+          options: ["a convergence of food security threats", "ideal weather conditions", "a strong economic growth", "a natural disaster with no human influence"],
+          correct: "a convergence of food security threats"
+        }
+      ];
+
+      // Editorial 3 – 10 questions
+      let editorial3 = [
+        {
+          question: "Editorial 3 describes the recent surge in traffic accidents in Karachi as:",
+          options: ["mysterious and unstoppable", "avoidable", "expected", "minimal"],
+          correct: "mysterious and unstoppable"
+        },
+        {
+          question: "Which political figure is mentioned in Editorial 3 regarding traffic accidents?",
+          options: ["PPP chairman Bilawal Bhutto-Zardari", "DG ISPR", "Balochistan chief minister", "US President"],
+          correct: "PPP chairman Bilawal Bhutto-Zardari"
+        },
+        {
+          question: "According to Editorial 3, what has been the response of Karachi police?",
+          options: ["Helpless", "Proactive", "Efficient", "Strict"],
+          correct: "Helpless"
+        },
+        {
+          question: "The term 'all out' in Editorial 3 means to:",
+          options: ["do everything possible", "relax efforts", "focus on minor issues", "wait and watch"],
+          correct: "do everything possible"
+        },
+        {
+          question: "Editorial 3 implies that the rise in accidents may be due to:",
+          options: ["routine policing failures", "improved road conditions", "better driver training", "increased safety measures"],
+          correct: "routine policing failures"
+        },
+        {
+          question: "Which term best describes the driving culture in Karachi as per Editorial 3?",
+          options: ["lack of respect for traffic police", "high discipline", "organized", "law-abiding"],
+          correct: "lack of respect for traffic police"
+        },
+        {
+          question: "The phrase 'chai paani culture' in Editorial 3 refers to:",
+          options: ["a casual attitude towards traffic rules", "a beverage tradition", "formal meetings", "strict regulations"],
+          correct: "a casual attitude towards traffic rules"
+        },
+        {
+          question: "Editorial 3 suggests that the number of drivers lacking adequate road sense is:",
+          options: ["worryingly large", "minimal", "inconsequential", "negligible"],
+          correct: "worryingly large"
+        },
+        {
+          question: "According to Editorial 3, what should the police do in response to rising accidents?",
+          options: ["Respond with immediate and visible action", "Ignore public anger", "Delay intervention", "Delegate to private firms"],
+          correct: "Respond with immediate and visible action"
+        },
+        {
+          question: "Identify the antonym of 'reckless' as used in Editorial 3.",
+          options: ["cautious", "careless", "irresponsible", "hasty"],
+          correct: "cautious"
+        }
+      ];
+      
+      // Combine all questions (50 total)
+      questions = [...editorial1, ...editorial2, ...editorial3];
+
+      // Dynamically generate the HTML for each question
+      const quizForm = document.getElementById('quizForm');
+      questions.forEach((q, index) => {
+        // Randomize options order for each question
+        let opts = shuffle(q.options.slice());
+        let questionDiv = document.createElement('div');
+        questionDiv.className = 'question';
+        questionDiv.id = 'question-' + index;
+
+        let questionText = document.createElement('p');
+        questionText.textContent = (index + 1) + ". " + q.question;
+        questionDiv.appendChild(questionText);
+
+        let optionsDiv = document.createElement('div');
+        optionsDiv.className = 'options';
+        opts.forEach(option => {
+          let label = document.createElement('label');
+          let radio = document.createElement('input');
+          radio.type = 'radio';
+          radio.name = 'question-' + index;
+          radio.value = option;
+          label.appendChild(radio);
+          label.appendChild(document.createTextNode(" " + option));
+          optionsDiv.appendChild(label);
+        });
+        questionDiv.appendChild(optionsDiv);
+        quizForm.appendChild(questionDiv);
+      });
+    }
+
+    // Function to start the quiz after a valid name is entered
     function startQuiz() {
-      const nameInput = document.getElementById("username").value.trim();
+      const nameInput = document.getElementById('studentNameInput').value.trim();
       if (nameInput === "") {
-        alert("Please enter your name to start the quiz.");
+        alert("Please enter your name.");
         return;
       }
-      document.getElementById("nameEntry").style.display = "none";
-      document.getElementById("quizSection").style.display = "block";
+      // Display the student's name in the header area
+      document.getElementById('studentNameDisplay').textContent = nameInput;
+      // Hide the name entry section and reveal the quiz section
+      document.getElementById('nameEntry').style.display = 'none';
+      document.getElementById('quizSection').style.display = 'block';
+      // Start timer
       startTime = new Date();
-      // Start the countdown timer
-      timerInterval = setInterval(updateTimer, 1000);
-      // Render the quiz questions
-      renderQuestions();
+      startTimer(totalTime);
     }
 
-    // Update timer every second
-    function updateTimer() {
-      const timerElement = document.getElementById("timer");
-      totalTime--;
-      let minutes = Math.floor(totalTime / 60);
-      let seconds = totalTime % 60;
-      timerElement.innerText = "Time Remaining: " + minutes + "m " + seconds + "s";
-      if (totalTime <= 0) {
-        clearInterval(timerInterval);
-        submitQuiz();
-      }
+    // Function to start the countdown timer
+    function startTimer(duration) {
+      let timer = duration, minutes, seconds;
+      timerInterval = setInterval(function () {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        document.getElementById('timer').textContent = minutes + ":" + seconds;
+        if (--timer < 0) {
+          clearInterval(timerInterval);
+          submitQuiz();
+        }
+      }, 1000);
     }
 
-    // Render quiz questions with randomized question and option order
-    function renderQuestions() {
-      let shuffledQuestions = shuffle(questions.slice());
-      const quizContainer = document.getElementById("quizContainer");
-      quizContainer.innerHTML = "";
-      shuffledQuestions.forEach((q, index) => {
-        // Randomize options for each question
-        let options = shuffle(q.options.slice());
-        let questionDiv = document.createElement("div");
-        questionDiv.className = "question";
-        let questionTitle = document.createElement("h3");
-        questionTitle.innerText = "Q" + (index + 1) + ": " + q.question;
-        questionDiv.appendChild(questionTitle);
-        let optionsList = document.createElement("ul");
-        options.forEach(option => {
-          let listItem = document.createElement("li");
-          let radioInput = document.createElement("input");
-          radioInput.type = "radio";
-          radioInput.name = "question" + q.id;
-          radioInput.value = option.text;
-          listItem.appendChild(radioInput);
-          let label = document.createElement("label");
-          label.innerText = option.text;
-          listItem.appendChild(label);
-          optionsList.appendChild(listItem);
-        });
-        questionDiv.appendChild(optionsList);
-        quizContainer.appendChild(questionDiv);
-      });
-    }
-
-    // Called when "Submit Quiz" is clicked or time runs out
+    // Function to submit the quiz and calculate results
     function submitQuiz() {
       clearInterval(timerInterval);
-      const endTime = new Date();
-      const timeTaken = Math.floor((endTime - startTime) / 1000);
-      const nameInput = document.getElementById("username").value.trim();
       let score = 0;
       let attempted = 0;
-      // Evaluate each question using the original questions array (IDs remain same)
-      questions.forEach(q => {
-        let radios = document.getElementsByName("question" + q.id);
-        radios.forEach(radio => {
-          if (radio.checked) {
-            attempted++;
-            let option = q.options.find(opt => opt.text === radio.value);
-            if (option && option.correct) {
-              score++;
-            }
+      questions.forEach((q, index) => {
+        let selected = document.querySelector('input[name="question-' + index + '"]:checked');
+        if (selected) {
+          attempted++;
+          if (selected.value === q.correct) {
+            score++;
           }
-        });
+        }
       });
-      // Hide quiz section and display results
-      document.getElementById("quizSection").style.display = "none";
-      document.getElementById("resultSection").style.display = "block";
-      document.getElementById("result").innerHTML = "<h2>Quiz Results</h2>" +
-        "<p>Name: " + nameInput + "</p>" +
-        "<p>Questions Attempted: " + attempted + " / 50</p>" +
-        "<p>Score: " + score + " / 50</p>" +
-        "<p>Time Taken: " + timeTaken + " seconds</p>";
-      
-      // Fill hidden Formspree form and submit
-      document.getElementById("studentName").value = nameInput;
-      document.getElementById("attempted").value = attempted;
-      document.getElementById("score").value = score;
-      document.getElementById("timeTaken").value = timeTaken;
-      document.getElementById("hiddenForm").submit();
+      let endTime = new Date();
+      let timeTaken = Math.floor((endTime - startTime) / 1000);
+
+      // Display the results on the page
+      let resultDiv = document.getElementById('result');
+      resultDiv.style.display = 'block';
+      resultDiv.innerHTML = "<h2>Results</h2>" +
+                            "<p>Name: " + document.getElementById('studentNameDisplay').textContent + "</p>" +
+                            "<p>Questions Attempted: " + attempted + " out of " + questions.length + "</p>" +
+                            "<p>Score: " + score + " out of " + questions.length + "</p>" +
+                            "<p>Time Taken: " + timeTaken + " seconds</p>";
+
+      // Fill and submit the hidden Formspree form
+      document.getElementById('formStudentName').value = document.getElementById('studentNameDisplay').textContent;
+      document.getElementById('formAttempted').value = attempted;
+      document.getElementById('formScore').value = score;
+      document.getElementById('formTimeTaken').value = timeTaken;
+      document.getElementById('resultsForm').submit();
     }
+
+    // Prevent form submission when pressing Enter in the name input field
+    document.addEventListener('DOMContentLoaded', function() {
+      loadQuiz();
+      document.getElementById('studentNameInput').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          startQuiz();
+        }
+      });
+    });
   </script>
 </head>
-<body>
+<body oncontextmenu="return false;">
   <header>
-    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Logo">
-    <h1>QUIZ FOR CSS ASPIRANTS 16 March 2025</h1>
-    <p>SYED ASGHAR ALI SHAH</p>
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
+    <h1>QUIZ FOR CSS ASPIRANTS 17 March 2025</h1>
+    <span class="name">SYED ASGHAR ALI SHAH</span>
   </header>
   <div class="container">
-    <!-- Name entry section -->
-    <div id="nameEntry" class="name-entry">
-      <h2>Enter Your Name</h2>
-      <input type="text" id="username" placeholder="Your Name">
+    <div id="nameEntry">
+      <h2>Enter Your Name to Start the Quiz</h2>
+      <input type="text" id="studentNameInput" placeholder="Enter your name">
       <button onclick="startQuiz()">Start Quiz</button>
     </div>
-    <!-- Quiz section -->
-    <div id="quizSection" class="quiz-section">
-      <div id="timer">Time Remaining: 10m 0s</div>
-      <div id="quizContainer"></div>
-      <button onclick="submitQuiz()">Submit Quiz</button>
-    </div>
-    <!-- Results section -->
-    <div id="resultSection" class="result-section" style="display:none;">
+    <div id="quizSection">
+      <div id="timer">10:00</div>
+      <div id="studentInfo" style="text-align: center; margin-bottom: 20px;">
+        <strong>Student: <span id="studentNameDisplay"></span></strong>
+      </div>
+      <form id="quizForm">
+        <!-- Quiz questions are generated here dynamically -->
+      </form>
+      <div style="text-align: center; margin-top: 20px;">
+        <button onclick="submitQuiz()">Submit Quiz</button>
+      </div>
       <div id="result"></div>
     </div>
   </div>
   <footer>
-    <p>Contact: 03265762698 | For more quizzes, visit our website!</p>
+    <p>Contact us: 03265762698 | Call now for more information!</p>
   </footer>
-  <!-- Hidden form for Formspree submission -->
-  <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-    <input type="hidden" name="studentName" id="studentName">
-    <input type="hidden" name="attempted" id="attempted">
-    <input type="hidden" name="score" id="score">
-    <input type="hidden" name="timeTaken" id="timeTaken">
+  <!-- Hidden Formspree form for results submission -->
+  <form id="resultsForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display: none;">
+    <input type="hidden" name="studentName" id="formStudentName">
+    <input type="hidden" name="attempted" id="formAttempted">
+    <input type="hidden" name="score" id="formScore">
+    <input type="hidden" name="timeTaken" id="formTimeTaken">
   </form>
 </body>
 </html>
