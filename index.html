@@ -3,782 +3,542 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>QUIZ FOR CSS ASPIRANTS - 18 March 2025</title>
+  <title>Quiz for CSS Aspirants 19 March 2025</title>
   <style>
-    /* Disable text selection */
-    * {
-      -webkit-user-select: none; 
-      -moz-user-select: none; 
-      -ms-user-select: none; 
-      user-select: none;
-    }
+    /* General Styles */
     body {
+      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background: #f0f0f0;
+      background: #f2f2f2;
+      user-select: none; /* Disable text selection */
+    }
+    header, footer {
+      background: #333;
+      color: #fff;
+      padding: 15px;
       text-align: center;
     }
     header {
-      background: #2c3e50;
-      color: #fff;
-      padding: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-wrap: wrap;
+      position: relative;
     }
     header img {
-      height: 60px;
-      margin-right: 15px;
+      max-width: 100px;
+      display: block;
+      margin: 10px auto;
     }
-    header h1 {
-      font-size: 24px;
-      margin: 0;
-    }
-    header h2 {
-      font-size: 18px;
-      margin: 5px 0 0 0;
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
     }
     .container {
-      width: 90%;
       max-width: 900px;
       margin: 20px auto;
       background: #fff;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    footer {
-      background: #2c3e50;
-      color: #fff;
-      padding: 10px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      font-size: 14px;
-    }
-    input[type="text"] {
-      padding: 8px;
-      font-size: 16px;
-      width: 80%;
-      margin: 10px 0;
-    }
-    button {
-      background: #27ae60;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      margin: 10px;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #219150;
-    }
-    #timer {
-      font-size: 20px;
-      font-weight: bold;
-      color: #c0392b;
-      margin-bottom: 20px;
-    }
-    .question {
-      text-align: left;
-      margin: 20px 0;
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
-    }
-    .question p {
-      margin: 5px 0;
-    }
-    .options {
-      margin-top: 10px;
-    }
-    .option {
-      margin: 5px 0;
-    }
-    /* Hide quiz section initially */
-    #quiz-section {
+    .hidden {
       display: none;
     }
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      margin: 10px 0;
+    }
+    button:hover {
+      background-color: #555;
+    }
+    .question {
+      margin-bottom: 20px;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    label {
+      cursor: pointer;
+    }
+    /* Disable context menu (right-click) */
+    ::-moz-selection { background: transparent; }
+    ::selection { background: transparent; }
   </style>
+</head>
+<body oncontextmenu="return false;">
+  <header>
+    <h1>QUIZ FOR CSS ASPIRANTS 19 March 2025</h1>
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
+    <p>SYED ASGHAR ALI SHAH</p>
+  </header>
+
+  <div class="container">
+    <!-- Name Entry Section -->
+    <div id="name-section">
+      <h2>Enter Your Name</h2>
+      <input type="text" id="userName" placeholder="Your Name" required>
+      <button id="startBtn">Start Quiz</button>
+    </div>
+
+    <!-- Timer Section -->
+    <div id="timer" class="hidden">
+      <h3>Time Remaining: <span id="time">10:00</span></h3>
+    </div>
+
+    <!-- Quiz Section -->
+    <form id="quizForm" class="hidden">
+      <div id="quiz">
+        <!-- Quiz questions will be rendered here by JavaScript -->
+      </div>
+      <button type="button" id="submitQuiz">Submit Quiz</button>
+    </form>
+
+    <!-- Results Section -->
+    <div id="results" class="hidden">
+      <h2>Results</h2>
+      <p>Name: <span id="resultName"></span></p>
+      <p>Questions Attempted: <span id="resultAttempted"></span> / 50</p>
+      <p>Score: <span id="resultScore"></span> / 50</p>
+      <p>Time Taken: <span id="resultTime"></span></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>Contact: 03265762698 | For more information, contact us now!</p>
+  </footer>
+
+  <!-- Hidden Form for Formspree Submission -->
+  <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+    <input type="text" name="name" id="formName">
+    <input type="text" name="attempted" id="formAttempted">
+    <input type="text" name="score" id="formScore">
+    <input type="text" name="timeTaken" id="formTime">
+  </form>
+
   <script>
-    // Disable right-click and key shortcuts to deter inspection
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
+    // Disable text selection and copy
+    document.addEventListener('selectstart', function(e) { e.preventDefault(); });
+    document.addEventListener('copy', function(e) { e.preventDefault(); });
+    // Disable F12 and other developer keys
+    document.addEventListener("keydown", function(e) {
+      if(e.keyCode === 123) { e.preventDefault(); }
     });
-    document.onkeydown = function(e) {
-      if (e.keyCode === 123 || // F12
-          (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || // Ctrl+Shift+I/J
-          (e.ctrlKey && e.keyCode === 85)) { // Ctrl+U
-        return false;
-      }
-    };
+    // Disable right-click
+    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
 
-    let timer, timeLeft = 1200; // 1200 seconds = 20 minutes
+    // Global variables
+    let timerInterval;
+    let totalTime = 10 * 60; // 10 minutes in seconds
+    let timeTaken = 0; // seconds
 
-    function startQuiz() {
-      const nameInput = document.getElementById("name").value.trim();
-      if (nameInput === "") {
-        alert("Please enter your name to start the quiz.");
+    document.getElementById('startBtn').addEventListener('click', function() {
+      const name = document.getElementById('userName').value.trim();
+      if(name === "") {
+        alert("Please enter your name.");
         return;
       }
-      // Hide welcome and show quiz section
-      document.getElementById("welcome").style.display = "none";
-      document.getElementById("quiz-section").style.display = "block";
-      // Start timer and randomize options
+      // Hide name section and show quiz and timer
+      document.getElementById('name-section').classList.add('hidden');
+      document.getElementById('quizForm').classList.remove('hidden');
+      document.getElementById('timer').classList.remove('hidden');
       startTimer();
-      shuffleAllOptions();
-    }
+    });
 
+    // Timer functions
     function startTimer() {
-      timer = setInterval(() => {
-        timeLeft--;
-        let minutes = Math.floor(timeLeft / 60);
-        let seconds = timeLeft % 60;
-        document.getElementById("timer").innerText = `Time Left: ${minutes}m ${seconds}s`;
-        if (timeLeft <= 0) {
-          clearInterval(timer);
+      updateTimerDisplay();
+      timerInterval = setInterval(function() {
+        totalTime--;
+        timeTaken++;
+        updateTimerDisplay();
+        if(totalTime <= 0) {
+          clearInterval(timerInterval);
           submitQuiz();
         }
       }, 1000);
     }
-
-    // Function to shuffle options inside each question's options div
-    function shuffleAllOptions() {
-      const optionsContainers = document.querySelectorAll('.options');
-      optionsContainers.forEach(container => {
-        // Convert HTMLCollection to array
-        let optionsArray = Array.from(container.children);
-        // Shuffle using Fisher-Yates
-        for (let i = optionsArray.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          container.appendChild(optionsArray[j]);
-          optionsArray.splice(j, 1);
-        }
-      });
+    function updateTimerDisplay() {
+      const minutes = Math.floor(totalTime / 60);
+      const seconds = totalTime % 60;
+      document.getElementById('time').textContent =
+        (minutes < 10 ? '0' + minutes : minutes) + ":" + (seconds < 10 ? '0' + seconds : seconds);
     }
 
-    function submitQuiz() {
-      clearInterval(timer);
-      const name = document.getElementById("name").value.trim();
-      const totalQuestions = 50;
-      let attempted = 0;
-      let score = 0;
-      for (let i = 1; i <= totalQuestions; i++) {
-        const selected = document.querySelector(`input[name="q${i}"]:checked`);
-        if (selected) {
-          attempted++;
-          if (selected.value === "correct") {
-            score++;
-          }
-        }
+    // Quiz Questions Data
+    const questions = [
+      /* Editorial 1 (20 Questions) */
+      {
+        question: "Editorial 1: Choose the correct synonym for 'ceasefire' as used in the text.",
+        options: ["truce", "attack", "retreat", "advance"],
+        answer: "truce"
+      },
+      {
+        question: "Editorial 1: Identify the correct preposition: 'Over 400 Palestinians have been killed ___ the latest atrocities.'",
+        options: ["in", "at", "by", "from"],
+        answer: "in"
+      },
+      {
+        question: "Editorial 1: Which word best replaces 'genocidal' in the context of the text?",
+        options: ["massacre", "peaceful", "trivial", "joyful"],
+        answer: "massacre"
+      },
+      {
+        question: "Editorial 1: What is the correct part of speech for 'devastated' in the sentence?",
+        options: ["adjective", "verb", "noun", "adverb"],
+        answer: "adjective"
+      },
+      {
+        question: "Editorial 1: Select the correctly punctuated sentence.",
+        options: [
+          "Tel Aviv’s troops may reportedly return, to the devastated Strip.",
+          "Tel Aviv’s troops, may reportedly return to the devastated Strip.",
+          "Tel Aviv’s troops may reportedly return to the devastated Strip.",
+          "Tel Aviv’s troops may reportedly return to, the devastated Strip."
+        ],
+        answer: "Tel Aviv’s troops may reportedly return to the devastated Strip."
+      },
+      {
+        question: "Editorial 1: Rearrange the sentence: 'the ceasefire held for two months' into a grammatically correct sentence.",
+        options: [
+          "For two months, the ceasefire held.",
+          "The ceasefire held for two months.",
+          "Held for two months the ceasefire.",
+          "Two months held the ceasefire."
+        ],
+        answer: "The ceasefire held for two months."
+      },
+      {
+        question: "Editorial 1: Choose the antonym for 'slim' as used in the text.",
+        options: ["ample", "narrow", "tiny", "limited"],
+        answer: "ample"
+      },
+      {
+        question: "Editorial 1: Which part of speech is the word 'butchery' in the text?",
+        options: ["noun", "verb", "adjective", "adverb"],
+        answer: "noun"
+      },
+      {
+        question: "Editorial 1: Identify the error in the sentence: 'if Israel continues its butchery, any chances of a renewed ceasefire will vaporise.'",
+        options: ["its", "butchery", "vaporise", "renewed"],
+        answer: "None"
+      },
+      {
+        question: "Editorial 1: Fill in the blank with the correct preposition: 'a return ___ relative calm seems impossible.'",
+        options: ["to", "for", "of", "with"],
+        answer: "to"
+      },
+      {
+        question: "Editorial 1: Choose the correct meaning of 'extermination' as used in the text.",
+        options: ["mass killing", "celebration", "rescue", "negotiation"],
+        answer: "mass killing"
+      },
+      {
+        question: "Editorial 1: Which sentence is grammatically correct?",
+        options: [
+          "There were doubts about Israel’s sincerity towards long-term peace.",
+          "There were doubt about Israel’s sincerity towards long-term peace.",
+          "There was doubts about Israel’s sincerity towards long-term peace.",
+          "There were doubts about Israel’s sincere towards long-term peace."
+        ],
+        answer: "There were doubts about Israel’s sincerity towards long-term peace."
+      },
+      {
+        question: "Editorial 1: Identify the correct synonym for 'retaliated' as used in context.",
+        options: ["responded", "ignored", "initiated", "stopped"],
+        answer: "responded"
+      },
+      {
+        question: "Editorial 1: Which part of speech is 'armed' in the sentence: 'armed Palestinian factions'?",
+        options: ["adjective", "noun", "verb", "adverb"],
+        answer: "adjective"
+      },
+      {
+        question: "Editorial 1: Choose the correct article to complete the sentence: '___ ceasefire held for two months.'",
+        options: ["A", "An", "The", "No article"],
+        answer: "The"
+      },
+      {
+        question: "Editorial 1: Identify the correct usage of a comma in the sentence.",
+        options: ["After introductory phrases", "Between subject and verb", "Before every noun", "None of the above"],
+        answer: "After introductory phrases"
+      },
+      {
+        question: "Editorial 1: What is the antonym of 'sincere' as used in the context of the article?",
+        options: ["insincere", "honest", "genuine", "truthful"],
+        answer: "insincere"
+      },
+      {
+        question: "Editorial 1: Rearrange the words to form a meaningful sentence: 'hostages / welfare / its / the / if / had / been / cared / Israel / for'.",
+        options: [
+          "If Israel had cared for its hostages, their welfare would be ensured.",
+          "Israel had cared for its hostages, if their welfare would be ensured.",
+          "If hostages had been cared for by Israel, their welfare ensured.",
+          "Had Israel cared for hostages, their welfare if ensured."
+        ],
+        answer: "If Israel had cared for its hostages, their welfare would be ensured."
+      },
+      {
+        question: "Editorial 1: Which preposition correctly fills the blank: 'a return ___ the people alive'?",
+        options: ["of", "for", "to", "with"],
+        answer: "to"
+      },
+      {
+        question: "Editorial 1: Identify the adverb in the sentence: 'the violence unleashed on Tuesday shows.'",
+        options: ["unleashed", "Tuesday", "shows", "the"],
+        answer: "Tuesday"
+      },
+      /* Editorial 2 (20 Questions) */
+      {
+        question: "Editorial 2: Choose the synonym for 'escalation' as used in the text.",
+        options: ["increase", "decline", "stagnation", "drop"],
+        answer: "increase"
+      },
+      {
+        question: "Editorial 2: Identify the correct preposition: 'huddle ___ national security'?",
+        options: ["on", "for", "about", "of"],
+        answer: "on"
+      },
+      {
+        question: "Editorial 2: Which word best replaces 'menace' in the text?",
+        options: ["threat", "joy", "solution", "benefit"],
+        answer: "threat"
+      },
+      {
+        question: "Editorial 2: What part of speech is the word 'unified' in the sentence?",
+        options: ["adjective", "noun", "verb", "adverb"],
+        answer: "adjective"
+      },
+      {
+        question: "Editorial 2: Choose the correctly structured sentence.",
+        options: [
+          "The committee’s statement emphasized unified political commitment.",
+          "The committee’s statement, emphasized unified political commitment.",
+          "The committee’s statement emphasized, unified political commitment.",
+          "The committee’s statement emphasized unified, political commitment."
+        ],
+        answer: "The committee’s statement emphasized unified political commitment."
+      },
+      {
+        question: "Editorial 2: Rearrange the sentence: 'regretted / some / opposition / lack / the / participation / members / by' into a correct sentence.",
+        options: [
+          "The members regretted the lack of participation by some opposition.",
+          "By some opposition, the members regretted the lack of participation.",
+          "Regretted the lack of participation by some opposition members.",
+          "Some opposition members regretted the lack of participation."
+        ],
+        answer: "The members regretted the lack of participation by some opposition."
+      },
+      {
+        question: "Editorial 2: Identify the antonym of 'sharp' as used in the context.",
+        options: ["dull", "keen", "bright", "quick"],
+        answer: "dull"
+      },
+      {
+        question: "Editorial 2: Which is the correct usage of the word 'huddle'?",
+        options: ["A meeting of people", "A type of clothing", "A formal event", "A cooking method"],
+        answer: "A meeting of people"
+      },
+      {
+        question: "Editorial 2: Select the correct preposition to complete the sentence: 'skipped the meeting ___ political reasons.'",
+        options: ["for", "by", "with", "of"],
+        answer: "for"
+      },
+      {
+        question: "Editorial 2: What is the correct synonym for 'censure' as used in the text?",
+        options: ["criticism", "praise", "support", "approval"],
+        answer: "criticism"
+      },
+      {
+        question: "Editorial 2: Identify the adverb in the sentence: 'politically, the leaders acted decisively.'",
+        options: ["politically", "leaders", "acted", "decisively"],
+        answer: "politically"
+      },
+      {
+        question: "Editorial 2: Choose the correct article: '___ meeting on national security was crucial.'",
+        options: ["A", "An", "The", "No article"],
+        answer: "The"
+      },
+      {
+        question: "Editorial 2: Which preposition correctly fits: 'focus ___ repelling terrorism'?",
+        options: ["on", "in", "at", "with"],
+        answer: "on"
+      },
+      {
+        question: "Editorial 2: Rearrange the words to form a meaningful sentence: 'unity / for / message / a / hope / of / was / required / on'?",
+        options: [
+          "A message of hope was required for unity.",
+          "For unity, a message of hope was required.",
+          "A message was required for hope and unity.",
+          "Hope for unity required a message was."
+        ],
+        answer: "A message of hope was required for unity."
+      },
+      {
+        question: "Editorial 2: What is the antonym of 'unified' as used in the text?",
+        options: ["divided", "together", "combined", "harmonized"],
+        answer: "divided"
+      },
+      {
+        question: "Editorial 2: Choose the correct meaning of 'allegiance' as used in the text.",
+        options: ["loyalty", "betrayal", "conflict", "indifference"],
+        answer: "loyalty"
+      },
+      {
+        question: "Editorial 2: Which word in the sentence is a noun?",
+        options: ["terrorism", "repeal", "politically", "unified"],
+        answer: "terrorism"
+      },
+      {
+        question: "Editorial 2: Identify the correct sequence: 'the committee members regretted the lack of participation by some opposition members and reiterated that the consultation process would continue.' Which part is misplaced?",
+        options: ["regretted", "lack", "by some opposition", "None"],
+        answer: "None"
+      },
+      {
+        question: "Editorial 2: In the phrase 'high-level huddle', what is the function of 'high-level'?",
+        options: ["adjective", "noun", "verb", "adverb"],
+        answer: "adjective"
+      },
+      {
+        question: "Editorial 2: Which term in the editorial indicates a negative criticism?",
+        options: ["censure", "unity", "consensus", "commitment"],
+        answer: "censure"
+      },
+      /* Editorial 3 (10 Questions) */
+      {
+        question: "Editorial 3: Choose the correct synonym for 'overhaul' as used in the text.",
+        options: ["revamp", "maintain", "ignore", "preserve"],
+        answer: "revamp"
+      },
+      {
+        question: "Editorial 3: Identify the preposition in the sentence: 'the proposal to bring down the weightage of population.'",
+        options: ["to", "down", "of", "bring"],
+        answer: "of"
+      },
+      {
+        question: "Editorial 3: Which word is the antonym of 'disproportionate'?",
+        options: ["balanced", "uneven", "extreme", "skewed"],
+        answer: "balanced"
+      },
+      {
+        question: "Editorial 3: What part of speech is 'incentivised' in the text?",
+        options: ["verb", "noun", "adjective", "adverb"],
+        answer: "verb"
+      },
+      {
+        question: "Editorial 3: Rearrange the sentence: 'A revised NFC formula must ensure that resources are allocated where they can yield the greatest impact.'",
+        options: [
+          "Resources are allocated by a revised NFC formula where they yield the greatest impact.",
+          "A revised NFC formula must ensure resources are allocated to yield the greatest impact.",
+          "Revised NFC formula ensures that resources yield the greatest impact where allocated.",
+          "Where resources can yield the greatest impact, a revised NFC formula must ensure allocation."
+        ],
+        answer: "Where resources can yield the greatest impact, a revised NFC formula must ensure allocation."
+      },
+      {
+        question: "Editorial 3: Which sentence uses correct grammar?",
+        options: [
+          "Social determinants like poverty will need policy interventions.",
+          "Social determinants such as poverty will need policy interventions.",
+          "Social determinants, such as poverty, will need policy interventions.",
+          "Social determinants; such as poverty will need policy interventions."
+        ],
+        answer: "Social determinants such as poverty will need policy interventions."
+      },
+      {
+        question: "Editorial 3: Identify the correct article for the sentence: '___ recalibrated NFC Award would reduce the financial burden.'",
+        options: ["A", "An", "The", "No article"],
+        answer: "The"
+      },
+      {
+        question: "Editorial 3: Choose the synonym for 'fiscal' as used in the text.",
+        options: ["financial", "emotional", "physical", "theoretical"],
+        answer: "financial"
+      },
+      {
+        question: "Editorial 3: Which word best fits in the blank: 'a recalibrated NFC Award would reduce the burden ___ the centre'?",
+        options: ["on", "of", "at", "in"],
+        answer: "on"
+      },
+      {
+        question: "Editorial 3: What is the antonym of 'equitable' as used in the text?",
+        options: ["inequitable", "fair", "just", "balanced"],
+        answer: "inequitable"
+      },
+      {
+        question: "Editorial 3: Identify the adverb in the sentence: 'provinces themselves would be willing to renegotiate provincial-sharing criteria.'",
+        options: ["themselves", "willing", "renegotiate", "criteria"],
+        answer: "willing"
       }
-      const timeTaken = 600 - timeLeft;
-      const resultText = `Name: ${name}\nQuestions Attempted: ${attempted}\nScore: ${score}/50\nTime Taken: ${timeTaken} seconds`;
-      document.getElementById("result").innerText = resultText;
+    ];
 
-      // Prepare and submit hidden form to Formspree
-      const form = document.createElement("form");
-      form.method = "POST";
-      form.action = "https://formspree.io/f/xwpvddea";
-      form.style.display = "none";
+    // Shuffle array helper function
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+    // Shuffle the questions order
+    shuffleArray(questions);
+    // Shuffle options for each question
+    questions.forEach(q => shuffleArray(q.options));
 
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = "quiz_result";
-      input.value = resultText;
-      form.appendChild(input);
+    // Render quiz questions
+    const quizDiv = document.getElementById('quiz');
+    questions.forEach((q, index) => {
+      const qDiv = document.createElement('div');
+      qDiv.classList.add('question');
+      qDiv.innerHTML = `<p><strong>Q${index + 1}:</strong> ${q.question}</p>`;
+      q.options.forEach(option => {
+        qDiv.innerHTML += `<label>
+          <input type="radio" name="q${index}" value="${option}"> ${option}
+        </label><br>`;
+      });
+      quizDiv.appendChild(qDiv);
+    });
 
-      document.body.appendChild(form);
-      form.submit();
+    // Submission logic
+    document.getElementById('submitQuiz').addEventListener('click', submitQuiz);
+    function submitQuiz() {
+      clearInterval(timerInterval);
+      let score = 0;
+      let attempted = 0;
+      questions.forEach((q, index) => {
+        const radios = document.getElementsByName('q' + index);
+        radios.forEach(radio => {
+          if(radio.checked) {
+            attempted++;
+            if(radio.value === q.answer) {
+              score++;
+            }
+          }
+        });
+      });
+      // Hide quiz and timer, show results
+      document.getElementById('quizForm').classList.add('hidden');
+      document.getElementById('timer').classList.add('hidden');
+      document.getElementById('results').classList.remove('hidden');
+      
+      document.getElementById('resultName').textContent = document.getElementById('userName').value;
+      document.getElementById('resultAttempted').textContent = attempted;
+      document.getElementById('resultScore').textContent = score;
+      document.getElementById('resultTime').textContent = timeTaken + " seconds";
+
+      // Fill and auto-submit hidden form
+      document.getElementById('formName').value = document.getElementById('userName').value;
+      document.getElementById('formAttempted').value = attempted;
+      document.getElementById('formScore').value = score;
+      document.getElementById('formTime').value = timeTaken + " seconds";
+      document.getElementById('hiddenForm').submit();
     }
   </script>
-</head>
-<body>
-  <header>
-    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
-    <div>
-      <h1>QUIZ FOR CSS ASPIRANTS - 18 March 2025</h1>
-      <h2>SYED ASGHAR ALI SHAH</h2>
-    </div>
-  </header>
-
-  <!-- Name Entry Section -->
-  <div class="container" id="welcome">
-    <h2>Welcome to the Toughest English Grammar Quiz</h2>
-    <p>Please enter your name to begin:</p>
-    <input type="text" id="name" placeholder="Your Name">
-    <br>
-    <button onclick="startQuiz()">Start Quiz</button>
-  </div>
-
-  <!-- Quiz Section -->
-  <div class="container" id="quiz-section">
-    <div id="timer">Time Left: 10m 0s</div>
-
-    <!-- QUESTIONS (50 total) -->
-
-    <!-- Editorial 1: Questions 1-20 -->
-    <!-- Q1 -->
-    <div class="question">
-      <p>1. Identify the correct preposition: "He is known ___ his unwavering stance on national security."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q1" value="wrong"> a) with</div>
-        <div class="option"><input type="radio" name="q1" value="correct"> b) for</div>
-        <div class="option"><input type="radio" name="q1" value="wrong"> c) about</div>
-        <div class="option"><input type="radio" name="q1" value="wrong"> d) in</div>
-      </div>
-    </div>
-
-    <!-- Q2 -->
-    <div class="question">
-      <p>2. Select the sentence with proper subject-verb agreement:</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q2" value="wrong"> a) The leadership in Pakistan have devised a plan.</div>
-        <div class="option"><input type="radio" name="q2" value="correct"> b) The leadership in Pakistan has devised a plan.</div>
-        <div class="option"><input type="radio" name="q2" value="wrong"> c) The leadership in Pakistan were devising a plan.</div>
-        <div class="option"><input type="radio" name="q2" value="wrong"> d) The leadership in Pakistan are devising a plan.</div>
-      </div>
-    </div>
-
-    <!-- Q3 -->
-    <div class="question">
-      <p>3. Choose the correctly punctuated sentence for a serious security meeting:</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q3" value="wrong"> a) The panel discussed, national security, and policies.</div>
-        <div class="option"><input type="radio" name="q3" value="correct"> b) The panel discussed national security and policies.</div>
-        <div class="option"><input type="radio" name="q3" value="wrong"> c) The panel, discussed national security and policies.</div>
-        <div class="option"><input type="radio" name="q3" value="wrong"> d) The panel discussed national, security and policies.</div>
-      </div>
-    </div>
-
-    <!-- Q4 -->
-    <div class="question">
-      <p>4. In the sentence "The military leadership must quickly respond to the threat", which word is an adverb?</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q4" value="wrong"> a) must</div>
-        <div class="option"><input type="radio" name="q4" value="correct"> b) quickly</div>
-        <div class="option"><input type="radio" name="q4" value="wrong"> c) respond</div>
-        <div class="option"><input type="radio" name="q4" value="wrong"> d) threat</div>
-      </div>
-    </div>
-
-    <!-- Q5 -->
-    <div class="question">
-      <p>5. Choose the sentence that correctly uses a semicolon:</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q5" value="wrong"> a) The insurgencies are complex; and require a holistic approach.</div>
-        <div class="option"><input type="radio" name="q5" value="wrong"> b) The insurgencies are complex, and require a holistic approach.</div>
-        <div class="option"><input type="radio" name="q5" value="correct"> c) The insurgencies are complex; they require a holistic approach.</div>
-        <div class="option"><input type="radio" name="q5" value="wrong"> d) The insurgencies; are complex and require a holistic approach.</div>
-      </div>
-    </div>
-
-    <!-- Q6 -->
-    <div class="question">
-      <p>6. Fill in the blank: "The state must listen ____ all shades of opinion."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q6" value="correct"> a) to</div>
-        <div class="option"><input type="radio" name="q6" value="wrong"> b) on</div>
-        <div class="option"><input type="radio" name="q6" value="wrong"> c) at</div>
-        <div class="option"><input type="radio" name="q6" value="wrong"> d) with</div>
-      </div>
-    </div>
-
-    <!-- Q7 -->
-    <div class="question">
-      <p>7. Identify the correct passive voice form: "A new counterterrorism policy ___ by the government."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q7" value="correct"> a) was formulated</div>
-        <div class="option"><input type="radio" name="q7" value="wrong"> b) formulated</div>
-        <div class="option"><input type="radio" name="q7" value="wrong"> c) has been formulating</div>
-        <div class="option"><input type="radio" name="q7" value="wrong"> d) is formulating</div>
-      </div>
-    </div>
-
-    <!-- Q8 -->
-    <div class="question">
-      <p>8. Which sentence uses a subordinate clause correctly?</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q8" value="correct"> a) Although the insurgency escalated, the government maintained its strategy.</div>
-        <div class="option"><input type="radio" name="q8" value="wrong"> b) Although the insurgency escalated the government maintained its strategy.</div>
-        <div class="option"><input type="radio" name="q8" value="wrong"> c) Despite of the insurgency escalating, the government maintained its strategy.</div>
-        <div class="option"><input type="radio" name="q8" value="wrong"> d) Even though the insurgency escalated; the government maintained its strategy.</div>
-      </div>
-    </div>
-
-    <!-- Q9 -->
-    <div class="question">
-      <p>9. Select the sentence with proper use of a colon:</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q9" value="wrong"> a) The meeting discussed: security, terrorism, and reforms.</div>
-        <div class="option"><input type="radio" name="q9" value="wrong"> b) The meeting discussed security, terrorism, and reforms.</div>
-        <div class="option"><input type="radio" name="q9" value="correct"> c) The meeting had one focus: national security.</div>
-        <div class="option"><input type="radio" name="q9" value="wrong"> d) The meeting: discussed national security and reforms.</div>
-      </div>
-    </div>
-
-    <!-- Q10 -->
-    <div class="question">
-      <p>10. Rearrange the sentence to be grammatically correct: "Plan / the / new / must / a / leadership / be / devised / by / effective / Pakistan’s /".</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q10" value="wrong"> a) Pakistan’s leadership must devise a new effective plan.</div>
-        <div class="option"><input type="radio" name="q10" value="correct"> b) A new effective plan must be devised by Pakistan’s leadership.</div>
-        <div class="option"><input type="radio" name="q10" value="wrong"> c) Must be devised a new plan by Pakistan’s leadership effective.</div>
-        <div class="option"><input type="radio" name="q10" value="wrong"> d) Effective Pakistan’s leadership must be devised a new plan.</div>
-      </div>
-    </div>
-
-    <!-- Q11 -->
-    <div class="question">
-      <p>11. Which option best replaces "insurgencies" with a synonym in context?</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q11" value="correct"> a) uprisings</div>
-        <div class="option"><input type="radio" name="q11" value="wrong"> b) celebrations</div>
-        <div class="option"><input type="radio" name="q11" value="wrong"> c) agreements</div>
-        <div class="option"><input type="radio" name="q11" value="wrong"> d) negotiations</div>
-      </div>
-    </div>
-
-    <!-- Q12 -->
-    <div class="question">
-      <p>12. Identify the correct use of a comma in this sentence: "When the lawmakers, generals and politicians meet, the agenda is dominated by national security concerns."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q12" value="wrong"> a) The comma after "lawmakers" is unnecessary.</div>
-        <div class="option"><input type="radio" name="q12" value="correct"> b) The comma after "meet" is correctly placed.</div>
-        <div class="option"><input type="radio" name="q12" value="wrong"> c) The commas are all incorrect.</div>
-        <div class="option"><input type="radio" name="q12" value="wrong"> d) No comma is required.</div>
-      </div>
-    </div>
-
-    <!-- Q13 -->
-    <div class="question">
-      <p>13. In the sentence "The in-camera huddle will feature the prime minister and army chief," which article is missing before "army chief"?</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q13" value="correct"> a) the</div>
-        <div class="option"><input type="radio" name="q13" value="wrong"> b) an</div>
-        <div class="option"><input type="radio" name="q13" value="wrong"> c) a</div>
-        <div class="option"><input type="radio" name="q13" value="wrong"> d) none</div>
-      </div>
-    </div>
-
-    <!-- Q14 -->
-    <div class="question">
-      <p>14. Choose the sentence that correctly employs parallel structure:</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q14" value="wrong"> a) The meeting will include discussing policies, debating strategies, and to review plans.</div>
-        <div class="option"><input type="radio" name="q14" value="correct"> b) The meeting will include discussing policies, debating strategies, and reviewing plans.</div>
-        <div class="option"><input type="radio" name="q14" value="wrong"> c) The meeting will include policy discussion, strategy debate, and plan review.</div>
-        <div class="option"><input type="radio" name="q14" value="wrong"> d) The meeting will include discussion of policies, debating strategies, and plan review.</div>
-      </div>
-    </div>
-
-    <!-- Q15 -->
-    <div class="question">
-      <p>15. Fill in the blank: "The state must implement reforms ____ ignore the root causes of insurgency."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q15" value="wrong"> a) but</div>
-        <div class="option"><input type="radio" name="q15" value="correct"> b) lest</div>
-        <div class="option"><input type="radio" name="q15" value="wrong"> c) or</div>
-        <div class="option"><input type="radio" name="q15" value="wrong"> d) so</div>
-      </div>
-    </div>
-
-    <!-- Q16 -->
-    <div class="question">
-      <p>16. Which sentence correctly uses a relative clause?</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q16" value="correct"> a) The panel, which was composed of experts, discussed the security measures.</div>
-        <div class="option"><input type="radio" name="q16" value="wrong"> b) The panel which was composed of experts discussed the security measures.</div>
-        <div class="option"><input type="radio" name="q16" value="wrong"> c) The panel that was composed of experts, discussed the security measures.</div>
-        <div class="option"><input type="radio" name="q16" value="wrong"> d) The panel composed of experts discussed the security measures.</div>
-      </div>
-    </div>
-
-    <!-- Q17 -->
-    <div class="question">
-      <p>17. In the sentence "Security threats continue unabated, forcing a re-evaluation of tactics", which word functions as a gerund?</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q17" value="wrong"> a) Security</div>
-        <div class="option"><input type="radio" name="q17" value="wrong"> b) threats</div>
-        <div class="option"><input type="radio" name="q17" value="correct"> c) forcing</div>
-        <div class="option"><input type="radio" name="q17" value="wrong"> d) tactics</div>
-      </div>
-    </div>
-
-    <!-- Q18 -->
-    <div class="question">
-      <p>18. Fill in the blank with the correct modal verb: "The government ___ consider all opinions before finalizing the policy."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q18" value="wrong"> a) might</div>
-        <div class="option"><input type="radio" name="q18" value="correct"> b) must</div>
-        <div class="option"><input type="radio" name="q18" value="wrong"> c) can</div>
-        <div class="option"><input type="radio" name="q18" value="wrong"> d) should</div>
-      </div>
-    </div>
-
-    <!-- Q19 -->
-    <div class="question">
-      <p>19. Which word is a compound adjective in "a holistic counterterrorism policy"?</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q19" value="wrong"> a) holistic</div>
-        <div class="option"><input type="radio" name="q19" value="correct"> b) counterterrorism</div>
-        <div class="option"><input type="radio" name="q19" value="wrong"> c) policy</div>
-        <div class="option"><input type="radio" name="q19" value="wrong"> d) none</div>
-      </div>
-    </div>
-
-    <!-- Q20 -->
-    <div class="question">
-      <p>20. Choose the sentence that avoids a dangling modifier:</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q20" value="wrong"> a) After reviewing the document, the counterterrorism strategy was updated.</div>
-        <div class="option"><input type="radio" name="q20" value="correct"> b) After reviewing the document, the experts updated the counterterrorism strategy.</div>
-        <div class="option"><input type="radio" name="q20" value="wrong"> c) The counterterrorism strategy was updated after reviewing the document.</div>
-        <div class="option"><input type="radio" name="q20" value="wrong"> d) Reviewing the document, the counterterrorism strategy was updated by the experts.</div>
-      </div>
-    </div>
-
-    <!-- Editorial 2: Questions 21-40 -->
-    <!-- Q21 -->
-    <div class="question">
-      <p>21. Identify the correct preposition: "The funds were allocated ___ the federal government by the apex court."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q21" value="correct"> a) to</div>
-        <div class="option"><input type="radio" name="q21" value="wrong"> b) for</div>
-        <div class="option"><input type="radio" name="q21" value="wrong"> c) by</div>
-        <div class="option"><input type="radio" name="q21" value="wrong"> d) from</div>
-      </div>
-    </div>
-
-    <!-- Q22 -->
-    <div class="question">
-      <p>22. Choose the sentence that correctly uses a colon in a financial context:</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q22" value="correct"> a) The announcement was clear: the funds will be used for a university project.</div>
-        <div class="option"><input type="radio" name="q22" value="wrong"> b) The announcement: was clear that funds will be used for a university project.</div>
-        <div class="option"><input type="radio" name="q22" value="wrong"> c) The announcement was clear, the funds will be used for a university project.</div>
-        <div class="option"><input type="radio" name="q22" value="wrong"> d) The announcement was clear; the funds will be used for a university project.</div>
-      </div>
-    </div>
-
-    <!-- Q23 -->
-    <div class="question">
-      <p>23. Which is a synonym for "repatriated" in the context of funds?</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q23" value="correct"> a) returned</div>
-        <div class="option"><input type="radio" name="q23" value="wrong"> b) confiscated</div>
-        <div class="option"><input type="radio" name="q23" value="wrong"> c) donated</div>
-        <div class="option"><input type="radio" name="q23" value="wrong"> d) withheld</div>
-      </div>
-    </div>
-
-    <!-- Q24 -->
-    <div class="question">
-      <p>24. Select the sentence with proper subject-verb agreement regarding funds:</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q24" value="wrong"> a) The funds is insufficient.</div>
-        <div class="option"><input type="radio" name="q24" value="correct"> b) The funds are insufficient.</div>
-        <div class="option"><input type="radio" name="q24" value="wrong"> c) The fund are insufficient.</div>
-        <div class="option"><input type="radio" name="q24" value="wrong"> d) The fund is insufficient.</div>
-      </div>
-    </div>
-
-    <!-- Q25 -->
-    <div class="question">
-      <p>25. Fill in the blank: "The controversy surrounding the money has left many stakeholders _______."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q25" value="correct"> a) perplexed</div>
-        <div class="option"><input type="radio" name="q25" value="wrong"> b) delighted</div>
-        <div class="option"><input type="radio" name="q25" value="wrong"> c) indifferent</div>
-        <div class="option"><input type="radio" name="q25" value="wrong"> d) complacent</div>
-      </div>
-    </div>
-
-    <!-- Q26 -->
-    <div class="question">
-      <p>26. Which sentence correctly uses a semicolon to join independent clauses?</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q26" value="correct"> a) The money was repatriated; it was then used for a university project.</div>
-        <div class="option"><input type="radio" name="q26" value="wrong"> b) The money was repatriated; because it was used for a university project.</div>
-        <div class="option"><input type="radio" name="q26" value="wrong"> c) The money was repatriated, it was then used for a university project.</div>
-        <div class="option"><input type="radio" name="q26" value="wrong"> d) The money was repatriated because; it was used for a university project.</div>
-      </div>
-    </div>
-
-    <!-- Q27 -->
-    <div class="question">
-      <p>27. Rearrange the sentence correctly: "Funds / the / misused / were / clearly / in / a / political / manner / the."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q27" value="correct"> a) The funds were clearly misused in a political manner.</div>
-        <div class="option"><input type="radio" name="q27" value="wrong"> b) Clearly the funds in a political manner were misused.</div>
-        <div class="option"><input type="radio" name="q27" value="wrong"> c) Misused the funds were clearly in a political manner.</div>
-        <div class="option"><input type="radio" name="q27" value="wrong"> d) The funds in a political manner were clearly misused.</div>
-      </div>
-    </div>
-
-    <!-- Q28 -->
-    <div class="question">
-      <p>28. Identify the correct word form: "The project was criticized for its ______ approach to education."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q28" value="correct"> a) hypocritical</div>
-        <div class="option"><input type="radio" name="q28" value="wrong"> b) humanitarian</div>
-        <div class="option"><input type="radio" name="q28" value="wrong"> c) revolutionary</div>
-        <div class="option"><input type="radio" name="q28" value="wrong"> d) ambiguous</div>
-      </div>
-    </div>
-
-    <!-- Q29 -->
-    <div class="question">
-      <p>29. Which sentence demonstrates correct punctuation with a relative clause?</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q29" value="correct"> a) The funds, which were repatriated, are now under scrutiny.</div>
-        <div class="option"><input type="radio" name="q29" value="wrong"> b) The funds which were repatriated are now under scrutiny.</div>
-        <div class="option"><input type="radio" name="q29" value="wrong"> c) The funds which were repatriated, are now under scrutiny.</div>
-        <div class="option"><input type="radio" name="q29" value="wrong"> d) The funds, which were repatriated are now under scrutiny.</div>
-      </div>
-    </div>
-
-    <!-- Q30 -->
-    <div class="question">
-      <p>30. Select the correct antonym for "controversial" in the context of government actions:</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q30" value="correct"> a) uncontroversial</div>
-        <div class="option"><input type="radio" name="q30" value="wrong"> b) disputed</div>
-        <div class="option"><input type="radio" name="q30" value="wrong"> c) contentious</div>
-        <div class="option"><input type="radio" name="q30" value="wrong"> d) provocative</div>
-      </div>
-    </div>
-
-    <!-- Q31 -->
-    <div class="question">
-      <p>31. Fill in the blank: "The government intended to use the funds to ______ a new university."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q31" value="correct"> a) establish</div>
-        <div class="option"><input type="radio" name="q31" value="wrong"> b) destroying</div>
-        <div class="option"><input type="radio" name="q31" value="wrong"> c) established</div>
-        <div class="option"><input type="radio" name="q31" value="wrong"> d) establishes</div>
-      </div>
-    </div>
-
-    <!-- Q32 -->
-    <div class="question">
-      <p>32. Which sentence is punctuated correctly?</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q32" value="correct"> a) After the funds were repatriated, the government allocated them wisely.</div>
-        <div class="option"><input type="radio" name="q32" value="wrong"> b) After the funds were repatriated the government allocated them, wisely.</div>
-        <div class="option"><input type="radio" name="q32" value="wrong"> c) After, the funds were repatriated, the government allocated them wisely.</div>
-        <div class="option"><input type="radio" name="q32" value="wrong"> d) After the funds were repatriated, the government, allocated them wisely.</div>
-      </div>
-    </div>
-
-    <!-- Q33 -->
-    <div class="question">
-      <p>33. Which preposition correctly completes: "The funds were credited ___ the Supreme Court’s account."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q33" value="correct"> a) to</div>
-        <div class="option"><input type="radio" name="q33" value="wrong"> b) in</div>
-        <div class="option"><input type="radio" name="q33" value="wrong"> c) on</div>
-        <div class="option"><input type="radio" name="q33" value="wrong"> d) over</div>
-      </div>
-    </div>
-
-    <!-- Q34 -->
-    <div class="question">
-      <p>34. Identify the word that best completes: "The decision was met with ______ criticism from stakeholders."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q34" value="correct"> a) vehement</div>
-        <div class="option"><input type="radio" name="q34" value="wrong"> b) mild</div>
-        <div class="option"><input type="radio" name="q34" value="wrong"> c) lenient</div>
-        <div class="option"><input type="radio" name="q34" value="wrong"> d) indifferent</div>
-      </div>
-    </div>
-
-    <!-- Q35 -->
-    <div class="question">
-      <p>35. Select the sentence with the correct use of an appositive:</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q35" value="correct"> a) The project, a major initiative by the government, has raised eyebrows.</div>
-        <div class="option"><input type="radio" name="q35" value="wrong"> b) The project a major initiative by the government, has raised eyebrows.</div>
-        <div class="option"><input type="radio" name="q35" value="wrong"> c) The project, a major initiative, by the government has raised eyebrows.</div>
-        <div class="option"><input type="radio" name="q35" value="wrong"> d) The project a major initiative, by the government, has raised eyebrows.</div>
-      </div>
-    </div>
-
-    <!-- Q36 -->
-    <div class="question">
-      <p>36. Choose the sentence that demonstrates proper use of the past perfect tense:</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q36" value="correct"> a) The funds had been allocated before the controversy erupted.</div>
-        <div class="option"><input type="radio" name="q36" value="wrong"> b) The funds have been allocated before the controversy erupted.</div>
-        <div class="option"><input type="radio" name="q36" value="wrong"> c) The funds were allocated before the controversy had erupted.</div>
-        <div class="option"><input type="radio" name="q36" value="wrong"> d) The funds allocated before the controversy erupted.</div>
-      </div>
-    </div>
-
-    <!-- Q37 -->
-    <div class="question">
-      <p>37. Which word in "The financial decision was both bold and controversial" is a conjunction?</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q37" value="wrong"> a) both</div>
-        <div class="option"><input type="radio" name="q37" value="correct"> b) and</div>
-        <div class="option"><input type="radio" name="q37" value="wrong"> c) bold</div>
-        <div class="option"><input type="radio" name="q37" value="wrong"> d) controversial</div>
-      </div>
-    </div>
-
-    <!-- Q38 -->
-    <div class="question">
-      <p>38. Fill in the blank: "The money, ______, was a major point of debate among stakeholders."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q38" value="correct"> a) ironically</div>
-        <div class="option"><input type="radio" name="q38" value="wrong"> b) clearly</div>
-        <div class="option"><input type="radio" name="q38" value="wrong"> c) obviously</div>
-        <div class="option"><input type="radio" name="q38" value="wrong"> d) silently</div>
-      </div>
-    </div>
-
-    <!-- Q39 -->
-    <div class="question">
-      <p>39. Identify the correct passive construction: "A settlement ______ by the apex court in November 2023."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q39" value="correct"> a) was reached</div>
-        <div class="option"><input type="radio" name="q39" value="wrong"> b) reached</div>
-        <div class="option"><input type="radio" name="q39" value="wrong"> c) is reaching</div>
-        <div class="option"><input type="radio" name="q39" value="wrong"> d) has reached</div>
-      </div>
-    </div>
-
-    <!-- Q40 -->
-    <div class="question">
-      <p>40. Rearrange the sentence: "Criticism / fierce / the / was / met / with / proposal / the."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q40" value="wrong"> a) Fierce criticism was met with the proposal.</div>
-        <div class="option"><input type="radio" name="q40" value="correct"> b) The proposal was met with fierce criticism.</div>
-        <div class="option"><input type="radio" name="q40" value="wrong"> c) Met with the proposal, fierce criticism was.</div>
-        <div class="option"><input type="radio" name="q40" value="wrong"> d) The proposal fierce criticism was met with.</div>
-      </div>
-    </div>
-
-    <!-- Editorial 3: Questions 41-50 -->
-    <!-- Q41 -->
-    <div class="question">
-      <p>41. Identify the correct preposition: "The prices surged ___ January."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q41" value="correct"> a) in</div>
-        <div class="option"><input type="radio" name="q41" value="wrong"> b) on</div>
-        <div class="option"><input type="radio" name="q41" value="wrong"> c) at</div>
-        <div class="option"><input type="radio" name="q41" value="wrong"> d) by</div>
-      </div>
-    </div>
-
-    <!-- Q42 -->
-    <div class="question">
-      <p>42. Choose the sentence that correctly uses a hyphenated compound adjective:</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q42" value="wrong"> a) The sugar-cartel practices unethical methods.</div>
-        <div class="option"><input type="radio" name="q42" value="wrong"> b) The sugar cartel practices unethical methods.</div>
-        <div class="option"><input type="radio" name="q42" value="correct"> c) The sugar-cartel-driven price surge alarmed consumers.</div>
-        <div class="option"><input type="radio" name="q42" value="wrong"> d) The sugar cartel-driven price surge alarmed consumers.</div>
-      </div>
-    </div>
-
-    <!-- Q43 -->
-    <div class="question">
-      <p>43. Identify the adverb in the sentence "Retail sugar prices surged rapidly."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q43" value="wrong"> a) surged</div>
-        <div class="option"><input type="radio" name="q43" value="correct"> b) rapidly</div>
-        <div class="option"><input type="radio" name="q43" value="wrong"> c) prices</div>
-        <div class="option"><input type="radio" name="q43" value="wrong"> d) retail</div>
-      </div>
-    </div>
-
-    <!-- Q44 -->
-    <div class="question">
-      <p>44. Fill in the blank with the correct conjunction: "The manufacturers promised stability, ____ the market continued to fluctuate wildly."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q44" value="correct"> a) yet</div>
-        <div class="option"><input type="radio" name="q44" value="wrong"> b) and</div>
-        <div class="option"><input type="radio" name="q44" value="wrong"> c) but</div>
-        <div class="option"><input type="radio" name="q44" value="wrong"> d) so</div>
-      </div>
-    </div>
-
-    <!-- Q45 -->
-    <div class="question">
-      <p>45. Select the sentence that demonstrates proper punctuation with a dash:</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q45" value="correct"> a) The government - despite protests - decided not to intervene.</div>
-        <div class="option"><input type="radio" name="q45" value="wrong"> b) The government, despite protests - decided not to intervene.</div>
-        <div class="option"><input type="radio" name="q45" value="wrong"> c) The government - despite protests, decided not to intervene.</div>
-        <div class="option"><input type="radio" name="q45" value="wrong"> d) The government despite protests - decided not to intervene.</div>
-      </div>
-    </div>
-
-    <!-- Q46 -->
-    <div class="question">
-      <p>46. Which word best replaces "deregulated" in the context of removing government control?</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q46" value="wrong"> a) liberalized</div>
-        <div class="option"><input type="radio" name="q46" value="wrong"> b) privatized</div>
-        <div class="option"><input type="radio" name="q46" value="wrong"> c) freed</div>
-        <div class="option"><input type="radio" name="q46" value="correct"> d) unregulated</div>
-      </div>
-    </div>
-
-    <!-- Q47 -->
-    <div class="question">
-      <p>47. Identify the correctly structured sentence:</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q47" value="correct"> a) Instead of addressing the underlying issues, the government announced plans to import raw sugar.</div>
-        <div class="option"><input type="radio" name="q47" value="wrong"> b) The government announced plans, instead of addressing the underlying issues, to import raw sugar.</div>
-        <div class="option"><input type="radio" name="q47" value="wrong"> c) Instead of addressing, the government announced plans to import raw sugar the underlying issues.</div>
-        <div class="option"><input type="radio" name="q47" value="wrong"> d) The government, instead of addressing the underlying issues, raw sugar to import announced plans.</div>
-      </div>
-    </div>
-
-    <!-- Q48 -->
-    <div class="question">
-      <p>48. Fill in the blank with the correct verb form: "The market ______ a sudden surge in prices since January."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q48" value="correct"> a) witnessed</div>
-        <div class="option"><input type="radio" name="q48" value="wrong"> b) witness</div>
-        <div class="option"><input type="radio" name="q48" value="wrong"> c) witnessing</div>
-        <div class="option"><input type="radio" name="q48" value="wrong"> d) has witness</div>
-      </div>
-    </div>
-
-    <!-- Q49 -->
-    <div class="question">
-      <p>49. Which of the following is an example of a compound adjective used in the sugar market context?</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q49" value="correct"> a) price-hike</div>
-        <div class="option"><input type="radio" name="q49" value="wrong"> b) market surge</div>
-        <div class="option"><input type="radio" name="q49" value="wrong"> c) raw sugar</div>
-        <div class="option"><input type="radio" name="q49" value="wrong"> d) crushing season</div>
-      </div>
-    </div>
-
-    <!-- Q50 -->
-    <div class="question">
-      <p>50. Rearrange the sentence for clarity: "To control the sugar prices, the government decided to intervene promptly."</p>
-      <div class="options">
-        <div class="option"><input type="radio" name="q50" value="correct"> a) Promptly, the government decided to intervene to control the sugar prices.</div>
-        <div class="option"><input type="radio" name="q50" value="wrong"> b) The government decided to control the sugar prices, to intervene promptly.</div>
-        <div class="option"><input type="radio" name="q50" value="wrong"> c) To intervene promptly, the government decided to control the sugar prices.</div>
-        <div class="option"><input type="radio" name="q50" value="wrong"> d) The government, promptly to intervene, decided to control the sugar prices.</div>
-      </div>
-    </div>
-
-    <button onclick="submitQuiz()">Submit Quiz</button>
-    <p id="result"></p>
-  </div>
-
-  <footer>
-    Created by Syed Asghar Ali Shah | Contact: 03265762698 | For more details, call now!
-  </footer>
 </body>
 </html>
