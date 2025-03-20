@@ -1,542 +1,344 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Quiz for CSS Aspirants 19 March 2025</title>
+  <title>Quiz for CSS Aspirants 20 March 2025</title>
   <style>
-    /* General Styles */
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background: #f2f2f2;
-      user-select: none; /* Disable text selection */
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      user-select: none;
     }
-    header, footer {
-      background: #333;
-      color: #fff;
-      padding: 15px;
+    /* Header styling */
+    .header {
+      background: #004080;
+      color: white;
+      padding: 20px;
       text-align: center;
     }
-    header {
-      position: relative;
+    .header img {
+      width: 60px;
+      height: auto;
+      vertical-align: middle;
+      margin-right: 10px;
     }
-    header img {
-      max-width: 100px;
+    .header h1 {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0;
+      font-size: 24px;
+    }
+    .header p {
+      margin: 5px 0 0;
+      font-size: 16px;
+    }
+    /* Container styling */
+    .container {
+      padding: 20px;
+      max-width: 900px;
+      margin: 20px auto;
+      background: white;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    /* Name entry section */
+    #nameEntry {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #nameEntry input {
+      padding: 10px;
+      font-size: 16px;
+      width: 300px;
+    }
+    #nameEntry button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    /* Timer */
+    #timer {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: right;
+      margin-bottom: 10px;
+    }
+    /* Question styling */
+    .question {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    .question p {
+      font-size: 16px;
+      margin: 0 0 10px;
+    }
+    .question label {
       display: block;
-      margin: 10px auto;
+      margin-bottom: 5px;
+      cursor: pointer;
     }
-    footer {
+    /* Submit button */
+    #submitQuiz {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /* Footer styling */
+    .footer {
+      background: #004080;
+      color: white;
+      text-align: center;
+      padding: 10px;
       position: fixed;
       bottom: 0;
       width: 100%;
     }
-    .container {
-      max-width: 900px;
-      margin: 20px auto;
-      background: #fff;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    /* Disable text selection globally */
+    * {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
-    .hidden {
-      display: none;
-    }
-    input[type="text"] {
-      width: 80%;
-      padding: 10px;
-      margin: 10px 0;
-      font-size: 16px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      cursor: pointer;
-      background-color: #333;
-      color: #fff;
-      border: none;
-      margin: 10px 0;
-    }
-    button:hover {
-      background-color: #555;
-    }
-    .question {
-      margin-bottom: 20px;
-      padding: 10px;
-      border-bottom: 1px solid #ccc;
-    }
-    label {
-      cursor: pointer;
-    }
-    /* Disable context menu (right-click) */
-    ::-moz-selection { background: transparent; }
-    ::selection { background: transparent; }
   </style>
 </head>
-<body oncontextmenu="return false;">
-  <header>
-    <h1>QUIZ FOR CSS ASPIRANTS 19 March 2025</h1>
+<body>
+  <div class="header">
     <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
+    <h1>QUIZ FOR CSS ASPIRANTS 20 March 2025</h1>
     <p>SYED ASGHAR ALI SHAH</p>
-  </header>
+  </div>
 
   <div class="container">
     <!-- Name Entry Section -->
-    <div id="name-section">
-      <h2>Enter Your Name</h2>
-      <input type="text" id="userName" placeholder="Your Name" required>
-      <button id="startBtn">Start Quiz</button>
+    <div id="nameEntry">
+      <label for="username">Enter your name:</label>
+      <input type="text" id="username" placeholder="Your Name">
+      <button id="startQuiz">Start Quiz</button>
     </div>
-
-    <!-- Timer Section -->
-    <div id="timer" class="hidden">
-      <h3>Time Remaining: <span id="time">10:00</span></h3>
-    </div>
-
+    
     <!-- Quiz Section -->
-    <form id="quizForm" class="hidden">
-      <div id="quiz">
-        <!-- Quiz questions will be rendered here by JavaScript -->
-      </div>
-      <button type="button" id="submitQuiz">Submit Quiz</button>
-    </form>
-
+    <div id="quizSection" class="hidden">
+      <div id="timer">25:00</div>
+      <form id="quizForm">
+        <!-- Quiz questions will be generated dynamically -->
+      </form>
+      <button id="submitQuiz" type="button">Submit Quiz</button>
+    </div>
+    
     <!-- Results Section -->
     <div id="results" class="hidden">
       <h2>Results</h2>
-      <p>Name: <span id="resultName"></span></p>
-      <p>Questions Attempted: <span id="resultAttempted"></span> / 50</p>
-      <p>Score: <span id="resultScore"></span> / 50</p>
-      <p>Time Taken: <span id="resultTime"></span></p>
+      <p id="resultText"></p>
     </div>
   </div>
 
-  <footer>
-    <p>Contact: 03265762698 | For more information, contact us now!</p>
-  </footer>
+  <div class="footer">
+    <p>Contact us: 03265762698</p>
+    <p>Join us for more updates and quizzes!</p>
+  </div>
 
-  <!-- Hidden Form for Formspree Submission -->
-  <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-    <input type="text" name="name" id="formName">
-    <input type="text" name="attempted" id="formAttempted">
-    <input type="text" name="score" id="formScore">
-    <input type="text" name="timeTaken" id="formTime">
+  <!-- Hidden Form for Formspree -->
+  <form id="hiddenForm" class="hidden" action="https://formspree.io/f/xwpvddea" method="POST">
+    <input type="hidden" name="name" id="formName">
+    <input type="hidden" name="attempted" id="formAttempted">
+    <input type="hidden" name="score" id="formScore">
+    <input type="hidden" name="timeTaken" id="formTimeTaken">
   </form>
 
   <script>
-    // Disable text selection and copy
-    document.addEventListener('selectstart', function(e) { e.preventDefault(); });
-    document.addEventListener('copy', function(e) { e.preventDefault(); });
-    // Disable F12 and other developer keys
-    document.addEventListener("keydown", function(e) {
-      if(e.keyCode === 123) { e.preventDefault(); }
-    });
-    // Disable right-click
-    document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
-
-    // Global variables
-    let timerInterval;
-    let totalTime = 10 * 60; // 10 minutes in seconds
-    let timeTaken = 0; // seconds
-
-    document.getElementById('startBtn').addEventListener('click', function() {
-      const name = document.getElementById('userName').value.trim();
-      if(name === "") {
-        alert("Please enter your name.");
-        return;
+    // Disable right-click and common inspect shortcuts
+    document.addEventListener('contextmenu', event => event.preventDefault());
+    document.onkeydown = function(e) {
+      if (e.keyCode == 123 || // F12
+         (e.ctrlKey && e.shiftKey && (e.keyCode == 'I'.charCodeAt(0) || e.keyCode == 'J'.charCodeAt(0))) ||
+         (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0))) {
+         return false;
       }
-      // Hide name section and show quiz and timer
-      document.getElementById('name-section').classList.add('hidden');
-      document.getElementById('quizForm').classList.remove('hidden');
-      document.getElementById('timer').classList.remove('hidden');
-      startTimer();
+    };
+
+    // Questions arrays for each editorial
+    var editorial1Questions = [
+      { id: 1, text: "Editorial 1: In the sentence 'comments to an American podcaster are detached from reality', what part of speech is 'detached'?", options: [{ text: "Adjective", isCorrect: true }, { text: "Adverb", isCorrect: false }, { text: "Noun", isCorrect: false }, { text: "Verb", isCorrect: false }] },
+      { id: 2, text: "Editorial 1: Which word best reflects a negative connotation in the editorial?", options: [{ text: "Villain", isCorrect: true }, { text: "Innocent", isCorrect: false }, { text: "Heroic", isCorrect: false }, { text: "Bright", isCorrect: false }] },
+      { id: 3, text: "Editorial 1: Identify the preposition in the phrase 'from sabotaging Saarc'.", options: [{ text: "From", isCorrect: true }, { text: "Sabotaging", isCorrect: false }, { text: "Saarc", isCorrect: false }, { text: "None", isCorrect: false }] },
+      { id: 4, text: "Editorial 1: Which synonym best matches 'conniving' as used in the editorial?", options: [{ text: "Scheming", isCorrect: true }, { text: "Honest", isCorrect: false }, { text: "Naive", isCorrect: false }, { text: "Joyful", isCorrect: false }] },
+      { id: 5, text: "Editorial 1: In the sentence 'India has been resisting Pakistan’s overtures for peace', what is the verb phrase?", options: [{ text: "has been resisting", isCorrect: true }, { text: "Pakistan’s overtures", isCorrect: false }, { text: "for peace", isCorrect: false }, { text: "been resisting", isCorrect: false }] },
+      { id: 6, text: "Editorial 1: Which article correctly fills the blank: '___ attempt at Pakistan-bashing'?", options: [{ text: "An", isCorrect: true }, { text: "A", isCorrect: false }, { text: "The", isCorrect: false }, { text: "No article", isCorrect: false }] },
+      { id: 7, text: "Editorial 1: Identify the antonym of 'misleading' in the context of the editorial.", options: [{ text: "Accurate", isCorrect: true }, { text: "Deceptive", isCorrect: false }, { text: "False", isCorrect: false }, { text: "Confusing", isCorrect: false }] },
+      { id: 8, text: "Editorial 1: Choose the correct preposition: 'India is not interested ___ harmony in South Asia.'", options: [{ text: "in", isCorrect: true }, { text: "for", isCorrect: false }, { text: "at", isCorrect: false }, { text: "of", isCorrect: false }] },
+      { id: 9, text: "Editorial 1: What is the meaning of 'overtures' in 'Pakistan’s overtures for peace'?", options: [{ text: "Proposals", isCorrect: true }, { text: "Refusals", isCorrect: false }, { text: "Criticisms", isCorrect: false }, { text: "Demands", isCorrect: false }] },
+      { id: 10, text: "Editorial 1: In 'the Indian PM’s remarks were misleading and one-sided', which adjective describes the remarks?", options: [{ text: "Misleading", isCorrect: true }, { text: "One-sided", isCorrect: false }, { text: "Recent", isCorrect: false }, { text: "Selective", isCorrect: false }] },
+      { id: 11, text: "Editorial 1: Rearrange the sentence: 'peace / unconditional / dialogue / for / If / is / to be brought / the only way'?", options: [{ text: "If the only way to bring peace is unconditional dialogue", isCorrect: true }, { text: "Unconditional dialogue is the only way if peace is brought", isCorrect: false }, { text: "The only way is unconditional dialogue to bring peace", isCorrect: false }, { text: "Peace is the only way if unconditional dialogue is brought", isCorrect: false }] },
+      { id: 12, text: "Editorial 1: Which term in the editorial implies a one-sided view?", options: [{ text: "Misleading", isCorrect: true }, { text: "Balanced", isCorrect: false }, { text: "Inclusive", isCorrect: false }, { text: "Harmonious", isCorrect: false }] },
+      { id: 13, text: "Editorial 1: Identify the part of speech for 'selective' in 'a highly selective reading'.", options: [{ text: "Adjective", isCorrect: true }, { text: "Noun", isCorrect: false }, { text: "Verb", isCorrect: false }, { text: "Adverb", isCorrect: false }] },
+      { id: 14, text: "Editorial 1: Choose the synonym for 'rebuffed' as used in the text.", options: [{ text: "Rejected", isCorrect: true }, { text: "Accepted", isCorrect: false }, { text: "Ignored", isCorrect: false }, { text: "Embraced", isCorrect: false }] },
+      { id: 15, text: "Editorial 1: Which word in the editorial serves as a conjunction?", options: [{ text: "while", isCorrect: true }, { text: "detached", isCorrect: false }, { text: "hostility", isCorrect: false }, { text: "misleading", isCorrect: false }] },
+      { id: 16, text: "Editorial 1: What is the antonym of 'innocent' as implied in the text?", options: [{ text: "Guilty", isCorrect: true }, { text: "Pure", isCorrect: false }, { text: "Naive", isCorrect: false }, { text: "Harmless", isCorrect: false }] },
+      { id: 17, text: "Editorial 1: In 'India refuses to even play cricket in Pakistan', which verb shows refusal?", options: [{ text: "Refuses", isCorrect: true }, { text: "Plays", isCorrect: false }, { text: "Even", isCorrect: false }, { text: "Cricket", isCorrect: false }] },
+      { id: 18, text: "Editorial 1: Which phrase best interprets 'uninterrupted dialogue'?", options: [{ text: "Continuous conversation", isCorrect: true }, { text: "Occasional discussion", isCorrect: false }, { text: "Disrupted talks", isCorrect: false }, { text: "Partial negotiations", isCorrect: false }] },
+      { id: 19, text: "Editorial 1: In 'revisit its own negative approach', which word is a possessive pronoun?", options: [{ text: "Its", isCorrect: true }, { text: "Revisit", isCorrect: false }, { text: "Negative", isCorrect: false }, { text: "Approach", isCorrect: false }] },
+      { id: 20, text: "Editorial 1: What does 'advocating' mean in the context of the editorial?", options: [{ text: "Supporting", isCorrect: true }, { text: "Opposing", isCorrect: false }, { text: "Ignoring", isCorrect: false }, { text: "Rejecting", isCorrect: false }] }
+    ];
+
+    var editorial2Questions = [
+      { id: 21, text: "Editorial 2: In 'the slump in large-scale manufacturing', what is a synonym for 'slump'?", options: [{ text: "Decline", isCorrect: true }, { text: "Rise", isCorrect: false }, { text: "Surge", isCorrect: false }, { text: "Boom", isCorrect: false }] },
+      { id: 22, text: "Editorial 2: Which word describes the condition 'big industry output has grown negatively'?", options: [{ text: "Declined", isCorrect: true }, { text: "Improved", isCorrect: false }, { text: "Stabilized", isCorrect: false }, { text: "Flourished", isCorrect: false }] },
+      { id: 23, text: "Editorial 2: Identify the preposition in 'amidst the adjustments the economy is forced to make'.", options: [{ text: "Amidst", isCorrect: true }, { text: "Adjustments", isCorrect: false }, { text: "Forced", isCorrect: false }, { text: "Economy", isCorrect: false }] },
+      { id: 24, text: "Editorial 2: Which article correctly fits: '___ steep surge in domestic power'?", options: [{ text: "A", isCorrect: true }, { text: "An", isCorrect: false }, { text: "The", isCorrect: false }, { text: "No article", isCorrect: false }] },
+      { id: 25, text: "Editorial 2: What is the antonym of 'stability' implied by the context?", options: [{ text: "Volatility", isCorrect: true }, { text: "Calm", isCorrect: false }, { text: "Serenity", isCorrect: false }, { text: "Peace", isCorrect: false }] },
+      { id: 26, text: "Editorial 2: In 'declining cotton production', what part of speech is 'declining'?", options: [{ text: "Adjective", isCorrect: true }, { text: "Verb", isCorrect: false }, { text: "Noun", isCorrect: false }, { text: "Adverb", isCorrect: false }] },
+      { id: 27, text: "Editorial 2: Choose the synonym for 'harsh' in describing the impact on iron and steel output.", options: [{ text: "Severe", isCorrect: true }, { text: "Gentle", isCorrect: false }, { text: "Mild", isCorrect: false }, { text: "Smooth", isCorrect: false }] },
+      { id: 28, text: "Editorial 2: What does 'credit to the private sector' imply?", options: [{ text: "Loans provided to businesses", isCorrect: true }, { text: "Government grants", isCorrect: false }, { text: "Foreign aid", isCorrect: false }, { text: "Bankruptcies", isCorrect: false }] },
+      { id: 29, text: "Editorial 2: Identify the error in 'big industry recorded a negative growth of 1.78pc'.", options: [{ text: "The phrase 'negative growth' is redundant", isCorrect: true }, { text: "The use of 'pc' is incorrect", isCorrect: false }, { text: "There is no error", isCorrect: false }, { text: "Numerals should be in words", isCorrect: false }] },
+      { id: 30, text: "Editorial 2: Rearrange the sentence: 'the only way forward / is to shed / our old habits of achieving growth'.", options: [{ text: "The only way forward is to shed our old habits of achieving growth", isCorrect: true }, { text: "Our old habits is to shed the only way forward", isCorrect: false }, { text: "To shed our old habits is the only way forward", isCorrect: false }, { text: "Shedding old habits is the only way forward", isCorrect: false }] },
+      { id: 31, text: "Editorial 2: In 'inflation is down but significant risks remain', which word acts as a conjunction?", options: [{ text: "but", isCorrect: true }, { text: "down", isCorrect: false }, { text: "inflation", isCorrect: false }, { text: "remain", isCorrect: false }] },
+      { id: 32, text: "Editorial 2: What does 'liquidity crunch' mean in economic terms?", options: [{ text: "Shortage of cash", isCorrect: true }, { text: "Surplus of funds", isCorrect: false }, { text: "Stable market", isCorrect: false }, { text: "Excess liquidity", isCorrect: false }] },
+      { id: 33, text: "Editorial 2: Identify the synonym of 'contracted' as used in the text.", options: [{ text: "Shrank", isCorrect: true }, { text: "Expanded", isCorrect: false }, { text: "Stabilized", isCorrect: false }, { text: "Grew", isCorrect: false }] },
+      { id: 34, text: "Editorial 2: In 'record increase in remittances', which part of speech is 'record'?", options: [{ text: "Adjective", isCorrect: true }, { text: "Noun", isCorrect: false }, { text: "Verb", isCorrect: false }, { text: "Adverb", isCorrect: false }] },
+      { id: 35, text: "Editorial 2: Choose the synonym for 'deteriorating' as implied in 'pressures on the external account are re-emerging'.", options: [{ text: "Worsening", isCorrect: true }, { text: "Improving", isCorrect: false }, { text: "Stabilizing", isCorrect: false }, { text: "Resolving", isCorrect: false }] },
+      { id: 36, text: "Editorial 2: Identify the preposition in 'supported by IMF funding'.", options: [{ text: "By", isCorrect: true }, { text: "Supported", isCorrect: false }, { text: "Funding", isCorrect: false }, { text: "IMF", isCorrect: false }] },
+      { id: 37, text: "Editorial 2: Which word is an antonym of 'recovery' in an economic downturn context?", options: [{ text: "Decline", isCorrect: true }, { text: "Improvement", isCorrect: false }, { text: "Resurgence", isCorrect: false }, { text: "Growth", isCorrect: false }] },
+      { id: 38, text: "Editorial 2: In 'big industry output has grown negatively', which adverb modifies 'grown'?", options: [{ text: "Negatively", isCorrect: true }, { text: "Grown", isCorrect: false }, { text: "Big", isCorrect: false }, { text: "Industry", isCorrect: false }] },
+      { id: 39, text: "Editorial 2: Which phrase best represents a descriptive adjective in 'high cost of credit'?", options: [{ text: "High cost", isCorrect: true }, { text: "Of credit", isCorrect: false }, { text: "Cost of", isCorrect: false }, { text: "Credit", isCorrect: false }] },
+      { id: 40, text: "Editorial 2: What is the meaning of 'import volumes' in this context?", options: [{ text: "Quantity of goods imported", isCorrect: true }, { text: "Cost of imported goods", isCorrect: false }, { text: "Domestic production", isCorrect: false }, { text: "Export levels", isCorrect: false }] }
+    ];
+
+    var editorial3Questions = [
+      { id: 41, text: "Editorial 3: Identify the error in the heading 'TTHE sudden closure of major universities'.", options: [{ text: "Extra 'T'", isCorrect: true }, { text: "Missing punctuation", isCorrect: false }, { text: "Wrong tense", isCorrect: false }, { text: "Incorrect word order", isCorrect: false }] },
+      { id: 42, text: "Editorial 3: In 'living under the shadow of apathy', which word is the noun?", options: [{ text: "Apathy", isCorrect: true }, { text: "Living", isCorrect: false }, { text: "Shadow", isCorrect: false }, { text: "Under", isCorrect: false }] },
+      { id: 43, text: "Editorial 3: Choose the correct preposition: 'disrupted ___ the guise of national security'.", options: [{ text: "Under", isCorrect: true }, { text: "By", isCorrect: false }, { text: "In", isCorrect: false }, { text: "For", isCorrect: false }] },
+      { id: 44, text: "Editorial 3: Identify the synonym for 'marginalisation' as used in the editorial.", options: [{ text: "Exclusion", isCorrect: true }, { text: "Inclusion", isCorrect: false }, { text: "Promotion", isCorrect: false }, { text: "Advancement", isCorrect: false }] },
+      { id: 45, text: "Editorial 3: What does 'academic limbo' most nearly mean?", options: [{ text: "Suspension of studies", isCorrect: true }, { text: "Academic excellence", isCorrect: false }, { text: "Graduation delay", isCorrect: false }, { text: "Scholarship", isCorrect: false }] },
+      { id: 46, text: "Editorial 3: In 'concessions will be given', what part of speech is 'concessions'?", options: [{ text: "Noun", isCorrect: true }, { text: "Verb", isCorrect: false }, { text: "Adjective", isCorrect: false }, { text: "Adverb", isCorrect: false }] },
+      { id: 47, text: "Editorial 3: Rearrange the sentence: 'provide / adequate / investments / digital infrastructure / must / in the province'.", options: [{ text: "The province must provide adequate investments in digital infrastructure", isCorrect: true }, { text: "Adequate investments must provide digital infrastructure in the province", isCorrect: false }, { text: "Must provide the province adequate digital infrastructure investments", isCorrect: false }, { text: "Digital infrastructure must be provided by adequate investments in the province", isCorrect: false }] },
+      { id: 48, text: "Editorial 3: Which word in 'their right to education faces further erosion' acts as a verb?", options: [{ text: "Faces", isCorrect: true }, { text: "Education", isCorrect: false }, { text: "Right", isCorrect: false }, { text: "Erosion", isCorrect: false }] },
+      { id: 49, text: "Editorial 3: What is the antonym of 'invest' as implied in 'immediate investments'?", options: [{ text: "Withdraw", isCorrect: true }, { text: "Commit", isCorrect: false }, { text: "Spend", isCorrect: false }, { text: "Increase", isCorrect: false }] },
+      { id: 50, text: "Editorial 3: In 'the state must recognise that genuine security cannot be achieved by sacrificing education', what is the synonym of 'sacrificing'?", options: [{ text: "Forfeiting", isCorrect: true }, { text: "Gaining", isCorrect: false }, { text: "Saving", isCorrect: false }, { text: "Maintaining", isCorrect: false }] }
+    ];
+
+    // Fisher-Yates shuffle function to randomize arrays
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    // Combine questions from all editorials
+    var allQuestions = [].concat(editorial1Questions, editorial2Questions, editorial3Questions);
+    
+    // Randomize answer options for each question
+    allQuestions.forEach(function(q) {
+      q.options = shuffle(q.options);
     });
 
-    // Timer functions
-    function startTimer() {
-      updateTimerDisplay();
+    // Generate quiz questions dynamically
+    function generateQuiz() {
+      var quizForm = document.getElementById('quizForm');
+      quizForm.innerHTML = "";
+      allQuestions.forEach(function(q, index) {
+        var questionDiv = document.createElement('div');
+        questionDiv.className = "question";
+        questionDiv.setAttribute("data-id", q.id);
+        var questionP = document.createElement('p');
+        questionP.innerHTML = (index + 1) + ". " + q.text;
+        questionDiv.appendChild(questionP);
+        q.options.forEach(function(opt, idx) {
+          var optionId = "q" + q.id + "o" + idx;
+          var label = document.createElement('label');
+          label.setAttribute("for", optionId);
+          var radio = document.createElement('input');
+          radio.type = "radio";
+          radio.name = "q" + q.id;
+          radio.id = optionId;
+          radio.value = opt.text;
+          if(opt.isCorrect) {
+            radio.setAttribute("data-correct", "true");
+          }
+          label.appendChild(radio);
+          label.innerHTML += " " + opt.text;
+          questionDiv.appendChild(label);
+        });
+        quizForm.appendChild(questionDiv);
+      });
+    }
+
+    var timerInterval;
+    var startTime;
+
+    function startTimer(duration) {
+      var timer = duration, minutes, seconds;
       timerInterval = setInterval(function() {
-        totalTime--;
-        timeTaken++;
-        updateTimerDisplay();
-        if(totalTime <= 0) {
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+        document.getElementById('timer').textContent = minutes + ":" + seconds;
+        if (--timer < 0) {
           clearInterval(timerInterval);
           submitQuiz();
         }
       }, 1000);
     }
-    function updateTimerDisplay() {
-      const minutes = Math.floor(totalTime / 60);
-      const seconds = totalTime % 60;
-      document.getElementById('time').textContent =
-        (minutes < 10 ? '0' + minutes : minutes) + ":" + (seconds < 10 ? '0' + seconds : seconds);
-    }
 
-    // Quiz Questions Data
-    const questions = [
-      /* Editorial 1 (20 Questions) */
-      {
-        question: "Editorial 1: Choose the correct synonym for 'ceasefire' as used in the text.",
-        options: ["truce", "attack", "retreat", "advance"],
-        answer: "truce"
-      },
-      {
-        question: "Editorial 1: Identify the correct preposition: 'Over 400 Palestinians have been killed ___ the latest atrocities.'",
-        options: ["in", "at", "by", "from"],
-        answer: "in"
-      },
-      {
-        question: "Editorial 1: Which word best replaces 'genocidal' in the context of the text?",
-        options: ["massacre", "peaceful", "trivial", "joyful"],
-        answer: "massacre"
-      },
-      {
-        question: "Editorial 1: What is the correct part of speech for 'devastated' in the sentence?",
-        options: ["adjective", "verb", "noun", "adverb"],
-        answer: "adjective"
-      },
-      {
-        question: "Editorial 1: Select the correctly punctuated sentence.",
-        options: [
-          "Tel Aviv’s troops may reportedly return, to the devastated Strip.",
-          "Tel Aviv’s troops, may reportedly return to the devastated Strip.",
-          "Tel Aviv’s troops may reportedly return to the devastated Strip.",
-          "Tel Aviv’s troops may reportedly return to, the devastated Strip."
-        ],
-        answer: "Tel Aviv’s troops may reportedly return to the devastated Strip."
-      },
-      {
-        question: "Editorial 1: Rearrange the sentence: 'the ceasefire held for two months' into a grammatically correct sentence.",
-        options: [
-          "For two months, the ceasefire held.",
-          "The ceasefire held for two months.",
-          "Held for two months the ceasefire.",
-          "Two months held the ceasefire."
-        ],
-        answer: "The ceasefire held for two months."
-      },
-      {
-        question: "Editorial 1: Choose the antonym for 'slim' as used in the text.",
-        options: ["ample", "narrow", "tiny", "limited"],
-        answer: "ample"
-      },
-      {
-        question: "Editorial 1: Which part of speech is the word 'butchery' in the text?",
-        options: ["noun", "verb", "adjective", "adverb"],
-        answer: "noun"
-      },
-      {
-        question: "Editorial 1: Identify the error in the sentence: 'if Israel continues its butchery, any chances of a renewed ceasefire will vaporise.'",
-        options: ["its", "butchery", "vaporise", "renewed"],
-        answer: "None"
-      },
-      {
-        question: "Editorial 1: Fill in the blank with the correct preposition: 'a return ___ relative calm seems impossible.'",
-        options: ["to", "for", "of", "with"],
-        answer: "to"
-      },
-      {
-        question: "Editorial 1: Choose the correct meaning of 'extermination' as used in the text.",
-        options: ["mass killing", "celebration", "rescue", "negotiation"],
-        answer: "mass killing"
-      },
-      {
-        question: "Editorial 1: Which sentence is grammatically correct?",
-        options: [
-          "There were doubts about Israel’s sincerity towards long-term peace.",
-          "There were doubt about Israel’s sincerity towards long-term peace.",
-          "There was doubts about Israel’s sincerity towards long-term peace.",
-          "There were doubts about Israel’s sincere towards long-term peace."
-        ],
-        answer: "There were doubts about Israel’s sincerity towards long-term peace."
-      },
-      {
-        question: "Editorial 1: Identify the correct synonym for 'retaliated' as used in context.",
-        options: ["responded", "ignored", "initiated", "stopped"],
-        answer: "responded"
-      },
-      {
-        question: "Editorial 1: Which part of speech is 'armed' in the sentence: 'armed Palestinian factions'?",
-        options: ["adjective", "noun", "verb", "adverb"],
-        answer: "adjective"
-      },
-      {
-        question: "Editorial 1: Choose the correct article to complete the sentence: '___ ceasefire held for two months.'",
-        options: ["A", "An", "The", "No article"],
-        answer: "The"
-      },
-      {
-        question: "Editorial 1: Identify the correct usage of a comma in the sentence.",
-        options: ["After introductory phrases", "Between subject and verb", "Before every noun", "None of the above"],
-        answer: "After introductory phrases"
-      },
-      {
-        question: "Editorial 1: What is the antonym of 'sincere' as used in the context of the article?",
-        options: ["insincere", "honest", "genuine", "truthful"],
-        answer: "insincere"
-      },
-      {
-        question: "Editorial 1: Rearrange the words to form a meaningful sentence: 'hostages / welfare / its / the / if / had / been / cared / Israel / for'.",
-        options: [
-          "If Israel had cared for its hostages, their welfare would be ensured.",
-          "Israel had cared for its hostages, if their welfare would be ensured.",
-          "If hostages had been cared for by Israel, their welfare ensured.",
-          "Had Israel cared for hostages, their welfare if ensured."
-        ],
-        answer: "If Israel had cared for its hostages, their welfare would be ensured."
-      },
-      {
-        question: "Editorial 1: Which preposition correctly fills the blank: 'a return ___ the people alive'?",
-        options: ["of", "for", "to", "with"],
-        answer: "to"
-      },
-      {
-        question: "Editorial 1: Identify the adverb in the sentence: 'the violence unleashed on Tuesday shows.'",
-        options: ["unleashed", "Tuesday", "shows", "the"],
-        answer: "Tuesday"
-      },
-      /* Editorial 2 (20 Questions) */
-      {
-        question: "Editorial 2: Choose the synonym for 'escalation' as used in the text.",
-        options: ["increase", "decline", "stagnation", "drop"],
-        answer: "increase"
-      },
-      {
-        question: "Editorial 2: Identify the correct preposition: 'huddle ___ national security'?",
-        options: ["on", "for", "about", "of"],
-        answer: "on"
-      },
-      {
-        question: "Editorial 2: Which word best replaces 'menace' in the text?",
-        options: ["threat", "joy", "solution", "benefit"],
-        answer: "threat"
-      },
-      {
-        question: "Editorial 2: What part of speech is the word 'unified' in the sentence?",
-        options: ["adjective", "noun", "verb", "adverb"],
-        answer: "adjective"
-      },
-      {
-        question: "Editorial 2: Choose the correctly structured sentence.",
-        options: [
-          "The committee’s statement emphasized unified political commitment.",
-          "The committee’s statement, emphasized unified political commitment.",
-          "The committee’s statement emphasized, unified political commitment.",
-          "The committee’s statement emphasized unified, political commitment."
-        ],
-        answer: "The committee’s statement emphasized unified political commitment."
-      },
-      {
-        question: "Editorial 2: Rearrange the sentence: 'regretted / some / opposition / lack / the / participation / members / by' into a correct sentence.",
-        options: [
-          "The members regretted the lack of participation by some opposition.",
-          "By some opposition, the members regretted the lack of participation.",
-          "Regretted the lack of participation by some opposition members.",
-          "Some opposition members regretted the lack of participation."
-        ],
-        answer: "The members regretted the lack of participation by some opposition."
-      },
-      {
-        question: "Editorial 2: Identify the antonym of 'sharp' as used in the context.",
-        options: ["dull", "keen", "bright", "quick"],
-        answer: "dull"
-      },
-      {
-        question: "Editorial 2: Which is the correct usage of the word 'huddle'?",
-        options: ["A meeting of people", "A type of clothing", "A formal event", "A cooking method"],
-        answer: "A meeting of people"
-      },
-      {
-        question: "Editorial 2: Select the correct preposition to complete the sentence: 'skipped the meeting ___ political reasons.'",
-        options: ["for", "by", "with", "of"],
-        answer: "for"
-      },
-      {
-        question: "Editorial 2: What is the correct synonym for 'censure' as used in the text?",
-        options: ["criticism", "praise", "support", "approval"],
-        answer: "criticism"
-      },
-      {
-        question: "Editorial 2: Identify the adverb in the sentence: 'politically, the leaders acted decisively.'",
-        options: ["politically", "leaders", "acted", "decisively"],
-        answer: "politically"
-      },
-      {
-        question: "Editorial 2: Choose the correct article: '___ meeting on national security was crucial.'",
-        options: ["A", "An", "The", "No article"],
-        answer: "The"
-      },
-      {
-        question: "Editorial 2: Which preposition correctly fits: 'focus ___ repelling terrorism'?",
-        options: ["on", "in", "at", "with"],
-        answer: "on"
-      },
-      {
-        question: "Editorial 2: Rearrange the words to form a meaningful sentence: 'unity / for / message / a / hope / of / was / required / on'?",
-        options: [
-          "A message of hope was required for unity.",
-          "For unity, a message of hope was required.",
-          "A message was required for hope and unity.",
-          "Hope for unity required a message was."
-        ],
-        answer: "A message of hope was required for unity."
-      },
-      {
-        question: "Editorial 2: What is the antonym of 'unified' as used in the text?",
-        options: ["divided", "together", "combined", "harmonized"],
-        answer: "divided"
-      },
-      {
-        question: "Editorial 2: Choose the correct meaning of 'allegiance' as used in the text.",
-        options: ["loyalty", "betrayal", "conflict", "indifference"],
-        answer: "loyalty"
-      },
-      {
-        question: "Editorial 2: Which word in the sentence is a noun?",
-        options: ["terrorism", "repeal", "politically", "unified"],
-        answer: "terrorism"
-      },
-      {
-        question: "Editorial 2: Identify the correct sequence: 'the committee members regretted the lack of participation by some opposition members and reiterated that the consultation process would continue.' Which part is misplaced?",
-        options: ["regretted", "lack", "by some opposition", "None"],
-        answer: "None"
-      },
-      {
-        question: "Editorial 2: In the phrase 'high-level huddle', what is the function of 'high-level'?",
-        options: ["adjective", "noun", "verb", "adverb"],
-        answer: "adjective"
-      },
-      {
-        question: "Editorial 2: Which term in the editorial indicates a negative criticism?",
-        options: ["censure", "unity", "consensus", "commitment"],
-        answer: "censure"
-      },
-      /* Editorial 3 (10 Questions) */
-      {
-        question: "Editorial 3: Choose the correct synonym for 'overhaul' as used in the text.",
-        options: ["revamp", "maintain", "ignore", "preserve"],
-        answer: "revamp"
-      },
-      {
-        question: "Editorial 3: Identify the preposition in the sentence: 'the proposal to bring down the weightage of population.'",
-        options: ["to", "down", "of", "bring"],
-        answer: "of"
-      },
-      {
-        question: "Editorial 3: Which word is the antonym of 'disproportionate'?",
-        options: ["balanced", "uneven", "extreme", "skewed"],
-        answer: "balanced"
-      },
-      {
-        question: "Editorial 3: What part of speech is 'incentivised' in the text?",
-        options: ["verb", "noun", "adjective", "adverb"],
-        answer: "verb"
-      },
-      {
-        question: "Editorial 3: Rearrange the sentence: 'A revised NFC formula must ensure that resources are allocated where they can yield the greatest impact.'",
-        options: [
-          "Resources are allocated by a revised NFC formula where they yield the greatest impact.",
-          "A revised NFC formula must ensure resources are allocated to yield the greatest impact.",
-          "Revised NFC formula ensures that resources yield the greatest impact where allocated.",
-          "Where resources can yield the greatest impact, a revised NFC formula must ensure allocation."
-        ],
-        answer: "Where resources can yield the greatest impact, a revised NFC formula must ensure allocation."
-      },
-      {
-        question: "Editorial 3: Which sentence uses correct grammar?",
-        options: [
-          "Social determinants like poverty will need policy interventions.",
-          "Social determinants such as poverty will need policy interventions.",
-          "Social determinants, such as poverty, will need policy interventions.",
-          "Social determinants; such as poverty will need policy interventions."
-        ],
-        answer: "Social determinants such as poverty will need policy interventions."
-      },
-      {
-        question: "Editorial 3: Identify the correct article for the sentence: '___ recalibrated NFC Award would reduce the financial burden.'",
-        options: ["A", "An", "The", "No article"],
-        answer: "The"
-      },
-      {
-        question: "Editorial 3: Choose the synonym for 'fiscal' as used in the text.",
-        options: ["financial", "emotional", "physical", "theoretical"],
-        answer: "financial"
-      },
-      {
-        question: "Editorial 3: Which word best fits in the blank: 'a recalibrated NFC Award would reduce the burden ___ the centre'?",
-        options: ["on", "of", "at", "in"],
-        answer: "on"
-      },
-      {
-        question: "Editorial 3: What is the antonym of 'equitable' as used in the text?",
-        options: ["inequitable", "fair", "just", "balanced"],
-        answer: "inequitable"
-      },
-      {
-        question: "Editorial 3: Identify the adverb in the sentence: 'provinces themselves would be willing to renegotiate provincial-sharing criteria.'",
-        options: ["themselves", "willing", "renegotiate", "criteria"],
-        answer: "willing"
+    // Start Quiz button event
+    document.getElementById('startQuiz').addEventListener('click', function() {
+      var name = document.getElementById('username').value.trim();
+      if(name === "") {
+        alert("Please enter your name.");
+        return;
       }
-    ];
-
-    // Shuffle array helper function
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-    }
-    // Shuffle the questions order
-    shuffleArray(questions);
-    // Shuffle options for each question
-    questions.forEach(q => shuffleArray(q.options));
-
-    // Render quiz questions
-    const quizDiv = document.getElementById('quiz');
-    questions.forEach((q, index) => {
-      const qDiv = document.createElement('div');
-      qDiv.classList.add('question');
-      qDiv.innerHTML = `<p><strong>Q${index + 1}:</strong> ${q.question}</p>`;
-      q.options.forEach(option => {
-        qDiv.innerHTML += `<label>
-          <input type="radio" name="q${index}" value="${option}"> ${option}
-        </label><br>`;
-      });
-      quizDiv.appendChild(qDiv);
+      document.getElementById('nameEntry').classList.add('hidden');
+      document.getElementById('quizSection').classList.remove('hidden');
+      generateQuiz();
+      startTimer(25 * 60); // 25 minutes
+      startTime = Date.now();
     });
 
-    // Submission logic
-    document.getElementById('submitQuiz').addEventListener('click', submitQuiz);
+    // Submit Quiz button event
+    document.getElementById('submitQuiz').addEventListener('click', function() {
+      submitQuiz();
+    });
+
+    // Submit quiz and calculate results
     function submitQuiz() {
       clearInterval(timerInterval);
-      let score = 0;
-      let attempted = 0;
-      questions.forEach((q, index) => {
-        const radios = document.getElementsByName('q' + index);
-        radios.forEach(radio => {
-          if(radio.checked) {
+      var totalQuestions = allQuestions.length;
+      var attempted = 0, score = 0;
+      allQuestions.forEach(function(q) {
+        var radios = document.getElementsByName("q" + q.id);
+        for (var i = 0; i < radios.length; i++) {
+          if (radios[i].checked) {
             attempted++;
-            if(radio.value === q.answer) {
+            if (radios[i].getAttribute("data-correct") === "true") {
               score++;
             }
+            break;
           }
-        });
+        }
       });
-      // Hide quiz and timer, show results
-      document.getElementById('quizForm').classList.add('hidden');
-      document.getElementById('timer').classList.add('hidden');
+      var endTime = Date.now();
+      var timeTaken = Math.floor((endTime - startTime) / 1000);
+      document.getElementById('quizSection').classList.add('hidden');
       document.getElementById('results').classList.remove('hidden');
-      
-      document.getElementById('resultName').textContent = document.getElementById('userName').value;
-      document.getElementById('resultAttempted').textContent = attempted;
-      document.getElementById('resultScore').textContent = score;
-      document.getElementById('resultTime').textContent = timeTaken + " seconds";
-
-      // Fill and auto-submit hidden form
-      document.getElementById('formName').value = document.getElementById('userName').value;
+      var resultText = "Name: " + document.getElementById('username').value.trim() + "<br>" +
+                       "Questions Attempted: " + attempted + " / " + totalQuestions + "<br>" +
+                       "Score: " + score + "<br>" +
+                       "Time Taken: " + timeTaken + " seconds";
+      document.getElementById('resultText').innerHTML = resultText;
+      // Fill and submit hidden Formspree form
+      document.getElementById('formName').value = document.getElementById('username').value.trim();
       document.getElementById('formAttempted').value = attempted;
       document.getElementById('formScore').value = score;
-      document.getElementById('formTime').value = timeTaken + " seconds";
+      document.getElementById('formTimeTaken').value = timeTaken;
       document.getElementById('hiddenForm').submit();
     }
   </script>
