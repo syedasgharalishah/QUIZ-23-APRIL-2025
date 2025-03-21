@@ -100,6 +100,19 @@
       -ms-user-select: none;
       user-select: none;
     }
+    /* Fixed Submit Button */
+    #submitQuizFixed {
+      position: fixed;
+      bottom: 80px;
+      right: 20px;
+      z-index: 1000;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
   </style>
   <script>
     // Disable right-click context menu
@@ -123,10 +136,11 @@
     
     <!-- Quiz Section -->
     <div id="quizSection" class="hidden">
-      <div class="timer" id="timer">10:00</div>
+      <div class="timer" id="timer">25:00</div>
       <form id="quizForm">
         <!-- Quiz questions will be injected here -->
       </form>
+      <!-- Original Submit Button -->
       <button id="submitQuiz">Submit Quiz</button>
     </div>
     
@@ -144,6 +158,9 @@
       <input type="hidden" name="timeTaken" id="formTimeTaken">
     </form>
   </div>
+  
+  <!-- Fixed Submit Button -->
+  <button id="submitQuizFixed">Submit Quiz</button>
   
   <footer>
     <p>Contact us: 03265762698</p>
@@ -554,6 +571,7 @@
     
     // Submit Quiz: Calculate score, time taken, and auto-submit hidden form via Formspree
     document.getElementById("submitQuiz").addEventListener("click", submitQuiz);
+    document.getElementById("submitQuizFixed").addEventListener("click", submitQuiz);
     
     function submitQuiz() {
       clearInterval(timerInterval);
