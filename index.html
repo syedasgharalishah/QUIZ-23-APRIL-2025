@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>QUIZ FOR CSS ASPIRANTS 22 March 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 23 March 2025</title>
   <style>
-    /* Global styling: Black background and white text; disable text selection */
+    /* Basic reset and disable text selection on all elements */
     * {
       margin: 0;
       padding: 0;
@@ -16,378 +15,391 @@
       -ms-user-select: none;
     }
     body {
-      background: linear-gradient(135deg, #000, #333);
-      color: #fff;
       font-family: Arial, sans-serif;
-      direction: ltr;
-      text-align: left;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 20px auto;
-      padding: 20px;
+      background-color: #f4f4f4;
+      color: #333;
+      line-height: 1.6;
     }
     header, footer {
-      background-color: #000;
-      padding: 15px 20px;
-      border: 1px solid #fff;
+      background-color: #003366;
+      color: #fff;
+      padding: 20px 10px;
       text-align: center;
     }
-    header h1 {
-      font-size: 2em;
-      margin-bottom: 5px;
-    }
-    .contact-info {
-      font-size: 1em;
-      margin: 5px 0;
-    }
-    /* Header image styling */
     header img {
-      max-width: 100%;
-      height: auto;
-      margin-bottom: 10px;
+      max-width: 100px;
+      display: block;
+      margin: 10px auto;
     }
-    /* Name Entry Section */
-    #nameSection {
-      margin: 20px 0;
-      text-align: center;
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    #nameSection input[type="text"] {
-      font-size: 1.2em;
-      padding: 8px;
-      width: 300px;
-      border: 1px solid #fff;
-      background-color: #222;
+    #name-entry, #quiz-section, #results-section {
+      margin-bottom: 20px;
+    }
+    #name-entry input[type="text"] {
+      padding: 10px;
+      width: 60%;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+    }
+    #name-entry button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #003366;
       color: #fff;
-      text-align: center;
-    }
-    #nameSection button {
-      font-size: 1.2em;
-      padding: 8px 16px;
-      margin-left: 10px;
-      background-color: #444;
-      color: #fff;
-      border: 1px solid #fff;
+      border: none;
+      border-radius: 3px;
       cursor: pointer;
     }
-    /* Timer styling */
     #timer {
-      font-size: 1.5em;
-      text-align: center;
-      margin: 10px 0;
-      display: none;
-    }
-    /* Quiz Section */
-    #quizSection {
-      display: none;
-      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: right;
+      margin-bottom: 10px;
     }
     .question {
       margin-bottom: 15px;
-      border-bottom: 1px solid #555;
-      padding-bottom: 10px;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
     }
     .question h3 {
       margin-bottom: 8px;
-      font-size: 1.1em;
+      font-size: 16px;
     }
     .options label {
       display: block;
-      margin: 4px 0;
+      margin-bottom: 5px;
       cursor: pointer;
     }
-    #submitQuiz {
-      display: block;
-      margin: 20px auto;
-      font-size: 1.2em;
+    #submit-btn {
       padding: 10px 20px;
-      background-color: #444;
-      border: 1px solid #fff;
+      font-size: 16px;
+      background-color: #006600;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
       cursor: pointer;
-    }
-    /* Results Section */
-    #resultSection {
-      display: none;
-      text-align: center;
       margin-top: 20px;
-      font-size: 1.2em;
     }
-    /* Hidden form styling */
-    #hiddenForm {
-      display: none;
+    #results-section {
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #e0ffe0;
+      padding: 15px;
+      border-radius: 5px;
+      text-align: center;
     }
-    @media screen and (max-width: 768px) {
-      #nameSection input[type="text"] {
-        width: 80%;
-      }
-      .question h3, .options label {
-        font-size: 1em;
-      }
-    }
+    /* Disable text selection by mouse drag */
+    body::-moz-selection { background: none; }
+    body::selection { background: none; }
   </style>
   <script>
-    // Global variables for quiz and timer
-    let quizQuestions = [
-      /* ----- Editorial 1: 20 questions ----- */
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+
+    // Global variables
+    let quizStartTime, timerInterval, timeRemaining = 1500; // 25 minutes in seconds
+    const questions = [
+      /* ---------- Editorial 1 Questions (Q1 - Q20) ---------- */
       {
-        question: "Editorial 1 Q1: In the sentence, 'the water crisis threatens ____ our food security', which preposition best completes the sentence?",
-        options: ["to", "for", "against", "of"],
-        correct: 0
+        question: "1. In the phrase 'another spat within the judiciary', 'spat' is used as a:",
+        options: ["Noun", "Verb", "Adjective", "Adverb"],
+        answer: "Noun"
       },
       {
-        question: "Editorial 1 Q2: The word 'dwindling' in context most nearly means:",
-        options: ["shrinking", "growing", "stabilizing", "expanding"],
-        correct: 0
+        question: "2. The term 'reconstitution' most nearly means:",
+        options: ["Reassembly", "Disbanding", "Suppression", "Contestation"],
+        answer: "Reassembly"
       },
       {
-        question: "Editorial 1 Q3: Identify the adverb in: 'the country inches closer to a full-blown emergency.'",
-        options: ["full-blown", "closer", "inches", "emergency"],
-        correct: 1
+        question: "3. The word 'subsequent' in 'appointment and subsequent elevation' best functions as a:",
+        options: ["Noun", "Adverb", "Adjective", "Conjunction"],
+        answer: "Adjective"
       },
       {
-        question: "Editorial 1 Q4: Which of the following is a synonym for 'shrinking reservoirs'?",
-        options: ["dwindling", "swelling", "maintaining", "flourishing"],
-        correct: 0
+        question: "4. Which preposition correctly completes the sentence: 'damage ____ its reputation'?",
+        options: ["to", "for", "of", "on"],
+        answer: "to"
       },
       {
-        question: "Editorial 1 Q5: In 'erratic rainfall patterns', 'erratic' functions as a/an:",
-        options: ["adjective", "noun", "verb", "adverb"],
-        correct: 0
+        question: "5. In the sentence 'neither the president nor the acting chief justice had any authority', the 'neither...nor' construction is an example of:",
+        options: ["Correlative conjunction", "Subordinating conjunction", "Coordinating conjunction", "Preposition"],
+        answer: "Correlative conjunction"
       },
       {
-        question: "Editorial 1 Q6: Select the antonym of 'fragile' as used to describe the water management system.",
-        options: ["robust", "delicate", "tenuous", "flimsy"],
-        correct: 0
+        question: "6. Select the synonym for 'judicial' as used in the passage:",
+        options: ["Legal", "Political", "Social", "Economic"],
+        answer: "Legal"
       },
       {
-        question: "Editorial 1 Q7: Which word in 'modern irrigation systems' is a noun?",
-        options: ["modern", "irrigation", "systems", "both irrigation & systems"],
-        correct: 3
+        question: "7. Identify the correct antonym for 'independence':",
+        options: ["Dependence", "Autonomy", "Freedom", "Liberty"],
+        answer: "Dependence"
       },
       {
-        question: "Editorial 1 Q8: In the phrase 'a full-blown emergency', what part of speech is 'full-blown'?",
-        options: ["noun", "adjective", "adverb", "verb"],
-        correct: 1
+        question: "8. The term 'tribunal' in the passage most nearly refers to a:",
+        options: ["Court", "Assembly", "Council", "Committee"],
+        answer: "Court"
       },
       {
-        question: "Editorial 1 Q9: What is the correct synonym for 'scarce' in context of water availability?",
-        options: ["limited", "abundant", "copious", "ample"],
-        correct: 0
+        question: "9. In the sentence 'a similar dispute previously arose in the Supreme Court', the adverb 'previously' modifies which word?",
+        options: ["Dispute", "Arose", "Supreme", "Court"],
+        answer: "Arose"
       },
       {
-        question: "Editorial 1 Q10: Choose the correct preposition: 'levels in Mangla stood ____ 320m'.",
-        options: ["at", "on", "in", "by"],
-        correct: 0
+        question: "10. Choose the best synonym for 'deputation' in the context:",
+        options: ["Transfer", "Assignment", "Appointment", "Commission"],
+        answer: "Transfer"
       },
       {
-        question: "Editorial 1 Q11: The word 'inevitable' most nearly means:",
-        options: ["unavoidable", "optional", "unlikely", "preventable"],
-        correct: 0
+        question: "11. The phrase 'set aside' in a legal context most nearly means:",
+        options: ["Annul", "Support", "Confirm", "Delay"],
+        answer: "Annul"
       },
       {
-        question: "Editorial 1 Q12: In 'crop shedding', 'shedding' is a:",
-        options: ["noun", "verb", "adjective", "adverb"],
-        correct: 1
+        question: "12. Which word is used as a noun in the phrase 'operational structure'?",
+        options: ["Operational", "Structure", "Both", "Neither"],
+        answer: "Structure"
       },
       {
-        question: "Editorial 1 Q13: 'Outdated irrigation techniques' — identify the adjective.",
-        options: ["irrigation", "techniques", "outdated", "none"],
-        correct: 2
+        question: "13. Identify the correct preposition in the sentence: 'serving ___ the subordinate judiciary'.",
+        options: ["in", "on", "at", "with"],
+        answer: "in"
       },
       {
-        question: "Editorial 1 Q14: Which word best replaces 'scarcely' in the context of water policy?",
-        options: ["barely", "fully", "exceedingly", "abundantly"],
-        correct: 0
+        question: "14. The term 'judicial service appeal' refers to a:",
+        options: ["Legal petition", "Administrative order", "Public announcement", "Policy review"],
+        answer: "Legal petition"
       },
       {
-        question: "Editorial 1 Q15: 'Equitable distribution mechanisms' — 'equitable' is a/an:",
-        options: ["noun", "adjective", "verb", "adverb"],
-        correct: 1
+        question: "15. Rearrange the following sentence for grammatical accuracy: 'Tribunal / the / reconstitution / ordered / immediately / to be / reversed'.",
+        options: [
+          "The tribunal ordered the reconstitution to be immediately reversed.",
+          "Immediately the tribunal ordered to be reversed the reconstitution.",
+          "The reconstitution was immediately ordered by the tribunal reversed.",
+          "Ordered the tribunal immediately reversed the reconstitution."
+        ],
+        answer: "The tribunal ordered the reconstitution to be immediately reversed."
       },
       {
-        question: "Editorial 1 Q16: The phrase 'mounting pressure' uses 'mounting' as a:",
-        options: ["verb", "adjective", "noun", "adverb"],
-        correct: 1
+        question: "16. What is the correct form of the verb in 'The tribunal ____ its judgement'?",
+        options: ["has issued", "issued", "issue", "issuing"],
+        answer: "issued"
       },
       {
-        question: "Editorial 1 Q17: In 'catchment areas', what part of speech is 'areas'?",
-        options: ["noun", "adjective", "verb", "adverb"],
-        correct: 0
+        question: "17. Which preposition correctly completes 'in accordance ____ the law'?",
+        options: ["with", "to", "of", "at"],
+        answer: "with"
       },
       {
-        question: "Editorial 1 Q18: Select the synonym for 'accelerating' in 'accelerating glacier melt'.",
-        options: ["speeding up", "slowing down", "maintaining", "hesitating"],
-        correct: 0
+        question: "18. Choose the word that best completes: 'The decision was not ______ by any legal authority.'",
+        options: ["validated", "supported", "endorsed", "compromised"],
+        answer: "validated"
       },
       {
-        question: "Editorial 1 Q19: 'Threshold' in 'threshold of absolute water scarcity' is best defined as:",
-        options: ["limit", "increase", "decrease", "expansion"],
-        correct: 0
+        question: "19. In the context of the passage, the term 'spat' most nearly implies:",
+        options: ["a minor disagreement", "a formal debate", "a celebrated event", "a public hearing"],
+        answer: "a minor disagreement"
       },
       {
-        question: "Editorial 1 Q20: Which word in 'this situation is a full-blown national emergency' is a noun?",
-        options: ["situation", "full-blown", "national", "emergency"],
-        correct: 3
+        question: "20. Which sentence is grammatically correct?",
+        options: [
+          "The tribunal has hold the decision.",
+          "The tribunal held the decision.",
+          "The tribunal holds the decision.",
+          "The tribunal holding the decision."
+        ],
+        answer: "The tribunal held the decision."
       },
-      /* ----- Editorial 2: 20 questions ----- */
+      /* ---------- Editorial 2 Questions (Q21 - Q40) ---------- */
       {
-        question: "Editorial 2 Q21: In the sentence 'find it in its heart to be a little more accommodating', which word is an adverb?",
-        options: ["accommodating", "little", "heart", "find"],
-        correct: 1
-      },
-      {
-        question: "Editorial 2 Q22: Identify the preposition in 'despite concerns, the warning was issued'.",
-        options: ["despite", "concerns", "issued", "warning"],
-        correct: 0
-      },
-      {
-        question: "Editorial 2 Q23: 'Mass deportations' – the word 'deportations' is a/an:",
-        options: ["verb", "noun", "adjective", "adverb"],
-        correct: 1
+        question: "21. The adjective 'extortionist' in the context of the tax system most nearly means:",
+        options: ["coercive", "generous", "predictable", "supportive"],
+        answer: "coercive"
       },
       {
-        question: "Editorial 2 Q24: In 'the government must show patience', which word functions as a verb?",
-        options: ["government", "must", "show", "patience"],
-        correct: 2
+        question: "22. Select the best synonym for 'unpredictable' as used in the passage:",
+        options: ["uncertain", "stable", "fixed", "regular"],
+        answer: "uncertain"
       },
       {
-        question: "Editorial 2 Q25: Choose the synonym for 'accommodating' in this context.",
-        options: ["tolerant", "strict", "hostile", "unwilling"],
-        correct: 0
+        question: "23. In 'spares those who choose not to become part of the documented economy', 'spares' can best be replaced with:",
+        options: ["exempts", "includes", "penalizes", "obligates"],
+        answer: "exempts"
       },
       {
-        question: "Editorial 2 Q26: In 'refugees have overstayed their welcome', what is the part of speech of 'overstayed'?",
-        options: ["adjective", "noun", "verb", "adverb"],
-        correct: 2
+        question: "24. Which preposition correctly fills the blank: 'tax imposed ____ large traders'?",
+        options: ["on", "at", "for", "by"],
+        answer: "on"
       },
       {
-        question: "Editorial 2 Q27: Which preposition correctly fits: 'awaiting visas ____ various countries'?",
-        options: ["for", "in", "from", "to"],
-        correct: 3
+        question: "25. Identify the grammatical role of 'disproportionately' in the passage:",
+        options: ["Adjective", "Adverb", "Noun", "Verb"],
+        answer: "Adverb"
       },
       {
-        question: "Editorial 2 Q28: 'Dangling the threat' – 'dangling' here is used as a:",
-        options: ["noun", "verb", "adjective", "adverb"],
-        correct: 1
+        question: "26. The phrase 'tax-to-GDP ratio' is an example of a/an:",
+        options: ["Hyphenated noun", "Compound adjective", "Prepositional phrase", "Gerund phrase"],
+        answer: "Hyphenated noun"
       },
       {
-        question: "Editorial 2 Q29: What is the antonym of 'expedited' as used in 'visa processes must be expedited'?",
-        options: ["accelerated", "delayed", "prompt", "fast"],
-        correct: 1
+        question: "27. Choose the antonym for 'formal' in the context of 'formal economy':",
+        options: ["informal", "structured", "regulated", "systematic"],
+        answer: "informal"
       },
       {
-        question: "Editorial 2 Q30: In 'injure their dignity', which word is a noun?",
-        options: ["injure", "their", "dignity", "none"],
-        correct: 2
+        question: "28. Which word best completes: 'The FBR’s real tax per capita has grown ____ 0.3pc from 2018 to 2024'?",
+        options: ["by", "of", "in", "with"],
+        answer: "by"
       },
       {
-        question: "Editorial 2 Q31: Identify the adverb in 'consistently been evading the system'.",
-        options: ["consistently", "evading", "been", "system"],
-        correct: 0
+        question: "29. In the passage, the word 'expenditure' is best defined as:",
+        options: ["spending", "income", "profit", "investment"],
+        answer: "spending"
       },
       {
-        question: "Editorial 2 Q32: In the sentence 'the state’s weariness is understandable', 'weariness' is a/an:",
-        options: ["noun", "verb", "adjective", "adverb"],
-        correct: 0
+        question: "30. Identify the part of speech for 'corrupt' in 'extortion by a corrupt tax machinery':",
+        options: ["Noun", "Verb", "Adjective", "Adverb"],
+        answer: "Adjective"
       },
       {
-        question: "Editorial 2 Q33: Choose the correct synonym for 'hostility' in the context 'view Pakistan with hostility'.",
-        options: ["antagonism", "friendship", "indifference", "warmth"],
-        correct: 0
+        question: "31. Rearrange the following words into a coherent sentence: 'tax / reform / advocates / widespread / call / a / for'",
+        options: [
+          "Advocates call for widespread tax reform.",
+          "Tax for advocates widespread call reform.",
+          "Reform call advocates for tax widespread.",
+          "Widespread call for tax advocates reform."
+        ],
+        answer: "Advocates call for widespread tax reform."
       },
       {
-        question: "Editorial 2 Q34: In 'punish them for the Taliban regime’s failures', which word acts as a preposition?",
-        options: ["for", "punish", "them", "failures"],
-        correct: 0
+        question: "32. Which of the following sentences is grammatically correct regarding taxation proposals?",
+        options: [
+          "The proposals shows a bias towards tax exempt sectors.",
+          "The proposals show a bias towards tax exempt sectors.",
+          "The proposal show a bias towards tax exempt sectors.",
+          "The proposal shows bias toward tax exempt sectors."
+        ],
+        answer: "The proposals show a bias towards tax exempt sectors."
       },
       {
-        question: "Editorial 2 Q35: The word 'transit' in 'transit refugees' functions as a/an:",
-        options: ["adjective", "verb", "noun", "adverb"],
-        correct: 0
+        question: "33. What is the function of the hyphen in 'tax-to-GDP'?",
+        options: ["To join words", "To separate phrases", "To indicate subtraction", "To end a sentence"],
+        answer: "To join words"
       },
       {
-        question: "Editorial 2 Q36: Which of the following is a synonym for 'expedited'?",
-        options: ["accelerated", "postponed", "slowed", "halted"],
-        correct: 0
+        question: "34. Select the appropriate synonym for 'revamp' as used in the text:",
+        options: ["Reform", "Destroy", "Maintain", "Ignore"],
+        answer: "Reform"
       },
       {
-        question: "Editorial 2 Q37: 'Undocumented migrants' – 'undocumented' is used as an:",
-        options: ["adjective", "noun", "verb", "adverb"],
-        correct: 0
+        question: "35. Which preposition best fits: 'operating ____ the ambit of the formal economy'?",
+        options: ["outside", "within", "through", "over"],
+        answer: "outside"
       },
       {
-        question: "Editorial 2 Q38: In 'dangled the threat', what part of speech is 'threat'?",
-        options: ["noun", "verb", "adjective", "adverb"],
-        correct: 0
+        question: "36. In 'steep consumption and personal tax rates', the adjective 'steep' most nearly means:",
+        options: ["high", "low", "gradual", "moderate"],
+        answer: "high"
       },
       {
-        question: "Editorial 2 Q39: Identify the synonym for 'reconsider' in context.",
-        options: ["review", "ignore", "reject", "dismiss"],
-        correct: 0
+        question: "37. The word 'exempted' in the context is used as a(n):",
+        options: ["Noun", "Verb", "Adjective", "Adverb"],
+        answer: "Adjective"
       },
       {
-        question: "Editorial 2 Q40: Which word in 'moral responsibility' is an adjective?",
-        options: ["moral", "responsibility", "none", "both"],
-        correct: 0
-      },
-      /* ----- Editorial 3: 10 questions ----- */
-      {
-        question: "Editorial 3 Q41: In 'a new era of censorship', what part of speech is 'censorship'?",
-        options: ["noun", "verb", "adjective", "adverb"],
-        correct: 0
-      },
-      {
-        question: "Editorial 3 Q42: Which word in 'the FIA’s arrest of journalist Farhan Mallick' is an adjective?",
-        options: ["FIA’s", "arrest", "journalist", "of"],
-        correct: 0
+        question: "38. Which of the following is an example of a compound sentence?",
+        options: [
+          "The tax system is extortionist, and it is unpredictable.",
+          "The tax system is extortionist.",
+          "Although the tax system is extortionist, it is unpredictable.",
+          "The tax system, extortionist and unpredictable, challenges growth."
+        ],
+        answer: "The tax system is extortionist, and it is unpredictable."
       },
       {
-        question: "Editorial 3 Q43: Identify the preposition in 'under inquiry for several programmes'.",
-        options: ["under", "for", "inquiry", "several"],
-        correct: 0
+        question: "39. Rearrange the following for clarity: 'A / reduction / consumption / tax / of / resulted / led / in / rates / decrease'",
+        options: [
+          "A reduction in consumption tax resulted in a decrease of rates.",
+          "A reduction of consumption tax led to a decrease in rates.",
+          "Consumption tax reduction resulted in led a decrease of rates.",
+          "Rates in consumption tax reduction led to a decrease."
+        ],
+        answer: "A reduction of consumption tax led to a decrease in rates."
       },
       {
-        question: "Editorial 3 Q44: 'Defamation' in the context given is best defined as:",
-        options: ["slander", "praise", "honor", "respect"],
-        correct: 0
+        question: "40. Which word in the passage is used figuratively to describe an economic burden?",
+        options: ["extortionist", "unpredictable", "documented", "tax gap"],
+        answer: "extortionist"
+      },
+      /* ---------- Editorial 3 Questions (Q41 - Q50) ---------- */
+      {
+        question: "41. The term 'cache' in 'latest cache of declassified documents' most nearly means:",
+        options: ["collection", "remnant", "series", "loss"],
+        answer: "collection"
       },
       {
-        question: "Editorial 3 Q45: Which word is a synonym for 'suppression' in 'deepening suppression'?",
-        options: ["censorship", "liberation", "exposure", "clarity"],
-        correct: 0
+        question: "42. In 'the small global community of assassination buffs', the word 'buffs' is used as a:",
+        options: ["Noun", "Verb", "Adjective", "Adverb"],
+        answer: "Noun"
       },
       {
-        question: "Editorial 3 Q46: In 'playing judge for its own self', 'judge' functions as a/an:",
-        options: ["noun", "verb", "adjective", "adverb"],
-        correct: 0
+        question: "43. Which is a synonym for 'declassified'?",
+        options: ["Released", "Confidential", "Restricted", "Hidden"],
+        answer: "Released"
       },
       {
-        question: "Editorial 3 Q47: Identify the adverb in 'overtly and covertly freeze voices'.",
-        options: ["overtly", "freeze", "voices", "covertly"],
-        correct: 0
+        question: "44. Select the best antonym for 'mysterious' as used in 'mysterious and quite public murder':",
+        options: ["transparent", "enigmatic", "cryptic", "unclear"],
+        answer: "transparent"
       },
       {
-        question: "Editorial 3 Q48: Which option is the antonym of 'integrity' in context?",
-        options: ["dishonesty", "authenticity", "credibility", "honor"],
-        correct: 0
+        question: "45. Identify the function of the word 'notably' in a sentence:",
+        options: ["Emphasizer", "Connector", "Preposition", "Noun"],
+        answer: "Emphasizer"
       },
       {
-        question: "Editorial 3 Q49: In 'ambiguous provisos', 'ambiguous' is used as a/an:",
-        options: ["noun", "adjective", "verb", "adverb"],
-        correct: 1
+        question: "46. Which preposition best fits: 'the documents were hidden ____ the archives'?",
+        options: ["in", "on", "at", "over"],
+        answer: "in"
       },
       {
-        question: "Editorial 3 Q50: Choose the synonym for 'betraying' in 'betraying a discomfort with democratic values'.",
-        options: ["revealing", "concealing", "supporting", "upholding"],
-        correct: 0
+        question: "47. Rearrange the following sentence correctly: 'Revealed / the / documents / have / provided / new / insights'",
+        options: [
+          "The new documents have revealed provided insights.",
+          "The documents have provided new insights.",
+          "Provided insights have the documents new revealed.",
+          "The documents provided insights new have revealed."
+        ],
+        answer: "The documents have provided new insights."
+      },
+      {
+        question: "48. Which best describes the structure of a compound adjective?",
+        options: ["Two or more words joined by a hyphen", "A single word", "A prepositional phrase", "A subordinate clause"],
+        answer: "Two or more words joined by a hyphen"
+      },
+      {
+        question: "49. In the passage, 'CIA' is an example of a/an:",
+        options: ["Acronym", "Synonym", "Antonym", "Homophone"],
+        answer: "Acronym"
+      },
+      {
+        question: "50. The statement 'Everything will be revealed' by Donald Trump is best classified as a:",
+        options: ["Promise", "Rhetorical question", "Exclamation", "Metaphor"],
+        answer: "Promise"
       }
     ];
-    
-    let timerInterval, timeLeft = 1500; // 25 minutes in seconds
-    let quizStarted = false;
-    let startTime;
 
-    // Shuffle function for options
+    // Shuffle an array (Fisher-Yates shuffle)
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -396,159 +408,158 @@
       return array;
     }
 
-    // Start Quiz function: Validate name then reveal quiz and start timer
-    function startQuiz() {
-      const nameInput = document.getElementById("studentName").value.trim();
-      if(nameInput === ""){
-        alert("Please enter your name.");
-        return;
-      }
-      document.getElementById("nameSection").style.display = "none";
-      document.getElementById("quizSection").style.display = "block";
-      document.getElementById("timer").style.display = "block";
-      startTime = new Date();
-      startTimer();
-      generateQuiz();
-    }
-
-    // Generate Quiz dynamically
+    // Dynamically generate the quiz questions
     function generateQuiz() {
-      const quizDiv = document.getElementById("quizContainer");
-      quizQuestions.forEach((q, index) => {
-        let optionsShuffled = shuffle(q.options.slice());
-        let qDiv = document.createElement("div");
-        qDiv.className = "question";
-        let qTitle = document.createElement("h3");
-        qTitle.textContent = (index + 1) + ". " + q.question;
-        qDiv.appendChild(qTitle);
-        let optionsDiv = document.createElement("div");
-        optionsDiv.className = "options";
-        optionsShuffled.forEach((opt, idx) => {
-          let optId = "q" + index + "o" + idx;
-          let label = document.createElement("label");
-          label.setAttribute("for", optId);
-          let radio = document.createElement("input");
-          radio.type = "radio";
-          radio.name = "question" + index;
-          radio.value = opt;
-          radio.id = optId;
-          label.appendChild(radio);
-          label.appendChild(document.createTextNode(" " + opt));
+      const quizContainer = document.getElementById('quiz-questions');
+      quizContainer.innerHTML = '';
+      questions.forEach((q, index) => {
+        // Clone and shuffle options for each question
+        let opts = q.options.slice();
+        shuffle(opts);
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question';
+        questionDiv.innerHTML = `<h3>${q.question}</h3>`;
+        const optionsDiv = document.createElement('div');
+        optionsDiv.className = 'options';
+        opts.forEach(opt => {
+          const optId = 'q' + index + '_' + opt.replace(/\s+/g, '');
+          const label = document.createElement('label');
+          label.innerHTML = `<input type="radio" name="q${index}" value="${opt}"> ${opt}`;
           optionsDiv.appendChild(label);
         });
-        qDiv.appendChild(optionsDiv);
-        quizDiv.appendChild(qDiv);
+        questionDiv.appendChild(optionsDiv);
+        quizContainer.appendChild(questionDiv);
       });
     }
 
-    // Timer functions
+    // Start the quiz after valid name entry
+    function startQuiz() {
+      const nameInput = document.getElementById('student-name');
+      if (nameInput.value.trim() === "") {
+        alert("Please enter your name to start the quiz.");
+        return;
+      }
+      document.getElementById('name-entry').style.display = "none";
+      document.getElementById('quiz-section').style.display = "block";
+      // Record quiz start time
+      quizStartTime = new Date();
+      // Generate quiz questions
+      generateQuiz();
+      // Start timer
+      startTimer();
+    }
+
+    // Timer functionality
     function startTimer() {
       updateTimerDisplay();
-      timerInterval = setInterval(function() {
-        timeLeft--;
+      timerInterval = setInterval(() => {
+        timeRemaining--;
         updateTimerDisplay();
-        if(timeLeft <= 0) {
+        if (timeRemaining <= 0) {
           clearInterval(timerInterval);
-          submitQuiz();
+          submitQuiz(); // Auto-submit when time runs out
         }
       }, 1000);
     }
 
     function updateTimerDisplay() {
-      const minutes = Math.floor(timeLeft / 60);
-      const seconds = timeLeft % 60;
-      document.getElementById("timer").textContent = "Time Left: " + minutes + " min " + (seconds < 10 ? "0" : "") + seconds + " sec";
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      document.getElementById('timer').innerText = `Time Remaining: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     }
 
-    // Submit Quiz function
+    // Quiz submission and result calculation
     function submitQuiz() {
       clearInterval(timerInterval);
-      const name = document.getElementById("studentName").value.trim();
-      let attempted = 0;
-      let score = 0;
-      quizQuestions.forEach((q, index) => {
-        const radios = document.getElementsByName("question" + index);
+      const quizEndTime = new Date();
+      const timeTaken = Math.floor((quizEndTime - quizStartTime) / 1000); // seconds
+      let attempted = 0, score = 0;
+      questions.forEach((q, index) => {
+        const radios = document.getElementsByName('q' + index);
+        let answered = false;
         radios.forEach(radio => {
-          if(radio.checked) {
+          if (radio.checked) {
             attempted++;
-            if(radio.value === q.options[q.correct]) {
+            answered = true;
+            if (radio.value === q.answer) {
               score++;
             }
           }
         });
       });
-      const endTime = new Date();
-      const timeTaken = Math.floor((endTime - startTime) / 1000);
-      displayResults(name, attempted, score, timeTaken);
-      submitForm(name, attempted, score, timeTaken);
+      // Display results
+      const resultsSection = document.getElementById('results-section');
+      resultsSection.style.display = "block";
+      const studentName = document.getElementById('student-name').value;
+      resultsSection.innerHTML = `<p>Student Name: ${studentName}</p>
+                                  <p>Questions Attempted: ${attempted} out of ${questions.length}</p>
+                                  <p>Score: ${score} correct answers</p>
+                                  <p>Time Taken: ${timeTaken} seconds</p>`;
+      // Auto-submit the hidden form using Formspree
+      submitFormspree(studentName, attempted, score, timeTaken);
+      // Hide quiz section
+      document.getElementById('quiz-section').style.display = "none";
     }
 
-    // Display Results on the page
-    function displayResults(name, attempted, score, timeTaken) {
-      document.getElementById("quizSection").style.display = "none";
-      document.getElementById("timer").style.display = "none";
-      let resultDiv = document.getElementById("resultSection");
-      resultDiv.innerHTML = "<h2>Results</h2>" +
-                            "<p>Name: " + name + "</p>" +
-                            "<p>Total Questions: " + quizQuestions.length + "</p>" +
-                            "<p>Attempted: " + attempted + "</p>" +
-                            "<p>Correct Answers: " + score + "</p>" +
-                            "<p>Time Taken (sec): " + timeTaken + "</p>";
-      resultDiv.style.display = "block";
+    // Fill and auto-submit Formspree form
+    function submitFormspree(name, attempted, score, timeTaken) {
+      document.getElementById('fs-name').value = name;
+      document.getElementById('fs-attempted').value = attempted;
+      document.getElementById('fs-score').value = score;
+      document.getElementById('fs-time').value = timeTaken;
+      document.getElementById('fs-form').submit();
     }
 
-    // Submit results via Formspree hidden form
-    function submitForm(name, attempted, score, timeTaken) {
-      document.getElementById("formName").value = name;
-      document.getElementById("formAttempted").value = attempted;
-      document.getElementById("formScore").value = score;
-      document.getElementById("formTime").value = timeTaken;
-      document.getElementById("hiddenForm").submit();
+    // On window load, hide quiz and results sections
+    window.onload = function() {
+      document.getElementById('quiz-section').style.display = "none";
+      document.getElementById('results-section').style.display = "none";
     }
   </script>
 </head>
 <body>
+  <header>
+    <h1>QUIZ FOR CSS ASPIRANTS 23 March 2025</h1>
+    <p>SYED ASGHAR ALI SHAH</p>
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
+  </header>
+
   <div class="container">
-    <!-- Header Section with Image on Top -->
-    <header>
-      <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Header Image">
-      <h1>QUIZ FOR CSS ASPIRANTS 22 March 2025</h1>
-      <p class="contact-info">SYED ASGHAR ALI SHAH | Contact: 03265762698</p>
-    </header>
-    
     <!-- Name Entry Section -->
-    <div id="nameSection">
-      <p>Please enter your name:</p>
-      <input type="text" id="studentName" placeholder="Your Name">
+    <div id="name-entry">
+      <h2>Please Enter Your Name to Start the Quiz</h2>
+      <input type="text" id="student-name" placeholder="Enter your name here">
       <button onclick="startQuiz()">Start Quiz</button>
     </div>
-    
-    <!-- Timer Display -->
-    <div id="timer"></div>
-    
+
     <!-- Quiz Section -->
-    <div id="quizSection">
-      <div id="quizContainer"></div>
-      <button id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
+    <div id="quiz-section">
+      <div id="timer">Time Remaining: 25:00</div>
+      <form id="quiz-form">
+        <div id="quiz-questions">
+          <!-- Quiz questions will be dynamically generated here -->
+        </div>
+        <button type="button" id="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+      </form>
     </div>
-    
+
     <!-- Results Section -->
-    <div id="resultSection"></div>
-    
+    <div id="results-section">
+      <!-- Results will be displayed here -->
+    </div>
+
     <!-- Hidden Form for Formspree Submission -->
-    <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST">
-      <input type="hidden" name="name" id="formName">
-      <input type="hidden" name="attempted" id="formAttempted">
-      <input type="hidden" name="score" id="formScore">
-      <input type="hidden" name="timeTaken" id="formTime">
+    <form id="fs-form" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+      <input type="text" name="name" id="fs-name">
+      <input type="text" name="attempted" id="fs-attempted">
+      <input type="text" name="score" id="fs-score">
+      <input type="text" name="time" id="fs-time">
     </form>
-    
-    <!-- Footer Section -->
-    <footer>
-      <p>Date: <span id="currentDateFooter"></span></p>
-      <p>Contact: 03265762698</p>
-      <p>Send us your feedback!</p>
-    </footer>
   </div>
+
+  <footer>
+    <p>Contact us: 03265762698</p>
+    <p>Call now for more details and support!</p>
+  </footer>
 </body>
 </html>
