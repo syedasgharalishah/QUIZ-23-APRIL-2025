@@ -2,404 +2,550 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 23 March 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 24 March 2025</title>
   <style>
-    /* Basic reset and disable text selection on all elements */
+    /* Disable text selection for all elements */
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      user-select: none;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
+      user-select: none;
     }
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-      line-height: 1.6;
+      background: #f2f2f2;
     }
     header, footer {
       background-color: #003366;
-      color: #fff;
-      padding: 20px 10px;
+      color: white;
       text-align: center;
+      padding: 20px 10px;
     }
-    header img {
-      max-width: 100px;
-      display: block;
-      margin: 10px auto;
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    footer p {
+      margin: 5px 0;
     }
     .container {
       max-width: 900px;
       margin: 20px auto;
+      background: white;
       padding: 20px;
-      background-color: #fff;
-      border-radius: 5px;
+      border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    #name-entry, #quiz-section, #results-section {
+    #nameSection, #quizSection, #resultSection {
       margin-bottom: 20px;
     }
-    #name-entry input[type="text"] {
+    input[type="text"] {
+      width: 80%;
       padding: 10px;
-      width: 60%;
       font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 3px;
+      margin-right: 10px;
     }
-    #name-entry button {
+    button {
       padding: 10px 20px;
       font-size: 16px;
-      background-color: #003366;
-      color: #fff;
-      border: none;
-      border-radius: 3px;
       cursor: pointer;
-    }
-    #timer {
-      font-size: 18px;
-      font-weight: bold;
-      text-align: right;
-      margin-bottom: 10px;
     }
     .question {
       margin-bottom: 15px;
       padding: 10px;
       border-bottom: 1px solid #ccc;
     }
-    .question h3 {
-      margin-bottom: 8px;
-      font-size: 16px;
-    }
     .options label {
       display: block;
-      margin-bottom: 5px;
-      cursor: pointer;
+      margin: 5px 0;
     }
-    #submit-btn {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #006600;
-      color: #fff;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-    #results-section {
+    #timer {
       font-size: 18px;
       font-weight: bold;
-      background-color: #e0ffe0;
-      padding: 15px;
-      border-radius: 5px;
-      text-align: center;
+      text-align: right;
+      margin-bottom: 10px;
+      color: #cc0000;
     }
-    /* Disable text selection by mouse drag */
-    body::-moz-selection { background: none; }
-    body::selection { background: none; }
   </style>
   <script>
-    // Disable right-click context menu
-    document.addEventListener('contextmenu', function(e) {
+    // Disable right-click and common shortcuts
+    document.addEventListener("contextmenu", function(e){
       e.preventDefault();
-    });
+    }, false);
+    document.onkeydown = function(e) {
+      if(e.keyCode === 123 || // F12
+         (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || // Ctrl+Shift+I or J
+         (e.ctrlKey && e.keyCode === 85)) { // Ctrl+U
+        return false;
+      }
+    };
 
     // Global variables
-    let quizStartTime, timerInterval, timeRemaining = 1500; // 25 minutes in seconds
+    let quizStartTime, quizTimer, timerInterval;
+    const totalTime = 25 * 60; // 25 minutes in seconds
+
+    // Questions array: each question has a text and options (each option is an object with text and isCorrect)
+    // 20 questions from Editorial 1
+    // 20 questions from Editorial 2
+    // 10 questions from Editorial 3
     const questions = [
-      /* ---------- Editorial 1 Questions (Q1 - Q20) ---------- */
+      // Editorial 1 questions (Q1 - Q20)
       {
-        question: "1. In the phrase 'another spat within the judiciary', 'spat' is used as a:",
-        options: ["Noun", "Verb", "Adjective", "Adverb"],
-        answer: "Noun"
-      },
-      {
-        question: "2. The term 'reconstitution' most nearly means:",
-        options: ["Reassembly", "Disbanding", "Suppression", "Contestation"],
-        answer: "Reassembly"
-      },
-      {
-        question: "3. The word 'subsequent' in 'appointment and subsequent elevation' best functions as a:",
-        options: ["Noun", "Adverb", "Adjective", "Conjunction"],
-        answer: "Adjective"
-      },
-      {
-        question: "4. Which preposition correctly completes the sentence: 'damage ____ its reputation'?",
-        options: ["to", "for", "of", "on"],
-        answer: "to"
-      },
-      {
-        question: "5. In the sentence 'neither the president nor the acting chief justice had any authority', the 'neither...nor' construction is an example of:",
-        options: ["Correlative conjunction", "Subordinating conjunction", "Coordinating conjunction", "Preposition"],
-        answer: "Correlative conjunction"
-      },
-      {
-        question: "6. Select the synonym for 'judicial' as used in the passage:",
-        options: ["Legal", "Political", "Social", "Economic"],
-        answer: "Legal"
-      },
-      {
-        question: "7. Identify the correct antonym for 'independence':",
-        options: ["Dependence", "Autonomy", "Freedom", "Liberty"],
-        answer: "Dependence"
-      },
-      {
-        question: "8. The term 'tribunal' in the passage most nearly refers to a:",
-        options: ["Court", "Assembly", "Council", "Committee"],
-        answer: "Court"
-      },
-      {
-        question: "9. In the sentence 'a similar dispute previously arose in the Supreme Court', the adverb 'previously' modifies which word?",
-        options: ["Dispute", "Arose", "Supreme", "Court"],
-        answer: "Arose"
-      },
-      {
-        question: "10. Choose the best synonym for 'deputation' in the context:",
-        options: ["Transfer", "Assignment", "Appointment", "Commission"],
-        answer: "Transfer"
-      },
-      {
-        question: "11. The phrase 'set aside' in a legal context most nearly means:",
-        options: ["Annul", "Support", "Confirm", "Delay"],
-        answer: "Annul"
-      },
-      {
-        question: "12. Which word is used as a noun in the phrase 'operational structure'?",
-        options: ["Operational", "Structure", "Both", "Neither"],
-        answer: "Structure"
-      },
-      {
-        question: "13. Identify the correct preposition in the sentence: 'serving ___ the subordinate judiciary'.",
-        options: ["in", "on", "at", "with"],
-        answer: "in"
-      },
-      {
-        question: "14. The term 'judicial service appeal' refers to a:",
-        options: ["Legal petition", "Administrative order", "Public announcement", "Policy review"],
-        answer: "Legal petition"
-      },
-      {
-        question: "15. Rearrange the following sentence for grammatical accuracy: 'Tribunal / the / reconstitution / ordered / immediately / to be / reversed'.",
+        question: "According to the editorial, what percentage of global GHG emissions does Pakistan contribute?",
         options: [
-          "The tribunal ordered the reconstitution to be immediately reversed.",
-          "Immediately the tribunal ordered to be reversed the reconstitution.",
-          "The reconstitution was immediately ordered by the tribunal reversed.",
-          "Ordered the tribunal immediately reversed the reconstitution."
-        ],
-        answer: "The tribunal ordered the reconstitution to be immediately reversed."
+          { text: "Less than 1%", isCorrect: true },
+          { text: "1-5%", isCorrect: false },
+          { text: "5-10%", isCorrect: false },
+          { text: "10-15%", isCorrect: false }
+        ]
       },
       {
-        question: "16. What is the correct form of the verb in 'The tribunal ____ its judgement'?",
-        options: ["has issued", "issued", "issue", "issuing"],
-        answer: "issued"
-      },
-      {
-        question: "17. Which preposition correctly completes 'in accordance ____ the law'?",
-        options: ["with", "to", "of", "at"],
-        answer: "with"
-      },
-      {
-        question: "18. Choose the word that best completes: 'The decision was not ______ by any legal authority.'",
-        options: ["validated", "supported", "endorsed", "compromised"],
-        answer: "validated"
-      },
-      {
-        question: "19. In the context of the passage, the term 'spat' most nearly implies:",
-        options: ["a minor disagreement", "a formal debate", "a celebrated event", "a public hearing"],
-        answer: "a minor disagreement"
-      },
-      {
-        question: "20. Which sentence is grammatically correct?",
+        question: "Which natural disaster in 2022 is mentioned as causing massive damage in Pakistan?",
         options: [
-          "The tribunal has hold the decision.",
-          "The tribunal held the decision.",
-          "The tribunal holds the decision.",
-          "The tribunal holding the decision."
-        ],
-        answer: "The tribunal held the decision."
-      },
-      /* ---------- Editorial 2 Questions (Q21 - Q40) ---------- */
-      {
-        question: "21. The adjective 'extortionist' in the context of the tax system most nearly means:",
-        options: ["coercive", "generous", "predictable", "supportive"],
-        answer: "coercive"
+          { text: "Earthquake", isCorrect: false },
+          { text: "Floods", isCorrect: true },
+          { text: "Cyclone", isCorrect: false },
+          { text: "Drought", isCorrect: false }
+        ]
       },
       {
-        question: "22. Select the best synonym for 'unpredictable' as used in the passage:",
-        options: ["uncertain", "stable", "fixed", "regular"],
-        answer: "uncertain"
-      },
-      {
-        question: "23. In 'spares those who choose not to become part of the documented economy', 'spares' can best be replaced with:",
-        options: ["exempts", "includes", "penalizes", "obligates"],
-        answer: "exempts"
-      },
-      {
-        question: "24. Which preposition correctly fills the blank: 'tax imposed ____ large traders'?",
-        options: ["on", "at", "for", "by"],
-        answer: "on"
-      },
-      {
-        question: "25. Identify the grammatical role of 'disproportionately' in the passage:",
-        options: ["Adjective", "Adverb", "Noun", "Verb"],
-        answer: "Adverb"
-      },
-      {
-        question: "26. The phrase 'tax-to-GDP ratio' is an example of a/an:",
-        options: ["Hyphenated noun", "Compound adjective", "Prepositional phrase", "Gerund phrase"],
-        answer: "Hyphenated noun"
-      },
-      {
-        question: "27. Choose the antonym for 'formal' in the context of 'formal economy':",
-        options: ["informal", "structured", "regulated", "systematic"],
-        answer: "informal"
-      },
-      {
-        question: "28. Which word best completes: 'The FBR’s real tax per capita has grown ____ 0.3pc from 2018 to 2024'?",
-        options: ["by", "of", "in", "with"],
-        answer: "by"
-      },
-      {
-        question: "29. In the passage, the word 'expenditure' is best defined as:",
-        options: ["spending", "income", "profit", "investment"],
-        answer: "spending"
-      },
-      {
-        question: "30. Identify the part of speech for 'corrupt' in 'extortion by a corrupt tax machinery':",
-        options: ["Noun", "Verb", "Adjective", "Adverb"],
-        answer: "Adjective"
-      },
-      {
-        question: "31. Rearrange the following words into a coherent sentence: 'tax / reform / advocates / widespread / call / a / for'",
+        question: "What is one of the key impacts of the 2022 floods mentioned in the editorial?",
         options: [
-          "Advocates call for widespread tax reform.",
-          "Tax for advocates widespread call reform.",
-          "Reform call advocates for tax widespread.",
-          "Widespread call for tax advocates reform."
-        ],
-        answer: "Advocates call for widespread tax reform."
+          { text: "Increased industrial output", isCorrect: false },
+          { text: "Displaced millions", isCorrect: true },
+          { text: "Boosted tourism", isCorrect: false },
+          { text: "Reduced food prices", isCorrect: false }
+        ]
       },
       {
-        question: "32. Which of the following sentences is grammatically correct regarding taxation proposals?",
+        question: "The editorial describes the threat to Pakistan's economy as:",
         options: [
-          "The proposals shows a bias towards tax exempt sectors.",
-          "The proposals show a bias towards tax exempt sectors.",
-          "The proposal show a bias towards tax exempt sectors.",
-          "The proposal shows bias toward tax exempt sectors."
-        ],
-        answer: "The proposals show a bias towards tax exempt sectors."
+          { text: "A minor setback", isCorrect: false },
+          { text: "An existential threat", isCorrect: true },
+          { text: "A temporary inconvenience", isCorrect: false },
+          { text: "An exaggerated claim", isCorrect: false }
+        ]
       },
       {
-        question: "33. What is the function of the hyphen in 'tax-to-GDP'?",
-        options: ["To join words", "To separate phrases", "To indicate subtraction", "To end a sentence"],
-        answer: "To join words"
-      },
-      {
-        question: "34. Select the appropriate synonym for 'revamp' as used in the text:",
-        options: ["Reform", "Destroy", "Maintain", "Ignore"],
-        answer: "Reform"
-      },
-      {
-        question: "35. Which preposition best fits: 'operating ____ the ambit of the formal economy'?",
-        options: ["outside", "within", "through", "over"],
-        answer: "outside"
-      },
-      {
-        question: "36. In 'steep consumption and personal tax rates', the adjective 'steep' most nearly means:",
-        options: ["high", "low", "gradual", "moderate"],
-        answer: "high"
-      },
-      {
-        question: "37. The word 'exempted' in the context is used as a(n):",
-        options: ["Noun", "Verb", "Adjective", "Adverb"],
-        answer: "Adjective"
-      },
-      {
-        question: "38. Which of the following is an example of a compound sentence?",
+        question: "Which of the following phrases best reflects the editorial’s description of Pakistan’s water issue due to shrinking glaciers?",
         options: [
-          "The tax system is extortionist, and it is unpredictable.",
-          "The tax system is extortionist.",
-          "Although the tax system is extortionist, it is unpredictable.",
-          "The tax system, extortionist and unpredictable, challenges growth."
-        ],
-        answer: "The tax system is extortionist, and it is unpredictable."
+          { text: "Abundant water supply", isCorrect: false },
+          { text: "Scarce water for agriculture", isCorrect: true },
+          { text: "Excess water flooding fields", isCorrect: false },
+          { text: "No impact on water resources", isCorrect: false }
+        ]
       },
       {
-        question: "39. Rearrange the following for clarity: 'A / reduction / consumption / tax / of / resulted / led / in / rates / decrease'",
+        question: "Identify the correct usage of the article in this sentence: 'Pakistan is among ____ nations most vulnerable to climate change.'",
         options: [
-          "A reduction in consumption tax resulted in a decrease of rates.",
-          "A reduction of consumption tax led to a decrease in rates.",
-          "Consumption tax reduction resulted in led a decrease of rates.",
-          "Rates in consumption tax reduction led to a decrease."
-        ],
-        answer: "A reduction of consumption tax led to a decrease in rates."
+          { text: "a", isCorrect: false },
+          { text: "an", isCorrect: false },
+          { text: "the", isCorrect: true },
+          { text: "none", isCorrect: false }
+        ]
       },
       {
-        question: "40. Which word in the passage is used figuratively to describe an economic burden?",
-        options: ["extortionist", "unpredictable", "documented", "tax gap"],
-        answer: "extortionist"
-      },
-      /* ---------- Editorial 3 Questions (Q41 - Q50) ---------- */
-      {
-        question: "41. The term 'cache' in 'latest cache of declassified documents' most nearly means:",
-        options: ["collection", "remnant", "series", "loss"],
-        answer: "collection"
-      },
-      {
-        question: "42. In 'the small global community of assassination buffs', the word 'buffs' is used as a:",
-        options: ["Noun", "Verb", "Adjective", "Adverb"],
-        answer: "Noun"
-      },
-      {
-        question: "43. Which is a synonym for 'declassified'?",
-        options: ["Released", "Confidential", "Restricted", "Hidden"],
-        answer: "Released"
-      },
-      {
-        question: "44. Select the best antonym for 'mysterious' as used in 'mysterious and quite public murder':",
-        options: ["transparent", "enigmatic", "cryptic", "unclear"],
-        answer: "transparent"
-      },
-      {
-        question: "45. Identify the function of the word 'notably' in a sentence:",
-        options: ["Emphasizer", "Connector", "Preposition", "Noun"],
-        answer: "Emphasizer"
-      },
-      {
-        question: "46. Which preposition best fits: 'the documents were hidden ____ the archives'?",
-        options: ["in", "on", "at", "over"],
-        answer: "in"
-      },
-      {
-        question: "47. Rearrange the following sentence correctly: 'Revealed / the / documents / have / provided / new / insights'",
+        question: "Choose the best synonym for 'existential' as used in the context of the editorial.",
         options: [
-          "The new documents have revealed provided insights.",
-          "The documents have provided new insights.",
-          "Provided insights have the documents new revealed.",
-          "The documents provided insights new have revealed."
-        ],
-        answer: "The documents have provided new insights."
+          { text: "Trivial", isCorrect: false },
+          { text: "Crucial", isCorrect: true },
+          { text: "Insignificant", isCorrect: false },
+          { text: "Imaginary", isCorrect: false }
+        ]
       },
       {
-        question: "48. Which best describes the structure of a compound adjective?",
-        options: ["Two or more words joined by a hyphen", "A single word", "A prepositional phrase", "A subordinate clause"],
-        answer: "Two or more words joined by a hyphen"
+        question: "Which preposition best completes the sentence: 'The government is looking ____ the IMF for climate funding.'",
+        options: [
+          { text: "for", isCorrect: false },
+          { text: "to", isCorrect: true },
+          { text: "at", isCorrect: false },
+          { text: "in", isCorrect: false }
+        ]
       },
       {
-        question: "49. In the passage, 'CIA' is an example of a/an:",
-        options: ["Acronym", "Synonym", "Antonym", "Homophone"],
-        answer: "Acronym"
+        question: "Which organization has Pakistan approached for $1bn in climate funding?",
+        options: [
+          { text: "World Bank", isCorrect: false },
+          { text: "IMF", isCorrect: true },
+          { text: "ADB", isCorrect: false },
+          { text: "UN", isCorrect: false }
+        ]
       },
       {
-        question: "50. The statement 'Everything will be revealed' by Donald Trump is best classified as a:",
-        options: ["Promise", "Rhetorical question", "Exclamation", "Metaphor"],
-        answer: "Promise"
+        question: "Select the correct synonym for 'cash-starved' as used in the editorial.",
+        options: [
+          { text: "Wealthy", isCorrect: false },
+          { text: "Underfunded", isCorrect: true },
+          { text: "Prosperous", isCorrect: false },
+          { text: "Affluent", isCorrect: false }
+        ]
+      },
+      {
+        question: "Which of the following best describes the frequency of extreme weather events mentioned in the editorial?",
+        options: [
+          { text: "Rare occurrences", isCorrect: false },
+          { text: "Periodic events", isCorrect: true },
+          { text: "Annual events", isCorrect: false },
+          { text: "Non-existent events", isCorrect: false }
+        ]
+      },
+      {
+        question: "Identify the correct preposition in the sentence: 'Policymakers must fight ____ the existential threat to the economy.'",
+        options: [
+          { text: "against", isCorrect: true },
+          { text: "for", isCorrect: false },
+          { text: "with", isCorrect: false },
+          { text: "of", isCorrect: false }
+        ]
+      },
+      {
+        question: "What economic consequence was NOT mentioned in the editorial regarding the floods?",
+        options: [
+          { text: "Displacement of millions", isCorrect: false },
+          { text: "Economic losses in tens of billions", isCorrect: false },
+          { text: "Boost in foreign investments", isCorrect: true },
+          { text: "Increase in food insecurity", isCorrect: false }
+        ]
+      },
+      {
+        question: "Choose the correct antonym of 'meagre' as used in describing the promised funds.",
+        options: [
+          { text: "Scant", isCorrect: false },
+          { text: "Generous", isCorrect: true },
+          { text: "Insufficient", isCorrect: false },
+          { text: "Paltry", isCorrect: false }
+        ]
+      },
+      {
+        question: "In the sentence 'Sustainable economic and environmental growth go hand in hand,' what does the phrase 'go hand in hand' mean?",
+        options: [
+          { text: "Occur simultaneously", isCorrect: true },
+          { text: "Are unrelated", isCorrect: false },
+          { text: "Cause conflict", isCorrect: false },
+          { text: "Occur separately", isCorrect: false }
+        ]
+      },
+      {
+        question: "Which word in the editorial is used to describe the severity of climate challenges?",
+        options: [
+          { text: "Enormous", isCorrect: true },
+          { text: "Tiny", isCorrect: false },
+          { text: "Insignificant", isCorrect: false },
+          { text: "Mild", isCorrect: false }
+        ]
+      },
+      {
+        question: "Select the sentence that correctly rearranges this jumbled sentence from the editorial: 'challenging / policymakers / concrete actions / require / political will.'",
+        options: [
+          { text: "Policymakers require political will to take challenging concrete actions.", isCorrect: false },
+          { text: "Concrete actions require challenging political will policymakers.", isCorrect: false },
+          { text: "Policymakers require political will to take concrete actions.", isCorrect: true },
+          { text: "Political will require policymakers to concrete challenging actions.", isCorrect: false }
+        ]
+      },
+      {
+        question: "Which of the following is NOT a measure suggested to overcome the climate challenge?",
+        options: [
+          { text: "Green action bonds", isCorrect: false },
+          { text: "Integrating climate-resilient policies", isCorrect: false },
+          { text: "Increased international dependency", isCorrect: true },
+          { text: "Usage of available funds for infrastructure", isCorrect: false }
+        ]
+      },
+      {
+        question: "What does the term 'climate-resilient' imply in the editorial?",
+        options: [
+          { text: "Adaptability to climate change", isCorrect: true },
+          { text: "Resistance to weather", isCorrect: false },
+          { text: "Immunity from natural disasters", isCorrect: false },
+          { text: "Avoidance of all risks", isCorrect: false }
+        ]
+      },
+      {
+        question: "Which aspect of the editorial highlights a disconnect between policy and action?",
+        options: [
+          { text: "Policymakers' verbal commitments", isCorrect: true },
+          { text: "Implementation of green bonds", isCorrect: false },
+          { text: "Rapid climate funding", isCorrect: false },
+          { text: "Strong technical capacity", isCorrect: false }
+        ]
+      },
+      // Editorial 2 questions (Q21 - Q40)
+      {
+        question: "According to the editorial, what is the estimated number of people who fell ill with TB in 2023?",
+        options: [
+          { text: "5.2 million", isCorrect: false },
+          { text: "10.8 million", isCorrect: true },
+          { text: "15.3 million", isCorrect: false },
+          { text: "20 million", isCorrect: false }
+        ]
+      },
+      {
+        question: "What is the percentage of the $22bn required for global TB care that was available in 2023?",
+        options: [
+          { text: "26%", isCorrect: true },
+          { text: "50%", isCorrect: false },
+          { text: "75%", isCorrect: false },
+          { text: "90%", isCorrect: false }
+        ]
+      },
+      {
+        question: "Which of the following is a risk factor for TB mentioned in the editorial?",
+        options: [
+          { text: "Overnutrition", isCorrect: false },
+          { text: "Smoking", isCorrect: true },
+          { text: "Excessive exercise", isCorrect: false },
+          { text: "High income", isCorrect: false }
+        ]
+      },
+      {
+        question: "Select the correct usage of the relative pronoun in: 'TB is a contagious bacterial infection which most commonly affects the lungs.'",
+        options: [
+          { text: "who", isCorrect: false },
+          { text: "which", isCorrect: true },
+          { text: "where", isCorrect: false },
+          { text: "whom", isCorrect: false }
+        ]
+      },
+      {
+        question: "What term best describes the TB research funding gap?",
+        options: [
+          { text: "Adequate", isCorrect: false },
+          { text: "Underfunded", isCorrect: true },
+          { text: "Excessive", isCorrect: false },
+          { text: "Sufficient", isCorrect: false }
+        ]
+      },
+      {
+        question: "According to the editorial, Pakistan accounted for what percentage of the global TB burden in 2023?",
+        options: [
+          { text: "6.3%", isCorrect: true },
+          { text: "10%", isCorrect: false },
+          { text: "15%", isCorrect: false },
+          { text: "20%", isCorrect: false }
+        ]
+      },
+      {
+        question: "Which challenge is highlighted regarding TB case detection in Pakistan?",
+        options: [
+          { text: "Over-reporting of cases", isCorrect: false },
+          { text: "Significant gap between estimated and reported cases", isCorrect: true },
+          { text: "Complete eradication of TB", isCorrect: false },
+          { text: "No challenges in case detection", isCorrect: false }
+        ]
+      },
+      {
+        question: "Select the best synonym for 'disproportionately' as used in the editorial regarding TB impact.",
+        options: [
+          { text: "Equally", isCorrect: false },
+          { text: "Unevenly", isCorrect: true },
+          { text: "Marginally", isCorrect: false },
+          { text: "Insignificantly", isCorrect: false }
+        ]
+      },
+      {
+        question: "Which of the following best captures the urgent need identified in the TB editorial?",
+        options: [
+          { text: "Expansion of donor support indefinitely", isCorrect: false },
+          { text: "Increased domestic investment", isCorrect: true },
+          { text: "Reduction of primary health services", isCorrect: false },
+          { text: "Complete reliance on rapid diagnostics", isCorrect: false }
+        ]
+      },
+      {
+        question: "In the context of TB, what does 'MDR-TB' stand for?",
+        options: [
+          { text: "Multi-drug resistant TB", isCorrect: true },
+          { text: "Mildly developed TB", isCorrect: false },
+          { text: "Majorly dangerous TB", isCorrect: false },
+          { text: "Multi-disease TB", isCorrect: false }
+        ]
+      },
+      {
+        question: "Choose the correct preposition to complete the sentence: 'Pakistan must invest ___ TB diagnosis and treatment.'",
+        options: [
+          { text: "in", isCorrect: true },
+          { text: "on", isCorrect: false },
+          { text: "at", isCorrect: false },
+          { text: "for", isCorrect: false }
+        ]
+      },
+      {
+        question: "Which of the following measures is recommended to improve TB case reporting?",
+        options: [
+          { text: "Decreasing surveillance", isCorrect: false },
+          { text: "Enhancing data systems", isCorrect: true },
+          { text: "Reducing diagnostics", isCorrect: false },
+          { text: "Ignoring WHO guidelines", isCorrect: false }
+        ]
+      },
+      {
+        question: "Select the antonym of 'curable' as used in the context of TB.",
+        options: [
+          { text: "Treatable", isCorrect: false },
+          { text: "Incurable", isCorrect: true },
+          { text: "Preventable", isCorrect: false },
+          { text: "Recoverable", isCorrect: false }
+        ]
+      },
+      {
+        question: "What is the target set for TB research funding in 2022, as mentioned in the editorial?",
+        options: [
+          { text: "$5bn", isCorrect: true },
+          { text: "$10bn", isCorrect: false },
+          { text: "$15bn", isCorrect: false },
+          { text: "$20bn", isCorrect: false }
+        ]
+      },
+      {
+        question: "Which risk factor is mentioned alongside diabetes in the TB editorial?",
+        options: [
+          { text: "Obesity", isCorrect: false },
+          { text: "Undernutrition", isCorrect: true },
+          { text: "Hypertension", isCorrect: false },
+          { text: "Asthma", isCorrect: false }
+        ]
+      },
+      {
+        question: "Select the best synonym for 'disrupted' as used in the editorial regarding TB care.",
+        options: [
+          { text: "Enhanced", isCorrect: false },
+          { text: "Interrupted", isCorrect: true },
+          { text: "Stabilized", isCorrect: false },
+          { text: "Improved", isCorrect: false }
+        ]
+      },
+      {
+        question: "What is one consequence of the funding drop for TB care mentioned in the editorial?",
+        options: [
+          { text: "Improved diagnostic systems", isCorrect: false },
+          { text: "Disrupted medicine supply chains", isCorrect: true },
+          { text: "Expanded human resource deployment", isCorrect: false },
+          { text: "Increased TB case detection", isCorrect: false }
+        ]
+      },
+      {
+        question: "Which organization estimated the TB cases and deaths mentioned in the editorial?",
+        options: [
+          { text: "CDC", isCorrect: false },
+          { text: "WHO", isCorrect: true },
+          { text: "UNICEF", isCorrect: false },
+          { text: "World Bank", isCorrect: false }
+        ]
+      },
+      {
+        question: "Identify the correct usage of an article in: '___ TB control programme in Pakistan has long relied on donor support.'",
+        options: [
+          { text: "A", isCorrect: false },
+          { text: "An", isCorrect: false },
+          { text: "The", isCorrect: true },
+          { text: "No article", isCorrect: false }
+        ]
+      },
+      {
+        question: "What does the editorial suggest must be integrated with TB care in Pakistan?",
+        options: [
+          { text: "Advanced robotics", isCorrect: false },
+          { text: "Broader primary and lung health services", isCorrect: true },
+          { text: "Exclusive private healthcare", isCorrect: false },
+          { text: "International agencies", isCorrect: false }
+        ]
+      },
+      // Editorial 3 questions (Q41 - Q50)
+      {
+        question: "According to the editorial, how many people died on migration routes worldwide in 2024?",
+        options: [
+          { text: "7,000", isCorrect: false },
+          { text: "8,938", isCorrect: true },
+          { text: "10,000", isCorrect: false },
+          { text: "12,000", isCorrect: false }
+        ]
+      },
+      {
+        question: "Which region had the highest number of fatalities according to the editorial?",
+        options: [
+          { text: "Europe", isCorrect: false },
+          { text: "Asia", isCorrect: true },
+          { text: "Africa", isCorrect: false },
+          { text: "North America", isCorrect: false }
+        ]
+      },
+      {
+        question: "What is the best synonym for 'wretched' as used in the editorial?",
+        options: [
+          { text: "Splendid", isCorrect: false },
+          { text: "Miserable", isCorrect: true },
+          { text: "Glorious", isCorrect: false },
+          { text: "Exuberant", isCorrect: false }
+        ]
+      },
+      {
+        question: "Select the correct preposition to complete: 'Migrants are often deceived ____ the perils of their journey.'",
+        options: [
+          { text: "about", isCorrect: true },
+          { text: "by", isCorrect: false },
+          { text: "of", isCorrect: false },
+          { text: "with", isCorrect: false }
+        ]
+      },
+      {
+        question: "Which term best describes the overcrowded conditions experienced by migrants as mentioned in the editorial?",
+        options: [
+          { text: "Spacious", isCorrect: false },
+          { text: "Packed like sardines", isCorrect: true },
+          { text: "Luxurious", isCorrect: false },
+          { text: "Comfortable", isCorrect: false }
+        ]
+      },
+      {
+        question: "What does the editorial suggest the narrative about migrants should be?",
+        options: [
+          { text: "They are offenders", isCorrect: false },
+          { text: "They are victims", isCorrect: true },
+          { text: "They are economic burdens", isCorrect: false },
+          { text: "They are invincible", isCorrect: false }
+        ]
+      },
+      {
+        question: "Identify the correct antonym for 'cosmetic' as used to describe the government's actions.",
+        options: [
+          { text: "Superficial", isCorrect: false },
+          { text: "Substantial", isCorrect: true },
+          { text: "Frivolous", isCorrect: false },
+          { text: "Peripheral", isCorrect: false }
+        ]
+      },
+      {
+        question: "Which of the following does the editorial NOT mention as a factor influencing migration?",
+        options: [
+          { text: "Joblessness", isCorrect: false },
+          { text: "Lack of education", isCorrect: false },
+          { text: "Stable political environment", isCorrect: true },
+          { text: "Poverty", isCorrect: false }
+        ]
+      },
+      {
+        question: "Rearrange the jumbled sentence to form a coherent sentence: 'migrants / the / are / victims / not / merely / opportunists.'",
+        options: [
+          { text: "Migrants are not merely opportunists; they are victims.", isCorrect: true },
+          { text: "Not victims are migrants merely opportunists.", isCorrect: false },
+          { text: "Migrants merely are not victims opportunists.", isCorrect: false },
+          { text: "Victims are migrants not merely opportunists.", isCorrect: false }
+        ]
+      },
+      {
+        question: "Which term is used in the editorial to describe the deceptive nature of migration networks?",
+        options: [
+          { text: "Transparent", isCorrect: false },
+          { text: "Deceptive", isCorrect: true },
+          { text: "Honest", isCorrect: false },
+          { text: "Straightforward", isCorrect: false }
+        ]
       }
     ];
 
-    // Shuffle an array (Fisher-Yates shuffle)
+    // Function to shuffle an array (Fisher-Yates)
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -408,158 +554,155 @@
       return array;
     }
 
-    // Dynamically generate the quiz questions
-    function generateQuiz() {
-      const quizContainer = document.getElementById('quiz-questions');
-      quizContainer.innerHTML = '';
+    // When DOM is loaded
+    window.onload = function() {
+      document.getElementById("startBtn").addEventListener("click", startQuiz);
+      document.getElementById("quizForm").addEventListener("submit", function(e){
+        e.preventDefault();
+        submitQuiz();
+      });
+      // Render questions in randomized order and with shuffled options
+      renderQuestions();
+    };
+
+    // Render all questions into the quiz container
+    function renderQuestions() {
+      const quizContainer = document.getElementById("quizQuestions");
       questions.forEach((q, index) => {
-        // Clone and shuffle options for each question
-        let opts = q.options.slice();
-        shuffle(opts);
-        const questionDiv = document.createElement('div');
-        questionDiv.className = 'question';
-        questionDiv.innerHTML = `<h3>${q.question}</h3>`;
-        const optionsDiv = document.createElement('div');
-        optionsDiv.className = 'options';
-        opts.forEach(opt => {
-          const optId = 'q' + index + '_' + opt.replace(/\s+/g, '');
-          const label = document.createElement('label');
-          label.innerHTML = `<input type="radio" name="q${index}" value="${opt}"> ${opt}`;
-          optionsDiv.appendChild(label);
+        // Shuffle options for each question
+        q.options = shuffle(q.options);
+        const qDiv = document.createElement("div");
+        qDiv.className = "question";
+        qDiv.innerHTML = `<p><strong>Q${index + 1}.</strong> ${q.question}</p>`;
+        const optionsDiv = document.createElement("div");
+        optionsDiv.className = "options";
+        q.options.forEach((option, idx) => {
+          const optionId = "q" + index + "o" + idx;
+          const radioHTML = `<label>
+            <input type="radio" name="question${index}" value="${option.isCorrect}">
+            ${option.text}
+          </label>`;
+          optionsDiv.innerHTML += radioHTML;
         });
-        questionDiv.appendChild(optionsDiv);
-        quizContainer.appendChild(questionDiv);
+        qDiv.appendChild(optionsDiv);
+        quizContainer.appendChild(qDiv);
       });
     }
 
-    // Start the quiz after valid name entry
+    // Start quiz: validate name and reveal quiz section and start timer
     function startQuiz() {
-      const nameInput = document.getElementById('student-name');
-      if (nameInput.value.trim() === "") {
-        alert("Please enter your name to start the quiz.");
+      const nameInput = document.getElementById("userName");
+      if(nameInput.value.trim() === "") {
+        alert("Please enter your name.");
         return;
       }
-      document.getElementById('name-entry').style.display = "none";
-      document.getElementById('quiz-section').style.display = "block";
-      // Record quiz start time
+      document.getElementById("nameSection").style.display = "none";
+      document.getElementById("quizSection").style.display = "block";
       quizStartTime = new Date();
-      // Generate quiz questions
-      generateQuiz();
-      // Start timer
-      startTimer();
+      startTimer(totalTime);
     }
 
-    // Timer functionality
-    function startTimer() {
-      updateTimerDisplay();
-      timerInterval = setInterval(() => {
-        timeRemaining--;
-        updateTimerDisplay();
-        if (timeRemaining <= 0) {
+    // Timer function: count down from given seconds
+    function startTimer(duration) {
+      let timer = duration;
+      const timerDisplay = document.getElementById("timer");
+      timerInterval = setInterval(function () {
+        const minutes = Math.floor(timer / 60);
+        const seconds = timer % 60;
+        timerDisplay.textContent = "Time Left: " + minutes + "m " + (seconds < 10 ? "0" : "") + seconds + "s";
+        if (--timer < 0) {
           clearInterval(timerInterval);
-          submitQuiz(); // Auto-submit when time runs out
+          alert("Time is up! Your quiz will be submitted automatically.");
+          submitQuiz();
         }
       }, 1000);
     }
 
-    function updateTimerDisplay() {
-      const minutes = Math.floor(timeRemaining / 60);
-      const seconds = timeRemaining % 60;
-      document.getElementById('timer').innerText = `Time Remaining: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-    }
-
-    // Quiz submission and result calculation
+    // Submit quiz: calculate score, time taken, attempted questions; show results; and submit hidden form via Formspree.
     function submitQuiz() {
       clearInterval(timerInterval);
-      const quizEndTime = new Date();
-      const timeTaken = Math.floor((quizEndTime - quizStartTime) / 1000); // seconds
-      let attempted = 0, score = 0;
-      questions.forEach((q, index) => {
-        const radios = document.getElementsByName('q' + index);
-        let answered = false;
-        radios.forEach(radio => {
-          if (radio.checked) {
-            attempted++;
-            answered = true;
-            if (radio.value === q.answer) {
-              score++;
-            }
+      const quizForm = document.getElementById("quizForm");
+      const formData = new FormData(quizForm);
+      let score = 0;
+      let attempted = 0;
+      // Loop through questions
+      for(let i = 0; i < questions.length; i++) {
+        const answer = formData.get("question" + i);
+        if(answer !== null) {
+          attempted++;
+          if(answer === "true") {
+            score++;
           }
-        });
-      });
+        }
+      }
+      const endTime = new Date();
+      const timeTaken = Math.floor((endTime - quizStartTime) / 1000); // seconds
+      const userName = document.getElementById("userName").value.trim();
       // Display results
-      const resultsSection = document.getElementById('results-section');
-      resultsSection.style.display = "block";
-      const studentName = document.getElementById('student-name').value;
-      resultsSection.innerHTML = `<p>Student Name: ${studentName}</p>
-                                  <p>Questions Attempted: ${attempted} out of ${questions.length}</p>
-                                  <p>Score: ${score} correct answers</p>
-                                  <p>Time Taken: ${timeTaken} seconds</p>`;
-      // Auto-submit the hidden form using Formspree
-      submitFormspree(studentName, attempted, score, timeTaken);
+      const resultSection = document.getElementById("resultSection");
+      resultSection.innerHTML = `<h2>Results</h2>
+        <p><strong>Name:</strong> ${userName}</p>
+        <p><strong>Questions Attempted:</strong> ${attempted} / ${questions.length}</p>
+        <p><strong>Score:</strong> ${score}</p>
+        <p><strong>Time Taken:</strong> ${Math.floor(timeTaken/60)}m ${timeTaken % 60}s</p>`;
+      resultSection.style.display = "block";
       // Hide quiz section
-      document.getElementById('quiz-section').style.display = "none";
+      document.getElementById("quizSection").style.display = "none";
+      // Fill hidden form and auto-submit it to Formspree
+      submitResultsToFormspree(userName, attempted, score, timeTaken);
     }
 
-    // Fill and auto-submit Formspree form
-    function submitFormspree(name, attempted, score, timeTaken) {
-      document.getElementById('fs-name').value = name;
-      document.getElementById('fs-attempted').value = attempted;
-      document.getElementById('fs-score').value = score;
-      document.getElementById('fs-time').value = timeTaken;
-      document.getElementById('fs-form').submit();
-    }
-
-    // On window load, hide quiz and results sections
-    window.onload = function() {
-      document.getElementById('quiz-section').style.display = "none";
-      document.getElementById('results-section').style.display = "none";
+    // Submit results to Formspree (hidden form)
+    function submitResultsToFormspree(name, attempted, score, timeTaken) {
+      const resultsForm = document.getElementById("resultsForm");
+      resultsForm.elements["studentName"].value = name;
+      resultsForm.elements["attempted"].value = attempted;
+      resultsForm.elements["score"].value = score;
+      resultsForm.elements["timeTaken"].value = timeTaken;
+      resultsForm.submit();
     }
   </script>
 </head>
 <body>
   <header>
-    <h1>QUIZ FOR CSS ASPIRANTS 23 March 2025</h1>
-    <p>SYED ASGHAR ALI SHAH</p>
-    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
+    <h1>QUIZ FOR CSS ASPIRANTS 24 March 2025</h1>
   </header>
 
   <div class="container">
     <!-- Name Entry Section -->
-    <div id="name-entry">
-      <h2>Please Enter Your Name to Start the Quiz</h2>
-      <input type="text" id="student-name" placeholder="Enter your name here">
-      <button onclick="startQuiz()">Start Quiz</button>
+    <div id="nameSection">
+      <p>Please enter your name to start the quiz:</p>
+      <input type="text" id="userName" placeholder="Enter your name">
+      <button id="startBtn">Start Quiz</button>
     </div>
 
-    <!-- Quiz Section -->
-    <div id="quiz-section">
-      <div id="timer">Time Remaining: 25:00</div>
-      <form id="quiz-form">
-        <div id="quiz-questions">
-          <!-- Quiz questions will be dynamically generated here -->
+    <!-- Quiz Section (hidden until name is entered) -->
+    <div id="quizSection" style="display:none;">
+      <div id="timer">Time Left: 25m 00s</div>
+      <form id="quizForm">
+        <div id="quizQuestions">
+          <!-- Questions will be injected here by JavaScript -->
         </div>
-        <button type="button" id="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+        <br>
+        <button type="submit">Submit Quiz</button>
       </form>
     </div>
 
-    <!-- Results Section -->
-    <div id="results-section">
-      <!-- Results will be displayed here -->
-    </div>
-
-    <!-- Hidden Form for Formspree Submission -->
-    <form id="fs-form" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-      <input type="text" name="name" id="fs-name">
-      <input type="text" name="attempted" id="fs-attempted">
-      <input type="text" name="score" id="fs-score">
-      <input type="text" name="time" id="fs-time">
-    </form>
+    <!-- Result Section -->
+    <div id="resultSection" style="display:none;"></div>
   </div>
 
+  <!-- Hidden Form for Formspree Submission -->
+  <form id="resultsForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+    <input type="text" name="studentName">
+    <input type="text" name="attempted">
+    <input type="text" name="score">
+    <input type="text" name="timeTaken">
+  </form>
+
   <footer>
-    <p>Contact us: 03265762698</p>
-    <p>Call now for more details and support!</p>
+    <p>Contact: 03265762698</p>
+    <p>Call now to join and excel!</p>
   </footer>
 </body>
 </html>
