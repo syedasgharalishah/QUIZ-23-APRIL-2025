@@ -2,707 +2,677 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 24 March 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 25 March 2025</title>
   <style>
-    /* Disable text selection for all elements */
-    * {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-    body {
+    /* Disable text selection */
+    body, html {
+      -webkit-user-select: none; 
+      -moz-user-select: none;    
+      -ms-user-select: none;     
+      user-select: none;         
       margin: 0;
+      padding: 0;
       font-family: Arial, sans-serif;
-      background: #f2f2f2;
+      background: #f9f9f9;
     }
-    header, footer {
-      background-color: #003366;
-      color: white;
+    /* Header styling */
+    header {
+      background: url('https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__') no-repeat center/cover;
+      color: #fff;
+      padding: 20px;
       text-align: center;
-      padding: 20px 10px;
+      position: relative;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 0;
+    }
+    header * {
+      position: relative;
+      z-index: 1;
     }
     header h1 {
       margin: 0;
-      font-size: 28px;
+      font-size: 2em;
     }
-    footer p {
-      margin: 5px 0;
+    header p {
+      margin: 5px 0 0;
+      font-size: 1.2em;
     }
+    /* Footer styling */
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 0.9em;
+    }
+    footer a {
+      color: #0cf;
+      text-decoration: none;
+    }
+    /* Container styling */
     .container {
-      max-width: 900px;
+      width: 90%;
+      max-width: 1000px;
       margin: 20px auto;
-      background: white;
+      background: #fff;
       padding: 20px;
-      border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    #nameSection, #quizSection, #resultSection {
+    /* Name entry section */
+    #nameSection {
+      text-align: center;
       margin-bottom: 20px;
     }
-    input[type="text"] {
-      width: 80%;
+    #nameSection input[type="text"] {
+      width: 300px;
       padding: 10px;
-      font-size: 16px;
-      margin-right: 10px;
+      font-size: 1em;
     }
-    button {
+    #nameSection button {
       padding: 10px 20px;
-      font-size: 16px;
+      font-size: 1em;
+      margin-left: 10px;
       cursor: pointer;
     }
-    .question {
-      margin-bottom: 15px;
-      padding: 10px;
-      border-bottom: 1px solid #ccc;
-    }
-    .options label {
-      display: block;
-      margin: 5px 0;
-    }
+    /* Timer styling */
     #timer {
-      font-size: 18px;
+      font-size: 1.2em;
       font-weight: bold;
-      text-align: right;
       margin-bottom: 10px;
-      color: #cc0000;
+      text-align: right;
+    }
+    /* Quiz styling */
+    .question {
+      margin-bottom: 20px;
+    }
+    .question p {
+      margin: 0 0 8px;
+      font-weight: bold;
+    }
+    .question label {
+      display: block;
+      margin-bottom: 5px;
+      cursor: pointer;
+    }
+    /* Results section */
+    #resultSection {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      background: #eef;
+      border: 1px solid #99c;
+    }
+    /* Disable right-click */
+    body {
+      -webkit-touch-callout: none;
     }
   </style>
+</head>
+<body oncontextmenu="return false;">
+  <header>
+    <h1>QUIZ FOR CSS ASPIRANTS 25 March 2025</h1>
+    <p>Presented by SYED ASGHAR ALI SHAH</p>
+  </header>
+  <div class="container">
+    <!-- Name Entry Section -->
+    <div id="nameSection">
+      <h2>Please enter your name to start the quiz</h2>
+      <input type="text" id="studentName" placeholder="Your Name">
+      <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+    
+    <!-- Quiz Section -->
+    <div id="quizSection" style="display:none;">
+      <div id="timer">Time Remaining: 25:00</div>
+      <form id="quizForm">
+        <!-- Editorial 1: Questions 1-20 -->
+        <h3>Editorial 1 Questions</h3>
+        <!-- Q1 -->
+        <div class="question">
+          <p>1. According to Editorial 1, the IMF blocked a government move to reduce which of the following?</p>
+          <label><input type="radio" name="q1" value="A"> Retail electricity prices</label>
+          <label><input type="radio" name="q1" value="B"> Petroleum levy</label>
+          <label><input type="radio" name="q1" value="C"> Tax on imports</label>
+          <label><input type="radio" name="q1" value="D"> Federal transaction taxes</label>
+        </div>
+        <!-- Q2 -->
+        <div class="question">
+          <p>2. Which term best describes the government move as described in Editorial 1?</p>
+          <label><input type="radio" name="q2" value="A"> Minor reduction</label>
+          <label><input type="radio" name="q2" value="B"> Temporary suspension</label>
+          <label><input type="radio" name="q2" value="C"> Substantially slash</label>
+          <label><input type="radio" name="q2" value="D"> Incremental increase</label>
+        </div>
+        <!-- Q3 -->
+        <div class="question">
+          <p>3. What was the promised relief per unit of electricity?</p>
+          <label><input type="radio" name="q3" value="A"> Rs10</label>
+          <label><input type="radio" name="q3" value="B"> Rs8</label>
+          <label><input type="radio" name="q3" value="C"> Rs2</label>
+          <label><input type="radio" name="q3" value="D"> Rs70</label>
+        </div>
+        <!-- Q4 -->
+        <div class="question">
+          <p>4. What additional burden was placed on consumers besides the electricity prices?</p>
+          <label><input type="radio" name="q4" value="A"> Petroleum levy increase</label>
+          <label><input type="radio" name="q4" value="B"> New tax</label>
+          <label><input type="radio" name="q4" value="C"> Higher rent</label>
+          <label><input type="radio" name="q4" value="D"> Increased power purchase contracts</label>
+        </div>
+        <!-- Q5 -->
+        <div class="question">
+          <p>5. What loan amount is mentioned in Editorial 1?</p>
+          <label><input type="radio" name="q5" value="A"> $5bn</label>
+          <label><input type="radio" name="q5" value="B"> $7bn</label>
+          <label><input type="radio" name="q5" value="C"> $10bn</label>
+          <label><input type="radio" name="q5" value="D"> $3bn</label>
+        </div>
+        <!-- Q6 -->
+        <div class="question">
+          <p>6. Which term best describes the revision of power purchase contracts?</p>
+          <label><input type="radio" name="q6" value="A"> Selected IPPs</label>
+          <label><input type="radio" name="q6" value="B"> Major banks</label>
+          <label><input type="radio" name="q6" value="C"> Private investors</label>
+          <label><input type="radio" name="q6" value="D"> Foreign agencies</label>
+        </div>
+        <!-- Q7 -->
+        <div class="question">
+          <p>7. What was increased to divert additional revenues?</p>
+          <label><input type="radio" name="q7" value="A"> Federal transaction taxes</label>
+          <label><input type="radio" name="q7" value="B"> Electricity tariff</label>
+          <label><input type="radio" name="q7" value="C"> Real estate tax</label>
+          <label><input type="radio" name="q7" value="D"> Petroleum levy</label>
+        </div>
+        <!-- Q8 -->
+        <div class="question">
+          <p>8. Which group is particularly mentioned as being affected by rising prices?</p>
+          <label><input type="radio" name="q8" value="A"> Low-middle-income households</label>
+          <label><input type="radio" name="q8" value="B"> High-income families</label>
+          <label><input type="radio" name="q8" value="C"> Foreign investors</label>
+          <label><input type="radio" name="q8" value="D"> Government officials</label>
+        </div>
+        <!-- Q9 -->
+        <div class="question">
+          <p>9. Which of the following is NOT mentioned as a factor for expensive electricity?</p>
+          <label><input type="radio" name="q9" value="A"> Transmission inefficiencies</label>
+          <label><input type="radio" name="q9" value="B"> Excessive subsidies</label>
+          <label><input type="radio" name="q9" value="C"> Corruption</label>
+          <label><input type="radio" name="q9" value="D"> Over-dependence on imported fossil fuels</label>
+        </div>
+        <!-- Q10 -->
+        <div class="question">
+          <p>10. Which of the following best summarizes the government's policy approach as per Editorial 1?</p>
+          <label><input type="radio" name="q10" value="A"> Implementing long-term reforms</label>
+          <label><input type="radio" name="q10" value="B"> Finding shortcuts to please the electorate</label>
+          <label><input type="radio" name="q10" value="C"> Focusing solely on renewable energy</label>
+          <label><input type="radio" name="q10" value="D"> Increasing investment in infrastructure</label>
+        </div>
+        <!-- Q11 -->
+        <div class="question">
+          <p>11. What is the reaction of middle-class consumers as described in Editorial 1?</p>
+          <label><input type="radio" name="q11" value="A"> They received a discount</label>
+          <label><input type="radio" name="q11" value="B"> Their bills outpaced rental rates</label>
+          <label><input type="radio" name="q11" value="C"> They were unaffected</label>
+          <label><input type="radio" name="q11" value="D"> They were given subsidies</label>
+        </div>
+        <!-- Q12 -->
+        <div class="question">
+          <p>12. What kind of oversight does the IMF exercise as per Editorial 1?</p>
+          <label><input type="radio" name="q12" value="A"> Minimal interference</label>
+          <label><input type="radio" name="q12" value="B"> Intrusive oversight</label>
+          <label><input type="radio" name="q12" value="C"> Supportive guidance</label>
+          <label><input type="radio" name="q12" value="D"> Passive monitoring</label>
+        </div>
+        <!-- Q13 -->
+        <div class="question">
+          <p>13. Which phrase best describes the tariff reduction plan?</p>
+          <label><input type="radio" name="q13" value="A"> Bold reform</label>
+          <label><input type="radio" name="q13" value="B"> Innovative solution</label>
+          <label><input type="radio" name="q13" value="C"> Necessary compromise</label>
+          <label><input type="radio" name="q13" value="D"> Risky experiment</label>
+        </div>
+        <!-- Q14 -->
+        <div class="question">
+          <p>14. What was the rationale behind increasing the petroleum levy?</p>
+          <label><input type="radio" name="q14" value="A"> To fund infrastructure</label>
+          <label><input type="radio" name="q14" value="B"> To punish high consumption</label>
+          <label><input type="radio" name="q14" value="C"> To divert additional revenues for tariff relief</label>
+          <label><input type="radio" name="q14" value="D"> To balance the budget</label>
+        </div>
+        <!-- Q15 -->
+        <div class="question">
+          <p>15. Which economic indicator is indirectly criticized in Editorial 1?</p>
+          <label><input type="radio" name="q15" value="A"> Runaway inflation</label>
+          <label><input type="radio" name="q15" value="B"> Economic growth</label>
+          <label><input type="radio" name="q15" value="C"> Employment rate</label>
+          <label><input type="radio" name="q15" value="D"> Foreign exchange reserves</label>
+        </div>
+        <!-- Q16 -->
+        <div class="question">
+          <p>16. The term 'elite greed' in Editorial 1 most likely refers to:</p>
+          <label><input type="radio" name="q16" value="A"> Successful business practices</label>
+          <label><input type="radio" name="q16" value="B"> Efficient management</label>
+          <label><input type="radio" name="q16" value="C"> Corrupt policymaking</label>
+          <label><input type="radio" name="q16" value="D"> Investor enthusiasm</label>
+        </div>
+        <!-- Q17 -->
+        <div class="question">
+          <p>17. What does the term 'oversight' imply in the context of the IMF's actions?</p>
+          <label><input type="radio" name="q17" value="A"> Monitoring</label>
+          <label><input type="radio" name="q17" value="B"> Neglect</label>
+          <label><input type="radio" name="q17" value="C"> Interference</label>
+          <label><input type="radio" name="q17" value="D"> Support</label>
+        </div>
+        <!-- Q18 -->
+        <div class="question">
+          <p>18. Which preposition correctly fills the blank in: "battered ___ runaway inflation"?</p>
+          <label><input type="radio" name="q18" value="A"> by</label>
+          <label><input type="radio" name="q18" value="B"> with</label>
+          <label><input type="radio" name="q18" value="C"> due to</label>
+          <label><input type="radio" name="q18" value="D"> because of</label>
+        </div>
+        <!-- Q19 -->
+        <div class="question">
+          <p>19. In the phrase "per litre increase", what is the function of the word "per"?</p>
+          <label><input type="radio" name="q19" value="A"> Noun</label>
+          <label><input type="radio" name="q19" value="B"> Adjective</label>
+          <label><input type="radio" name="q19" value="C"> Conjunction</label>
+          <label><input type="radio" name="q19" value="D"> Preposition</label>
+        </div>
+        <!-- Q20 -->
+        <div class="question">
+          <p>20. Choose the synonym for "mismanagement" as used in Editorial 1.</p>
+          <label><input type="radio" name="q20" value="A"> Coordination</label>
+          <label><input type="radio" name="q20" value="B"> Inefficiency</label>
+          <label><input type="radio" name="q20" value="C"> Overseeing</label>
+          <label><input type="radio" name="q20" value="D"> Control</label>
+        </div>
+        
+        <!-- Editorial 2: Questions 21-40 -->
+        <h3>Editorial 2 Questions</h3>
+        <!-- Q21 -->
+        <div class="question">
+          <p>21. According to Editorial 2, what has been the state's approach to neutralising militant threats?</p>
+          <label><input type="radio" name="q21" value="A"> Using blunt tools like lawfare and police brutality</label>
+          <label><input type="radio" name="q21" value="B"> Dialogue with militants</label>
+          <label><input type="radio" name="q21" value="C"> Economic sanctions</label>
+          <label><input type="radio" name="q21" value="D"> Military intervention</label>
+        </div>
+        <!-- Q22 -->
+        <div class="question">
+          <p>22. Which region is specifically mentioned in Editorial 2?</p>
+          <label><input type="radio" name="q22" value="A"> Balochistan</label>
+          <label><input type="radio" name="q22" value="B"> Sindh</label>
+          <label><input type="radio" name="q22" value="C"> Punjab</label>
+          <label><input type="radio" name="q22" value="D"> Khyber Pakhtunkhwa</label>
+        </div>
+        <!-- Q23 -->
+        <div class="question">
+          <p>23. What term describes the protest movement mentioned in Editorial 2?</p>
+          <label><input type="radio" name="q23" value="A"> BYC (Baloch Yakjehti Committee)</label>
+          <label><input type="radio" name="q23" value="B"> BNP</label>
+          <label><input type="radio" name="q23" value="C"> PTI</label>
+          <label><input type="radio" name="q23" value="D"> MQM</label>
+        </div>
+        <!-- Q24 -->
+        <div class="question">
+          <p>24. Who led the protest movement in Balochistan?</p>
+          <label><input type="radio" name="q24" value="A"> Women</label>
+          <label><input type="radio" name="q24" value="B"> Military officials</label>
+          <label><input type="radio" name="q24" value="C"> Political leaders</label>
+          <label><input type="radio" name="q24" value="D"> International activists</label>
+        </div>
+        <!-- Q25 -->
+        <div class="question">
+          <p>25. Which phrase best describes the state's treatment of the BYC?</p>
+          <label><input type="radio" name="q25" value="A"> Supportively</label>
+          <label><input type="radio" name="q25" value="B"> With contempt</label>
+          <label><input type="radio" name="q25" value="C"> Indifferently</label>
+          <label><input type="radio" name="q25" value="D"> Collaboratively</label>
+        </div>
+        <!-- Q26 -->
+        <div class="question">
+          <p>26. Which legal action was taken against Dr Mahrang Baloch?</p>
+          <label><input type="radio" name="q26" value="A"> Awarded a prize</label>
+          <label><input type="radio" name="q26" value="B"> Given immunity</label>
+          <label><input type="radio" name="q26" value="C"> Arrest and booking on serious charges</label>
+          <label><input type="radio" name="q26" value="D"> Promoted to a position</label>
+        </div>
+        <!-- Q27 -->
+        <div class="question">
+          <p>27. The phrase "neutralising the threat" implies:</p>
+          <label><input type="radio" name="q27" value="A"> Ignoring the threat</label>
+          <label><input type="radio" name="q27" value="B"> Supporting the threat</label>
+          <label><input type="radio" name="q27" value="C"> Minimising the impact</label>
+          <label><input type="radio" name="q27" value="D"> Encouraging the threat</label>
+        </div>
+        <!-- Q28 -->
+        <div class="question">
+          <p>28. Which of the following is NOT a charge mentioned against BYC leadership?</p>
+          <label><input type="radio" name="q28" value="A"> Terrorism</label>
+          <label><input type="radio" name="q28" value="B"> Murder</label>
+          <label><input type="radio" name="q28" value="C"> Incitement to rebellion</label>
+          <label><input type="radio" name="q28" value="D"> Tax evasion</label>
+        </div>
+        <!-- Q29 -->
+        <div class="question">
+          <p>29. What does the phrase "nonviolent but persistent protest" imply?</p>
+          <label><input type="radio" name="q29" value="A"> Violent demonstrations</label>
+          <label><input type="radio" name="q29" value="B"> Intermittent riots</label>
+          <label><input type="radio" name="q29" value="C"> Peaceful yet continuous</label>
+          <label><input type="radio" name="q29" value="D"> Passive agreement</label>
+        </div>
+        <!-- Q30 -->
+        <div class="question">
+          <p>30. In Editorial 2, which aspect is highlighted as a potential consequence of state excesses?</p>
+          <label><input type="radio" name="q30" value="A"> Alienation of the civilian population</label>
+          <label><input type="radio" name="q30" value="B"> Improved security</label>
+          <label><input type="radio" name="q30" value="C"> Economic growth</label>
+          <label><input type="radio" name="q30" value="D"> International praise</label>
+        </div>
+        <!-- Q31 -->
+        <div class="question">
+          <p>31. What is the objective behind the creation of Pakistan as per Editorial 2?</p>
+          <label><input type="radio" name="q31" value="A"> Dominance of a political party</label>
+          <label><input type="radio" name="q31" value="B"> Military control</label>
+          <label><input type="radio" name="q31" value="C"> Establish a welfare state based on equality, justice, and rule of law</label>
+          <label><input type="radio" name="q31" value="D"> Economic isolation</label>
+        </div>
+        <!-- Q32 -->
+        <div class="question">
+          <p>32. Which of the following best describes "lawfare" as used in Editorial 2?</p>
+          <label><input type="radio" name="q32" value="A"> Strict law enforcement</label>
+          <label><input type="radio" name="q32" value="B"> Using legal systems as a tool of warfare</label>
+          <label><input type="radio" name="q32" value="C"> Waging war through legislation</label>
+          <label><input type="radio" name="q32" value="D"> Ignoring legal procedures</label>
+        </div>
+        <!-- Q33 -->
+        <div class="question">
+          <p>33. What sentiment is reinforced by the state's actions towards Baloch citizens?</p>
+          <label><input type="radio" name="q33" value="A"> They are seen as antagonists</label>
+          <label><input type="radio" name="q33" value="B"> They are given full support</label>
+          <label><input type="radio" name="q33" value="C"> They are considered heroes</label>
+          <label><input type="radio" name="q33" value="D"> They are ignored</label>
+        </div>
+        <!-- Q34 -->
+        <div class="question">
+          <p>34. Which preposition correctly completes: "tired ___ state excesses"?</p>
+          <label><input type="radio" name="q34" value="A"> by</label>
+          <label><input type="radio" name="q34" value="B"> with</label>
+          <label><input type="radio" name="q34" value="C"> from</label>
+          <label><input type="radio" name="q34" value="D"> of</label>
+        </div>
+        <!-- Q35 -->
+        <div class="question">
+          <p>35. Choose the antonym for "keen" as used in the context of the state's actions.</p>
+          <label><input type="radio" name="q35" value="A"> Eager</label>
+          <label><input type="radio" name="q35" value="B"> Alert</label>
+          <label><input type="radio" name="q35" value="C"> Indifferent</label>
+          <label><input type="radio" name="q35" value="D"> Interested</label>
+        </div>
+        <!-- Q36 -->
+        <div class="question">
+          <p>36. What does the term "provoked" most nearly mean in Editorial 2?</p>
+          <label><input type="radio" name="q36" value="A"> Calmed</label>
+          <label><input type="radio" name="q36" value="B"> Ignored</label>
+          <label><input type="radio" name="q36" value="C"> Supported</label>
+          <label><input type="radio" name="q36" value="D"> Incited</label>
+        </div>
+        <!-- Q37 -->
+        <div class="question">
+          <p>37. Which term best fits the role of "civilian" in the context of the article?</p>
+          <label><input type="radio" name="q37" value="A"> Soldier</label>
+          <label><input type="radio" name="q37" value="B"> Non-combatant</label>
+          <label><input type="radio" name="q37" value="C"> Official</label>
+          <label><input type="radio" name="q37" value="D"> Policeman</label>
+        </div>
+        <!-- Q38 -->
+        <div class="question">
+          <p>38. What is the grammatical function of the word "but" in the sentence "nonviolent but persistent protest"?</p>
+          <label><input type="radio" name="q38" value="A"> Adjective</label>
+          <label><input type="radio" name="q38" value="B"> Preposition</label>
+          <label><input type="radio" name="q38" value="C"> Conjunction</label>
+          <label><input type="radio" name="q38" value="D"> Adverb</label>
+        </div>
+        <!-- Q39 -->
+        <div class="question">
+          <p>39. In the context of Editorial 2, what does "incitement" refer to?</p>
+          <label><input type="radio" name="q39" value="A"> Government propaganda</label>
+          <label><input type="radio" name="q39" value="B"> Encouragement to take action</label>
+          <label><input type="radio" name="q39" value="C"> Support for policies</label>
+          <label><input type="radio" name="q39" value="D"> A peaceful discussion</label>
+        </div>
+        <!-- Q40 -->
+        <div class="question">
+          <p>40. Which phrase best captures the overall message of Editorial 2?</p>
+          <label><input type="radio" name="q40" value="A"> The state must not alienate its citizens through excessive measures</label>
+          <label><input type="radio" name="q40" value="B"> The state should use force to control protests</label>
+          <label><input type="radio" name="q40" value="C"> The protest movement is violent</label>
+          <label><input type="radio" name="q40" value="D"> The state is praised for its policies</label>
+        </div>
+        
+        <!-- Editorial 3: Questions 41-50 -->
+        <h3>Editorial 3 Questions</h3>
+        <!-- Q41 -->
+        <div class="question">
+          <p>41. What sport is discussed in Editorial 3?</p>
+          <label><input type="radio" name="q41" value="A"> Football</label>
+          <label><input type="radio" name="q41" value="B"> Cricket</label>
+          <label><input type="radio" name="q41" value="C"> Tennis</label>
+          <label><input type="radio" name="q41" value="D"> Hockey</label>
+        </div>
+        <!-- Q42 -->
+        <div class="question">
+          <p>42. Which team is mentioned as having collapsed against New Zealand?</p>
+          <label><input type="radio" name="q42" value="A"> England</label>
+          <label><input type="radio" name="q42" value="B"> India</label>
+          <label><input type="radio" name="q42" value="C"> Pakistan</label>
+          <label><input type="radio" name="q42" value="D"> Australia</label>
+        </div>
+        <!-- Q43 -->
+        <div class="question">
+          <p>43. What approach did Pakistan use in the T20 series as per Editorial 3?</p>
+          <label><input type="radio" name="q43" value="A"> Defensive strategy</label>
+          <label><input type="radio" name="q43" value="B"> Balanced play</label>
+          <label><input type="radio" name="q43" value="C"> High-risk approach</label>
+          <label><input type="radio" name="q43" value="D"> Conservative play</label>
+        </div>
+        <!-- Q44 -->
+        <div class="question">
+          <p>44. Who is the captain mentioned in Editorial 3?</p>
+          <label><input type="radio" name="q44" value="A"> Imran Khan</label>
+          <label><input type="radio" name="q44" value="B"> Salman Ali Agha</label>
+          <label><input type="radio" name="q44" value="C"> Wasim Akram</label>
+          <label><input type="radio" name="q44" value="D"> Saeed Anwar</label>
+        </div>
+        <!-- Q45 -->
+        <div class="question">
+          <p>45. Which player scored a record-breaking century in the third game?</p>
+          <label><input type="radio" name="q45" value="A"> Babar Azam</label>
+          <label><input type="radio" name="q45" value="B"> Hasan Nawaz</label>
+          <label><input type="radio" name="q45" value="C"> Mohammad Haris</label>
+          <label><input type="radio" name="q45" value="D"> Shoaib Malik</label>
+        </div>
+        <!-- Q46 -->
+        <div class="question">
+          <p>46. What does the term "boom or bust" imply about the team's performance?</p>
+          <label><input type="radio" name="q46" value="A"> Consistent victories</label>
+          <label><input type="radio" name="q46" value="B"> Unpredictable performance</label>
+          <label><input type="radio" name="q46" value="C"> Consistent losses</label>
+          <label><input type="radio" name="q46" value="D"> Average performance</label>
+        </div>
+        <!-- Q47 -->
+        <div class="question">
+          <p>47. Which adjective best describes the New Zealand bowling as per Editorial 3?</p>
+          <label><input type="radio" name="q47" value="A"> Chaotic</label>
+          <label><input type="radio" name="q47" value="B"> Lax</label>
+          <label><input type="radio" name="q47" value="C"> Unorganized</label>
+          <label><input type="radio" name="q47" value="D"> Disciplined</label>
+        </div>
+        <!-- Q48 -->
+        <div class="question">
+          <p>48. The phrase "fresh mindset" suggests the need for a change in:</p>
+          <label><input type="radio" name="q48" value="A"> Strategy</label>
+          <label><input type="radio" name="q48" value="B"> Equipment</label>
+          <label><input type="radio" name="q48" value="C"> Team composition</label>
+          <label><input type="radio" name="q48" value="D"> Home ground</label>
+        </div>
+        <!-- Q49 -->
+        <div class="question">
+          <p>49. What was the outcome of Pakistan's performance in most games, according to Editorial 3?</p>
+          <label><input type="radio" name="q49" value="A"> Consistent victories</label>
+          <label><input type="radio" name="q49" value="B"> Consistent losses</label>
+          <label><input type="radio" name="q49" value="C"> Boom or bust, with more busts</label>
+          <label><input type="radio" name="q49" value="D"> Average performance</label>
+        </div>
+        <!-- Q50 -->
+        <div class="question">
+          <p>50. Which part of speech is "collapse" in the context of the match?</p>
+          <label><input type="radio" name="q50" value="A"> Verb</label>
+          <label><input type="radio" name="q50" value="B"> Adjective</label>
+          <label><input type="radio" name="q50" value="C"> Noun</label>
+          <label><input type="radio" name="q50" value="D"> Adverb</label>
+        </div>
+        <br>
+        <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+      </form>
+    </div>
+    
+    <!-- Result Section -->
+    <div id="resultSection">
+      <h2>Quiz Results</h2>
+      <p id="resultDetails"></p>
+    </div>
+    
+    <!-- Hidden Form for Formspree Submission -->
+    <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+      <input type="text" name="studentName" id="formName">
+      <input type="text" name="attempted" id="formAttempted">
+      <input type="text" name="score" id="formScore">
+      <input type="text" name="timeTaken" id="formTime">
+    </form>
+  </div>
+  
+  <footer>
+    <p>Contact us: 03265762698 | Call now for more details!</p>
+  </footer>
+  
   <script>
-    // Disable right-click and common shortcuts
-    document.addEventListener("contextmenu", function(e){
-      e.preventDefault();
-    }, false);
-    document.onkeydown = function(e) {
-      if(e.keyCode === 123 || // F12
-         (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || // Ctrl+Shift+I or J
-         (e.ctrlKey && e.keyCode === 85)) { // Ctrl+U
-        return false;
-      }
-    };
-
+    // Prevent text selection and context menu already handled in CSS and body attribute
+    
     // Global variables
-    let quizStartTime, quizTimer, timerInterval;
-    const totalTime = 25 * 60; // 25 minutes in seconds
-
-    // Questions array: each question has a text and options (each option is an object with text and isCorrect)
-    // 20 questions from Editorial 1
-    // 20 questions from Editorial 2
-    // 10 questions from Editorial 3
-    const questions = [
-      // Editorial 1 questions (Q1 - Q20)
-      {
-        question: "According to the editorial, what percentage of global GHG emissions does Pakistan contribute?",
-        options: [
-          { text: "Less than 1%", isCorrect: true },
-          { text: "1-5%", isCorrect: false },
-          { text: "5-10%", isCorrect: false },
-          { text: "10-15%", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which natural disaster in 2022 is mentioned as causing massive damage in Pakistan?",
-        options: [
-          { text: "Earthquake", isCorrect: false },
-          { text: "Floods", isCorrect: true },
-          { text: "Cyclone", isCorrect: false },
-          { text: "Drought", isCorrect: false }
-        ]
-      },
-      {
-        question: "What is one of the key impacts of the 2022 floods mentioned in the editorial?",
-        options: [
-          { text: "Increased industrial output", isCorrect: false },
-          { text: "Displaced millions", isCorrect: true },
-          { text: "Boosted tourism", isCorrect: false },
-          { text: "Reduced food prices", isCorrect: false }
-        ]
-      },
-      {
-        question: "The editorial describes the threat to Pakistan's economy as:",
-        options: [
-          { text: "A minor setback", isCorrect: false },
-          { text: "An existential threat", isCorrect: true },
-          { text: "A temporary inconvenience", isCorrect: false },
-          { text: "An exaggerated claim", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which of the following phrases best reflects the editorial’s description of Pakistan’s water issue due to shrinking glaciers?",
-        options: [
-          { text: "Abundant water supply", isCorrect: false },
-          { text: "Scarce water for agriculture", isCorrect: true },
-          { text: "Excess water flooding fields", isCorrect: false },
-          { text: "No impact on water resources", isCorrect: false }
-        ]
-      },
-      {
-        question: "Identify the correct usage of the article in this sentence: 'Pakistan is among ____ nations most vulnerable to climate change.'",
-        options: [
-          { text: "a", isCorrect: false },
-          { text: "an", isCorrect: false },
-          { text: "the", isCorrect: true },
-          { text: "none", isCorrect: false }
-        ]
-      },
-      {
-        question: "Choose the best synonym for 'existential' as used in the context of the editorial.",
-        options: [
-          { text: "Trivial", isCorrect: false },
-          { text: "Crucial", isCorrect: true },
-          { text: "Insignificant", isCorrect: false },
-          { text: "Imaginary", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which preposition best completes the sentence: 'The government is looking ____ the IMF for climate funding.'",
-        options: [
-          { text: "for", isCorrect: false },
-          { text: "to", isCorrect: true },
-          { text: "at", isCorrect: false },
-          { text: "in", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which organization has Pakistan approached for $1bn in climate funding?",
-        options: [
-          { text: "World Bank", isCorrect: false },
-          { text: "IMF", isCorrect: true },
-          { text: "ADB", isCorrect: false },
-          { text: "UN", isCorrect: false }
-        ]
-      },
-      {
-        question: "Select the correct synonym for 'cash-starved' as used in the editorial.",
-        options: [
-          { text: "Wealthy", isCorrect: false },
-          { text: "Underfunded", isCorrect: true },
-          { text: "Prosperous", isCorrect: false },
-          { text: "Affluent", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which of the following best describes the frequency of extreme weather events mentioned in the editorial?",
-        options: [
-          { text: "Rare occurrences", isCorrect: false },
-          { text: "Periodic events", isCorrect: true },
-          { text: "Annual events", isCorrect: false },
-          { text: "Non-existent events", isCorrect: false }
-        ]
-      },
-      {
-        question: "Identify the correct preposition in the sentence: 'Policymakers must fight ____ the existential threat to the economy.'",
-        options: [
-          { text: "against", isCorrect: true },
-          { text: "for", isCorrect: false },
-          { text: "with", isCorrect: false },
-          { text: "of", isCorrect: false }
-        ]
-      },
-      {
-        question: "What economic consequence was NOT mentioned in the editorial regarding the floods?",
-        options: [
-          { text: "Displacement of millions", isCorrect: false },
-          { text: "Economic losses in tens of billions", isCorrect: false },
-          { text: "Boost in foreign investments", isCorrect: true },
-          { text: "Increase in food insecurity", isCorrect: false }
-        ]
-      },
-      {
-        question: "Choose the correct antonym of 'meagre' as used in describing the promised funds.",
-        options: [
-          { text: "Scant", isCorrect: false },
-          { text: "Generous", isCorrect: true },
-          { text: "Insufficient", isCorrect: false },
-          { text: "Paltry", isCorrect: false }
-        ]
-      },
-      {
-        question: "In the sentence 'Sustainable economic and environmental growth go hand in hand,' what does the phrase 'go hand in hand' mean?",
-        options: [
-          { text: "Occur simultaneously", isCorrect: true },
-          { text: "Are unrelated", isCorrect: false },
-          { text: "Cause conflict", isCorrect: false },
-          { text: "Occur separately", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which word in the editorial is used to describe the severity of climate challenges?",
-        options: [
-          { text: "Enormous", isCorrect: true },
-          { text: "Tiny", isCorrect: false },
-          { text: "Insignificant", isCorrect: false },
-          { text: "Mild", isCorrect: false }
-        ]
-      },
-      {
-        question: "Select the sentence that correctly rearranges this jumbled sentence from the editorial: 'challenging / policymakers / concrete actions / require / political will.'",
-        options: [
-          { text: "Policymakers require political will to take challenging concrete actions.", isCorrect: false },
-          { text: "Concrete actions require challenging political will policymakers.", isCorrect: false },
-          { text: "Policymakers require political will to take concrete actions.", isCorrect: true },
-          { text: "Political will require policymakers to concrete challenging actions.", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which of the following is NOT a measure suggested to overcome the climate challenge?",
-        options: [
-          { text: "Green action bonds", isCorrect: false },
-          { text: "Integrating climate-resilient policies", isCorrect: false },
-          { text: "Increased international dependency", isCorrect: true },
-          { text: "Usage of available funds for infrastructure", isCorrect: false }
-        ]
-      },
-      {
-        question: "What does the term 'climate-resilient' imply in the editorial?",
-        options: [
-          { text: "Adaptability to climate change", isCorrect: true },
-          { text: "Resistance to weather", isCorrect: false },
-          { text: "Immunity from natural disasters", isCorrect: false },
-          { text: "Avoidance of all risks", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which aspect of the editorial highlights a disconnect between policy and action?",
-        options: [
-          { text: "Policymakers' verbal commitments", isCorrect: true },
-          { text: "Implementation of green bonds", isCorrect: false },
-          { text: "Rapid climate funding", isCorrect: false },
-          { text: "Strong technical capacity", isCorrect: false }
-        ]
-      },
-      // Editorial 2 questions (Q21 - Q40)
-      {
-        question: "According to the editorial, what is the estimated number of people who fell ill with TB in 2023?",
-        options: [
-          { text: "5.2 million", isCorrect: false },
-          { text: "10.8 million", isCorrect: true },
-          { text: "15.3 million", isCorrect: false },
-          { text: "20 million", isCorrect: false }
-        ]
-      },
-      {
-        question: "What is the percentage of the $22bn required for global TB care that was available in 2023?",
-        options: [
-          { text: "26%", isCorrect: true },
-          { text: "50%", isCorrect: false },
-          { text: "75%", isCorrect: false },
-          { text: "90%", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which of the following is a risk factor for TB mentioned in the editorial?",
-        options: [
-          { text: "Overnutrition", isCorrect: false },
-          { text: "Smoking", isCorrect: true },
-          { text: "Excessive exercise", isCorrect: false },
-          { text: "High income", isCorrect: false }
-        ]
-      },
-      {
-        question: "Select the correct usage of the relative pronoun in: 'TB is a contagious bacterial infection which most commonly affects the lungs.'",
-        options: [
-          { text: "who", isCorrect: false },
-          { text: "which", isCorrect: true },
-          { text: "where", isCorrect: false },
-          { text: "whom", isCorrect: false }
-        ]
-      },
-      {
-        question: "What term best describes the TB research funding gap?",
-        options: [
-          { text: "Adequate", isCorrect: false },
-          { text: "Underfunded", isCorrect: true },
-          { text: "Excessive", isCorrect: false },
-          { text: "Sufficient", isCorrect: false }
-        ]
-      },
-      {
-        question: "According to the editorial, Pakistan accounted for what percentage of the global TB burden in 2023?",
-        options: [
-          { text: "6.3%", isCorrect: true },
-          { text: "10%", isCorrect: false },
-          { text: "15%", isCorrect: false },
-          { text: "20%", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which challenge is highlighted regarding TB case detection in Pakistan?",
-        options: [
-          { text: "Over-reporting of cases", isCorrect: false },
-          { text: "Significant gap between estimated and reported cases", isCorrect: true },
-          { text: "Complete eradication of TB", isCorrect: false },
-          { text: "No challenges in case detection", isCorrect: false }
-        ]
-      },
-      {
-        question: "Select the best synonym for 'disproportionately' as used in the editorial regarding TB impact.",
-        options: [
-          { text: "Equally", isCorrect: false },
-          { text: "Unevenly", isCorrect: true },
-          { text: "Marginally", isCorrect: false },
-          { text: "Insignificantly", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which of the following best captures the urgent need identified in the TB editorial?",
-        options: [
-          { text: "Expansion of donor support indefinitely", isCorrect: false },
-          { text: "Increased domestic investment", isCorrect: true },
-          { text: "Reduction of primary health services", isCorrect: false },
-          { text: "Complete reliance on rapid diagnostics", isCorrect: false }
-        ]
-      },
-      {
-        question: "In the context of TB, what does 'MDR-TB' stand for?",
-        options: [
-          { text: "Multi-drug resistant TB", isCorrect: true },
-          { text: "Mildly developed TB", isCorrect: false },
-          { text: "Majorly dangerous TB", isCorrect: false },
-          { text: "Multi-disease TB", isCorrect: false }
-        ]
-      },
-      {
-        question: "Choose the correct preposition to complete the sentence: 'Pakistan must invest ___ TB diagnosis and treatment.'",
-        options: [
-          { text: "in", isCorrect: true },
-          { text: "on", isCorrect: false },
-          { text: "at", isCorrect: false },
-          { text: "for", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which of the following measures is recommended to improve TB case reporting?",
-        options: [
-          { text: "Decreasing surveillance", isCorrect: false },
-          { text: "Enhancing data systems", isCorrect: true },
-          { text: "Reducing diagnostics", isCorrect: false },
-          { text: "Ignoring WHO guidelines", isCorrect: false }
-        ]
-      },
-      {
-        question: "Select the antonym of 'curable' as used in the context of TB.",
-        options: [
-          { text: "Treatable", isCorrect: false },
-          { text: "Incurable", isCorrect: true },
-          { text: "Preventable", isCorrect: false },
-          { text: "Recoverable", isCorrect: false }
-        ]
-      },
-      {
-        question: "What is the target set for TB research funding in 2022, as mentioned in the editorial?",
-        options: [
-          { text: "$5bn", isCorrect: true },
-          { text: "$10bn", isCorrect: false },
-          { text: "$15bn", isCorrect: false },
-          { text: "$20bn", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which risk factor is mentioned alongside diabetes in the TB editorial?",
-        options: [
-          { text: "Obesity", isCorrect: false },
-          { text: "Undernutrition", isCorrect: true },
-          { text: "Hypertension", isCorrect: false },
-          { text: "Asthma", isCorrect: false }
-        ]
-      },
-      {
-        question: "Select the best synonym for 'disrupted' as used in the editorial regarding TB care.",
-        options: [
-          { text: "Enhanced", isCorrect: false },
-          { text: "Interrupted", isCorrect: true },
-          { text: "Stabilized", isCorrect: false },
-          { text: "Improved", isCorrect: false }
-        ]
-      },
-      {
-        question: "What is one consequence of the funding drop for TB care mentioned in the editorial?",
-        options: [
-          { text: "Improved diagnostic systems", isCorrect: false },
-          { text: "Disrupted medicine supply chains", isCorrect: true },
-          { text: "Expanded human resource deployment", isCorrect: false },
-          { text: "Increased TB case detection", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which organization estimated the TB cases and deaths mentioned in the editorial?",
-        options: [
-          { text: "CDC", isCorrect: false },
-          { text: "WHO", isCorrect: true },
-          { text: "UNICEF", isCorrect: false },
-          { text: "World Bank", isCorrect: false }
-        ]
-      },
-      {
-        question: "Identify the correct usage of an article in: '___ TB control programme in Pakistan has long relied on donor support.'",
-        options: [
-          { text: "A", isCorrect: false },
-          { text: "An", isCorrect: false },
-          { text: "The", isCorrect: true },
-          { text: "No article", isCorrect: false }
-        ]
-      },
-      {
-        question: "What does the editorial suggest must be integrated with TB care in Pakistan?",
-        options: [
-          { text: "Advanced robotics", isCorrect: false },
-          { text: "Broader primary and lung health services", isCorrect: true },
-          { text: "Exclusive private healthcare", isCorrect: false },
-          { text: "International agencies", isCorrect: false }
-        ]
-      },
-      // Editorial 3 questions (Q41 - Q50)
-      {
-        question: "According to the editorial, how many people died on migration routes worldwide in 2024?",
-        options: [
-          { text: "7,000", isCorrect: false },
-          { text: "8,938", isCorrect: true },
-          { text: "10,000", isCorrect: false },
-          { text: "12,000", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which region had the highest number of fatalities according to the editorial?",
-        options: [
-          { text: "Europe", isCorrect: false },
-          { text: "Asia", isCorrect: true },
-          { text: "Africa", isCorrect: false },
-          { text: "North America", isCorrect: false }
-        ]
-      },
-      {
-        question: "What is the best synonym for 'wretched' as used in the editorial?",
-        options: [
-          { text: "Splendid", isCorrect: false },
-          { text: "Miserable", isCorrect: true },
-          { text: "Glorious", isCorrect: false },
-          { text: "Exuberant", isCorrect: false }
-        ]
-      },
-      {
-        question: "Select the correct preposition to complete: 'Migrants are often deceived ____ the perils of their journey.'",
-        options: [
-          { text: "about", isCorrect: true },
-          { text: "by", isCorrect: false },
-          { text: "of", isCorrect: false },
-          { text: "with", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which term best describes the overcrowded conditions experienced by migrants as mentioned in the editorial?",
-        options: [
-          { text: "Spacious", isCorrect: false },
-          { text: "Packed like sardines", isCorrect: true },
-          { text: "Luxurious", isCorrect: false },
-          { text: "Comfortable", isCorrect: false }
-        ]
-      },
-      {
-        question: "What does the editorial suggest the narrative about migrants should be?",
-        options: [
-          { text: "They are offenders", isCorrect: false },
-          { text: "They are victims", isCorrect: true },
-          { text: "They are economic burdens", isCorrect: false },
-          { text: "They are invincible", isCorrect: false }
-        ]
-      },
-      {
-        question: "Identify the correct antonym for 'cosmetic' as used to describe the government's actions.",
-        options: [
-          { text: "Superficial", isCorrect: false },
-          { text: "Substantial", isCorrect: true },
-          { text: "Frivolous", isCorrect: false },
-          { text: "Peripheral", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which of the following does the editorial NOT mention as a factor influencing migration?",
-        options: [
-          { text: "Joblessness", isCorrect: false },
-          { text: "Lack of education", isCorrect: false },
-          { text: "Stable political environment", isCorrect: true },
-          { text: "Poverty", isCorrect: false }
-        ]
-      },
-      {
-        question: "Rearrange the jumbled sentence to form a coherent sentence: 'migrants / the / are / victims / not / merely / opportunists.'",
-        options: [
-          { text: "Migrants are not merely opportunists; they are victims.", isCorrect: true },
-          { text: "Not victims are migrants merely opportunists.", isCorrect: false },
-          { text: "Migrants merely are not victims opportunists.", isCorrect: false },
-          { text: "Victims are migrants not merely opportunists.", isCorrect: false }
-        ]
-      },
-      {
-        question: "Which term is used in the editorial to describe the deceptive nature of migration networks?",
-        options: [
-          { text: "Transparent", isCorrect: false },
-          { text: "Deceptive", isCorrect: true },
-          { text: "Honest", isCorrect: false },
-          { text: "Straightforward", isCorrect: false }
-        ]
-      }
-    ];
-
-    // Function to shuffle an array (Fisher-Yates)
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
-    // When DOM is loaded
-    window.onload = function() {
-      document.getElementById("startBtn").addEventListener("click", startQuiz);
-      document.getElementById("quizForm").addEventListener("submit", function(e){
-        e.preventDefault();
-        submitQuiz();
-      });
-      // Render questions in randomized order and with shuffled options
-      renderQuestions();
+    let timerInterval;
+    let totalTime = 25 * 60; // 25 minutes in seconds
+    let startTime;
+    
+    // Correct answers mapping (question id: correct option letter)
+    const answers = {
+      // Editorial 1 (Q1 - Q20)
+      q1: "A", q2: "C", q3: "B", q4: "A", q5: "B",
+      q6: "A", q7: "D", q8: "A", q9: "B", q10: "B",
+      q11: "B", q12: "B", q13: "C", q14: "C", q15: "A",
+      q16: "C", q17: "C", q18: "A", q19: "D", q20: "B",
+      // Editorial 2 (Q21 - Q40)
+      q21: "A", q22: "A", q23: "A", q24: "A", q25: "B",
+      q26: "C", q27: "C", q28: "D", q29: "C", q30: "A",
+      q31: "C", q32: "B", q33: "A", q34: "D", q35: "C",
+      q36: "D", q37: "B", q38: "C", q39: "B", q40: "A",
+      // Editorial 3 (Q41 - Q50)
+      q41: "B", q42: "C", q43: "C", q44: "B", q45: "B",
+      q46: "B", q47: "D", q48: "A", q49: "C", q50: "A"
     };
-
-    // Render all questions into the quiz container
-    function renderQuestions() {
-      const quizContainer = document.getElementById("quizQuestions");
-      questions.forEach((q, index) => {
-        // Shuffle options for each question
-        q.options = shuffle(q.options);
-        const qDiv = document.createElement("div");
-        qDiv.className = "question";
-        qDiv.innerHTML = `<p><strong>Q${index + 1}.</strong> ${q.question}</p>`;
-        const optionsDiv = document.createElement("div");
-        optionsDiv.className = "options";
-        q.options.forEach((option, idx) => {
-          const optionId = "q" + index + "o" + idx;
-          const radioHTML = `<label>
-            <input type="radio" name="question${index}" value="${option.isCorrect}">
-            ${option.text}
-          </label>`;
-          optionsDiv.innerHTML += radioHTML;
-        });
-        qDiv.appendChild(optionsDiv);
-        quizContainer.appendChild(qDiv);
-      });
-    }
-
-    // Start quiz: validate name and reveal quiz section and start timer
+    
+    // Start Quiz after name is entered
     function startQuiz() {
-      const nameInput = document.getElementById("userName");
+      const nameInput = document.getElementById("studentName");
       if(nameInput.value.trim() === "") {
         alert("Please enter your name.");
         return;
       }
+      // Hide name section and show quiz
       document.getElementById("nameSection").style.display = "none";
       document.getElementById("quizSection").style.display = "block";
-      quizStartTime = new Date();
-      startTimer(totalTime);
+      startTimer();
+      startTime = new Date();
     }
-
-    // Timer function: count down from given seconds
-    function startTimer(duration) {
-      let timer = duration;
-      const timerDisplay = document.getElementById("timer");
-      timerInterval = setInterval(function () {
-        const minutes = Math.floor(timer / 60);
-        const seconds = timer % 60;
-        timerDisplay.textContent = "Time Left: " + minutes + "m " + (seconds < 10 ? "0" : "") + seconds + "s";
-        if (--timer < 0) {
+    
+    // Timer countdown function
+    function startTimer() {
+      updateTimerDisplay(totalTime);
+      timerInterval = setInterval(() => {
+        totalTime--;
+        updateTimerDisplay(totalTime);
+        if(totalTime <= 0) {
           clearInterval(timerInterval);
-          alert("Time is up! Your quiz will be submitted automatically.");
-          submitQuiz();
+          submitQuiz(); // Auto-submit when time is up
         }
       }, 1000);
     }
-
-    // Submit quiz: calculate score, time taken, attempted questions; show results; and submit hidden form via Formspree.
+    
+    function updateTimerDisplay(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const secs = seconds % 60;
+      document.getElementById("timer").innerText = "Time Remaining: " +
+        String(minutes).padStart(2, '0') + ":" + String(secs).padStart(2, '0');
+    }
+    
+    // Quiz submission and result calculation
     function submitQuiz() {
       clearInterval(timerInterval);
-      const quizForm = document.getElementById("quizForm");
-      const formData = new FormData(quizForm);
+      const form = document.getElementById("quizForm");
       let score = 0;
       let attempted = 0;
-      // Loop through questions
-      for(let i = 0; i < questions.length; i++) {
-        const answer = formData.get("question" + i);
-        if(answer !== null) {
-          attempted++;
-          if(answer === "true") {
-            score++;
+      
+      for(let key in answers) {
+        const qElements = document.getElementsByName(key);
+        let answered = false;
+        for(let elem of qElements) {
+          if(elem.checked) {
+            attempted++;
+            if(elem.value === answers[key]) {
+              score++;
+            }
+            answered = true;
+            break;
           }
         }
       }
+      
       const endTime = new Date();
-      const timeTaken = Math.floor((endTime - quizStartTime) / 1000); // seconds
-      const userName = document.getElementById("userName").value.trim();
+      const timeTaken = Math.floor((endTime - startTime) / 1000);
+      
       // Display results
-      const resultSection = document.getElementById("resultSection");
-      resultSection.innerHTML = `<h2>Results</h2>
-        <p><strong>Name:</strong> ${userName}</p>
-        <p><strong>Questions Attempted:</strong> ${attempted} / ${questions.length}</p>
-        <p><strong>Score:</strong> ${score}</p>
-        <p><strong>Time Taken:</strong> ${Math.floor(timeTaken/60)}m ${timeTaken % 60}s</p>`;
-      resultSection.style.display = "block";
-      // Hide quiz section
-      document.getElementById("quizSection").style.display = "none";
-      // Fill hidden form and auto-submit it to Formspree
-      submitResultsToFormspree(userName, attempted, score, timeTaken);
+      const studentName = document.getElementById("studentName").value.trim();
+      document.getElementById("resultDetails").innerHTML = 
+        "<strong>Name:</strong> " + studentName + "<br>" +
+        "<strong>Questions Attempted:</strong> " + attempted + " / 50<br>" +
+        "<strong>Score:</strong> " + score + " / 50<br>" +
+        "<strong>Time Taken:</strong> " + timeTaken + " seconds";
+      
+      document.getElementById("resultSection").style.display = "block";
+      
+      // Fill hidden Formspree form and auto-submit
+      document.getElementById("formName").value = studentName;
+      document.getElementById("formAttempted").value = attempted;
+      document.getElementById("formScore").value = score;
+      document.getElementById("formTime").value = timeTaken;
+      
+      // Submit the form (using Formspree's standard POST submission)
+      document.getElementById("hiddenForm").submit();
     }
-
-    // Submit results to Formspree (hidden form)
-    function submitResultsToFormspree(name, attempted, score, timeTaken) {
-      const resultsForm = document.getElementById("resultsForm");
-      resultsForm.elements["studentName"].value = name;
-      resultsForm.elements["attempted"].value = attempted;
-      resultsForm.elements["score"].value = score;
-      resultsForm.elements["timeTaken"].value = timeTaken;
-      resultsForm.submit();
-    }
+    
+    // Optional: Prevent F12 and Ctrl+Shift+I (not fully secure but a deterrent)
+    document.onkeydown = function(e) {
+      if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) {
+        return false;
+      }
+    };
   </script>
-</head>
-<body>
-  <header>
-    <h1>QUIZ FOR CSS ASPIRANTS 24 March 2025</h1>
-  </header>
-
-  <div class="container">
-    <!-- Name Entry Section -->
-    <div id="nameSection">
-      <p>Please enter your name to start the quiz:</p>
-      <input type="text" id="userName" placeholder="Enter your name">
-      <button id="startBtn">Start Quiz</button>
-    </div>
-
-    <!-- Quiz Section (hidden until name is entered) -->
-    <div id="quizSection" style="display:none;">
-      <div id="timer">Time Left: 25m 00s</div>
-      <form id="quizForm">
-        <div id="quizQuestions">
-          <!-- Questions will be injected here by JavaScript -->
-        </div>
-        <br>
-        <button type="submit">Submit Quiz</button>
-      </form>
-    </div>
-
-    <!-- Result Section -->
-    <div id="resultSection" style="display:none;"></div>
-  </div>
-
-  <!-- Hidden Form for Formspree Submission -->
-  <form id="resultsForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-    <input type="text" name="studentName">
-    <input type="text" name="attempted">
-    <input type="text" name="score">
-    <input type="text" name="timeTaken">
-  </form>
-
-  <footer>
-    <p>Contact: 03265762698</p>
-    <p>Call now to join and excel!</p>
-  </footer>
 </body>
 </html>
