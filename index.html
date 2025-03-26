@@ -2,677 +2,633 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 25 March 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 26 March 2025</title>
   <style>
-    /* Disable text selection */
+    /* Overall styling and disable text selection */
     body, html {
-      -webkit-user-select: none; 
-      -moz-user-select: none;    
-      -ms-user-select: none;     
-      user-select: none;         
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
+      background: #f4f4f4;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
     /* Header styling */
     header {
-      background: url('https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__') no-repeat center/cover;
-      color: #fff;
+      background: url('https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__') no-repeat center;
+      background-size: cover;
+      color: white;
       padding: 20px;
       text-align: center;
       position: relative;
-    }
-    header::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background-color: rgba(0,0,0,0.5);
-      z-index: 0;
-    }
-    header * {
-      position: relative;
-      z-index: 1;
     }
     header h1 {
       margin: 0;
-      font-size: 2em;
+      font-size: 2.5em;
     }
-    header p {
-      margin: 5px 0 0;
+    header h2 {
+      margin: 5px 0 0 0;
       font-size: 1.2em;
+      font-weight: normal;
     }
-    /* Footer styling */
-    footer {
-      background: #333;
-      color: #fff;
-      text-align: center;
-      padding: 10px 0;
-      font-size: 0.9em;
-    }
-    footer a {
-      color: #0cf;
-      text-decoration: none;
-    }
-    /* Container styling */
-    .container {
-      width: 90%;
-      max-width: 1000px;
+    /* Name entry container */
+    #nameEntry {
       margin: 20px auto;
+      width: 90%;
+      max-width: 500px;
       background: #fff;
       padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    /* Name entry section */
-    #nameSection {
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
       text-align: center;
-      margin-bottom: 20px;
     }
-    #nameSection input[type="text"] {
-      width: 300px;
+    #nameEntry input[type="text"] {
+      width: 80%;
       padding: 10px;
       font-size: 1em;
     }
-    #nameSection button {
+    #nameEntry button {
       padding: 10px 20px;
       font-size: 1em;
-      margin-left: 10px;
+      margin-top: 10px;
       cursor: pointer;
     }
-    /* Timer styling */
+    /* Quiz section styling */
+    #quizSection {
+      display: none;
+      padding: 20px;
+    }
     #timer {
       font-size: 1.2em;
       font-weight: bold;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       text-align: right;
     }
-    /* Quiz styling */
     .question {
-      margin-bottom: 20px;
+      background: #fff;
+      margin-bottom: 15px;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
     }
-    .question p {
-      margin: 0 0 8px;
-      font-weight: bold;
+    .question h3 {
+      margin: 0 0 10px;
+      font-size: 1.1em;
     }
     .question label {
       display: block;
       margin-bottom: 5px;
       cursor: pointer;
     }
-    /* Results section */
-    #resultSection {
-      display: none;
-      margin-top: 20px;
-      padding: 15px;
-      background: #eef;
-      border: 1px solid #99c;
+    /* Submit button */
+    #submitBtn {
+      padding: 15px 30px;
+      font-size: 1.1em;
+      background: #007BFF;
+      color: white;
+      border: none;
+      cursor: pointer;
+      margin: 20px auto;
+      display: block;
+      border-radius: 5px;
     }
-    /* Disable right-click */
-    body {
-      -webkit-touch-callout: none;
+    /* Results display */
+    #results {
+      display: none;
+      background: #fff;
+      padding: 20px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    /* Footer styling */
+    footer {
+      background: #333;
+      color: #fff;
+      padding: 15px;
+      text-align: center;
+      position: relative;
+      bottom: 0;
+      width: 100%;
     }
   </style>
-</head>
-<body oncontextmenu="return false;">
-  <header>
-    <h1>QUIZ FOR CSS ASPIRANTS 25 March 2025</h1>
-    <p>Presented by SYED ASGHAR ALI SHAH</p>
-  </header>
-  <div class="container">
-    <!-- Name Entry Section -->
-    <div id="nameSection">
-      <h2>Please enter your name to start the quiz</h2>
-      <input type="text" id="studentName" placeholder="Your Name">
-      <button onclick="startQuiz()">Start Quiz</button>
-    </div>
-    
-    <!-- Quiz Section -->
-    <div id="quizSection" style="display:none;">
-      <div id="timer">Time Remaining: 25:00</div>
-      <form id="quizForm">
-        <!-- Editorial 1: Questions 1-20 -->
-        <h3>Editorial 1 Questions</h3>
-        <!-- Q1 -->
-        <div class="question">
-          <p>1. According to Editorial 1, the IMF blocked a government move to reduce which of the following?</p>
-          <label><input type="radio" name="q1" value="A"> Retail electricity prices</label>
-          <label><input type="radio" name="q1" value="B"> Petroleum levy</label>
-          <label><input type="radio" name="q1" value="C"> Tax on imports</label>
-          <label><input type="radio" name="q1" value="D"> Federal transaction taxes</label>
-        </div>
-        <!-- Q2 -->
-        <div class="question">
-          <p>2. Which term best describes the government move as described in Editorial 1?</p>
-          <label><input type="radio" name="q2" value="A"> Minor reduction</label>
-          <label><input type="radio" name="q2" value="B"> Temporary suspension</label>
-          <label><input type="radio" name="q2" value="C"> Substantially slash</label>
-          <label><input type="radio" name="q2" value="D"> Incremental increase</label>
-        </div>
-        <!-- Q3 -->
-        <div class="question">
-          <p>3. What was the promised relief per unit of electricity?</p>
-          <label><input type="radio" name="q3" value="A"> Rs10</label>
-          <label><input type="radio" name="q3" value="B"> Rs8</label>
-          <label><input type="radio" name="q3" value="C"> Rs2</label>
-          <label><input type="radio" name="q3" value="D"> Rs70</label>
-        </div>
-        <!-- Q4 -->
-        <div class="question">
-          <p>4. What additional burden was placed on consumers besides the electricity prices?</p>
-          <label><input type="radio" name="q4" value="A"> Petroleum levy increase</label>
-          <label><input type="radio" name="q4" value="B"> New tax</label>
-          <label><input type="radio" name="q4" value="C"> Higher rent</label>
-          <label><input type="radio" name="q4" value="D"> Increased power purchase contracts</label>
-        </div>
-        <!-- Q5 -->
-        <div class="question">
-          <p>5. What loan amount is mentioned in Editorial 1?</p>
-          <label><input type="radio" name="q5" value="A"> $5bn</label>
-          <label><input type="radio" name="q5" value="B"> $7bn</label>
-          <label><input type="radio" name="q5" value="C"> $10bn</label>
-          <label><input type="radio" name="q5" value="D"> $3bn</label>
-        </div>
-        <!-- Q6 -->
-        <div class="question">
-          <p>6. Which term best describes the revision of power purchase contracts?</p>
-          <label><input type="radio" name="q6" value="A"> Selected IPPs</label>
-          <label><input type="radio" name="q6" value="B"> Major banks</label>
-          <label><input type="radio" name="q6" value="C"> Private investors</label>
-          <label><input type="radio" name="q6" value="D"> Foreign agencies</label>
-        </div>
-        <!-- Q7 -->
-        <div class="question">
-          <p>7. What was increased to divert additional revenues?</p>
-          <label><input type="radio" name="q7" value="A"> Federal transaction taxes</label>
-          <label><input type="radio" name="q7" value="B"> Electricity tariff</label>
-          <label><input type="radio" name="q7" value="C"> Real estate tax</label>
-          <label><input type="radio" name="q7" value="D"> Petroleum levy</label>
-        </div>
-        <!-- Q8 -->
-        <div class="question">
-          <p>8. Which group is particularly mentioned as being affected by rising prices?</p>
-          <label><input type="radio" name="q8" value="A"> Low-middle-income households</label>
-          <label><input type="radio" name="q8" value="B"> High-income families</label>
-          <label><input type="radio" name="q8" value="C"> Foreign investors</label>
-          <label><input type="radio" name="q8" value="D"> Government officials</label>
-        </div>
-        <!-- Q9 -->
-        <div class="question">
-          <p>9. Which of the following is NOT mentioned as a factor for expensive electricity?</p>
-          <label><input type="radio" name="q9" value="A"> Transmission inefficiencies</label>
-          <label><input type="radio" name="q9" value="B"> Excessive subsidies</label>
-          <label><input type="radio" name="q9" value="C"> Corruption</label>
-          <label><input type="radio" name="q9" value="D"> Over-dependence on imported fossil fuels</label>
-        </div>
-        <!-- Q10 -->
-        <div class="question">
-          <p>10. Which of the following best summarizes the government's policy approach as per Editorial 1?</p>
-          <label><input type="radio" name="q10" value="A"> Implementing long-term reforms</label>
-          <label><input type="radio" name="q10" value="B"> Finding shortcuts to please the electorate</label>
-          <label><input type="radio" name="q10" value="C"> Focusing solely on renewable energy</label>
-          <label><input type="radio" name="q10" value="D"> Increasing investment in infrastructure</label>
-        </div>
-        <!-- Q11 -->
-        <div class="question">
-          <p>11. What is the reaction of middle-class consumers as described in Editorial 1?</p>
-          <label><input type="radio" name="q11" value="A"> They received a discount</label>
-          <label><input type="radio" name="q11" value="B"> Their bills outpaced rental rates</label>
-          <label><input type="radio" name="q11" value="C"> They were unaffected</label>
-          <label><input type="radio" name="q11" value="D"> They were given subsidies</label>
-        </div>
-        <!-- Q12 -->
-        <div class="question">
-          <p>12. What kind of oversight does the IMF exercise as per Editorial 1?</p>
-          <label><input type="radio" name="q12" value="A"> Minimal interference</label>
-          <label><input type="radio" name="q12" value="B"> Intrusive oversight</label>
-          <label><input type="radio" name="q12" value="C"> Supportive guidance</label>
-          <label><input type="radio" name="q12" value="D"> Passive monitoring</label>
-        </div>
-        <!-- Q13 -->
-        <div class="question">
-          <p>13. Which phrase best describes the tariff reduction plan?</p>
-          <label><input type="radio" name="q13" value="A"> Bold reform</label>
-          <label><input type="radio" name="q13" value="B"> Innovative solution</label>
-          <label><input type="radio" name="q13" value="C"> Necessary compromise</label>
-          <label><input type="radio" name="q13" value="D"> Risky experiment</label>
-        </div>
-        <!-- Q14 -->
-        <div class="question">
-          <p>14. What was the rationale behind increasing the petroleum levy?</p>
-          <label><input type="radio" name="q14" value="A"> To fund infrastructure</label>
-          <label><input type="radio" name="q14" value="B"> To punish high consumption</label>
-          <label><input type="radio" name="q14" value="C"> To divert additional revenues for tariff relief</label>
-          <label><input type="radio" name="q14" value="D"> To balance the budget</label>
-        </div>
-        <!-- Q15 -->
-        <div class="question">
-          <p>15. Which economic indicator is indirectly criticized in Editorial 1?</p>
-          <label><input type="radio" name="q15" value="A"> Runaway inflation</label>
-          <label><input type="radio" name="q15" value="B"> Economic growth</label>
-          <label><input type="radio" name="q15" value="C"> Employment rate</label>
-          <label><input type="radio" name="q15" value="D"> Foreign exchange reserves</label>
-        </div>
-        <!-- Q16 -->
-        <div class="question">
-          <p>16. The term 'elite greed' in Editorial 1 most likely refers to:</p>
-          <label><input type="radio" name="q16" value="A"> Successful business practices</label>
-          <label><input type="radio" name="q16" value="B"> Efficient management</label>
-          <label><input type="radio" name="q16" value="C"> Corrupt policymaking</label>
-          <label><input type="radio" name="q16" value="D"> Investor enthusiasm</label>
-        </div>
-        <!-- Q17 -->
-        <div class="question">
-          <p>17. What does the term 'oversight' imply in the context of the IMF's actions?</p>
-          <label><input type="radio" name="q17" value="A"> Monitoring</label>
-          <label><input type="radio" name="q17" value="B"> Neglect</label>
-          <label><input type="radio" name="q17" value="C"> Interference</label>
-          <label><input type="radio" name="q17" value="D"> Support</label>
-        </div>
-        <!-- Q18 -->
-        <div class="question">
-          <p>18. Which preposition correctly fills the blank in: "battered ___ runaway inflation"?</p>
-          <label><input type="radio" name="q18" value="A"> by</label>
-          <label><input type="radio" name="q18" value="B"> with</label>
-          <label><input type="radio" name="q18" value="C"> due to</label>
-          <label><input type="radio" name="q18" value="D"> because of</label>
-        </div>
-        <!-- Q19 -->
-        <div class="question">
-          <p>19. In the phrase "per litre increase", what is the function of the word "per"?</p>
-          <label><input type="radio" name="q19" value="A"> Noun</label>
-          <label><input type="radio" name="q19" value="B"> Adjective</label>
-          <label><input type="radio" name="q19" value="C"> Conjunction</label>
-          <label><input type="radio" name="q19" value="D"> Preposition</label>
-        </div>
-        <!-- Q20 -->
-        <div class="question">
-          <p>20. Choose the synonym for "mismanagement" as used in Editorial 1.</p>
-          <label><input type="radio" name="q20" value="A"> Coordination</label>
-          <label><input type="radio" name="q20" value="B"> Inefficiency</label>
-          <label><input type="radio" name="q20" value="C"> Overseeing</label>
-          <label><input type="radio" name="q20" value="D"> Control</label>
-        </div>
-        
-        <!-- Editorial 2: Questions 21-40 -->
-        <h3>Editorial 2 Questions</h3>
-        <!-- Q21 -->
-        <div class="question">
-          <p>21. According to Editorial 2, what has been the state's approach to neutralising militant threats?</p>
-          <label><input type="radio" name="q21" value="A"> Using blunt tools like lawfare and police brutality</label>
-          <label><input type="radio" name="q21" value="B"> Dialogue with militants</label>
-          <label><input type="radio" name="q21" value="C"> Economic sanctions</label>
-          <label><input type="radio" name="q21" value="D"> Military intervention</label>
-        </div>
-        <!-- Q22 -->
-        <div class="question">
-          <p>22. Which region is specifically mentioned in Editorial 2?</p>
-          <label><input type="radio" name="q22" value="A"> Balochistan</label>
-          <label><input type="radio" name="q22" value="B"> Sindh</label>
-          <label><input type="radio" name="q22" value="C"> Punjab</label>
-          <label><input type="radio" name="q22" value="D"> Khyber Pakhtunkhwa</label>
-        </div>
-        <!-- Q23 -->
-        <div class="question">
-          <p>23. What term describes the protest movement mentioned in Editorial 2?</p>
-          <label><input type="radio" name="q23" value="A"> BYC (Baloch Yakjehti Committee)</label>
-          <label><input type="radio" name="q23" value="B"> BNP</label>
-          <label><input type="radio" name="q23" value="C"> PTI</label>
-          <label><input type="radio" name="q23" value="D"> MQM</label>
-        </div>
-        <!-- Q24 -->
-        <div class="question">
-          <p>24. Who led the protest movement in Balochistan?</p>
-          <label><input type="radio" name="q24" value="A"> Women</label>
-          <label><input type="radio" name="q24" value="B"> Military officials</label>
-          <label><input type="radio" name="q24" value="C"> Political leaders</label>
-          <label><input type="radio" name="q24" value="D"> International activists</label>
-        </div>
-        <!-- Q25 -->
-        <div class="question">
-          <p>25. Which phrase best describes the state's treatment of the BYC?</p>
-          <label><input type="radio" name="q25" value="A"> Supportively</label>
-          <label><input type="radio" name="q25" value="B"> With contempt</label>
-          <label><input type="radio" name="q25" value="C"> Indifferently</label>
-          <label><input type="radio" name="q25" value="D"> Collaboratively</label>
-        </div>
-        <!-- Q26 -->
-        <div class="question">
-          <p>26. Which legal action was taken against Dr Mahrang Baloch?</p>
-          <label><input type="radio" name="q26" value="A"> Awarded a prize</label>
-          <label><input type="radio" name="q26" value="B"> Given immunity</label>
-          <label><input type="radio" name="q26" value="C"> Arrest and booking on serious charges</label>
-          <label><input type="radio" name="q26" value="D"> Promoted to a position</label>
-        </div>
-        <!-- Q27 -->
-        <div class="question">
-          <p>27. The phrase "neutralising the threat" implies:</p>
-          <label><input type="radio" name="q27" value="A"> Ignoring the threat</label>
-          <label><input type="radio" name="q27" value="B"> Supporting the threat</label>
-          <label><input type="radio" name="q27" value="C"> Minimising the impact</label>
-          <label><input type="radio" name="q27" value="D"> Encouraging the threat</label>
-        </div>
-        <!-- Q28 -->
-        <div class="question">
-          <p>28. Which of the following is NOT a charge mentioned against BYC leadership?</p>
-          <label><input type="radio" name="q28" value="A"> Terrorism</label>
-          <label><input type="radio" name="q28" value="B"> Murder</label>
-          <label><input type="radio" name="q28" value="C"> Incitement to rebellion</label>
-          <label><input type="radio" name="q28" value="D"> Tax evasion</label>
-        </div>
-        <!-- Q29 -->
-        <div class="question">
-          <p>29. What does the phrase "nonviolent but persistent protest" imply?</p>
-          <label><input type="radio" name="q29" value="A"> Violent demonstrations</label>
-          <label><input type="radio" name="q29" value="B"> Intermittent riots</label>
-          <label><input type="radio" name="q29" value="C"> Peaceful yet continuous</label>
-          <label><input type="radio" name="q29" value="D"> Passive agreement</label>
-        </div>
-        <!-- Q30 -->
-        <div class="question">
-          <p>30. In Editorial 2, which aspect is highlighted as a potential consequence of state excesses?</p>
-          <label><input type="radio" name="q30" value="A"> Alienation of the civilian population</label>
-          <label><input type="radio" name="q30" value="B"> Improved security</label>
-          <label><input type="radio" name="q30" value="C"> Economic growth</label>
-          <label><input type="radio" name="q30" value="D"> International praise</label>
-        </div>
-        <!-- Q31 -->
-        <div class="question">
-          <p>31. What is the objective behind the creation of Pakistan as per Editorial 2?</p>
-          <label><input type="radio" name="q31" value="A"> Dominance of a political party</label>
-          <label><input type="radio" name="q31" value="B"> Military control</label>
-          <label><input type="radio" name="q31" value="C"> Establish a welfare state based on equality, justice, and rule of law</label>
-          <label><input type="radio" name="q31" value="D"> Economic isolation</label>
-        </div>
-        <!-- Q32 -->
-        <div class="question">
-          <p>32. Which of the following best describes "lawfare" as used in Editorial 2?</p>
-          <label><input type="radio" name="q32" value="A"> Strict law enforcement</label>
-          <label><input type="radio" name="q32" value="B"> Using legal systems as a tool of warfare</label>
-          <label><input type="radio" name="q32" value="C"> Waging war through legislation</label>
-          <label><input type="radio" name="q32" value="D"> Ignoring legal procedures</label>
-        </div>
-        <!-- Q33 -->
-        <div class="question">
-          <p>33. What sentiment is reinforced by the state's actions towards Baloch citizens?</p>
-          <label><input type="radio" name="q33" value="A"> They are seen as antagonists</label>
-          <label><input type="radio" name="q33" value="B"> They are given full support</label>
-          <label><input type="radio" name="q33" value="C"> They are considered heroes</label>
-          <label><input type="radio" name="q33" value="D"> They are ignored</label>
-        </div>
-        <!-- Q34 -->
-        <div class="question">
-          <p>34. Which preposition correctly completes: "tired ___ state excesses"?</p>
-          <label><input type="radio" name="q34" value="A"> by</label>
-          <label><input type="radio" name="q34" value="B"> with</label>
-          <label><input type="radio" name="q34" value="C"> from</label>
-          <label><input type="radio" name="q34" value="D"> of</label>
-        </div>
-        <!-- Q35 -->
-        <div class="question">
-          <p>35. Choose the antonym for "keen" as used in the context of the state's actions.</p>
-          <label><input type="radio" name="q35" value="A"> Eager</label>
-          <label><input type="radio" name="q35" value="B"> Alert</label>
-          <label><input type="radio" name="q35" value="C"> Indifferent</label>
-          <label><input type="radio" name="q35" value="D"> Interested</label>
-        </div>
-        <!-- Q36 -->
-        <div class="question">
-          <p>36. What does the term "provoked" most nearly mean in Editorial 2?</p>
-          <label><input type="radio" name="q36" value="A"> Calmed</label>
-          <label><input type="radio" name="q36" value="B"> Ignored</label>
-          <label><input type="radio" name="q36" value="C"> Supported</label>
-          <label><input type="radio" name="q36" value="D"> Incited</label>
-        </div>
-        <!-- Q37 -->
-        <div class="question">
-          <p>37. Which term best fits the role of "civilian" in the context of the article?</p>
-          <label><input type="radio" name="q37" value="A"> Soldier</label>
-          <label><input type="radio" name="q37" value="B"> Non-combatant</label>
-          <label><input type="radio" name="q37" value="C"> Official</label>
-          <label><input type="radio" name="q37" value="D"> Policeman</label>
-        </div>
-        <!-- Q38 -->
-        <div class="question">
-          <p>38. What is the grammatical function of the word "but" in the sentence "nonviolent but persistent protest"?</p>
-          <label><input type="radio" name="q38" value="A"> Adjective</label>
-          <label><input type="radio" name="q38" value="B"> Preposition</label>
-          <label><input type="radio" name="q38" value="C"> Conjunction</label>
-          <label><input type="radio" name="q38" value="D"> Adverb</label>
-        </div>
-        <!-- Q39 -->
-        <div class="question">
-          <p>39. In the context of Editorial 2, what does "incitement" refer to?</p>
-          <label><input type="radio" name="q39" value="A"> Government propaganda</label>
-          <label><input type="radio" name="q39" value="B"> Encouragement to take action</label>
-          <label><input type="radio" name="q39" value="C"> Support for policies</label>
-          <label><input type="radio" name="q39" value="D"> A peaceful discussion</label>
-        </div>
-        <!-- Q40 -->
-        <div class="question">
-          <p>40. Which phrase best captures the overall message of Editorial 2?</p>
-          <label><input type="radio" name="q40" value="A"> The state must not alienate its citizens through excessive measures</label>
-          <label><input type="radio" name="q40" value="B"> The state should use force to control protests</label>
-          <label><input type="radio" name="q40" value="C"> The protest movement is violent</label>
-          <label><input type="radio" name="q40" value="D"> The state is praised for its policies</label>
-        </div>
-        
-        <!-- Editorial 3: Questions 41-50 -->
-        <h3>Editorial 3 Questions</h3>
-        <!-- Q41 -->
-        <div class="question">
-          <p>41. What sport is discussed in Editorial 3?</p>
-          <label><input type="radio" name="q41" value="A"> Football</label>
-          <label><input type="radio" name="q41" value="B"> Cricket</label>
-          <label><input type="radio" name="q41" value="C"> Tennis</label>
-          <label><input type="radio" name="q41" value="D"> Hockey</label>
-        </div>
-        <!-- Q42 -->
-        <div class="question">
-          <p>42. Which team is mentioned as having collapsed against New Zealand?</p>
-          <label><input type="radio" name="q42" value="A"> England</label>
-          <label><input type="radio" name="q42" value="B"> India</label>
-          <label><input type="radio" name="q42" value="C"> Pakistan</label>
-          <label><input type="radio" name="q42" value="D"> Australia</label>
-        </div>
-        <!-- Q43 -->
-        <div class="question">
-          <p>43. What approach did Pakistan use in the T20 series as per Editorial 3?</p>
-          <label><input type="radio" name="q43" value="A"> Defensive strategy</label>
-          <label><input type="radio" name="q43" value="B"> Balanced play</label>
-          <label><input type="radio" name="q43" value="C"> High-risk approach</label>
-          <label><input type="radio" name="q43" value="D"> Conservative play</label>
-        </div>
-        <!-- Q44 -->
-        <div class="question">
-          <p>44. Who is the captain mentioned in Editorial 3?</p>
-          <label><input type="radio" name="q44" value="A"> Imran Khan</label>
-          <label><input type="radio" name="q44" value="B"> Salman Ali Agha</label>
-          <label><input type="radio" name="q44" value="C"> Wasim Akram</label>
-          <label><input type="radio" name="q44" value="D"> Saeed Anwar</label>
-        </div>
-        <!-- Q45 -->
-        <div class="question">
-          <p>45. Which player scored a record-breaking century in the third game?</p>
-          <label><input type="radio" name="q45" value="A"> Babar Azam</label>
-          <label><input type="radio" name="q45" value="B"> Hasan Nawaz</label>
-          <label><input type="radio" name="q45" value="C"> Mohammad Haris</label>
-          <label><input type="radio" name="q45" value="D"> Shoaib Malik</label>
-        </div>
-        <!-- Q46 -->
-        <div class="question">
-          <p>46. What does the term "boom or bust" imply about the team's performance?</p>
-          <label><input type="radio" name="q46" value="A"> Consistent victories</label>
-          <label><input type="radio" name="q46" value="B"> Unpredictable performance</label>
-          <label><input type="radio" name="q46" value="C"> Consistent losses</label>
-          <label><input type="radio" name="q46" value="D"> Average performance</label>
-        </div>
-        <!-- Q47 -->
-        <div class="question">
-          <p>47. Which adjective best describes the New Zealand bowling as per Editorial 3?</p>
-          <label><input type="radio" name="q47" value="A"> Chaotic</label>
-          <label><input type="radio" name="q47" value="B"> Lax</label>
-          <label><input type="radio" name="q47" value="C"> Unorganized</label>
-          <label><input type="radio" name="q47" value="D"> Disciplined</label>
-        </div>
-        <!-- Q48 -->
-        <div class="question">
-          <p>48. The phrase "fresh mindset" suggests the need for a change in:</p>
-          <label><input type="radio" name="q48" value="A"> Strategy</label>
-          <label><input type="radio" name="q48" value="B"> Equipment</label>
-          <label><input type="radio" name="q48" value="C"> Team composition</label>
-          <label><input type="radio" name="q48" value="D"> Home ground</label>
-        </div>
-        <!-- Q49 -->
-        <div class="question">
-          <p>49. What was the outcome of Pakistan's performance in most games, according to Editorial 3?</p>
-          <label><input type="radio" name="q49" value="A"> Consistent victories</label>
-          <label><input type="radio" name="q49" value="B"> Consistent losses</label>
-          <label><input type="radio" name="q49" value="C"> Boom or bust, with more busts</label>
-          <label><input type="radio" name="q49" value="D"> Average performance</label>
-        </div>
-        <!-- Q50 -->
-        <div class="question">
-          <p>50. Which part of speech is "collapse" in the context of the match?</p>
-          <label><input type="radio" name="q50" value="A"> Verb</label>
-          <label><input type="radio" name="q50" value="B"> Adjective</label>
-          <label><input type="radio" name="q50" value="C"> Noun</label>
-          <label><input type="radio" name="q50" value="D"> Adverb</label>
-        </div>
-        <br>
-        <button type="button" onclick="submitQuiz()">Submit Quiz</button>
-      </form>
-    </div>
-    
-    <!-- Result Section -->
-    <div id="resultSection">
-      <h2>Quiz Results</h2>
-      <p id="resultDetails"></p>
-    </div>
-    
-    <!-- Hidden Form for Formspree Submission -->
-    <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-      <input type="text" name="studentName" id="formName">
-      <input type="text" name="attempted" id="formAttempted">
-      <input type="text" name="score" id="formScore">
-      <input type="text" name="timeTaken" id="formTime">
-    </form>
-  </div>
-  
-  <footer>
-    <p>Contact us: 03265762698 | Call now for more details!</p>
-  </footer>
-  
   <script>
-    // Prevent text selection and context menu already handled in CSS and body attribute
-    
-    // Global variables
-    let timerInterval;
-    let totalTime = 25 * 60; // 25 minutes in seconds
-    let startTime;
-    
-    // Correct answers mapping (question id: correct option letter)
-    const answers = {
-      // Editorial 1 (Q1 - Q20)
-      q1: "A", q2: "C", q3: "B", q4: "A", q5: "B",
-      q6: "A", q7: "D", q8: "A", q9: "B", q10: "B",
-      q11: "B", q12: "B", q13: "C", q14: "C", q15: "A",
-      q16: "C", q17: "C", q18: "A", q19: "D", q20: "B",
-      // Editorial 2 (Q21 - Q40)
-      q21: "A", q22: "A", q23: "A", q24: "A", q25: "B",
-      q26: "C", q27: "C", q28: "D", q29: "C", q30: "A",
-      q31: "C", q32: "B", q33: "A", q34: "D", q35: "C",
-      q36: "D", q37: "B", q38: "C", q39: "B", q40: "A",
-      // Editorial 3 (Q41 - Q50)
-      q41: "B", q42: "C", q43: "C", q44: "B", q45: "B",
-      q46: "B", q47: "D", q48: "A", q49: "C", q50: "A"
+    // Disable right-click and common inspect keys
+    document.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
+    document.onkeydown = function(e) {
+      if(e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85)){
+         return false;
+      }
     };
-    
-    // Start Quiz after name is entered
+
+    let timerInterval, totalTime = 1500; // 25 minutes = 1500 seconds
+    let startTime;
     function startQuiz() {
-      const nameInput = document.getElementById("studentName");
-      if(nameInput.value.trim() === "") {
-        alert("Please enter your name.");
+      const userName = document.getElementById('userName').value.trim();
+      if(userName === "") {
+        alert("Please enter your name to start the quiz.");
         return;
       }
-      // Hide name section and show quiz
-      document.getElementById("nameSection").style.display = "none";
-      document.getElementById("quizSection").style.display = "block";
-      startTimer();
+      // Display user's name on header
+      document.getElementById('displayName').innerText = userName.toUpperCase();
+      // Hide name entry and show quiz section
+      document.getElementById('nameEntry').style.display = "none";
+      document.getElementById('quizSection').style.display = "block";
+      // Set start time
       startTime = new Date();
+      // Start the timer
+      timerInterval = setInterval(updateTimer, 1000);
     }
-    
-    // Timer countdown function
-    function startTimer() {
-      updateTimerDisplay(totalTime);
-      timerInterval = setInterval(() => {
-        totalTime--;
-        updateTimerDisplay(totalTime);
-        if(totalTime <= 0) {
-          clearInterval(timerInterval);
-          submitQuiz(); // Auto-submit when time is up
-        }
-      }, 1000);
+    function updateTimer() {
+      totalTime--;
+      let minutes = Math.floor(totalTime/60);
+      let seconds = totalTime % 60;
+      document.getElementById('timer').innerText = "Time Remaining: " + minutes + "m " + seconds + "s";
+      if(totalTime <= 0) {
+        clearInterval(timerInterval);
+        submitQuiz();
+      }
     }
-    
-    function updateTimerDisplay(seconds) {
-      const minutes = Math.floor(seconds / 60);
-      const secs = seconds % 60;
-      document.getElementById("timer").innerText = "Time Remaining: " +
-        String(minutes).padStart(2, '0') + ":" + String(secs).padStart(2, '0');
-    }
-    
-    // Quiz submission and result calculation
     function submitQuiz() {
       clearInterval(timerInterval);
-      const form = document.getElementById("quizForm");
-      let score = 0;
-      let attempted = 0;
-      
-      for(let key in answers) {
-        const qElements = document.getElementsByName(key);
-        let answered = false;
-        for(let elem of qElements) {
-          if(elem.checked) {
+      // Calculate time taken
+      const timeTaken = 1500 - totalTime;
+      // Calculate score and attempted questions
+      let score = 0, attempted = 0;
+      for(let i = 1; i <= 50; i++){
+        const options = document.getElementsByName('q' + i);
+        for(const opt of options){
+          if(opt.checked){
             attempted++;
-            if(elem.value === answers[key]) {
+            if(opt.dataset.correct === "true") {
               score++;
             }
-            answered = true;
-            break;
           }
         }
       }
-      
-      const endTime = new Date();
-      const timeTaken = Math.floor((endTime - startTime) / 1000);
-      
       // Display results
-      const studentName = document.getElementById("studentName").value.trim();
-      document.getElementById("resultDetails").innerHTML = 
-        "<strong>Name:</strong> " + studentName + "<br>" +
-        "<strong>Questions Attempted:</strong> " + attempted + " / 50<br>" +
-        "<strong>Score:</strong> " + score + " / 50<br>" +
-        "<strong>Time Taken:</strong> " + timeTaken + " seconds";
-      
-      document.getElementById("resultSection").style.display = "block";
-      
-      // Fill hidden Formspree form and auto-submit
-      document.getElementById("formName").value = studentName;
-      document.getElementById("formAttempted").value = attempted;
-      document.getElementById("formScore").value = score;
-      document.getElementById("formTime").value = timeTaken;
-      
-      // Submit the form (using Formspree's standard POST submission)
-      document.getElementById("hiddenForm").submit();
+      const resultDiv = document.getElementById('results');
+      const userName = document.getElementById('userName').value.trim();
+      resultDiv.innerHTML = "<h2>Quiz Results</h2>" +
+                            "<p><strong>Name:</strong> " + userName + "</p>" +
+                            "<p><strong>Questions Attempted:</strong> " + attempted + " out of 50</p>" +
+                            "<p><strong>Score:</strong> " + score + " correct answers</p>" +
+                            "<p><strong>Time Taken:</strong> " + Math.floor(timeTaken/60) + " minutes " + (timeTaken % 60) + " seconds</p>";
+      resultDiv.style.display = "block";
+      // Automatically submit results via Formspree
+      document.getElementById('formUserName').value = userName;
+      document.getElementById('formAttempted').value = attempted;
+      document.getElementById('formScore').value = score;
+      document.getElementById('formTime').value = Math.floor(timeTaken/60) + "m " + (timeTaken % 60) + "s";
+      document.getElementById('hiddenForm').submit();
+      // Optionally disable quiz form after submission
+      document.getElementById('quizForm').style.display = "none";
     }
-    
-    // Optional: Prevent F12 and Ctrl+Shift+I (not fully secure but a deterrent)
-    document.onkeydown = function(e) {
-      if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) {
-        return false;
-      }
-    };
   </script>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <h1>QUIZ FOR CSS ASPIRANTS 25 March 2025</h1>
+    <h2>SYED ASGHAR ALI SHAH</h2>
+    <div id="displayName" style="margin-top:10px; font-size:1.2em;"></div>
+  </header>
+
+  <!-- Name Entry Section -->
+  <div id="nameEntry">
+    <h2>Enter Your Name to Start the Quiz</h2>
+    <input type="text" id="userName" placeholder="Your Name">
+    <br>
+    <button onclick="startQuiz()">Start Quiz</button>
+  </div>
+
+  <!-- Quiz Section -->
+  <div id="quizSection">
+    <div id="timer">Time Remaining: 25m 0s</div>
+    <form id="quizForm">
+      <!-- Question 1 -->
+      <div class="question">
+        <h3>1. Identify the part of speech of the underlined word in "She sings <u>beautifully</u>."</h3>
+        <label><input type="radio" name="q1" value="Verb"> Verb</label>
+        <label><input type="radio" name="q1" value="Adverb" data-correct="true"> Adverb</label>
+        <label><input type="radio" name="q1" value="Adjective"> Adjective</label>
+        <label><input type="radio" name="q1" value="Noun"> Noun</label>
+      </div>
+      <!-- Question 2 -->
+      <div class="question">
+        <h3>2. Choose the correct preposition: "He is fond ___ music."</h3>
+        <label><input type="radio" name="q2" value="of" data-correct="true"> of</label>
+        <label><input type="radio" name="q2" value="for"> for</label>
+        <label><input type="radio" name="q2" value="to"> to</label>
+        <label><input type="radio" name="q2" value="at"> at</label>
+      </div>
+      <!-- Question 3 -->
+      <div class="question">
+        <h3>3. Identify the tense of "She had been working."</h3>
+        <label><input type="radio" name="q3" value="Past Perfect" > Past Perfect</label>
+        <label><input type="radio" name="q3" value="Past Perfect Continuous" data-correct="true"> Past Perfect Continuous</label>
+        <label><input type="radio" name="q3" value="Present Perfect"> Present Perfect</label>
+        <label><input type="radio" name="q3" value="Future Perfect"> Future Perfect</label>
+      </div>
+      <!-- Question 4: Sentence Rearrangement -->
+      <div class="question">
+        <h3>4. Rearrange the words to form a correct sentence: "beautiful / is / sky / The"</h3>
+        <label><input type="radio" name="q4" value="The sky is beautiful." data-correct="true"> The sky is beautiful.</label>
+        <label><input type="radio" name="q4" value="Beautiful is the sky."> Beautiful is the sky.</label>
+        <label><input type="radio" name="q4" value="Sky the beautiful is."> Sky the beautiful is.</label>
+        <label><input type="radio" name="q4" value="Is the sky beautiful."> Is the sky beautiful.</label>
+      </div>
+      <!-- Question 5 -->
+      <div class="question">
+        <h3>5. In "After the rain stopped, the flowers bloomed," what is the subject?</h3>
+        <label><input type="radio" name="q5" value="After the rain stopped"> After the rain stopped</label>
+        <label><input type="radio" name="q5" value="the flowers" data-correct="true"> the flowers</label>
+        <label><input type="radio" name="q5" value="bloomed"> bloomed</label>
+        <label><input type="radio" name="q5" value="rain"> rain</label>
+      </div>
+      <!-- Question 6 -->
+      <div class="question">
+        <h3>6. In "He gave her a gift," which is the direct object?</h3>
+        <label><input type="radio" name="q6" value="her"> her</label>
+        <label><input type="radio" name="q6" value="He"> He</label>
+        <label><input type="radio" name="q6" value="a gift" data-correct="true"> a gift</label>
+        <label><input type="radio" name="q6" value="gave"> gave</label>
+      </div>
+      <!-- Question 7 -->
+      <div class="question">
+        <h3>7. Identify the type of clause in "When he arrived, the meeting started."</h3>
+        <label><input type="radio" name="q7" value="Noun clause"> Noun clause</label>
+        <label><input type="radio" name="q7" value="Adjective clause"> Adjective clause</label>
+        <label><input type="radio" name="q7" value="Adverbial clause" data-correct="true"> Adverbial clause</label>
+        <label><input type="radio" name="q7" value="Independent clause"> Independent clause</label>
+      </div>
+      <!-- Question 8 -->
+      <div class="question">
+        <h3>8. Identify the error in "She don't like apples."</h3>
+        <label><input type="radio" name="q8" value="like should be dislikes"> like should be dislikes</label>
+        <label><input type="radio" name="q8" value="She should be replaced" > She should be replaced</label>
+        <label><input type="radio" name="q8" value="don't should be doesn't" data-correct="true"> don't should be doesn't</label>
+        <label><input type="radio" name="q8" value="apples should be apple"> apples should be apple</label>
+      </div>
+      <!-- Question 9 -->
+      <div class="question">
+        <h3>9. Choose the correct article: "___ apple a day keeps the doctor away."</h3>
+        <label><input type="radio" name="q9" value="A"> A</label>
+        <label><input type="radio" name="q9" value="An" data-correct="true"> An</label>
+        <label><input type="radio" name="q9" value="The"> The</label>
+        <label><input type="radio" name="q9" value="No article"> No article</label>
+      </div>
+      <!-- Question 10 -->
+      <div class="question">
+        <h3>10. "Children" is the plural form of which noun?</h3>
+        <label><input type="radio" name="q10" value="child" data-correct="true"> child</label>
+        <label><input type="radio" name="q10" value="childe"> childe</label>
+        <label><input type="radio" name="q10" value="childs"> childs</label>
+        <label><input type="radio" name="q10" value="childes"> childes</label>
+      </div>
+      <!-- Question 11 -->
+      <div class="question">
+        <h3>11. Complete the series: good, better, ____.</h3>
+        <label><input type="radio" name="q11" value="best" data-correct="true"> best</label>
+        <label><input type="radio" name="q11" value="more good"> more good</label>
+        <label><input type="radio" name="q11" value="finest"> finest</label>
+        <label><input type="radio" name="q11" value="greatest"> greatest</label>
+      </div>
+      <!-- Question 12 -->
+      <div class="question">
+        <h3>12. What is the superlative form of "happy"?</h3>
+        <label><input type="radio" name="q12" value="happier"> happier</label>
+        <label><input type="radio" name="q12" value="more happy"> more happy</label>
+        <label><input type="radio" name="q12" value="happiest" data-correct="true"> happiest</label>
+        <label><input type="radio" name="q12" value="most happy"> most happy</label>
+      </div>
+      <!-- Question 13 -->
+      <div class="question">
+        <h3>13. Complete the sentence: "Neither of the boys did ___ homework."</h3>
+        <label><input type="radio" name="q13" value="their"> their</label>
+        <label><input type="radio" name="q13" value="him" > him</label>
+        <label><input type="radio" name="q13" value="his" data-correct="true"> his</label>
+        <label><input type="radio" name="q13" value="them"> them</label>
+      </div>
+      <!-- Question 14 -->
+      <div class="question">
+        <h3>14. Choose the correct conjunction: "I will go, ____ I have time."</h3>
+        <label><input type="radio" name="q14" value="if" data-correct="true"> if</label>
+        <label><input type="radio" name="q14" value="unless"> unless</label>
+        <label><input type="radio" name="q14" value="although"> although</label>
+        <label><input type="radio" name="q14" value="because"> because</label>
+      </div>
+      <!-- Question 15 -->
+      <div class="question">
+        <h3>15. In "The cat sat on the mat," which phrase is prepositional?</h3>
+        <label><input type="radio" name="q15" value="The cat" > The cat</label>
+        <label><input type="radio" name="q15" value="sat" > sat</label>
+        <label><input type="radio" name="q15" value="on the mat" data-correct="true"> on the mat</label>
+        <label><input type="radio" name="q15" value="cat sat"> cat sat</label>
+      </div>
+      <!-- Question 16 -->
+      <div class="question">
+        <h3>16. "What a wonderful world!" is an example of which sentence type?</h3>
+        <label><input type="radio" name="q16" value="Declarative"> Declarative</label>
+        <label><input type="radio" name="q16" value="Interrogative"> Interrogative</label>
+        <label><input type="radio" name="q16" value="Imperative"> Imperative</label>
+        <label><input type="radio" name="q16" value="Exclamatory" data-correct="true"> Exclamatory</label>
+      </div>
+      <!-- Question 17: Sentence Rearrangement -->
+      <div class="question">
+        <h3>17. Rearrange the words to form a question: "you / are / coming / ?" </h3>
+        <label><input type="radio" name="q17" value="Are you coming?" data-correct="true"> Are you coming?</label>
+        <label><input type="radio" name="q17" value="You are coming?"> You are coming?</label>
+        <label><input type="radio" name="q17" value="Coming are you?"> Coming are you?</label>
+        <label><input type="radio" name="q17" value="You coming are?"> You coming are?</label>
+      </div>
+      <!-- Question 18 -->
+      <div class="question">
+        <h3>18. Transform to passive voice: "They built the house."</h3>
+        <label><input type="radio" name="q18" value="The house built by them."> The house built by them.</label>
+        <label><input type="radio" name="q18" value="The house was built by them." data-correct="true"> The house was built by them.</label>
+        <label><input type="radio" name="q18" value="The house is built by them."> The house is built by them.</label>
+        <label><input type="radio" name="q18" value="They were built by the house."> They were built by the house.</label>
+      </div>
+      <!-- Question 19 -->
+      <div class="question">
+        <h3>19. Complete: "She ___ going to school."</h3>
+        <label><input type="radio" name="q19" value="is" data-correct="true"> is</label>
+        <label><input type="radio" name="q19" value="are"> are</label>
+        <label><input type="radio" name="q19" value="am"> am</label>
+        <label><input type="radio" name="q19" value="be"> be</label>
+      </div>
+      <!-- Question 20 -->
+      <div class="question">
+        <h3>20. Identify the error in subject-verb agreement: "Each of the students have their book."</h3>
+        <label><input type="radio" name="q20" value="students is wrong"> students is wrong</label>
+        <label><input type="radio" name="q20" value="have should be has" data-correct="true"> have should be has</label>
+        <label><input type="radio" name="q20" value="the is unnecessary"> the is unnecessary</label>
+        <label><input type="radio" name="q20" value="students should be singular"> students should be singular</label>
+      </div>
+      <!-- Question 21 -->
+      <div class="question">
+        <h3>21. What part of speech is "quickly" in "He quickly ran"?</h3>
+        <label><input type="radio" name="q21" value="Adjective"> Adjective</label>
+        <label><input type="radio" name="q21" value="Adverb" data-correct="true"> Adverb</label>
+        <label><input type="radio" name="q21" value="Noun"> Noun</label>
+        <label><input type="radio" name="q21" value="Verb"> Verb</label>
+      </div>
+      <!-- Question 22 -->
+      <div class="question">
+        <h3>22. In "She sent her friend a letter," which is the indirect object?</h3>
+        <label><input type="radio" name="q22" value="letter"> letter</label>
+        <label><input type="radio" name="q22" value="her friend" data-correct="true"> her friend</label>
+        <label><input type="radio" name="q22" value="She"> She</label>
+        <label><input type="radio" name="q22" value="sent"> sent</label>
+      </div>
+      <!-- Question 23 -->
+      <div class="question">
+        <h3>23. In "The sky became dark," what is "dark" functioning as?</h3>
+        <label><input type="radio" name="q23" value="Adverb"> Adverb</label>
+        <label><input type="radio" name="q23" value="Object"> Object</label>
+        <label><input type="radio" name="q23" value="Subject complement" data-correct="true"> Subject complement</label>
+        <label><input type="radio" name="q23" value="Verb"> Verb</label>
+      </div>
+      <!-- Question 24 -->
+      <div class="question">
+        <h3>24. Identify the object of the preposition in "The keys are in the drawer."</h3>
+        <label><input type="radio" name="q24" value="keys"> keys</label>
+        <label><input type="radio" name="q24" value="are"> are</label>
+        <label><input type="radio" name="q24" value="in" > in</label>
+        <label><input type="radio" name="q24" value="drawer" data-correct="true"> drawer</label>
+      </div>
+      <!-- Question 25 -->
+      <div class="question">
+        <h3>25. "Is he coming?" is an example of which sentence type?</h3>
+        <label><input type="radio" name="q25" value="Declarative"> Declarative</label>
+        <label><input type="radio" name="q25" value="Interrogative" data-correct="true"> Interrogative</label>
+        <label><input type="radio" name="q25" value="Exclamatory"> Exclamatory</label>
+        <label><input type="radio" name="q25" value="Imperative"> Imperative</label>
+      </div>
+      <!-- Question 26 -->
+      <div class="question">
+        <h3>26. In "I like tea but not coffee," what function does "but" serve?</h3>
+        <label><input type="radio" name="q26" value="Preposition"> Preposition</label>
+        <label><input type="radio" name="q26" value="Conjunction" data-correct="true"> Conjunction</label>
+        <label><input type="radio" name="q26" value="Interjection"> Interjection</label>
+        <label><input type="radio" name="q26" value="Adverb"> Adverb</label>
+      </div>
+      <!-- Question 27 -->
+      <div class="question">
+        <h3>27. In "This book is mine," which word is a demonstrative adjective?</h3>
+        <label><input type="radio" name="q27" value="This" data-correct="true"> This</label>
+        <label><input type="radio" name="q27" value="book"> book</label>
+        <label><input type="radio" name="q27" value="is"> is</label>
+        <label><input type="radio" name="q27" value="mine"> mine</label>
+      </div>
+      <!-- Question 28 -->
+      <div class="question">
+        <h3>28. Identify the possessive case in the phrase "John's car."</h3>
+        <label><input type="radio" name="q28" value="John" > John</label>
+        <label><input type="radio" name="q28" value="car"> car</label>
+        <label><input type="radio" name="q28" value="John's" data-correct="true"> John's</label>
+        <label><input type="radio" name="q28" value="s"> s</label>
+      </div>
+      <!-- Question 29 -->
+      <div class="question">
+        <h3>29. In "The man who called is here," what is the role of "who"?</h3>
+        <label><input type="radio" name="q29" value="Relative pronoun" data-correct="true"> Relative pronoun</label>
+        <label><input type="radio" name="q29" value="Interrogative pronoun"> Interrogative pronoun</label>
+        <label><input type="radio" name="q29" value="Conjunction"> Conjunction</label>
+        <label><input type="radio" name="q29" value="Adverb"> Adverb</label>
+      </div>
+      <!-- Question 30 -->
+      <div class="question">
+        <h3>30. Identify the error in subject-verb agreement: "The team are winning."</h3>
+        <label><input type="radio" name="q30" value="Team should be teams"> Team should be teams</label>
+        <label><input type="radio" name="q30" value="are should be is" data-correct="true"> are should be is</label>
+        <label><input type="radio" name="q30" value="The is missing"> The is missing</label>
+        <label><input type="radio" name="q30" value="No error"> No error</label>
+      </div>
+      <!-- Question 31 -->
+      <div class="question">
+        <h3>31. Choose the correct modal: "You ___ see a doctor if you're ill."</h3>
+        <label><input type="radio" name="q31" value="must"> must</label>
+        <label><input type="radio" name="q31" value="should" data-correct="true"> should</label>
+        <label><input type="radio" name="q31" value="can"> can</label>
+        <label><input type="radio" name="q31" value="might"> might</label>
+      </div>
+      <!-- Question 32 -->
+      <div class="question">
+        <h3>32. Which of the following is a proper noun?</h3>
+        <label><input type="radio" name="q32" value="city"> city</label>
+        <label><input type="radio" name="q32" value="paris" data-correct="true"> Paris</label>
+        <label><input type="radio" name="q32" value="country"> country</label>
+        <label><input type="radio" name="q32" value="continent"> continent</label>
+      </div>
+      <!-- Question 33 -->
+      <div class="question">
+        <h3>33. In "The old bridge is sturdy," which words are adjectives?</h3>
+        <label><input type="radio" name="q33" value="old and sturdy" data-correct="true"> old and sturdy</label>
+        <label><input type="radio" name="q33" value="bridge"> bridge</label>
+        <label><input type="radio" name="q33" value="The and is"> The and is</label>
+        <label><input type="radio" name="q33" value="old only"> old only</label>
+      </div>
+      <!-- Question 34 -->
+      <div class="question">
+        <h3>34. Identify the adverbial phrase in "In a hurry, he left."</h3>
+        <label><input type="radio" name="q34" value="he left"> he left</label>
+        <label><input type="radio" name="q34" value="In a hurry" data-correct="true"> In a hurry</label>
+        <label><input type="radio" name="q34" value="a hurry"> a hurry</label>
+        <label><input type="radio" name="q34" value="left"> left</label>
+      </div>
+      <!-- Question 35 -->
+      <div class="question">
+        <h3>35. Choose the correct verb form: "Neither he nor his friends ___ coming."</h3>
+        <label><input type="radio" name="q35" value="is"> is</label>
+        <label><input type="radio" name="q35" value="are" data-correct="true"> are</label>
+        <label><input type="radio" name="q35" value="was"> was</label>
+        <label><input type="radio" name="q35" value="were"> were</label>
+      </div>
+      <!-- Question 36 -->
+      <div class="question">
+        <h3>36. Which punctuation makes the meaning clear: "Let's eat, grandma!" vs "Let's eat grandma!"</h3>
+        <label><input type="radio" name="q36" value="Comma usage" data-correct="true"> Comma usage</label>
+        <label><input type="radio" name="q36" value="Period usage"> Period usage</label>
+        <label><input type="radio" name="q36" value="Colon usage"> Colon usage</label>
+        <label><input type="radio" name="q36" value="Semicolon usage"> Semicolon usage</label>
+      </div>
+      <!-- Question 37 -->
+      <div class="question">
+        <h3>37. Identify the correct comma placement: "After dinner we went to a movie."</h3>
+        <label><input type="radio" name="q37" value="After dinner, we went to a movie." data-correct="true"> After dinner, we went to a movie.</label>
+        <label><input type="radio" name="q37" value="After dinner we, went to a movie."> After dinner we, went to a movie.</label>
+        <label><input type="radio" name="q37" value="After, dinner we went to a movie."> After, dinner we went to a movie.</label>
+        <label><input type="radio" name="q37" value="No comma needed"> No comma needed</label>
+      </div>
+      <!-- Question 38: Sentence Rearrangement -->
+      <div class="question">
+        <h3>38. Rearrange to form a correct sentence: "difficult / extremely / is / the / test."</h3>
+        <label><input type="radio" name="q38" value="The test is extremely difficult." data-correct="true"> The test is extremely difficult.</label>
+        <label><input type="radio" name="q38" value="Extremely the test is difficult."> Extremely the test is difficult.</label>
+        <label><input type="radio" name="q38" value="Difficult the test is extremely."> Difficult the test is extremely.</label>
+        <label><input type="radio" name="q38" value="Is the test extremely difficult?"> Is the test extremely difficult?</label>
+      </div>
+      <!-- Question 39 -->
+      <div class="question">
+        <h3>39. Identify the error: "He has less books than me."</h3>
+        <label><input type="radio" name="q39" value="less should be fewer" data-correct="true"> less should be fewer</label>
+        <label><input type="radio" name="q39" value="books should be book"> books should be book</label>
+        <label><input type="radio" name="q39" value="me should be I"> me should be I</label>
+        <label><input type="radio" name="q39" value="No error"> No error</label>
+      </div>
+      <!-- Question 40 -->
+      <div class="question">
+        <h3>40. Identify the error: "I can't hardly wait."</h3>
+        <label><input type="radio" name="q40" value="Double negative error" data-correct="true"> Double negative error</label>
+        <label><input type="radio" name="q40" value="can't should be can"> can't should be can</label>
+        <label><input type="radio" name="q40" value="hardly is fine"> hardly is fine</label>
+        <label><input type="radio" name="q40" value="No error"> No error</label>
+      </div>
+      <!-- Question 41 -->
+      <div class="question">
+        <h3>41. What is the function of "although" in a sentence?</h3>
+        <label><input type="radio" name="q41" value="Coordinating conjunction"> Coordinating conjunction</label>
+        <label><input type="radio" name="q41" value="Subordinating conjunction" data-correct="true"> Subordinating conjunction</label>
+        <label><input type="radio" name="q41" value="Interjection"> Interjection</label>
+        <label><input type="radio" name="q41" value="Preposition"> Preposition</label>
+      </div>
+      <!-- Question 42 -->
+      <div class="question">
+        <h3>42. Complete the sentence: "She was late ___ heavy traffic."</h3>
+        <label><input type="radio" name="q42" value="because of" data-correct="true"> because of</label>
+        <label><input type="radio" name="q42" value="due to"> due to</label>
+        <label><input type="radio" name="q42" value="by"> by</label>
+        <label><input type="radio" name="q42" value="with"> with</label>
+      </div>
+      <!-- Question 43 -->
+      <div class="question">
+        <h3>43. Which sentence is in passive voice?</h3>
+        <label><input type="radio" name="q43" value="She writes a letter."> She writes a letter.</label>
+        <label><input type="radio" name="q43" value="A letter is written by her." data-correct="true"> A letter is written by her.</label>
+        <label><input type="radio" name="q43" value="She is writing a letter."> She is writing a letter.</label>
+        <label><input type="radio" name="q43" value="She wrote a letter."> She wrote a letter.</label>
+      </div>
+      <!-- Question 44 -->
+      <div class="question">
+        <h3>44. Fill in the blank: "To ___ did you give the book?"</h3>
+        <label><input type="radio" name="q44" value="who"> who</label>
+        <label><input type="radio" name="q44" value="whom" data-correct="true"> whom</label>
+        <label><input type="radio" name="q44" value="whose"> whose</label>
+        <label><input type="radio" name="q44" value="which"> which</label>
+      </div>
+      <!-- Question 45 -->
+      <div class="question">
+        <h3>45. Identify the error: "He don't know the answer."</h3>
+        <label><input type="radio" name="q45" value="don't should be doesn't" data-correct="true"> don't should be doesn't</label>
+        <label><input type="radio" name="q45" value="He should be replaced"> He should be replaced</label>
+        <label><input type="radio" name="q45" value="answer should be answers"> answer should be answers</label>
+        <label><input type="radio" name="q45" value="No error"> No error</label>
+      </div>
+      <!-- Question 46 -->
+      <div class="question">
+        <h3>46. "Sit down." is an example of which sentence type?</h3>
+        <label><input type="radio" name="q46" value="Interrogative"> Interrogative</label>
+        <label><input type="radio" name="q46" value="Declarative"> Declarative</label>
+        <label><input type="radio" name="q46" value="Imperative" data-correct="true"> Imperative</label>
+        <label><input type="radio" name="q46" value="Exclamatory"> Exclamatory</label>
+      </div>
+      <!-- Question 47 -->
+      <div class="question">
+        <h3>47. In "Either option is acceptable," what is the function of "either"?</h3>
+        <label><input type="radio" name="q47" value="Coordinating conjunction"> Coordinating conjunction</label>
+        <label><input type="radio" name="q47" value="Distributive adjective" data-correct="true"> Distributive adjective</label>
+        <label><input type="radio" name="q47" value="Preposition"> Preposition</label>
+        <label><input type="radio" name="q47" value="Interjection"> Interjection</label>
+      </div>
+      <!-- Question 48 -->
+      <div class="question">
+        <h3>48. Choose the correct pronoun: "It is I/I am the one."</h3>
+        <label><input type="radio" name="q48" value="I am" data-correct="true"> I am</label>
+        <label><input type="radio" name="q48" value="me am"> me am</label>
+        <label><input type="radio" name="q48" value="I"> I</label>
+        <label><input type="radio" name="q48" value="me"> me</label>
+      </div>
+      <!-- Question 49: Sentence Rearrangement -->
+      <div class="question">
+        <h3>49. Rearrange the words to form a correct sentence: "sentence / rearrange / must / the / correct / to"</h3>
+        <label><input type="radio" name="q49" value="The sentence must be rearranged correctly." data-correct="true"> The sentence must be rearranged correctly.</label>
+        <label><input type="radio" name="q49" value="Must the sentence be rearranged correctly."> Must the sentence be rearranged correctly.</label>
+        <label><input type="radio" name="q49" value="Rearranged correctly must be the sentence."> Rearranged correctly must be the sentence.</label>
+        <label><input type="radio" name="q49" value="The sentence correctly must be rearranged."> The sentence correctly must be rearranged.</label>
+      </div>
+      <!-- Question 50 -->
+      <div class="question">
+        <h3>50. In "He ran quickly," what is the grammatical term for "quickly"?</h3>
+        <label><input type="radio" name="q50" value="Adjective"> Adjective</label>
+        <label><input type="radio" name="q50" value="Adverb of manner" data-correct="true"> Adverb of manner</label>
+        <label><input type="radio" name="q50" value="Verb"> Verb</label>
+        <label><input type="radio" name="q50" value="Noun"> Noun</label>
+      </div>
+      <button type="button" id="submitBtn" onclick="submitQuiz()">Submit Quiz</button>
+    </form>
+  </div>
+
+  <!-- Results Display -->
+  <div id="results"></div>
+
+  <!-- Hidden Form for Formspree Submission -->
+  <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+    <input type="text" name="userName" id="formUserName">
+    <input type="text" name="attempted" id="formAttempted">
+    <input type="text" name="score" id="formScore">
+    <input type="text" name="timeTaken" id="formTime">
+  </form>
+
+  <!-- Footer -->
+  <footer>
+    <p>Contact us at 03265762698 | For more quizzes and information, call now!</p>
+  </footer>
 </body>
 </html>
