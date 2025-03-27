@@ -2,633 +2,501 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 26 March 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 27 March 2025</title>
   <style>
-    /* Overall styling and disable text selection */
+    /* Disable text selection */
     body, html {
+      -webkit-user-select: none; /* Safari */
+      -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* IE10+/Edge */
+      user-select: none;
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
       background: #f4f4f4;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
     }
-    /* Header styling */
-    header {
-      background: url('https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__') no-repeat center;
-      background-size: cover;
-      color: white;
-      padding: 20px;
+    header, footer {
+      background: #003366;
+      color: #fff;
       text-align: center;
-      position: relative;
+      padding: 20px 10px;
     }
     header h1 {
       margin: 0;
-      font-size: 2.5em;
+      font-size: 28px;
     }
     header h2 {
       margin: 5px 0 0 0;
-      font-size: 1.2em;
+      font-size: 18px;
       font-weight: normal;
     }
-    /* Name entry container */
-    #nameEntry {
-      margin: 20px auto;
+    .container {
       width: 90%;
-      max-width: 500px;
+      max-width: 1000px;
+      margin: 20px auto;
       background: #fff;
       padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      text-align: center;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    #nameEntry input[type="text"] {
-      width: 80%;
-      padding: 10px;
-      font-size: 1em;
-    }
-    #nameEntry button {
-      padding: 10px 20px;
-      font-size: 1em;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-    /* Quiz section styling */
-    #quizSection {
-      display: none;
-      padding: 20px;
-    }
-    #timer {
-      font-size: 1.2em;
-      font-weight: bold;
+    #nameEntry, #quizSection, #resultSection {
       margin-bottom: 20px;
-      text-align: right;
+    }
+    #quizSection, #resultSection {
+      display: none;
     }
     .question {
-      background: #fff;
       margin-bottom: 15px;
-      padding: 15px;
-      border-radius: 5px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
     }
     .question h3 {
       margin: 0 0 10px;
-      font-size: 1.1em;
+      font-size: 16px;
     }
-    .question label {
+    .options label {
       display: block;
       margin-bottom: 5px;
       cursor: pointer;
     }
-    /* Submit button */
-    #submitBtn {
-      padding: 15px 30px;
-      font-size: 1.1em;
-      background: #007BFF;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin: 20px auto;
-      display: block;
-      border-radius: 5px;
-    }
-    /* Results display */
-    #results {
-      display: none;
-      background: #fff;
-      padding: 20px;
-      margin: 20px auto;
-      width: 90%;
-      max-width: 600px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      text-align: center;
-    }
-    /* Footer styling */
-    footer {
-      background: #333;
+    button {
+      background: #003366;
       color: #fff;
-      padding: 15px;
-      text-align: center;
-      position: relative;
-      bottom: 0;
-      width: 100%;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #00509e;
+    }
+    #timer {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: right;
+    }
+    /* Disable right-click context menu */
+    body {
+      -webkit-touch-callout: none;
     }
   </style>
+</head>
+<body oncontextmenu="return false;">
+  <header>
+    <h1>QUIZ FOR CSS ASPIRANTS 27 March 2025</h1>
+    <h2>SYED ASGHAR ALI SHAH</h2>
+  </header>
+  
+  <div class="container">
+    <!-- Name Entry Section -->
+    <div id="nameEntry">
+      <h2>Enter Your Name to Start the Quiz</h2>
+      <input type="text" id="studentName" placeholder="Your Name" style="padding: 8px; width: 60%; font-size: 16px;">
+      <br>
+      <button id="startQuizBtn">Start Quiz</button>
+    </div>
+    
+    <!-- Quiz Section -->
+    <div id="quizSection">
+      <div id="timer">Time Left: 25:00</div>
+      <form id="quizForm">
+        <!-- Quiz questions will be inserted here dynamically -->
+      </form>
+      <button id="submitQuizBtn">Submit Quiz</button>
+    </div>
+    
+    <!-- Result Section -->
+    <div id="resultSection">
+      <h2>Quiz Results</h2>
+      <p id="resultDisplay"></p>
+    </div>
+  </div>
+  
+  <footer>
+    <p>Contact: 03265762698 | Call us now for more details!</p>
+  </footer>
+  
+  <!-- Hidden form for Formspree submission -->
+  <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+    <input type="hidden" name="studentName" id="formStudentName">
+    <input type="hidden" name="attempted" id="formAttempted">
+    <input type="hidden" name="score" id="formScore">
+    <input type="hidden" name="timeTaken" id="formTimeTaken">
+  </form>
+  
   <script>
-    // Disable right-click and common inspect keys
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    });
-    document.onkeydown = function(e) {
-      if(e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85)){
-         return false;
+    // Prevent text copying by disabling selection and context menu is set via CSS and oncontextmenu attribute.
+    
+    // Questions array – each question object includes the question text, options array, and the correct answer.
+    const questions = [
+      {
+        q: "1. Which of the following is a proper noun?",
+        options: ["dog", "London", "happiness", "book"],
+        answer: "London"
+      },
+      {
+        q: "2. In the sentence 'The teacher spoke eloquently,' which word is the adverb?",
+        options: ["teacher", "spoke", "eloquently", "the"],
+        answer: "eloquently"
+      },
+      {
+        q: "3. Which sentence is an interrogative sentence?",
+        options: ["He is here.", "Are you coming?", "Stop talking.", "What a surprise!"],
+        answer: "Are you coming?"
+      },
+      {
+        q: "4. In the sentence 'She gave her friend a gift,' what is 'her friend'?",
+        options: ["subject", "direct object", "indirect object", "predicate"],
+        answer: "indirect object"
+      },
+      {
+        q: "5. Identify the preposition in the sentence 'The cat jumped ... the fence.'",
+        options: ["jumped", "cat", "over", "fence"],
+        answer: "over"
+      },
+      {
+        q: "6. Which sentence correctly uses the possessive case?",
+        options: ["The cats tail", "The cat's tail", "The cats' tail", "The cat tail"],
+        answer: "The cat's tail"
+      },
+      {
+        q: "7. Which of the following is a compound sentence?",
+        options: ["I went to the market.", "I went to the market and I bought apples.", "Because I went to the market, I bought apples.", "I bought apples."],
+        answer: "I went to the market and I bought apples."
+      },
+      {
+        q: "8. Which word is an interjection in the sentence 'Wow, that was amazing!'?",
+        options: ["that", "was", "amazing", "Wow"],
+        answer: "Wow"
+      },
+      {
+        q: "9. Identify the direct object in 'He read the book thoroughly.'",
+        options: ["He", "read", "book", "thoroughly"],
+        answer: "book"
+      },
+      {
+        q: "10. Which of the following is a demonstrative adjective?",
+        options: ["this", "quickly", "very", "some"],
+        answer: "this"
+      },
+      {
+        q: "11. Choose the sentence that is in the passive voice.",
+        options: ["The chef cooks the meal.", "The meal is cooked by the chef.", "The chef was cooking the meal.", "The meal cooked quickly."],
+        answer: "The meal is cooked by the chef."
+      },
+      {
+        q: "12. Identify the error in: 'Each of the students have finished their exam.'",
+        options: ["verb agreement", "pronoun case", "spelling", "punctuation"],
+        answer: "verb agreement"
+      },
+      {
+        q: "13. Which sentence demonstrates correct subject-verb agreement?",
+        options: ["The list of items are on the desk.", "The list of items is on the desk.", "The items on the list is long.", "List of items are long."],
+        answer: "The list of items is on the desk."
+      },
+      {
+        q: "14. In the sentence 'After the movie, we went out for dinner,' what role does 'After' play?",
+        options: ["noun", "adjective", "conjunction", "preposition"],
+        answer: "preposition"
+      },
+      {
+        q: "15. Which of the following is a relative pronoun?",
+        options: ["which", "who", "that", "all of the above"],
+        answer: "all of the above"
+      },
+      {
+        q: "16. Identify the correct use of an adverb in the sentence: 'He sings ______.'",
+        options: ["beautiful", "beautifully", "beautifuly", "beauty"],
+        answer: "beautifully"
+      },
+      {
+        q: "17. Which sentence correctly uses an infinitive?",
+        options: ["She likes to dance.", "She likes dancing.", "She liked dance.", "She dance."],
+        answer: "She likes to dance."
+      },
+      {
+        q: "18. Which of the following is an example of a gerund?",
+        options: ["swimming", "swim", "swam", "to swim"],
+        answer: "swimming"
+      },
+      {
+        q: "19. Select the sentence that best illustrates a complex sentence.",
+        options: ["I ate, and I left.", "I ate because I was hungry.", "I ate dinner.", "I left early."],
+        answer: "I ate because I was hungry."
+      },
+      {
+        q: "20. Which sentence correctly uses a semicolon?",
+        options: ["I came home; I saw; I conquered.", "I came, I saw; I conquered.", "I came; I saw, I conquered.", "I came, I saw, I conquered."],
+        answer: "I came home; I saw; I conquered."
+      },
+      {
+        q: "21. Identify the correct sentence with proper punctuation.",
+        options: ["Lets eat, Grandma.", "Let's eat Grandma.", "Lets eat Grandma.", "Let's eat, Grandma."],
+        answer: "Let's eat, Grandma."
+      },
+      {
+        q: "22. Which sentence contains a dangling modifier?",
+        options: ["Running fast, the finish line was crossed by him.", "Running fast, he crossed the finish line.", "He was running fast to cross the finish line.", "He ran fast."],
+        answer: "Running fast, the finish line was crossed by him."
+      },
+      {
+        q: "23. In the sentence 'Neither the teacher nor the students were aware of the change,' which subject-verb agreement is correct?",
+        options: ["were", "was", "are", "is"],
+        answer: "were"
+      },
+      {
+        q: "24. Identify the prepositional phrase in the sentence 'The cat slept on the warm windowsill.'",
+        options: ["The cat", "slept", "on the warm windowsill", "warm windowsill"],
+        answer: "on the warm windowsill"
+      },
+      {
+        q: "25. Which of the following sentences uses a subordinating conjunction?",
+        options: ["I will call you when I arrive.", "I will call you, and I will text.", "I will call you but I am busy.", "I will call you or text."],
+        answer: "I will call you when I arrive."
+      },
+      {
+        q: "26. Identify the correct order of adjectives in English with respect to opinion, size, age, shape, color, origin, material.",
+        options: ["size, shape, age, color, material, purpose", "opinion, size, age, shape, color, origin, material", "age, opinion, color, origin, shape, size", "material, color, shape, age, size, opinion"],
+        answer: "opinion, size, age, shape, color, origin, material"
+      },
+      {
+        q: "27. Which sentence contains an example of an idiom?",
+        options: ["It’s raining cats and dogs.", "The cat is on the roof.", "I saw a cat.", "Dogs bark."],
+        answer: "It’s raining cats and dogs."
+      },
+      {
+        q: "28. In the sentence 'She is as brave as a lion,' what figure of speech is used?",
+        options: ["Metaphor", "Simile", "Hyperbole", "Personification"],
+        answer: "Simile"
+      },
+      {
+        q: "29. Which word is an example of a collective noun?",
+        options: ["flock", "courage", "happiness", "apple"],
+        answer: "flock"
+      },
+      {
+        q: "30. Identify the error in: 'He did not do nothing.'",
+        options: ["Double negative", "Verb tense", "Subject-verb agreement", "Pronoun usage"],
+        answer: "Double negative"
+      },
+      {
+        q: "31. Which sentence is an imperative sentence?",
+        options: ["Please close the door.", "The door is closed.", "Is the door closed?", "The door closes."],
+        answer: "Please close the door."
+      },
+      {
+        q: "32. Identify the part of speech of the word 'quickly' in the sentence 'She quickly finished her work.'",
+        options: ["verb", "adjective", "adverb", "preposition"],
+        answer: "adverb"
+      },
+      {
+        q: "33. Which sentence uses an appositive correctly?",
+        options: ["My friend, John, is coming over.", "My friend John, is coming over.", "My friend John is, coming over.", "My, friend John is coming over."],
+        answer: "My friend, John, is coming over."
+      },
+      {
+        q: "34. Which sentence demonstrates proper use of a colon?",
+        options: ["She had one hobby: painting.", "She had: one hobby painting.", "She had one hobby, painting.", "She had one hobby; painting."],
+        answer: "She had one hobby: painting."
+      },
+      {
+        q: "35. In the sentence 'The book, which was on the table, was red,' what type of clause is 'which was on the table'?",
+        options: ["Independent clause", "Dependent clause", "Coordinate clause", "Appositive clause"],
+        answer: "Dependent clause"
+      },
+      {
+        q: "36. Identify the correct use of quotation marks.",
+        options: ["She said, 'I am coming soon.'", "She said 'I am coming soon'.", "She said, 'I am coming soon.", "She said, I am coming soon."],
+        answer: "She said, 'I am coming soon.'"
+      },
+      {
+        q: "37. Which of the following sentences uses the correct comparative form?",
+        options: ["She is more smarter than her brother.", "She is smarter than her brother.", "She is smart than her brother.", "She is most smart than her brother."],
+        answer: "She is smarter than her brother."
+      },
+      {
+        q: "38. Select the sentence that best demonstrates the use of the superlative form.",
+        options: ["He is the most intelligent student in the class.", "He is more intelligent than all.", "He is intelligent.", "He is more intelligent student."],
+        answer: "He is the most intelligent student in the class."
+      },
+      {
+        q: "39. Which sentence uses the modal verb correctly?",
+        options: ["She can sings beautifully.", "She can sing beautifully.", "She can sang beautifully.", "She cans sing beautifully."],
+        answer: "She can sing beautifully."
+      },
+      {
+        q: "40. Identify the sentence that properly uses the past perfect tense.",
+        options: ["She had finished her work before dinner.", "She finished her work before dinner.", "She has finished her work before dinner.", "She finishes her work before dinner."],
+        answer: "She had finished her work before dinner."
+      },
+      {
+        q: "41. Which of the following is an example of direct speech?",
+        options: ["He said he was tired.", "He said, 'I am tired.'", "He was tired.", "I am tired."],
+        answer: "He said, 'I am tired.'"
+      },
+      {
+        q: "42. In the sentence 'Despite the rain, the match continued,' what is the role of 'despite'?",
+        options: ["Conjunction", "Preposition", "Adverb", "Interjection"],
+        answer: "Preposition"
+      },
+      {
+        q: "43. Identify the correct use of the semicolon in joining independent clauses.",
+        options: ["I went home; because I was tired.", "I went home; I was tired.", "I went home, I was tired.", "I went home; and I was tired."],
+        answer: "I went home; I was tired."
+      },
+      {
+        q: "44. Which sentence is an example of a declarative sentence?",
+        options: ["What a beautiful day!", "Please sit down.", "The sky is clear.", "Is it raining?"],
+        answer: "The sky is clear."
+      },
+      {
+        q: "45. Identify the term for a word that has the same spelling but different meanings.",
+        options: ["Homophone", "Homograph", "Antonym", "Synonym"],
+        answer: "Homograph"
+      },
+      {
+        q: "46. Which sentence contains a correct use of the future perfect tense?",
+        options: ["By next year, I will have graduated.", "I will have graduate by next year.", "I have graduated by next year.", "I will graduate by next year."],
+        answer: "By next year, I will have graduated."
+      },
+      {
+        q: "47. Identify the error in: 'Its a beautiful day, isn't it?'",
+        options: ["Missing apostrophe in 'it's'", "Incorrect verb tense", "Subject-verb agreement error", "Punctuation error"],
+        answer: "Missing apostrophe in 'it's'"
+      },
+      {
+        q: "48. Which of the following demonstrates correct use of an interrogative adjective?",
+        options: ["Which color do you prefer?", "What do you prefer color?", "Color do you prefer?", "Do you prefer which color?"],
+        answer: "Which color do you prefer?"
+      },
+      {
+        q: "49. In the sentence 'They went to the store to buy groceries,' what function does 'to buy' serve?",
+        options: ["Infinitive of purpose", "Prepositional phrase", "Gerund", "Participle phrase"],
+        answer: "Infinitive of purpose"
+      },
+      {
+        q: "50. Which sentence correctly uses a restrictive clause?",
+        options: ["The students who study hard get good grades.", "The students, who study hard, get good grades.", "The students, who study hard get good grades.", "The students that study hard, get good grades."],
+        answer: "The students who study hard get good grades."
       }
-    };
-
-    let timerInterval, totalTime = 1500; // 25 minutes = 1500 seconds
-    let startTime;
-    function startQuiz() {
-      const userName = document.getElementById('userName').value.trim();
-      if(userName === "") {
+    ];
+    
+    let timerInterval;
+    let totalTime = 25 * 60; // 25 minutes in seconds
+    let timeTaken = 0;
+    
+    const startQuizBtn = document.getElementById("startQuizBtn");
+    const studentNameInput = document.getElementById("studentName");
+    const nameEntryDiv = document.getElementById("nameEntry");
+    const quizSectionDiv = document.getElementById("quizSection");
+    const quizForm = document.getElementById("quizForm");
+    const submitQuizBtn = document.getElementById("submitQuizBtn");
+    const timerDisplay = document.getElementById("timer");
+    const resultSection = document.getElementById("resultSection");
+    const resultDisplay = document.getElementById("resultDisplay");
+    
+    // Render quiz questions dynamically with randomized options
+    function renderQuiz() {
+      quizForm.innerHTML = "";
+      questions.forEach((question, index) => {
+        // Clone options array and shuffle it
+        const opts = question.options.slice();
+        for (let i = opts.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [opts[i], opts[j]] = [opts[j], opts[i]];
+        }
+        
+        const questionDiv = document.createElement("div");
+        questionDiv.className = "question";
+        questionDiv.innerHTML = `<h3>${question.q}</h3>`;
+        
+        const optionsDiv = document.createElement("div");
+        optionsDiv.className = "options";
+        opts.forEach(opt => {
+          const id = `q${index}_${opt}`;
+          const label = document.createElement("label");
+          label.innerHTML = `<input type="radio" name="question${index}" value="${opt}"> ${opt}`;
+          optionsDiv.appendChild(label);
+        });
+        questionDiv.appendChild(optionsDiv);
+        quizForm.appendChild(questionDiv);
+      });
+    }
+    
+    // Timer countdown
+    function startTimer() {
+      timerInterval = setInterval(() => {
+        if (totalTime <= 0) {
+          clearInterval(timerInterval);
+          submitQuiz();
+        } else {
+          totalTime--;
+          timeTaken = 25 * 60 - totalTime;
+          const minutes = Math.floor(totalTime / 60);
+          const seconds = totalTime % 60;
+          timerDisplay.textContent = `Time Left: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+      }, 1000);
+    }
+    
+    // Calculate result and auto-submit Formspree form
+    function submitQuiz() {
+      clearInterval(timerInterval);
+      let score = 0;
+      let attempted = 0;
+      
+      questions.forEach((question, index) => {
+        const radios = document.getElementsByName(`question${index}`);
+        radios.forEach(radio => {
+          if (radio.checked) {
+            attempted++;
+            if (radio.value === question.answer) score++;
+          }
+        });
+      });
+      
+      // Display results
+      const studentName = studentNameInput.value;
+      resultDisplay.innerHTML = `<strong>Name:</strong> ${studentName}<br>
+                                 <strong>Questions Attempted:</strong> ${attempted} / ${questions.length}<br>
+                                 <strong>Score:</strong> ${score} / ${questions.length}<br>
+                                 <strong>Time Taken:</strong> ${Math.floor(timeTaken/60)} minutes ${timeTaken % 60} seconds`;
+      quizSectionDiv.style.display = "none";
+      resultSection.style.display = "block";
+      
+      // Fill and auto-submit the hidden Formspree form
+      document.getElementById("formStudentName").value = studentName;
+      document.getElementById("formAttempted").value = attempted;
+      document.getElementById("formScore").value = score;
+      document.getElementById("formTimeTaken").value = `${Math.floor(timeTaken/60)}m ${timeTaken % 60}s`;
+      document.getElementById("hiddenForm").submit();
+    }
+    
+    // Start Quiz button event
+    startQuizBtn.addEventListener("click", () => {
+      const name = studentNameInput.value.trim();
+      if (name === "") {
         alert("Please enter your name to start the quiz.");
         return;
       }
-      // Display user's name on header
-      document.getElementById('displayName').innerText = userName.toUpperCase();
-      // Hide name entry and show quiz section
-      document.getElementById('nameEntry').style.display = "none";
-      document.getElementById('quizSection').style.display = "block";
-      // Set start time
-      startTime = new Date();
-      // Start the timer
-      timerInterval = setInterval(updateTimer, 1000);
-    }
-    function updateTimer() {
-      totalTime--;
-      let minutes = Math.floor(totalTime/60);
-      let seconds = totalTime % 60;
-      document.getElementById('timer').innerText = "Time Remaining: " + minutes + "m " + seconds + "s";
-      if(totalTime <= 0) {
-        clearInterval(timerInterval);
-        submitQuiz();
+      nameEntryDiv.style.display = "none";
+      quizSectionDiv.style.display = "block";
+      renderQuiz();
+      startTimer();
+    });
+    
+    // Submit Quiz button event
+    submitQuizBtn.addEventListener("click", submitQuiz);
+    
+    // Prevent key combinations (like Ctrl+U or F12) – note this is not foolproof
+    document.onkeydown = function(e) {
+      if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73)) {
+         return false;
       }
-    }
-    function submitQuiz() {
-      clearInterval(timerInterval);
-      // Calculate time taken
-      const timeTaken = 1500 - totalTime;
-      // Calculate score and attempted questions
-      let score = 0, attempted = 0;
-      for(let i = 1; i <= 50; i++){
-        const options = document.getElementsByName('q' + i);
-        for(const opt of options){
-          if(opt.checked){
-            attempted++;
-            if(opt.dataset.correct === "true") {
-              score++;
-            }
-          }
-        }
-      }
-      // Display results
-      const resultDiv = document.getElementById('results');
-      const userName = document.getElementById('userName').value.trim();
-      resultDiv.innerHTML = "<h2>Quiz Results</h2>" +
-                            "<p><strong>Name:</strong> " + userName + "</p>" +
-                            "<p><strong>Questions Attempted:</strong> " + attempted + " out of 50</p>" +
-                            "<p><strong>Score:</strong> " + score + " correct answers</p>" +
-                            "<p><strong>Time Taken:</strong> " + Math.floor(timeTaken/60) + " minutes " + (timeTaken % 60) + " seconds</p>";
-      resultDiv.style.display = "block";
-      // Automatically submit results via Formspree
-      document.getElementById('formUserName').value = userName;
-      document.getElementById('formAttempted').value = attempted;
-      document.getElementById('formScore').value = score;
-      document.getElementById('formTime').value = Math.floor(timeTaken/60) + "m " + (timeTaken % 60) + "s";
-      document.getElementById('hiddenForm').submit();
-      // Optionally disable quiz form after submission
-      document.getElementById('quizForm').style.display = "none";
-    }
+    };
   </script>
-</head>
-<body>
-  <!-- Header -->
-  <header>
-    <h1>QUIZ FOR CSS ASPIRANTS 26 March 2025</h1>
-    <h2>SYED ASGHAR ALI SHAH</h2>
-    <div id="displayName" style="margin-top:10px; font-size:1.2em;"></div>
-  </header>
-
-  <!-- Name Entry Section -->
-  <div id="nameEntry">
-    <h2>Enter Your Name to Start the Quiz</h2>
-    <input type="text" id="userName" placeholder="Your Name">
-    <br>
-    <button onclick="startQuiz()">Start Quiz</button>
-  </div>
-
-  <!-- Quiz Section -->
-  <div id="quizSection">
-    <div id="timer">Time Remaining: 25m 0s</div>
-    <form id="quizForm">
-      <!-- Question 1 -->
-      <div class="question">
-        <h3>1. Identify the part of speech of the underlined word in "She sings <u>beautifully</u>."</h3>
-        <label><input type="radio" name="q1" value="Verb"> Verb</label>
-        <label><input type="radio" name="q1" value="Adverb" data-correct="true"> Adverb</label>
-        <label><input type="radio" name="q1" value="Adjective"> Adjective</label>
-        <label><input type="radio" name="q1" value="Noun"> Noun</label>
-      </div>
-      <!-- Question 2 -->
-      <div class="question">
-        <h3>2. Choose the correct preposition: "He is fond ___ music."</h3>
-        <label><input type="radio" name="q2" value="of" data-correct="true"> of</label>
-        <label><input type="radio" name="q2" value="for"> for</label>
-        <label><input type="radio" name="q2" value="to"> to</label>
-        <label><input type="radio" name="q2" value="at"> at</label>
-      </div>
-      <!-- Question 3 -->
-      <div class="question">
-        <h3>3. Identify the tense of "She had been working."</h3>
-        <label><input type="radio" name="q3" value="Past Perfect" > Past Perfect</label>
-        <label><input type="radio" name="q3" value="Past Perfect Continuous" data-correct="true"> Past Perfect Continuous</label>
-        <label><input type="radio" name="q3" value="Present Perfect"> Present Perfect</label>
-        <label><input type="radio" name="q3" value="Future Perfect"> Future Perfect</label>
-      </div>
-      <!-- Question 4: Sentence Rearrangement -->
-      <div class="question">
-        <h3>4. Rearrange the words to form a correct sentence: "beautiful / is / sky / The"</h3>
-        <label><input type="radio" name="q4" value="The sky is beautiful." data-correct="true"> The sky is beautiful.</label>
-        <label><input type="radio" name="q4" value="Beautiful is the sky."> Beautiful is the sky.</label>
-        <label><input type="radio" name="q4" value="Sky the beautiful is."> Sky the beautiful is.</label>
-        <label><input type="radio" name="q4" value="Is the sky beautiful."> Is the sky beautiful.</label>
-      </div>
-      <!-- Question 5 -->
-      <div class="question">
-        <h3>5. In "After the rain stopped, the flowers bloomed," what is the subject?</h3>
-        <label><input type="radio" name="q5" value="After the rain stopped"> After the rain stopped</label>
-        <label><input type="radio" name="q5" value="the flowers" data-correct="true"> the flowers</label>
-        <label><input type="radio" name="q5" value="bloomed"> bloomed</label>
-        <label><input type="radio" name="q5" value="rain"> rain</label>
-      </div>
-      <!-- Question 6 -->
-      <div class="question">
-        <h3>6. In "He gave her a gift," which is the direct object?</h3>
-        <label><input type="radio" name="q6" value="her"> her</label>
-        <label><input type="radio" name="q6" value="He"> He</label>
-        <label><input type="radio" name="q6" value="a gift" data-correct="true"> a gift</label>
-        <label><input type="radio" name="q6" value="gave"> gave</label>
-      </div>
-      <!-- Question 7 -->
-      <div class="question">
-        <h3>7. Identify the type of clause in "When he arrived, the meeting started."</h3>
-        <label><input type="radio" name="q7" value="Noun clause"> Noun clause</label>
-        <label><input type="radio" name="q7" value="Adjective clause"> Adjective clause</label>
-        <label><input type="radio" name="q7" value="Adverbial clause" data-correct="true"> Adverbial clause</label>
-        <label><input type="radio" name="q7" value="Independent clause"> Independent clause</label>
-      </div>
-      <!-- Question 8 -->
-      <div class="question">
-        <h3>8. Identify the error in "She don't like apples."</h3>
-        <label><input type="radio" name="q8" value="like should be dislikes"> like should be dislikes</label>
-        <label><input type="radio" name="q8" value="She should be replaced" > She should be replaced</label>
-        <label><input type="radio" name="q8" value="don't should be doesn't" data-correct="true"> don't should be doesn't</label>
-        <label><input type="radio" name="q8" value="apples should be apple"> apples should be apple</label>
-      </div>
-      <!-- Question 9 -->
-      <div class="question">
-        <h3>9. Choose the correct article: "___ apple a day keeps the doctor away."</h3>
-        <label><input type="radio" name="q9" value="A"> A</label>
-        <label><input type="radio" name="q9" value="An" data-correct="true"> An</label>
-        <label><input type="radio" name="q9" value="The"> The</label>
-        <label><input type="radio" name="q9" value="No article"> No article</label>
-      </div>
-      <!-- Question 10 -->
-      <div class="question">
-        <h3>10. "Children" is the plural form of which noun?</h3>
-        <label><input type="radio" name="q10" value="child" data-correct="true"> child</label>
-        <label><input type="radio" name="q10" value="childe"> childe</label>
-        <label><input type="radio" name="q10" value="childs"> childs</label>
-        <label><input type="radio" name="q10" value="childes"> childes</label>
-      </div>
-      <!-- Question 11 -->
-      <div class="question">
-        <h3>11. Complete the series: good, better, ____.</h3>
-        <label><input type="radio" name="q11" value="best" data-correct="true"> best</label>
-        <label><input type="radio" name="q11" value="more good"> more good</label>
-        <label><input type="radio" name="q11" value="finest"> finest</label>
-        <label><input type="radio" name="q11" value="greatest"> greatest</label>
-      </div>
-      <!-- Question 12 -->
-      <div class="question">
-        <h3>12. What is the superlative form of "happy"?</h3>
-        <label><input type="radio" name="q12" value="happier"> happier</label>
-        <label><input type="radio" name="q12" value="more happy"> more happy</label>
-        <label><input type="radio" name="q12" value="happiest" data-correct="true"> happiest</label>
-        <label><input type="radio" name="q12" value="most happy"> most happy</label>
-      </div>
-      <!-- Question 13 -->
-      <div class="question">
-        <h3>13. Complete the sentence: "Neither of the boys did ___ homework."</h3>
-        <label><input type="radio" name="q13" value="their"> their</label>
-        <label><input type="radio" name="q13" value="him" > him</label>
-        <label><input type="radio" name="q13" value="his" data-correct="true"> his</label>
-        <label><input type="radio" name="q13" value="them"> them</label>
-      </div>
-      <!-- Question 14 -->
-      <div class="question">
-        <h3>14. Choose the correct conjunction: "I will go, ____ I have time."</h3>
-        <label><input type="radio" name="q14" value="if" data-correct="true"> if</label>
-        <label><input type="radio" name="q14" value="unless"> unless</label>
-        <label><input type="radio" name="q14" value="although"> although</label>
-        <label><input type="radio" name="q14" value="because"> because</label>
-      </div>
-      <!-- Question 15 -->
-      <div class="question">
-        <h3>15. In "The cat sat on the mat," which phrase is prepositional?</h3>
-        <label><input type="radio" name="q15" value="The cat" > The cat</label>
-        <label><input type="radio" name="q15" value="sat" > sat</label>
-        <label><input type="radio" name="q15" value="on the mat" data-correct="true"> on the mat</label>
-        <label><input type="radio" name="q15" value="cat sat"> cat sat</label>
-      </div>
-      <!-- Question 16 -->
-      <div class="question">
-        <h3>16. "What a wonderful world!" is an example of which sentence type?</h3>
-        <label><input type="radio" name="q16" value="Declarative"> Declarative</label>
-        <label><input type="radio" name="q16" value="Interrogative"> Interrogative</label>
-        <label><input type="radio" name="q16" value="Imperative"> Imperative</label>
-        <label><input type="radio" name="q16" value="Exclamatory" data-correct="true"> Exclamatory</label>
-      </div>
-      <!-- Question 17: Sentence Rearrangement -->
-      <div class="question">
-        <h3>17. Rearrange the words to form a question: "you / are / coming / ?" </h3>
-        <label><input type="radio" name="q17" value="Are you coming?" data-correct="true"> Are you coming?</label>
-        <label><input type="radio" name="q17" value="You are coming?"> You are coming?</label>
-        <label><input type="radio" name="q17" value="Coming are you?"> Coming are you?</label>
-        <label><input type="radio" name="q17" value="You coming are?"> You coming are?</label>
-      </div>
-      <!-- Question 18 -->
-      <div class="question">
-        <h3>18. Transform to passive voice: "They built the house."</h3>
-        <label><input type="radio" name="q18" value="The house built by them."> The house built by them.</label>
-        <label><input type="radio" name="q18" value="The house was built by them." data-correct="true"> The house was built by them.</label>
-        <label><input type="radio" name="q18" value="The house is built by them."> The house is built by them.</label>
-        <label><input type="radio" name="q18" value="They were built by the house."> They were built by the house.</label>
-      </div>
-      <!-- Question 19 -->
-      <div class="question">
-        <h3>19. Complete: "She ___ going to school."</h3>
-        <label><input type="radio" name="q19" value="is" data-correct="true"> is</label>
-        <label><input type="radio" name="q19" value="are"> are</label>
-        <label><input type="radio" name="q19" value="am"> am</label>
-        <label><input type="radio" name="q19" value="be"> be</label>
-      </div>
-      <!-- Question 20 -->
-      <div class="question">
-        <h3>20. Identify the error in subject-verb agreement: "Each of the students have their book."</h3>
-        <label><input type="radio" name="q20" value="students is wrong"> students is wrong</label>
-        <label><input type="radio" name="q20" value="have should be has" data-correct="true"> have should be has</label>
-        <label><input type="radio" name="q20" value="the is unnecessary"> the is unnecessary</label>
-        <label><input type="radio" name="q20" value="students should be singular"> students should be singular</label>
-      </div>
-      <!-- Question 21 -->
-      <div class="question">
-        <h3>21. What part of speech is "quickly" in "He quickly ran"?</h3>
-        <label><input type="radio" name="q21" value="Adjective"> Adjective</label>
-        <label><input type="radio" name="q21" value="Adverb" data-correct="true"> Adverb</label>
-        <label><input type="radio" name="q21" value="Noun"> Noun</label>
-        <label><input type="radio" name="q21" value="Verb"> Verb</label>
-      </div>
-      <!-- Question 22 -->
-      <div class="question">
-        <h3>22. In "She sent her friend a letter," which is the indirect object?</h3>
-        <label><input type="radio" name="q22" value="letter"> letter</label>
-        <label><input type="radio" name="q22" value="her friend" data-correct="true"> her friend</label>
-        <label><input type="radio" name="q22" value="She"> She</label>
-        <label><input type="radio" name="q22" value="sent"> sent</label>
-      </div>
-      <!-- Question 23 -->
-      <div class="question">
-        <h3>23. In "The sky became dark," what is "dark" functioning as?</h3>
-        <label><input type="radio" name="q23" value="Adverb"> Adverb</label>
-        <label><input type="radio" name="q23" value="Object"> Object</label>
-        <label><input type="radio" name="q23" value="Subject complement" data-correct="true"> Subject complement</label>
-        <label><input type="radio" name="q23" value="Verb"> Verb</label>
-      </div>
-      <!-- Question 24 -->
-      <div class="question">
-        <h3>24. Identify the object of the preposition in "The keys are in the drawer."</h3>
-        <label><input type="radio" name="q24" value="keys"> keys</label>
-        <label><input type="radio" name="q24" value="are"> are</label>
-        <label><input type="radio" name="q24" value="in" > in</label>
-        <label><input type="radio" name="q24" value="drawer" data-correct="true"> drawer</label>
-      </div>
-      <!-- Question 25 -->
-      <div class="question">
-        <h3>25. "Is he coming?" is an example of which sentence type?</h3>
-        <label><input type="radio" name="q25" value="Declarative"> Declarative</label>
-        <label><input type="radio" name="q25" value="Interrogative" data-correct="true"> Interrogative</label>
-        <label><input type="radio" name="q25" value="Exclamatory"> Exclamatory</label>
-        <label><input type="radio" name="q25" value="Imperative"> Imperative</label>
-      </div>
-      <!-- Question 26 -->
-      <div class="question">
-        <h3>26. In "I like tea but not coffee," what function does "but" serve?</h3>
-        <label><input type="radio" name="q26" value="Preposition"> Preposition</label>
-        <label><input type="radio" name="q26" value="Conjunction" data-correct="true"> Conjunction</label>
-        <label><input type="radio" name="q26" value="Interjection"> Interjection</label>
-        <label><input type="radio" name="q26" value="Adverb"> Adverb</label>
-      </div>
-      <!-- Question 27 -->
-      <div class="question">
-        <h3>27. In "This book is mine," which word is a demonstrative adjective?</h3>
-        <label><input type="radio" name="q27" value="This" data-correct="true"> This</label>
-        <label><input type="radio" name="q27" value="book"> book</label>
-        <label><input type="radio" name="q27" value="is"> is</label>
-        <label><input type="radio" name="q27" value="mine"> mine</label>
-      </div>
-      <!-- Question 28 -->
-      <div class="question">
-        <h3>28. Identify the possessive case in the phrase "John's car."</h3>
-        <label><input type="radio" name="q28" value="John" > John</label>
-        <label><input type="radio" name="q28" value="car"> car</label>
-        <label><input type="radio" name="q28" value="John's" data-correct="true"> John's</label>
-        <label><input type="radio" name="q28" value="s"> s</label>
-      </div>
-      <!-- Question 29 -->
-      <div class="question">
-        <h3>29. In "The man who called is here," what is the role of "who"?</h3>
-        <label><input type="radio" name="q29" value="Relative pronoun" data-correct="true"> Relative pronoun</label>
-        <label><input type="radio" name="q29" value="Interrogative pronoun"> Interrogative pronoun</label>
-        <label><input type="radio" name="q29" value="Conjunction"> Conjunction</label>
-        <label><input type="radio" name="q29" value="Adverb"> Adverb</label>
-      </div>
-      <!-- Question 30 -->
-      <div class="question">
-        <h3>30. Identify the error in subject-verb agreement: "The team are winning."</h3>
-        <label><input type="radio" name="q30" value="Team should be teams"> Team should be teams</label>
-        <label><input type="radio" name="q30" value="are should be is" data-correct="true"> are should be is</label>
-        <label><input type="radio" name="q30" value="The is missing"> The is missing</label>
-        <label><input type="radio" name="q30" value="No error"> No error</label>
-      </div>
-      <!-- Question 31 -->
-      <div class="question">
-        <h3>31. Choose the correct modal: "You ___ see a doctor if you're ill."</h3>
-        <label><input type="radio" name="q31" value="must"> must</label>
-        <label><input type="radio" name="q31" value="should" data-correct="true"> should</label>
-        <label><input type="radio" name="q31" value="can"> can</label>
-        <label><input type="radio" name="q31" value="might"> might</label>
-      </div>
-      <!-- Question 32 -->
-      <div class="question">
-        <h3>32. Which of the following is a proper noun?</h3>
-        <label><input type="radio" name="q32" value="city"> city</label>
-        <label><input type="radio" name="q32" value="paris" data-correct="true"> Paris</label>
-        <label><input type="radio" name="q32" value="country"> country</label>
-        <label><input type="radio" name="q32" value="continent"> continent</label>
-      </div>
-      <!-- Question 33 -->
-      <div class="question">
-        <h3>33. In "The old bridge is sturdy," which words are adjectives?</h3>
-        <label><input type="radio" name="q33" value="old and sturdy" data-correct="true"> old and sturdy</label>
-        <label><input type="radio" name="q33" value="bridge"> bridge</label>
-        <label><input type="radio" name="q33" value="The and is"> The and is</label>
-        <label><input type="radio" name="q33" value="old only"> old only</label>
-      </div>
-      <!-- Question 34 -->
-      <div class="question">
-        <h3>34. Identify the adverbial phrase in "In a hurry, he left."</h3>
-        <label><input type="radio" name="q34" value="he left"> he left</label>
-        <label><input type="radio" name="q34" value="In a hurry" data-correct="true"> In a hurry</label>
-        <label><input type="radio" name="q34" value="a hurry"> a hurry</label>
-        <label><input type="radio" name="q34" value="left"> left</label>
-      </div>
-      <!-- Question 35 -->
-      <div class="question">
-        <h3>35. Choose the correct verb form: "Neither he nor his friends ___ coming."</h3>
-        <label><input type="radio" name="q35" value="is"> is</label>
-        <label><input type="radio" name="q35" value="are" data-correct="true"> are</label>
-        <label><input type="radio" name="q35" value="was"> was</label>
-        <label><input type="radio" name="q35" value="were"> were</label>
-      </div>
-      <!-- Question 36 -->
-      <div class="question">
-        <h3>36. Which punctuation makes the meaning clear: "Let's eat, grandma!" vs "Let's eat grandma!"</h3>
-        <label><input type="radio" name="q36" value="Comma usage" data-correct="true"> Comma usage</label>
-        <label><input type="radio" name="q36" value="Period usage"> Period usage</label>
-        <label><input type="radio" name="q36" value="Colon usage"> Colon usage</label>
-        <label><input type="radio" name="q36" value="Semicolon usage"> Semicolon usage</label>
-      </div>
-      <!-- Question 37 -->
-      <div class="question">
-        <h3>37. Identify the correct comma placement: "After dinner we went to a movie."</h3>
-        <label><input type="radio" name="q37" value="After dinner, we went to a movie." data-correct="true"> After dinner, we went to a movie.</label>
-        <label><input type="radio" name="q37" value="After dinner we, went to a movie."> After dinner we, went to a movie.</label>
-        <label><input type="radio" name="q37" value="After, dinner we went to a movie."> After, dinner we went to a movie.</label>
-        <label><input type="radio" name="q37" value="No comma needed"> No comma needed</label>
-      </div>
-      <!-- Question 38: Sentence Rearrangement -->
-      <div class="question">
-        <h3>38. Rearrange to form a correct sentence: "difficult / extremely / is / the / test."</h3>
-        <label><input type="radio" name="q38" value="The test is extremely difficult." data-correct="true"> The test is extremely difficult.</label>
-        <label><input type="radio" name="q38" value="Extremely the test is difficult."> Extremely the test is difficult.</label>
-        <label><input type="radio" name="q38" value="Difficult the test is extremely."> Difficult the test is extremely.</label>
-        <label><input type="radio" name="q38" value="Is the test extremely difficult?"> Is the test extremely difficult?</label>
-      </div>
-      <!-- Question 39 -->
-      <div class="question">
-        <h3>39. Identify the error: "He has less books than me."</h3>
-        <label><input type="radio" name="q39" value="less should be fewer" data-correct="true"> less should be fewer</label>
-        <label><input type="radio" name="q39" value="books should be book"> books should be book</label>
-        <label><input type="radio" name="q39" value="me should be I"> me should be I</label>
-        <label><input type="radio" name="q39" value="No error"> No error</label>
-      </div>
-      <!-- Question 40 -->
-      <div class="question">
-        <h3>40. Identify the error: "I can't hardly wait."</h3>
-        <label><input type="radio" name="q40" value="Double negative error" data-correct="true"> Double negative error</label>
-        <label><input type="radio" name="q40" value="can't should be can"> can't should be can</label>
-        <label><input type="radio" name="q40" value="hardly is fine"> hardly is fine</label>
-        <label><input type="radio" name="q40" value="No error"> No error</label>
-      </div>
-      <!-- Question 41 -->
-      <div class="question">
-        <h3>41. What is the function of "although" in a sentence?</h3>
-        <label><input type="radio" name="q41" value="Coordinating conjunction"> Coordinating conjunction</label>
-        <label><input type="radio" name="q41" value="Subordinating conjunction" data-correct="true"> Subordinating conjunction</label>
-        <label><input type="radio" name="q41" value="Interjection"> Interjection</label>
-        <label><input type="radio" name="q41" value="Preposition"> Preposition</label>
-      </div>
-      <!-- Question 42 -->
-      <div class="question">
-        <h3>42. Complete the sentence: "She was late ___ heavy traffic."</h3>
-        <label><input type="radio" name="q42" value="because of" data-correct="true"> because of</label>
-        <label><input type="radio" name="q42" value="due to"> due to</label>
-        <label><input type="radio" name="q42" value="by"> by</label>
-        <label><input type="radio" name="q42" value="with"> with</label>
-      </div>
-      <!-- Question 43 -->
-      <div class="question">
-        <h3>43. Which sentence is in passive voice?</h3>
-        <label><input type="radio" name="q43" value="She writes a letter."> She writes a letter.</label>
-        <label><input type="radio" name="q43" value="A letter is written by her." data-correct="true"> A letter is written by her.</label>
-        <label><input type="radio" name="q43" value="She is writing a letter."> She is writing a letter.</label>
-        <label><input type="radio" name="q43" value="She wrote a letter."> She wrote a letter.</label>
-      </div>
-      <!-- Question 44 -->
-      <div class="question">
-        <h3>44. Fill in the blank: "To ___ did you give the book?"</h3>
-        <label><input type="radio" name="q44" value="who"> who</label>
-        <label><input type="radio" name="q44" value="whom" data-correct="true"> whom</label>
-        <label><input type="radio" name="q44" value="whose"> whose</label>
-        <label><input type="radio" name="q44" value="which"> which</label>
-      </div>
-      <!-- Question 45 -->
-      <div class="question">
-        <h3>45. Identify the error: "He don't know the answer."</h3>
-        <label><input type="radio" name="q45" value="don't should be doesn't" data-correct="true"> don't should be doesn't</label>
-        <label><input type="radio" name="q45" value="He should be replaced"> He should be replaced</label>
-        <label><input type="radio" name="q45" value="answer should be answers"> answer should be answers</label>
-        <label><input type="radio" name="q45" value="No error"> No error</label>
-      </div>
-      <!-- Question 46 -->
-      <div class="question">
-        <h3>46. "Sit down." is an example of which sentence type?</h3>
-        <label><input type="radio" name="q46" value="Interrogative"> Interrogative</label>
-        <label><input type="radio" name="q46" value="Declarative"> Declarative</label>
-        <label><input type="radio" name="q46" value="Imperative" data-correct="true"> Imperative</label>
-        <label><input type="radio" name="q46" value="Exclamatory"> Exclamatory</label>
-      </div>
-      <!-- Question 47 -->
-      <div class="question">
-        <h3>47. In "Either option is acceptable," what is the function of "either"?</h3>
-        <label><input type="radio" name="q47" value="Coordinating conjunction"> Coordinating conjunction</label>
-        <label><input type="radio" name="q47" value="Distributive adjective" data-correct="true"> Distributive adjective</label>
-        <label><input type="radio" name="q47" value="Preposition"> Preposition</label>
-        <label><input type="radio" name="q47" value="Interjection"> Interjection</label>
-      </div>
-      <!-- Question 48 -->
-      <div class="question">
-        <h3>48. Choose the correct pronoun: "It is I/I am the one."</h3>
-        <label><input type="radio" name="q48" value="I am" data-correct="true"> I am</label>
-        <label><input type="radio" name="q48" value="me am"> me am</label>
-        <label><input type="radio" name="q48" value="I"> I</label>
-        <label><input type="radio" name="q48" value="me"> me</label>
-      </div>
-      <!-- Question 49: Sentence Rearrangement -->
-      <div class="question">
-        <h3>49. Rearrange the words to form a correct sentence: "sentence / rearrange / must / the / correct / to"</h3>
-        <label><input type="radio" name="q49" value="The sentence must be rearranged correctly." data-correct="true"> The sentence must be rearranged correctly.</label>
-        <label><input type="radio" name="q49" value="Must the sentence be rearranged correctly."> Must the sentence be rearranged correctly.</label>
-        <label><input type="radio" name="q49" value="Rearranged correctly must be the sentence."> Rearranged correctly must be the sentence.</label>
-        <label><input type="radio" name="q49" value="The sentence correctly must be rearranged."> The sentence correctly must be rearranged.</label>
-      </div>
-      <!-- Question 50 -->
-      <div class="question">
-        <h3>50. In "He ran quickly," what is the grammatical term for "quickly"?</h3>
-        <label><input type="radio" name="q50" value="Adjective"> Adjective</label>
-        <label><input type="radio" name="q50" value="Adverb of manner" data-correct="true"> Adverb of manner</label>
-        <label><input type="radio" name="q50" value="Verb"> Verb</label>
-        <label><input type="radio" name="q50" value="Noun"> Noun</label>
-      </div>
-      <button type="button" id="submitBtn" onclick="submitQuiz()">Submit Quiz</button>
-    </form>
-  </div>
-
-  <!-- Results Display -->
-  <div id="results"></div>
-
-  <!-- Hidden Form for Formspree Submission -->
-  <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-    <input type="text" name="userName" id="formUserName">
-    <input type="text" name="attempted" id="formAttempted">
-    <input type="text" name="score" id="formScore">
-    <input type="text" name="timeTaken" id="formTime">
-  </form>
-
-  <!-- Footer -->
-  <footer>
-    <p>Contact us at 03265762698 | For more quizzes and information, call now!</p>
-  </footer>
 </body>
 </html>
