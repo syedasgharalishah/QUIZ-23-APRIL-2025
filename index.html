@@ -2,539 +2,660 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 08 APRIL 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 09 APRIL 2025</title>
   <style>
-    /* General Reset and Styling */
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f1f1f1;
-      -webkit-user-select: none; /* disable text selection */
+    /* Global styles and disable text selection */
+    * {
+      margin: 0; padding: 0;
+      user-select: none; /* disable text selection */
+      -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
-      user-select: none;
     }
-    header, footer {
-      background: #003366;
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      overflow-x: hidden;
+    }
+    /* Header styling */
+    header {
+      background: #00539C;
       color: #fff;
+      padding: 20px;
       text-align: center;
-      padding: 15px 0;
+      position: relative;
+    }
+    header img {
+      width: 50px;
+      height: 50px;
+      vertical-align: middle;
+      margin-right: 10px;
     }
     header h1 {
-      margin: 0;
-      font-size: 28px;
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 24px;
     }
-    header h2 {
-      margin: 5px 0 0 0;
-      font-size: 18px;
-      font-weight: normal;
+    header .author {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 16px;
     }
-    .container {
-      max-width: 900px;
-      margin: 20px auto;
-      padding: 20px;
+    /* Name entry section */
+    #name-section {
       background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    #nameEntry {
+      padding: 20px;
+      margin: 20px auto;
+      width: 80%;
+      max-width: 600px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
       text-align: center;
-      margin-bottom: 30px;
     }
-    #nameEntry input[type="text"] {
+    #name-section input[type="text"] {
       padding: 10px;
-      width: 60%;
+      width: 80%;
       font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 4px;
     }
-    #nameEntry button {
+    #name-section button {
       padding: 10px 20px;
       font-size: 16px;
-      margin-left: 10px;
-      background: #003366;
+      background: #00539C;
       color: #fff;
       border: none;
-      border-radius: 4px;
+      margin-top: 10px;
       cursor: pointer;
+      border-radius: 4px;
     }
-    #quizSection {
+    /* Quiz Section styling */
+    #quiz-section {
       display: none;
+      background: #fff;
+      padding: 20px;
+      margin: 20px auto;
+      width: 90%;
+      max-width: 900px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+    }
+    #quiz-section h2 {
+      text-align: center;
+      margin-bottom: 20px;
     }
     .timer {
-      font-size: 18px;
       text-align: right;
+      font-size: 18px;
       margin-bottom: 10px;
-      color: #003366;
+      color: #d9534f;
     }
     .question {
       margin-bottom: 20px;
-      padding: 15px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      background: #f9f9f9;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
     }
-    .question h3 {
-      margin: 0 0 10px 0;
+    .question p {
+      font-weight: bold;
     }
-    .options label {
-      display: block;
-      margin-bottom: 5px;
-      cursor: pointer;
+    .options {
+      list-style: none;
+      margin-top: 10px;
     }
-    #submitQuiz {
+    .options li {
+      margin-bottom: 8px;
+    }
+    .options input {
+      margin-right: 8px;
+    }
+    #submit-btn {
       display: block;
       width: 200px;
-      margin: 30px auto;
+      margin: 20px auto;
       padding: 10px;
-      font-size: 18px;
-      background: #006600;
+      background: #00539C;
       color: #fff;
+      font-size: 18px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
     }
-    #resultSection {
+    /* Result Section styling */
+    #result-section {
       display: none;
-      text-align: center;
-      margin-top: 20px;
+      background: #fff;
       padding: 20px;
-      background: #e2ffe2;
-      border: 1px solid #00cc00;
-      border-radius: 4px;
+      margin: 20px auto;
+      width: 80%;
+      max-width: 600px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+    }
+    /* Footer styling */
+    footer {
+      background: #00539C;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      position: relative;
+      bottom: 0;
+      width: 100%;
     }
     footer p {
-      margin: 0;
-      font-size: 16px;
+      margin-bottom: 5px;
     }
   </style>
   <script>
-    // Disable right-click and inspection keys
-    document.addEventListener('contextmenu', function(e) {
-      e.preventDefault();
-    }, false);
-    document.addEventListener('keydown', function(e) {
-      // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
-      if (e.keyCode === 123 || 
-          (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
-          (e.ctrlKey && e.keyCode === 85)) {
-        e.preventDefault();
-      }
-    }, false);
-    
-    // Global variables for quiz management
-    let totalTime = 1500; // 25 minutes in seconds
-    let timerInterval;
-    let startTime;
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', event => event.preventDefault());
 
-    // Array of 50 advanced, tricky multiple-choice questions.
-    // Topics include parts of speech, prepositions, idioms, synonyms, antonyms, sentence rearrangement, etc.
-    let questions = [
+    // Global quiz data: 50 questions covering advanced grammar, idioms, synonyms,
+    // antonyms, prepositions, sentence rearrangement etc.
+    const quizData = [
       {
-        question: "1. In the sentence 'The bright sun shines in the sky,' the word 'bright' functions as a:",
-        options: ["Noun", "Adjective", "Verb", "Adverb"],
-        answer: 1
+        question: "1. Which of the following is an independent clause?",
+        options: ["Trump supports tariffs.", "When tariffs increase.", "Because tariffs increase.", "If tariffs increase."],
+        correct: "Trump supports tariffs."
       },
       {
-        question: "2. Choose the correct preposition: 'She is fond ___ classical music.'",
-        options: ["for", "of", "at", "in"],
-        answer: 1
+        question: "2. Identify the subordinate clause in the sentence: 'If the government fails, the people will suffer.'",
+        options: ["the people will suffer", "If the government fails", "government fails", "people will suffer"],
+        correct: "If the government fails"
       },
       {
-        question: "3. Identify the part of speech of the underlined word in: 'He quickly solved the puzzle.' (Underlined: quickly)",
-        options: ["Adverb", "Adjective", "Conjunction", "Pronoun"],
-        answer: 0
+        question: "3. What is the function of a coordinating conjunction?",
+        options: ["To join two independent clauses", "To replace a noun", "To modify a verb", "To introduce subordinate clauses"],
+        correct: "To join two independent clauses"
       },
       {
-        question: "4. Choose the correct synonym for 'meticulous':",
-        options: ["careless", "hasty", "thorough", "sloppy"],
-        answer: 2
+        question: "4. Which sentence is in passive voice?",
+        options: ["The committee approved the proposal.", "The proposal was approved by the committee.", "The committee is discussing the proposal.", "The proposal excites the committee."],
+        correct: "The proposal was approved by the committee."
       },
       {
-        question: "5. Select the correct antonym for 'verbose':",
-        options: ["talkative", "laconic", "wordy", "rambling"],
-        answer: 1
+        question: "5. In the sentence 'Trump, a controversial leader, influenced policies,' what is the appositive?",
+        options: ["Trump", "a controversial leader", "influenced policies", "policies"],
+        correct: "a controversial leader"
       },
       {
-        question: "6. In advanced sentence rearrangement, which segment best starts the complex sentence: 'Although the rain poured down, ____'?",
-        options: ["she stayed indoors", "the match continued", "everyone cheered", "the sun shone brightly"],
-        answer: 0
+        question: "6. Which modal verb in the sentence 'One must question these arbitrary measures' indicates obligation?",
+        options: ["must", "question", "these", "arbitrary"],
+        correct: "must"
       },
       {
-        question: "7. Identify the function of the word 'despite' in: 'Despite the heavy traffic, they arrived on time.'",
-        options: ["Conjunction", "Preposition", "Adverb", "Verb"],
-        answer: 1
+        question: "7. In 'Before debating these, some questions arise,' identify the role of the phrase 'Before debating these'.",
+        options: ["Main clause", "Subordinate clause", "Coordinating conjunction", "Independent clause"],
+        correct: "Subordinate clause"
       },
       {
-        question: "8. Which sentence correctly converts active voice to passive voice?",
-        options: ["The cake was eaten by the child.", "The child was ate the cake.", "The cake eaten by the child.", "The cake is eating by the child."],
-        answer: 0
+        question: "8. Which of the following best describes a compound sentence?",
+        options: ["A sentence with one independent clause", "A sentence with two or more independent clauses", "A sentence that includes a subordinate clause", "A sentence without a verb"],
+        correct: "A sentence with two or more independent clauses"
       },
       {
-        question: "9. Complete the sentence: 'He is not only smart ___ also very creative.'",
-        options: ["but", "and", "or", "nor"],
-        answer: 0
+        question: "9. Which of the following idioms means a false belief inspired by promises?",
+        options: ["Trumpian delusion", "In thrall to", "Revived Trumpocracy", "Dash the hopes"],
+        correct: "Trumpian delusion"
       },
       {
-        question: "10. Identify the prepositional phrase in the sentence: 'The cat slept under the old wooden table.'",
-        options: ["The cat slept", "under the old wooden table", "old wooden table", "The cat"],
-        answer: 1
+        question: "10. Choose the appropriate synonym for 'arbitrary measure' from the options below:",
+        options: ["Random action", "Reasoned action", "Delayed action", "Immediate action"],
+        correct: "Random action"
       },
       {
-        question: "11. Rearrange the words to form a coherent sentence: 'quickly / finished / the exam / she / her paper'",
-        options: ["She finished her paper quickly.", "Quickly she her paper finished.", "Her paper finished quickly she.", "Finished quickly, her paper she."],
-        answer: 0
+        question: "11. Identify the correct antonym of 'waiting 100 days' based on the notes.",
+        options: ["Immediate action", "Delay", "Postponement", "Initial assessment"],
+        correct: "Immediate action"
       },
       {
-        question: "12. Complete the idiom: 'Never let a good crisis ___.'",
-        options: ["waste", "pass", "fade", "dwell"],
-        answer: 0
+        question: "12. Which sentence is a correct example of a first conditional sentence?",
+        options: ["If it rains, we will stay indoors.", "If it rains, we stayed indoors.", "If it rained, we would stay indoors.", "If it rains, we stayed indoors."],
+        correct: "If it rains, we will stay indoors."
       },
       {
-        question: "13. Which of the following best describes 'diplomatic skulduggery'?",
-        options: ["Transparent negotiations", "Underhanded maneuvers", "Direct confrontation", "Open dialogue"],
-        answer: 1
+        question: "13. In a sentence rearrangement task, which of the following is the correct order for: (a) subject, (b) verb, (c) object?",
+        options: ["a, b, c", "b, a, c", "c, a, b", "b, c, a"],
+        correct: "a, b, c"
       },
       {
-        question: "14. Select the correct synonym for 'ameliorate':",
-        options: ["worsen", "improve", "destroy", "ignore"],
-        answer: 1
+        question: "14. Which word is the synonym of 'incarceration'?",
+        options: ["Imprisonment", "Liberation", "Deprecation", "Exile"],
+        correct: "Imprisonment"
       },
       {
-        question: "15. In 'She swiftly completed the test,' the word 'swiftly' is which part of speech?",
-        options: ["Verb", "Adjective", "Adverb", "Conjunction"],
-        answer: 2
+        question: "15. Identify the direct question in the sentence: 'Who has the legal mandate to reform the police?'",
+        options: ["Who has", "the legal mandate", "to reform the police", "Who has the legal mandate to reform the police?"],
+        correct: "Who has the legal mandate to reform the police?"
       },
       {
-        question: "16. In the sentence 'Neither the teacher nor the students were ready,' the word 'neither' functions as a:",
-        options: ["Pronoun", "Conjunction", "Determiner", "Adverb"],
-        answer: 2
+        question: "16. The phrase 'in thrall to' is best defined as:",
+        options: ["Under the influence of", "Opposed to", "Independent of", "Free from"],
+        correct: "Under the influence of"
       },
       {
-        question: "17. Rearrange the words to form a proper sentence: 'at / arriving / the station / I / was'",
-        options: ["I was arriving at the station.", "At the station I arriving was.", "I arriving was at the station.", "Was I arriving at the station?"],
-        answer: 0
+        question: "17. Which option best explains the meaning of 'preliminary judgement'?",
+        options: ["Initial evaluation before action", "Final verdict after discussion", "Random decision", "Delayed conclusion"],
+        correct: "Initial evaluation before action"
       },
       {
-        question: "18. Identify the idiom meaning 'to take advantage of an opportunity':",
-        options: ["waste a good crisis", "seize the opportunity", "avoid the moment", "miss the chance"],
-        answer: 1
+        question: "18. What does the term 'parenthetical insertion' refer to?",
+        options: ["Extra information enclosed in commas or dashes", "The main clause of a sentence", "A compound clause", "A subordinate clause"],
+        correct: "Extra information enclosed in commas or dashes"
       },
       {
-        question: "19. Which is the correct plural form for 'child'?",
-        options: ["childs", "childes", "children", "childrens"],
-        answer: 2
+        question: "19. In sentence rearrangement, which arrangement of 'the committee / approved / the proposal' is correct?",
+        options: ["Approved the proposal the committee", "The proposal approved the committee", "The committee approved the proposal", "Approved the committee the proposal"],
+        correct: "The committee approved the proposal"
       },
       {
-        question: "20. Choose the proper article: '__ unique idea can change the world.'",
-        options: ["A", "An", "The", "No article is needed"],
-        answer: 1
+        question: "20. Which of these is a correct example of a complex sentence?",
+        options: ["Trump supports tariffs.", "Trump supports tariffs, but he limits them.", "If the government fails, the people will suffer.", "Trump supports tariffs; his policies affect many nations."],
+        correct: "If the government fails, the people will suffer."
       },
       {
-        question: "21. In 'Few have the fortitude to succeed,' the word 'fortitude' is an example of a:",
-        options: ["Collective noun", "Abstract noun", "Proper noun", "Concrete noun"],
-        answer: 1
+        question: "21. Which option is the best antonym for 'democratic establishment' based on the idiom notes?",
+        options: ["Opponents of Trump", "Democratic governance", "Resurgent Trump rule", "Authoritarian takeover"],
+        correct: "Democratic governance"
       },
       {
-        question: "22. Select the sentence that uses an infinitive correctly:",
-        options: ["She likes to dance.", "She likes dancing.", "She likes dance.", "She likes danced."],
-        answer: 0
+        question: "22. The sentence 'The board decided on a policy of waiting 100 days' implies which of the following?",
+        options: ["Immediate decision", "Delay or postponement", "Rapid action", "Initial evaluation"],
+        correct: "Delay or postponement"
       },
       {
-        question: "23. Identify the correct synonym for 'antithesis':",
-        options: ["Opposite", "Synonym", "Analogy", "Metaphor"],
-        answer: 0
+        question: "23. Which sentence is written using proper subject-verb agreement?",
+        options: ["The teams is winning.", "The team are winning.", "The team is winning.", "The teams is winning."],
+        correct: "The team is winning."
       },
       {
-        question: "24. Which sentence uses the subjunctive mood correctly?",
-        options: ["If I were you, I would study harder.", "If I was you, I would study harder.", "If I am you, I study harder.", "If I be you, I would study harder."],
-        answer: 0
+        question: "24. Choose the option that best expresses an active voice version of: 'The proposal was approved by the committee.'",
+        options: ["The committee approved the proposal.", "The proposal approved the committee.", "The committee was approving the proposal.", "The approval was given by the proposal."],
+        correct: "The committee approved the proposal."
       },
       {
-        question: "25. Complete the sentence: 'He acted ______ when confronted with criticism.'",
-        options: ["aplomb", "aplombly", "plomb", "a plomb"],
-        answer: 0
+        question: "25. Which of the following uses a modal verb correctly to express a hypothetical situation?",
+        options: ["If I won the lottery, I would travel the world.", "If I win the lottery, I would travel the world.", "If I won the lottery, I will travel the world.", "If I win the lottery, I travel the world."],
+        correct: "If I won the lottery, I would travel the world."
       },
       {
-        question: "26. In 'The committee reached its verdict,' the pronoun 'its' refers to:",
-        options: ["The individuals in the committee", "The collective group (committee)", "A specific member", "None of the above"],
-        answer: 1
-      },
-      {
-        question: "27. Which sentence best exemplifies proper subject-verb agreement?",
-        options: ["The list of items are on the desk.", "The list of items is on the desk.", "The list of item are on the desk.", "The list of items were on the desk."],
-        answer: 1
-      },
-      {
-        question: "28. Identify the error in: 'Neither the players nor the coach were ready.'",
-        options: ["Wrong use of 'neither'", "Verb should be 'was'", "Incorrect punctuation", "No error"],
-        answer: 1
-      },
-      {
-        question: "29. Which option best represents an adverb clause?",
-        options: ["Because she was tired", "She was tired", "Tired she was", "Although tired"],
-        answer: 0
-      },
-      {
-        question: "30. Choose the sentence that correctly uses a semicolon:",
-        options: ["I love grammar; it fascinates me.", "I love grammar, it fascinates me.", "I love grammar: it fascinates me.", "I love grammar but; it fascinates me."],
-        answer: 0
-      },
-      {
-        question: "31. Identify the correct past participle of 'write':",
-        options: ["writed", "written", "writ", "write"],
-        answer: 1
-      },
-      {
-        question: "32. Select the correct antonym for 'arduous':",
-        options: ["strenuous", "effortless", "difficult", "laborious"],
-        answer: 1
-      },
-      {
-        question: "33. In 'The lawyer argued vehemently during the trial,' which word is an adverb?",
-        options: ["lawyer", "argued", "vehemently", "trial"],
-        answer: 2
-      },
-      {
-        question: "34. In 'He was happier than ever,' the word 'than' functions as a:",
-        options: ["Conjunction", "Preposition", "Adjective", "Adverb"],
-        answer: 0
-      },
-      {
-        question: "35. Choose the best synonym for 'candid':",
-        options: ["evasive", "honest", "reserved", "deceitful"],
-        answer: 1
-      },
-      {
-        question: "36. Which sentence demonstrates proper capitalization?",
-        options: ["the President of the United States visited.", "The president of the united states visited.", "The President of the United States visited.", "The president of the United States visited."],
-        answer: 2
-      },
-      {
-        question: "37. Identify the error in the compound sentence: 'I wanted to go for a walk, but it started raining.'",
-        options: ["Comma splice", "Incorrect conjunction", "There is no error", "Fragmented sentence"],
-        answer: 2
-      },
-      {
-        question: "38. When converting active to passive, which element remains unchanged?",
-        options: ["The subject", "The object", "The verb tense", "The adverb"],
-        answer: 2
-      },
-      {
-        question: "39. Choose the correct synonym for 'ephemeral':",
-        options: ["permanent", "transient", "enduring", "lasting"],
-        answer: 1
-      },
-      {
-        question: "40. In the sentence 'Without his input, the plan failed,' the word 'without' functions as a:",
-        options: ["Verb", "Preposition", "Conjunction", "Adjective"],
-        answer: 1
-      },
-      {
-        question: "41. Which sentence demonstrates a correct second conditional structure?",
-        options: ["If I were rich, I would travel the world.", "If I am rich, I will travel the world.", "If I was rich, I travel the world.", "If I will be rich, I travel the world."],
-        answer: 0
-      },
-      {
-        question: "42. Select the pairing that correctly matches a modal verb with its usage:",
-        options: ["Must – expressing possibility", "Might – expressing obligation", "Should – giving advice", "Can – indicating impossibility"],
-        answer: 2
-      },
-      {
-        question: "43. Identify the part of speech for 'albeit' in formal writing:",
-        options: ["Conjunction", "Interjection", "Preposition", "Adverb"],
-        answer: 0
-      },
-      {
-        question: "44. Rearrange the words to form a grammatically correct sentence: 'arrived / the guests / late / all'",
-        options: ["All the guests arrived late.", "Arrived all the guests late.", "Late arrived the guests all.", "The guests all arrived late."],
-        answer: 3
-      },
-      {
-        question: "45. In grammar, what is a 'gerund'?",
-        options: ["A type of adjective", "A verb form functioning as a noun", "A type of adverb", "A pronoun"],
-        answer: 1
-      },
-      {
-        question: "46. Complete the sentence: 'He complained ______ the noise.'",
-        options: ["about", "on", "at", "of"],
-        answer: 0
-      },
-      {
-        question: "47. Which sentence correctly employs parallel structure?",
-        options: ["She likes reading, to swim, and jogging.", "She likes reading, swimming, and jogging.", "She likes to read, swimming, and to jog.", "She likes reading, to swim, and to jogging."],
-        answer: 1
-      },
-      {
-        question: "48. Identify the error in the sentence: 'Everyone must bring their own pencil.'",
-        options: ["Subject-verb disagreement", "Pronoun-antecedent disagreement", "Incorrect tense", "Missing article"],
-        answer: 1
-      },
-      {
-        question: "49. Choose the correct idiom to complete the sentence: 'When opportunity knocks, you must ______.'",
-        options: ["keep the door closed", "take the bull by the horns", "open the door", "let it pass"],
-        answer: 2
-      },
-      {
-        question: "50. Which sentence is a correctly constructed complex sentence?",
+        question: "26. Identify the sentence that best uses a parenthetical insertion:",
         options: [
-          "Although the test was difficult, she passed with flying colors.",
-          "She passed with flying colors although the test was difficult.",
-          "She, although the test was difficult, passed with flying colors.",
-          "Although difficult was the test, she with flying colors passed."
+          "Trump, a controversial figure, has influenced many policies.",
+          "Trump is a controversial figure.",
+          "Trump influenced many policies.",
+          "A controversial figure influenced policies."
         ],
-        answer: 0
+        correct: "Trump, a controversial figure, has influenced many policies."
+      },
+      {
+        question: "27. What is the antonym of 'sucked into the Trump-verse' as per the idiom notes?",
+        options: ["Resistant to Trump ideology", "Enthralled by Trumpism", "Caught up in Trumpism", "Submerged in Trump ideology"],
+        correct: "Resistant to Trump ideology"
+      },
+      {
+        question: "28. In the sentence 'The 18th Amendment was a significant development,' what grammatical structure is emphasized?",
+        options: ["Active voice", "Passive voice", "Compound sentence", "Conditional structure"],
+        correct: "Passive voice"
+      },
+      {
+        question: "29. Which option best defines 'synonym' in the context of vocabulary?",
+        options: ["A word that means the same as another", "A word with opposite meaning", "A word that describes an action", "A word that modifies a noun"],
+        correct: "A word that means the same as another"
+      },
+      {
+        question: "30. The expression 'dash the hopes' in the notes implies:",
+        options: ["To build hopes", "To destroy hopes completely", "To delay hopes", "To clarify hopes"],
+        correct: "To destroy hopes completely"
+      },
+      {
+        question: "31. Rearrange the following words to form a grammatically correct sentence: 'approved / the committee / proposal / the'.",
+        options: [
+          "The committee approved the proposal.",
+          "Approved the proposal the committee.",
+          "The proposal approved the committee.",
+          "Committee the approved proposal."
+        ],
+        correct: "The committee approved the proposal."
+      },
+      {
+        question: "32. Which of the following is an example of a conditional structure?",
+        options: [
+          "If tariffs increase, consumers will pay more.",
+          "Tariffs increase and consumers pay more.",
+          "Consumers pay more because tariffs increase.",
+          "Tariffs increase; consumers pay more."
+        ],
+        correct: "If tariffs increase, consumers will pay more."
+      },
+      {
+        question: "33. Which phrase best describes 'initial assessment'?",
+        options: [
+          "Final verdict",
+          "Preliminary judgement",
+          "Delayed evaluation",
+          "Postponed review"
+        ],
+        correct: "Preliminary judgement"
+      },
+      {
+        question: "34. Which of the following sentences demonstrates correct punctuation with a parenthetical insertion?",
+        options: [
+          "Trump (a polarizing leader) influenced policies.",
+          "Trump a polarizing leader influenced policies.",
+          "Trump, a polarizing leader influenced policies.",
+          "Trump influenced policies (a polarizing leader)."
+        ],
+        correct: "Trump (a polarizing leader) influenced policies."
+      },
+      {
+        question: "35. Which option is a suitable synonym for 'liberation' in the context of immigration?",
+        options: [
+          "Amnesty",
+          "Incarceration",
+          "Exile",
+          "Crackdown"
+        ],
+        correct: "Amnesty"
+      },
+      {
+        question: "36. Identify the correctly structured compound sentence:",
+        options: [
+          "Trump supports tariffs and he supports taxes.",
+          "Trump supports tariffs, but he limits them to China.",
+          "Trump supports tariffs because they are effective.",
+          "Trump supports tariffs if they are effective."
+        ],
+        correct: "Trump supports tariffs, but he limits them to China."
+      },
+      {
+        question: "37. Which sentence uses a rhetorical question as a device?",
+        options: [
+          "Who can clearly define public interest?",
+          "Public interest is clearly defined.",
+          "The public interest is defined clearly.",
+          "Define public interest clearly."
+        ],
+        correct: "Who can clearly define public interest?"
+      },
+      {
+        question: "38. Which option best describes the purpose of using a subordinate clause?",
+        options: [
+          "To add extra detail without standing alone",
+          "To replace the main clause entirely",
+          "To form a compound sentence",
+          "To introduce a list"
+        ],
+        correct: "To add extra detail without standing alone"
+      },
+      {
+        question: "39. Which sentence is an example of active voice?",
+        options: [
+          "The law was enforced by the government.",
+          "The government enforced the law.",
+          "The law enforced the government.",
+          "Enforced was the law by the government."
+        ],
+        correct: "The government enforced the law."
+      },
+      {
+        question: "40. Which of the following is an example of a sentence using a modal for possibility?",
+        options: [
+          "She can speak five languages.",
+          "She must speak five languages.",
+          "She did speak five languages.",
+          "She speaks five languages."
+        ],
+        correct: "She can speak five languages."
+      },
+      {
+        question: "41. Choose the option that best expresses the antonym for 'hoop of hope' as used metaphorically in the notes.",
+        options: [
+          "Lost hope",
+          "Sucked into the Trump-verse",
+          "Trumpian delusion",
+          "Revived Trumpocracy"
+        ],
+        correct: "Lost hope"
+      },
+      {
+        question: "42. In a sentence rearrangement task, arrange the words to form a correct complex sentence: 'if / it / rains / indoors / we / will / stay'.",
+        options: [
+          "If it rains, we will stay indoors.",
+          "We will stay indoors if it rains.",
+          "Will we stay indoors if it rains?",
+          "Indoors, if it rains, we will stay."
+        ],
+        correct: "If it rains, we will stay indoors."
+      },
+      {
+        question: "43. Which of the following correctly uses punctuation to separate clauses?",
+        options: [
+          "Trump’s policies, however, were widely debated.",
+          "Trump’s policies however were widely debated.",
+          "Trump’s policies however, were widely debated.",
+          "Trump’s policies, however were widely debated."
+        ],
+        correct: "Trump’s policies, however, were widely debated."
+      },
+      {
+        question: "44. Identify the correct passive transformation for: 'The committee approved the proposal.'",
+        options: [
+          "The proposal was approved by the committee.",
+          "The proposal approved by the committee.",
+          "Approved was the proposal by the committee.",
+          "The committee was approving the proposal."
+        ],
+        correct: "The proposal was approved by the committee."
+      },
+      {
+        question: "45. Which option best illustrates the use of an idiomatic expression?",
+        options: [
+          "He fell for the Trumpian delusion.",
+          "He believed the facts.",
+          "He supported the proposal.",
+          "He questioned the measure."
+        ],
+        correct: "He fell for the Trumpian delusion."
+      },
+      {
+        question: "46. Which word best describes 'mandate' as used in 'Who has the legal mandate to reform the police?'",
+        options: [
+          "Authority",
+          "Suggestion",
+          "Possibility",
+          "Negation"
+        ],
+        correct: "Authority"
+      },
+      {
+        question: "47. Identify the correct synonym for 'expanded curbs on free speech' from the notes:",
+        options: [
+          "Increasing restrictions on communication",
+          "Liberalizing communication",
+          "Removing boundaries on expression",
+          "Expanding free expression"
+        ],
+        correct: "Increasing restrictions on communication"
+      },
+      {
+        question: "48. Which sentence best exemplifies correct subject-verb agreement?",
+        options: [
+          "The list of items are on the desk.",
+          "The list of items is on the desk.",
+          "The items list are on the desk.",
+          "The items list is on the desk."
+        ],
+        correct: "The list of items is on the desk."
+      },
+      {
+        question: "49. Which question below is structured as a direct question?",
+        options: [
+          "Explain the significance of the amendment.",
+          "Who has the legal mandate to reform the police?",
+          "The legal mandate to reform the police is unclear.",
+          "Discuss the legal mandate to reform the police."
+        ],
+        correct: "Who has the legal mandate to reform the police?"
+      },
+      {
+        question: "50. Which of the following is a correctly constructed second conditional sentence?",
+        options: [
+          "If I won the lottery, I would travel the world.",
+          "If I win the lottery, I would travel the world.",
+          "If I won the lottery, I will travel the world.",
+          "If I win the lottery, I travel the world."
+        ],
+        correct: "If I won the lottery, I would travel the world."
       }
     ];
 
-    // Shuffle the options for a given question object using the Fisher-Yates shuffle.
-    function shuffleOptions(questionObj) {
-      let options = questionObj.options.map(function(opt, index) {
-        return { text: opt, originalIndex: index };
-      });
-      for (let i = options.length - 1; i > 0; i--) {
+    let timerInterval;
+    let timeRemaining = 1500; // 25 minutes in seconds
+    let startTime;
+
+    // Function to shuffle array items (Fisher-Yates shuffle)
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [options[i], options[j]] = [options[j], options[i]];
+        [array[i], array[j]] = [array[j], array[i]];
       }
-      // Update the correct answer's new index.
-      for (let i = 0; i < options.length; i++) {
-        if (options[i].originalIndex === questionObj.answer) {
-          questionObj.answer = i;
-          break;
-        }
-      }
-      questionObj.options = options.map(item => item.text);
+      return array;
     }
 
-    // Shuffle options for all questions on page load (before rendering the quiz)
-    function shuffleAllOptions() {
-      questions.forEach(q => shuffleOptions(q));
+    // Function to start the quiz (hides name section, shows quiz and starts timer)
+    function startQuiz() {
+      const nameInput = document.getElementById('student-name');
+      if (nameInput.value.trim() === '') {
+        alert("Please enter your name.");
+        return;
+      }
+      // Hide name entry and show quiz section
+      document.getElementById('name-section').style.display = 'none';
+      document.getElementById('quiz-section').style.display = 'block';
+      startTime = new Date();
+      // Start the timer
+      timerInterval = setInterval(updateTimer, 1000);
+      // Load and randomize questions
+      loadQuestions();
     }
 
-    // Render the quiz questions into the container.
-    function renderQuiz() {
-      const container = document.getElementById('quizContainer');
-      container.innerHTML = "";
-      questions.forEach((q, idx) => {
-        let qDiv = document.createElement('div');
-        qDiv.className = 'question';
-        qDiv.innerHTML = `<h3>${q.question}</h3>`;
-        let optionsDiv = document.createElement('div');
-        optionsDiv.className = 'options';
-        q.options.forEach((option, optIdx) => {
-          optionsDiv.innerHTML += `<label>
-            <input type="radio" name="q${idx}" value="${optIdx}">
-            ${option}
-          </label>`;
+    // Timer function to update every second
+    function updateTimer() {
+      let minutes = Math.floor(timeRemaining / 60);
+      let seconds = timeRemaining % 60;
+      document.getElementById('time').textContent = `Time Remaining: ${minutes < 10 ? '0'+minutes : minutes}:${seconds < 10 ? '0'+seconds : seconds}`;
+      if (timeRemaining <= 0) {
+        clearInterval(timerInterval);
+        alert("Time is up! Your quiz will now be submitted.");
+        submitQuiz();
+      }
+      timeRemaining--;
+    }
+
+    // Dynamically load questions and randomize options
+    function loadQuestions() {
+      const quizContainer = document.getElementById('questions-container');
+      quizData.forEach((q, index) => {
+        // Shuffle options for each question
+        const shuffledOptions = shuffle([...q.options]);
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question';
+        const questionP = document.createElement('p');
+        questionP.textContent = q.question;
+        questionDiv.appendChild(questionP);
+        const ul = document.createElement('ul');
+        ul.className = 'options';
+        shuffledOptions.forEach(option => {
+          const li = document.createElement('li');
+          li.innerHTML = `<label><input type="radio" name="question${index}" value="${option}"> ${option}</label>`;
+          ul.appendChild(li);
         });
-        qDiv.appendChild(optionsDiv);
-        container.appendChild(qDiv);
+        questionDiv.appendChild(ul);
+        quizContainer.appendChild(questionDiv);
       });
     }
 
-    // Timer function: starts and updates the countdown every second.
-    function startTimer() {
-      startTime = new Date();
-      timerInterval = setInterval(function() {
-        totalTime--;
-        let minutes = Math.floor(totalTime / 60);
-        let seconds = totalTime % 60;
-        document.getElementById('timerDisplay').textContent = "Time remaining: " + minutes + "m " + seconds + "s";
-        if (totalTime <= 0) {
-          clearInterval(timerInterval);
-          submitQuiz();
-        }
-      }, 1000);
-    }
-
-    // Evaluate the quiz, calculate the score and time taken, then display results.
+    // Submit quiz and calculate results
     function submitQuiz() {
       clearInterval(timerInterval);
-      let score = 0;
-      let attempted = 0;
-      questions.forEach((q, idx) => {
-        const radios = document.getElementsByName('q' + idx);
+      const endTime = new Date();
+      let timeTakenSeconds = Math.floor((endTime - startTime) / 1000);
+      let score = 0, attempted = 0;
+      quizData.forEach((q, index) => {
+        const radios = document.getElementsByName('question' + index);
         radios.forEach(radio => {
           if (radio.checked) {
             attempted++;
-            if (parseInt(radio.value) === q.answer) {
+            if (radio.value === q.correct) {
               score++;
             }
           }
         });
       });
-      let endTime = new Date();
-      let timeTaken = Math.floor((endTime - startTime) / 1000);
-      document.getElementById('quizSection').style.display = "none";
-      let resultDiv = document.getElementById('resultSection');
-      resultDiv.style.display = "block";
-      let name = document.getElementById('studentName').value;
-      resultDiv.innerHTML = `<h2>Results</h2>
-        <p>Name: ${name}</p>
-        <p>Questions Attempted: ${attempted} / ${questions.length}</p>
-        <p>Score: ${score} / ${questions.length}</p>
-        <p>Time Taken: ${timeTaken} seconds</p>`;
-      // Fill hidden Formspree fields and submit the form automatically.
-      document.getElementById('fs_name').value = name;
-      document.getElementById('fs_attempted').value = attempted;
-      document.getElementById('fs_score').value = score;
-      document.getElementById('fs_time').value = timeTaken;
-      document.getElementById('fs_form').submit();
+      // Hide quiz and show result section
+      document.getElementById('quiz-section').style.display = 'none';
+      const resultDiv = document.getElementById('result-section');
+      const studentName = document.getElementById('student-name').value;
+      resultDiv.innerHTML = `<h2>Quiz Results</h2>
+                             <p>Name: ${studentName}</p>
+                             <p>Questions Attempted: ${attempted} / ${quizData.length}</p>
+                             <p>Score: ${score} / ${quizData.length}</p>
+                             <p>Time Taken: ${timeTakenSeconds} seconds</p>`;
+      resultDiv.style.display = 'block';
+      // Auto-submit the results via hidden Formspree form
+      submitResultsForm(studentName, attempted, score, timeTakenSeconds);
     }
 
-    // Start quiz after a valid name is entered.
-    function startQuiz() {
-      let nameInput = document.getElementById('studentName').value.trim();
-      if (nameInput === "") {
-        alert("Please enter your name to start the quiz.");
-        return;
-      }
-      document.getElementById('nameEntry').style.display = "none";
-      document.getElementById('quizSection').style.display = "block";
-      shuffleAllOptions();
-      renderQuiz();
-      startTimer();
-    }
-
-    window.onload = function() {
-      // Disable text selection on the entire document.
-      document.body.onselectstart = function() { return false; };
+    // Create and submit a hidden form to Formspree
+    function submitResultsForm(name, attempted, score, timeTaken) {
+      const form = document.createElement('form');
+      form.action = 'https://formspree.io/f/xwpvddea';
+      form.method = 'POST';
+      // Hidden fields
+      form.innerHTML = `
+        <input type="hidden" name="Name" value="${name}">
+        <input type="hidden" name="Attempted" value="${attempted}">
+        <input type="hidden" name="Score" value="${score}">
+        <input type="hidden" name="Time_Taken" value="${timeTaken}">
+      `;
+      document.body.appendChild(form);
+      form.submit();
     }
   </script>
 </head>
 <body>
+  <!-- Header -->
   <header>
-    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Logo" style="height:60px; display:block; margin:0 auto 10px auto;">
-    <h1>QUIZ FOR CSS ASPIRANTS 08 APRIL 2025</h1>
-    <h2>SYED ASGHAR ALI SHAH</h2>
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Logo">
+    <h1>QUIZ FOR CSS ASPIRANTS 09 APRIL 2025</h1>
+    <div class="author">SYED ASGHAR ALI SHAH</div>
   </header>
-  <div class="container">
-    <div id="nameEntry">
-      <p>Please enter your name to start the quiz:</p>
-      <input type="text" id="studentName" placeholder="Enter your name here">
-      <button onclick="startQuiz()">Start Quiz</button>
-    </div>
-    <div id="quizSection">
-      <div class="timer" id="timerDisplay">Time remaining: 25m 0s</div>
-      <div id="quizContainer">
-        <!-- Quiz questions will be rendered here by JavaScript -->
-      </div>
-      <button id="submitQuiz" onclick="submitQuiz()">Submit Quiz</button>
-    </div>
-    <div id="resultSection">
-      <!-- Quiz results will display here -->
-    </div>
-    <!-- Hidden Formspree form for automatic submission -->
-    <form id="fs_form" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-      <input type="hidden" name="name" id="fs_name">
-      <input type="hidden" name="attempted" id="fs_attempted">
-      <input type="hidden" name="score" id="fs_score">
-      <input type="hidden" name="time_taken" id="fs_time">
-    </form>
+
+  <!-- Name Entry Section -->
+  <div id="name-section">
+    <h2>Enter Your Name to Start the Quiz</h2>
+    <input type="text" id="student-name" placeholder="Your Name">
+    <br>
+    <button onclick="startQuiz()">Start Quiz</button>
   </div>
+
+  <!-- Quiz Section -->
+  <div id="quiz-section">
+    <div class="timer" id="time">Time Remaining: 25:00</div>
+    <div id="questions-container"></div>
+    <button id="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+  </div>
+
+  <!-- Result Section -->
+  <div id="result-section"></div>
+
+  <!-- Footer -->
   <footer>
-    <p>Contact us: 03265762698 &mdash; Call now to get more details!</p>
+    <p>Contact: 03265762698</p>
+    <p>For further inquiries, please call now!</p>
   </footer>
 </body>
 </html>
