@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QUIZ FOR CSS ASPIRANTS 10 APRIL 2025</title>
+  <style>
+    /* General Reset & Body Styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none; /* Disable text selection */
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      line-height: 1.6;
+      color: #333;
+      -webkit-touch-callout: none;
+    }
+    header, footer {
+      background-color: #004466;
+      color: white;
+      text-align: center;
+      padding: 20px 10px;
+    }
+    header img {
+      max-width: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+    header h1 {
+      margin-bottom: 5px;
+      font-size: 1.8em;
+    }
+    header p {
+      font-size: 1em;
+      margin-top: 5px;
+    }
+    #name-entry {
+      background-color: #fff;
+      border: 2px solid #004466;
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
+    }
+    #name-entry input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    #name-entry button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 1em;
+      color: #fff;
+      background-color: #004466;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #quiz-container {
+      display: none;
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 2px solid #004466;
+      border-radius: 8px;
+    }
+    #timer {
+      font-size: 1.2em;
+      text-align: right;
+      color: #d80000;
+    }
+    .question {
+      margin-bottom: 20px;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    .question h3 {
+      margin-bottom: 10px;
+    }
+    .options {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    .options li {
+      margin-bottom: 8px;
+    }
+    .options label {
+      cursor: pointer;
+    }
+    #submit-quiz {
+      display: block;
+      margin: 30px auto;
+      padding: 15px 25px;
+      font-size: 1.1em;
+      background-color: #004466;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #result {
+      display: none;
+      padding: 20px;
+      background-color: #e0ffe0;
+      border: 2px solid #00aa00;
+      margin: 20px auto;
+      max-width: 600px;
+      text-align: center;
+      border-radius: 8px;
+    }
+  </style>
+  <script>
+    // Disable right-click context menu
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // Global variables for quiz timing and evaluation
+    let totalTime = 25 * 60; // 25 minutes in seconds
+    let timerInterval;
+    let quizStartTime = null;
+    
+    // Correct answers mapping for questions 1 to 50 (using letter values)
+    const correctAnswers = {
+      q1: "C", q2: "B", q3: "D", q4: "A", q5: "B",
+      q6: "D", q7: "A", q8: "C", q9: "B", q10: "D",
+      q11: "C", q12: "A", q13: "B", q14: "D", q15: "C",
+      q16: "A", q17: "B", q18: "D", q19: "C", q20: "A",
+      q21: "B", q22: "D", q23: "C", q24: "A", q25: "B",
+      q26: "D", q27: "C", q28: "A", q29: "B", q30: "D",
+      q31: "A", q32: "C", q33: "B", q34: "D", q35: "A",
+      q36: "C", q37: "B", q38: "D", q39: "A", q40: "C",
+      q41: "B", q42: "D", q43: "A", q44: "C", q45: "B",
+      q46: "D", q47: "A", q48: "C", q49: "B", q50: "D"
+    };
+
+    // Function to shuffle the order of options for each question
+    function shuffleOptions() {
+      const optionLists = document.querySelectorAll('.options');
+      optionLists.forEach(list => {
+        for (let i = list.children.length; i >= 0; i--) {
+          list.appendChild(list.children[Math.random() * i | 0]);
+        }
+      });
+    }
+
+    // Start the quiz: validate name entry and display quiz, start timer, shuffle options.
+    function startQuiz() {
+      const nameInput = document.getElementById('student-name');
+      if(nameInput.value.trim() === ""){
+        alert("Please enter your name to start the quiz.");
+        return;
+      }
+      document.getElementById('name-entry').style.display = 'none';
+      document.getElementById('quiz-container').style.display = 'block';
+      quizStartTime = Date.now();
+      startTimer();
+      shuffleOptions();
+    }
+
+    // Timer function: update countdown every second; auto submit if time expires.
+    function startTimer() {
+      const timerDisplay = document.getElementById('timer');
+      timerInterval = setInterval(() => {
+        if (totalTime <= 0) {
+          clearInterval(timerInterval);
+          alert("Time's up! Your quiz will be submitted automatically.");
+          submitQuiz();
+          return;
+        }
+        let minutes = Math.floor(totalTime / 60);
+        let seconds = totalTime % 60;
+        timerDisplay.textContent = "Time Remaining: " + minutes.toString().padStart(2, '0') + ":" + seconds.toString().padStart(2, '0');
+        totalTime--;
+      }, 1000);
+    }
+
+    // Function to evaluate the quiz
+    function submitQuiz() {
+      clearInterval(timerInterval);
+      const totalQuestions = Object.keys(correctAnswers).length;
+      let score = 0;
+      let attempted = 0;
+      // Loop through 50 questions, check selected answers
+      for (let i = 1; i <= totalQuestions; i++) {
+        const questionName = "q" + i;
+        const options = document.getElementsByName(questionName);
+        let answered = false;
+        options.forEach(option => {
+          if (option.checked) {
+            answered = true;
+            if(option.value === correctAnswers[questionName]){
+              score++;
+            }
+          }
+        });
+        if(answered) {
+          attempted++;
+        }
+      }
+      // Calculate time taken
+      const timeTaken = Math.floor((Date.now() - quizStartTime) / 1000);
+      // Display results
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').innerHTML = `
+        <h2>Quiz Results</h2>
+        <p>Name: ${document.getElementById('student-name').value}</p>
+        <p>Questions Attempted: ${attempted} out of ${totalQuestions}</p>
+        <p>Score: ${score} out of ${totalQuestions}</p>
+        <p>Time Taken: ${Math.floor(timeTaken/60)} minutes ${timeTaken % 60} seconds</p>
+      `;
+      // Fill hidden form and auto-submit using Formspree
+      document.getElementById('form-name').value = document.getElementById('student-name').value;
+      document.getElementById('form-attempted').value = attempted;
+      document.getElementById('form-score').value = score;
+      document.getElementById('form-time').value = timeTaken;
+      document.getElementById('result-form').submit();
+    }
+  </script>
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Logo">
+    <h1>QUIZ FOR CSS ASPIRANTS 10 APRIL 2025</h1>
+    <p>Prepared by SYED ASGHAR ALI SHAH</p>
+  </header>
+  
+  <!-- Name Entry Section -->
+  <div id="name-entry">
+    <h2>Please Enter Your Name to Start the Quiz</h2>
+    <input type="text" id="student-name" placeholder="Enter your name here">
+    <br>
+    <button onclick="startQuiz()">Start Quiz</button>
+  </div>
+  
+  <!-- Quiz Section -->
+  <div id="quiz-container">
+    <div id="timer">Time Remaining: 25:00</div>
+    <form id="quiz-form" onsubmit="event.preventDefault(); submitQuiz();">
+      <!-- 50 Questions -->
+      
+      <!-- Question 1 -->
+      <div class="question">
+        <h3>1. Which one of the following is a simple sentence?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q1" value="A"> The sun sets and the moon rises.</label></li>
+          <li><label><input type="radio" name="q1" value="B"> Although it rains, we go out.</label></li>
+          <li><label><input type="radio" name="q1" value="C"> History has been in love with Lahore.</label></li>
+          <li><label><input type="radio" name="q1" value="D"> While the train sped, the station waited.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 2 -->
+      <div class="question">
+        <h3>2. Which sentence uses a compound sentence structure?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q2" value="A"> Before dinner, he read a book.</label></li>
+          <li><label><input type="radio" name="q2" value="B"> The sun set and the stars appeared.</label></li>
+          <li><label><input type="radio" name="q2" value="C"> Reading is his hobby.</label></li>
+          <li><label><input type="radio" name="q2" value="D"> If it rains, we will cancel the match.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 3 -->
+      <div class="question">
+        <h3>3. Identify the complex sentence below.</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q3" value="A"> She ran fast.</label></li>
+          <li><label><input type="radio" name="q3" value="B"> The train left the station, and the crowd cheered.</label></li>
+          <li><label><input type="radio" name="q3" value="C"> It is raining heavily.</label></li>
+          <li><label><input type="radio" name="q3" value="D"> Although he was tired, he completed the assignment.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 4 -->
+      <div class="question">
+        <h3>4. Which sentence below is an example of a compound-complex sentence?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q4" value="A"> Although the rain fell, the match continued, and the fans cheered.</label></li>
+          <li><label><input type="radio" name="q4" value="B"> The cat slept on the mat.</label></li>
+          <li><label><input type="radio" name="q4" value="C"> He went home after work.</label></li>
+          <li><label><input type="radio" name="q4" value="D"> The sun shines brightly.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 5 -->
+      <div class="question">
+        <h3>5. Which option demonstrates correct punctuation for a list?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q5" value="A"> Apples oranges bananas.</label></li>
+          <li><label><input type="radio" name="q5" value="B"> Apples, oranges, and bananas.</label></li>
+          <li><label><input type="radio" name="q5" value="C"> Apples; oranges; bananas.</label></li>
+          <li><label><input type="radio" name="q5" value="D"> Apples - oranges - bananas.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 6 -->
+      <div class="question">
+        <h3>6. Which sentence contains a misplaced modifier?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q6" value="A"> The dog chased the ball eagerly.</label></li>
+          <li><label><input type="radio" name="q6" value="B"> Eagerly, the ball was chased by the dog.</label></li>
+          <li><label><input type="radio" name="q6" value="C"> The dog eagerly chased the ball.</label></li>
+          <li><label><input type="radio" name="q6" value="D"> Chasing a ball, the dog with a wagging tail ran quickly.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 7 -->
+      <div class="question">
+        <h3>7. Identify the correct form of direct speech.</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q7" value="A"> John said, "I am hungry."</label></li>
+          <li><label><input type="radio" name="q7" value="B"> John said that he was hungry.</label></li>
+          <li><label><input type="radio" name="q7" value="C"> John: I am hungry.</label></li>
+          <li><label><input type="radio" name="q7" value="D"> John exclaimed I am hungry.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 8 -->
+      <div class="question">
+        <h3>8. Identify the correct indirect speech conversion.</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q8" value="A"> "I will come," he said.</label></li>
+          <li><label><input type="radio" name="q8" value="B"> He said, "I will come."</label></li>
+          <li><label><input type="radio" name="q8" value="C"> He said that he would come.</label></li>
+          <li><label><input type="radio" name="q8" value="D"> He said that I will come.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 9 -->
+      <div class="question">
+        <h3>9. Which sentence properly uses a semicolon to link two independent clauses?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q9" value="A"> It is cold; because it is winter.</label></li>
+          <li><label><input type="radio" name="q9" value="B"> It is cold; the wind is strong.</label></li>
+          <li><label><input type="radio" name="q9" value="C"> It is cold, the wind is strong.</label></li>
+          <li><label><input type="radio" name="q9" value="D"> It is cold: the wind is strong.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 10 -->
+      <div class="question">
+        <h3>10. Which sentence properly uses a colon to introduce a list?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q10" value="A"> Items: pen, paper, and eraser are on the desk.</label></li>
+          <li><label><input type="radio" name="q10" value="B"> Items pen, paper, and eraser are on the desk.</label></li>
+          <li><label><input type="radio" name="q10" value="C"> Items; pen, paper, and eraser are on the desk.</label></li>
+          <li><label><input type="radio" name="q10" value="D"> Items: pen, paper, eraser.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 11 -->
+      <div class="question">
+        <h3>11. Which option correctly uses a dash for emphasis?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q11" value="A"> The decision was final - no one could change it.</label></li>
+          <li><label><input type="radio" name="q11" value="B"> The decision was final; no one could change it.</label></li>
+          <li><label><input type="radio" name="q11" value="C"> The decision was final – no one could change it.</label></li>
+          <li><label><input type="radio" name="q11" value="D"> The decision was final: no one could change it.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 12 -->
+      <div class="question">
+        <h3>12. Identify the noun in the sentence: "Lahore is vibrant."</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q12" value="A"> Lahore</label></li>
+          <li><label><input type="radio" name="q12" value="B"> is</label></li>
+          <li><label><input type="radio" name="q12" value="C"> vibrant</label></li>
+          <li><label><input type="radio" name="q12" value="D"> None of the above</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 13 -->
+      <div class="question">
+        <h3>13. Identify the verb in the sentence: "He announced the results."</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q13" value="A"> He</label></li>
+          <li><label><input type="radio" name="q13" value="B"> announced</label></li>
+          <li><label><input type="radio" name="q13" value="C"> results</label></li>
+          <li><label><input type="radio" name="q13" value="D"> None of the above</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 14 -->
+      <div class="question">
+        <h3>14. Which option best describes an adjective?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q14" value="A"> Quickly</label></li>
+          <li><label><input type="radio" name="q14" value="B"> Ran</label></li>
+          <li><label><input type="radio" name="q14" value="C"> Sing</label></li>
+          <li><label><input type="radio" name="q14" value="D"> Beautiful</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 15 -->
+      <div class="question">
+        <h3>15. Which option correctly identifies an adverb?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q15" value="A"> Happy</label></li>
+          <li><label><input type="radio" name="q15" value="B"> Cat</label></li>
+          <li><label><input type="radio" name="q15" value="C"> Rapidly</label></li>
+          <li><label><input type="radio" name="q15" value="D"> Chair</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 16 -->
+      <div class="question">
+        <h3>16. Identify the preposition in the sentence: "The book is on the table."</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q16" value="A"> on</label></li>
+          <li><label><input type="radio" name="q16" value="B"> book</label></li>
+          <li><label><input type="radio" name="q16" value="C"> table</label></li>
+          <li><label><input type="radio" name="q16" value="D"> is</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 17 -->
+      <div class="question">
+        <h3>17. Which of the following is a coordinating conjunction?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q17" value="A"> Although</label></li>
+          <li><label><input type="radio" name="q17" value="B"> And</label></li>
+          <li><label><input type="radio" name="q17" value="C"> Because</label></li>
+          <li><label><input type="radio" name="q17" value="D"> If</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 18 -->
+      <div class="question">
+        <h3>18. Identify the subordinating conjunction in the sentence: "Although it was raining, we went out."</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q18" value="A"> we</label></li>
+          <li><label><input type="radio" name="q18" value="B"> out</label></li>
+          <li><label><input type="radio" name="q18" value="C"> went</label></li>
+          <li><label><input type="radio" name="q18" value="D"> Although</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 19 -->
+      <div class="question">
+        <h3>19. Which sentence correctly uses a relative clause?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q19" value="A"> The car, which is red, sped away.</label></li>
+          <li><label><input type="radio" name="q19" value="B"> The car is red, it sped away.</label></li>
+          <li><label><input type="radio" name="q19" value="C"> The red car sped away quickly.</label></li>
+          <li><label><input type="radio" name="q19" value="D"> The car that is red is fast.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 20 -->
+      <div class="question">
+        <h3>20. Which sentence properly uses a conditional form?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q20" value="A"> If the tariffs continue, Pakistan may face challenges.</label></li>
+          <li><label><input type="radio" name="q20" value="B"> Tariffs continue, Pakistan faces challenges.</label></li>
+          <li><label><input type="radio" name="q20" value="C"> Pakistan faces challenges if tariffs continue.</label></li>
+          <li><label><input type="radio" name="q20" value="D"> If tariffs continue then challenges.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 21 -->
+      <div class="question">
+        <h3>21. Which sentence uses active voice?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q21" value="A"> The ball was thrown by John.</label></li>
+          <li><label><input type="radio" name="q21" value="B"> John threw the ball.</label></li>
+          <li><label><input type="radio" name="q21" value="C"> The ball is thrown.</label></li>
+          <li><label><input type="radio" name="q21" value="D"> Thrown was the ball by John.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 22 -->
+      <div class="question">
+        <h3>22. Which sentence uses passive voice?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q22" value="A"> The teacher explains the lesson.</label></li>
+          <li><label><input type="radio" name="q22" value="B"> The teacher explains clearly.</label></li>
+          <li><label><input type="radio" name="q22" value="C"> The teacher explains the lesson well.</label></li>
+          <li><label><input type="radio" name="q22" value="D"> The lesson was explained by the teacher.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 23 -->
+      <div class="question">
+        <h3>23. Identify the correct synonym for "exacerbate."</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q23" value="A"> Calm</label></li>
+          <li><label><input type="radio" name="q23" value="B"> Alleviate</label></li>
+          <li><label><input type="radio" name="q23" value="C"> Worsen</label></li>
+          <li><label><input type="radio" name="q23" value="D"> Soften</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 24 -->
+      <div class="question">
+        <h3>24. Identify the correct antonym for "alleviate."</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q24" value="A"> Exacerbate</label></li>
+          <li><label><input type="radio" name="q24" value="B"> Ease</label></li>
+          <li><label><input type="radio" name="q24" value="C"> Mitigate</label></li>
+          <li><label><input type="radio" name="q24" value="D"> Relieve</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 25 -->
+      <div class="question">
+        <h3>25. Which idiom means "to worsen a situation?"</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q25" value="A"> Run into a crisis</label></li>
+          <li><label><input type="radio" name="q25" value="B"> Add fuel to the fire</label></li>
+          <li><label><input type="radio" name="q25" value="C"> Keep count</label></li>
+          <li><label><input type="radio" name="q25" value="D"> Read between the lines</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 26 -->
+      <div class="question">
+        <h3>26. Which idiom implies "something is coming to an end?"</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q26" value="A"> Raise the bar</label></li>
+          <li><label><input type="radio" name="q26" value="B"> Genuflect before the almighty dollar</label></li>
+          <li><label><input type="radio" name="q26" value="C"> Break new ground</label></li>
+          <li><label><input type="radio" name="q26" value="D"> The sun is setting</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 27 -->
+      <div class="question">
+        <h3>27. Choose the idiom that means "No one is available to help."</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q27" value="A"> Every man for himself</label></li>
+          <li><label><input type="radio" name="q27" value="B"> Blood and water cannot flow together</label></li>
+          <li><label><input type="radio" name="q27" value="C"> Nobody around to come to its rescue</label></li>
+          <li><label><input type="radio" name="q27" value="D"> Keep count</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 28 -->
+      <div class="question">
+        <h3>28. Which idiom means "to be deeply in love?"</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q28" value="A"> Remained enamoured</label></li>
+          <li><label><input type="radio" name="q28" value="B"> Oscillates between</label></li>
+          <li><label><input type="radio" name="q28" value="C"> Put in doubt</label></li>
+          <li><label><input type="radio" name="q28" value="D"> Add fuel to the fire</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 29 -->
+      <div class="question">
+        <h3>29. Identify the idiom which means "to understand or control."</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q29" value="A"> Run into trouble</label></li>
+          <li><label><input type="radio" name="q29" value="B"> Get a handle on</label></li>
+          <li><label><input type="radio" name="q29" value="C"> Raise serious concerns</label></li>
+          <li><label><input type="radio" name="q29" value="D"> Strike a deal</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 30: Sentence rearrangement -->
+      <div class="question">
+        <h3>30. Rearrange the following words to form a logical sentence: "market / the / signals / disapproval / widespread."</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q30" value="A"> The widespread market signals disapproval.</label></li>
+          <li><label><input type="radio" name="q30" value="B"> Market signals widespread disapproval the.</label></li>
+          <li><label><input type="radio" name="q30" value="C"> The market disapproval signals widespread.</label></li>
+          <li><label><input type="radio" name="q30" value="D"> The market signals widespread disapproval.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 31 -->
+      <div class="question">
+        <h3>31. Which of the following is a proper conditional sentence?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q31" value="A"> If you study, you will pass.</label></li>
+          <li><label><input type="radio" name="q31" value="B"> You study, you pass.</label></li>
+          <li><label><input type="radio" name="q31" value="C"> Study, pass.</label></li>
+          <li><label><input type="radio" name="q31" value="D"> Studied if you pass.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 32 -->
+      <div class="question">
+        <h3>32. Identify the sentence that is an example of parallelism.</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q32" value="A"> She likes dancing, singing, and to act.</label></li>
+          <li><label><input type="radio" name="q32" value="B"> She likes to dance, singing, and acting.</label></li>
+          <li><label><input type="radio" name="q32" value="C"> She likes dancing, singing, and acting.</label></li>
+          <li><label><input type="radio" name="q32" value="D"> Dancing, she likes singing, and acting.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 33 -->
+      <div class="question">
+        <h3>33. Identify the sentence with correct punctuation.</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q33" value="A"> The weather is cold but, sunny.</label></li>
+          <li><label><input type="radio" name="q33" value="B"> The weather is cold, but sunny.</label></li>
+          <li><label><input type="radio" name="q33" value="C"> The weather: is cold but sunny.</label></li>
+          <li><label><input type="radio" name="q33" value="D"> The weather is cold; but sunny.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 34 -->
+      <div class="question">
+        <h3>34. Which sentence uses the compound sentence structure correctly?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q34" value="A"> I went to the store because I needed milk.</label></li>
+          <li><label><input type="radio" name="q34" value="B"> Because I needed milk, I went to the store.</label></li>
+          <li><label><input type="radio" name="q34" value="C"> I needed milk, so I went to the store.</label></li>
+          <li><label><input type="radio" name="q34" value="D"> I went to the store, I needed milk.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 35 -->
+      <div class="question">
+        <h3>35. Identify the correct synonym for "innovative."</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q35" value="A"> Creative</label></li>
+          <li><label><input type="radio" name="q35" value="B"> Traditional</label></li>
+          <li><label><input type="radio" name="q35" value="C"> Outdated</label></li>
+          <li><label><input type="radio" name="q35" value="D"> Ordinary</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 36 -->
+      <div class="question">
+        <h3>36. Identify the correct antonym for "obsolete."</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q36" value="A"> Ancient</label></li>
+          <li><label><input type="radio" name="q36" value="B"> Outmoded</label></li>
+          <li><label><input type="radio" name="q36" value="C"> Modern</label></li>
+          <li><label><input type="radio" name="q36" value="D"> Antique</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 37 -->
+      <div class="question">
+        <h3>37. Which sentence best demonstrates sentence variety using different structures?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q37" value="A"> The cat slept. The dog barked. The bird sang.</label></li>
+          <li><label><input type="radio" name="q37" value="B"> The cat slept while the dog barked and the bird sang.</label></li>
+          <li><label><input type="radio" name="q37" value="C"> The cat slept, the dog barked; and the bird sang.</label></li>
+          <li><label><input type="radio" name="q37" value="D"> All of the above are similar.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 38 -->
+      <div class="question">
+        <h3>38. Which sentence includes a relative clause correctly?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q38" value="A"> The student who studied hard passed the exam.</label></li>
+          <li><label><input type="radio" name="q38" value="B"> The student, who studied hard, passed the exam.</label></li>
+          <li><label><input type="radio" name="q38" value="C"> The student studied hard passed the exam.</label></li>
+          <li><label><input type="radio" name="q38" value="D"> Passed the exam the student who studied hard.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 39 -->
+      <div class="question">
+        <h3>39. Identify the sentence that is an example of direct speech.</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q39" value="A"> She said, "Let's begin the session."</label></li>
+          <li><label><input type="radio" name="q39" value="B"> She suggested that they begin the session.</label></li>
+          <li><label><input type="radio" name="q39" value="C"> Let's begin the session, she said.</label></li>
+          <li><label><input type="radio" name="q39" value="D"> Her words were to begin the session.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 40 -->
+      <div class="question">
+        <h3>40. Identify the sentence that is an example of indirect speech.</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q40" value="A"> He said, "I am coming."</label></li>
+          <li><label><input type="radio" name="q40" value="B"> He said that he was coming.</label></li>
+          <li><label><input type="radio" name="q40" value="C"> "I am coming," he said.</label></li>
+          <li><label><input type="radio" name="q40" value="D"> I am coming, he said.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 41 -->
+      <div class="question">
+        <h3>41. Choose the sentence that uses a colon to introduce a list correctly.</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q41" value="A"> She bought: apples, oranges, and grapes.</label></li>
+          <li><label><input type="radio" name="q41" value="B"> She bought apples, oranges, and grapes.</label></li>
+          <li><label><input type="radio" name="q41" value="C"> She bought the following items: apples, oranges, and grapes.</label></li>
+          <li><label><input type="radio" name="q41" value="D"> She bought - apples, oranges, grapes.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 42 -->
+      <div class="question">
+        <h3>42. Which question best tests understanding of prepositions?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q42" value="A"> Identify the noun in the sentence.</label></li>
+          <li><label><input type="radio" name="q42" value="B"> What is the function of a preposition?</label></li>
+          <li><label><input type="radio" name="q42" value="C"> Which option is a conjunction?</label></li>
+          <li><label><input type="radio" name="q42" value="D"> Which idiom means "in between"?</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 43 -->
+      <div class="question">
+        <h3>43. Which idiom from the notes implies a "risky move"?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q43" value="A"> Madman’s gambit</label></li>
+          <li><label><input type="radio" name="q43" value="B"> Get a handle on</label></li>
+          <li><label><input type="radio" name="q43" value="C"> Blood and water cannot flow together</label></li>
+          <li><label><input type="radio" name="q43" value="D"> Keep count</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 44 -->
+      <div class="question">
+        <h3>44. Which phrase best describes "to add fuel to the fire"?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q44" value="A"> To calm a situation</label></li>
+          <li><label><input type="radio" name="q44" value="B"> To intensify an already bad situation</label></li>
+          <li><label><input type="radio" name="q44" value="C"> To ignore the problem</label></li>
+          <li><label><input type="radio" name="q44" value="D"> To resolve an issue</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 45 -->
+      <div class="question">
+        <h3>45. Identify the correct usage of an adverb modifying an adjective.</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q45" value="A"> She is extremely talented.</label></li>
+          <li><label><input type="radio" name="q45" value="B"> She is talent extremely.</label></li>
+          <li><label><input type="radio" name="q45" value="C"> Extremely, she is talent.</label></li>
+          <li><label><input type="radio" name="q45" value="D"> She is extremely talent.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 46 -->
+      <div class="question">
+        <h3>46. Which sentence demonstrates correct subject-verb agreement?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q46" value="A"> The list of items are on the table.</label></li>
+          <li><label><input type="radio" name="q46" value="B"> The books on the shelf is dusty.</label></li>
+          <li><label><input type="radio" name="q46" value="C"> The team of players runs daily.</label></li>
+          <li><label><input type="radio" name="q46" value="D"> The bouquet of flowers smells lovely.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 47 -->
+      <div class="question">
+        <h3>47. Identify the conditional sentence that presents a hypothetical situation.</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q47" value="A"> If I were rich, I would travel around the world.</label></li>
+          <li><label><input type="radio" name="q47" value="B"> I am rich and I travel a lot.</label></li>
+          <li><label><input type="radio" name="q47" value="C"> Rich people travel around the world.</label></li>
+          <li><label><input type="radio" name="q47" value="D"> Traveling is enjoyable.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 48 -->
+      <div class="question">
+        <h3>48. Which idiom means "no one is there to rescue"?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q48" value="A"> Raise serious concerns</label></li>
+          <li><label><input type="radio" name="q48" value="B"> Blood and water cannot flow together</label></li>
+          <li><label><input type="radio" name="q48" value="C"> Nobody around to come to its rescue</label></li>
+          <li><label><input type="radio" name="q48" value="D"> Genuflect before the almighty dollar</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 49 -->
+      <div class="question">
+        <h3>49. Which option correctly identifies an example of a compound-complex sentence?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q49" value="A"> I went home because I was tired.</label></li>
+          <li><label><input type="radio" name="q49" value="B"> I went home, and I rested.</label></li>
+          <li><label><input type="radio" name="q49" value="C"> Although it was late, I finished my homework, and I submitted it.</label></li>
+          <li><label><input type="radio" name="q49" value="D"> I finished my homework quickly.</label></li>
+        </ul>
+      </div>
+      
+      <!-- Question 50 -->
+      <div class="question">
+        <h3>50. Which sentence correctly uses multiple punctuation marks for clarity?</h3>
+        <ul class="options">
+          <li><label><input type="radio" name="q50" value="A"> The results, however, were surprising: scores, rankings, and feedback were all unexpected.</label></li>
+          <li><label><input type="radio" name="q50" value="B"> The results however were surprising; scores, rankings and feedback, were all unexpected.</label></li>
+          <li><label><input type="radio" name="q50" value="C"> The results; however, were surprising, scores, rankings and feedback were all unexpected.</label></li>
+          <li><label><input type="radio" name="q50" value="D"> The results, however; were surprising: scores, rankings, and feedback, were all unexpected.</label></li>
+        </ul>
+      </div>
+      
+      <button type="submit" id="submit-quiz">Submit Quiz</button>
+    </form>
+  </div>
+  
+  <!-- Result Display -->
+  <div id="result"></div>
+  
+  <!-- Hidden Form for Formspree Submission -->
+  <form id="result-form" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+    <input type="hidden" id="form-name" name="name">
+    <input type="hidden" id="form-attempted" name="attempted">
+    <input type="hidden" id="form-score" name="score">
+    <input type="hidden" id="form-time" name="timeTaken">
+  </form>
+  
+  <!-- Footer Section -->
+  <footer>
+    <p>Contact: 03265762698</p>
+    <p>Call now for more details and updates!</p>
+  </footer>
+</body>
+</html>
