@@ -2,628 +2,371 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 11 APRIL 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 12 APRIL 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    /* Global resets and non‐selectable text */
+    /* Disable text selection for all content */
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
       user-select: none;
     }
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      line-height: 1.6;
+      background: #f2f2f2;
     }
-    /* Header styling with background image from your URL */
     header {
-      background: url('https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__') no-repeat center center/cover;
-      color: #fff;
-      padding: 20px 10px;
+      background: url('https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__') no-repeat center;
+      background-size: cover;
+      color: white;
+      padding: 20px;
       text-align: center;
       position: relative;
     }
     header h1 {
+      margin: 0;
       font-size: 2em;
-      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px #000;
     }
-    header h2 {
-      font-size: 1em;
-      font-weight: 400;
+    header .creator {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 0.9em;
+      font-weight: bold;
     }
-    /* Name entry section */
-    #nameEntry {
-      padding: 20px;
-      text-align: center;
-      background-color: #222;
+    footer {
+      background: #333;
       color: #fff;
-    }
-    #nameEntry input {
-      padding: 10px;
-      font-size: 1em;
-      width: 250px;
-      margin-right: 10px;
-    }
-    #nameEntry button {
       padding: 10px 20px;
-      font-size: 1em;
-      cursor: pointer;
+      text-align: center;
+      font-size: 0.9em;
     }
-    /* Quiz Section */
-    #quizSection {
-      display: none;
-      padding: 20px;
-      background: #fff;
+    .container {
       max-width: 900px;
       margin: 20px auto;
+      background: #fff;
+      padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    #timer {
-      font-weight: bold;
-      margin-bottom: 20px;
-      text-align: right;
+    .hidden {
+      display: none;
+    }
+    input[type="text"], input[type="password"] {
+      width: 80%;
+      padding: 8px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 10px 20px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #0056b3;
+    }
+    .timer {
       font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 15px;
+      text-align: right;
     }
     .question {
       margin-bottom: 20px;
-      padding: 10px;
-      border-bottom: 1px solid #ddd;
+      border-bottom: 1px dashed #ccc;
+      padding-bottom: 10px;
     }
-    .question p {
-      font-weight: bold;
-      margin-bottom: 8px;
+    .question h3 {
+      margin: 0 0 10px 0;
     }
-    .options {
-      list-style: none;
-    }
-    .options li {
-      margin-bottom: 6px;
-    }
-    .options input[type="radio"] {
-      margin-right: 8px;
-    }
-    /* Submit button */
-    #submitQuiz {
-      padding: 12px 25px;
-      font-size: 1em;
+    .options label {
+      margin-right: 15px;
       cursor: pointer;
-      display: block;
-      margin: 20px auto;
-    }
-    /* Results Section */
-    #resultSection {
-      display: none;
-      padding: 20px;
-      background: #e2f7e2;
-      max-width: 600px;
-      margin: 20px auto;
-      border-radius: 8px;
-      text-align: center;
-    }
-    /* Footer styling */
-    footer {
-      background: #222;
-      color: #fff;
-      text-align: center;
-      padding: 15px 10px;
-      position: fixed;
-      left: 0;
-      bottom: 0;
-      width: 100%;
     }
     /* Disable right-click context menu */
     body {
+      -webkit-touch-callout: none;
       -webkit-user-select: none;
+      -khtml-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
+      user-select: none;
     }
   </style>
 </head>
 <body oncontextmenu="return false;">
   <!-- Header -->
   <header>
-    <h1>QUIZ FOR CSS ASPIRANTS 11 APRIL 2025</h1>
-    <h2>Created by: SYED ASGHAR ALI SHAH</h2>
+    <div class="creator">SYED ASGHAR ALI SHAH</div>
+    <h1>QUIZ FOR CSS ASPIRANTS 12 APRIL 2025</h1>
   </header>
+  
+  <div class="container">
+    <!-- Login Section -->
+    <div id="loginSection">
+      <h2>Login</h2>
+      <p>Please login with your credentials.</p>
+      <input type="text" id="loginUsername" placeholder="Username"><br>
+      <input type="password" id="loginPassword" placeholder="Password"><br>
+      <button onclick="checkLogin()">Login</button>
+    </div>
 
-  <!-- Name Entry Section -->
-  <section id="nameEntry">
-    <label for="userName">Enter your name to start the quiz:</label>
-    <input type="text" id="userName" placeholder="Your Name">
-    <button id="startQuizBtn">Start Quiz</button>
-  </section>
+    <!-- Name Entry Section -->
+    <div id="nameSection" class="hidden">
+      <h2>Enter Your Name</h2>
+      <input type="text" id="studentName" placeholder="Your Name"><br>
+      <button onclick="startQuiz()">Start Quiz</button>
+    </div>
 
-  <!-- Quiz Section -->
-  <section id="quizSection">
-    <div id="timer">Time Remaining: 25:00</div>
-    <form id="quizForm">
-      <!-- Quiz questions will be injected here by JavaScript -->
-    </form>
-    <button id="submitQuiz">Submit Quiz</button>
-  </section>
+    <!-- Quiz Section -->
+    <div id="quizSection" class="hidden">
+      <div class="timer" id="timer">Time Left: 25:00</div>
+      <form id="quizForm">
+        <!-- Questions will be inserted here by JavaScript -->
+      </form>
+      <button onclick="submitQuiz()">Submit Quiz</button>
+    </div>
 
-  <!-- Result Section -->
-  <section id="resultSection">
-    <h2>Quiz Results</h2>
-    <p id="resultDetails"></p>
-  </section>
+    <!-- Results Section -->
+    <div id="resultsSection" class="hidden">
+      <h2>Quiz Results</h2>
+      <p id="resultText"></p>
+    </div>
+  </div>
 
-  <!-- Hidden Form for Formspree Submission -->
-  <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display: none;">
-    <input type="hidden" name="name" id="resultName">
-    <input type="hidden" name="attempted" id="resultAttempted">
-    <input type="hidden" name="score" id="resultScore">
-    <input type="hidden" name="timeTaken" id="resultTime">
+  <!-- Hidden Form to submit results via Formspree -->
+  <form action="https://formspree.io/f/xwpvddea" method="POST" id="resultsForm" style="display:none;">
+    <input type="text" name="studentName" id="formStudentName">
+    <input type="text" name="attempted" id="formAttempted">
+    <input type="text" name="score" id="formScore">
+    <input type="text" name="timeTaken" id="formTimeTaken">
   </form>
 
+  <footer>
+    <p>For enquiries call: 03265762698 | Don't miss this opportunity to excel!</p>
+  </footer>
+
   <script>
-    // Data structure for 50 tough and varied questions
-    const questions = [
-      {
-        question: "1. In the sentence 'Islam ethically oriented the world and brought forth a unique civilisation,' what is the subject?",
-        options: ["world", "Islam", "civilisation", "oriented"],
-        answer: "Islam"
-      },
-      {
-        question: "2. Identify the predicate in 'Islam ethically oriented the world and brought forth a unique civilisation.'",
-        options: ["Islam", "ethically oriented the world and brought forth a unique civilisation", "unique civilisation", "oriented"],
-        answer: "ethically oriented the world and brought forth a unique civilisation"
-      },
-      {
-        question: "3. Transform the active sentence 'Islam ethically oriented the world.' into passive voice.",
-        options: ["The world was ethically oriented by Islam.", "Islam was ethically oriented by the world.", "The world ethically oriented Islam.", "Ethically the world was oriented by Islam."],
-        answer: "The world was ethically oriented by Islam."
-      },
-      {
-        question: "4. Which of the following is an example of a compound sentence?",
-        options: [
-          "Islam ethically oriented the world.",
-          "The writer teaches at Quaid-i-Azam University, and he advocates for spiritual democracy.",
-          "If we do not orient ourselves, we will be lost.",
-          "The world was left bewildered."
-        ],
-        answer: "The writer teaches at Quaid-i-Azam University, and he advocates for spiritual democracy."
-      },
-      {
-        question: "5. In the sentence 'Because tariffs are bad, many economies struggle,' which part is the dependent clause?",
-        options: ["many economies struggle", "tariffs are bad", "Because tariffs are bad", "struggle"],
-        answer: "Because tariffs are bad"
-      },
-      {
-        question: "6. Which sentence is a correct example of a complex sentence?",
-        options: [
-          "Islam ethically oriented the world and brought forth a unique civilisation.",
-          "The writer teaches, and he advocates for democracy.",
-          "If we adopt new strategies, our economy will improve.",
-          "The world was left bewildered."
-        ],
-        answer: "If we adopt new strategies, our economy will improve."
-      },
-      {
-        question: "7. Identify the relative clause in the sentence: 'The writer, who teaches at Quaid-i-Azam University, is known for his incisive opinions.'",
-        options: ["The writer", "is known for his incisive opinions", "who teaches at Quaid-i-Azam University", "incisive opinions"],
-        answer: "who teaches at Quaid-i-Azam University"
-      },
-      {
-        question: "8. Choose the sentence that correctly uses passive voice.",
-        options: [
-          "Trump left the entire world bewildered.",
-          "The entire world was left bewildered by Trump.",
-          "Bewildered was the world by Trump leaving.",
-          "Trump bewildered the entire world."
-        ],
-        answer: "The entire world was left bewildered by Trump."
-      },
-      {
-        question: "9. Which of the following sentences is an example of sentence inversion for emphasis?",
-        options: [
-          "Never before had the world seen such a transformation.",
-          "The world had never seen such a transformation before.",
-          "The world never had seen such transformation.",
-          "Such transformation, never seen before by the world."
-        ],
-        answer: "Never before had the world seen such a transformation."
-      },
-      {
-        question: "10. In the sentence 'If we do not adopt a new strategy for skills training, the gap between demand and supply will widen significantly,' what type of punctuation is used to separate the clauses?",
-        options: ["Comma", "Semicolon", "Colon", "Period"],
-        answer: "Comma"
-      },
-      {
-        question: "11. Which of the following best defines an idiom?",
-        options: [
-          "A phrase that has a literal meaning.",
-          "A phrase whose meaning cannot be deduced from its individual words.",
-          "A formal rule of grammar.",
-          "A synonym for a proverb."
-        ],
-        answer: "A phrase whose meaning cannot be deduced from its individual words."
-      },
-      {
-        question: "12. What does the idiom 'take the bull by the horns' mean?",
-        options: [
-          "Avoid a difficult situation.",
-          "Confront a difficult situation directly.",
-          "Hesitate in decision-making.",
-          "Cancel a project."
-        ],
-        answer: "Confront a difficult situation directly."
-      },
-      {
-        question: "13. Which of the following sentences best demonstrates a compound-complex sentence?",
-        options: [
-          "Although tariffs are bad, many nations are imposing higher tariffs, and the economy suffers.",
-          "Tariffs are bad and the economy suffers.",
-          "Although tariffs are bad, the economy suffers.",
-          "Tariffs are bad; hence the economy suffers."
-        ],
-        answer: "Although tariffs are bad, many nations are imposing higher tariffs, and the economy suffers."
-      },
-      {
-        question: "14. Identify the direct object in: 'Trump left the entire world bewildered at his tariff policy.'",
-        options: ["Trump", "the entire world", "bewildered", "tariff policy"],
-        answer: "the entire world"
-      },
-      {
-        question: "15. In the sentence 'If we do not orient ourselves to the political moral vision, we are bound to serve others at our own peril,' what role does the phrase 'to the political moral vision' play?",
-        options: [
-          "It acts as a subject complement.",
-          "It serves as an indirect object.",
-          "It is an adverbial phrase modifying the verb orient.",
-          "It is a conjunction."
-        ],
-        answer: "It is an adverbial phrase modifying the verb orient."
-      },
-      {
-        question: "16. Which answer correctly transforms the active sentence 'The government granted concessions to the industries' into passive voice?",
-        options: [
-          "Concessions were granted to the industries by the government.",
-          "The industries were granted concessions by the government.",
-          "The government was granted concessions to the industries.",
-          "Concessions to the industries were granted by the government."
-        ],
-        answer: "Concessions were granted to the industries by the government."
-      },
-      {
-        question: "17. Choose the sentence that best represents a compound sentence.",
-        options: [
-          "If we study, we will pass.",
-          "We studied hard, so we passed.",
-          "Studying hard is essential.",
-          "Pass if you study hard."
-        ],
-        answer: "We studied hard, so we passed."
-      },
-      {
-        question: "18. What is the function of a semicolon in complex sentences?",
-        options: [
-          "To end a sentence abruptly.",
-          "To connect closely related independent clauses.",
-          "To introduce a list.",
-          "To indicate a question."
-        ],
-        answer: "To connect closely related independent clauses."
-      },
-      {
-        question: "19. In the exercise 'Fill in the blank: The community ______ (participate) equally in all tasks,' which verb form is correct?",
-        options: ["participated", "participates", "participating", "participate"],
-        answer: "participates"
-      },
-      {
-        question: "20. Which word in the sentence 'Spiritual democracy offered a panacea to twin malaises in society' functions as an adjective?",
-        options: ["democracy", "offered", "panacea", "twin"],
-        answer: "twin"
-      },
-      {
-        question: "21. Which sentence correctly rearranges the order to form a meaningful sentence: 'ethically / oriented / by / The world / Islam / was'?",
-        options: [
-          "Islam was ethically oriented by the world.",
-          "The world was ethically oriented by Islam.",
-          "Oriented by Islam was the world ethically.",
-          "By Islam, the world was ethically oriented."
-        ],
-        answer: "The world was ethically oriented by Islam."
-      },
-      {
-        question: "22. Choose the sentence that best exemplifies the use of a colon.",
-        options: [
-          "He had one goal: to pass the exam.",
-          "He had one goal, to pass the exam.",
-          "He had one goal; to pass the exam.",
-          "He had one goal - to pass the exam."
-        ],
-        answer: "He had one goal: to pass the exam."
-      },
-      {
-        question: "23. Which of the following is a synonym for the idiom 'pull the plug' as used in project management?",
-        options: [
-          "Initiate",
-          "Terminate",
-          "Delay",
-          "Ignore"
-        ],
-        answer: "Terminate"
-      },
-      {
-        question: "24. Identify the correct synonym for the idiom 'dillydally'.",
-        options: [
-          "Hurry",
-          "Procrastinate",
-          "Commence",
-          "Accelerate"
-        ],
-        answer: "Procrastinate"
-      },
-      {
-        question: "25. The idiom 'run the risk' most nearly means:",
-        options: [
-          "Avoid danger.",
-          "Face the possibility of negative consequences.",
-          "Guarantee success.",
-          "Ensure safety."
-        ],
-        answer: "Face the possibility of negative consequences."
-      },
-      {
-        question: "26. In the sentence 'Companies scramble for market share in a competitive industry,' what does the word 'scramble' mean?",
-        options: [
-          "Relax",
-          "Compete fiercely",
-          "Ignore",
-          "Yield"
-        ],
-        answer: "Compete fiercely"
-      },
-      {
-        question: "27. Which of the following sentences demonstrates proper comma usage in a complex sentence?",
-        options: [
-          "If we study hard we will pass the exam.",
-          "If we study hard, we will pass the exam.",
-          "If, we study hard, we will pass the exam.",
-          "If we study hard, we will, pass the exam."
-        ],
-        answer: "If we study hard, we will pass the exam."
-      },
-      {
-        question: "28. Which of the following best describes the term 'predicate' in a sentence?",
-        options: [
-          "The main verb and its modifiers that tell what the subject does.",
-          "The subject and its description.",
-          "The introductory phrase.",
-          "An adjective phrase."
-        ],
-        answer: "The main verb and its modifiers that tell what the subject does."
-      },
-      {
-        question: "29. In 'The policy left the door open for future negotiations,' which phrase functions as an idiom meaning to create future opportunities?",
-        options: [
-          "left the door open",
-          "future negotiations",
-          "The policy left",
-          "open for future"
-        ],
-        answer: "left the door open"
-      },
-      {
-        question: "30. Identify the sentence that uses a conditional clause correctly.",
-        options: [
-          "We will go if it rains.",
-          "If it rains, we will go.",
-          "It rains if we will go.",
-          "Go if it rains."
-        ],
-        answer: "If it rains, we will go."
-      },
-      {
-        question: "31. What is the role of an adverb in a sentence?",
-        options: [
-          "To modify nouns",
-          "To modify verbs, adjectives, or other adverbs",
-          "To act as a subject",
-          "To replace pronouns"
-        ],
-        answer: "To modify verbs, adjectives, or other adverbs"
-      },
-      {
-        question: "32. Which one of the following is an example of a direct transformation of active to passive voice?",
-        options: [
-          "The cake was baked by the chef.",
-          "The chef baked the cake.",
-          "Baked by the chef was the cake.",
-          "The cake baked the chef."
-        ],
-        answer: "The cake was baked by the chef."
-      },
-      {
-        question: "33. In the sentence 'The community participates equally in all tasks,' which word is the adverb?",
-        options: [
-          "community",
-          "participates",
-          "equally",
-          "tasks"
-        ],
-        answer: "equally"
-      },
-      {
-        question: "34. Which phrase best serves as an antonym for 'scramble for' in a business context?",
-        options: [
-          "compete for",
-          "yield to",
-          "ignore",
-          "accelerate"
-        ],
-        answer: "yield to"
-      },
-      {
-        question: "35. In a sentence rearrangement exercise, which of the following orders produces a grammatically correct sentence?",
-        options: [
-          "By sheer determination, success was achieved by the team.",
-          "Success by the team was achieved by sheer determination.",
-          "Achieved was success by the team, by sheer determination.",
-          "Sheer determination the team achieved by success."
-        ],
-        answer: "By sheer determination, success was achieved by the team."
-      },
-      {
-        question: "36. Which of the following is a characteristic of formal language in editorials?",
-        options: [
-          "Use of slang and contractions",
-          "Precision and clarity",
-          "Casual expressions",
-          "Ambiguous phrasing"
-        ],
-        answer: "Precision and clarity"
-      },
-      {
-        question: "37. What is an example of a compound-complex sentence structure?",
-        options: [
-          "While the economy suffers, many nations impose tariffs, and businesses struggle to adapt.",
-          "Tariffs are imposed and businesses struggle.",
-          "The economy suffers because of tariffs.",
-          "Many nations impose tariffs."
-        ],
-        answer: "While the economy suffers, many nations impose tariffs, and businesses struggle to adapt."
-      },
-      {
-        question: "38. Which sentence demonstrates an advanced use of inversion for emphasis?",
-        options: [
-          "Seldom have we seen such innovation.",
-          "We have seldom seen such innovation.",
-          "Innovation is seldom seen by us.",
-          "Seldom we have seen innovation."
-        ],
-        answer: "Seldom have we seen such innovation."
-      },
-      {
-        question: "39. In the sentence 'The writer, who teaches at Quaid-i-Azam University, is renowned for incisive opinions,' what is the role of the clause 'who teaches at Quaid-i-Azam University'?",
-        options: [
-          "It is the main clause.",
-          "It provides additional information about the writer.",
-          "It functions as the predicate.",
-          "It is an introductory phrase."
-        ],
-        answer: "It provides additional information about the writer."
-      },
-      {
-        question: "40. Which option is the most accurate synonym for 'hedge one's bets'?",
-        options: [
-          "Risk everything",
-          "Reduce risk by preparing for different outcomes",
-          "Commit without caution",
-          "Ignore potential risks"
-        ],
-        answer: "Reduce risk by preparing for different outcomes"
-      },
-      {
-        question: "41. The phrase 'burn the midnight oil' means to:",
-        options: [
-          "Take a long lunch break.",
-          "Work late into the night.",
-          "Quit work early.",
-          "Spend energy recklessly."
-        ],
-        answer: "Work late into the night."
-      },
-      {
-        question: "42. Identify the sentence that contains a correct use of a colon to introduce an explanation.",
-        options: [
-          "The final result is clear: success was inevitable.",
-          "The final result; success was inevitable.",
-          "The final result, success was inevitable.",
-          "The final result success was inevitable:"
-        ],
-        answer: "The final result is clear: success was inevitable."
-      },
-      {
-        question: "43. Which sentence below is NOT grammatically correct?",
-        options: [
-          "If we do not revise our methods, failure is imminent.",
-          "Revise our methods, failure is imminent.",
-          "Failure is imminent if we do not revise our methods.",
-          "We must revise our methods or failure will be imminent."
-        ],
-        answer: "Revise our methods, failure is imminent."
-      },
-      {
-        question: "44. Which word in the sentence 'The policies became ineffective' functions as a complement?",
-        options: [
-          "policies",
-          "became",
-          "ineffective",
-          "The"
-        ],
-        answer: "ineffective"
-      },
-      {
-        question: "45. The idiom 'give way to' means to:",
-        options: [
-          "Maintain the status quo.",
-          "Yield or be replaced by something else.",
-          "Accelerate progress.",
-          "Oppose strongly."
-        ],
-        answer: "Yield or be replaced by something else."
-      },
-      {
-        question: "46. Which sentence best demonstrates the use of punctuation to indicate a pause in a compound-complex sentence?",
-        options: [
-          "While the rain poured down, the streets flooded and people hurried indoors.",
-          "While the rain poured down the streets flooded and people hurried indoors.",
-          "The rain poured down, the streets flooded people hurried indoors.",
-          "While, the rain poured down the streets flooded and people hurried indoors."
-        ],
-        answer: "While the rain poured down, the streets flooded and people hurried indoors."
-      },
-      {
-        question: "47. Choose the correctly punctuated sentence:",
-        options: [
-          "Because the market is volatile, investors hedge their bets by diversifying their portfolios.",
-          "Because the market is volatile investors hedge their bets by diversifying their portfolios.",
-          "Investors hedge their bets, because the market is volatile, by diversifying their portfolios.",
-          "Because the market is volatile; investors hedge their bets by diversifying their portfolios."
-        ],
-        answer: "Because the market is volatile, investors hedge their bets by diversifying their portfolios."
-      },
-      {
-        question: "48. Which sentence rearrangement correctly forms a coherent sentence from the scrambled words: 'oriented / world / was / ethically / The / by / Islam'?",
-        options: [
-          "Ethically, Islam was oriented by the world.",
-          "The world was ethically oriented by Islam.",
-          "By Islam, oriented ethically was the world.",
-          "Oriented ethically, by the world was Islam."
-        ],
-        answer: "The world was ethically oriented by Islam."
-      },
-      {
-        question: "49. In the sentence 'Her speech struck a chord with many in the audience,' what does the idiom 'struck a chord' mean?",
-        options: [
-          "Ignored the audience.",
-          "Evoked an emotional response.",
-          "Confused the listeners.",
-          "Diminished interest."
-        ],
-        answer: "Evoked an emotional response."
-      },
-      {
-        question: "50. Rearrange the following words to form a grammatically correct and meaningful sentence: 'by / was / the team / achieved / success / sheer determination /'. Choose the correct order.",
-        options: [
-          "Sheer determination by the team was achieved success.",
-          "Success was achieved by the team through sheer determination.",
-          "By the team, success was achieved sheer determination.",
-          "The team sheer determination achieved success by."
-        ],
-        answer: "Success was achieved by the team through sheer determination."
+    // Disable keydown for F12 and Ctrl+Shift+I (not foolproof but a deterrent)
+    document.onkeydown = function(e) {
+      if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74))) {
+        return false;
       }
+    };
+
+    // Data: 50 challenging grammar, idiom, synonym, antonym, and sentence-rearrangement questions.
+    // Each object: q (question text), options (array), answer (index of the correct option)
+    const questions = [
+      { q: "1. In the sentence 'She quickly completed her assignment,' the word 'quickly' is a:", options: ["Adjective", "Adverb", "Noun", "Conjunction"], answer: 1 },
+      { q: "2. Identify the preposition in: 'The cat slept under the warm blanket.'", options: ["cat", "under", "warm", "slept"], answer: 1 },
+      { q: "3. Which of the following idioms means to reject an offer?", options: ["Turn away", "Break the ice", "Spin as a win", "Seize the moment"], answer: 0 },
+      { q: "4. In the sentence 'The manager spoke nonchalantly about the changes,' the word 'nonchalantly' functions as an:", options: ["Adjective", "Adverb", "Verb", "Noun"], answer: 1 },
+      { q: "5. Select the correct synonym for 'draconian'.", options: ["Lenient", "Severe", "Easy-going", "Casual"], answer: 1 },
+      { q: "6. Which sentence uses a compound-complex structure?", options: [
+          "The market crashed and the investors panicked.",
+          "Although the economy was unstable, the government intervened, and investors hoped for recovery.",
+          "The economy was unstable.",
+          "Investors hoped for recovery."
+        ], answer: 1 },
+      { q: "7. Choose the correctly punctuated sentence.", options: [
+          "The teacher said 'Please, hand in your assignments.'",
+          "The teacher said, 'Please hand in your assignments.'",
+          "The teacher, said 'Please hand in, your assignments.'",
+          "The teacher said Please hand in your assignments."
+        ], answer: 1 },
+      { q: "8. Which word in the sentence 'He is exceptionally talented' acts as a modifier?", options: ["He", "is", "exceptionally", "talented"], answer: 2 },
+      { q: "9. The phrase 'break the ice' is an example of an:", options: ["Idiom", "Simile", "Metaphor", "Alliteration"], answer: 0 },
+      { q: "10. Identify the type of clause in the sentence 'Although it was raining, we continued the match.'", options: ["Independent clause", "Dependent clause", "Relative clause", "Noun clause"], answer: 1 },
+      { q: "11. In direct speech, quotation marks are used to:", options: ["Indicate the writer's opinion", "Introduce a list", "Enclose the exact words spoken", "Emphasize adjectives"], answer: 2 },
+      { q: "12. Which sentence correctly transforms active voice into passive voice?", options: [
+          "The book was read by the student.",
+          "The student read the book.",
+          "The book is reading by the student.",
+          "By the student, the book read."
+        ], answer: 0 },
+      { q: "13. In the sentence 'The early bird catches the worm,' 'early' functions as a(n):", options: ["Noun", "Adjective", "Adverb", "Pronoun"], answer: 1 },
+      { q: "14. Which preposition best completes: 'She is fond ___ classical music.'", options: ["to", "of", "in", "at"], answer: 1 },
+      { q: "15. Choose the antonym of 'benevolent'.", options: ["Generous", "Malevolent", "Kind", "Altruistic"], answer: 1 },
+      { q: "16. Rearrange the sentence fragments to form a coherent sentence: 'in the park / children / happily played / on a sunny day'.", options: [
+          "Children played happily on a sunny day in the park.",
+          "On a sunny day, in the park played happily children.",
+          "Happily, children in the park on a sunny day played.",
+          "In the park, on a sunny day, played happily children."
+        ], answer: 0 },
+      { q: "17. Identify the conjunction in: 'She wanted to go for a walk, but it was raining.'", options: ["walk", "but", "raining", "for"], answer: 1 },
+      { q: "18. Which option is a correct example of reported speech?", options: [
+          "He said, 'I am hungry.'",
+          "He said that he was hungry.",
+          "He said I am hungry.",
+          "He says 'I was hungry.'"
+        ], answer: 1 },
+      { q: "19. Select the sentence that contains a relative clause.", options: [
+          "I met a man who can speak five languages.",
+          "I met a man speaking five languages.",
+          "I met a man; he can speak five languages.",
+          "I met a man and he can speak five languages."
+        ], answer: 0 },
+      { q: "20. In the sentence 'Despite the heavy rain, the match continued,' 'despite' is a:", options: ["Conjunction", "Preposition", "Adverb", "Interjection"], answer: 1 },
+      { q: "21. Which word in 'astonishingly' is the root word?", options: ["aston", "astonishing", "ly", "nothing is removed"], answer: 0 },
+      { q: "22. Identify the type of sentence: 'Do you want to join us?'", options: ["Imperative", "Declarative", "Interrogative", "Exclamatory"], answer: 2 },
+      { q: "23. Find the error in subject-verb agreement: 'The list of items are on the table.'", options: [
+          "Items",
+          "The list",
+          "Are",
+          "On the table"
+        ], answer: 2 },
+      { q: "24. Which sentence contains an adverbial clause?", options: [
+          "I will call you when I arrive.",
+          "I will call you immediately.",
+          "I will call you now.",
+          "I will call you soon."
+        ], answer: 0 },
+      { q: "25. In idioms, the phrase 'seize the moment' means:", options: [
+          "Forget the opportunity",
+          "Take immediate advantage of an opportunity",
+          "Delay decisions",
+          "Ignore chances"
+        ], answer: 1 },
+      { q: "26. Choose the synonym for 'meticulous'.", options: ["Careless", "Diligent", "Imprecise", "Hasty"], answer: 1 },
+      { q: "27. Identify the correct transformation from direct to indirect speech for: 'She said, \"I will finish the work.\"'", options: [
+          "She said that she would finish the work.",
+          "She said that she will finish the work.",
+          "She said that I would finish the work.",
+          "She said that I finish the work."
+        ], answer: 0 },
+      { q: "28. Which option best rearranges the sentence 'can/ quickly/ the report/ be completed' to a meaningful one?", options: [
+          "The report can quickly be completed.",
+          "Quickly can the report be completed.",
+          "Can quickly the report be completed?",
+          "The quickly report can be completed."
+        ], answer: 0 },
+      { q: "29. In the sentence 'They swiftly moved to the next phase,' the word 'swiftly' is a/an:", options: ["Adjective", "Noun", "Verb", "Adverb"], answer: 3 },
+      { q: "30. Which of the following is an example of a collective noun?", options: [
+          "Flock",
+          "Happiness",
+          "Quickly",
+          "Beautiful"
+        ], answer: 0 },
+      { q: "31. Choose the correct antonym for 'opaque'.", options: ["Clear", "Dull", "Dark", "Muddy"], answer: 0 },
+      { q: "32. Which sentence correctly uses a semicolon?", options: [
+          "I have a big test tomorrow; I can't go out tonight.",
+          "I have a big test tomorrow, I can't go out tonight.",
+          "I have a big test tomorrow; and I can't go out tonight.",
+          "I have a big test tomorrow I can't go out tonight;"
+        ], answer: 0 },
+      { q: "33. Identify the part of speech of 'rapidly' in the sentence: 'The river flows rapidly.'", options: ["Noun", "Adjective", "Adverb", "Conjunction"], answer: 2 },
+      { q: "34. 'Out of the blue' is an idiom that means:", options: [
+          "Expectedly",
+          "Suddenly and unexpectedly",
+          "Gradually",
+          "Regularly"
+        ], answer: 1 },
+      { q: "35. In the sentence 'The committee members, along with the advisor, were present,' which is the subject?", options: [
+          "The committee members",
+          "the advisor",
+          "committee members along with the advisor",
+          "were present"
+        ], answer: 0 },
+      { q: "36. Choose the synonym for 'elated'.", options: ["Sad", "Ecstatic", "Angry", "Bored"], answer: 1 },
+      { q: "37. Which sentence is in the passive voice?", options: [
+          "The chef cooked a delicious meal.",
+          "A delicious meal was cooked by the chef.",
+          "The chef is cooking a delicious meal.",
+          "Cooking a delicious meal, the chef impressed everyone."
+        ], answer: 1 },
+      { q: "38. Identify the conjunction in the sentence: 'Neither the manager nor the assistant could solve the problem.'", options: [
+          "Neither, nor",
+          "the, assistant",
+          "manager, problem",
+          "could, solve"
+        ], answer: 0 },
+      { q: "39. Which option best expresses the meaning of the idiom 'locked horns'?", options: [
+          "Reached an agreement",
+          "Engaged in a serious disagreement",
+          "Ignored each other",
+          "Shut the door"
+        ], answer: 1 },
+      { q: "40. In the sentence 'She is not only talented but also hardworking,' the structure used is:", options: [
+          "Parallelism",
+          "Antithesis",
+          "Chiasmus",
+          "Hyperbole"
+        ], answer: 0 },
+      { q: "41. Choose the correct sentence that demonstrates proper subject-verb agreement.", options: [
+          "The list of items are displayed on the board.",
+          "The list of items is displayed on the board.",
+          "Items on the list is displayed on the board.",
+          "Items on the list are displayed on the board."
+        ], answer: 1 },
+      { q: "42. Which word best completes the sentence: 'He felt ______ after hearing the good news.'?", options: [
+          "melancholy",
+          "elated",
+          "morose",
+          "tedious"
+        ], answer: 1 },
+      { q: "43. Identify the adverb in the sentence: 'The teacher patiently explained the concept.'", options: [
+          "patiently",
+          "explained",
+          "teacher",
+          "concept"
+        ], answer: 0 },
+      { q: "44. Select the correct transformation of the sentence 'I cannot go' into its negative form.", options: [
+          "I can go not.",
+          "I cannot go.",
+          "I can't go.",
+          "I am unable to go."
+        ], answer: 2 },
+      { q: "45. Which option best rearranges the sentence fragments: 'the presentation / flawlessly / delivered / was'?", options: [
+          "The presentation was flawlessly delivered.",
+          "Flawlessly the presentation was delivered.",
+          "Was the presentation flawlessly delivered.",
+          "The flawlessly presentation was delivered."
+        ], answer: 0 },
+      { q: "46. In the sentence 'If he studies diligently, he will pass the exam,' the clause 'If he studies diligently' is a:", options: [
+          "Independent clause",
+          "Adjective clause",
+          "Adverbial clause",
+          "Noun clause"
+        ], answer: 2 },
+      { q: "47. Choose the correct synonym for 'verbose'.", options: [
+          "Brief",
+          "Talkative",
+          "Terse",
+          "Concise"
+        ], answer: 1 },
+      { q: "48. Which sentence best demonstrates the use of a colon to introduce an explanation?", options: [
+          "She had one hobby: painting.",
+          "She had one hobby, painting.",
+          "She had one hobby; painting.",
+          "She had one: hobby painting."
+        ], answer: 0 },
+      { q: "49. The sentence 'No news is good news' is an example of a/an:", options: [
+          "Irony",
+          "Metaphor",
+          "Simile",
+          "Hyperbole"
+        ], answer: 0 },
+      { q: "50. Identify the function of the word 'swift' in the sentence 'The swift response impressed everyone.'", options: [
+          "Noun",
+          "Adjective",
+          "Adverb",
+          "Verb"
+        ], answer: 1 }
     ];
 
-    // Variables for quiz state
-    let timerInterval;
-    let timeRemaining = 1500; // 25 minutes = 1500 seconds
-    let quizStartTime;
+    let timerInterval, totalSeconds = 25 * 60;
+    let quizStartedTime;
 
-    // Shuffle array function (Fisher-Yates Shuffle)
+    // Shuffle array function
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -632,113 +375,110 @@
       return array;
     }
 
-    // Render quiz questions into the form
+    // Render questions with randomized options
     function renderQuiz() {
       const quizForm = document.getElementById("quizForm");
       quizForm.innerHTML = "";
-      questions.forEach((q, index) => {
-        // Shuffle options for each question
-        const shuffledOptions = shuffle([...q.options]);
-        const questionDiv = document.createElement("div");
-        questionDiv.className = "question";
-        // Question text
-        const questionText = document.createElement("p");
-        questionText.textContent = q.question;
-        questionDiv.appendChild(questionText);
-        // Options list
-        const optionsList = document.createElement("ul");
-        optionsList.className = "options";
-        shuffledOptions.forEach(option => {
-          const li = document.createElement("li");
-          li.innerHTML = `<label><input type="radio" name="q${index}" value="${option}"> ${option}</label>`;
-          optionsList.appendChild(li);
+      questions.forEach((item, index) => {
+        // Create a copy and shuffle options while tracking the correct answer
+        let opts = item.options.map((opt, idx) => ({ text: opt, originalIndex: idx }));
+        opts = shuffle(opts);
+        let newCorrectIndex = opts.findIndex(opt => opt.originalIndex === item.answer);
+
+        // Save the updated correct answer index back to our object for evaluation.
+        item.currentAnswer = newCorrectIndex;
+
+        // Build HTML for question
+        const div = document.createElement("div");
+        div.className = "question";
+        div.innerHTML = `<h3>${item.q}</h3>`;
+        opts.forEach((opt, i) => {
+          const optionId = "q" + index + "o" + i;
+          const radioHTML = `<div class="options">
+            <input type="radio" name="q${index}" id="${optionId}" value="${i}">
+            <label for="${optionId}">${opt.text}</label>
+          </div>`;
+          div.innerHTML += radioHTML;
         });
-        questionDiv.appendChild(optionsList);
-        quizForm.appendChild(questionDiv);
+        quizForm.appendChild(div);
       });
     }
 
-    // Start timer function
+    // Timer countdown
     function startTimer() {
-      quizStartTime = new Date();
-      updateTimer(); // initial update
+      quizStartedTime = new Date();
       timerInterval = setInterval(() => {
-        timeRemaining--;
-        updateTimer();
-        if(timeRemaining <= 0) {
+        if (totalSeconds <= 0) {
           clearInterval(timerInterval);
-          submitQuiz(); // auto-submit when time runs out
+          submitQuiz();
+          return;
         }
+        totalSeconds--;
+        let minutes = Math.floor(totalSeconds / 60);
+        let seconds = totalSeconds % 60;
+        document.getElementById("timer").textContent = "Time Left: " + 
+          String(minutes).padStart(2, '0') + ":" + String(seconds).padStart(2, '0');
       }, 1000);
     }
 
-    function updateTimer() {
-      const minutes = Math.floor(timeRemaining / 60);
-      const seconds = timeRemaining % 60;
-      document.getElementById("timer").textContent = `Time Remaining: ${minutes < 10 ? "0" + minutes : minutes}:${seconds < 10 ? "0" + seconds : seconds}`;
-    }
-
-    // Calculate and display results, then submit hidden form to Formspree
+    // Evaluate quiz answers and display results
     function submitQuiz() {
       clearInterval(timerInterval);
-      const quizEndTime = new Date();
-      const timeTaken = Math.floor((quizEndTime - quizStartTime) / 1000); // in seconds
-      const userName = document.getElementById("userName").value;
-      let attempted = 0, score = 0;
-      questions.forEach((q, index) => {
+      const endTime = new Date();
+      const timeTaken = Math.floor((endTime - quizStartedTime) / 1000); // seconds
+      let score = 0, attempted = 0;
+      questions.forEach((item, index) => {
         const radios = document.getElementsByName("q" + index);
         let answered = false;
         radios.forEach(radio => {
-          if(radio.checked) {
+          if (radio.checked) {
             answered = true;
-            if(radio.value === q.answer) {
+            if (parseInt(radio.value) === item.currentAnswer) {
               score++;
             }
           }
         });
-        if(answered) attempted++;
+        if (answered) attempted++;
       });
-      // Display results
-      const resultDetails = `
-        Name: ${userName} <br>
-        Questions Attempted: ${attempted} / ${questions.length} <br>
-        Correct Answers: ${score} <br>
-        Time Taken: ${Math.floor(timeTaken / 60)} minutes ${timeTaken % 60} seconds
-      `;
-      document.getElementById("resultDetails").innerHTML = resultDetails;
-      document.getElementById("resultSection").style.display = "block";
-      // Prepare and submit hidden form via Formspree
-      document.getElementById("resultName").value = userName;
-      document.getElementById("resultAttempted").value = attempted;
-      document.getElementById("resultScore").value = score;
-      document.getElementById("resultTime").value = `${Math.floor(timeTaken / 60)}m ${timeTaken % 60}s`;
-      document.getElementById("hiddenForm").submit();
+      const resultText = `Student: ${document.getElementById('studentName').value} <br>
+                          Questions Attempted: ${attempted} / ${questions.length} <br>
+                          Score: ${score} <br>
+                          Time Taken: ${Math.floor(timeTaken/60)} minutes ${timeTaken%60} seconds.`;
+      document.getElementById("resultText").innerHTML = resultText;
+      document.getElementById("quizSection").classList.add("hidden");
+      document.getElementById("resultsSection").classList.remove("hidden");
+      // Populate and auto-submit the hidden Formspree form
+      document.getElementById("formStudentName").value = document.getElementById('studentName').value;
+      document.getElementById("formAttempted").value = attempted;
+      document.getElementById("formScore").value = score;
+      document.getElementById("formTimeTaken").value = `${Math.floor(timeTaken/60)}m ${timeTaken%60}s`;
+      document.getElementById("resultsForm").submit();
     }
 
-    // Event listeners
-    document.getElementById("startQuizBtn").addEventListener("click", function() {
-      const userName = document.getElementById("userName").value.trim();
-      if(userName === "") {
-        alert("Please enter your name to start the quiz.");
+    // Login validation
+    function checkLogin() {
+      const username = document.getElementById("loginUsername").value.trim();
+      const password = document.getElementById("loginPassword").value;
+      if (username === "DAWN MASTERY" && password === "12april2025") {
+        document.getElementById("loginSection").classList.add("hidden");
+        document.getElementById("nameSection").classList.remove("hidden");
+      } else {
+        alert("Incorrect username or password.");
+      }
+    }
+
+    // Start Quiz: validate name and display quiz section
+    function startQuiz() {
+      const name = document.getElementById("studentName").value.trim();
+      if (name === "") {
+        alert("Please enter your name.");
         return;
       }
-      // Hide name entry, show quiz section and render quiz
-      document.getElementById("nameEntry").style.display = "none";
-      document.getElementById("quizSection").style.display = "block";
+      document.getElementById("nameSection").classList.add("hidden");
+      document.getElementById("quizSection").classList.remove("hidden");
       renderQuiz();
       startTimer();
-    });
-
-    document.getElementById("submitQuiz").addEventListener("click", function() {
-      if(confirm("Are you sure you want to submit the quiz?")) {
-        submitQuiz();
-      }
-    });
+    }
   </script>
-
-  <!-- Footer -->
-  <footer>
-    <p>Contact Us: 03265762698 | Join our WhatsApp group for updates!</p>
-  </footer>
 </body>
 </html>
