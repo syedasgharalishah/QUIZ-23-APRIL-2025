@@ -2,427 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>QUIZ FOR CSS ASPIRANTS 14 APRIL 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 15 APRIL 2025</title>
   <style>
-    /* Global reset and disable text selection except on inputs and textareas */
+    /* Disable text selection for all elements */
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
-    }
-    input, textarea {
-      -webkit-user-select: text;
-      -moz-user-select: text;
-      -ms-user-select: text;
-      user-select: text;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      overflow-y: scroll;
+      background: #f4f4f4;
+      color: #333;
+      padding: 20px;
     }
     header, footer {
-      background-color: #003366;
+      background: #003366;
       color: #fff;
+      padding: 15px;
       text-align: center;
-      padding: 15px 10px;
-    }
-    header {
-      position: relative;
     }
     header img {
-      position: absolute;
-      left: 10px;
-      top: 10px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
+      max-width: 80px;
+      vertical-align: middle;
+      margin-right: 15px;
     }
     header h1 {
-      font-size: 1.8em;
-    }
-    footer p {
-      font-size: 0.9em;
+      display: inline;
+      font-size: 24px;
+      vertical-align: middle;
     }
     .container {
-      width: 90%;
       max-width: 900px;
       margin: 20px auto;
       background: #fff;
+      border: 1px solid #ddd;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     #nameSection, #quizSection, #resultSection {
       margin-bottom: 20px;
     }
-    #nameSection input[type="text"] {
-      width: 70%;
-      padding: 10px;
-      font-size: 1em;
-      margin-right: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    #nameSection button, #quizSection button {
-      padding: 10px 20px;
-      font-size: 1em;
-      background: #003366;
-      color: #fff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    #nameSection button:hover, #quizSection button:hover {
-      background: #0055a5;
-    }
-    #timer {
-      font-size: 1.2em;
-      font-weight: bold;
-      color: #d00;
-      margin-bottom: 15px;
+    #quizSection, #resultSection {
+      display: none;
     }
     .question {
-      margin-bottom: 20px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #ddd;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
     }
     .question h3 {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
     .options label {
       display: block;
       margin-bottom: 5px;
       cursor: pointer;
     }
-    /* Disable text selection on dynamic elements (except inputs) */
-    .question, .options, label {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+    .timer {
+      text-align: right;
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    button {
+      background: #003366;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+    button:hover {
+      background: #00509e;
+    }
+    /* Disable right click on the page */
+    body {
+      -webkit-touch-callout: none;
     }
   </style>
-</head>
-<body oncontextmenu="return false;">
-  <!-- Header Section -->
-  <header>
-    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Image">
-    <h1>QUIZ FOR CSS ASPIRANTS 14 APRIL 2025</h1>
-    <p>SYED ASGHAR ALI SHAH</p>
-  </header>
-  
-  <div class="container">
-    <!-- Name Entry Section -->
-    <div id="nameSection">
-      <h2>Please enter your name to start the quiz:</h2>
-      <input type="text" id="studentName" placeholder="Enter your name here">
-      <button id="startBtn">Start Quiz</button>
-    </div>
-
-    <!-- Quiz Section -->
-    <div id="quizSection" style="display: none;">
-      <div id="timer">Time Remaining: 25:00</div>
-      <form id="quizForm">
-        <div id="questionsContainer">
-          <!-- Questions will be injected here by JavaScript -->
-        </div>
-        <button type="button" id="submitQuizBtn">Submit Quiz</button>
-      </form>
-    </div>
-
-    <!-- Result Section -->
-    <div id="resultSection" style="display: none;">
-      <h2>Quiz Results</h2>
-      <p id="resultText"></p>
-    </div>
-    
-    <!-- Hidden Form for Formspree Submission -->
-    <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display: none;">
-      <input type="hidden" name="studentName" id="formStudentName">
-      <input type="hidden" name="questionsAttempted" id="formQuestionsAttempted">
-      <input type="hidden" name="score" id="formScore">
-      <input type="hidden" name="timeTaken" id="formTimeTaken">
-    </form>
-  </div>
-
-  <footer>
-    <p>For any inquiries, call: 03265762698 | Contact us now!</p>
-  </footer>
-
   <script>
-    // Disable text selection for most elements,
-    // but allow it for input and textarea elements.
-    document.addEventListener('mousedown', function(e) {
-      const tag = e.target.tagName.toLowerCase();
-      if (tag !== 'input' && tag !== 'textarea') {
-        e.preventDefault();
-      }
-    });
+    // Disable right click on entire document
+    document.addEventListener('contextmenu', event => event.preventDefault());
 
-    // Questions array (50 challenging MCQs)
-    const questions = [
-      {
-        question: "Choose the correct preposition: He apologized ___ being late.",
-        options: ["for", "about", "at", "in"],
-        answer: 0
-      },
-      {
-        question: "Neither the teacher nor the students ___ ready for the exam.",
-        options: ["is", "are", "was", "were"],
-        answer: 1
-      },
-      {
-        question: "Which idiom means 'to reveal a secret'?",
-        options: ["spill the beans", "break the ice", "hit the sack", "jump the gun"],
-        answer: 0
-      },
-      {
-        question: "In the sentence 'The quick brown fox jumps over the lazy dog', which word is an adjective?",
-        options: ["fox", "jumps", "quick", "over"],
-        answer: 2
-      },
-      {
-        question: "Identify the sentence written in passive voice:",
-        options: ["She gives a gift.", "A gift is given by her.", "She is giving a gift.", "She will give a gift."],
-        answer: 1
-      },
-      {
-        question: "Select the grammatically correct comparative form: 'This test is ___ than the last one.'",
-        options: ["more tougher", "tougher", "more tough", "toughest"],
-        answer: 1
-      },
-      {
-        question: "Choose the synonym for 'elated':",
-        options: ["sad", "miserable", "joyful", "angry"],
-        answer: 2
-      },
-      {
-        question: "Choose the antonym for 'scarce':",
-        options: ["rare", "abundant", "few", "limited"],
-        answer: 1
-      },
-      {
-        question: "Fill in the blank: 'She is keen ___ learning new languages.'",
-        options: ["for", "on", "at", "in"],
-        answer: 0
-      },
-      {
-        question: "Rearrange the words to form a correct sentence: 'always she breakfast eats in the morning'",
-        options: ["She always eats breakfast in the morning.", "Always she breakfast eats in the morning.", "Breakfast always she eats in the morning.", "Morning she always eats breakfast."],
-        answer: 0
-      },
-      {
-        question: "Identify the correct form: 'By the time he arrives, we ___ dinner.'",
-        options: ["will have finished", "have finished", "finished", "finishing"],
-        answer: 0
-      },
-      {
-        question: "What does the idiom 'back down' mean?",
-        options: ["to retreat", "to stand firm", "to advance", "to shout"],
-        answer: 0
-      },
-      {
-        question: "Which of the following sentences shows correct subject-verb agreement?",
-        options: ["The bouquet of roses smell wonderful.", "The team are winning the game.", "The collection of stamps is priceless.", "The list of items were extensive."],
-        answer: 2
-      },
-      {
-        question: "Identify the prepositional phrase in: 'The cat sat under the table.'",
-        options: ["The cat", "sat", "under the table", "table"],
-        answer: 2
-      },
-      {
-        question: "Choose the correct modal: 'You ___ finish your work before you go out.'",
-        options: ["must", "may", "might", "should"],
-        answer: 0
-      },
-      {
-        question: "Select the correct present perfect form: 'I ___ to Paris.'",
-        options: ["have been", "am been", "was", "been"],
-        answer: 0
-      },
-      {
-        question: "What does 'beat around the bush' mean?",
-        options: ["avoid the main topic", "speak directly", "start a conversation", "be enthusiastic"],
-        answer: 0
-      },
-      {
-        question: "In the sentence 'Quickly, she ran to the store,' which word is an adverb?",
-        options: ["ran", "to", "she", "quickly"],
-        answer: 3
-      },
-      {
-        question: "Choose the antonym for 'optimistic':",
-        options: ["hopeful", "pessimistic", "cheerful", "joyful"],
-        answer: 1
-      },
-      {
-        question: "Choose the synonym for 'meticulous':",
-        options: ["careless", "thorough", "quick", "casual"],
-        answer: 1
-      },
-      {
-        question: "Select the correct preposition: 'He is responsible ___ the project.'",
-        options: ["for", "to", "of", "in"],
-        answer: 0
-      },
-      {
-        question: "Select the correct past tense: 'She ___ the book last night.'",
-        options: ["reads", "read", "has read", "reading"],
-        answer: 1
-      },
-      {
-        question: "Identify the error: 'Each of the students have completed their exam.'",
-        options: ["Each should be replaced with all", "have should be has", "students should be singular", "no error"],
-        answer: 1
-      },
-      {
-        question: "Rearrange to form a correct sentence: 'movie enjoyed the we really did'",
-        options: ["We really did enjoy the movie.", "The movie did really enjoy we.", "Enjoyed we the movie really did.", "Really we did enjoy the movie."],
-        answer: 0
-      },
-      {
-        question: "Transform 'The chef cooked the meal' into passive voice.",
-        options: ["The meal was cooked by the chef.", "The chef was cooking the meal.", "The meal cooked by the chef.", "The meal is cooked by the chef."],
-        answer: 0
-      },
-      {
-        question: "What does 'cut corners' mean?",
-        options: ["Do something the easy way", "Take a shortcut", "Do things properly", "Spend more time"],
-        answer: 0
-      },
-      {
-        question: "In the sentence 'Loudly, the music played through the night,' which word is an adverb?",
-        options: ["loudly", "music", "played", "night"],
-        answer: 0
-      },
-      {
-        question: "Change 'He can speak French fluently' into a question.",
-        options: ["Can he speak French fluently?", "Does he speak French fluently?", "He can speak French fluently?", "Is he speak French fluently?"],
-        answer: 0
-      },
-      {
-        question: "Select the correct superlative form: 'This is the ___ book I have ever read.'",
-        options: ["most interesting", "interestingest", "more interesting", "interestinger"],
-        answer: 0
-      },
-      {
-        question: "What does 'a blessing in disguise' mean?",
-        options: ["A hidden benefit", "A curse", "A surprise gift", "A meaningless event"],
-        answer: 0
-      },
-      {
-        question: "Fill in the blank: 'They are fond ___ classical music.'",
-        options: ["of", "on", "at", "in"],
-        answer: 0
-      },
-      {
-        question: "Select the correct future tense: 'By next year, I ___ my degree.'",
-        options: ["will have completed", "completed", "have completed", "completing"],
-        answer: 0
-      },
-      {
-        question: "Identify the error: 'Neither the manager nor the employees was present.'",
-        options: ["The use of 'was' is incorrect", "The use of 'neither' is incorrect", "The employees should be singular", "No error"],
-        answer: 0
-      },
-      {
-        question: "Choose the antonym for 'diligent':",
-        options: ["industrious", "lazy", "hardworking", "assiduous"],
-        answer: 1
-      },
-      {
-        question: "Select the synonym for 'abundant':",
-        options: ["scarce", "plentiful", "rare", "insufficient"],
-        answer: 1
-      },
-      {
-        question: "Rearrange to form a correct sentence: 'books library the in are many'",
-        options: ["There are many books in the library.", "Books are many in the library.", "In the library are many books.", "Many books are in library the."],
-        answer: 0
-      },
-      {
-        question: "Choose the correct preposition: 'We arrived ___ the airport in time.'",
-        options: ["at", "in", "on", "to"],
-        answer: 0
-      },
-      {
-        question: "In the sentence 'He quickly finished his work,' what is the function of 'quickly'?",
-        options: ["noun", "verb", "adjective", "adverb"],
-        answer: 3
-      },
-      {
-        question: "Select the appropriate modal: 'You ___ see a doctor immediately.'",
-        options: ["might", "should", "could", "would"],
-        answer: 1
-      },
-      {
-        question: "Which sentence correctly uses the past perfect tense?",
-        options: ["She had finished the work before he arrived.", "She has finished the work before he arrived.", "She finished the work before he had arrived.", "She finishes the work before he arrived."],
-        answer: 0
-      },
-      {
-        question: "What is the meaning of 'on the ball'?",
-        options: ["alert", "tired", "slow", "distracted"],
-        answer: 0
-      },
-      {
-        question: "Identify the error: 'The series of lectures were interesting.'",
-        options: ["'series' should be plural", "The verb should be 'was'", "No error", "The word 'interesting' is used incorrectly"],
-        answer: 1
-      },
-      {
-        question: "In the question 'Whom did you see?', which word is the object?",
-        options: ["Whom", "did", "you", "see"],
-        answer: 0
-      },
-      {
-        question: "Fill in the blank: 'She succeeded ___ breaking the record.'",
-        options: ["in", "at", "on", "with"],
-        answer: 0
-      },
-      {
-        question: "Select the correct verb form: 'If I ___ enough money, I would travel around the world.'",
-        options: ["had", "have", "will have", "would have"],
-        answer: 0
-      },
-      {
-        question: "Which sentence correctly uses a comparative adverb?",
-        options: ["She sings more beautifully than her sister.", "She sings beautiful than her sister.", "She sings most beautifully than her sister.", "She sings beautifully most than her sister."],
-        answer: 0
-      },
-      {
-        question: "What does 'let sleeping dogs lie' mean?",
-        options: ["Avoid disturbing a situation", "Wake up slowly", "Let dogs sleep", "Ignore responsibilities"],
-        answer: 0
-      },
-      {
-        question: "Choose the correct preposition: 'He is married ___ a lawyer.'",
-        options: ["to", "with", "by", "for"],
-        answer: 0
-      },
-      {
-        question: "Select the synonym for 'coherent':",
-        options: ["disjointed", "logical", "confusing", "erratic"],
-        answer: 1
-      },
-      {
-        question: "Rearrange to form a correct sentence: 'hardly the finished exam he had begun studying'",
-        options: ["Hardly had he finished the exam when he had begun studying.", "Hardly finished he the exam when he began studying.", "He had hardly finished the exam when he began studying.", "When he had finished the exam, hardly he began studying."],
-        answer: 2
-      }
-    ];
+    // Global variables
+    let quizData = [];
+    let timerInterval, totalTime = 25 * 60; // 25 minutes in seconds
+    let startTime;
 
-    let timerInterval;
-    let totalTime = 25 * 60; // 25 minutes in seconds
-    let timeTaken = 0; // seconds elapsed
-
-    // Fisher–Yates shuffle
+    // Shuffle function for arrays
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -431,115 +102,292 @@
       return array;
     }
 
-    // Render questions dynamically to the page
-    function renderQuestions() {
-      const container = document.getElementById("questionsContainer");
-      container.innerHTML = "";
-      questions.forEach((q, idx) => {
-        const optionsCopy = q.options.slice();
-        const originalAnswerText = q.options[q.answer];
-        const shuffledOptions = shuffle(optionsCopy);
-        const newCorrectIndex = shuffledOptions.indexOf(originalAnswerText);
-        
-        const questionDiv = document.createElement("div");
-        questionDiv.className = "question";
-        const qTitle = document.createElement("h3");
-        qTitle.innerText = (idx + 1) + ". " + q.question;
-        questionDiv.appendChild(qTitle);
+    // Generate quiz questions (50 questions)
+    // The quiz includes advanced grammar questions covering parts of speech, prepositions, idioms, synonyms, antonyms, and sentence rearrangement.
+    function generateQuizData() {
+      quizData = [
+        // PARTS OF SPEECH – MCQs
+        { id: 1, question: "Identify the noun in the sentence: 'The swift fox leaped over the lazy dog.'", type: "mcq",
+          options: ["fox", "leaped", "swift", "over"], answer: "fox" },
+        { id: 2, question: "Which word in the sentence acts as an adjective? 'The ancient castle stood silent.'", type: "mcq",
+          options: ["castle", "silent", "stood", "ancient"], answer: "ancient" },
+        { id: 3, question: "Select the preposition in the sentence: 'She walked through the dark forest.'", type: "mcq",
+          options: ["walked", "she", "through", "forest"], answer: "through" },
+        { id: 4, question: "Choose the verb in this sentence: 'The children happily played in the park.'", type: "mcq",
+          options: ["children", "happily", "played", "park"], answer: "played" },
+        { id: 5, question: "Which word is an adverb in the sentence: 'He spoke softly during the lecture.'", type: "mcq",
+          options: ["spoke", "softly", "lecture", "he"], answer: "softly" },
+        { id: 6, question: "Identify the pronoun in the sentence: 'They will arrive soon.'", type: "mcq",
+          options: ["arrive", "they", "soon", "will"], answer: "they" },
+        { id: 7, question: "Which one of the following is a conjunction in the sentence: 'I wanted to go, but I stayed home.'", type: "mcq",
+          options: ["to", "but", "go", "home"], answer: "but" },
+        { id: 8, question: "Select the interjection from this sentence: 'Wow, that was an amazing performance!'", type: "mcq",
+          options: ["amazing", "that", "wow", "performance"], answer: "wow" },
+        { id: 9, question: "Identify the article in the sentence: 'An apple a day keeps the doctor away.'", type: "mcq",
+          options: ["apple", "an", "day", "doctor"], answer: "an" },
+        { id: 10, question: "Which option best completes the sentence as an adjective? 'She wore a ____ dress.'", type: "mcq",
+          options: ["beautiful", "beauty", "beautify", "beautified"], answer: "beautiful" },
 
-        const optionsDiv = document.createElement("div");
-        optionsDiv.className = "options";
-        shuffledOptions.forEach((option, opIdx) => {
-          const optionLabel = document.createElement("label");
-          const radio = document.createElement("input");
-          radio.type = "radio";
-          radio.name = "q" + idx;
-          radio.value = opIdx;
-          optionLabel.dataset.correct = newCorrectIndex;
-          optionLabel.appendChild(radio);
-          optionLabel.innerHTML += " " + option;
-          optionsDiv.appendChild(optionLabel);
-        });
-        questionDiv.appendChild(optionsDiv);
-        container.appendChild(questionDiv);
+        // PREPOSITIONS & SENTENCE STRUCTURE
+        { id: 11, question: "Choose the correct preposition: 'He is fond ____ classical music.'", type: "mcq",
+          options: ["in", "of", "at", "on"], answer: "of" },
+        { id: 12, question: "Which sentence correctly uses a preposition?", type: "mcq",
+          options: ["She arrived on Monday.", "She arrived in Monday.", "She arrived at Monday.", "She arrived by Monday."], answer: "She arrived on Monday." },
+        { id: 13, question: "Identify the error in the sentence: 'The meeting will start promptly at 9 AM sharp.'", type: "mcq",
+          options: ["start", "promptly", "at", "No error"], answer: "No error" },
+        { id: 14, question: "In 'They sat beside the lake.', the word 'beside' is a:", type: "mcq",
+          options: ["conjunction", "preposition", "adjective", "adverb"], answer: "preposition" },
+        { id: 15, question: "Select the correct sentence structure:", type: "mcq",
+          options: ["Incorrect - ‘Although he was tired, yet he could not sleep.’", "Correct - ‘Although he was tired, he could not sleep.’", "Incorrect - ‘He could not sleep although he was tired.’", "Both sentences are correct."],
+          answer: "Correct - ‘Although he was tired, he could not sleep.’" },
+
+        // IDIOMS, SYNONYMS & ANTONYMS
+        { id: 16, question: "What does the idiom 'game changer' mean?", type: "mcq",
+          options: ["A person who plays games", "A factor that dramatically changes things", "A tool used in sports", "An unexpected failure"], answer: "A factor that dramatically changes things" },
+        { id: 17, question: "Select the synonym of the word 'final solution' as used in discussions.", type: "mcq",
+          options: ["temporary fix", "ultimate remedy", "interim measure", "avoidance"], answer: "ultimate remedy" },
+        { id: 18, question: "Choose the antonym for 'results zilch' in context.", type: "mcq",
+          options: ["productive", "null", "zero", "void"], answer: "productive" },
+        { id: 19, question: "What does 'taken for a ride' mean?", type: "mcq",
+          options: ["Offered a free ride", "Deceived or cheated", "Gave a discount", "Accompanied someone"], answer: "Deceived or cheated" },
+        { id: 20, question: "Identify the best synonym for 'rain foreign investment' in the context of economic policies.", type: "mcq",
+          options: ["Attract capital", "Repel investment", "Drain funds", "Neglect growth"], answer: "Attract capital" },
+
+        // ADVANCED GRAMMAR & STRUCTURE
+        { id: 21, question: "Which sentence is a compound sentence?", type: "mcq",
+          options: ["She writes beautifully.", "He went to the market and bought fresh fruits.", "When I arrived, the show began.", "Although it was raining, we stayed indoors."],
+          answer: "He went to the market and bought fresh fruits." },
+        { id: 22, question: "Identify the complex sentence.", type: "mcq",
+          options: ["The sun rises in the east.", "She loves painting.", "I will call you when I reach home.", "The dog barked loudly."],
+          answer: "I will call you when I reach home." },
+        { id: 23, question: "Which sentence uses a relative clause correctly?", type: "mcq",
+          options: ["The book that I read was fascinating.", "The book, I read it, was fascinating.", "The book I read, was fascinating.", "I read the book, that was fascinating."],
+          answer: "The book that I read was fascinating." },
+        { id: 24, question: "Which sentence correctly interchanges active and passive voice?", type: "mcq",
+          options: ["The cake was eaten by the children.", "The children ate the cake.", "Both are correct.", "Neither are correct."],
+          answer: "Both are correct." },
+        { id: 25, question: "Choose the sentence with correct adjective order: ", type: "mcq",
+          options: ["She wore a silk beautiful dress.", "She wore a beautiful silk dress.", "She wore a dress silk beautiful.", "She wore a dress beautiful silk."],
+          answer: "She wore a beautiful silk dress." },
+
+        // SENTENCE REARRANGEMENT QUESTIONS (Rearrange the scrambled sentence)
+        { id: 26, question: "Rearrange the following words to form a meaningful sentence: 'is / playing / the / children / park / in'", type: "rearrange",
+          options: ["The children is playing in the park", "The children are playing in the park", "Children playing in the park are", "In the park the children playing"], answer: "The children are playing in the park" },
+        { id: 27, question: "Rearrange these parts into a correct sentence: 'quickly / ran / the / dog / towards / the / park'", type: "rearrange",
+          options: ["The dog quickly ran towards the park", "Quickly the dog ran towards the park", "The quickly dog ran towards the park", "Ran the dog quickly towards the park"], answer: "The dog quickly ran towards the park" },
+        { id: 28, question: "Arrange the words: 'has / completed / her / assignment / Sarah'", type: "rearrange",
+          options: ["Sarah has completed her assignment", "Her assignment Sarah has completed", "Completed her assignment has Sarah", "Has Sarah her assignment completed"], answer: "Sarah has completed her assignment" },
+        { id: 29, question: "Reorder: 'before / breakfast / he / always / exercises / does'", type: "rearrange",
+          options: ["He always exercises before breakfast", "Exercises before he always breakfast", "Before breakfast he always exercises", "Always exercises he before breakfast"], answer: "He always exercises before breakfast" },
+        { id: 30, question: "Form a proper sentence: 'the / finished / work / they / on / project / the'", type: "rearrange",
+          options: ["They finished on the project the work", "They finished the work on the project", "Finished they the project on the work", "The work they finished on the project"], answer: "They finished the work on the project" },
+
+        // MIXED ADVANCED QUESTIONS
+        { id: 31, question: "Which is the correct synonym for 'erratic' when describing behavior?", type: "mcq",
+          options: ["predictable", "inconsistent", "steady", "uniform"], answer: "inconsistent" },
+        { id: 32, question: "Identify the antonym of 'subdue' in the context of controlling unruly behavior.", type: "mcq",
+          options: ["suppress", "calm", "incite", "restrain"], answer: "incite" },
+        { id: 33, question: "Which sentence contains a modal verb expressing possibility?", type: "mcq",
+          options: ["She may attend the seminar.", "She attends the seminar.", "She will attend the seminar.", "She attended the seminar."],
+          answer: "She may attend the seminar." },
+        { id: 34, question: "Identify the sentence in direct speech:", type: "mcq",
+          options: ['He said, "I am tired."', 'He said that he was tired.', 'He mentioned he was tired.', 'Tired he was.'],
+          answer: 'He said, "I am tired."' },
+        { id: 35, question: "Which sentence best demonstrates the use of a conditional clause?", type: "mcq",
+          options: ["If it rains, we will cancel the picnic.", "It rains and we cancel the picnic.", "We cancel the picnic if it rains.", "Both A and C."],
+          answer: "Both A and C." },
+        { id: 36, question: "Select the proper rearrangement of a scrambled idiom: 'fuel / fire / add / to / the'", type: "rearrange",
+          options: ["Add fuel to the fire", "Fuel add to the fire", "Add the fuel to fire", "Fire to the add fuel"], answer: "Add fuel to the fire" },
+        { id: 37, question: "Choose the correct meaning of the idiom 'call it a day'.", type: "mcq",
+          options: ["Continue working", "Stop working", "Work harder", "Take a short break"], answer: "Stop working" },
+        { id: 38, question: "Which of the following sentences correctly uses a semicolon?", type: "mcq",
+          options: ["I like tea; but I don't like coffee.", "I like tea; I don't like coffee.", "I like tea, I don't like coffee;", "I like tea: I don't like coffee."],
+          answer: "I like tea; I don't like coffee." },
+        { id: 39, question: "Identify the correct option that replaces the underlined word with a synonym: 'The proposal was *innovative*.'", type: "mcq",
+          options: ["conventional", "novel", "obsolete", "mundane"], answer: "novel" },
+        { id: 40, question: "What is the antonym of 'diligent' in the context of work ethic?", type: "mcq",
+          options: ["industrious", "lazy", "hardworking", "meticulous"], answer: "lazy" },
+        { id: 41, question: "Which sentence correctly uses the sequence of tenses?", type: "mcq",
+          options: ["She said that she will go.", "She said that she would go.", "She said that she gone.", "She says that she would go."],
+          answer: "She said that she would go." },
+        { id: 42, question: "Select the best rephrasing of the sentence 'The review was scathing' to maintain meaning.", type: "mcq",
+          options: ["The review was extremely complimentary.", "The review was harsh.", "The review was moderate.", "The review barely mentioned criticism."],
+          answer: "The review was harsh." },
+        { id: 43, question: "Which option best completes the sentence: 'Despite the challenges, she ____ to succeed.'", type: "mcq",
+          options: ["persevered", "yielded", "hesitated", "relinquished"], answer: "persevered" },
+        { id: 44, question: "Choose the sentence that employs correct punctuation for appositives.", type: "mcq",
+          options: ["My brother, John, is a musician.", "My brother John, is a musician.", "My brother, John is a musician.", "My brother John is a musician."],
+          answer: "My brother, John, is a musician." },
+        { id: 45, question: "Identify the correct passive voice transformation of 'The chef cooked a meal.'", type: "mcq",
+          options: ["A meal is cooked by the chef.", "A meal was cooked by the chef.", "The chef was cooked by a meal.", "A meal cooked by the chef."],
+          answer: "A meal was cooked by the chef." },
+        { id: 46, question: "Which option shows correct capitalization in a title?", type: "mcq",
+          options: ["the rise of empires", "The Rise Of Empires", "The Rise of Empires", "the Rise Of Empires"], answer: "The Rise of Empires" },
+        { id: 47, question: "Select the option where the adverb modifies the adjective correctly: 'incredibly fast car.'", type: "mcq",
+          options: ["incredibly", "fast", "car", "incredibly fast"], answer: "incredibly" },
+        { id: 48, question: "What does the idiom 'once in a blue moon' mean?", type: "mcq",
+          options: ["frequently", "rarely", "regularly", "always"], answer: "rarely" },
+        { id: 49, question: "Identify the error in this sentence: 'Neither the manager or the assistant was available.'", type: "mcq",
+          options: ["Neither", "the manager", "or", "available"], answer: "or" },
+        { id: 50, question: "Choose the sentence that best demonstrates advanced sentence construction.", type: "mcq",
+          options: [
+            "Although he was tired, he stayed up to finish the project, and he submitted it on time.",
+            "He was tired; he still finished the project.",
+            "Tired as he was, he finished the project.",
+            "He was too tired, yet he finished."
+          ],
+          answer: "Although he was tired, he stayed up to finish the project, and he submitted it on time." }
+      ];
+      // Shuffle options for each question to ensure different sequence every time.
+      quizData.forEach(q => {
+        q.options = shuffle(q.options);
       });
     }
 
-    // Timer countdown
+    // Function to render quiz questions on the page
+    function renderQuiz() {
+      let quizContainer = document.getElementById("quizQuestions");
+      quizContainer.innerHTML = "";
+      quizData.forEach((q, index) => {
+        let div = document.createElement("div");
+        div.className = "question";
+        let qNumber = document.createElement("h3");
+        qNumber.innerText = "Q" + (index + 1) + ": " + q.question;
+        div.appendChild(qNumber);
+        let optionsDiv = document.createElement("div");
+        optionsDiv.className = "options";
+        q.options.forEach(opt => {
+          let label = document.createElement("label");
+          let radio = document.createElement("input");
+          radio.type = "radio";
+          radio.name = "q" + index;
+          radio.value = opt;
+          label.appendChild(radio);
+          label.appendChild(document.createTextNode(" " + opt));
+          optionsDiv.appendChild(label);
+        });
+        div.appendChild(optionsDiv);
+        quizContainer.appendChild(div);
+      });
+    }
+
+    // Timer function
     function startTimer() {
-      const timerDisplay = document.getElementById("timer");
+      startTime = new Date();
+      let timerDisplay = document.getElementById("timer");
       timerInterval = setInterval(() => {
         if (totalTime <= 0) {
           clearInterval(timerInterval);
           submitQuiz();
         } else {
+          let minutes = Math.floor(totalTime / 60);
+          let seconds = totalTime % 60;
+          timerDisplay.innerText = "Time Left: " + minutes + "m " + seconds + "s";
           totalTime--;
-          timeTaken++;
-          const minutes = Math.floor(totalTime / 60);
-          const seconds = totalTime % 60;
-          timerDisplay.innerText = `Time Remaining: ${minutes < 10 ? '0'+minutes : minutes}:${seconds < 10 ? '0'+seconds : seconds}`;
         }
       }, 1000);
     }
 
-    // Calculate and submit quiz results
-    function submitQuiz() {
-      clearInterval(timerInterval);
-      const formElements = document.getElementById("quizForm").elements;
-      let score = 0;
-      let attempted = 0;
-      questions.forEach((q, idx) => {
-        const options = document.getElementsByName("q" + idx);
-        options.forEach((radio) => {
-          if (radio.checked) {
-            attempted++;
-            const correctIndex = Number(radio.parentElement.dataset.correct);
-            if (Number(radio.value) === correctIndex) {
-              score++;
-            }
-          }
-        });
-      });
-      // Disable all inputs once submitted
-      document.querySelectorAll("input").forEach(input => input.disabled = true);
-      document.getElementById("quizSection").style.display = "none";
-      const resultSection = document.getElementById("resultSection");
-      resultSection.style.display = "block";
-      const resultText = document.getElementById("resultText");
-      const studentName = document.getElementById("studentName").value;
-      resultText.innerHTML = `<strong>Name:</strong> ${studentName}<br>
-                              <strong>Questions Attempted:</strong> ${attempted} out of ${questions.length}<br>
-                              <strong>Score:</strong> ${score} correct answers<br>
-                              <strong>Time Taken:</strong> ${formatTime(timeTaken)}`;
-      
-      // Fill hidden Formspree form and auto-submit
-      document.getElementById("formStudentName").value = studentName;
-      document.getElementById("formQuestionsAttempted").value = attempted;
-      document.getElementById("formScore").value = score;
-      document.getElementById("formTimeTaken").value = formatTime(timeTaken);
-      document.getElementById("hiddenForm").submit();
-    }
-
-    function formatTime(seconds) {
-      const minutes = Math.floor(seconds / 60);
-      const sec = seconds % 60;
-      return `${minutes < 10 ? '0'+minutes : minutes}:${sec < 10 ? '0'+sec : sec}`;
-    }
-
-    // Event listeners for quiz start and submission
-    document.getElementById("startBtn").addEventListener("click", function() {
-      const nameInput = document.getElementById("studentName").value.trim();
+    // Function to start the quiz after name entry
+    function startQuiz() {
+      let nameInput = document.getElementById("userName").value.trim();
       if (nameInput === "") {
         alert("Please enter your name to start the quiz.");
         return;
       }
       document.getElementById("nameSection").style.display = "none";
       document.getElementById("quizSection").style.display = "block";
-      renderQuestions();
+      renderQuiz();
       startTimer();
-    });
+    }
 
-    document.getElementById("submitQuizBtn").addEventListener("click", submitQuiz);
+    // Function to calculate quiz results and auto-submit the data via Formspree
+    function submitQuiz() {
+      clearInterval(timerInterval);
+      let score = 0;
+      let attempted = 0;
+      quizData.forEach((q, index) => {
+        let options = document.getElementsByName("q" + index);
+        options.forEach(opt => {
+          if (opt.checked) {
+            attempted++;
+            if (opt.value === q.answer) {
+              score++;
+            }
+          }
+        });
+      });
+      let endTime = new Date();
+      let timeTaken = Math.floor((endTime - startTime) / 1000); // in seconds
+      let name = document.getElementById("userName").value.trim();
+      // Display results
+      document.getElementById("quizSection").style.display = "none";
+      let resultDiv = document.getElementById("resultSection");
+      resultDiv.style.display = "block";
+      resultDiv.innerHTML = "<h2>Results for " + name + "</h2>" +
+        "<p>Questions Attempted: " + attempted + " / " + quizData.length + "</p>" +
+        "<p>Score: " + score + " / " + quizData.length + "</p>" +
+        "<p>Time Taken: " + timeTaken + " seconds</p>";
+      // Submit results via hidden Formspree form
+      document.getElementById("fsName").value = name;
+      document.getElementById("fsAttempted").value = attempted;
+      document.getElementById("fsScore").value = score;
+      document.getElementById("fsTime").value = timeTaken;
+      document.getElementById("fsForm").submit();
+    }
+
+    // Initialize quiz data when the page loads
+    window.onload = function() {
+      generateQuizData();
+    }
   </script>
+</head>
+<body oncontextmenu="return false;">
+  <!-- Header Section -->
+  <header>
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Logo">
+    <h1>QUIZ FOR CSS ASPIRANTS 15 APRIL 2025</h1>
+    <p style="font-size: 14px; margin-top: 5px;">SYED ASGHAR ALI SHAH</p>
+  </header>
+  
+  <!-- Main Container -->
+  <div class="container">
+    <!-- Name Entry Section -->
+    <div id="nameSection">
+      <h2>Enter Your Name to Start the Quiz</h2>
+      <input type="text" id="userName" placeholder="Your Name" style="padding: 8px; width: 300px; font-size: 16px;">
+      <br>
+      <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+    
+    <!-- Quiz Section -->
+    <div id="quizSection">
+      <div class="timer" id="timer">Time Left: 25m 0s</div>
+      <form id="quizForm">
+        <div id="quizQuestions"></div>
+        <br>
+        <button type="button" onclick="submitQuiz()">Submit Quiz</button>
+      </form>
+    </div>
+    
+    <!-- Result Section -->
+    <div id="resultSection">
+      <!-- Results will be displayed here -->
+    </div>
+    
+    <!-- Hidden Form for Formspree Submission -->
+    <form id="fsForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
+      <input type="text" name="name" id="fsName">
+      <input type="text" name="attempted" id="fsAttempted">
+      <input type="text" name="score" id="fsScore">
+      <input type="text" name="time" id="fsTime">
+    </form>
+  </div>
+  
+  <!-- Footer Section -->
+  <footer>
+    <p>Contact: 03265762698</p>
+    <p>Call now to get more information and join our advanced quiz series!</p>
+  </footer>
 </body>
 </html>
