@@ -2,272 +2,359 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>QUIZ FOR CSS ASPIRANTS 17 APRIL 2025</title>
+  <title>QUIZ FOR CSS ASPIRANTS 18 APRIL 2025</title>
   <style>
-    /* Disable text selection */
+    /* Disable text selection except on inputs/textareas */
     * {
       -webkit-user-select: none;
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
-    }
-    html, body {
       margin: 0;
       padding: 0;
-      background: #f4f7fa;
+      box-sizing: border-box;
+    }
+    input, textarea {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
+    body {
       font-family: Arial, sans-serif;
+      background: #f2f4f8;
       color: #333;
-      -webkit-touch-callout: none;
     }
     header, footer {
-      background-color: #1a2638;
+      background: #003366;
       color: #fff;
       text-align: center;
-      padding: 20px 10px;
+      padding: 15px;
     }
     header img {
-      max-width: 100px;
-      margin: 0 auto 10px;
-      display: block;
-      border-radius: 8px;
-    }
-    header h1 {
-      margin: 5px 0;
-      font-size: 26px;
-      letter-spacing: 1px;
-    }
-    header p {
-      margin: 5px 0;
-      font-size: 16px;
-      font-weight: bold;
-    }
-    #nameSection, #quizSection, #resultSection {
-      max-width: 900px;
-      margin: 30px auto;
-      background: #fff;
-      padding: 25px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    }
-    #nameSection input[type="text"] {
-      width: 65%;
-      padding: 12px;
-      font-size: 18px;
-      border: 1px solid #ccc;
+      height: 50px;
+      vertical-align: middle;
       border-radius: 4px;
       margin-right: 10px;
     }
-    #nameSection button, #quizSection button {
-      padding: 12px 24px;
-      font-size: 18px;
-      background-color: #1a2638;
-      color: #fff;
-      border: none;
-      cursor: pointer;
+    header h1 {
+      display: inline-block;
+      font-size: 1.8em;
+      vertical-align: middle;
+    }
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    #nameSection input {
+      width: 70%;
+      padding: 10px;
+      font-size: 1em;
+      margin-right: 10px;
+      border: 1px solid #ccc;
       border-radius: 4px;
     }
-    #quizSection {
-      display: none;
+    button {
+      padding: 10px 20px;
+      background: #003366;
+      border: none;
+      color: #fff;
+      font-size: 1em;
+      border-radius: 4px;
+      cursor: pointer;
     }
-    .timer {
-      font-size: 20px;
+    button:hover {
+      background: #0055a5;
+    }
+    #timer {
+      font-size: 1.2em;
       font-weight: bold;
-      text-align: right;
+      color: #c00;
       margin-bottom: 15px;
-      color: #1a2638;
     }
     .question {
-      margin-bottom: 25px;
-      padding-bottom: 15px;
-      border-bottom: 1px dashed #ccc;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #ddd;
     }
-    .question p {
-      font-size: 18px;
-      margin: 8px 0;
+    .question h3 {
+      margin-bottom: 10px;
     }
-    .options label {
+    .question label {
       display: block;
-      margin: 6px 0;
+      margin-bottom: 6px;
       cursor: pointer;
-      font-size: 16px;
+    }
+    #resultSection {
+      text-align: center;
+      padding: 20px;
     }
   </style>
+</head>
+<body oncontextmenu="return false;">
+  <header>
+    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Logo">
+    <h1>QUIZ FOR CSS ASPIRANTS 18 APRIL 2025</h1>
+    <p>SYED ASGHAR ALI SHAH</p>
+  </header>
+
+  <div class="container">
+    <!-- Name Entry -->
+    <div id="nameSection">
+      <h2>Enter your name to begin:</h2>
+      <input type="text" id="studentName" placeholder="Your Name">
+      <button id="startBtn">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quizSection" style="display:none;">
+      <div id="timer">Time Remaining: 25:00</div>
+      <form id="quizForm">
+        <div id="questionsContainer"></div>
+        <button type="button" id="submitBtn">Submit Quiz</button>
+      </form>
+    </div>
+
+    <!-- Results -->
+    <div id="resultSection" style="display:none;">
+      <h2>Your Results</h2>
+      <p id="resultText"></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>Questions?</p>
+    <p>Contact: 03265762698 – Get in Touch Now!</p>
+  </footer>
+
   <script>
-    // Prevent right-click and key shortcuts
-    document.addEventListener('contextmenu', e => e.preventDefault());
-    document.onkeydown = function(e) {
-      if (e.keyCode === 123 ||
-          (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
-          (e.ctrlKey && e.keyCode === 85)) {
-        return false;
-      }
-    };
+    // Prevent selection except inputs/textareas
+    document.addEventListener('mousedown', e => {
+      if (!['INPUT','TEXTAREA'].includes(e.target.tagName)) e.preventDefault();
+    });
 
-    let timerInterval, startTime;
-    let timeRemaining = 25 * 60; // 25 minutes
-
-    // 50 advanced, shuffled MCQs
+    // 50 toughest MCQs
     const questions = [
-      { q:"Which word is a preposition?", opts:["Despite","Brisk","Thrive","Opaque"], a:"Despite" },
-      { q:"Identify the synonym of 'loquacious'.", opts:["Garrulous","Taciturn","Laconic","Reticent"], a:"Garrulous" },
-      { q:"Choose the antonym of 'prolific'.", opts:["Barren","Productive","Fruitful","Generative"], a:"Barren" },
-      { q:"What part of speech is 'beneath' in 'He hid it beneath the floor'?", opts:["Preposition","Adverb","Adjective","Conjunction"], a:"Preposition" },
-      { q:"Which is the correct idiom for 'to begin energetically'?", opts:["Hit the road","Hit the sack","Hit the ground running","Hit the deck"], a:"Hit the ground running" },
-      { q:"Rearrange: 'often / she / visits / libraries'", opts:["She often visits libraries.","Often she visits libraries.","Visits she often libraries.","Libraries she often visits."], a:"She often visits libraries." },
-      { q:"Identify the phrasal verb meaning 'to postpone'.", opts:["Put out","Put off","Put in","Put up"], a:"Put off" },
-      { q:"Which sentence uses passive voice correctly?", opts:["The cake was eaten by him.","He was eating the cake.","He eats the cake.","The cake ate by him."], a:"The cake was eaten by him." },
-      { q:"Select the correct use of 'its' vs 'it's'.", opts:["Its raining.","It's time.","Its a problem.","It's color."], a:"It's time." },
-      { q:"Which form is correct? 'She is one of the _____ students here.'", opts:["most diligent","more diligent","most diligently","diligentest"], a:"most diligent" },
-      { q:"Choose the correct conjunction: '______ he apologized, she refused to forgive.'", opts:["Although","Because","Until","Unless"], a:"Although" },
-      { q:"What's the synonym of 'esoteric'?", opts:["Obscure","Common","Public","Manifest"], a:"Obscure" },
-      { q:"Which sentence shows correct subject-verb agreement?", opts:["The list of items are long.","The list of items is long.","The lists of items is long.","The list of item are long."], a:"The list of items is long." },
-      { q:"Identify the adjective: 'The weather became colder.'", opts:["became","weather","colder","the"], a:"colder" },
-      { q:"Which is an example of an irregular plural?", opts:["Geese","Cats","Books","Horses"], a:"Geese" },
-      { q:"Select the antonym of 'meticulous'.", opts:["Careless","Thorough","Punctual","Exact"], a:"Careless" },
-      { q:"Which is a compound sentence?", opts:["I came and I saw.","Although I came, I saw.","I came; I saw.","I saw coming."], a:"I came and I saw." },
-      { q:"Choose correct relative pronoun: 'The book ______ you gave me is great.'", opts:["which","when","where","who"], a:"which" },
-      { q:"Identify the gerund: 'Swimming is healthy.'", opts:["Swimming","is","healthy","None"], a:"Swimming" },
-      { q:"Which word is an interjection?", opts:["Alas","Quickly","Window","Because"], a:"Alas" },
-      { q:"Choose correct article: 'She adopted _____ unique approach.'", opts:["a","an","the","no article"], a:"a" },
-      { q:"Which is a subordinating conjunction?", opts:["While","And","Or","But"], a:"While" },
-      { q:"Select the correct form: 'If I _____ rich, I would travel.'", opts:["were","was","am","be"], a:"were" },
-      { q:"Identify the adverb in: 'He ran swiftly home.'", opts:["swiftly","home","ran","He"], a:"swiftly" },
-      { q:"Which shows correct direct speech punctuation?", opts:['She said, "Go ahead."','She said "Go ahead".','She said, Go ahead.','She said "Go ahead"'], a:'She said, "Go ahead."' },
-      { q:"Choose the synonym for 'candid'.", opts:["Frank","Secretive","Evasive","Obscure"], a:"Frank" },
-      { q:"Which is the infinitive in: 'He hopes to win.'?", opts:["to win","He hopes","win","hopes to"], a:"to win" },
-      { q:"Select the correct modal: 'You _____ see a doctor.'", opts:["should","can","might","would"], a:"should" },
-      { q:"Which is an uncountable noun?", opts:["Information","Ideas","Apples","Books"], a:"Information" },
-      { q:"Identify the conjunction in: 'She sings and dances.'", opts:["and","sings","dances","she"], a:"and" },
-      { q:"Choose the antonym of 'vigilant'.", opts:["Negligent","Alert","Watchful","Careful"], a:"Negligent" },
-      { q:"Which is correct: 'He is keen _____ football.'", opts:["on","in","for","at"], a:"on" },
-      { q:"Rearrange: 'never / she / has / seen / such / beauty'", opts:["She has never seen such beauty.","Never she has seen such beauty.","Has she never seen such beauty.","She never has seen such beauty."], a:"She has never seen such beauty." },
-      { q:"Select the adverb clause: 'When he arrived, we left.'", opts:["When he arrived","we left","he arrived","left we"], a:"When he arrived" },
-      { q:"Which noun is feminine form of 'actor'?", opts:["actress","actorine","actora","actoress"], a:"actress" },
-      { q:"Choose the correct form: 'They _____ already eaten.'", opts:["have","has","had","having"], a:"have" },
-      { q:"Which shows correct plural of 'analysis'?", opts:["analyses","analysises","analysii","analysis"], a:"analyses" },
-      { q:"Select the synonym of 'nefarious'.", opts:["Wicked","Virtuous","Honorable","Good"], a:"Wicked" },
-      { q:"Which is an example of nominalization?", opts:["The destruction of the city.","The city was destroyed.","They destroyed the city.","Destroying the city."], a:"The destruction of the city." },
-      { q:"Identify the determiner in: 'Each student must register.'", opts:["Each","student","must","register"], a:"Each" },
-      { q:"Choose correct preposition: 'I am good _____ math.'", opts:["at","in","on","for"], a:"at" },
-      { q:"Which sentence uses the future continuous correctly?", opts:["I will be working at 5.","I will work at 5.","I work at 5.","I am working at 5."], a:"I will be working at 5." },
-      { q:"Select the antonym of 'ambiguous'.", opts:["Clear","Vague","Obscure","Dubious"], a:"Clear" },
-      { q:"Which word is a determiner?", opts:["Their","They","Them","Those"], a:"Their" },
-      { q:"Choose the correct comparative: 'This is _____ than that.'", opts:["better","more good","gooder","best"], a:"better" },
-      { q:"Identify the direct object: 'She read the book.'", opts:["the book","She","read","book"], a:"the book" },
-      { q:"Which shows correct negative question tag? 'You like tea, _____?'", opts:["don't you","do you","aren't you","doesn't you"], a:"don't you" },
-      { q:"Select the correct form: 'Had I _____ known, I would have declined.'", opts:["only","but","also","yet"], a:"only" }
+      { q:"The correct definition of a collective noun is:", opts:[
+          "Names a group of items as one unit",
+          "Names a single item only",
+          "Names qualities rather than things",
+          "Names actions or verbs"], a:0 },
+      { q:"Choose the correct possessive form:", opts:[
+          "Children’s books",
+          "Childrens’ books",
+          "Children book’s",
+          "Childrens’s books"], a:0 },
+      { q:"Which sentence correctly uses 'whose'?", opts:[
+          "The student whose paper won was praised.",
+          "The student who’s paper won was praised.",
+          "The student whose’s paper won was praised.",
+          "The student who paper won was praised."], a:0 },
+      { q:"Select the past perfect example:", opts:[
+          "He had finished when she arrived.",
+          "He finished when she had arrived.",
+          "He has finished when she arrived.",
+          "He finishes when she arrived."], a:0 },
+      { q:"Correct preposition: She insisted ___ paying.", opts:[
+          "on","at","in","for"], a:0 },
+      { q:"Comparative of 'little' (amount):", opts:[
+          "less","littler","more little","least"], a:0 },
+      { q:"Plural of 'criterion' is:", opts:[
+          "criteria","criterions","criterion","criterias"], a:0 },
+      { q:"Identify the abstract noun:", opts:[
+          "justice","just","justly","justify"], a:0 },
+      { q:"Modal of obligation in past:", opts:[
+          "should have","must have","can have","might have"], a:0 },
+      { q:"Prepositional phrase:", opts:[
+          "in spite of","despite","although","because"], a:0 },
+      { q:"Correct passive voice:", opts:[
+          "The cake was eaten by him.",
+          "He was eaten cake by.",
+          "Was eaten the cake by him.",
+          "By him was eaten cake."], a:0 },
+      { q:"Infinitive of purpose:", opts:[
+          "He came to help.",
+          "He came helping.",
+          "He came help.",
+          "He came helped."], a:0 },
+      { q:"Choose 'few' vs 'a few':", opts:[
+          "I have a few questions.",
+          "I have few questions.",
+          "I have few question.",
+          "I have a few question."], a:0 },
+      { q:"Correct question tag:", opts:[
+          "You can swim, can't you?",
+          "You can swim, can you?",
+          "You can swim, won't you?",
+          "You can swim, will you?"], a:0 },
+      { q:"Reported speech: 'I will go', he said.", opts:[
+          "He said he would go.",
+          "He said he will go.",
+          "He said, 'I will go'.",
+          "He said that he will go."], a:0 },
+      { q:"Idiom for 'unexpectedly':", opts:[
+          "out of the blue",
+          "under the weather",
+          "on the ball",
+          "in hot water"], a:0 },
+      { q:"Antonym of 'scarce':", opts:[
+          "abundant","rare","sparse","limited"], a:0 },
+      { q:"Synonym for 'meticulous':", opts:[
+          "thorough","careless","quick","light"], a:0 },
+      { q:"Correct article: ___ university", opts:[
+          "a university","an university","the university","none"], a:0 },
+      { q:"Direct object: 'She gave him a gift.'", opts:[
+          "a gift","him","she","gave"], a:0 },
+      { q:"Gerund form:", opts:[
+          "Swimming is fun.","Swim is fun.","To swim is fun.","Swum is fun."], a:0 },
+      { q:"Sequence of tenses:", opts:[
+          "He said he had seen it.","He said he saw it.",
+          "He says he had seen it.","He said he has seen it."], a:0 },
+      { q:"Comparative adverb:", opts:[
+          "more beautifully","beautifuller","most beautifully","beautiful"], a:0 },
+      { q:"Correct ordinal:", opts:[
+          "1st","firstly","one","first"], a:0 },
+      { q:"Negative transformation:", opts:[
+          "He is not happy.","He is unhappy not.","Not he is happy.","He unhappy is not."], a:0 },
+      { q:"Disjunctive interrogative:", opts:[
+          "You’re coming, aren’t you?","You’re coming, are you?",
+          "You’re coming, won't you?","You’re coming, will you?"], a:0 },
+      { q:"Hyphen in compound adj.:", opts:[
+          "well-known artist","well known artist","well, known artist","well known-artist"], a:0 },
+      { q:"Indefinite pronoun correct:", opts:[
+          "Anyone can go.","Anone can go.","Any one can go.","Anyone can goes."], a:0 },
+      { q:"Error: 'Each of them are here.'", opts:[
+          "are → is","each → all","them → thems","no error"], a:0 },
+      { q:"Irregular plural:", opts:[
+          "men","mans","mens","man"], a:0 },
+      { q:"Correct tag q.:", opts:[
+          "You’re ready, aren’t you?","You’re ready, are you?",
+          "You’re ready, won't you?","You’re ready, will you?"], a:0 },
+      { q:"Correct use of 'whom':", opts:[
+          "Whom did you see?","Who did you see?",
+          "Whom you did see?","Who you did see?"], a:0 },
+      { q:"Past continuous:", opts:[
+          "I was reading.","I were reading.","I was read.","I read was."], a:0 },
+      { q:"Subjunctive wish:", opts:[
+          "I wish I were there.","I wish I was there.",
+          "I wish I am there.","I wish am I there?"], a:0 },
+      { q:"Count vs uncount:", opts:[
+          "much sugar","many sugar","much sugars","many sugars"], a:0 },
+      { q:"Inversion emphasis:", opts:[
+          "Never have I seen.","Never I have seen.",
+          "Have I never seen.","I have never seen."], a:0 },
+      { q:"Split infinitive avoid:", opts:[
+          "to go boldly","to boldly go","boldly to go","go to boldly"], a:0 },
+      { q:"Correct 'due to':", opts:[
+          "The delay was due to rain.","Due to rain the delay was."], a:0 },
+      { q:"Omit article:", opts:[
+          "She plays the piano.","She plays piano."], a:0 },
+      { q:"Dash punctuation:", opts:[
+          "word—word","word - word","word– word","word -word"], a:0 },
+      { q:"Semi-colon use:", opts:[
+          "I came; I saw.","I came , I saw.","I came . I saw.","I came: I saw."], a:0 },
+      // New 9 questions:
+      { q:"A restrictive relative clause uses ____ to introduce it:", opts:[
+          "that","which","who","whom"], a:0 },
+      { q:"A non‑restrictive relative clause typically uses:", opts:[
+          "which","that","who","whose"], a:0 },
+      { q:"Identify the uncountable noun:", opts:[
+          "advice","advices","advise","advisory"], a:0 },
+      { q:"Correct counterfactual: If I ___, I would have prevented it.", opts:[
+          "had known","have known","knew","knows"], a:0 },
+      { q:"Idiom meaning 'avoid main point':", opts:[
+          "beat around the bush","beat the bush","bush around","beat around"], a:0 },
+      { q:"Correct preposition: arrive ___ the station", opts:[
+          "at","in","on","by"], a:0 },
+      { q:"A colon is used to:", opts:[
+          "introduce a list","link independent clauses","show possession","indicate omission"], a:0 },
+      { q:"A participle clause example is:", opts:[
+          "Given the choice, I'd go.","To choose, I'd go.","Choosing, I'd go.","choose being given."], a:0 },
+      { q:"Identify the correct correction for double negative: 'I don’t know nothing.'", opts:[
+          "I don’t know anything.","I don’t know nothing.","I know nothing.","I don’t anything know."], a:0 }
     ];
 
-    function shuffle(arr) {
-      for (let i=arr.length-1; i>0; i--) {
+    let total=25*60, elapsed=0, timerId;
+
+    function shuffle(arr){
+      for(let i=arr.length-1;i>0;i--){
         const j=Math.floor(Math.random()*(i+1));
         [arr[i],arr[j]]=[arr[j],arr[i]];
       }
       return arr;
     }
 
-    function renderQuiz() {
-      const container=document.getElementById('quizQuestions');
-      container.innerHTML='';
-      const qs=shuffle(questions.slice());
-      qs.forEach((item,idx)=>{
-        const opts=shuffle(item.opts.slice());
+    function renderQuestions(){
+      const ctr=document.getElementById('questionsContainer');
+      ctr.innerHTML='';
+      questions.forEach((q,i)=>{
+        const opts=shuffle(q.opts.slice());
+        const correct=opts.indexOf(q.opts[q.a]);
         const div=document.createElement('div');
         div.className='question';
-        div.innerHTML=`<p><strong>Q${idx+1}.</strong> ${item.q}</p>`;
-        const optsDiv=document.createElement('div');
-        optsDiv.className='options';
-        opts.forEach(o=>{
-          const lbl=document.createElement('label');
-          lbl.innerHTML=`<input type="radio" name="q${idx}" value="${o}"> ${o}`;
-          optsDiv.appendChild(lbl);
+        div.innerHTML=`<h3>${i+1}. ${q.q}</h3>`;
+        opts.forEach((o,j)=>{
+          div.innerHTML+=
+            `<label>
+              <input type="radio" name="q${i}" value="${j}" data-correct="${correct}">
+              ${o}
+            </label>`;
         });
-        div.appendChild(optsDiv);
-        container.appendChild(div);
+        ctr.appendChild(div);
       });
-      document.getElementById('quizSection').dataset.questions=JSON.stringify(qs);
     }
 
-    function startTimer() {
-      startTime=Date.now();
-      const td=document.getElementById('timer');
-      timerInterval=setInterval(()=>{
-        timeRemaining--;
-        const m=Math.floor(timeRemaining/60), s=timeRemaining%60;
-        td.textContent=`Time Left: ${m<10?'0'+m:m}:${s<10?'0'+s:s}`;
-        if(timeRemaining<=0){ clearInterval(timerInterval); submitQuiz(); }
+    function startTimer(){
+      const d=document.getElementById('timer');
+      timerId=setInterval(()=>{
+        if(total<0){ clearInterval(timerId); submitQuiz(); return; }
+        const m=Math.floor(total/60), s=total%60;
+        d.textContent=`Time Remaining: ${m<10?'0':''}${m}:${s<10?'0':''}${s}`;
+        total--; elapsed++;
       },1000);
     }
 
-    function submitQuiz() {
-      clearInterval(timerInterval);
-      const qs=JSON.parse(document.getElementById('quizSection').dataset.questions);
-      let attempted=0, score=0;
-      qs.forEach((item,idx)=>{
-        const sel=document.querySelector(`input[name="q${idx}"]:checked`);
-        if(sel){ attempted++; if(sel.value===item.a) score++; }
+    function submitQuiz(){
+      clearInterval(timerId);
+      let score=0, att=0;
+      questions.forEach((_,i)=>{
+        const sel=document.querySelector(`input[name=q${i}]:checked`);
+        if(sel){ att++; if(+sel.value===+sel.dataset.correct) score++; }
       });
-      const tTaken=Math.floor((Date.now()-startTime)/1000);
-      const name=document.getElementById('userName').value;
-      const resDiv=document.getElementById('resultSection');
-      resDiv.innerHTML=`
-        <h2>Results</h2>
-        <p>Name: ${name}</p>
-        <p>Attempted: ${attempted} / ${qs.length}</p>
-        <p>Score: ${score}</p>
-        <p>Time Taken: ${Math.floor(tTaken/60)}m ${tTaken%60}s</p>
+      document.getElementById('quizSection').style.display='none';
+      const name=document.getElementById('studentName').value;
+      document.getElementById('resultText').innerHTML=`
+        <strong>Name:</strong> ${name}<br>
+        <strong>Attempted:</strong> ${att}/${questions.length}<br>
+        <strong>Score:</strong> ${score}<br>
+        <strong>Time:</strong> ${Math.floor(elapsed/60)}:${elapsed%60<10?'0':''}${elapsed%60}
       `;
-      resDiv.style.display='block';
-      const f=document.getElementById('resultsForm');
-      f.user_name.value=name;
-      f.attempted.value=attempted;
-      f.correct.value=score;
-      f.time_taken.value=tTaken;
-      f.submit();
+      document.getElementById('resultSection').style.display='block';
+      fetch('https://formspree.io/f/xwpvddea',{
+        method:'POST',
+        headers:{ 'Accept':'application/json','Content-Type':'application/json' },
+        body: JSON.stringify({
+          studentName: name,
+          questionsAttempted: att,
+          score: score,
+          timeTaken: `${Math.floor(elapsed/60)}:${elapsed%60<10?'0':''}${elapsed%60}`
+        })
+      }).then(r=>r.json()).catch(console.error);
     }
 
-    function startQuiz() {
-      const name=document.getElementById('userName').value.trim();
-      if(!name){ alert('Please enter your name.'); return; }
+    document.getElementById('startBtn').addEventListener('click',()=>{
+      const n=document.getElementById('studentName').value.trim();
+      if(!n) return alert('Please enter your name.');
       document.getElementById('nameSection').style.display='none';
       document.getElementById('quizSection').style.display='block';
-      renderQuiz();
-      startTimer();
-    }
+      renderQuestions(); startTimer();
+    });
+    document.getElementById('submitBtn').addEventListener('click', submitQuiz);
   </script>
-</head>
-<body>
-  <header>
-    <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Quiz Banner">
-    <h1>QUIZ FOR CSS ASPIRANTS 17 APRIL 2025</h1>
-    <p>SYED ASGHAR ALI SHAH</p>
-  </header>
-
-  <div id="nameSection">
-    <h2>Enter Your Name</h2>
-    <input type="text" id="userName" placeholder="Your Name">
-    <button onclick="startQuiz()">Start Quiz</button>
-  </div>
-
-  <div id="quizSection">
-    <div class="timer" id="timer">Time Left: 25:00</div>
-    <div id="quizQuestions"></div>
-    <button onclick="submitQuiz()">Submit Quiz</button>
-  </div>
-
-  <div id="resultSection" style="display:none; max-width:900px; margin:30px auto; background:#fff; padding:25px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.1);"></div>
-
-  <form id="resultsForm" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-    <input type="hidden" name="user_name" value="">
-    <input type="hidden" name="attempted" value="">
-    <input type="hidden" name="correct" value="">
-    <input type="hidden" name="time_taken" value="">
-  </form>
-
-  <footer>
-    <p>Contact: 03265762698</p>
-    <p class="cta">Strive for excellence and never stop learning!</p>
-  </footer>
 </body>
 </html>
