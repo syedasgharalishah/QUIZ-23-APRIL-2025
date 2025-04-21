@@ -62,24 +62,19 @@ Meta Pixel integration instructions:
       box-shadow: 0 2px 4px var(--shadow);
     }
     .logo { font-size:1.5rem; font-weight:700; color:var(--primary); }
-    nav a, .whatsapp-link { margin-left:1rem; text-decoration:none; font-size:1rem; color:var(--primary); }
+    .whatsapp-link { text-decoration:none; font-size:1rem; color:var(--primary); }
     .whatsapp-link img { vertical-align:middle; width:24px; margin-right:0.5rem; }
     main { max-width:1200px; margin:1rem auto; padding:0 1rem; }
-    .hero {
-      display:grid; grid-template-columns:1fr; gap:1rem; align-items:center;
-      padding:1rem; background: var(--light-bg); border-radius:8px; box-shadow: 0 2px 8px var(--shadow);
+    .title {
+      text-align:center; margin-bottom:1rem;
     }
-    @media(min-width:768px) {
-      .hero { grid-template-columns:1fr 1fr; }
+    .title h1 {
+      font-size:2.5rem; font-weight:700; color:var(--primary);
     }
-    .hero h1 {
-      font-size:2.25rem; font-weight:700; color:var(--primary); margin-bottom:0.75rem;
+    .hero-img {
+      text-align:center; margin-bottom:1.5rem;
     }
-    .hero .subtitle {
-      font-size:1rem; font-weight:500; margin-bottom:1rem; color:#555;
-    }
-    .price { font-size:1.5rem; font-weight:500; margin:0.75rem 0; }
-    .price .old { text-decoration:line-through; color:#999; margin-left:0.75rem; font-weight:400; }
+    .hero-img img { max-width:100%; border-radius:8px; box-shadow: 0 2px 8px var(--shadow); }
     .btn {
       display:inline-block; padding:0.85rem 1.75rem;
       background:var(--accent); color:#fff; text-decoration:none;
@@ -87,123 +82,93 @@ Meta Pixel integration instructions:
       transition: transform 0.1s ease;
     }
     .btn:active { transform: scale(0.98); }
-    .sections { margin-top:2.5rem; }
-    .section {
-      display:flex; flex-direction:column; margin-bottom:2rem; gap:1rem;
-      padding:1rem; background:#fff; border-radius:8px; box-shadow: 0 2px 6px var(--shadow);
-    }
-    .section img { max-width:100%; border-radius:8px; }
-    .section .text { flex:1; padding:0.5rem 0; }
-    .section .text h2 {
-      font-size:1.5rem; font-weight:700; margin-bottom:0.5rem; color:var(--primary);
-    }
+    .subtitle { text-align:center; font-size:1rem; font-weight:500; color:#555; margin-bottom:0.75rem; }
+    .price { text-align:center; font-size:1.5rem; font-weight:500; margin-bottom:1rem; }
+    .price .old { text-decoration:line-through; color:#999; margin-left:0.75rem; font-weight:400; }
+    .sections { margin-top:2rem; }
+    .section { margin-bottom:2rem; }
+    .section img { width:100%; border-radius:8px; box-shadow: 0 2px 6px var(--shadow); }
+    .section .text { padding:0.75rem 0; }
+    .section .text h2 { font-size:1.5rem; font-weight:700; color:var(--primary); margin-bottom:0.5rem; }
     .point-list { list-style: none; padding-left:0; }
     .point-list li { margin-bottom:0.75rem; font-size:1rem; }
     #order-form { background:var(--light-bg); padding:1.5rem; border-radius:8px; box-shadow: 0 2px 8px var(--shadow); margin:2rem 0; }
-    #order-form h2 { font-size:1.75rem; font-weight:700; margin-bottom:1rem; color:var(--primary); }
+    #order-form h2 { font-size:1.75rem; font-weight:700; margin-bottom:1rem; color:var(--primary); text-align:center; }
     #order-form label { display:block; margin-top:1rem; font-weight:500; color:#555; }
     #order-form input { width:100%; padding:0.75rem; margin-top:0.5rem; border:1px solid #ccc; border-radius:4px; font-size:1rem; }
-    #order-form button {
-      margin-top:1.5rem; padding:0.85rem 1.75rem; background:var(--accent);
-      color:#fff; border:none; border-radius:28px; font-weight:500; cursor:pointer;
-      box-shadow: 0 4px 6px var(--shadow); transition: transform 0.1s ease;
-    }
+    #order-form button { width:100%; margin-top:1.5rem; padding:0.85rem; background:var(--accent); color:#fff; border:none; border-radius:28px; font-weight:500; cursor:pointer; box-shadow: 0 4px 6px var(--shadow); transition: transform 0.1s ease; }
     #order-form button:active { transform: scale(0.98); }
-    footer {
-      background:var(--primary); color:#fff; padding:1rem; text-align:center; margin-top:2rem;
-    }
+    footer { background:var(--primary); color:#fff; padding:1rem; text-align:center; margin-top:2rem; }
     footer a { color:#fff; text-decoration:none; font-weight:500; }
-    .sticky-order {
-      position: fixed; bottom:0; left:0; width:100%;
-      background:var(--accent); color:#fff; text-align:center;
-      padding:0.75rem; font-size:1rem; font-weight:500;
-      box-shadow: 0 -2px 6px var(--shadow); z-index:1000;
-    }
+    .sticky-order { position: fixed; bottom:0; left:0; width:100%; background:var(--accent); color:#fff; text-align:center; padding:0.75rem; font-size:1rem; font-weight:500; box-shadow: 0 -2px 6px var(--shadow); z-index:1000; }
   </style>
 </head>
 <body>
 
 <header>
   <div class="logo">SYED’S AND CO</div>
-  <div>
-    <a href="#order-form" class="btn">🛒 آرڈر کریں</a>
-    <a class="whatsapp-link"
-       href="https://api.whatsapp.com/send?phone=923265762698&text=السلام%20علیکم%20کیا%20آپ%20SYEDS%20AND%20CO%20کے%20مالک%20ہیں؟"
-       target="_blank">
-      <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp"/>
-      📞 سید اصغر علی شاہ
-    </a>
-  </div>
+  <a class="whatsapp-link" href="https://api.whatsapp.com/send?phone=923265762698&text=السلام%20علیکم%20کیا%20آپ%20SYEDS%20AND%20CO%20کے%20مالک%20ہیں؟" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp"/> 📞 سید اصغر علی شاہ
+  </a>
 </header>
 
 <main>
-
-  <!-- Hero -->
-  <div class="hero">
-    <div>
-      <h1>🌟 Original Havelyn Hair Food Oil</h1>
-      <div class="subtitle">Hair nourishment with 30+ pure Ayurvedic herbs – قدرتی بالوں کی تازگی</div>
-      <div class="price">
-        <strong>Rs.1,999.00</strong> <span class="old">Rs.4,000.00</span>
-      </div>
-      <a href="#order-form" class="btn">🚀 Place Your Order – آرڈر کریں</a>
-    </div>
-    <div>
-      <img src="https://havelynpk.com/cdn/shop/files/E07D1AA7-637E-4BA4-8926-7C0BC80A6CCC.jpg?v=1741434605&width=1080"
-           alt="Original Havelyn Hair Food Oil">
-    </div>
+  <!-- Page Title -->
+  <div class="title">
+    <h1>🌟 Original Havelyn Hair Food Oil</h1>
+  </div>
+  <!-- Hero Image -->
+  <div class="hero-img">
+    <img src="https://havelynpk.com/cdn/shop/files/E07D1AA7-637E-4BA4-8926-7C0BC80A6CCC.jpg?v=1741434605&width=1080" alt="Original Havelyn Hair Food Oil">
   </div>
 
-  <!-- Additional Image Sections -->
+  <div class="subtitle">Hair nourishment with 30+ pure Ayurvedic herbs – قدرتی بالوں کی تازگی</div>
+  <div class="price"><strong>Rs.1,999.00</strong> <span class="old">Rs.4,000.00</span></div>
+  <div style="text-align:center; margin-bottom:2rem;"><a href="#order-form" class="btn">🚀 Place Your Order – آرڈر کریں</a></div>
+
+  <!-- Additional Sections -->
   <div class="sections">
     <div class="section">
-      <img src="https://havelynpk.com/cdn/shop/files/IMG-20250213-WA0014.jpg?v=1741434607&width=1600"
-           alt="Havelyn Hair Food Oil usage">
+      <img src="https://havelynpk.com/cdn/shop/files/IMG-20250213-WA0014.jpg?v=1741434607&width=1600" alt="Usage">
       <div class="text">
         <h2>✨ Benefits – فوائد</h2>
         <ul class="point-list">
-          <li>💪 <strong>Deep Nourishment:</strong> Over 30 Ayurvedic herbs penetrate scalp &amp; follicles.</li>
-          <li>🌿 <strong>Herbal Power:</strong> Mustard, sesame, coconut &amp; almond oils for strength.</li>
+          <li>💪 <strong>Deep Nourishment:</strong> Over 30 Ayurvedic herbs penetrate scalp & follicles.</li>
+          <li>🌿 <strong>Herbal Power:</strong> Mustard, sesame, coconut & almond oils for strength.</li>
           <li>💧 <strong>Moisture Boost:</strong> Restores shine and tames frizz.</li>
         </ul>
       </div>
     </div>
-
     <div class="section">
-      <img src="https://havelynpk.com/cdn/shop/files/havelynhairoil_2.jpg?v=1741434609&width=2000"
-           alt="Ingredients list">
+      <img src="https://havelynpk.com/cdn/shop/files/havelynhairoil_2.jpg?v=1741434609&width=2000" alt="Ingredients">
       <div class="text">
         <h2>🔍 Ingredients – اجزاء</h2>
         <ul class="point-list">
-          <li>🌱 <strong>Aloe Vera:</strong> Soothes &amp; calms irritation.</li>
-          <li>🍈 <strong>Amla &amp; Shikakai:</strong> Strengthen roots &amp; prevent breakage.</li>
+          <li>🌱 <strong>Aloe Vera:</strong> Soothes & calms irritation.</li>
+          <li>🍈 <strong>Amla & Shikakai:</strong> Strengthen roots & prevent breakage.</li>
           <li>🌹 <strong>Rosemary Oil:</strong> Stimulates blood flow for faster growth.</li>
         </ul>
       </div>
     </div>
-
     <div class="section">
-      <img src="https://havelynpk.com/cdn/shop/files/A3CAA9D6-4716-47D3-BE81-EDEC3CF4A6D7.jpg?v=1741434609&width=1290"
-           alt="How to use Havelyn Hair Food Oil">
+      <img src="https://havelynpjpk.com/cdn/shop/files/A3CAA9D6-4716-47D3-BE81-EDEC3CF4A6D7.jpg?v=1741434609&width=1290" alt="How to Use">
       <div class="text">
         <h2>📝 How to Use – استعمال کا طریقہ</h2>
         <ul class="point-list">
           <li>💧 <strong>Apply:</strong> Massage oil onto scalp for 3–4 minutes.</li>
-          <li>⏰ <strong>Cover:</strong> Use towel or shower cap &amp; leave overnight.</li>
+          <li>⏰ <strong>Cover:</strong> Use towel or shower cap & leave overnight.</li>
           <li>🛁 <strong>Rinse:</strong> Shampoo next morning for best results.</li>
         </ul>
       </div>
     </div>
-
     <div class="section">
-      <img src="https://havelynpk.com/cdn/shop/files/B434FFE2-44D9-4DB0-BAA6-2C0D92B4E8FA.jpg?v=1741434611&width=1080"
-           alt="Guaranteed results">
+      <img src="https://havelynpk.com/cdn/shop/files/B434FFE2-44D9-4DB0-BAA6-2C0D92B4E8FA.jpg?v=1741434611&width=1080" alt="Results">
       <div class="text">
         <h2>✅ Guaranteed Results – یقین دہانی</h2>
         <ul class="point-list">
           <li>🚫 <strong>No Side Effects:</strong> Safe herbal formula.</li>
           <li>💇‍♀️ <strong>Thicker Strands:</strong> Works like minoxidil.</li>
-          <li>🎉 <strong>Shiny Finish:</strong> Control split ends &amp; frizz.</li>
+          <li>🎉 <strong>Shiny Finish:</strong> Control split ends & frizz.</li>
         </ul>
       </div>
     </div>
@@ -225,7 +190,6 @@ Meta Pixel integration instructions:
       <button type="submit">✅ CONFIRM ORDER – تصدیق کریں</button>
     </form>
   </section>
-
 </main>
 
 <footer>
