@@ -5,7 +5,7 @@ GitHub Pages deployment steps:
 1. Add this HTML file (e.g. index.html) to your repo’s root or docs/ directory.
 2. Commit and push to the branch you’ve configured for GitHub Pages (e.g., main or gh-pages).
 3. In your repository’s Settings → Pages, select the branch and folder (root/docs) and save.
-4. Your site will be live at https://<username>.github.io/<repo>/.  
+4. Your site will be live at https://<username>.github.io/<repo>/.
 Meta Pixel integration instructions:
 – Copy the Meta Pixel code block below into your <head>.
 – Replace ‘1405241363811556’ with your own Pixel ID if needed.
@@ -17,6 +17,7 @@ Meta Pixel integration instructions:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#2c3e50">
   <title>Original Havelyn Hair Food Oil of Pakistan</title>
 
   <!-- Meta Pixel Code -->
@@ -38,55 +39,86 @@ Meta Pixel integration instructions:
   </noscript>
   <!-- End Meta Pixel Code -->
 
+  <!-- Google Font for Android-like feel -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --primary: #2c3e50;
       --accent: #e67e22;
       --light-bg: #f9f9f9;
       --text: #333;
+      --shadow: rgba(0,0,0,0.1);
     }
     * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior: smooth; font-family: Arial, sans-serif; }
+    html { scroll-behavior: smooth; font-family: 'Roboto', sans-serif; }
     body { color: var(--text); background: #fff; }
     header {
       position: sticky; top:0; z-index:1000;
       background:#fff; border-bottom:1px solid #ddd;
       display:flex; align-items:center; justify-content:space-between;
-      padding:0.5rem 1rem;
+      padding:0.75rem 1rem;
+      box-shadow: 0 2px 4px var(--shadow);
     }
-    .logo { font-size:1.25rem; font-weight:bold; color:var(--primary); }
-    nav a, .whatsapp-link { margin-left:1rem; text-decoration:none; font-size:0.9rem; color:var(--primary); }
-    .whatsapp-link img { vertical-align:middle; width:20px; margin-right:0.25rem; }
+    .logo { font-size:1.5rem; font-weight:700; color:var(--primary); }
+    nav a, .whatsapp-link { margin-left:1rem; text-decoration:none; font-size:1rem; color:var(--primary); }
+    .whatsapp-link img { vertical-align:middle; width:24px; margin-right:0.5rem; }
     main { max-width:1200px; margin:1rem auto; padding:0 1rem; }
     .hero {
       display:grid; grid-template-columns:1fr; gap:1rem; align-items:center;
+      padding:1rem; background: var(--light-bg); border-radius:8px; box-shadow: 0 2px 8px var(--shadow);
     }
     @media(min-width:768px) {
       .hero { grid-template-columns:1fr 1fr; }
     }
-    .hero h1 { font-size:2rem; color:var(--primary); margin-bottom:0.5rem; }
-    .price { font-size:1.25rem; margin:0.5rem 0; }
-    .price .old { text-decoration:line-through; color:#999; margin-left:0.5rem; }
-    .btn { display:inline-block; padding:0.75rem 1.5rem; background:var(--accent); color:#fff; text-decoration:none; border-radius:4px; font-weight:bold; }
-    .sections { margin-top:2rem; }
+    .hero h1 {
+      font-size:2.25rem; font-weight:700; color:var(--primary); margin-bottom:0.75rem;
+    }
+    .hero .subtitle {
+      font-size:1rem; font-weight:500; margin-bottom:1rem; color:#555;
+    }
+    .price { font-size:1.5rem; font-weight:500; margin:0.75rem 0; }
+    .price .old { text-decoration:line-through; color:#999; margin-left:0.75rem; font-weight:400; }
+    .btn {
+      display:inline-block; padding:0.85rem 1.75rem;
+      background:var(--accent); color:#fff; text-decoration:none;
+      border-radius:28px; font-weight:500; box-shadow: 0 4px 6px var(--shadow);
+      transition: transform 0.1s ease;
+    }
+    .btn:active { transform: scale(0.98); }
+    .sections { margin-top:2.5rem; }
     .section {
       display:flex; flex-direction:column; margin-bottom:2rem; gap:1rem;
-    }
-    @media(min-width:768px) {
-      .section { flex-direction:row; align-items:center; }
-      .section.even { flex-direction:row-reverse; }
+      padding:1rem; background:#fff; border-radius:8px; box-shadow: 0 2px 6px var(--shadow);
     }
     .section img { max-width:100%; border-radius:8px; }
-    .section .text { flex:1; padding:0 1rem; }
-    #order-form { background:var(--light-bg); padding:1rem; border-radius:8px; margin:2rem 0; }
-    #order-form label { display:block; margin-top:1rem; font-weight:bold; }
-    #order-form input { width:100%; padding:0.5rem; margin-top:0.25rem; border:1px solid #ccc; border-radius:4px; }
-    #order-form button { margin-top:1rem; padding:0.75rem 1.5rem; background:var(--accent); color:#fff; border:none; border-radius:4px; cursor:pointer; }
-    #view-orders { margin-left:1rem; background:#555; }
-    #orders-table { width:100%; border-collapse:collapse; margin-top:1rem; }
-    #orders-table th, #orders-table td { border:1px solid #ccc; padding:0.5rem; text-align:left; }
-    footer { background:var(--primary); color:#fff; padding:1rem; text-align:center; margin-top:2rem; }
-    footer a { color:#fff; text-decoration:none; }
+    .section .text { flex:1; padding:0.5rem 0; }
+    .section .text h2 {
+      font-size:1.5rem; font-weight:700; margin-bottom:0.5rem; color:var(--primary);
+    }
+    .point-list { list-style: none; padding-left:0; }
+    .point-list li { margin-bottom:0.75rem; font-size:1rem; }
+    #order-form { background:var(--light-bg); padding:1.5rem; border-radius:8px; box-shadow: 0 2px 8px var(--shadow); margin:2rem 0; }
+    #order-form h2 { font-size:1.75rem; font-weight:700; margin-bottom:1rem; color:var(--primary); }
+    #order-form label { display:block; margin-top:1rem; font-weight:500; color:#555; }
+    #order-form input { width:100%; padding:0.75rem; margin-top:0.5rem; border:1px solid #ccc; border-radius:4px; font-size:1rem; }
+    #order-form button {
+      margin-top:1.5rem; padding:0.85rem 1.75rem; background:var(--accent);
+      color:#fff; border:none; border-radius:28px; font-weight:500; cursor:pointer;
+      box-shadow: 0 4px 6px var(--shadow); transition: transform 0.1s ease;
+    }
+    #order-form button:active { transform: scale(0.98); }
+    footer {
+      background:var(--primary); color:#fff; padding:1rem; text-align:center; margin-top:2rem;
+    }
+    footer a { color:#fff; text-decoration:none; font-weight:500; }
+    .sticky-order {
+      position: fixed; bottom:0; left:0; width:100%;
+      background:var(--accent); color:#fff; text-align:center;
+      padding:0.75rem; font-size:1rem; font-weight:500;
+      box-shadow: 0 -2px 6px var(--shadow); z-index:1000;
+    }
   </style>
 </head>
 <body>
@@ -94,12 +126,12 @@ Meta Pixel integration instructions:
 <header>
   <div class="logo">SYED’S AND CO</div>
   <div>
-    <a href="#order-form">Place Your Order</a>
+    <a href="#order-form" class="btn">🛒 آرڈر کریں</a>
     <a class="whatsapp-link"
        href="https://api.whatsapp.com/send?phone=923265762698&text=السلام%20علیکم%20کیا%20آپ%20SYEDS%20AND%20CO%20کے%20مالک%20ہیں؟"
        target="_blank">
       <img src="https://cdn-icons-png.flaticon.com/512/124/124034.png" alt="WhatsApp"/>
-      کسی بھی مسئلے کی صورت میں مالک سید اصغر علی شاہ سے رابطہ کریں
+      📞 سید اصغر علی شاہ
     </a>
   </div>
 </header>
@@ -109,11 +141,12 @@ Meta Pixel integration instructions:
   <!-- Hero -->
   <div class="hero">
     <div>
-      <h1>Original Havelyn Hair Food Oil of Pakistan</h1>
+      <h1>🌟 Original Havelyn Hair Food Oil</h1>
+      <div class="subtitle">Hair nourishment with 30+ pure Ayurvedic herbs – قدرتی بالوں کی تازگی</div>
       <div class="price">
-        Rs.1,999.00 <span class="old">Rs.4,000.00</span>
+        <strong>Rs.1,999.00</strong> <span class="old">Rs.4,000.00</span>
       </div>
-      <a href="#order-form" class="btn">Place Your Order – آرڈر کریں</a>
+      <a href="#order-form" class="btn">🚀 Place Your Order – آرڈر کریں</a>
     </div>
     <div>
       <img src="https://havelynpk.com/cdn/shop/files/E07D1AA7-637E-4BA4-8926-7C0BC80A6CCC.jpg?v=1741434605&width=1080"
@@ -123,47 +156,62 @@ Meta Pixel integration instructions:
 
   <!-- Additional Image Sections -->
   <div class="sections">
-    <div class="section odd">
+    <div class="section">
       <img src="https://havelynpk.com/cdn/shop/files/IMG-20250213-WA0014.jpg?v=1741434607&width=1600"
            alt="Havelyn Hair Food Oil usage">
       <div class="text">
-        <p>
-          This 100% natural hair food is enriched with over 30 Ayurvedic herbs—including mustard, sesame, coconut, and almond oils—to deeply nourish your scalp and hair follicles.
-        </p>
+        <h2>✨ Benefits – فوائد</h2>
+        <ul class="point-list">
+          <li>💪 <strong>Deep Nourishment:</strong> Over 30 Ayurvedic herbs penetrate scalp &amp; follicles.</li>
+          <li>🌿 <strong>Herbal Power:</strong> Mustard, sesame, coconut &amp; almond oils for strength.</li>
+          <li>💧 <strong>Moisture Boost:</strong> Restores shine and tames frizz.</li>
+        </ul>
       </div>
     </div>
-    <div class="section even">
+
+    <div class="section">
       <img src="https://havelynpk.com/cdn/shop/files/havelynhairoil_2.jpg?v=1741434609&width=2000"
            alt="Ingredients list">
       <div class="text">
-        <p>
-          Packed with aloe vera, amla, shikakai, and rosemary oil, it helps prevent hair fall, boost growth, increase circulation, and restore natural shine.
-        </p>
+        <h2>🔍 Ingredients – اجزاء</h2>
+        <ul class="point-list">
+          <li>🌱 <strong>Aloe Vera:</strong> Soothes &amp; calms irritation.</li>
+          <li>🍈 <strong>Amla &amp; Shikakai:</strong> Strengthen roots &amp; prevent breakage.</li>
+          <li>🌹 <strong>Rosemary Oil:</strong> Stimulates blood flow for faster growth.</li>
+        </ul>
       </div>
     </div>
-    <div class="section odd">
+
+    <div class="section">
       <img src="https://havelynpk.com/cdn/shop/files/A3CAA9D6-4716-47D3-BE81-EDEC3CF4A6D7.jpg?v=1741434609&width=1290"
            alt="How to use Havelyn Hair Food Oil">
       <div class="text">
-        <p>
-          To use: apply a reasonable amount onto the scalp, massage for 3–4 minutes in circular motions, cover with a towel or shower cap, and leave overnight for best results.
-        </p>
+        <h2>📝 How to Use – استعمال کا طریقہ</h2>
+        <ul class="point-list">
+          <li>💧 <strong>Apply:</strong> Massage oil onto scalp for 3–4 minutes.</li>
+          <li>⏰ <strong>Cover:</strong> Use towel or shower cap &amp; leave overnight.</li>
+          <li>🛁 <strong>Rinse:</strong> Shampoo next morning for best results.</li>
+        </ul>
       </div>
     </div>
-    <div class="section even">
+
+    <div class="section">
       <img src="https://havelynpk.com/cdn/shop/files/B434FFE2-44D9-4DB0-BAA6-2C0D92B4E8FA.jpg?v=1741434611&width=1080"
            alt="Guaranteed results">
       <div class="text">
-        <p>
-          No side effects—this formula works like minoxidil to thicken strands, control frizz, prevent split ends, and keep your hair healthy and shiny.
-        </p>
+        <h2>✅ Guaranteed Results – یقین دہانی</h2>
+        <ul class="point-list">
+          <li>🚫 <strong>No Side Effects:</strong> Safe herbal formula.</li>
+          <li>💇‍♀️ <strong>Thicker Strands:</strong> Works like minoxidil.</li>
+          <li>🎉 <strong>Shiny Finish:</strong> Control split ends &amp; frizz.</li>
+        </ul>
       </div>
     </div>
   </div>
 
   <!-- Order Form -->
   <section id="order-form">
-    <h2>Place Your Order – اپنا آرڈر دیں</h2>
+    <h2>🛒 Place Your Order – اپنا آرڈر دیں</h2>
     <form action="https://formspree.io/f/xbloroad" method="POST" id="order-form-element">
       <label for="name">Name / نام</label>
       <input type="text" id="name" name="name" required>
@@ -174,19 +222,21 @@ Meta Pixel integration instructions:
       <label for="location">Location / مقام</label>
       <input type="text" id="location" name="location" required>
 
-      <button type="submit">CONFIRM ORDER – تصدیق کریں</button>
-      <button type="button" id="view-orders">View Orders – آرڈرز دیکھیں</button>
+      <button type="submit">✅ CONFIRM ORDER – تصدیق کریں</button>
     </form>
-    <div id="orders-container"></div>
   </section>
 
 </main>
 
 <footer>
-  <p>WhatsApp: <a href="https://api.whatsapp.com/send?phone=923265762698" target="_blank">+92 326 5762698</a></p>
-  <p>Email: <a href="mailto:asgharshah095@gmail.com">asgharshah095@gmail.com</a></p>
-  <p>Location: KATLANG ROAD SHANKAR MARDAN</p>
+  <p>📞 WhatsApp: <a href="https://api.whatsapp.com/send?phone=923265762698" target="_blank">+92 326 5762698</a></p>
+  <p>✉️ Email: <a href="mailto:asgharshah095@gmail.com">asgharshah095@gmail.com</a></p>
+  <p>📍 Location: KATLANG ROAD, SHANKAR MARDAN</p>
 </footer>
+
+<div class="sticky-order">
+  <a href="#order-form" class="btn">🚀 ابھی آرڈر کریں</a>
+</div>
 
 <script>
   document.getElementById('order-form-element').addEventListener('submit', function(e) {
@@ -198,21 +248,6 @@ Meta Pixel integration instructions:
     orders.push({ name, whatsapp, location, date: new Date().toISOString() });
     localStorage.setItem('productOrders', JSON.stringify(orders));
     this.submit();
-  });
-
-  document.getElementById('view-orders').addEventListener('click', function() {
-    const pwd = prompt('Enter password to view orders:');
-    if (pwd === 'ihti795358') {
-      const orders = JSON.parse(localStorage.getItem('productOrders') || '[]');
-      let html = '<table id="orders-table"><thead><tr><th>Name</th><th>WhatsApp</th><th>Location</th><th>Ordered At</th></tr></thead><tbody>';
-      orders.forEach(o => {
-        html += `<tr><td>${o.name}</td><td>${o.whatsapp}</td><td>${o.location}</td><td>${new Date(o.date).toLocaleString()}</td></tr>`;
-      });
-      html += '</tbody></table>';
-      document.getElementById('orders-container').innerHTML = html;
-    } else {
-      alert('Incorrect password!');
-    }
   });
 </script>
 
