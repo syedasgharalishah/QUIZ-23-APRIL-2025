@@ -3,629 +3,1182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced Quiz for CSS Aspirants - SYED ASGHAR ALI SHAH</title>
+    <title>Toughest Quiz Ever</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Disable Text Selection */
-        body {
-            -webkit-user-select: none; /* Safari */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* IE10+/Edge */
-            user-select: none; /* Standard */
-            font-family: 'Inter', sans-serif; /* Default font */
-        }
-        /* Basic scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-        /* Style for question container */
-        .question-container {
-            background-color: #ffffff;
-            padding: 1.5rem; /* p-6 */
-            margin-bottom: 1rem; /* mb-4 */
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
-            border: 1px solid #e5e7eb; /* border border-gray-200 */
-        }
-        /* Style for radio button labels */
-        .option-label {
-            display: block;
-            padding: 0.75rem; /* p-3 */
-            margin-bottom: 0.5rem; /* mb-2 */
-            border: 1px solid #d1d5db; /* border border-gray-300 */
-            border-radius: 0.375rem; /* rounded-md */
-            cursor: pointer;
-            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-        }
-        .option-label:hover {
-            background-color: #f3f4f6; /* hover:bg-gray-100 */
-        }
-        /* Style for selected radio button label */
-        input[type="radio"]:checked + .option-label {
-            background-color: #dbeafe; /* bg-blue-100 */
-            border-color: #3b82f6; /* border-blue-500 */
-            font-weight: 600; /* font-semibold */
-        }
-        /* Hide actual radio button */
-        input[type="radio"] {
-            display: none;
-        }
-        /* Ensure footer stays at the bottom */
-        body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        main {
-            flex-grow: 1;
-        }
-    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body class="bg-gray-100" oncontextmenu="return false;">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        /* Ensure that text is not selectable */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
-    <header class="bg-gradient-to-r from-blue-700 to-indigo-800 text-white p-4 shadow-lg">
-        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
-            <div class="flex items-center space-x-4 mb-4 md:mb-0">
-                <img
-                    src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__"
-                    alt="User Image"
-                    class="w-16 h-16 rounded-full border-2 border-white object-cover shadow-md"
-                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/e2e8f0/4a5568?text=SAAS';"
-                >
-                <div>
-                    <h1 class="text-xl md:text-2xl font-bold">QUIZ FOR CSS ASPIRANTS</h1>
-                    <p class="text-sm md:text-md font-semibold">23 APRIL 2025</p>
-                    <p class="text-xs md:text-sm font-medium mt-1">SYED ASGHAR ALI SHAH</p>
-                </div>
-            </div>
-            <div id="timer-display" class="text-lg font-semibold bg-white text-red-600 px-4 py-2 rounded-lg shadow-md hidden">
-                Time Left: <span id="time">25:00</span>
-            </div>
+        /* Optional: If you want to disable text selection on specific elements */
+        p, h1, h2, h3, h4, h5, h6, div, span, label, input, button, textarea {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-blue-600 text-white py-4 flex justify-around items-center rounded-b-md shadow-md">
+        <h1 class="text-2xl font-semibold">QUIZ FOR CSS ASPIRANTS 24 APRIL 2025</h1>
+        <div class="flex items-center gap-4">
+            <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Logo" class="h-12 rounded-full border-2 border-white">
+            <span class="font-bold text-lg">SYED ASGHAR ALI SHAH</span>
         </div>
     </header>
 
-    <main class="container mx-auto p-4 md:p-8">
+    <main class="container mx-auto mt-8 p-4">
+        <div id="name-entry-section" class="bg-white rounded-md shadow-lg p-6 mb-6">
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Enter Your Name</h2>
+            <input type="text" id="name-input" placeholder="Enter your full name" class="w-full px-4 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-blue-500 mb-4">
+            <p id="name-error" class="text-red-500 text-sm mb-4" style="display: none;">Please enter your name.</p>
+            <button id="start-quiz-button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">Start Quiz</button>
+        </div>
 
-        <section id="nameEntrySection" class="bg-white p-6 md:p-8 rounded-lg shadow-lg max-w-lg mx-auto text-center">
-            <h2 class="text-2xl font-bold mb-6 text-gray-800">Enter Your Name to Begin</h2>
-            <div class="mb-4">
-                <label for="studentName" class="sr-only">Your Name</label>
-                <input type="text" id="studentName" name="studentName" placeholder="Enter your full name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg" required>
-            </div>
-            <button id="startBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                Start Quiz
-            </button>
-            <p id="nameError" class="text-red-500 text-sm mt-3 hidden">Please enter your name.</p>
-        </section>
-
-        <section id="quizSection" class="hidden">
-            <form id="quizForm">
-                <div id="questionsContainer" class="space-y-6"></div>
-
-                <div class="mt-8 text-center">
-                    <button type="submit" id="submitBtn" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50">
-                        Submit Quiz
-                    </button>
+        <div id="quiz-section" class="bg-white rounded-md shadow-lg p-6" style="display: none;">
+            <div id="timer-display" class="text-center text-lg font-semibold text-blue-700 mb-4">Time Remaining: 25:00</div>
+            <form id="quiz-form" class="space-y-4">
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">1. Choose the word nearest in meaning to 'Precarious':</p>
+                    <label class="block">
+                        <input type="radio" name="q1" value="a" class="mr-2">
+                        <span>Stable</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q1" value="b" class="mr-2">
+                        <span>Critical</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q1" value="c" class="mr-2">
+                        <span>Secure</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q1" value="d" class="mr-2">
+                        <span>Safe</span>
+                    </label>
                 </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">2. 'Knee-jerk reaction' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q2" value="a" class="mr-2">
+                        <span>A delayed response</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q2" value="b" class="mr-2">
+                        <span>An automatic response</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q2" value="c" class="mr-2">
+                         <span>A thoughtful reaction</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q2" value="d" class="mr-2">
+                        <span>No reaction</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">3. The antonym of 'Introspect' is:</p>
+                    <label class="block">
+                        <input type="radio" name="q3" value="a" class="mr-2">
+                        <span>Self-examine</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q3" value="b" class="mr-2">
+                        <span>Reflect</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q3" value="c" class="mr-2">
+                        <span>Externalize</span>
+                    </label>
+                     <label class="block">
+                        <input type="radio" name="q3" value="d" class="mr-2">
+                        <span>Analyze</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">4. 'Stamp out' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q4" value="a" class="mr-2">
+                        <span>To encourage</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q4" value="b" class="mr-2">
+                        <span>To promote</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q4" value="c" class="mr-2">
+                        <span>To abolish</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q4" value="d" class="mr-2">
+                        <span>To foster</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">5. A 'wake-up call' is:</p>
+                    <label class="block">
+                        <input type="radio" name="q5" value="a" class="mr-2">
+                        <span>A lull</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q5" value="b" class="mr-2">
+                        <span>Reassurance</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q5" value="c" class="mr-2">
+                        <span>An alarm</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q5" value="d" class="mr-2">
+                        <span>Comfort</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">6. 'Proceed with caution' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q6" value="a" class="mr-2">
+                        <span>Act recklessly</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q6" value="b" class="mr-2">
+                        <span>Rush in</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q6" value="c" class="mr-2">
+                        <span>Be careful</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q6" value="d" class="mr-2">
+                        <span>Be careless</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">7. 'Met by resolutely' implies:</p>
+                    <label class="block">
+                        <input type="radio" name="q7" value="a" class="mr-2">
+                        <span>Responded hesitantly</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q7" value="b" class="mr-2">
+                        <span>Faced timidly</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q7" value="c" class="mr-2">
+                        <span>Responded firmly</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q7" value="d" class="mr-2">
+                        <span>Met weakly</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">8. 'Downgrading diplomatic relations' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q8" value="a" class="mr-2">
+                        <span>Improving ties</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q8" value="b" class="mr-2">
+                        <span>Strengthening diplomacy</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q8" value="c" class="mr-2">
+                        <span>Worsening relations</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q8" value="d" class="mr-2">
+                        <span>Reducing diplomacy</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">9. 'Calibrate its response' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q9" value="a" class="mr-2">
+                        <span>Act without planning</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q9" value="b" class="mr-2">
+                        <span>Respond randomly</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q9" value="c" class="mr-2">
+                        <span>Measure carefully</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q9" value="d" class="mr-2">
+                        <span>React impulsively</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">10. 'Convened a meeting' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q10" value="a" class="mr-2">
+                        <span>Adjourned a meeting</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q10" value="b" class="mr-2">
+                        <span>Dispersed</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q10" value="c" class="mr-2">
+                        <span>Called a meeting</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q10" value="d" class="mr-2">
+                        <span>Cancelled</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">11. 'Hitherto unknown entity' refers to:</p>
+                    <label class="block">
+                        <input type="radio" name="q11" value="a" class="mr-2">
+                        <span>Well-known entity</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q11" value="b" class="mr-2">
+                        <span>Established group</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q11" value="c" class="mr-2">
+                        <span>Previously unknown group</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q11" value="d" class="mr-2">
+                        <span>Familiar organization</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">12. 'False flag operation' is:</p>
+                    <label class="block">
+                        <input type="radio" name="q12" value="a" class="mr-2">
+                        <span>Genuine operation</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q12" value="b" class="mr-2">
+                        <span>Transparent act</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q12" value="c" class="mr-2">
+                        <span>Deceptive operation</span>
+                    </label>
+                    <label class="block">
+                         <input type="radio" name="q12" value="d" class="mr-2">
+                        <span>Overt action</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">13. 'Roundly condemned' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q13" value="a" class="mr-2">
+                        <span>Highly praised</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q13" value="b" class="mr-2">
+                        <span>Widely approved</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q13" value="c" class="mr-2">
+                        <span>Strongly denounced</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q13" value="d" class="mr-2">
+                        <span>Strongly supported</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">14. 'Bred immense discontent' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q14" value="a" class="mr-2">
+                        <span>Produced widespread happiness</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q14" value="b" class="mr-2">
+                        <span>Fostered contentment</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q14" value="c" class="mr-2">
+                        <span>Created immense dissatisfaction</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q14" value="d" class="mr-2">
+                        <span>Caused satisfaction</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">15. 'Peaceful avenues' refers to:</p>
+                    <label class="block">
+                        <input type="radio" name="q15" value="a" class="mr-2">
+                        <span>Violent avenues</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q15" value="b" class="mr-2">
+                        <span>Aggressive methods</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q15" value="c" class="mr-2">
+                        <span>Non-violent ways</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q15" value="d" class="mr-2">
+                        <span>Forceful means</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">16. 'Just resolution' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q16" value="a" class="mr-2">
+                        <span>Unfair resolution</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q16" value="b" class="mr-2">
+                        <span>Unjust outcome</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q16" value="c" class="mr-2">
+                        <span>Fair settlement</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q16" value="d" class="mr-2">
+                        <span>Biased outcome</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">17. 'Calm yet firm response' is similar to:</p>
+                    <label class="block">
+                        <input type="radio" name="q17" value="a" class="mr-2">
+                        <span>Agitated reaction</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q17" value="b" class="mr-2">
+                        <span>Panicked response</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q17" value="c" class="mr-2">
+                        <span>Measured and controlled reaction</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q17" value="d" class="mr-2">
+                        <span>Hysterical response</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">18. 'Low poverty forecast' implies:</p>
+                    <label class="block">
+                        <input type="radio" name="q18" value="a" class="mr-2">
+                        <span>Increasing poverty</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q18" value="b" class="mr-2">
+                        <span>High poverty</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q18" value="c" class="mr-2">
+                        <span>Reducing poverty</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q18" value="d" class="mr-2">
+                        <span>Elevated poverty</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">19. 'Elevated poverty levels' indicates:</p>
+                    <label class="block">
+                        <input type="radio" name="q19" value="a" class="mr-2">
+                        <span>Decreased poverty levels</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q19" value="b" class="mr-2">
+                        <span>Minimal poverty</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q19" value="c" class="mr-2">
+                        <span>Increased poverty rates</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q19" value="d" class="mr-2">
+                        <span>Low poverty rates</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">20. 'Fall into this category' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q20" value="a" class="mr-2">
+                        <span>Not be part of this group</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q20" value="b" class="mr-2">
+                        <span>Not be classified as</span>
+                    </label>
+                     <label class="block">
+                        <input type="radio" name="q20" value="c" class="mr-2">
+                        <span>Be excluded from this category</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q20" value="d" class="mr-2">
+                        <span>Become part of this group</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">21. 'Cut poverty and create jobs' is similar to:</p>
+                    <label class="block">
+                        <input type="radio" name="q21" value="a" class="mr-2"><span>Increase poverty and destroy jobs</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q21" value="b" class="mr-2">
+                        <span>Worsen poverty and reduce employment</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q21" value="c" class="mr-2">
+                        <span>Reduce poverty and generate employment</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q21" value="d" class="mr-2">
+                        <span>Exacerbate poverty and provide jobs</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">22. 'At risk of spoiling' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q22" value="a" class="mr-2">
+                        <span>Safe from spoiling</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q22" value="b" class="mr-2">
+                        <span>Protected from decay</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q22" value="c" class="mr-2">
+                        <span>In danger of going bad</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q22" value="d" class="mr-2">
+                        <span>Resistant to spoilage</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">23. 'Wait out a lengthy negotiation process' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q23" value="a" class="mr-2">
+                        <span>Rush the negotiation process</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q23" value="b" class="mr-2">
+                        <span>Endure long talks</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q23" value="c" class="mr-2">
+                        <span>Expedite negotiations</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q23" value="d" class="mr-2">
+                        <span>Shorten discussions</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">24. 'Below target' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q24" value="a" class="mr-2">
+                        <span>Above target</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q24" value="b" class="mr-2">
+                        <span>Exceeding the goal</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q24" value="c" class="mr-2">
+                        <span>Less than the desired level</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q24" value="d" class="mr-2">
+                        <span>Over the desired level</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">25. 'Requiring extensions' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q25" value="a" class="mr-2">
+                        <span>Shortening deadlines</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q25" value="b" class="mr-2">
+                        <span>Avoiding delays</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q25" value="c" class="mr-2">
+                        <span>Needing additional time</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q25" value="d" class="mr-2">
+                        <span>Finishing early</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">26. 'Reduced urgency' implies:</p>
+                    <label class="block">
+                        <input type="radio" name="q26" value="a" class="mr-2">
+                        <span>Increased urgency</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q26" value="b" class="mr-2">
+                        <span>Higher priority</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q26" value="c" class="mr-2">
+                        <span>Less pressing need</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q26" value="d" class="mr-2">
+                        <span>Greater need</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">27. 'Address the underlying absorption capacity issues' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q27" value="a" class="mr-2">
+                        <span>Ignore absorption capacity issues</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q27" value="b" class="mr-2">
+                        <span>Neglect underlying problems</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q27" value="c" class="mr-2">
+                        <span>Deal with core capacity problems</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q27" value="d" class="mr-2">
+                        <span>Avoid addressing core issues</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">28. 'Undermines Pakistan’s broader development agenda' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q28" value="a" class="mr-2">
+                        <span>Strengthens development agenda</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q28" value="b" class="mr-2">
+                        <span>Supports progress plan</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q28" value="c" class="mr-2">
+                        <span>Weakens development plan</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q28" value="d" class="mr-2">
+                        <span>Benefits overall development goals</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">29. 'Postpones projects' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q29" value="a" class="mr-2">
+                        <span>Accelerates projects</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q29" value="b" class="mr-2">
+                        <span>Expedites initiatives</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q29" value="c" class="mr-2">
+                        <span>Delays initiatives</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q29" value="d" class="mr-2">
+                        <span>Speeds up completion</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">30. 'Erodes the confidence of donors' implies:</p>
+                    <label class="block">
+                        <input type="radio" name="q30" value="a" class="mr-2">
+                        <span>Increases donor trust</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q30" value="b" class="mr-2">
+                        <span>Maintains donor confidence</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q30" value="c" class="mr-2">
+                        <span>Gradually reduces trust</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q30" value="d" class="mr-2">
+                        <span>Enhances donor reliability</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">31. 'Entire supply chain for industry is now disrupted' indicates:</p>
+                    <label class="block">
+                        <input type="radio" name="q31" value="a" class="mr-2">
+                        <span>Industry supply chain is functioning smoothly</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q31" value="b" class="mr-2">
+                        <span>Only a small part of supply chain is affected</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q31" value="c" class="mr-2">
+                        <span>The complete supply chain is disturbed</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q31" value="d" class="mr-2">
+                        <span>Supply chain is more efficient than before</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">32. 'Drying up of water flows' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q32" value="a" class="mr-2">
+                        <span>Increase in water flow</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q32" value="b" class="mr-2">
+                        <span>Abundance of water</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q32" value="c" class="mr-2">
+                        <span>Reduction in water flow</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q32" value="d" class="mr-2">
+                        <span>Continuous water movement</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">33. 'Makes no sense' implies:</p>
+                    <label class="block">
+                        <input type="radio" name="q33" value="a" class="mr-2">
+                        <span>Is logical</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q33" value="b" class="mr-2">
+                        <span>Is reasonable</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q33" value="c" class="mr-2">
+                        <span>Is illogical</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q33" value="d" class="mr-2">
+                        <span>Makes sense</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">34. 'In the game for their own interests' means:</p>
+                    <label class="block">
+                        <input type="radio" name="q34" value="a" class="mr-2">
+                        <span>Acting for the common good</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q34" value="b" class="mr-2">
+                        <span>Pursuing collective benefit</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q34" value="c" class="mr-2">
+                        <span>Acting for self-interest</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q34" value="d" class="mr-2">
+                        <span>Motivated by altruism</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">35. 'Unmistakable imprint' refers to:</p>
+                    <label class="block">
+                        <input type="radio" name="q35" value="a" class="mr-2">
+                        <span>Hidden imprint</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q35" value="b" class="mr-2">
+                        <span>Unclear mark</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q35" value="c" class="mr-2">
+                        <span>Clear mark</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q35" value="d" class="mr-2">
+                        <span>Negligible influence</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">36. Choose the correct sentence:</p>
+                    <label class="block">
+                        <input type="radio" name="q36" value="a" class="mr-2">
+                        <span>The data is showing an upward trend.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q36" value="b" class="mr-2">
+                        <span>The data are showing an upward trend.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q36" value="c" class="mr-2">
+                        <span>The data shows an upward trend.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q36" value="d" class="mr-2">
+                        <span>Data are showing an upward trend.</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">37. Identify the preposition in the sentence: 'The book is on the table.'</p>
+                    <label class="block">
+                        <input type="radio" name="q37" value="a" class="mr-2">
+                        <span>The</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q37" value="b" class="mr-2">
+                        <span>Book</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q37" value="c" class="mr-2">
+                        <span>Is</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q37" value="d" class="mr-2">
+                        <span>On</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">38. Choose the correct form of the verb: 'If I ___ you, I would go.'</p>
+                    <label class="block">
+                        <input type="radio" name="q38" value="a" class="mr-2">
+                        <span>Was</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q38" value="b" class="mr-2">
+                        <span>Were</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q38" value="c" class="mr-2">
+                        <span>Am</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q38" value="d" class="mr-2">
+                        <span>Had been</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">39. Identify the adverb in the sentence: 'She sings very well.'</p>
+                    <label class="block">
+                        <input type="radio" name="q39" value="a" class="mr-2">
+                        <span>She</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q39" value="b" class="mr-2">
+                        <span>Sings</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q39" value="c" class="mr-2">
+                        <span>Very</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q39" value="d" class="mr-2">
+                        <span>Well</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">40. Choose the correct article: 'He is ___ honest man.'</p>
+                    <label class="block">
+                        <input type="radio" name="q40" value="a" class="mr-2">
+                        <span>A</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q40" value="b" class="mr-2">
+                        <span>An</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q40" value="c" class="mr-2">
+                        <span>The</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q40" value="d" class="mr-2">
+                        <span>No article</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">41. Identify the conjunction: 'I will go, but he will stay.'</p>
+                    <label class="block">
+                        <input type="radio" name="q41" value="a" class="mr-2">
+                        <span>I</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q41" value="b" class="mr-2">
+                        <span>Will go</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q41" value="c" class="mr-2">
+                        <span>But</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q41" value="d" class="mr-2">
+                        <span>He will stay</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">42. Choose the correct tense: 'By next year, I ___ my degree.'</p>
+                    <label class="block">
+                        <input type="radio" name="q42" value="a" class="mr-2">
+                        <span>Will graduate</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q42" value="b" class="mr-2">
+                        <span>Will have graduated</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q42" value="c" class="mr-2">
+                        <span>Graduate</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q42" value="d" class="mr-2">
+                        <span>Graduated</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">43. Identify the type of clause: 'If it rains, we will stay home.'</p>
+                    <label class="block">
+                        <input type="radio" name="q43" value="a" class="mr-2">
+                        <span>Main clause</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q43" value="b" class="mr-2">
+                        <span>Noun clause</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q43" value="c" class="mr-2">
+                        <span>Adjective clause</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q43" value="d" class="mr-2">
+                        <span>Adverbial clause</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">44. Choose the correct passive voice: 'Someone stole my car.'</p>
+                    <label class="block">
+                        <input type="radio" name="q44" value="a" class="mr-2">
+                        <span>I stole my car.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q44" value="b" class="mr-2">
+                        <span>My car was stolen.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q44" value="c" class="mr-2">
+                        <span>My car stole someone.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q44" value="d" class="mr-2">
+                        <span>Someone was stolen by my car.</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">45. Identify the sentence with correct subject-verb agreement:</p>
+                    <label class="block">
+                        <input type="radio" name="q45" value="a" class="mr-2">
+                        <span>The team are playing well.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q45" value="b" class="mr-2">
+                        <span>The team is playing well.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q45" value="c" class="mr-2">
+                        <span>The teams is playing well.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q45" value="d" class="mr-2">
+                        <span>Teams are playing well.</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">46. Choose the correct punctuation: 'Its important to study hard.'</p>
+                    <label class="block">
+                        <input type="radio" name="q46" value="a" class="mr-2">
+                        <span>Its' important to study hard.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q46" value="b" class="mr-2">
+                        <span>It's important to study hard.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q46" value="c" class="mr-2">
+                        <span>Its important, to study hard.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q46" value="d" class="mr-2">
+                        <span>Its' important, to study hard.</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">47. Identify the sentence with a misplaced modifier:</p>
+                    <label class="block">
+                        <input type="radio" name="q47" value="a" class="mr-2">
+                        <span>I saw a dog running down the street.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q47" value="b" class="mr-2">
+                        <span>Running down the street, I saw a dog.</span>
+                    </label>
+                     <label class="block">
+                        <input type="radio" name="q47" value="c" class="mr-2">
+                        <span>A dog running down the street was seen by me.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q47" value="d" class="mr-2">
+                        <span>While running down the street, I saw a dog.</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">48. Choose the correct sentence with parallel structure:</p>
+                    <label class="block">
+                        <input type="radio" name="q48" value="a" class="mr-2">
+                        <span>He likes to swim, to bike, and to run.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q48" value="b" class="mr-2">
+                        <span>He likes swimming, biking, and to run.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q48" value="c" class="mr-2">
+                        <span>He likes to swim, biking, and running.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q48" value="d" class="mr-2">
+                         <span>He likes swimming, to bike, and running.</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">49. Identify the sentence with correct pronoun usage:</p>
+                    <label class="block">
+                        <input type="radio" name="q49" value="a" class="mr-2">
+                        <span>Me and him went to the store.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q49" value="b" class="mr-2">
+                        <span>He and I went to the store.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q49" value="c" class="mr-2">
+                        <span>Him and me went to the store.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q49" value="d" class="mr-2">
+                        <span>I and him went to the store.</span>
+                    </label>
+                </div>
+
+                <div class="mb-4 p-4 rounded-md bg-gray-50">
+                    <p class="text-gray-700 font-medium mb-2">50. Choose the sentence with the correct use of a semicolon:</p>
+                    <label class="block">
+                        <input type="radio" name="q50" value="a" class="mr-2">
+                        <span>I went to the store; and bought some milk.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q50" value="b" class="mr-2">
+                        <span>I went to the store, and bought some milk.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q50" value="c" class="mr-2">
+                        <span>I went to the store; I bought some milk.</span>
+                    </label>
+                    <label class="block">
+                        <input type="radio" name="q50" value="d" class="mr-2">
+                        <span>I went to the store; but bought some milk.</span>
+                    </label>
+                </div>
+
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">Submit Quiz</button>
             </form>
-        </section>
+        </div>
 
-        <section id="resultsSection" class="hidden bg-white p-6 md:p-8 rounded-lg shadow-lg max-w-xl mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-6 text-gray-800">Quiz Results</h2>
-            <div class="space-y-4 text-left text-lg border border-gray-200 p-6 rounded-md bg-gray-50">
-                <p><strong class="font-semibold text-gray-700">Name:</strong> <span id="resultName" class="text-blue-700 font-medium"></span></p>
-                <p><strong class="font-semibold text-gray-700">Questions Attempted:</strong> <span id="resultAttempted" class="text-blue-700 font-medium"></span> / 50</p>
-                <p><strong class="font-semibold text-gray-700">Correct Answers:</strong> <span id="resultScore" class="text-green-700 font-bold"></span> / 50</p>
-                <p><strong class="font-semibold text-gray-700">Percentage:</strong> <span id="resultPercentage" class="text-green-700 font-bold"></span>%</p>
-                <p><strong class="font-semibold text-gray-700">Time Taken:</strong> <span id="resultTime" class="text-blue-700 font-medium"></span></p>
-            </div>
-             <p class="mt-6 text-gray-600 text-sm">Your results have been submitted. Thank you for participating!</p>
-        </section>
+        <div id="results-section" class="bg-white rounded-md shadow-lg p-6 mt-8" style="display: none;">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Results</h2>
+            <p class="text-lg">Name: <span id="student-name"></span></p>
+            <p class="text-lg">Questions Attempted: <span id="questions-attempted"></span></p>
+            <p class="text-lg">Score: <span id="score"></span></p>
+            <p class="text-lg">Time Taken: <span id="time-taken"></span></p>
+            <p class="text-red-600 font-bold mt-4">Note: These results have been automatically submitted.</p>
+        </div>
 
-        <form id="hiddenForm" action="https://formspree.io/f/xwpvddea" method="POST" class="hidden">
-            <input type="hidden" name="student_name" id="formName">
-            <input type="hidden" name="attempted_questions" id="formAttempted">
-            <input type="hidden" name="score" id="formScore">
-            <input type="hidden" name="percentage" id="formPercentage">
-            <input type="hidden" name="time_taken" id="formTime">
+        <form id="results-form" action="https://formspree.io/f/xwpvddea" method="POST" style="display: none;">
+            <input type="hidden" name="student_name" id="results-form-name">
+            <input type="hidden" name="questions_attempted" id="results-form-attempted">
+            <input type="hidden" name="score" id="results-form-score">
+            <input type="hidden" name="time_taken" id="results-form-time">
         </form>
-
     </main>
 
-    <footer class="bg-gray-800 text-white p-6 mt-12">
-        <div class="container mx-auto text-center">
-            <p class="font-semibold text-lg mb-2">Prepare for Success!</p>
-            <p class="mb-2">Contact for Queries: <a href="tel:03265762698" class="hover:text-blue-400 transition duration-300">03265762698</a></p>
-            <p class="text-sm text-gray-400">&copy; 2025 SYED ASGHAR ALI SHAH - All Rights Reserved</p>
-        </div>
+    <footer class="bg-gray-800 text-white py-4 text-center rounded-t-md shadow-md">
+        <p class="text-md">Contact: 03265762698 | Your Gateway to CSS Excellence</p>
     </footer>
 
     <script>
-        // --- Quiz Data (Strictly from provided PDFs - Source references removed) ---
-        const quizData = [
-            // --- Grammar Analysis PDF ---
-            {
-                question: "1. Which of the following is listed as an example of a Proper Noun in the source material?",
-                options: { a: "country", b: "tariffs", c: "Singapore", d: "game" },
-                answer: "c"
-            },
-            {
-                question: "2. 'Devastation', 'impact', and 'flexibility' are examples of which type of noun, according to the source material?",
-                options: { a: "Common Noun", b: "Collective Noun", c: "Proper Noun", d: "Abstract Noun" },
-                answer: "d"
-            },
-            {
-                question: "3. In the sentence snippet '...how developed they are...', what type of pronoun is 'they'?",
-                options: { a: "Possessive", b: "Personal", c: "Relative", d: "Demonstrative" },
-                answer: "b"
-            },
-            {
-                question: "4. Which word from the text functions as a Relative Pronoun introducing a dependent clause?",
-                options: { a: "his", b: "this", c: "which", d: "something" },
-                answer: "c"
-            },
-             {
-                question: "5. The terms 'levies', 'shook', and 'negotiate' are identified as examples of what type of verb?",
-                options: { a: "Linking Verbs", b: "Helping Verbs", c: "Action Verbs", d: "Modal Verbs" },
-                answer: "c"
-            },
-            {
-                question: "6. In the phrase 'raging in Ukraine, Gaza and Sudan', 'raging' is identified as what verb form acting like an adjective?",
-                options: { a: "Gerund", b: "Infinitive", c: "Past Participle", d: "Present Participle" },
-                answer: "d"
-            },
-            {
-                question: "7. In the phrase 'ending trade between itself and the other country', 'ending' is used as a:",
-                options: { a: "Present Participle (adjective)", b: "Gerund (noun)", c: "Main Verb", d: "Infinitive" },
-                answer: "b"
-            },
-             {
-                question: "8. Based on examples from the source, 'high-stakes', 'peace-time', and 'large-scale' are classified as:",
-                options: { a: "Descriptive Adjectives", b: "Articles", c: "Demonstrative Adjectives", d: "Possessive Adjectives" },
-                answer: "a"
-            },
-            {
-                question: "9. The word 'unilaterally' in 'Trump unilaterally began this trade game...' is given as an example of an adverb modifying:",
-                options: { a: "an Adjective", b: "another Adverb", c: "a Verb", d: "a Noun" },
-                answer: "c"
-            },
-            {
-                question: "10. In the phrase 'exceedingly high levels', 'exceedingly' is an adverb modifying:",
-                options: { a: "a Verb ('levels')", b: "an Adjective ('high')", c: "a Noun ('levels')", d: "another Adverb" },
-                answer: "b"
-            },
-            {
-                question: "11. 'Of', 'on', 'by', 'without', 'through', 'from', and 'between' are examples of what part of speech?",
-                options: { a: "Conjunctions", b: "Adverbs", c: "Prepositions", d: "Interjections" },
-                answer: "c"
-            },
-            {
-                question: "12. The prepositional phrase 'at the expense of consumers' uses which preposition primarily to link 'expense' and 'consumers'?",
-                options: { a: "of", b: "at", c: "expense", d: "consumers" },
-                answer: "b" // Rephrased slightly to avoid ambiguity, 'at' governs the whole phrase
-            },
-            {
-                question: "13. 'For, And, Nor, But, Or, Yet, So' (FANBOYS) are identified as which type of conjunction?",
-                options: { a: "Subordinating", b: "Correlative", c: "Coordinating", d: "Adverbial" },
-                answer: "c"
-            },
-            {
-                question: "14. In the sentence 'Trump is neither mad nor stupid', 'neither...nor' is an example of which type of conjunction?",
-                options: { a: "Coordinating", b: "Subordinating", c: "Correlative", d: "Complementizer" },
-                answer: "c"
-            },
-            {
-                question: "15. A group of words containing a subject and a verb but cannot stand alone is called a/an:",
-                options: { a: "Independent Clause", b: "Phrase", c: "Dependent Clause", d: "Simple Sentence" },
-                answer: "c"
-            },
-            {
-                question: "16. The clause 'who will bear the cost of tariffs' in the sentence '...consumers who will bear the cost of tariffs...' is identified as what type of dependent clause?",
-                options: { a: "Noun Clause", b: "Adverb Clause", c: "Adjective Clause (Relative Clause)", d: "Independent Clause" },
-                answer: "c"
-            },
-            {
-                question: "17. 'Has long been used' and 'could have retaliated' are examples of which type of phrase?",
-                options: { a: "Noun Phrase", b: "Prepositional Phrase", c: "Verb Phrase", d: "Adjective Phrase" },
-                answer: "c"
-            },
-            {
-                question: "18. The phrase 'raging in Ukraine, Gaza and Sudan' is given as an example of a:",
-                options: { a: "Gerund Phrase", b: "Infinitive Phrase", c: "Prepositional Phrase", d: "Participial Phrase" },
-                answer: "d"
-            },
-            {
-                question: "19. A sentence containing one independent clause and at least one dependent clause is classified as a:",
-                options: { a: "Simple Sentence", b: "Compound Sentence", c: "Complex Sentence", d: "Compound-Complex Sentence" },
-                answer: "c"
-            },
-            {
-                question: "20. The sentence 'International trade is a peace-time activity' is an example of a:",
-                options: { a: "Complex Sentence", b: "Simple Sentence", c: "Compound Sentence", d: "Compound-Complex Sentence" },
-                answer: "b"
-            },
-            {
-                question: "21. Which punctuation mark is used to show possession (e.g., Trump's view)?",
-                options: { a: "Comma (,)", b: "Apostrophe (')", c: "Hyphen (-)", d: "Semicolon (;)" },
-                answer: "b"
-            },
-            {
-                question: "22. In the source text, single quotes (' ') are noted as being used primarily for:",
-                options: { a: "Direct quotations", b: "Indicating contractions", c: "Emphasis or marking a term being discussed", d: "Separating items in a list" },
-                answer: "c"
-            },
-             {
-                question: "23. The verb tense used for actions happening regularly or general truths (e.g., 'trade is', 'conflicts involve') is:",
-                options: { a: "Simple Past", b: "Present Perfect", c: "Simple Present", d: "Past Continuous" },
-                answer: "c"
-            },
-            {
-                question: "24. The sentence '...phrase ‘trade war’ has long been used...' is an example of which voice?",
-                options: { a: "Active Voice", b: "Passive Voice", c: "Middle Voice", d: "Reflexive Voice" },
-                answer: "b"
-            },
-            {
-                question: "25. The mood used for stating facts or opinions (most sentences in the text) is the:",
-                options: { a: "Imperative Mood", b: "Subjunctive Mood", c: "Indicative Mood", d: "Interrogative Mood" },
-                answer: "c"
-            },
-            {
-                question: "26. Which example demonstrates parallelism in a list of verbs/infinitives?",
-                options: { a: "'the loss of life, deep human trauma and the destruction...'", b: "'take counter steps, negotiate, or retaliate.'", c: "'commentators, analysts, pundits, and economists...'", d: "'neither mad nor stupid.'" },
-                answer: "b"
-            },
-             {
-                question: "27. Rearrange the following phrases into a coherent part of a sentence: (1) to describe / (2) the process / (3) used / (4) has long been",
-                options: { a: "3, 1, 2, 4", b: "4, 3, 1, 2", c: "1, 2, 3, 4", d: "3, 4, 1, 2" },
-                answer: "b" // "has long been used to describe the process"
-            },
-
-            // --- Idioms, Synonyms, Antonyms PDF ---
-            {
-                question: "28. What is the meaning of the idiom 'At the heart of'?",
-                options: { a: "On the outer edge", b: "The least important part", c: "The most central or important part", d: "A temporary solution" },
-                answer: "c"
-            },
-            {
-                question: "29. 'Curtail' and 'limit' are synonyms for which idiom?",
-                options: { a: "Woke up too late", b: "Clip the province's control", c: "Little wonder", d: "Clutch at straws" },
-                answer: "b"
-            },
-            {
-                question: "30. What is an antonym for the idiom 'Woke up too late'?",
-                options: { a: "Realized belatedly", b: "Missed the boat", c: "Acted timely / Foresaw", d: "Slow on the uptake" },
-                answer: "c"
-            },
-             {
-                question: "31. The idiom 'Clutch at straws' means trying desperate measures. What is an antonym?",
-                options: { a: "Grasp at straws", b: "Hope against hope", c: "Resort to desperate measures", d: "Be realistic / Accept the inevitable" },
-                answer: "d"
-            },
-            {
-                question: "32. 'In control' and 'running the show' are provided as synonyms for which idiom?",
-                options: { a: "In a bind", b: "Calling the shots", c: "Panacea for our economic woes", d: "Go a long way" },
-                answer: "b"
-            },
-            {
-                question: "33. 'Panacea for our economic woes' refers to a supposed cure-all. Which phrase is a synonym?",
-                options: { a: "Specific solution", b: "Partial remedy", c: "Contributing factor", d: "Magic bullet / Universal remedy" },
-                answer: "d"
-            },
-            {
-                question: "34. What is the meaning of the idiom 'Encroaching on'?",
-                options: { a: "Respecting boundaries", b: "Withdrawing from", c: "Gradually intruding upon or taking over", d: "Staying within limits" },
-                answer: "c"
-            },
-             {
-                question: "35. 'Pulled no punches' means speaking frankly. What is an antonym?",
-                options: { a: "Spoke bluntly", b: "Was direct", c: "Didn't hold back", d: "Was diplomatic / Beat around the bush" },
-                answer: "d"
-            },
-            {
-                question: "36. 'Felt disappointed, betrayed, abandoned' are synonyms given for which idiom?",
-                options: { a: "Set on", b: "Hold on to", c: "Felt let down", d: "In trouble" },
-                answer: "c"
-            },
-            {
-                question: "37. 'Keep, retain, maintain' are synonyms for the idiom:",
-                options: { a: "Set on", b: "Hold on to", c: "In trouble", d: "Plays a vital role" },
-                answer: "b"
-            },
-            {
-                question: "38. 'Backbone of the economy' means the most important part. Which term is a synonym?",
-                options: { a: "Minor sector", b: "Peripheral industry", c: "Foundation / Mainstay / Cornerstone", d: "Temporary boost" },
-                answer: "c"
-            },
-             {
-                question: "39. What does 'Paradigm shift' mean?",
-                options: { a: "Status quo", b: "Incremental change", c: "A fundamental change in approach or assumptions", d: "Maintaining continuity" },
-                answer: "c"
-            },
-            {
-                question: "40. The idiom 'Risen against' means to rebel. What is an antonym?",
-                options: { a: "Rebelled against", b: "Protested against", c: "Revolted against", d: "Supported / Accepted / Submitted to" },
-                answer: "d"
-            },
-            {
-                question: "41. 'Supported by, endorsed by, sponsored by' are synonyms for which idiom?",
-                options: { a: "Turned into", b: "Backed by", c: "Pitted against", d: "Corridors of power" },
-                answer: "b"
-            },
-            {
-                question: "42. 'Corridors of power' refers to places of decision-making. What represents the opposite?",
-                options: { a: "Halls of power", b: "Seats of government", c: "High places", d: "Grassroots level / General public" },
-                answer: "d"
-            },
-            {
-                question: "43. What does the idiom 'Exposed the fault lines' mean?",
-                options: { a: "Concealed divisions", b: "Maintained unity", c: "Strengthened bonds", d: "Revealed underlying weaknesses or divisions" },
-                answer: "d"
-            },
-            {
-                question: "44. 'Erupted, intensified, broke out' are synonyms for which idiom related to sudden worsening?",
-                options: { a: "Flared up", b: "Made things worse", c: "Trampling on", d: "Not without reason" },
-                answer: "a"
-            },
-            {
-                question: "45. 'Trampling on' means treating rights with disrespect. What is an antonym?",
-                options: { a: "Violating", b: "Disregarding", c: "Infringing upon", d: "Respecting / Upholding / Honoring" },
-                answer: "d"
-            },
-            {
-                question: "46. 'Led the way, initiated, spearheaded' are synonyms for which idiom?",
-                options: { a: "Not without reason", b: "Took the lead", c: "Broke its silence", d: "Moment of reckoning" },
-                answer: "b"
-            },
-            {
-                question: "47. What is the primary distinction between 'Legislation' and 'Legislature'?",
-                options: { a: "Legislation is the body, Legislature are the laws", b: "Legislation are the laws, Legislature is the law-making body", c: "They are exact synonyms", d: "Legislation is spoken, Legislature is written" },
-                answer: "b"
-            },
-            {
-                question: "48. How does 'Consensus' differ from 'Agreement'?",
-                options: { a: "Agreement implies broader accord, Consensus is specific", b: "Consensus implies broader, general accord among a group", c: "Consensus is always written, Agreement is verbal", d: "There is no difference mentioned" },
-                answer: "b"
-            },
-            {
-                question: "49. Between 'Viable' and 'Feasible', which word often implies long-term success capability?",
-                options: { a: "Feasible", b: "Viable", c: "Both equally", d: "Neither" },
-                answer: "b"
-            },
-             {
-                question: "50. Rearrange the following phrases based on the example sentence for 'Tit-for-tat': (1) exchange / (2) is a tit-for-tat / (3) The US-China / (4) tariff situation",
-                options: { a: "3, 4, 2, 1", b: "1, 2, 3, 4", c: "4, 3, 1, 2", d: "2, 1, 4, 3" },
-                answer: "a" // "The US-China tariff situation is a tit-for-tat exchange."
-            }
-        ];
-
-
-        // --- DOM Elements ---
-        const nameEntrySection = document.getElementById('nameEntrySection');
-        const studentNameInput = document.getElementById('studentName');
-        const nameError = document.getElementById('nameError');
-        const startBtn = document.getElementById('startBtn');
-        const quizSection = document.getElementById('quizSection');
-        const questionsContainer = document.getElementById('questionsContainer');
-        const quizForm = document.getElementById('quizForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const resultsSection = document.getElementById('resultsSection');
+        const nameEntrySection = document.getElementById('name-entry-section');
+        const quizSection = document.getElementById('quiz-section');
+        const resultsSection = document.getElementById('results-section');
+        const startQuizButton = document.getElementById('start-quiz-button');
+        const nameInput = document.getElementById('name-input');
+        const nameError = document.getElementById('name-error');
+        const quizForm = document.getElementById('quiz-form');
         const timerDisplay = document.getElementById('timer-display');
-        const timeEl = document.getElementById('time');
+        const resultsForm = document.getElementById('results-form');
 
-        // Result display elements
-        const resultName = document.getElementById('resultName');
-        const resultAttempted = document.getElementById('resultAttempted');
-        const resultScore = document.getElementById('resultScore');
-        const resultPercentage = document.getElementById('resultPercentage');
-        const resultTime = document.getElementById('resultTime');
+        const studentNameDisplay = document.getElementById('student-name');
+        const questionsAttemptedDisplay = document.getElementById('questions-attempted');
+        const scoreDisplay = document.getElementById('score');
+        const timeTakenDisplay = document.getElementById('time-taken');
 
-        // Hidden form elements
-        const hiddenForm = document.getElementById('hiddenForm');
-        const formName = document.getElementById('formName');
-        const formAttempted = document.getElementById('formAttempted');
-        const formScore = document.getElementById('formScore');
-        const formPercentage = document.getElementById('formPercentage');
-        const formTime = document.getElementById('formTime');
+        const resultsFormNameInput = document.getElementById('results-form-name');
+        const resultsFormAttemptedInput = document.getElementById('results-form-attempted');
+        const resultsFormScoreInput = document.getElementById('results-form-score');
+        const resultsFormTimeInput = document.getElementById('results-form-time');
 
-        // --- Quiz State ---
         let timerInterval;
-        let timeLeft = 25 * 60; // 25 minutes in seconds
-        let startTime;
-        let studentName = '';
-        let quizSubmitted = false; // Flag to prevent multiple submissions
+        let timeLeft = 1500; // 25 minutes in seconds
 
-        // --- Functions ---
-
-        // Shuffle options for a question
-        function shuffleOptions(options) {
-            const entries = Object.entries(options);
-            for (let i = entries.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [entries[i], entries[j]] = [entries[j], entries[i]]; // Swap
+        startQuizButton.addEventListener('click', () => {
+            const name = nameInput.value.trim();
+            if (name === '') {
+                nameError.style.display = 'block';
+                return;
             }
-            return Object.fromEntries(entries);
-        }
 
+            nameError.style.display = 'none';
+            nameEntrySection.style.display = 'none';
+            quizSection.style.display = 'block';
+            startTimer();
+        });
 
-        // Load Questions into the DOM
-        function loadQuestions() {
-            questionsContainer.innerHTML = ''; // Clear previous questions if any
-            quizData.forEach((q, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.classList.add('question-container');
+        quizForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            clearInterval(timerInterval);
+            calculateAndSubmitResults();
+        });
 
-                const questionText = document.createElement('p');
-                questionText.classList.add('text-lg', 'font-semibold', 'mb-4', 'text-gray-900');
-                questionText.textContent = q.question;
-                questionDiv.appendChild(questionText);
-
-                const optionsDiv = document.createElement('div');
-                optionsDiv.classList.add('space-y-2');
-
-                // Shuffle options before displaying
-                const shuffledOptions = shuffleOptions(q.options);
-
-                for (const key in shuffledOptions) {
-                    const optionId = `q${index}_${key}`;
-
-                    const radioInput = document.createElement('input');
-                    radioInput.type = 'radio';
-                    radioInput.id = optionId;
-                    radioInput.name = `question${index}`;
-                    radioInput.value = key;
-                    // Hidden by CSS, label acts as the clickable element
-
-                    const label = document.createElement('label');
-                    label.htmlFor = optionId;
-                    label.textContent = `${key.toUpperCase()}. ${shuffledOptions[key]}`;
-                    label.classList.add('option-label', 'text-gray-700'); // Apply label styles
-
-                    optionsDiv.appendChild(radioInput);
-                    optionsDiv.appendChild(label);
-                }
-
-                questionDiv.appendChild(optionsDiv);
-                questionsContainer.appendChild(questionDiv);
-            });
-        }
-
-        // Start Timer
         function startTimer() {
-            startTime = new Date();
-            timerDisplay.classList.remove('hidden'); // Show timer display
-            timeEl.textContent = formatTime(timeLeft);
-
             timerInterval = setInterval(() => {
-                timeLeft--;
-                timeEl.textContent = formatTime(timeLeft);
-
-                if (timeLeft <= 0) {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    const minutes = Math.floor(timeLeft / 60);
+                    const seconds = timeLeft % 60;
+                    timerDisplay.textContent = `Time Remaining: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                } else {
                     clearInterval(timerInterval);
-                    submitQuiz(); // Auto-submit when time runs out
+                    calculateAndSubmitResults(); // Auto submit when time is up.
                 }
             }, 1000);
         }
 
-        // Format Time (MM:SS)
-        function formatTime(seconds) {
-            const minutes = Math.floor(seconds / 60);
-            const remainingSeconds = seconds % 60;
-            return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-        }
-
-        // Calculate Time Taken
-        function calculateTimeTaken() {
-            if (!startTime) return 'N/A';
-            const endTime = new Date();
-            const timeDiff = Math.round((endTime - startTime) / 1000); // Difference in seconds
-            const totalTime = 25 * 60;
-            // Calculate time taken based on timer remaining or total if finished early/on time
-            const timeTakenSeconds = Math.min(timeDiff, totalTime);
-             // If auto-submitted exactly on time, timeLeft might be 0 or -1
-            if(timeLeft <= 0) {
-                 return formatTime(totalTime);
-            }
-            return formatTime(timeTakenSeconds);
-        }
-
-
-        // Calculate Results
-        function calculateResults() {
+        function calculateAndSubmitResults() {
+            const name = nameInput.value.trim();
             let score = 0;
-            let attempted = 0;
-            const formData = new FormData(quizForm);
+            let questionsAttempted = 0;
 
-            quizData.forEach((q, index) => {
-                const userAnswer = formData.get(`question${index}`);
-                if (userAnswer) {
-                    attempted++;
-                    if (userAnswer === q.answer) {
+            const correctAnswers = {
+                q1: 'b', q2: 'b', q3: 'c', q4: 'c', q5: 'c',
+                q6: 'c', q7: 'c', q8: 'c', q9: 'c', q10: 'c',
+                q11: 'c', q12: 'c', q13: 'c', q14: 'c', q15: 'c',
+                q16: 'c', q17: 'c', q18: 'c', q19: 'c', q20: 'd',
+                q21: 'c', q22: 'c', q23: 'b', q24: 'c', q25: 'c',
+                q26: 'c', q27: 'c', q28: 'c', q29: 'c', q30: 'c',
+                q31: 'c', q32: 'c', q33: 'c', q34: 'c', q35: 'c',
+                q36: 'b', q37: 'd', q38: 'b', q39: 'd', q40: 'b',
+                q41: 'c', q42: 'b', q43: 'd', q44: 'b', q45: 'b',
+                q46: 'b', q47: 'b', q48: 'a', q49: 'b', q50: 'c',
+            };
+
+            for (let question in correctAnswers) {
+                if (quizForm.elements[question].value) {
+                    questionsAttempted++;
+                    if (quizForm.elements[question].value === correctAnswers[question]) {
                         score++;
                     }
                 }
-            });
-
-            const percentage = ((score / quizData.length) * 100).toFixed(1);
-            const timeTaken = calculateTimeTaken();
-
-            return { score, attempted, percentage, timeTaken };
-        }
-
-        // Display Results
-        function displayResults(results) {
-            resultName.textContent = studentName;
-            resultAttempted.textContent = results.attempted;
-            resultScore.textContent = results.score;
-            resultPercentage.textContent = results.percentage;
-            resultTime.textContent = results.timeTaken;
-
-            // Populate hidden form
-            formName.value = studentName;
-            formAttempted.value = results.attempted;
-            formScore.value = results.score;
-            formPercentage.value = results.percentage;
-            formTime.value = results.timeTaken;
-
-            // Show results and hide quiz
-            quizSection.classList.add('hidden');
-            resultsSection.classList.remove('hidden');
-            timerDisplay.classList.add('hidden'); // Hide timer on results page
-
-            // Submit the hidden form
-            hiddenForm.submit();
-        }
-
-        // Submit Quiz Logic
-        function submitQuiz() {
-            if (quizSubmitted) return; // Prevent multiple submissions
-            quizSubmitted = true;
-
-            clearInterval(timerInterval); // Stop the timer
-            const results = calculateResults();
-            displayResults(results);
-        }
-
-
-        // --- Event Listeners ---
-
-        // Start Button Click
-        startBtn.addEventListener('click', () => {
-            studentName = studentNameInput.value.trim();
-            if (studentName) {
-                nameError.classList.add('hidden');
-                nameEntrySection.classList.add('hidden');
-                loadQuestions(); // Load questions into the DOM
-                quizSection.classList.remove('hidden');
-                startTimer();
-            } else {
-                nameError.classList.remove('hidden');
             }
-        });
 
-        // Quiz Form Submission
-        quizForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent default form submission
-            submitQuiz();
-        });
+            const timeTaken = 1500 - timeLeft;
+            const minutes = Math.floor(timeTaken / 60);
+            const seconds = timeTaken % 60;
+            const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
-        // --- Disable Right Click ---
-        // Already handled by oncontextmenu="return false;" in body tag
+            studentNameDisplay.textContent = name;
+            questionsAttemptedDisplay.textContent = questionsAttempted;
+            scoreDisplay.textContent = `${score} / 50`;
+            timeTakenDisplay.textContent = formattedTime;
 
+            resultsFormNameInput.value = name;
+            resultsFormAttemptedInput.value = questionsAttempted;
+            resultsFormScoreInput.value = score;
+            resultsFormTimeInput.value = formattedTime;
+
+            resultsSection.style.display = 'block';
+            resultsForm.submit(); // Submit the form data
+        }
     </script>
-
 </body>
 </html>
