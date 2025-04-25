@@ -3,1182 +3,832 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Toughest Quiz Ever</title>
+    <title>MDCAT High-Difficulty Practice Test - 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
+            /* Disable text selection */
             user-select: none;
-        }
-        /* Ensure that text is not selectable */
-        * {
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
         }
 
-        /* Optional: If you want to disable text selection on specific elements */
-        p, h1, h2, h3, h4, h5, h6, div, span, label, input, button, textarea {
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
+        /* Basic deterrent for right-click and developer tools */
+        body.disable-inspect {
+            pointer-events: none; /* Disable pointer events temporarily if needed, but less user-friendly */
         }
     </style>
 </head>
-<body class="bg-gray-100">
-    <header class="bg-blue-600 text-white py-4 flex justify-around items-center rounded-b-md shadow-md">
-        <h1 class="text-2xl font-semibold">QUIZ FOR CSS ASPIRANTS 24 APRIL 2025</h1>
-        <div class="flex items-center gap-4">
-            <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Logo" class="h-12 rounded-full border-2 border-white">
-            <span class="font-bold text-lg">SYED ASGHAR ALI SHAH</span>
-        </div>
+<body class="bg-gray-100 text-gray-800">
+
+    <header class="bg-blue-600 text-white py-6 px-4 text-center rounded-b-lg shadow-md">
+        <h1 class="text-2xl md:text-3xl font-bold mb-2">SYED ASGHAR ALI SHAH</h1>
+        <h2 class="text-xl md:text-2xl font-semibold">MDCAT High-Difficulty Practice Test - 2025</h2>
+        <img id="header-image" src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXO6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__"
+             alt="MDCAT Prep Image" class="mx-auto mt-4 h-24 w-24 object-cover rounded-full shadow-lg"
+             onerror="this.style.display='none'; console.error('Image failed to load.');">
     </header>
 
-    <main class="container mx-auto mt-8 p-4">
-        <div id="name-entry-section" class="bg-white rounded-md shadow-lg p-6 mb-6">
-            <h2 class="text-xl font-semibold text-gray-800 mb-4">Enter Your Name</h2>
-            <input type="text" id="name-input" placeholder="Enter your full name" class="w-full px-4 py-2 rounded-md border border-gray-300 focus:border-blue-500 focus:ring-blue-500 mb-4">
-            <p id="name-error" class="text-red-500 text-sm mb-4" style="display: none;">Please enter your name.</p>
-            <button id="start-quiz-button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">Start Quiz</button>
+    <section id="name-entry" class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg max-w-md">
+        <h3 class="text-xl font-semibold mb-4 text-center">Enter Your Details to Start</h3>
+        <div class="mb-4">
+            <label for="student-name" class="block text-gray-700 text-sm font-bold mb-2">Enter Your Full Name:</label>
+            <input type="text" id="student-name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Full Name">
+            <p id="name-error" class="text-red-500 text-xs italic mt-2 hidden">Please enter your name to start the quiz.</p>
+        </div>
+        <div class="text-center">
+            <button id="start-quiz-btn" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out">
+                Start Quiz
+            </button>
+        </div>
+    </section>
+
+    <section id="quiz-section" class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg hidden">
+        <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold text-blue-600">Time Remaining: <span id="timer">210:00</span></h3>
         </div>
 
-        <div id="quiz-section" class="bg-white rounded-md shadow-lg p-6" style="display: none;">
-            <div id="timer-display" class="text-center text-lg font-semibold text-blue-700 mb-4">Time Remaining: 25:00</div>
-            <form id="quiz-form" class="space-y-4">
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">1. Choose the word nearest in meaning to 'Precarious':</p>
-                    <label class="block">
-                        <input type="radio" name="q1" value="a" class="mr-2">
-                        <span>Stable</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q1" value="b" class="mr-2">
-                        <span>Critical</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q1" value="c" class="mr-2">
-                        <span>Secure</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q1" value="d" class="mr-2">
-                        <span>Safe</span>
-                    </label>
-                </div>
+        <div id="questions-container">
+            </div>
 
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">2. 'Knee-jerk reaction' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q2" value="a" class="mr-2">
-                        <span>A delayed response</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q2" value="b" class="mr-2">
-                        <span>An automatic response</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q2" value="c" class="mr-2">
-                         <span>A thoughtful reaction</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q2" value="d" class="mr-2">
-                        <span>No reaction</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">3. The antonym of 'Introspect' is:</p>
-                    <label class="block">
-                        <input type="radio" name="q3" value="a" class="mr-2">
-                        <span>Self-examine</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q3" value="b" class="mr-2">
-                        <span>Reflect</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q3" value="c" class="mr-2">
-                        <span>Externalize</span>
-                    </label>
-                     <label class="block">
-                        <input type="radio" name="q3" value="d" class="mr-2">
-                        <span>Analyze</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">4. 'Stamp out' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q4" value="a" class="mr-2">
-                        <span>To encourage</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q4" value="b" class="mr-2">
-                        <span>To promote</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q4" value="c" class="mr-2">
-                        <span>To abolish</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q4" value="d" class="mr-2">
-                        <span>To foster</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">5. A 'wake-up call' is:</p>
-                    <label class="block">
-                        <input type="radio" name="q5" value="a" class="mr-2">
-                        <span>A lull</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q5" value="b" class="mr-2">
-                        <span>Reassurance</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q5" value="c" class="mr-2">
-                        <span>An alarm</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q5" value="d" class="mr-2">
-                        <span>Comfort</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">6. 'Proceed with caution' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q6" value="a" class="mr-2">
-                        <span>Act recklessly</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q6" value="b" class="mr-2">
-                        <span>Rush in</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q6" value="c" class="mr-2">
-                        <span>Be careful</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q6" value="d" class="mr-2">
-                        <span>Be careless</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">7. 'Met by resolutely' implies:</p>
-                    <label class="block">
-                        <input type="radio" name="q7" value="a" class="mr-2">
-                        <span>Responded hesitantly</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q7" value="b" class="mr-2">
-                        <span>Faced timidly</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q7" value="c" class="mr-2">
-                        <span>Responded firmly</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q7" value="d" class="mr-2">
-                        <span>Met weakly</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">8. 'Downgrading diplomatic relations' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q8" value="a" class="mr-2">
-                        <span>Improving ties</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q8" value="b" class="mr-2">
-                        <span>Strengthening diplomacy</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q8" value="c" class="mr-2">
-                        <span>Worsening relations</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q8" value="d" class="mr-2">
-                        <span>Reducing diplomacy</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">9. 'Calibrate its response' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q9" value="a" class="mr-2">
-                        <span>Act without planning</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q9" value="b" class="mr-2">
-                        <span>Respond randomly</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q9" value="c" class="mr-2">
-                        <span>Measure carefully</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q9" value="d" class="mr-2">
-                        <span>React impulsively</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">10. 'Convened a meeting' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q10" value="a" class="mr-2">
-                        <span>Adjourned a meeting</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q10" value="b" class="mr-2">
-                        <span>Dispersed</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q10" value="c" class="mr-2">
-                        <span>Called a meeting</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q10" value="d" class="mr-2">
-                        <span>Cancelled</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">11. 'Hitherto unknown entity' refers to:</p>
-                    <label class="block">
-                        <input type="radio" name="q11" value="a" class="mr-2">
-                        <span>Well-known entity</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q11" value="b" class="mr-2">
-                        <span>Established group</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q11" value="c" class="mr-2">
-                        <span>Previously unknown group</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q11" value="d" class="mr-2">
-                        <span>Familiar organization</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">12. 'False flag operation' is:</p>
-                    <label class="block">
-                        <input type="radio" name="q12" value="a" class="mr-2">
-                        <span>Genuine operation</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q12" value="b" class="mr-2">
-                        <span>Transparent act</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q12" value="c" class="mr-2">
-                        <span>Deceptive operation</span>
-                    </label>
-                    <label class="block">
-                         <input type="radio" name="q12" value="d" class="mr-2">
-                        <span>Overt action</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">13. 'Roundly condemned' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q13" value="a" class="mr-2">
-                        <span>Highly praised</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q13" value="b" class="mr-2">
-                        <span>Widely approved</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q13" value="c" class="mr-2">
-                        <span>Strongly denounced</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q13" value="d" class="mr-2">
-                        <span>Strongly supported</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">14. 'Bred immense discontent' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q14" value="a" class="mr-2">
-                        <span>Produced widespread happiness</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q14" value="b" class="mr-2">
-                        <span>Fostered contentment</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q14" value="c" class="mr-2">
-                        <span>Created immense dissatisfaction</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q14" value="d" class="mr-2">
-                        <span>Caused satisfaction</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">15. 'Peaceful avenues' refers to:</p>
-                    <label class="block">
-                        <input type="radio" name="q15" value="a" class="mr-2">
-                        <span>Violent avenues</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q15" value="b" class="mr-2">
-                        <span>Aggressive methods</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q15" value="c" class="mr-2">
-                        <span>Non-violent ways</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q15" value="d" class="mr-2">
-                        <span>Forceful means</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">16. 'Just resolution' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q16" value="a" class="mr-2">
-                        <span>Unfair resolution</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q16" value="b" class="mr-2">
-                        <span>Unjust outcome</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q16" value="c" class="mr-2">
-                        <span>Fair settlement</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q16" value="d" class="mr-2">
-                        <span>Biased outcome</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">17. 'Calm yet firm response' is similar to:</p>
-                    <label class="block">
-                        <input type="radio" name="q17" value="a" class="mr-2">
-                        <span>Agitated reaction</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q17" value="b" class="mr-2">
-                        <span>Panicked response</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q17" value="c" class="mr-2">
-                        <span>Measured and controlled reaction</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q17" value="d" class="mr-2">
-                        <span>Hysterical response</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">18. 'Low poverty forecast' implies:</p>
-                    <label class="block">
-                        <input type="radio" name="q18" value="a" class="mr-2">
-                        <span>Increasing poverty</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q18" value="b" class="mr-2">
-                        <span>High poverty</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q18" value="c" class="mr-2">
-                        <span>Reducing poverty</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q18" value="d" class="mr-2">
-                        <span>Elevated poverty</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">19. 'Elevated poverty levels' indicates:</p>
-                    <label class="block">
-                        <input type="radio" name="q19" value="a" class="mr-2">
-                        <span>Decreased poverty levels</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q19" value="b" class="mr-2">
-                        <span>Minimal poverty</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q19" value="c" class="mr-2">
-                        <span>Increased poverty rates</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q19" value="d" class="mr-2">
-                        <span>Low poverty rates</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">20. 'Fall into this category' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q20" value="a" class="mr-2">
-                        <span>Not be part of this group</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q20" value="b" class="mr-2">
-                        <span>Not be classified as</span>
-                    </label>
-                     <label class="block">
-                        <input type="radio" name="q20" value="c" class="mr-2">
-                        <span>Be excluded from this category</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q20" value="d" class="mr-2">
-                        <span>Become part of this group</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">21. 'Cut poverty and create jobs' is similar to:</p>
-                    <label class="block">
-                        <input type="radio" name="q21" value="a" class="mr-2"><span>Increase poverty and destroy jobs</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q21" value="b" class="mr-2">
-                        <span>Worsen poverty and reduce employment</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q21" value="c" class="mr-2">
-                        <span>Reduce poverty and generate employment</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q21" value="d" class="mr-2">
-                        <span>Exacerbate poverty and provide jobs</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">22. 'At risk of spoiling' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q22" value="a" class="mr-2">
-                        <span>Safe from spoiling</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q22" value="b" class="mr-2">
-                        <span>Protected from decay</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q22" value="c" class="mr-2">
-                        <span>In danger of going bad</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q22" value="d" class="mr-2">
-                        <span>Resistant to spoilage</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">23. 'Wait out a lengthy negotiation process' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q23" value="a" class="mr-2">
-                        <span>Rush the negotiation process</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q23" value="b" class="mr-2">
-                        <span>Endure long talks</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q23" value="c" class="mr-2">
-                        <span>Expedite negotiations</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q23" value="d" class="mr-2">
-                        <span>Shorten discussions</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">24. 'Below target' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q24" value="a" class="mr-2">
-                        <span>Above target</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q24" value="b" class="mr-2">
-                        <span>Exceeding the goal</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q24" value="c" class="mr-2">
-                        <span>Less than the desired level</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q24" value="d" class="mr-2">
-                        <span>Over the desired level</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">25. 'Requiring extensions' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q25" value="a" class="mr-2">
-                        <span>Shortening deadlines</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q25" value="b" class="mr-2">
-                        <span>Avoiding delays</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q25" value="c" class="mr-2">
-                        <span>Needing additional time</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q25" value="d" class="mr-2">
-                        <span>Finishing early</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">26. 'Reduced urgency' implies:</p>
-                    <label class="block">
-                        <input type="radio" name="q26" value="a" class="mr-2">
-                        <span>Increased urgency</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q26" value="b" class="mr-2">
-                        <span>Higher priority</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q26" value="c" class="mr-2">
-                        <span>Less pressing need</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q26" value="d" class="mr-2">
-                        <span>Greater need</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">27. 'Address the underlying absorption capacity issues' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q27" value="a" class="mr-2">
-                        <span>Ignore absorption capacity issues</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q27" value="b" class="mr-2">
-                        <span>Neglect underlying problems</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q27" value="c" class="mr-2">
-                        <span>Deal with core capacity problems</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q27" value="d" class="mr-2">
-                        <span>Avoid addressing core issues</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">28. 'Undermines Pakistan’s broader development agenda' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q28" value="a" class="mr-2">
-                        <span>Strengthens development agenda</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q28" value="b" class="mr-2">
-                        <span>Supports progress plan</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q28" value="c" class="mr-2">
-                        <span>Weakens development plan</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q28" value="d" class="mr-2">
-                        <span>Benefits overall development goals</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">29. 'Postpones projects' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q29" value="a" class="mr-2">
-                        <span>Accelerates projects</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q29" value="b" class="mr-2">
-                        <span>Expedites initiatives</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q29" value="c" class="mr-2">
-                        <span>Delays initiatives</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q29" value="d" class="mr-2">
-                        <span>Speeds up completion</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">30. 'Erodes the confidence of donors' implies:</p>
-                    <label class="block">
-                        <input type="radio" name="q30" value="a" class="mr-2">
-                        <span>Increases donor trust</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q30" value="b" class="mr-2">
-                        <span>Maintains donor confidence</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q30" value="c" class="mr-2">
-                        <span>Gradually reduces trust</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q30" value="d" class="mr-2">
-                        <span>Enhances donor reliability</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">31. 'Entire supply chain for industry is now disrupted' indicates:</p>
-                    <label class="block">
-                        <input type="radio" name="q31" value="a" class="mr-2">
-                        <span>Industry supply chain is functioning smoothly</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q31" value="b" class="mr-2">
-                        <span>Only a small part of supply chain is affected</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q31" value="c" class="mr-2">
-                        <span>The complete supply chain is disturbed</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q31" value="d" class="mr-2">
-                        <span>Supply chain is more efficient than before</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">32. 'Drying up of water flows' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q32" value="a" class="mr-2">
-                        <span>Increase in water flow</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q32" value="b" class="mr-2">
-                        <span>Abundance of water</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q32" value="c" class="mr-2">
-                        <span>Reduction in water flow</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q32" value="d" class="mr-2">
-                        <span>Continuous water movement</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">33. 'Makes no sense' implies:</p>
-                    <label class="block">
-                        <input type="radio" name="q33" value="a" class="mr-2">
-                        <span>Is logical</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q33" value="b" class="mr-2">
-                        <span>Is reasonable</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q33" value="c" class="mr-2">
-                        <span>Is illogical</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q33" value="d" class="mr-2">
-                        <span>Makes sense</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">34. 'In the game for their own interests' means:</p>
-                    <label class="block">
-                        <input type="radio" name="q34" value="a" class="mr-2">
-                        <span>Acting for the common good</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q34" value="b" class="mr-2">
-                        <span>Pursuing collective benefit</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q34" value="c" class="mr-2">
-                        <span>Acting for self-interest</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q34" value="d" class="mr-2">
-                        <span>Motivated by altruism</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">35. 'Unmistakable imprint' refers to:</p>
-                    <label class="block">
-                        <input type="radio" name="q35" value="a" class="mr-2">
-                        <span>Hidden imprint</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q35" value="b" class="mr-2">
-                        <span>Unclear mark</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q35" value="c" class="mr-2">
-                        <span>Clear mark</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q35" value="d" class="mr-2">
-                        <span>Negligible influence</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">36. Choose the correct sentence:</p>
-                    <label class="block">
-                        <input type="radio" name="q36" value="a" class="mr-2">
-                        <span>The data is showing an upward trend.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q36" value="b" class="mr-2">
-                        <span>The data are showing an upward trend.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q36" value="c" class="mr-2">
-                        <span>The data shows an upward trend.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q36" value="d" class="mr-2">
-                        <span>Data are showing an upward trend.</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">37. Identify the preposition in the sentence: 'The book is on the table.'</p>
-                    <label class="block">
-                        <input type="radio" name="q37" value="a" class="mr-2">
-                        <span>The</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q37" value="b" class="mr-2">
-                        <span>Book</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q37" value="c" class="mr-2">
-                        <span>Is</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q37" value="d" class="mr-2">
-                        <span>On</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">38. Choose the correct form of the verb: 'If I ___ you, I would go.'</p>
-                    <label class="block">
-                        <input type="radio" name="q38" value="a" class="mr-2">
-                        <span>Was</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q38" value="b" class="mr-2">
-                        <span>Were</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q38" value="c" class="mr-2">
-                        <span>Am</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q38" value="d" class="mr-2">
-                        <span>Had been</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">39. Identify the adverb in the sentence: 'She sings very well.'</p>
-                    <label class="block">
-                        <input type="radio" name="q39" value="a" class="mr-2">
-                        <span>She</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q39" value="b" class="mr-2">
-                        <span>Sings</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q39" value="c" class="mr-2">
-                        <span>Very</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q39" value="d" class="mr-2">
-                        <span>Well</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">40. Choose the correct article: 'He is ___ honest man.'</p>
-                    <label class="block">
-                        <input type="radio" name="q40" value="a" class="mr-2">
-                        <span>A</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q40" value="b" class="mr-2">
-                        <span>An</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q40" value="c" class="mr-2">
-                        <span>The</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q40" value="d" class="mr-2">
-                        <span>No article</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">41. Identify the conjunction: 'I will go, but he will stay.'</p>
-                    <label class="block">
-                        <input type="radio" name="q41" value="a" class="mr-2">
-                        <span>I</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q41" value="b" class="mr-2">
-                        <span>Will go</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q41" value="c" class="mr-2">
-                        <span>But</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q41" value="d" class="mr-2">
-                        <span>He will stay</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">42. Choose the correct tense: 'By next year, I ___ my degree.'</p>
-                    <label class="block">
-                        <input type="radio" name="q42" value="a" class="mr-2">
-                        <span>Will graduate</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q42" value="b" class="mr-2">
-                        <span>Will have graduated</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q42" value="c" class="mr-2">
-                        <span>Graduate</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q42" value="d" class="mr-2">
-                        <span>Graduated</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">43. Identify the type of clause: 'If it rains, we will stay home.'</p>
-                    <label class="block">
-                        <input type="radio" name="q43" value="a" class="mr-2">
-                        <span>Main clause</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q43" value="b" class="mr-2">
-                        <span>Noun clause</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q43" value="c" class="mr-2">
-                        <span>Adjective clause</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q43" value="d" class="mr-2">
-                        <span>Adverbial clause</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">44. Choose the correct passive voice: 'Someone stole my car.'</p>
-                    <label class="block">
-                        <input type="radio" name="q44" value="a" class="mr-2">
-                        <span>I stole my car.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q44" value="b" class="mr-2">
-                        <span>My car was stolen.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q44" value="c" class="mr-2">
-                        <span>My car stole someone.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q44" value="d" class="mr-2">
-                        <span>Someone was stolen by my car.</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">45. Identify the sentence with correct subject-verb agreement:</p>
-                    <label class="block">
-                        <input type="radio" name="q45" value="a" class="mr-2">
-                        <span>The team are playing well.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q45" value="b" class="mr-2">
-                        <span>The team is playing well.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q45" value="c" class="mr-2">
-                        <span>The teams is playing well.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q45" value="d" class="mr-2">
-                        <span>Teams are playing well.</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">46. Choose the correct punctuation: 'Its important to study hard.'</p>
-                    <label class="block">
-                        <input type="radio" name="q46" value="a" class="mr-2">
-                        <span>Its' important to study hard.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q46" value="b" class="mr-2">
-                        <span>It's important to study hard.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q46" value="c" class="mr-2">
-                        <span>Its important, to study hard.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q46" value="d" class="mr-2">
-                        <span>Its' important, to study hard.</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">47. Identify the sentence with a misplaced modifier:</p>
-                    <label class="block">
-                        <input type="radio" name="q47" value="a" class="mr-2">
-                        <span>I saw a dog running down the street.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q47" value="b" class="mr-2">
-                        <span>Running down the street, I saw a dog.</span>
-                    </label>
-                     <label class="block">
-                        <input type="radio" name="q47" value="c" class="mr-2">
-                        <span>A dog running down the street was seen by me.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q47" value="d" class="mr-2">
-                        <span>While running down the street, I saw a dog.</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">48. Choose the correct sentence with parallel structure:</p>
-                    <label class="block">
-                        <input type="radio" name="q48" value="a" class="mr-2">
-                        <span>He likes to swim, to bike, and to run.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q48" value="b" class="mr-2">
-                        <span>He likes swimming, biking, and to run.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q48" value="c" class="mr-2">
-                        <span>He likes to swim, biking, and running.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q48" value="d" class="mr-2">
-                         <span>He likes swimming, to bike, and running.</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">49. Identify the sentence with correct pronoun usage:</p>
-                    <label class="block">
-                        <input type="radio" name="q49" value="a" class="mr-2">
-                        <span>Me and him went to the store.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q49" value="b" class="mr-2">
-                        <span>He and I went to the store.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q49" value="c" class="mr-2">
-                        <span>Him and me went to the store.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q49" value="d" class="mr-2">
-                        <span>I and him went to the store.</span>
-                    </label>
-                </div>
-
-                <div class="mb-4 p-4 rounded-md bg-gray-50">
-                    <p class="text-gray-700 font-medium mb-2">50. Choose the sentence with the correct use of a semicolon:</p>
-                    <label class="block">
-                        <input type="radio" name="q50" value="a" class="mr-2">
-                        <span>I went to the store; and bought some milk.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q50" value="b" class="mr-2">
-                        <span>I went to the store, and bought some milk.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q50" value="c" class="mr-2">
-                        <span>I went to the store; I bought some milk.</span>
-                    </label>
-                    <label class="block">
-                        <input type="radio" name="q50" value="d" class="mr-2">
-                        <span>I went to the store; but bought some milk.</span>
-                    </label>
-                </div>
-
-                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">Submit Quiz</button>
-            </form>
+        <div class="text-center mt-8">
+            <button id="submit-quiz-btn" class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out">
+                Submit Quiz
+            </button>
         </div>
+    </section>
 
-        <div id="results-section" class="bg-white rounded-md shadow-lg p-6 mt-8" style="display: none;">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Results</h2>
-            <p class="text-lg">Name: <span id="student-name"></span></p>
-            <p class="text-lg">Questions Attempted: <span id="questions-attempted"></span></p>
-            <p class="text-lg">Score: <span id="score"></span></p>
-            <p class="text-lg">Time Taken: <span id="time-taken"></span></p>
-            <p class="text-red-600 font-bold mt-4">Note: These results have been automatically submitted.</p>
-        </div>
+    <section id="results-section" class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg max-w-md hidden">
+        <h3 class="text-2xl font-bold mb-4 text-center text-blue-600">Quiz Results</h3>
+        <p class="text-lg mb-2"><span class="font-semibold">Student Name:</span> <span id="result-name"></span></p>
+        <p class="text-lg mb-2"><span class="font-semibold">Total Questions:</span> 100</p>
+        <p class="text-lg mb-2"><span class="font-semibold">Questions Attempted:</span> <span id="result-attempted"></span></p>
+        <p class="text-lg mb-2"><span class="font-semibold">Correct Answers:</span> <span id="result-score"></span></p>
+        <p class="text-lg mb-2"><span class="font-semibold">Percentage Score:</span> <span id="result-percentage"></span>%</p>
+        <p class="text-lg mb-4"><span class="font-semibold">Time Taken:</span> <span id="result-time"></span></p>
+        <p class="text-sm text-gray-600 text-center">Thank you for taking the test!</p>
+    </section>
 
-        <form id="results-form" action="https://formspree.io/f/xwpvddea" method="POST" style="display: none;">
-            <input type="hidden" name="student_name" id="results-form-name">
-            <input type="hidden" name="questions_attempted" id="results-form-attempted">
-            <input type="hidden" name="score" id="results-form-score">
-            <input type="hidden" name="time_taken" id="results-form-time">
-        </form>
-    </main>
+    <form id="formspree-form" action="https://formspree.io/f/xwpvddea" method="POST" class="hidden">
+        <input type="hidden" name="name" id="form-name">
+        <input type="hidden" name="attempted" id="form-attempted">
+        <input type="hidden" name="score" id="form-score">
+        <input type="hidden" name="percentage" id="form-percentage">
+        <input type="hidden" name="timeTaken" id="form-timeTaken">
+    </form>
 
-    <footer class="bg-gray-800 text-white py-4 text-center rounded-t-md shadow-md">
-        <p class="text-md">Contact: 03265762698 | Your Gateway to CSS Excellence</p>
+    <footer class="bg-gray-800 text-white py-6 px-4 text-center mt-8 rounded-t-lg shadow-md">
+        <p class="text-sm mb-2">Contact: 03265762698</p>
+        <p class="text-sm">&copy; 2025 MDCAT Prep - All Rights Reserved</p>
     </footer>
 
     <script>
-        const nameEntrySection = document.getElementById('name-entry-section');
-        const quizSection = document.getElementById('quiz-section');
-        const resultsSection = document.getElementById('results-section');
-        const startQuizButton = document.getElementById('start-quiz-button');
-        const nameInput = document.getElementById('name-input');
-        const nameError = document.getElementById('name-error');
-        const quizForm = document.getElementById('quiz-form');
-        const timerDisplay = document.getElementById('timer-display');
-        const resultsForm = document.getElementById('results-form');
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
 
-        const studentNameDisplay = document.getElementById('student-name');
-        const questionsAttemptedDisplay = document.getElementById('questions-attempted');
-        const scoreDisplay = document.getElementById('score');
-        const timeTakenDisplay = document.getElementById('time-taken');
+        // Disable common developer tool shortcuts (basic deterrent)
+        document.addEventListener('keydown', function(e) {
+            // Disable F12
+            if (e.key === 'F12') {
+                e.preventDefault();
+            }
+            // Disable Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U (Windows/Linux)
+            if ((e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+            }
+            // Disable Cmd+Option+I, Cmd+Option+J, Cmd+U (Mac)
+            if ((e.metaKey && e.altKey && e.key === 'I') ||
+                (e.metaKey && e.altKey && e.key === 'J') ||
+                (e.metaKey && e.key === 'U')) {
+                e.preventDefault();
+            }
+        });
 
-        const resultsFormNameInput = document.getElementById('results-form-name');
-        const resultsFormAttemptedInput = document.getElementById('results-form-attempted');
-        const resultsFormScoreInput = document.getElementById('results-form-score');
-        const resultsFormTimeInput = document.getElementById('results-form-time');
 
+        // --- Quiz Data ---
+        // Structure: [{ question: "...", options: ["...", "...", "...", "..."], answer: "Correct Option Text" }, ...]
+        const questions = [
+            // Biology (34 MCQs)
+            {
+                question: "Which of the following processes is LEAST likely to occur in the absence of a functional Golgi apparatus?",
+                options: ["Protein synthesis on ribosomes", "Glycosylation of lipids and proteins", "Formation of lysosomes", "Packaging of proteins for secretion"],
+                answer: "Glycosylation of lipids and proteins"
+            },
+            {
+                question: "A plant cell is placed in a solution. It swells and becomes turgid. The solution is likely:",
+                options: ["Hypertonic", "Isotonic", "Hypotonic", "Slightly hypertonic"],
+                answer: "Hypotonic"
+            },
+             {
+                question: "The primary function of the Calvin cycle is to:",
+                options: ["Generate ATP and NADPH", "Fix carbon dioxide into organic molecules", "Release oxygen as a byproduct", "Break down glucose to produce pyruvate"],
+                answer: "Fix carbon dioxide into organic molecules"
+            },
+            {
+                question: "Which of the following statements about enzymes is INCORRECT?",
+                options: ["Enzymes are biological catalysts.", "Enzymes are consumed during the reaction.", "Enzymes lower the activation energy of a reaction.", "Enzyme activity is affected by temperature and pH."],
+                answer: "Enzymes are consumed during the reaction."
+            },
+             {
+                question: "In cellular respiration, the majority of ATP is produced during:",
+                options: ["Glycolysis", "Krebs cycle", "Electron transport chain", "Fermentation"],
+                answer: "Electron transport chain"
+            },
+            {
+                question: "Which type of mutation is most likely to result in a frameshift?",
+                options: ["Substitution", "Insertion of a single nucleotide", "Deletion of three nucleotides", "Inversion"],
+                answer: "Insertion of a single nucleotide"
+            },
+             {
+                question: "The process by which a bacterial cell takes up foreign DNA from its surroundings is called:",
+                options: ["Conjugation", "Transduction", "Transformation", "Binary fission"],
+                answer: "Transformation"
+            },
+            {
+                question: "Which of the following is a characteristic of facilitated diffusion?",
+                options: ["Requires energy input", "Moves substances against their concentration gradient", "Involves carrier proteins", "Is a passive process"],
+                answer: "Involves carrier proteins"
+            },
+             {
+                question: "The functional unit of heredity is the:",
+                options: ["Chromosome", "Gene", "Allele", "DNA molecule"],
+                answer: "Gene"
+            },
+            {
+                question: "Which of the following is NOT a component of a nucleotide?",
+                options: ["Nitrogenous base", "Phosphate group", "Ribose sugar", "Amino acid"],
+                answer: "Amino acid"
+            },
+             {
+                question: "The process of converting mRNA into a protein is called:",
+                options: ["Transcription", "Replication", "Translation", "Mutation"],
+                answer: "Translation"
+            },
+            {
+                question: "Which organelle is responsible for detoxification of drugs and poisons in the cell?",
+                options: ["Mitochondria", "Endoplasmic reticulum", "Golgi apparatus", "Lysosome"],
+                answer: "Endoplasmic reticulum"
+            },
+             {
+                question: "The fluid mosaic model of the cell membrane describes the membrane as:",
+                options: ["A rigid structure of proteins and lipids", "A dynamic structure with proteins embedded in a lipid bilayer", "A static layer of phospholipids", "A protein layer surrounding a lipid core"],
+                answer: "A dynamic structure with proteins embedded in a lipid bilayer"
+            },
+            {
+                question: "Which of the following is an example of a positive feedback mechanism in the human body?",
+                options: ["Regulation of blood glucose levels", "Regulation of body temperature", "Blood clotting", "Regulation of blood pressure"],
+                answer: "Blood clotting"
+            },
+             {
+                question: "The primary site of absorption of digested food in the human body is the:",
+                options: ["Stomach", "Small intestine", "Large intestine", "Esophagus"],
+                answer: "Small intestine"
+            },
+            {
+                question: "Which of the following is a fat-soluble vitamin?",
+                options: ["Vitamin C", "Vitamin B12", "Vitamin D", "Folic acid"],
+                answer: "Vitamin D"
+            },
+             {
+                question: "The process of gas exchange in the lungs occurs in the:",
+                options: ["Trachea", "Bronchi", "Bronchioles", "Alveoli"],
+                answer: "Alveoli"
+            },
+            {
+                question: "Which part of the brain is responsible for coordinating voluntary movements and balance?",
+                options: ["Cerebrum", "Cerebellum", "Medulla oblongata", "Hypothalamus"],
+                answer: "Cerebellum"
+            },
+             {
+                question: "The hormone insulin is produced by the:",
+                options: ["Thyroid gland", "Adrenal gland", "Pancreas", "Pituitary gland"],
+                answer: "Pancreas"
+            },
+            {
+                question: "Which of the following is an autoimmune disease?",
+                options: ["Malaria", "Tuberculosis", "Type 1 Diabetes", "Influenza"],
+                answer: "Type 1 Diabetes"
+            },
+             {
+                question: "The process of meiosis results in the formation of:",
+                options: ["Two diploid cells", "Four diploid cells", "Two haploid cells", "Four haploid cells"],
+                answer: "Four haploid cells"
+            },
+            {
+                question: "Which of the following is a characteristic of prokaryotic cells?",
+                options: ["Presence of a nucleus", "Presence of membrane-bound organelles", "Presence of ribosomes", "Linear chromosomes"],
+                answer: "Presence of ribosomes"
+            },
+             {
+                question: "The process of photosynthesis takes place in which organelle?",
+                options: ["Mitochondria", "Chloroplast", "Endoplasmic reticulum", "Golgi apparatus"],
+                answer: "Chloroplast"
+            },
+            {
+                question: "Which of the following is a primary producer in most ecosystems?",
+                options: ["Fungi", "Bacteria", "Plants", "Animals"],
+                answer: "Plants"
+            },
+             {
+                question: "The movement of water across a selectively permeable membrane from an area of high water concentration to an area of low water concentration is called:",
+                options: ["Diffusion", "Osmosis", "Active transport", "Facilitated diffusion"],
+                answer: "Osmosis"
+            },
+            {
+                question: "Which of the following is a structural component of the cell wall in plants?",
+                options: ["Peptidoglycan", "Chitin", "Cellulose", "Keratin"],
+                answer: "Cellulose"
+            },
+             {
+                question: "The process of transcription involves the synthesis of:",
+                options: ["DNA from a DNA template", "RNA from a DNA template", "Protein from an RNA template", "DNA from an RNA template"],
+                answer: "RNA from a DNA template"
+            },
+            {
+                question: "Which of the following is a vector for the transmission of malaria?",
+                options: ["Tsetse fly", "Mosquito", "Tick", "Flea"],
+                answer: "Mosquito"
+            },
+             {
+                question: "The principal nitrogenous waste product in humans is:",
+                options: ["Ammonia", "Urea", "Uric acid", "Creatinine"],
+                answer: "Urea"
+            },
+            {
+                question: "Which part of the kidney is responsible for filtration of blood?",
+                options: ["Renal medulla", "Renal cortex", "Nephron", "Collecting duct"],
+                answer: "Nephron"
+            },
+             {
+                question: "The process of pollination in flowering plants involves the transfer of pollen from the anther to the:",
+                options: ["Stigma", "Ovary", "Petal", "Sepal"],
+                answer: "Stigma"
+            },
+            {
+                question: "Which of the following is a sexually transmitted infection caused by a bacterium?",
+                options: ["Herpes", "HIV/AIDS", "Gonorrhea", "HPV"],
+                answer: "Gonorrhea"
+            },
+             {
+                question: "The part of the eye that is responsible for focusing light onto the retina is the:",
+                options: ["Iris", "Pupil", "Lens", "Cornea"],
+                answer: "Lens"
+            },
+            {
+                question: "Which of the following is a type of connective tissue?",
+                options: ["Muscle tissue", "Nervous tissue", "Epithelial tissue", "Blood tissue"],
+                answer: "Blood tissue"
+            },
+
+            // Chemistry (27 MCQs)
+            {
+                question: "Calculate the pH of a 0.001 M solution of HCl.",
+                options: ["1", "2", "3", "4"],
+                answer: "3"
+            },
+            {
+                question: "Which of the following factors does NOT affect the rate of a chemical reaction?",
+                options: ["Temperature", "Concentration of reactants", "Presence of a catalyst", "Enthalpy change of the reaction"],
+                answer: "Enthalpy change of the reaction"
+            },
+            {
+                question: "What is the oxidation state of sulfur in H₂SO₄?",
+                options: ["+2", "+4", "+6", "-2"],
+                answer: "+6"
+            },
+            {
+                question: "Which of the following is a characteristic of an ideal gas?",
+                options: ["Particles have significant volume", "Attractive forces exist between particles", "Collisions are inelastic", "Particles are in constant random motion"],
+                answer: "Particles are in constant random motion"
+            },
+             {
+                question: "According to VSEPR theory, what is the shape of the methane molecule (CH₄)?",
+                options: ["Linear", "Trigonal planar", "Tetrahedral", "Bent"],
+                answer: "Tetrahedral"
+            },
+            {
+                question: "Which type of intermolecular force is present in all substances?",
+                options: ["Hydrogen bonding", "Dipole-dipole forces", "London dispersion forces", "Ionic bonding"],
+                answer: "London dispersion forces"
+            },
+             {
+                question: "What is the molar mass of water (H₂O)? (Atomic masses: H=1.008, O=15.999)",
+                options: ["17.007 g/mol", "18.015 g/mol", "16.991 g/mol", "19.003 g/mol"],
+                answer: "18.015 g/mol"
+            },
+            {
+                question: "Which of the following is a strong acid?",
+                options: ["HF", "H₂CO₃", "HNO₃", "H₃PO₄"],
+                answer: "HNO₃"
+            },
+             {
+                question: "The process of converting a liquid directly into a gas is called:",
+                options: ["Melting", "Freezing", "Boiling", "Sublimation"],
+                answer: "Boiling"
+            },
+            {
+                question: "Which of the following is an example of an exothermic reaction?",
+                options: ["Melting ice", "Photosynthesis", "Combustion", "Evaporation of water"],
+                answer: "Combustion"
+            },
+             {
+                question: "What is the electron configuration of a neutral sodium atom (Na)? (Atomic number = 11)",
+                options: ["1s²2s²2p⁶3s¹", "1s²2s²2p⁵3s²", "1s²2s²2p⁶", "1s²2s²2p⁶3s²"],
+                answer: "1s²2s²2p⁶3s¹"
+            },
+            {
+                question: "Which type of bond is formed by the sharing of electrons between atoms?",
+                options: ["Ionic bond", "Covalent bond", "Metallic bond", "Hydrogen bond"],
+                answer: "Covalent bond"
+            },
+             {
+                question: "The concept of electronegativity is used to predict:",
+                options: ["The melting point of a substance", "The type of bond formed between atoms", "The solubility of a substance", "The reaction rate"],
+                answer: "The type of bond formed between atoms"
+            },
+            {
+                question: "What is the conjugate base of H₂O?",
+                options: ["H₃O⁺", "OH⁻", "H₂O", "H⁺"],
+                answer: "OH⁻"
+            },
+             {
+                question: "Which of the following is a characteristic of a buffer solution?",
+                options: ["It resists changes in pH", "It has a pH of exactly 7", "It is always acidic", "It is always basic"],
+                answer: "It resists changes in pH"
+            },
+            {
+                question: "What is the general formula for an alkane?",
+                options: ["CnH₂n", "CnH₂n+2", "CnH₂n-2", "CnH₂n-6"],
+                answer: "CnH₂n+2"
+            },
+             {
+                question: "Which functional group is characteristic of alcohols?",
+                options: ["-COOH", "-CHO", "-OH", "-NH₂"],
+                answer: "-OH"
+            },
+            {
+                question: "The process of adding hydrogen to an alkene is called:",
+                options: ["Oxidation", "Reduction", "Hydrogenation", "Halogenation"],
+                answer: "Hydrogenation"
+            },
+             {
+                question: "Which of the following is an isomer of butane?",
+                options: ["Propane", "Pentane", "Isobutane", "Butene"],
+                answer: "Isobutane"
+            },
+            {
+                question: "What is the product of the reaction between an acid and a base?",
+                options: ["Salt and water", "Salt and hydrogen gas", "Acid and base", "Oxide and water"],
+                answer: "Salt and water"
+            },
+             {
+                question: "The half-life of a radioactive isotope is the time it takes for:",
+                options: ["All of the isotope to decay", "Half of the isotope to decay", "The decay rate to double", "The temperature to decrease by half"],
+                answer: "Half of the isotope to decay"
+            },
+            {
+                question: "Which type of radiation is the most penetrating?",
+                options: ["Alpha particles", "Beta particles", "Gamma rays", "Neutrons"],
+                answer: "Gamma rays"
+            },
+             {
+                question: "What is the molarity of a solution prepared by dissolving 10 g of NaOH in enough water to make 500 mL of solution? (Molar mass of NaOH = 40 g/mol)",
+                options: ["0.25 M", "0.50 M", "1.0 M", "2.0 M"],
+                answer: "0.50 M"
+            },
+            {
+                question: "Which of the following is a colligative property?",
+                options: ["Density", "Viscosity", "Boiling point elevation", "Surface tension"],
+                answer: "Boiling point elevation"
+            },
+             {
+                question: "The process of separating a mixture based on the differences in boiling points of its components is called:",
+                options: ["Filtration", "Distillation", "Chromatography", "Crystallization"],
+                answer: "Distillation"
+            },
+            {
+                question: "Which of the following is an example of a redox reaction?",
+                options: ["Neutralization reaction", "Precipitation reaction", "Combustion reaction", "Dissolving salt in water"],
+                answer: "Combustion reaction"
+            },
+             {
+                question: "What is the systematic name for the compound CH₃CH₂OCH₂CH₃?",
+                options: ["Diethyl ether", "Butane", "Propanol", "Ethane"],
+                answer: "Diethyl ether"
+            },
+
+            // Physics (27 MCQs)
+            {
+                question: "A car accelerates from rest at a constant rate of 2 m/s². How far does it travel in 5 seconds?",
+                options: ["10 m", "25 m", "50 m", "100 m"],
+                answer: "25 m"
+            },
+            {
+                question: "What is the SI unit of power?",
+                options: ["Joule", "Watt", "Newton", "Volt"],
+                answer: "Watt"
+            },
+            {
+                question: "According to Newton's third law of motion, for every action, there is an equal and opposite:",
+                options: ["Force", "Velocity", "Acceleration", "Momentum"],
+                answer: "Force"
+            },
+            {
+                question: "What is the relationship between frequency (f) and wavelength (λ) of a wave, given its speed (v)?",
+                options: ["v = fλ", "f = vλ", "λ = vf", "v = f/λ"],
+                answer: "v = fλ"
+            },
+             {
+                question: "Which of the following is a scalar quantity?",
+                options: ["Velocity", "Acceleration", "Force", "Energy"],
+                answer: "Energy"
+            },
+            {
+                question: "What is the principle behind the operation of a hydraulic press?",
+                options: ["Archimedes' principle", "Pascal's principle", "Bernoulli's principle", "Newton's laws of motion"],
+                answer: "Pascal's principle"
+            },
+             {
+                question: "The phenomenon of bending of light as it passes from one medium to another is called:",
+                options: ["Reflection", "Refraction", "Diffraction", "Interference"],
+                answer: "Refraction"
+            },
+            {
+                question: "What is the unit of electric resistance?",
+                options: ["Ampere", "Volt", "Ohm", "Watt"],
+                answer: "Ohm"
+            },
+             {
+                question: "According to Ohm's law, the current flowing through a conductor is directly proportional to the:",
+                options: ["Resistance", "Voltage", "Power", "Charge"],
+                answer: "Voltage"
+            },
+            {
+                question: "Which of the following is a magnetic material?",
+                options: ["Copper", "Aluminum", "Iron", "Plastic"],
+                answer: "Iron"
+            },
+             {
+                question: "What is the process by which a nucleus emits alpha particles, beta particles, or gamma rays?",
+                options: ["Nuclear fusion", "Nuclear fission", "Radioactive decay", "Nuclear reaction"],
+                answer: "Radioactive decay"
+            },
+            {
+                question: "The energy possessed by an object due to its motion is called:",
+                options: ["Potential energy", "Kinetic energy", "Thermal energy", "Chemical energy"],
+                answer: "Kinetic energy"
+            },
+             {
+                question: "What is the unit of work?",
+                options: ["Watt", "Joule", "Newton", "Pascal"],
+                answer: "Joule"
+            },
+            {
+                question: "Which type of lens is used to correct myopia (nearsightedness)?",
+                options: ["Convex lens", "Concave lens", "Cylindrical lens", "Plano-convex lens"],
+                answer: "Concave lens"
+            },
+             {
+                question: "The phenomenon of splitting of white light into its constituent colors when it passes through a prism is called:",
+                options: ["Reflection", "Refraction", "Dispersion", "Diffraction"],
+                answer: "Dispersion"
+            },
+            {
+                question: "What is the SI unit of electric charge?",
+                options: ["Volt", "Ampere", "Ohm", "Coulomb"],
+                answer: "Coulomb"
+            },
+             {
+                question: "According to the law of conservation of energy, energy cannot be created or destroyed, but can be:",
+                options: ["Converted from one form to another", "Lost as heat", "Gained from the environment", "Used up completely"],
+                answer: "Converted from one form to another"
+            },
+            {
+                question: "What is the force that opposes the motion of an object through a fluid?",
+                options: ["Friction", "Tension", "Drag", "Normal force"],
+                answer: "Drag"
+            },
+             {
+                question: "The temperature at which a solid changes into a liquid is called its:",
+                options: ["Boiling point", "Melting point", "Freezing point", "Sublimation point"],
+                answer: "Melting point"
+            },
+            {
+                question: "What is the SI unit of frequency?",
+                options: ["Meter", "Second", "Hertz", "Newton"],
+                answer: "Hertz"
+            },
+             {
+                question: "Which type of wave requires a medium to propagate?",
+                options: ["Electromagnetic wave", "Mechanical wave", "Light wave", "Radio wave"],
+                answer: "Mechanical wave"
+            },
+            {
+                question: "What is the phenomenon where a wave bends around an obstacle?",
+                options: ["Reflection", "Refraction", "Diffraction", "Interference"],
+                answer: "Diffraction"
+            },
+             {
+                question: "What is the unit of magnetic field strength?",
+                options: ["Ampere", "Volt", "Tesla", "Weber"],
+                answer: "Tesla"
+            },
+            {
+                question: "The process of converting alternating current (AC) to direct current (DC) is called:",
+                options: ["Rectification", "Amplification", "Modulation", "Demodulation"],
+                answer: "Rectification"
+            },
+             {
+                question: "What is the SI unit of pressure?",
+                options: ["Newton", "Joule", "Pascal", "Watt"],
+                answer: "Pascal"
+            },
+            {
+                question: "Which of the following is a renewable energy source?",
+                options: ["Coal", "Natural gas", "Solar energy", "Nuclear energy"],
+                answer: "Solar energy"
+            },
+             {
+                question: "What is the relationship between mass (m), force (F), and acceleration (a) according to Newton's second law?",
+                options: ["F = ma", "a = Fm", "m = Fa", "F = m/a"],
+                answer: "F = ma"
+            },
+
+            // English (9 MCQs) - Focus on advanced grammar, usage, idioms, etc.
+            {
+                question: "Identify the type of phrase underlined in the following sentence: 'Running quickly, she caught the bus.'",
+                options: ["Noun phrase", "Adverbial phrase", "Adjective phrase", "Participial phrase"],
+                answer: "Participial phrase"
+            },
+            {
+                question: "Choose the sentence that uses the subjunctive mood correctly:",
+                options: ["If I was you, I would take the offer.", "If I were you, I would take the offer.", "If I am you, I would take the offer.", "If I had been you, I would take the offer."],
+                answer: "If I were you, I would take the offer."
+            },
+            {
+                question: "Which preposition best completes the sentence? 'He is adept _____ solving complex problems.'",
+                options: ["at", "in", "with", "on"],
+                answer: "at"
+            },
+            {
+                question: "What does the idiom 'to bite the bullet' mean?",
+                options: ["To speak angrily", "To face a difficult situation with courage", "To give up easily", "To make a quick decision"],
+                answer: "To face a difficult situation with courage"
+            },
+             {
+                question: "Identify the error in the following sentence: 'Neither the students nor the teacher were present for the meeting.'",
+                options: ["Subject-verb agreement", "Pronoun agreement", "Parallelism", "Tense consistency"],
+                answer: "Subject-verb agreement"
+            },
+            {
+                question: "Which phrasal verb means 'to tolerate' or 'to endure'?",
+                options: ["Put off", "Put up with", "Put out", "Put down"],
+                answer: "Put up with"
+            },
+             {
+                question: "Choose the word that is the closest ANTONYM for 'Ephemeral'.",
+                options: ["Transient", "Lasting", "Fleeting", "Momentary"],
+                answer: "Lasting"
+            },
+            {
+                question: "Rearrange the following words to form a grammatically correct sentence: 'quickly / the / ran / child / away'",
+                options: ["The child ran quickly away.", "Quickly the child ran away.", "Away the child ran quickly.", "Ran the child quickly away."],
+                answer: "The child ran quickly away."
+            },
+             {
+                question: "Identify the correct use of punctuation in the following sentence:",
+                options: ["The books, which were old, were sold.", "The books which were old were sold.", "The books; which were old; were sold.", "The books - which were old - were sold."],
+                answer: "The books, which were old, were sold."
+            },
+
+            // Logical Reasoning (3 MCQs)
+            {
+                question: "If all A are B, and some B are C, then which of the following must be true?",
+                options: ["All A are C", "Some A are C", "Some C are A", "None of the above"],
+                answer: "None of the above"
+            },
+            {
+                question: "Look at this series: 2, 6, 12, 20, 30, ... What number should come next?",
+                options: ["40", "42", "44", "46"],
+                answer: "42"
+            },
+             {
+                question: "In a certain code, 'CAT' is written as 'DBG'. How is 'DOG' written in the same code?",
+                options: ["EPG", "EOH", "CPF", "EQH"],
+                answer: "EOH"
+            }
+        ];
+
+        // --- Global Variables ---
+        let studentName = '';
         let timerInterval;
-        let timeLeft = 1500; // 25 minutes in seconds
+        const totalTime = 210 * 60; // 210 minutes in seconds
+        let timeRemaining = totalTime;
+        let startTime;
 
-        startQuizButton.addEventListener('click', () => {
-            const name = nameInput.value.trim();
-            if (name === '') {
-                nameError.style.display = 'block';
+        // --- DOM Elements ---
+        const nameEntrySection = document.getElementById('name-entry');
+        const studentNameInput = document.getElementById('student-name');
+        const nameError = document.getElementById('name-error');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const quizSection = document.getElementById('quiz-section');
+        const timerDisplay = document.getElementById('timer');
+        const questionsContainer = document.getElementById('questions-container');
+        const submitQuizBtn = document.getElementById('submit-quiz-btn');
+        const resultsSection = document.getElementById('results-section');
+        const resultName = document.getElementById('result-name');
+        const resultAttempted = document.getElementById('result-attempted');
+        const resultScore = document.getElementById('result-score');
+        const resultPercentage = document.getElementById('result-percentage');
+        const resultTime = document.getElementById('result-time');
+        const formspreeForm = document.getElementById('formspree-form');
+        const formName = document.getElementById('form-name');
+        const formAttempted = document.getElementById('form-attempted');
+        const formScore = document.getElementById('form-score');
+        const formPercentage = document.getElementById('form-percentage');
+        const formTimeTaken = document.getElementById('form-timeTaken');
+
+
+        // --- Event Listeners ---
+        startQuizBtn.addEventListener('click', startQuiz);
+        submitQuizBtn.addEventListener('click', submitQuiz);
+
+        // --- Functions ---
+
+        // Function to shuffle an array (Fisher-Yates Algorithm)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+            }
+            return array;
+        }
+
+        // Function to render questions
+        function renderQuestions() {
+            // Shuffle questions array (optional, but adds another layer of randomization)
+            // shuffleArray(questions); // Uncomment this line if you want to randomize the order of questions themselves
+
+            questionsContainer.innerHTML = ''; // Clear previous questions
+
+            questions.forEach((q, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.classList.add('mb-6', 'p-4', 'border', 'border-gray-200', 'rounded-md', 'bg-gray-50');
+
+                // Add question number and text
+                const questionText = document.createElement('p');
+                questionText.classList.add('font-semibold', 'mb-3', 'text-gray-900');
+                questionText.textContent = `${index + 1}. ${q.question}`;
+                questionElement.appendChild(questionText);
+
+                // Shuffle options for the current question
+                const shuffledOptions = shuffleArray([...q.options]); // Create a copy before shuffling
+
+                // Add options (radio buttons)
+                shuffledOptions.forEach((option, optionIndex) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.classList.add('mb-2');
+
+                    const radioInput = document.createElement('input');
+                    radioInput.type = 'radio';
+                    radioInput.name = `question-${index}`; // Group radio buttons by question
+                    radioInput.id = `q${index}-option${optionIndex}`;
+                    radioInput.value = option;
+                    radioInput.classList.add('mr-2', 'text-blue-600', 'focus:ring-blue-500');
+
+                    const label = document.createElement('label');
+                    label.htmlFor = `q${index}-option${optionIndex}`;
+                    label.textContent = option;
+                    label.classList.add('text-gray-700', 'cursor-pointer');
+
+                    optionDiv.appendChild(radioInput);
+                    optionDiv.appendChild(label);
+                    questionElement.appendChild(optionDiv);
+                });
+
+                questionsContainer.appendChild(questionElement);
+            });
+        }
+
+        // Function to start the quiz
+        function startQuiz() {
+            studentName = studentNameInput.value.trim();
+
+            if (studentName === '') {
+                nameError.classList.remove('hidden');
                 return;
             }
 
-            nameError.style.display = 'none';
-            nameEntrySection.style.display = 'none';
-            quizSection.style.display = 'block';
-            startTimer();
-        });
+            nameError.classList.add('hidden');
+            nameEntrySection.classList.add('hidden');
+            quizSection.classList.remove('hidden');
 
-        quizForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            clearInterval(timerInterval);
-            calculateAndSubmitResults();
-        });
+            // Render questions with randomized options
+            renderQuestions();
 
-        function startTimer() {
-            timerInterval = setInterval(() => {
-                if (timeLeft > 0) {
-                    timeLeft--;
-                    const minutes = Math.floor(timeLeft / 60);
-                    const seconds = timeLeft % 60;
-                    timerDisplay.textContent = `Time Remaining: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                } else {
-                    clearInterval(timerInterval);
-                    calculateAndSubmitResults(); // Auto submit when time is up.
-                }
-            }, 1000);
+            // Start the timer
+            startTime = Date.now(); // Record the start time
+            timerInterval = setInterval(updateTimer, 1000);
         }
 
-        function calculateAndSubmitResults() {
-            const name = nameInput.value.trim();
-            let score = 0;
-            let questionsAttempted = 0;
+        // Function to update the timer display
+        function updateTimer() {
+            timeRemaining--;
 
-            const correctAnswers = {
-                q1: 'b', q2: 'b', q3: 'c', q4: 'c', q5: 'c',
-                q6: 'c', q7: 'c', q8: 'c', q9: 'c', q10: 'c',
-                q11: 'c', q12: 'c', q13: 'c', q14: 'c', q15: 'c',
-                q16: 'c', q17: 'c', q18: 'c', q19: 'c', q20: 'd',
-                q21: 'c', q22: 'c', q23: 'b', q24: 'c', q25: 'c',
-                q26: 'c', q27: 'c', q28: 'c', q29: 'c', q30: 'c',
-                q31: 'c', q32: 'c', q33: 'c', q34: 'c', q35: 'c',
-                q36: 'b', q37: 'd', q38: 'b', q39: 'd', q40: 'b',
-                q41: 'c', q42: 'b', q43: 'd', q44: 'b', q45: 'b',
-                q46: 'b', q47: 'b', q48: 'a', q49: 'b', q50: 'c',
-            };
-
-            for (let question in correctAnswers) {
-                if (quizForm.elements[question].value) {
-                    questionsAttempted++;
-                    if (quizForm.elements[question].value === correctAnswers[question]) {
-                        score++;
-                    }
-                }
+            if (timeRemaining < 0) {
+                clearInterval(timerInterval);
+                submitQuiz(true); // Auto-submit when time runs out
+                return;
             }
 
-            const timeTaken = 1500 - timeLeft;
-            const minutes = Math.floor(timeTaken / 60);
-            const seconds = timeTaken % 60;
-            const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-            studentNameDisplay.textContent = name;
-            questionsAttemptedDisplay.textContent = questionsAttempted;
-            scoreDisplay.textContent = `${score} / 50`;
-            timeTakenDisplay.textContent = formattedTime;
-
-            resultsFormNameInput.value = name;
-            resultsFormAttemptedInput.value = questionsAttempted;
-            resultsFormScoreInput.value = score;
-            resultsFormTimeInput.value = formattedTime;
-
-            resultsSection.style.display = 'block';
-            resultsForm.submit(); // Submit the form data
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            timerDisplay.textContent = formattedTime;
         }
+
+        // Function to submit the quiz
+        function submitQuiz(isAutoSubmit = false) {
+            clearInterval(timerInterval); // Stop the timer
+
+            if (isAutoSubmit) {
+                 // Optional: Display a message that time ran out
+                 alert("Time's up! Your quiz has been automatically submitted.");
+            } else {
+                 // Optional: Confirmation for manual submission
+                 if (!confirm("Are you sure you want to submit the quiz?")) {
+                     // If user cancels, restart the timer and exit
+                     timerInterval = setInterval(updateTimer, 1000);
+                     return;
+                 }
+            }
+
+
+            // Calculate results
+            let attemptedCount = 0;
+            let correctCount = 0;
+            const endTime = Date.now();
+            const timeTakenMillis = endTime - startTime;
+            const timeTakenSeconds = Math.floor(timeTakenMillis / 1000);
+
+            questions.forEach((q, index) => {
+                const selectedOption = document.querySelector(`input[name="question-${index}"]:checked`);
+                if (selectedOption) {
+                    attemptedCount++;
+                    if (selectedOption.value === q.answer) {
+                        correctCount++;
+                    }
+                }
+            });
+
+            const percentageScore = (correctCount / questions.length) * 100;
+
+            // Format time taken
+            const hoursTaken = Math.floor(timeTakenSeconds / 3600);
+            const minutesTaken = Math.floor((timeTakenSeconds % 3600) / 60);
+            const secondsTaken = timeTakenSeconds % 60;
+            let timeTakenString = '';
+            if (hoursTaken > 0) timeTakenString += `${hoursTaken} hour${hoursTaken > 1 ? 's' : ''}, `;
+            if (minutesTaken > 0) timeTakenString += `${minutesTaken} minute${minutesTaken > 1 ? 's' : ''}, `;
+            timeTakenString += `${secondsTaken} second${secondsTaken > 1 ? 's' : ''}`;
+            if (timeTakenString.endsWith(', ')) timeTakenString = timeTakenString.slice(0, -2); // Remove trailing comma and space
+
+
+            // Display results
+            quizSection.classList.add('hidden');
+            resultsSection.classList.remove('hidden');
+
+            resultName.textContent = studentName;
+            resultAttempted.textContent = attemptedCount;
+            resultScore.textContent = correctCount;
+            resultPercentage.textContent = percentageScore.toFixed(2); // Display with 2 decimal places
+            resultTime.textContent = timeTakenString;
+
+            // Populate and submit hidden Formspree form
+            formName.value = studentName;
+            formAttempted.value = attemptedCount;
+            formScore.value = correctCount;
+            formPercentage.value = percentageScore.toFixed(2);
+            formTimeTaken.value = timeTakenString;
+
+            // Submit the form
+            formspreeForm.submit();
+        }
+
+        // --- Initial Setup ---
+        // Ensure quiz section and results section are hidden on load
+        quizSection.classList.add('hidden');
+        resultsSection.classList.add('hidden');
+        nameEntrySection.classList.remove('hidden'); // Ensure name entry is visible initially
+
     </script>
+
 </body>
 </html>
