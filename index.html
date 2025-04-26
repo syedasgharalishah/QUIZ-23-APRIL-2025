@@ -3,830 +3,712 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MDCAT High-Difficulty Practice Test - 2025</title>
+    <title>QUIZ FOR CSS ASPIRANTS 26 APRIL 2025 - SYED ASGHAR ALI SHAH</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Apply Inter font globally */
         body {
             font-family: 'Inter', sans-serif;
-            /* Disable text selection */
-            user-select: none;
             -webkit-user-select: none; /* Safari */
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Standard syntax */
+            /* Disable image dragging */
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
         }
-
-        /* Basic deterrent for right-click and developer tools */
-        body.disable-inspect {
-            pointer-events: none; /* Disable pointer events temporarily if needed, but less user-friendly */
+        /* Custom styles for quiz elements */
+        .quiz-option {
+            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+        }
+        .quiz-option:hover {
+            background-color: #e0f2fe; /* Light blue hover */
+            border-color: #3b82f6; /* Blue border hover */
+        }
+        .quiz-option.selected {
+            background-color: #bfdbfe; /* Darker blue selected */
+            border-color: #2563eb; /* Darker blue border selected */
+            font-weight: 600;
+        }
+        /* Style for correct/incorrect feedback (optional, can be added on submit) */
+        .quiz-option.correct {
+            background-color: #dcfce7;
+            border-color: #22c55e;
+        }
+        .quiz-option.incorrect {
+            background-color: #fee2e2;
+            border-color: #ef4444;
+        }
+        /* Hide scrollbar but allow scrolling */
+         .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        /* Prevent image saving */
+        img {
+            pointer-events: none;
         }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gradient-to-br from-gray-100 to-blue-100 min-h-screen flex flex-col" oncontextmenu="return false;">
 
-    <header class="bg-blue-600 text-white py-6 px-4 text-center rounded-b-lg shadow-md">
-        <h1 class="text-2xl md:text-3xl font-bold mb-2">SYED ASGHAR ALI SHAH</h1>
-        <h2 class="text-xl md:text-2xl font-semibold">MDCAT High-Difficulty Practice Test - 2025</h2>
-        <img id="header-image" src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXO6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__"
-             alt="MDCAT Prep Image" class="mx-auto mt-4 h-24 w-24 object-cover rounded-full shadow-lg"
-             onerror="this.style.display='none'; console.error('Image failed to load.');">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex flex-col sm:flex-row justify-between items-center">
+            <div class="flex items-center space-x-3 mb-2 sm:mb-0">
+                 <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__"
+                     alt="User Image"
+                     class="h-12 w-12 rounded-full object-cover border-2 border-blue-500"
+                     onerror="this.onerror=null; this.src='https://placehold.co/48x48/007bff/ffffff?text=SA';">
+                 <span class="text-lg font-semibold text-gray-700">SYED ASGHAR ALI SHAH</span>
+            </div>
+            <h1 class="text-xl sm:text-2xl font-bold text-center text-blue-700">QUIZ FOR CSS ASPIRANTS 26 APRIL 2025</h1>
+            <div id="timer-display" class="text-lg sm:text-xl font-semibold text-red-600 mt-2 sm:mt-0">Time Left: 25:00</div>
+        </div>
     </header>
 
-    <section id="name-entry" class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg max-w-md">
-        <h3 class="text-xl font-semibold mb-4 text-center">Enter Your Details to Start</h3>
-        <div class="mb-4">
-            <label for="student-name" class="block text-gray-700 text-sm font-bold mb-2">Enter Your Full Name:</label>
-            <input type="text" id="student-name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Your Full Name">
-            <p id="name-error" class="text-red-500 text-xs italic mt-2 hidden">Please enter your name to start the quiz.</p>
-        </div>
-        <div class="text-center">
-            <button id="start-quiz-btn" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out">
+    <main class="container mx-auto px-4 py-8 flex-grow">
+
+        <section id="name-entry" class="max-w-lg mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-lg text-center">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Welcome to the Grammar Challenge!</h2>
+            <p class="text-gray-600 mb-6">Please enter your full name to begin the quiz.</p>
+            <input type="text" id="student-name" placeholder="Enter your full name" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-6 text-lg" required>
+            <button id="start-quiz-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md text-lg transition duration-300 ease-in-out transform hover:scale-105">
                 Start Quiz
             </button>
-        </div>
-    </section>
+        </section>
 
-    <section id="quiz-section" class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg hidden">
-        <div class="text-center mb-6">
-            <h3 class="text-2xl font-bold text-blue-600">Time Remaining: <span id="timer">210:00</span></h3>
-        </div>
-
-        <div id="questions-container">
+        <section id="quiz-section" class="hidden max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-xl">
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Grammar & Vocabulary Quiz</h2>
+            <div id="question-container" class="mb-6">
+                <p class="text-lg font-semibold text-gray-700 mb-2"><span id="question-number"></span> / 50</p>
+                <p id="question-text" class="text-xl text-gray-800 mb-5 leading-relaxed"></p>
+                <div id="options-container" class="space-y-3">
+                    </div>
+                 <div id="rearrangement-input-container" class="hidden mt-4">
+                    <label for="rearrangement-answer" class="block text-gray-700 font-medium mb-2">Your Rearranged Sentence:</label>
+                    <input type="text" id="rearrangement-answer" placeholder="Type the rearranged sentence here" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
             </div>
+            <div class="flex justify-between items-center mt-8">
+                 <button id="prev-question-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-5 rounded-md transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
+                    Previous
+                </button>
+                <button id="next-question-btn" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-5 rounded-md transition duration-300 ease-in-out">
+                    Next
+                </button>
+                <button id="submit-quiz-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-5 rounded-md transition duration-300 ease-in-out hidden">
+                    Submit Quiz
+                </button>
+            </div>
+        </section>
 
-        <div class="text-center mt-8">
-            <button id="submit-quiz-btn" class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full focus:outline-none focus:shadow-outline transition duration-300 ease-in-out">
-                Submit Quiz
-            </button>
+        <section id="results-section" class="hidden max-w-lg mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-lg text-center mt-10">
+            <h2 class="text-3xl font-bold mb-6 text-blue-700">Quiz Results</h2>
+            <div class="space-y-4 text-lg text-gray-700">
+                <p><strong class="font-semibold text-gray-800">Name:</strong> <span id="result-name"></span></p>
+                <p><strong class="font-semibold text-gray-800">Time Taken:</strong> <span id="result-time"></span></p>
+                <p><strong class="font-semibold text-gray-800">Questions Attempted:</strong> <span id="result-attempted"></span></p>
+                <p><strong class="font-semibold text-gray-800">Correct Answers:</strong> <span id="result-score"></span> / 50</p>
+                <p><strong class="font-semibold text-gray-800">Percentage:</strong> <span id="result-percentage"></span>%</p>
+            </div>
+             <p class="mt-6 text-sm text-gray-500">Your results have been submitted. Thank you for participating!</p>
+        </section>
+
+        <form id="results-form" action="https://formspree.io/f/xwpvddea" method="POST" class="hidden">
+            <input type="text" name="name" id="form-name">
+            <input type="text" name="time_taken" id="form-time">
+            <input type="number" name="attempted" id="form-attempted">
+            <input type="number" name="score" id="form-score">
+            <input type="text" name="percentage" id="form-percentage">
+            <input type="hidden" name="_subject" value="New Quiz Submission - CSS Aspirants">
+             <input type="text" name="_gotcha" style="display:none"> </form>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white py-6 mt-12 shadow-inner">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">Need assistance or have questions?</p>
+            <p class="mb-4 font-semibold text-lg">Contact: 03265762698</p>
+            <p class="text-sm text-gray-400">&copy; 2025 SYED ASGHAR ALI SHAH - CSS Aspirant Resources. All rights reserved.</p>
+             <p class="text-sm text-gray-500 mt-2">Designed for dedicated CSS Aspirants.</p>
         </div>
-    </section>
-
-    <section id="results-section" class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-lg max-w-md hidden">
-        <h3 class="text-2xl font-bold mb-4 text-center text-blue-600">Quiz Results</h3>
-        <p class="text-lg mb-2"><span class="font-semibold">Student Name:</span> <span id="result-name"></span></p>
-        <p class="text-lg mb-2"><span class="font-semibold">Total Questions:</span> 100</p>
-        <p class="text-lg mb-2"><span class="font-semibold">Questions Attempted:</span> <span id="result-attempted"></span></p>
-        <p class="text-lg mb-2"><span class="font-semibold">Correct Answers:</span> <span id="result-score"></span></p>
-        <p class="text-lg mb-2"><span class="font-semibold">Percentage Score:</span> <span id="result-percentage"></span>%</p>
-        <p class="text-lg mb-4"><span class="font-semibold">Time Taken:</span> <span id="result-time"></span></p>
-        <p class="text-sm text-gray-600 text-center">Thank you for taking the test!</p>
-    </section>
-
-    <form id="formspree-form" action="https://formspree.io/f/xwpvddea" method="POST" class="hidden">
-        <input type="hidden" name="name" id="form-name">
-        <input type="hidden" name="attempted" id="form-attempted">
-        <input type="hidden" name="score" id="form-score">
-        <input type="hidden" name="percentage" id="form-percentage">
-        <input type="hidden" name="timeTaken" id="form-timeTaken">
-    </form>
-
-    <footer class="bg-gray-800 text-white py-6 px-4 text-center mt-8 rounded-t-lg shadow-md">
-        <p class="text-sm mb-2">Contact: 03265762698</p>
-        <p class="text-sm">&copy; 2025 MDCAT Prep - All Rights Reserved</p>
     </footer>
 
     <script>
-        // Disable right-click context menu
-        document.addEventListener('contextmenu', function(e) {
-            e.preventDefault();
-        });
-
-        // Disable common developer tool shortcuts (basic deterrent)
-        document.addEventListener('keydown', function(e) {
-            // Disable F12
-            if (e.key === 'F12') {
-                e.preventDefault();
-            }
-            // Disable Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U (Windows/Linux)
-            if ((e.ctrlKey && e.shiftKey && e.key === 'I') ||
-                (e.ctrlKey && e.shiftKey && e.key === 'J') ||
-                (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault();
-            }
-            // Disable Cmd+Option+I, Cmd+Option+J, Cmd+U (Mac)
-            if ((e.metaKey && e.altKey && e.key === 'I') ||
-                (e.metaKey && e.altKey && e.key === 'J') ||
-                (e.metaKey && e.key === 'U')) {
-                e.preventDefault();
-            }
-        });
-
-
-        // --- Quiz Data ---
-        // Structure: [{ question: "...", options: ["...", "...", "...", "..."], answer: "Correct Option Text" }, ...]
-        const questions = [
-            // Biology (34 MCQs)
+        // --- Quiz Data (Derived from PDFs) ---
+        const quizData = [
+            // --- Part of Speech Questions ---
             {
-                question: "Which of the following processes is LEAST likely to occur in the absence of a functional Golgi apparatus?",
-                options: ["Protein synthesis on ribosomes", "Glycosylation of lipids and proteins", "Formation of lysosomes", "Packaging of proteins for secretion"],
-                answer: "Glycosylation of lipids and proteins"
+                question: "In the sentence 'This past month, India has been hit by 10 per cent tariffs on goods it ships to the US.', what part of speech is 'tariffs'?",
+                options: ["Verb", "Adjective", "Noun", "Adverb"],
+                answer: "Noun",
+                type: "mcq"
             },
             {
-                question: "A plant cell is placed in a solution. It swells and becomes turgid. The solution is likely:",
-                options: ["Hypertonic", "Isotonic", "Hypotonic", "Slightly hypertonic"],
-                answer: "Hypotonic"
+                question: "Identify the part of speech for 'irked' in 'President Donald Trump is irked by this...'.",
+                options: ["Noun", "Verb (Past Participle used as Adjective)", "Adverb", "Preposition"],
+                answer: "Verb (Past Participle used as Adjective)",
+                type: "mcq" // Technically a predicate adjective here
+            },
+            {
+                question: "What part of speech is 'modernise' in '...efforts to modernise its air fleet.'?",
+                options: ["Noun", "Adjective", "Verb (Infinitive)", "Adverb"],
+                answer: "Verb (Infinitive)",
+                type: "mcq"
+            },
+            {
+                question: "In 'Vance welcomed the idea of India buying energy from the US.', 'buying' functions as a:",
+                options: ["Present Participle (Adjective)", "Gerund (Noun)", "Main Verb", "Adverb"],
+                answer: "Gerund (Noun)",
+                type: "mcq" // Gerund as object of the preposition 'of'
+            },
+            {
+                question: "What is the part of speech for 'however' in 'India's trade war with the US, however, seems to augur only uncertainty...'?",
+                options: ["Conjunction (Coordinating)", "Adjective", "Preposition", "Adverb (Conjunctive/Transitional)"],
+                answer: "Adverb (Conjunctive/Transitional)",
+                type: "mcq"
             },
              {
-                question: "The primary function of the Calvin cycle is to:",
-                options: ["Generate ATP and NADPH", "Fix carbon dioxide into organic molecules", "Release oxygen as a byproduct", "Break down glucose to produce pyruvate"],
-                answer: "Fix carbon dioxide into organic molecules"
+                question: "Identify the pronoun type for 'it' in '...goods it ships to the US.'",
+                options: ["Personal (Subjective)", "Personal (Objective)", "Possessive", "Reflexive"],
+                answer: "Personal (Subjective)", // 'it' is the subject of the verb 'ships' in the implied relative clause "that it ships"
+                type: "mcq"
             },
             {
-                question: "Which of the following statements about enzymes is INCORRECT?",
-                options: ["Enzymes are biological catalysts.", "Enzymes are consumed during the reaction.", "Enzymes lower the activation energy of a reaction.", "Enzyme activity is affected by temperature and pH."],
-                answer: "Enzymes are consumed during the reaction."
+                question: "What part of speech is 'unfortunate' in 'The tension between India and Pakistan is unfortunate...'?",
+                options: ["Adverb", "Noun", "Verb", "Adjective (Predicate)"],
+                answer: "Adjective (Predicate)",
+                type: "mcq"
             },
              {
-                question: "In cellular respiration, the majority of ATP is produced during:",
-                options: ["Glycolysis", "Krebs cycle", "Electron transport chain", "Fermentation"],
-                answer: "Electron transport chain"
-            },
-            {
-                question: "Which type of mutation is most likely to result in a frameshift?",
-                options: ["Substitution", "Insertion of a single nucleotide", "Deletion of three nucleotides", "Inversion"],
-                answer: "Insertion of a single nucleotide"
+                question: "In the phrase '...arguably bigger war...', what does 'arguably' modify?",
+                options: ["war (Noun)", "bigger (Adjective)", "fighting (Verb)", "is (Verb)"],
+                answer: "bigger (Adjective)",
+                type: "mcq"
             },
              {
-                question: "The process by which a bacterial cell takes up foreign DNA from its surroundings is called:",
-                options: ["Conjugation", "Transduction", "Transformation", "Binary fission"],
-                answer: "Transformation"
+                question: "What type of verb is 'seems' in '...seems to augur only uncertainty...'?",
+                options: ["Action Verb", "Helping Verb", "Linking Verb", "Modal Verb"],
+                answer: "Linking Verb",
+                type: "mcq"
             },
             {
-                question: "Which of the following is a characteristic of facilitated diffusion?",
-                options: ["Requires energy input", "Moves substances against their concentration gradient", "Involves carrier proteins", "Is a passive process"],
-                answer: "Involves carrier proteins"
+                question: "Identify the part of speech for 'between' in '...escalation of tensions between Pakistan and India...'.",
+                options: ["Adverb", "Conjunction", "Preposition", "Adjective"],
+                answer: "Preposition",
+                type: "mcq"
+            },
+            // --- Preposition Questions ---
+            {
+                question: "Choose the correct preposition: 'The US is India's largest trading partner, with exports ____ it accounting for 18pc...'",
+                options: ["on", "to", "from", "by"],
+                answer: "to",
+                type: "mcq"
+            },
+            {
+                question: "Fill in the blank: 'Concerns have been raised ____ the effectiveness of the F-35...'",
+                options: ["about", "regarding", "over", "with"],
+                answer: "regarding", // 'about' or 'over' could also fit, but 'regarding' is used in the text.
+                type: "mcq"
+            },
+            {
+                question: "Select the appropriate preposition: 'Vance welcomed the idea ____ India buying energy from the US.'",
+                options: ["for", "with", "of", "about"],
+                answer: "of",
+                type: "mcq"
+            },
+            {
+                question: "Complete the sentence: 'Reading ____ the lines of the Vance visit shows how far apart the two countries are.'",
+                options: ["in", "between", "through", "over"],
+                answer: "between",
+                type: "mcq"
             },
              {
-                question: "The functional unit of heredity is the:",
-                options: ["Chromosome", "Gene", "Allele", "DNA molecule"],
-                answer: "Gene"
+                question: "Which preposition fits here: '...strike a deal that is ____ America’s liking...'?",
+                options: ["for", "with", "to", "by"],
+                answer: "to",
+                type: "mcq"
+            },
+            // --- Verb Tense/Aspect/Voice/Mood Questions ---
+            {
+                question: "What is the tense and voice of 'has been hit' in 'India has been hit by 10 per cent tariffs'?",
+                options: ["Present Perfect Active", "Past Perfect Passive", "Present Perfect Passive", "Simple Present Passive"],
+                answer: "Present Perfect Passive",
+                type: "mcq"
             },
             {
-                question: "Which of the following is NOT a component of a nucleotide?",
-                options: ["Nitrogenous base", "Phosphate group", "Ribose sugar", "Amino acid"],
-                answer: "Amino acid"
+                question: "Identify the tense of 'had brought' in '...how the South Koreans had brought their A-game...'.",
+                options: ["Simple Past", "Past Continuous", "Present Perfect", "Past Perfect"],
+                answer: "Past Perfect",
+                type: "mcq"
+            },
+            {
+                question: "What mood is predominantly used in the sentence 'The US is India’s largest trading partner.'?",
+                options: ["Indicative", "Imperative", "Subjunctive", "Conditional"],
+                answer: "Indicative",
+                type: "mcq"
+            },
+            {
+                question: "The verb phrase 'could be produced' in '...which Russia has proposed could be produced within India.' expresses:",
+                options: ["Certainty", "Obligation", "Possibility/Capability", "Past Habit"],
+                answer: "Possibility/Capability",
+                type: "mcq"
             },
              {
-                question: "The process of converting mRNA into a protein is called:",
-                options: ["Transcription", "Replication", "Translation", "Mutation"],
-                answer: "Translation"
+                question: "Is the main clause 'New Delhi is already fighting an arguably bigger war' in Active or Passive voice?",
+                options: ["Active", "Passive"],
+                answer: "Active",
+                type: "mcq"
+            },
+            // --- Sentence Structure Questions ---
+            {
+                question: "Classify the sentence: 'President Donald Trump is irked by this.'",
+                options: ["Simple", "Compound", "Complex", "Compound-Complex"],
+                answer: "Simple",
+                type: "mcq"
             },
             {
-                question: "Which organelle is responsible for detoxification of drugs and poisons in the cell?",
-                options: ["Mitochondria", "Endoplasmic reticulum", "Golgi apparatus", "Lysosome"],
-                answer: "Endoplasmic reticulum"
+                question: "What type of sentence is: 'This ‘deal’ sounds good in theory but presents problems for Modi’s domestic initiatives.'?",
+                options: ["Simple", "Compound", "Complex", "Compound-Complex"],
+                answer: "Compound", // Two independent clauses joined by 'but'
+                type: "mcq"
+            },
+            {
+                question: "Identify the sentence type: 'WHILE the tragic attack...may have increased the prospects of war..., New Delhi is already fighting an arguably bigger war...'",
+                options: ["Simple", "Compound", "Complex", "Compound-Complex"],
+                answer: "Complex", // Dependent clause (starting with WHILE) + Independent clause
+                type: "mcq"
+            },
+            {
+                question: "What kind of clause is 'that is to America’s liking' in '...strike a deal that is to America’s liking...'?",
+                options: ["Independent Clause", "Adverbial Clause", "Noun Clause", "Adjectival (Relative) Clause"],
+                answer: "Adjectival (Relative) Clause", // Modifies 'deal'
+                type: "mcq"
             },
              {
-                question: "The fluid mosaic model of the cell membrane describes the membrane as:",
-                options: ["A rigid structure of proteins and lipids", "A dynamic structure with proteins embedded in a lipid bilayer", "A static layer of phospholipids", "A protein layer surrounding a lipid core"],
-                answer: "A dynamic structure with proteins embedded in a lipid bilayer"
+                question: "The clause 'how the world is coming to America' functions as what in the sentence '...has been eager to boast of how the world is coming to America...'?",
+                options: ["Adjective Clause", "Adverb Clause", "Noun Clause (Object of Preposition)", "Independent Clause"],
+                answer: "Noun Clause (Object of Preposition)", // Object of 'of'
+                type: "mcq"
+            },
+            // --- Idioms, Synonyms, Antonyms Questions ---
+            {
+                question: "What is the meaning of the idiom 'Upped the ante'?",
+                options: ["Reduced the demands", "Increased the demands or risks", "Kept things the same", "Offered a compromise"],
+                answer: "Increased the demands or risks",
+                type: "mcq"
             },
             {
-                question: "Which of the following is an example of a positive feedback mechanism in the human body?",
-                options: ["Regulation of blood glucose levels", "Regulation of body temperature", "Blood clotting", "Regulation of blood pressure"],
-                answer: "Blood clotting"
+                question: "Which is a synonym for 'In abeyance'?",
+                options: ["Active", "Resumed", "Suspended", "Ongoing"],
+                answer: "Suspended",
+                type: "mcq"
+            },
+            {
+                question: "Choose the antonym for 'Give diplomacy a chance'.",
+                options: ["Attempt negotiation", "Seek peaceful resolution", "Resort to force", "Try talking"],
+                answer: "Resort to force",
+                type: "mcq"
+            },
+            {
+                question: "The idiom 'Scapegoat' refers to:",
+                options: ["The real culprit", "A person blamed for others' mistakes", "A hero", "A leader"],
+                answer: "A person blamed for others' mistakes",
+                type: "mcq"
+            },
+            {
+                question: "What does 'Fanning the flames' mean?",
+                options: ["Calming a situation", "Making a situation worse", "Ignoring a problem", "Starting a fire"],
+                answer: "Making a situation worse",
+                type: "mcq"
             },
              {
-                question: "The primary site of absorption of digested food in the human body is the:",
-                options: ["Stomach", "Small intestine", "Large intestine", "Esophagus"],
-                answer: "Small intestine"
-            },
-            {
-                question: "Which of the following is a fat-soluble vitamin?",
-                options: ["Vitamin C", "Vitamin B12", "Vitamin D", "Folic acid"],
-                answer: "Vitamin D"
+                question: "An antonym for 'Bring down the temperature' (reduce tension) is:",
+                options: ["Cool things down", "De-escalate", "Calm the situation", "Inflame"],
+                answer: "Inflame",
+                type: "mcq"
             },
              {
-                question: "The process of gas exchange in the lungs occurs in the:",
-                options: ["Trachea", "Bronchi", "Bronchioles", "Alveoli"],
-                answer: "Alveoli"
-            },
-            {
-                question: "Which part of the brain is responsible for coordinating voluntary movements and balance?",
-                options: ["Cerebrum", "Cerebellum", "Medulla oblongata", "Hypothalamus"],
-                answer: "Cerebellum"
+                question: "What does 'Left a bad taste in the mouth' signify?",
+                options: ["A pleasant feeling", "A feeling of displeasure or bitterness", "A delicious meal", "A neutral experience"],
+                answer: "A feeling of displeasure or bitterness",
+                type: "mcq"
             },
              {
-                question: "The hormone insulin is produced by the:",
-                options: ["Thyroid gland", "Adrenal gland", "Pancreas", "Pituitary gland"],
-                answer: "Pancreas"
-            },
-            {
-                question: "Which of the following is an autoimmune disease?",
-                options: ["Malaria", "Tuberculosis", "Type 1 Diabetes", "Influenza"],
-                answer: "Type 1 Diabetes"
+                question: "Which phrase means 'To escape from or evade authorities'?",
+                options: ["Take action against", "Give authorities the slip", "Besmirch image", "Follow up"],
+                answer: "Give authorities the slip",
+                type: "mcq"
             },
              {
-                question: "The process of meiosis results in the formation of:",
-                options: ["Two diploid cells", "Four diploid cells", "Two haploid cells", "Four haploid cells"],
-                answer: "Four haploid cells"
+                question: "A 'Precision strike' is best described as:",
+                options: ["Indiscriminate bombing", "Carpet bombing", "A targeted attack", "A ground assault"],
+                answer: "A targeted attack",
+                type: "mcq"
             },
             {
-                question: "Which of the following is a characteristic of prokaryotic cells?",
-                options: ["Presence of a nucleus", "Presence of membrane-bound organelles", "Presence of ribosomes", "Linear chromosomes"],
-                answer: "Presence of ribosomes"
+                question: "What is the meaning of 'Rubber-stamped'?",
+                options: ["Scrutinized carefully", "Rejected after review", "Approved automatically without proper consideration", "Questioned intensely"],
+                answer: "Approved automatically without proper consideration",
+                type: "mcq"
+            },
+            {
+                question: "Choose a synonym for 'Held to account'.",
+                options: ["Excused", "Pardoned", "Let off", "Held responsible"],
+                answer: "Held responsible",
+                type: "mcq"
+            },
+            {
+                question: "The idiom 'Gain traction' means:",
+                options: ["Lose support", "Stagnate", "Become popular or accepted", "Fade away"],
+                answer: "Become popular or accepted",
+                type: "mcq"
+            },
+            {
+                question: "What is an antonym for 'Rule by fear'?",
+                options: ["Intimidation", "Tyranny", "Rule of law", "Despotism"],
+                answer: "Rule of law",
+                type: "mcq"
+            },
+            {
+                question: "The phrase 'Race to the bottom' describes a situation where standards are:",
+                options: ["Raised", "Lowered competitively", "Maintained", "Ignored"],
+                answer: "Lowered competitively",
+                type: "mcq"
             },
              {
-                question: "The process of photosynthesis takes place in which organelle?",
-                options: ["Mitochondria", "Chloroplast", "Endoplasmic reticulum", "Golgi apparatus"],
-                answer: "Chloroplast"
-            },
-            {
-                question: "Which of the following is a primary producer in most ecosystems?",
-                options: ["Fungi", "Bacteria", "Plants", "Animals"],
-                answer: "Plants"
+                question: "'Follow suit' means:",
+                options: ["Act independently", "Innovate", "Do the same as someone else", "Diverge"],
+                answer: "Do the same as someone else",
+                type: "mcq"
             },
              {
-                question: "The movement of water across a selectively permeable membrane from an area of high water concentration to an area of low water concentration is called:",
-                options: ["Diffusion", "Osmosis", "Active transport", "Facilitated diffusion"],
-                answer: "Osmosis"
-            },
-            {
-                question: "Which of the following is a structural component of the cell wall in plants?",
-                options: ["Peptidoglycan", "Chitin", "Cellulose", "Keratin"],
-                answer: "Cellulose"
+                question: "What does 'Dare to differ' imply?",
+                options: ["Conforming", "Agreeing", "Having the courage to disagree", "Remaining silent"],
+                answer: "Having the courage to disagree",
+                type: "mcq"
             },
              {
-                question: "The process of transcription involves the synthesis of:",
-                options: ["DNA from a DNA template", "RNA from a DNA template", "Protein from an RNA template", "DNA from an RNA template"],
-                answer: "RNA from a DNA template"
-            },
-            {
-                question: "Which of the following is a vector for the transmission of malaria?",
-                options: ["Tsetse fly", "Mosquito", "Tick", "Flea"],
-                answer: "Mosquito"
+                question: "A 'Puppet regime' is a government that is:",
+                options: ["Sovereign and independent", "Actually controlled by an outside power", "Elected democratically", "Autonomous"],
+                answer: "Actually controlled by an outside power",
+                type: "mcq"
             },
              {
-                question: "The principal nitrogenous waste product in humans is:",
-                options: ["Ammonia", "Urea", "Uric acid", "Creatinine"],
-                answer: "Urea"
+                question: "What does 'Sorely lacking' mean?",
+                options: ["Abundant", "Sufficient", "Very much needed but absent/insufficient", "Adequate"],
+                answer: "Very much needed but absent/insufficient",
+                type: "mcq"
             },
             {
-                question: "Which part of the kidney is responsible for filtration of blood?",
-                options: ["Renal medulla", "Renal cortex", "Nephron", "Collecting duct"],
-                answer: "Nephron"
+                question: "An antonym for 'Cash-strapped' is:",
+                options: ["Impoverished", "Broke", "Underfunded", "Affluent"],
+                answer: "Affluent",
+                type: "mcq"
             },
              {
-                question: "The process of pollination in flowering plants involves the transfer of pollen from the anther to the:",
-                options: ["Stigma", "Ovary", "Petal", "Sepal"],
-                answer: "Stigma"
-            },
-            {
-                question: "Which of the following is a sexually transmitted infection caused by a bacterium?",
-                options: ["Herpes", "HIV/AIDS", "Gonorrhea", "HPV"],
-                answer: "Gonorrhea"
-            },
-             {
-                question: "The part of the eye that is responsible for focusing light onto the retina is the:",
-                options: ["Iris", "Pupil", "Lens", "Cornea"],
-                answer: "Lens"
-            },
-            {
-                question: "Which of the following is a type of connective tissue?",
-                options: ["Muscle tissue", "Nervous tissue", "Epithelial tissue", "Blood tissue"],
-                answer: "Blood tissue"
-            },
-
-            // Chemistry (27 MCQs)
-            {
-                question: "Calculate the pH of a 0.001 M solution of HCl.",
-                options: ["1", "2", "3", "4"],
-                answer: "3"
-            },
-            {
-                question: "Which of the following factors does NOT affect the rate of a chemical reaction?",
-                options: ["Temperature", "Concentration of reactants", "Presence of a catalyst", "Enthalpy change of the reaction"],
-                answer: "Enthalpy change of the reaction"
-            },
-            {
-                question: "What is the oxidation state of sulfur in H₂SO₄?",
-                options: ["+2", "+4", "+6", "-2"],
-                answer: "+6"
-            },
-            {
-                question: "Which of the following is a characteristic of an ideal gas?",
-                options: ["Particles have significant volume", "Attractive forces exist between particles", "Collisions are inelastic", "Particles are in constant random motion"],
-                answer: "Particles are in constant random motion"
-            },
-             {
-                question: "According to VSEPR theory, what is the shape of the methane molecule (CH₄)?",
-                options: ["Linear", "Trigonal planar", "Tetrahedral", "Bent"],
-                answer: "Tetrahedral"
-            },
-            {
-                question: "Which type of intermolecular force is present in all substances?",
-                options: ["Hydrogen bonding", "Dipole-dipole forces", "London dispersion forces", "Ionic bonding"],
-                answer: "London dispersion forces"
-            },
-             {
-                question: "What is the molar mass of water (H₂O)? (Atomic masses: H=1.008, O=15.999)",
-                options: ["17.007 g/mol", "18.015 g/mol", "16.991 g/mol", "19.003 g/mol"],
-                answer: "18.015 g/mol"
-            },
-            {
-                question: "Which of the following is a strong acid?",
-                options: ["HF", "H₂CO₃", "HNO₃", "H₃PO₄"],
-                answer: "HNO₃"
-            },
-             {
-                question: "The process of converting a liquid directly into a gas is called:",
-                options: ["Melting", "Freezing", "Boiling", "Sublimation"],
-                answer: "Boiling"
-            },
-            {
-                question: "Which of the following is an example of an exothermic reaction?",
-                options: ["Melting ice", "Photosynthesis", "Combustion", "Evaporation of water"],
-                answer: "Combustion"
-            },
-             {
-                question: "What is the electron configuration of a neutral sodium atom (Na)? (Atomic number = 11)",
-                options: ["1s²2s²2p⁶3s¹", "1s²2s²2p⁵3s²", "1s²2s²2p⁶", "1s²2s²2p⁶3s²"],
-                answer: "1s²2s²2p⁶3s¹"
-            },
-            {
-                question: "Which type of bond is formed by the sharing of electrons between atoms?",
-                options: ["Ionic bond", "Covalent bond", "Metallic bond", "Hydrogen bond"],
-                answer: "Covalent bond"
-            },
-             {
-                question: "The concept of electronegativity is used to predict:",
-                options: ["The melting point of a substance", "The type of bond formed between atoms", "The solubility of a substance", "The reaction rate"],
-                answer: "The type of bond formed between atoms"
-            },
-            {
-                question: "What is the conjugate base of H₂O?",
-                options: ["H₃O⁺", "OH⁻", "H₂O", "H⁺"],
-                answer: "OH⁻"
-            },
-             {
-                question: "Which of the following is a characteristic of a buffer solution?",
-                options: ["It resists changes in pH", "It has a pH of exactly 7", "It is always acidic", "It is always basic"],
-                answer: "It resists changes in pH"
-            },
-            {
-                question: "What is the general formula for an alkane?",
-                options: ["CnH₂n", "CnH₂n+2", "CnH₂n-2", "CnH₂n-6"],
-                answer: "CnH₂n+2"
-            },
-             {
-                question: "Which functional group is characteristic of alcohols?",
-                options: ["-COOH", "-CHO", "-OH", "-NH₂"],
-                answer: "-OH"
-            },
-            {
-                question: "The process of adding hydrogen to an alkene is called:",
-                options: ["Oxidation", "Reduction", "Hydrogenation", "Halogenation"],
-                answer: "Hydrogenation"
-            },
-             {
-                question: "Which of the following is an isomer of butane?",
-                options: ["Propane", "Pentane", "Isobutane", "Butene"],
-                answer: "Isobutane"
-            },
-            {
-                question: "What is the product of the reaction between an acid and a base?",
-                options: ["Salt and water", "Salt and hydrogen gas", "Acid and base", "Oxide and water"],
-                answer: "Salt and water"
-            },
-             {
-                question: "The half-life of a radioactive isotope is the time it takes for:",
-                options: ["All of the isotope to decay", "Half of the isotope to decay", "The decay rate to double", "The temperature to decrease by half"],
-                answer: "Half of the isotope to decay"
-            },
-            {
-                question: "Which type of radiation is the most penetrating?",
-                options: ["Alpha particles", "Beta particles", "Gamma rays", "Neutrons"],
-                answer: "Gamma rays"
-            },
-             {
-                question: "What is the molarity of a solution prepared by dissolving 10 g of NaOH in enough water to make 500 mL of solution? (Molar mass of NaOH = 40 g/mol)",
-                options: ["0.25 M", "0.50 M", "1.0 M", "2.0 M"],
-                answer: "0.50 M"
-            },
-            {
-                question: "Which of the following is a colligative property?",
-                options: ["Density", "Viscosity", "Boiling point elevation", "Surface tension"],
-                answer: "Boiling point elevation"
-            },
-             {
-                question: "The process of separating a mixture based on the differences in boiling points of its components is called:",
-                options: ["Filtration", "Distillation", "Chromatography", "Crystallization"],
-                answer: "Distillation"
-            },
-            {
-                question: "Which of the following is an example of a redox reaction?",
-                options: ["Neutralization reaction", "Precipitation reaction", "Combustion reaction", "Dissolving salt in water"],
-                answer: "Combustion reaction"
-            },
-             {
-                question: "What is the systematic name for the compound CH₃CH₂OCH₂CH₃?",
-                options: ["Diethyl ether", "Butane", "Propanol", "Ethane"],
-                answer: "Diethyl ether"
+                question: "'Uncharted territory' refers to something:",
+                options: ["Familiar and known", "Well-trodden", "New, unknown, or unexplored", "Established"],
+                answer: "New, unknown, or unexplored",
+                type: "mcq"
             },
 
-            // Physics (27 MCQs)
+            // --- Sentence Rearrangement Questions ---
             {
-                question: "A car accelerates from rest at a constant rate of 2 m/s². How far does it travel in 5 seconds?",
-                options: ["10 m", "25 m", "50 m", "100 m"],
-                answer: "25 m"
-            },
-            {
-                question: "What is the SI unit of power?",
-                options: ["Joule", "Watt", "Newton", "Volt"],
-                answer: "Watt"
-            },
-            {
-                question: "According to Newton's third law of motion, for every action, there is an equal and opposite:",
-                options: ["Force", "Velocity", "Acceleration", "Momentum"],
-                answer: "Force"
-            },
-            {
-                question: "What is the relationship between frequency (f) and wavelength (λ) of a wave, given its speed (v)?",
-                options: ["v = fλ", "f = vλ", "λ = vf", "v = f/λ"],
-                answer: "v = fλ"
+                question: "Rearrange the following parts into a grammatically correct and meaningful sentence: (A) has been hit / (B) by 10 per cent tariffs / (C) India / (D) this past month / (E) on goods it ships to the US",
+                options: ["D A C B E", "C A D B E", "D C A B E", "C D A B E"], // Correct order: D, C, A, B, E
+                answer: "D C A B E", // This past month, India has been hit by 10 per cent tariffs on goods it ships to the US.
+                type: "rearrangement_mcq", // Using MCQ format for rearrangement
+                parts: { "A": "has been hit", "B": "by 10 per cent tariffs", "C": "India", "D": "this past month", "E": "on goods it ships to the US" }
             },
              {
-                question: "Which of the following is a scalar quantity?",
-                options: ["Velocity", "Acceleration", "Force", "Energy"],
-                answer: "Energy"
+                question: "Rearrange the jumbled parts to form a coherent sentence: (A) the flames / (B) instead of / (C) need to calm down / (D) fanning / (E) they",
+                options: ["B D A E C", "E B D A C", "E C B D A", "B D E A C"], // Correct order: B, D, A, E, C
+                answer: "B D A E C", // Instead of fanning the flames, they need to calm down.
+                type: "rearrangement_mcq",
+                parts: { "A": "the flames", "B": "instead of", "C": "need to calm down", "D": "fanning", "E": "they" }
             },
             {
-                question: "What is the principle behind the operation of a hydraulic press?",
-                options: ["Archimedes' principle", "Pascal's principle", "Bernoulli's principle", "Newton's laws of motion"],
-                answer: "Pascal's principle"
+                question: "Arrange these parts into a logical sentence: (A) has captured / (B) Mahrang Baloch / (C) the imagination / (D) of the Baloch sub-nation",
+                options: ["B A C D", "A B C D", "B C A D", "C B A D"], // Correct order: B, A, C, D
+                answer: "B A C D", // Mahrang Baloch has captured the imagination of the Baloch sub-nation.
+                type: "rearrangement_mcq",
+                parts: { "A": "has captured", "B": "Mahrang Baloch", "C": "the imagination", "D": "of the Baloch sub-nation" }
+            },
+            {
+                question: "Form a correct sentence from these parts: (A) must mend / (B) to gain trust / (C) its behaviour / (D) the state",
+                options: ["D C A B", "D A C B", "A D C B", "B D A C"], // Correct order: D, A, C, B
+                answer: "D A C B", // The state must mend its behaviour to gain trust.
+                type: "rearrangement_mcq",
+                parts: { "A": "must mend", "B": "to gain trust", "C": "its behaviour", "D": "the state" }
             },
              {
-                question: "The phenomenon of bending of light as it passes from one medium to another is called:",
-                options: ["Reflection", "Refraction", "Diffraction", "Interference"],
-                answer: "Refraction"
-            },
-            {
-                question: "What is the unit of electric resistance?",
-                options: ["Ampere", "Volt", "Ohm", "Watt"],
-                answer: "Ohm"
-            },
-             {
-                question: "According to Ohm's law, the current flowing through a conductor is directly proportional to the:",
-                options: ["Resistance", "Voltage", "Power", "Charge"],
-                answer: "Voltage"
-            },
-            {
-                question: "Which of the following is a magnetic material?",
-                options: ["Copper", "Aluminum", "Iron", "Plastic"],
-                answer: "Iron"
-            },
-             {
-                question: "What is the process by which a nucleus emits alpha particles, beta particles, or gamma rays?",
-                options: ["Nuclear fusion", "Nuclear fission", "Radioactive decay", "Nuclear reaction"],
-                answer: "Radioactive decay"
-            },
-            {
-                question: "The energy possessed by an object due to its motion is called:",
-                options: ["Potential energy", "Kinetic energy", "Thermal energy", "Chemical energy"],
-                answer: "Kinetic energy"
-            },
-             {
-                question: "What is the unit of work?",
-                options: ["Watt", "Joule", "Newton", "Pascal"],
-                answer: "Joule"
-            },
-            {
-                question: "Which type of lens is used to correct myopia (nearsightedness)?",
-                options: ["Convex lens", "Concave lens", "Cylindrical lens", "Plano-convex lens"],
-                answer: "Concave lens"
-            },
-             {
-                question: "The phenomenon of splitting of white light into its constituent colors when it passes through a prism is called:",
-                options: ["Reflection", "Refraction", "Dispersion", "Diffraction"],
-                answer: "Dispersion"
-            },
-            {
-                question: "What is the SI unit of electric charge?",
-                options: ["Volt", "Ampere", "Ohm", "Coulomb"],
-                answer: "Coulomb"
-            },
-             {
-                question: "According to the law of conservation of energy, energy cannot be created or destroyed, but can be:",
-                options: ["Converted from one form to another", "Lost as heat", "Gained from the environment", "Used up completely"],
-                answer: "Converted from one form to another"
-            },
-            {
-                question: "What is the force that opposes the motion of an object through a fluid?",
-                options: ["Friction", "Tension", "Drag", "Normal force"],
-                answer: "Drag"
-            },
-             {
-                question: "The temperature at which a solid changes into a liquid is called its:",
-                options: ["Boiling point", "Melting point", "Freezing point", "Sublimation point"],
-                answer: "Melting point"
-            },
-            {
-                question: "What is the SI unit of frequency?",
-                options: ["Meter", "Second", "Hertz", "Newton"],
-                answer: "Hertz"
-            },
-             {
-                question: "Which type of wave requires a medium to propagate?",
-                options: ["Electromagnetic wave", "Mechanical wave", "Light wave", "Radio wave"],
-                answer: "Mechanical wave"
-            },
-            {
-                question: "What is the phenomenon where a wave bends around an obstacle?",
-                options: ["Reflection", "Refraction", "Diffraction", "Interference"],
-                answer: "Diffraction"
-            },
-             {
-                question: "What is the unit of magnetic field strength?",
-                options: ["Ampere", "Volt", "Tesla", "Weber"],
-                answer: "Tesla"
-            },
-            {
-                question: "The process of converting alternating current (AC) to direct current (DC) is called:",
-                options: ["Rectification", "Amplification", "Modulation", "Demodulation"],
-                answer: "Rectification"
-            },
-             {
-                question: "What is the SI unit of pressure?",
-                options: ["Newton", "Joule", "Pascal", "Watt"],
-                answer: "Pascal"
-            },
-            {
-                question: "Which of the following is a renewable energy source?",
-                options: ["Coal", "Natural gas", "Solar energy", "Nuclear energy"],
-                answer: "Solar energy"
-            },
-             {
-                question: "What is the relationship between mass (m), force (F), and acceleration (a) according to Newton's second law?",
-                options: ["F = ma", "a = Fm", "m = Fa", "F = m/a"],
-                answer: "F = ma"
-            },
-
-            // English (9 MCQs) - Focus on advanced grammar, usage, idioms, etc.
-            {
-                question: "Identify the type of phrase underlined in the following sentence: 'Running quickly, she caught the bus.'",
-                options: ["Noun phrase", "Adverbial phrase", "Adjective phrase", "Participial phrase"],
-                answer: "Participial phrase"
-            },
-            {
-                question: "Choose the sentence that uses the subjunctive mood correctly:",
-                options: ["If I was you, I would take the offer.", "If I were you, I would take the offer.", "If I am you, I would take the offer.", "If I had been you, I would take the offer."],
-                answer: "If I were you, I would take the offer."
-            },
-            {
-                question: "Which preposition best completes the sentence? 'He is adept _____ solving complex problems.'",
-                options: ["at", "in", "with", "on"],
-                answer: "at"
-            },
-            {
-                question: "What does the idiom 'to bite the bullet' mean?",
-                options: ["To speak angrily", "To face a difficult situation with courage", "To give up easily", "To make a quick decision"],
-                answer: "To face a difficult situation with courage"
-            },
-             {
-                question: "Identify the error in the following sentence: 'Neither the students nor the teacher were present for the meeting.'",
-                options: ["Subject-verb agreement", "Pronoun agreement", "Parallelism", "Tense consistency"],
-                answer: "Subject-verb agreement"
-            },
-            {
-                question: "Which phrasal verb means 'to tolerate' or 'to endure'?",
-                options: ["Put off", "Put up with", "Put out", "Put down"],
-                answer: "Put up with"
-            },
-             {
-                question: "Choose the word that is the closest ANTONYM for 'Ephemeral'.",
-                options: ["Transient", "Lasting", "Fleeting", "Momentary"],
-                answer: "Lasting"
-            },
-            {
-                question: "Rearrange the following words to form a grammatically correct sentence: 'quickly / the / ran / child / away'",
-                options: ["The child ran quickly away.", "Quickly the child ran away.", "Away the child ran quickly.", "Ran the child quickly away."],
-                answer: "The child ran quickly away."
-            },
-             {
-                question: "Identify the correct use of punctuation in the following sentence:",
-                options: ["The books, which were old, were sold.", "The books which were old were sold.", "The books; which were old; were sold.", "The books - which were old - were sold."],
-                answer: "The books, which were old, were sold."
-            },
-
-            // Logical Reasoning (3 MCQs)
-            {
-                question: "If all A are B, and some B are C, then which of the following must be true?",
-                options: ["All A are C", "Some A are C", "Some C are A", "None of the above"],
-                answer: "None of the above"
-            },
-            {
-                question: "Look at this series: 2, 6, 12, 20, 30, ... What number should come next?",
-                options: ["40", "42", "44", "46"],
-                answer: "42"
-            },
-             {
-                question: "In a certain code, 'CAT' is written as 'DBG'. How is 'DOG' written in the same code?",
-                options: ["EPG", "EOH", "CPF", "EQH"],
-                answer: "EOH"
+                question: "Rearrange the following to make a meaningful sentence: (A) are the / (B) political stability / (C) foremost need / (D) and legitimacy / (E) of the hour",
+                options: ["B D A C E", "B A D C E", "C E A B D", "A C E B D"], // Correct order: B, D, A, C, E
+                answer: "B D A C E", // Political stability and legitimacy are the foremost need of the hour.
+                type: "rearrangement_mcq",
+                parts: { "A": "are the", "B": "political stability", "C": "foremost need", "D": "and legitimacy", "E": "of the hour" }
             }
         ];
 
-        // --- Global Variables ---
-        let studentName = '';
-        let timerInterval;
-        const totalTime = 210 * 60; // 210 minutes in seconds
-        let timeRemaining = totalTime;
-        let startTime;
-
         // --- DOM Elements ---
         const nameEntrySection = document.getElementById('name-entry');
-        const studentNameInput = document.getElementById('student-name');
-        const nameError = document.getElementById('name-error');
-        const startQuizBtn = document.getElementById('start-quiz-btn');
         const quizSection = document.getElementById('quiz-section');
-        const timerDisplay = document.getElementById('timer');
-        const questionsContainer = document.getElementById('questions-container');
-        const submitQuizBtn = document.getElementById('submit-quiz-btn');
         const resultsSection = document.getElementById('results-section');
-        const resultName = document.getElementById('result-name');
-        const resultAttempted = document.getElementById('result-attempted');
-        const resultScore = document.getElementById('result-score');
-        const resultPercentage = document.getElementById('result-percentage');
-        const resultTime = document.getElementById('result-time');
-        const formspreeForm = document.getElementById('formspree-form');
+        const studentNameInput = document.getElementById('student-name');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const questionContainer = document.getElementById('question-container');
+        const questionNumberEl = document.getElementById('question-number');
+        const questionTextEl = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const rearrangementInputContainer = document.getElementById('rearrangement-input-container');
+        const rearrangementAnswerInput = document.getElementById('rearrangement-answer');
+        const nextQuestionBtn = document.getElementById('next-question-btn');
+        const prevQuestionBtn = document.getElementById('prev-question-btn');
+        const submitQuizBtn = document.getElementById('submit-quiz-btn');
+        const timerDisplay = document.getElementById('timer-display');
+        const resultNameEl = document.getElementById('result-name');
+        const resultTimeEl = document.getElementById('result-time');
+        const resultAttemptedEl = document.getElementById('result-attempted');
+        const resultScoreEl = document.getElementById('result-score');
+        const resultPercentageEl = document.getElementById('result-percentage');
+        const resultsForm = document.getElementById('results-form');
         const formName = document.getElementById('form-name');
+        const formTime = document.getElementById('form-time');
         const formAttempted = document.getElementById('form-attempted');
         const formScore = document.getElementById('form-score');
         const formPercentage = document.getElementById('form-percentage');
-        const formTimeTaken = document.getElementById('form-timeTaken');
 
+        // --- Quiz State ---
+        let currentQuestionIndex = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+        let score = 0;
+        let timerInterval;
+        let timeLeft = 25 * 60; // 25 minutes in seconds
+        let startTime;
+        let endTime;
+        let studentName = '';
 
-        // --- Event Listeners ---
-        startQuizBtn.addEventListener('click', startQuiz);
-        submitQuizBtn.addEventListener('click', submitQuiz);
-
-        // --- Functions ---
-
-        // Function to shuffle an array (Fisher-Yates Algorithm)
+        // --- Utility Functions ---
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]]; // Swap elements
             }
-            return array;
         }
 
-        // Function to render questions
-        function renderQuestions() {
-            // Shuffle questions array (optional, but adds another layer of randomization)
-            // shuffleArray(questions); // Uncomment this line if you want to randomize the order of questions themselves
+        // Shuffle options for each MCQ question
+        quizData.forEach(q => {
+            if (q.type === 'mcq' || q.type === 'rearrangement_mcq') {
+                 // Keep track of the original answer before shuffling options
+                const correctAnswerValue = q.answer;
+                // Find the option text that matches the answer value for rearrangement_mcq
+                const correctAnswerText = (q.type === 'rearrangement_mcq')
+                    ? q.options.find(opt => opt === correctAnswerValue) // The answer is the key sequence
+                    : correctAnswerValue; // For MCQ, the answer is the option text
 
-            questionsContainer.innerHTML = ''; // Clear previous questions
+                shuffleArray(q.options);
 
-            questions.forEach((q, index) => {
-                const questionElement = document.createElement('div');
-                questionElement.classList.add('mb-6', 'p-4', 'border', 'border-gray-200', 'rounded-md', 'bg-gray-50');
+                 // Update the answer to match the potentially new index/value after shuffling
+                 // For MCQ, the answer remains the text content.
+                 // For rearrangement_mcq, the answer remains the key sequence string.
+                 q.answer = correctAnswerValue;
+            }
+        });
 
-                // Add question number and text
-                const questionText = document.createElement('p');
-                questionText.classList.add('font-semibold', 'mb-3', 'text-gray-900');
-                questionText.textContent = `${index + 1}. ${q.question}`;
-                questionElement.appendChild(questionText);
+        // --- Event Listeners ---
+        startQuizBtn.addEventListener('click', startQuiz);
+        nextQuestionBtn.addEventListener('click', nextQuestion);
+        prevQuestionBtn.addEventListener('click', prevQuestion);
+        submitQuizBtn.addEventListener('click', submitQuiz);
 
-                // Shuffle options for the current question
-                const shuffledOptions = shuffleArray([...q.options]); // Create a copy before shuffling
+        // Prevent context menu (right-click)
+        document.addEventListener('contextmenu', event => event.preventDefault());
 
-                // Add options (radio buttons)
-                shuffledOptions.forEach((option, optionIndex) => {
-                    const optionDiv = document.createElement('div');
-                    optionDiv.classList.add('mb-2');
+        // Optional: Disable specific keys like F12 (Inspect Element)
+        document.addEventListener('keydown', event => {
+            if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I') || (event.ctrlKey && event.shiftKey && event.key === 'J') || (event.ctrlKey && event.key === 'U')) {
+                event.preventDefault();
+            }
+        });
 
-                    const radioInput = document.createElement('input');
-                    radioInput.type = 'radio';
-                    radioInput.name = `question-${index}`; // Group radio buttons by question
-                    radioInput.id = `q${index}-option${optionIndex}`;
-                    radioInput.value = option;
-                    radioInput.classList.add('mr-2', 'text-blue-600', 'focus:ring-blue-500');
 
-                    const label = document.createElement('label');
-                    label.htmlFor = `q${index}-option${optionIndex}`;
-                    label.textContent = option;
-                    label.classList.add('text-gray-700', 'cursor-pointer');
-
-                    optionDiv.appendChild(radioInput);
-                    optionDiv.appendChild(label);
-                    questionElement.appendChild(optionDiv);
-                });
-
-                questionsContainer.appendChild(questionElement);
-            });
-        }
-
-        // Function to start the quiz
+        // --- Quiz Logic ---
         function startQuiz() {
             studentName = studentNameInput.value.trim();
-
-            if (studentName === '') {
-                nameError.classList.remove('hidden');
+            if (studentName === "") {
+                alert("Please enter your name to start the quiz.");
                 return;
             }
-
-            nameError.classList.add('hidden');
             nameEntrySection.classList.add('hidden');
             quizSection.classList.remove('hidden');
-
-            // Render questions with randomized options
-            renderQuestions();
-
-            // Start the timer
-            startTime = Date.now(); // Record the start time
-            timerInterval = setInterval(updateTimer, 1000);
+            startTime = new Date();
+            startTimer();
+            displayQuestion(currentQuestionIndex);
+            updateNavigationButtons(); // Initial button state
         }
 
-        // Function to update the timer display
-        function updateTimer() {
-            timeRemaining--;
+        function displayQuestion(index) {
+            const question = quizData[index];
+            questionNumberEl.textContent = index + 1;
+            questionTextEl.textContent = question.question;
+            optionsContainer.innerHTML = ''; // Clear previous options
+            rearrangementInputContainer.classList.add('hidden'); // Hide rearrangement input by default
+            rearrangementAnswerInput.value = ''; // Clear previous rearrangement answer
 
-            if (timeRemaining < 0) {
-                clearInterval(timerInterval);
-                submitQuiz(true); // Auto-submit when time runs out
-                return;
+            if (question.type === 'mcq' || question.type === 'rearrangement_mcq') {
+                // Display parts for rearrangement questions
+                if (question.type === 'rearrangement_mcq' && question.parts) {
+                    let partsHtml = '<div class="mt-4 p-3 bg-gray-100 rounded border border-gray-300 text-sm">';
+                    partsHtml += '<p class="font-medium mb-2 text-gray-700">Parts:</p><ul class="list-disc list-inside">';
+                    for (const key in question.parts) {
+                        partsHtml += `<li><strong>(${key})</strong> ${question.parts[key]}</li>`;
+                    }
+                    partsHtml += '</ul></div>';
+                    questionTextEl.insertAdjacentHTML('afterend', partsHtml);
+                }
+
+                // Display options
+                question.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.classList.add('block', 'w-full', 'text-left', 'p-3', 'border', 'border-gray-300', 'rounded-md', 'quiz-option', 'text-gray-700', 'hover:bg-blue-100', 'hover:border-blue-400');
+                    button.onclick = () => selectAnswer(index, option, button);
+
+                    // If an answer was previously selected for this question, highlight it
+                    if (userAnswers[index] === option) {
+                        button.classList.add('selected');
+                    }
+                    optionsContainer.appendChild(button);
+                });
+            }
+            // Note: No separate handling needed for rearrangement input here,
+            // as we are using MCQ options to select the correct sequence.
+            // If free-form rearrangement input was needed, we'd show rearrangementInputContainer.
+
+            updateNavigationButtons();
+        }
+
+
+        function selectAnswer(index, answer, selectedButton) {
+            // Deselect previously selected option for this question
+            const previouslySelected = optionsContainer.querySelector('.selected');
+            if (previouslySelected) {
+                previouslySelected.classList.remove('selected');
             }
 
-            const minutes = Math.floor(timeRemaining / 60);
-            const seconds = timeRemaining % 60;
-            const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-            timerDisplay.textContent = formattedTime;
+            // Select the new option
+            selectedButton.classList.add('selected');
+            userAnswers[index] = answer; // Store the selected option value/text
+
+            // Automatically move to the next question after a brief delay (optional)
+            // setTimeout(nextQuestion, 300);
         }
 
-        // Function to submit the quiz
-        function submitQuiz(isAutoSubmit = false) {
-            clearInterval(timerInterval); // Stop the timer
 
-            if (isAutoSubmit) {
-                 // Optional: Display a message that time ran out
-                 alert("Time's up! Your quiz has been automatically submitted.");
+        function updateNavigationButtons() {
+            prevQuestionBtn.disabled = currentQuestionIndex === 0;
+            if (currentQuestionIndex === quizData.length - 1) {
+                nextQuestionBtn.classList.add('hidden');
+                submitQuizBtn.classList.remove('hidden');
             } else {
-                 // Optional: Confirmation for manual submission
-                 if (!confirm("Are you sure you want to submit the quiz?")) {
-                     // If user cancels, restart the timer and exit
-                     timerInterval = setInterval(updateTimer, 1000);
-                     return;
-                 }
+                nextQuestionBtn.classList.remove('hidden');
+                submitQuizBtn.classList.add('hidden');
             }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                displayQuestion(currentQuestionIndex);
+            }
+        }
+
+        function prevQuestion() {
+             if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                displayQuestion(currentQuestionIndex);
+            }
+        }
 
 
-            // Calculate results
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Time's up! Submitting your quiz automatically.");
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        function submitQuiz() {
+            clearInterval(timerInterval); // Stop the timer
+            endTime = new Date();
+
+            calculateResults();
+
+            quizSection.classList.add('hidden');
+            resultsSection.classList.remove('hidden');
+            timerDisplay.classList.add('hidden'); // Hide timer on results page
+
+            // Populate and submit the hidden form
+            populateAndSubmitForm();
+        }
+
+        function calculateResults() {
+            score = 0;
             let attemptedCount = 0;
-            let correctCount = 0;
-            const endTime = Date.now();
-            const timeTakenMillis = endTime - startTime;
-            const timeTakenSeconds = Math.floor(timeTakenMillis / 1000);
-
-            questions.forEach((q, index) => {
-                const selectedOption = document.querySelector(`input[name="question-${index}"]:checked`);
-                if (selectedOption) {
+            quizData.forEach((question, index) => {
+                if (userAnswers[index] !== null) {
                     attemptedCount++;
-                    if (selectedOption.value === q.answer) {
-                        correctCount++;
+                    // Check if the stored answer matches the correct answer text/value
+                    if (userAnswers[index] === question.answer) {
+                        score++;
                     }
                 }
             });
 
-            const percentageScore = (correctCount / questions.length) * 100;
-
-            // Format time taken
-            const hoursTaken = Math.floor(timeTakenSeconds / 3600);
-            const minutesTaken = Math.floor((timeTakenSeconds % 3600) / 60);
-            const secondsTaken = timeTakenSeconds % 60;
-            let timeTakenString = '';
-            if (hoursTaken > 0) timeTakenString += `${hoursTaken} hour${hoursTaken > 1 ? 's' : ''}, `;
-            if (minutesTaken > 0) timeTakenString += `${minutesTaken} minute${minutesTaken > 1 ? 's' : ''}, `;
-            timeTakenString += `${secondsTaken} second${secondsTaken > 1 ? 's' : ''}`;
-            if (timeTakenString.endsWith(', ')) timeTakenString = timeTakenString.slice(0, -2); // Remove trailing comma and space
-
+            const timeTaken = Math.round((endTime - startTime) / 1000); // Time in seconds
+            const minutesTaken = Math.floor(timeTaken / 60);
+            const secondsTaken = timeTaken % 60;
+            const timeTakenFormatted = `${minutesTaken} min ${secondsTaken} sec`;
+            const percentage = ((score / quizData.length) * 100).toFixed(1);
 
             // Display results
-            quizSection.classList.add('hidden');
-            resultsSection.classList.remove('hidden');
+            resultNameEl.textContent = studentName;
+            resultTimeEl.textContent = timeTakenFormatted;
+            resultAttemptedEl.textContent = attemptedCount;
+            resultScoreEl.textContent = score;
+            resultPercentageEl.textContent = percentage;
 
-            resultName.textContent = studentName;
-            resultAttempted.textContent = attemptedCount;
-            resultScore.textContent = correctCount;
-            resultPercentage.textContent = percentageScore.toFixed(2); // Display with 2 decimal places
-            resultTime.textContent = timeTakenString;
-
-            // Populate and submit hidden Formspree form
-            formName.value = studentName;
-            formAttempted.value = attemptedCount;
-            formScore.value = correctCount;
-            formPercentage.value = percentageScore.toFixed(2);
-            formTimeTaken.value = timeTakenString;
-
-            // Submit the form
-            formspreeForm.submit();
+            // Store for form submission
+             formName.value = studentName;
+             formTime.value = timeTakenFormatted;
+             formAttempted.value = attemptedCount;
+             formScore.value = score;
+             formPercentage.value = percentage;
         }
 
-        // --- Initial Setup ---
-        // Ensure quiz section and results section are hidden on load
-        quizSection.classList.add('hidden');
-        resultsSection.classList.add('hidden');
-        nameEntrySection.classList.remove('hidden'); // Ensure name entry is visible initially
+         function populateAndSubmitForm() {
+            // Values are already set in calculateResults()
+            resultsForm.submit();
+            console.log("Submitting form to Formspree..."); // For debugging
+        }
 
     </script>
 
