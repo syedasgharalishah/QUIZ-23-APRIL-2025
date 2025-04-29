@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUIZ FOR CSS ASPIRANTS 26 APRIL 2025 - SYED ASGHAR ALI SHAH</title>
+    <title>QUIZ FOR CSS ASPIRANTS 29 APRIL 2025 - SYED ASGHAR ALI SHAH</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,10 +22,14 @@
             -moz-user-drag: none;
             -o-user-drag: none;
             user-drag: none;
+            overscroll-behavior: none; /* Prevent pull-to-refresh */
         }
         /* Custom styles for quiz elements */
         .quiz-option {
             transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+             word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto; /* Improve word breaking */
         }
         .quiz-option:hover {
             background-color: #e0f2fe; /* Light blue hover */
@@ -35,15 +39,6 @@
             background-color: #bfdbfe; /* Darker blue selected */
             border-color: #2563eb; /* Darker blue border selected */
             font-weight: 600;
-        }
-        /* Style for correct/incorrect feedback (optional, can be added on submit) */
-        .quiz-option.correct {
-            background-color: #dcfce7;
-            border-color: #22c55e;
-        }
-        .quiz-option.incorrect {
-            background-color: #fee2e2;
-            border-color: #ef4444;
         }
         /* Hide scrollbar but allow scrolling */
          .no-scrollbar::-webkit-scrollbar {
@@ -56,6 +51,31 @@
         /* Prevent image saving */
         img {
             pointer-events: none;
+        }
+         /* Style for rearrangement parts */
+        .rearrangement-parts {
+             background-color: #f3f4f6; /* Lighter Gray */
+             border: 1px solid #e5e7eb;
+             padding: 10px 15px;
+             border-radius: 6px;
+             font-size: 0.9rem;
+             margin-bottom: 1rem;
+             color: #374151;
+        }
+        .rearrangement-parts strong {
+            color: #111827; /* Darker Gray */
+        }
+        .rearrangement-parts ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 5px;
+        }
+         .rearrangement-parts li {
+            margin-bottom: 4px;
+        }
+         /* Ensure buttons don't wrap awkwardly on small screens */
+        .quiz-navigation button {
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -70,16 +90,16 @@
                      onerror="this.onerror=null; this.src='https://placehold.co/48x48/007bff/ffffff?text=SA';">
                  <span class="text-lg font-semibold text-gray-700">SYED ASGHAR ALI SHAH</span>
             </div>
-            <h1 class="text-xl sm:text-2xl font-bold text-center text-blue-700">QUIZ FOR CSS ASPIRANTS 26 APRIL 2025</h1>
-            <div id="timer-display" class="text-lg sm:text-xl font-semibold text-red-600 mt-2 sm:mt-0">Time Left: 25:00</div>
+            <h1 class="text-xl sm:text-2xl font-bold text-center text-blue-700">QUIZ FOR CSS ASPIRANTS 29 APRIL 2025</h1>
+            <div id="timer-display" class="text-lg sm:text-xl font-semibold text-red-600 mt-2 sm:mt-0">Time Left: 40:00</div>
         </div>
     </header>
 
     <main class="container mx-auto px-4 py-8 flex-grow">
 
         <section id="name-entry" class="max-w-lg mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-lg text-center">
-            <h2 class="text-2xl font-bold mb-6 text-gray-800">Welcome to the Grammar Challenge!</h2>
-            <p class="text-gray-600 mb-6">Please enter your full name to begin the quiz.</p>
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Ultimate CSS Aspirant Challenge (April 29)</h2>
+            <p class="text-gray-600 mb-6">Enter your full name to begin this comprehensive 100-question quiz (40 Minutes).</p>
             <input type="text" id="student-name" placeholder="Enter your full name" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 mb-6 text-lg" required>
             <button id="start-quiz-btn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-md text-lg transition duration-300 ease-in-out transform hover:scale-105">
                 Start Quiz
@@ -87,25 +107,26 @@
         </section>
 
         <section id="quiz-section" class="hidden max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-xl">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Grammar & Vocabulary Quiz</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">CSS Aspirant Quiz - April 29</h2>
             <div id="question-container" class="mb-6">
-                <p class="text-lg font-semibold text-gray-700 mb-2"><span id="question-number"></span> / 50</p>
+                <p class="text-lg font-semibold text-gray-700 mb-2"><span id="question-number"></span> / 100</p>
                 <p id="question-text" class="text-xl text-gray-800 mb-5 leading-relaxed"></p>
-                <div id="options-container" class="space-y-3">
-                    </div>
-                 <div id="rearrangement-input-container" class="hidden mt-4">
-                    <label for="rearrangement-answer" class="block text-gray-700 font-medium mb-2">Your Rearranged Sentence:</label>
-                    <input type="text" id="rearrangement-answer" placeholder="Type the rearranged sentence here" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                 <div id="rearrangement-parts-display" class="hidden">
+                     <p class="font-medium mb-2 text-gray-700">Rearrange these parts:</p>
+                     <ul id="rearrangement-parts-list" class="list-disc list-inside"></ul>
                 </div>
+                <div id="options-container" class="space-y-3 mt-4">
+                    </div>
             </div>
-            <div class="flex justify-between items-center mt-8">
-                 <button id="prev-question-btn" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-5 rounded-md transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
+            <div class="quiz-navigation flex flex-col sm:flex-row justify-between items-center mt-8 space-y-3 sm:space-y-0">
+                 <button id="prev-question-btn" class="w-full sm:w-auto bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-5 rounded-md transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed">
                     Previous
                 </button>
-                <button id="next-question-btn" class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-5 rounded-md transition duration-300 ease-in-out">
+                <span id="progress-indicator" class="text-sm text-gray-600 font-medium order-first sm:order-none"></span>
+                <button id="next-question-btn" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-5 rounded-md transition duration-300 ease-in-out">
                     Next
                 </button>
-                <button id="submit-quiz-btn" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-5 rounded-md transition duration-300 ease-in-out hidden">
+                <button id="submit-quiz-btn" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-5 rounded-md transition duration-300 ease-in-out hidden">
                     Submit Quiz
                 </button>
             </div>
@@ -116,8 +137,8 @@
             <div class="space-y-4 text-lg text-gray-700">
                 <p><strong class="font-semibold text-gray-800">Name:</strong> <span id="result-name"></span></p>
                 <p><strong class="font-semibold text-gray-800">Time Taken:</strong> <span id="result-time"></span></p>
-                <p><strong class="font-semibold text-gray-800">Questions Attempted:</strong> <span id="result-attempted"></span></p>
-                <p><strong class="font-semibold text-gray-800">Correct Answers:</strong> <span id="result-score"></span> / 50</p>
+                <p><strong class="font-semibold text-gray-800">Questions Attempted:</strong> <span id="result-attempted"></span> / 100</p>
+                <p><strong class="font-semibold text-gray-800">Correct Answers:</strong> <span id="result-score"></span> / 100</p>
                 <p><strong class="font-semibold text-gray-800">Percentage:</strong> <span id="result-percentage"></span>%</p>
             </div>
              <p class="mt-6 text-sm text-gray-500">Your results have been submitted. Thank you for participating!</p>
@@ -129,7 +150,7 @@
             <input type="number" name="attempted" id="form-attempted">
             <input type="number" name="score" id="form-score">
             <input type="text" name="percentage" id="form-percentage">
-            <input type="hidden" name="_subject" value="New Quiz Submission - CSS Aspirants">
+            <input type="hidden" name="_subject" value="New Quiz Submission - CSS Aspirants April 29">
              <input type="text" name="_gotcha" style="display:none"> </form>
 
     </main>
@@ -144,321 +165,619 @@
     </footer>
 
     <script>
-        // --- Quiz Data (Derived from PDFs) ---
+        // --- Quiz Data (100 Questions: 50 Grammar/Vocab + 50 GK) ---
         const quizData = [
-            // --- Part of Speech Questions ---
+            // --- Section 1: Grammar & Vocabulary (April 29 Source - 50 Questions) ---
+            // Parts of Speech
             {
-                question: "In the sentence 'This past month, India has been hit by 10 per cent tariffs on goods it ships to the US.', what part of speech is 'tariffs'?",
-                options: ["Verb", "Adjective", "Noun", "Adverb"],
-                answer: "Noun",
+                question: "In '...bracing for avoidable blunders...', what part of speech is 'avoidable'?",
+                options: ["Noun", "Verb", "Adverb", "Adjective"],
+                answer: "Adjective",
                 type: "mcq"
             },
             {
-                question: "Identify the part of speech for 'irked' in 'President Donald Trump is irked by this...'.",
-                options: ["Noun", "Verb (Past Participle used as Adjective)", "Adverb", "Preposition"],
-                answer: "Verb (Past Participle used as Adjective)",
-                type: "mcq" // Technically a predicate adjective here
-            },
-            {
-                question: "What part of speech is 'modernise' in '...efforts to modernise its air fleet.'?",
-                options: ["Noun", "Adjective", "Verb (Infinitive)", "Adverb"],
-                answer: "Verb (Infinitive)",
+                question: "Identify the part of speech of 'their' in '...a fresh round of their hop-on, hop-off military stand-off...'.",
+                options: ["Personal Pronoun", "Possessive Adjective", "Relative Pronoun", "Demonstrative Pronoun"],
+                answer: "Possessive Adjective",
                 type: "mcq"
             },
             {
-                question: "In 'Vance welcomed the idea of India buying energy from the US.', 'buying' functions as a:",
-                options: ["Present Participle (Adjective)", "Gerund (Noun)", "Main Verb", "Adverb"],
-                answer: "Gerund (Noun)",
-                type: "mcq" // Gerund as object of the preposition 'of'
+                question: "What function does 'grappling' serve in 'The wider world is grappling with a potentially devastating tussle...'?",
+                options: ["Noun (Gerund)", "Adjective (Participle)", "Verb (Present Participle in Continuous Tense)", "Adverb"],
+                answer: "Verb (Present Participle in Continuous Tense)",
+                type: "mcq"
             },
             {
-                question: "What is the part of speech for 'however' in 'India's trade war with the US, however, seems to augur only uncertainty...'?",
-                options: ["Conjunction (Coordinating)", "Adjective", "Preposition", "Adverb (Conjunctive/Transitional)"],
-                answer: "Adverb (Conjunctive/Transitional)",
+                question: "In '...neither consistent with treaty provisions nor international law.', 'consistent' is what part of speech?",
+                options: ["Adverb", "Adjective", "Noun", "Verb"],
+                answer: "Adjective", // Predicate adjective after implied 'is'
                 type: "mcq"
             },
              {
-                question: "Identify the pronoun type for 'it' in '...goods it ships to the US.'",
-                options: ["Personal (Subjective)", "Personal (Objective)", "Possessive", "Reflexive"],
-                answer: "Personal (Subjective)", // 'it' is the subject of the verb 'ships' in the implied relative clause "that it ships"
+                question: "What part of speech is 'nevertheless' in 'It, nevertheless, holds great relevance...'?",
+                options: ["Preposition", "Adjective", "Conjunction", "Adverb (Conjunctive)"],
+                answer: "Adverb (Conjunctive)",
+                type: "mcq"
+            },
+            // Prepositions
+            {
+                question: "Choose the correct preposition: '...warned ____ his 2013 book...'",
+                options: ["on", "at", "in", "by"],
+                answer: "in",
                 type: "mcq"
             },
             {
-                question: "What part of speech is 'unfortunate' in 'The tension between India and Pakistan is unfortunate...'?",
-                options: ["Adverb", "Noun", "Verb", "Adjective (Predicate)"],
-                answer: "Adjective (Predicate)",
+                question: "Fill the blank: 'Civilisations form ____ water.'",
+                options: ["by", "with", "around", "over"],
+                answer: "around",
+                type: "mcq"
+            },
+            {
+                question: "Select the preposition: '...locked ____ tense jousting with Sudan and Ethiopia...'",
+                options: ["by", "in", "at", "on"],
+                answer: "in",
                 type: "mcq"
             },
              {
-                question: "In the phrase '...arguably bigger war...', what does 'arguably' modify?",
-                options: ["war (Noun)", "bigger (Adjective)", "fighting (Verb)", "is (Verb)"],
-                answer: "bigger (Adjective)",
+                question: "Complete the sentence: '...commenting ____ X about India's abeyance...'",
+                options: ["in", "at", "with", "on"],
+                answer: "on",
                 type: "mcq"
             },
              {
-                question: "What type of verb is 'seems' in '...seems to augur only uncertainty...'?",
-                options: ["Action Verb", "Helping Verb", "Linking Verb", "Modal Verb"],
-                answer: "Linking Verb",
+                question: "Which preposition fits: '...accused ____ complicity with Russia's invasion...'?",
+                options: ["for", "of", "with", "by"],
+                answer: "of", // Accused OF something
+                type: "mcq"
+            },
+            // Verb Tense/Voice/Mood
+            {
+                question: "What is the tense and voice of 'have come' in '...the words of Noam Chomsky... have come into focus...'?",
+                options: ["Simple Past Active", "Present Perfect Active", "Past Perfect Active", "Present Perfect Passive"],
+                answer: "Present Perfect Active",
                 type: "mcq"
             },
             {
-                question: "Identify the part of speech for 'between' in '...escalation of tensions between Pakistan and India...'.",
-                options: ["Adverb", "Conjunction", "Preposition", "Adjective"],
-                answer: "Preposition",
-                type: "mcq"
-            },
-            // --- Preposition Questions ---
-            {
-                question: "Choose the correct preposition: 'The US is India's largest trading partner, with exports ____ it accounting for 18pc...'",
-                options: ["on", "to", "from", "by"],
-                answer: "to",
-                type: "mcq"
-            },
-            {
-                question: "Fill in the blank: 'Concerns have been raised ____ the effectiveness of the F-35...'",
-                options: ["about", "regarding", "over", "with"],
-                answer: "regarding", // 'about' or 'over' could also fit, but 'regarding' is used in the text.
-                type: "mcq"
-            },
-            {
-                question: "Select the appropriate preposition: 'Vance welcomed the idea ____ India buying energy from the US.'",
-                options: ["for", "with", "of", "about"],
-                answer: "of",
-                type: "mcq"
-            },
-            {
-                question: "Complete the sentence: 'Reading ____ the lines of the Vance visit shows how far apart the two countries are.'",
-                options: ["in", "between", "through", "over"],
-                answer: "between",
-                type: "mcq"
-            },
-             {
-                question: "Which preposition fits here: '...strike a deal that is ____ America’s liking...'?",
-                options: ["for", "with", "to", "by"],
-                answer: "to",
-                type: "mcq"
-            },
-            // --- Verb Tense/Aspect/Voice/Mood Questions ---
-            {
-                question: "What is the tense and voice of 'has been hit' in 'India has been hit by 10 per cent tariffs'?",
-                options: ["Present Perfect Active", "Past Perfect Passive", "Present Perfect Passive", "Simple Present Passive"],
-                answer: "Present Perfect Passive",
-                type: "mcq"
-            },
-            {
-                question: "Identify the tense of 'had brought' in '...how the South Koreans had brought their A-game...'.",
+                question: "Identify the tense of 'warned' in 'Chomsky warned in his 2013 book...'.",
                 options: ["Simple Past", "Past Continuous", "Present Perfect", "Past Perfect"],
-                answer: "Past Perfect",
+                answer: "Simple Past",
                 type: "mcq"
             },
             {
-                question: "What mood is predominantly used in the sentence 'The US is India’s largest trading partner.'?",
-                options: ["Indicative", "Imperative", "Subjunctive", "Conditional"],
+                question: "What is the voice of 'cannot be redressed' in '...it cannot be redressed with war drums...'?",
+                options: ["Active", "Passive"],
+                answer: "Passive",
+                type: "mcq"
+            },
+            {
+                question: "The verb phrase 'would pose' in 'A water-sharing dispute would pose a mortal crisis...' expresses:",
+                options: ["Past certainty", "Present ability", "Hypothetical future consequence", "Present obligation"],
+                answer: "Hypothetical future consequence",
+                type: "mcq"
+            },
+             {
+                question: "What mood is primarily used in the sentence 'Civilisations form around water.'?",
+                options: ["Imperative", "Subjunctive", "Indicative", "Conditional"],
                 answer: "Indicative",
                 type: "mcq"
             },
-            {
-                question: "The verb phrase 'could be produced' in '...which Russia has proposed could be produced within India.' expresses:",
-                options: ["Certainty", "Obligation", "Possibility/Capability", "Past Habit"],
-                answer: "Possibility/Capability",
-                type: "mcq"
-            },
+            // Sentence Structure
              {
-                question: "Is the main clause 'New Delhi is already fighting an arguably bigger war' in Active or Passive voice?",
-                options: ["Active", "Passive"],
-                answer: "Active",
-                type: "mcq"
-            },
-            // --- Sentence Structure Questions ---
-            {
-                question: "Classify the sentence: 'President Donald Trump is irked by this.'",
+                question: "Classify the sentence: 'Civilisations form around water.'",
                 options: ["Simple", "Compound", "Complex", "Compound-Complex"],
                 answer: "Simple",
                 type: "mcq"
             },
             {
-                question: "What type of sentence is: 'This ‘deal’ sounds good in theory but presents problems for Modi’s domestic initiatives.'?",
+                question: "What type of sentence is: 'The tragedy of Pahalgam is heartrending, but it cannot be redressed with war drums...'.",
                 options: ["Simple", "Compound", "Complex", "Compound-Complex"],
-                answer: "Compound", // Two independent clauses joined by 'but'
+                answer: "Compound",
                 type: "mcq"
             },
             {
-                question: "Identify the sentence type: 'WHILE the tragic attack...may have increased the prospects of war..., New Delhi is already fighting an arguably bigger war...'",
+                question: "Identify the sentence type: 'While a nuclear strike would require action, environmental catastrophe is partially defined by wilful inaction...'.",
                 options: ["Simple", "Compound", "Complex", "Compound-Complex"],
-                answer: "Complex", // Dependent clause (starting with WHILE) + Independent clause
+                answer: "Complex",
                 type: "mcq"
             },
             {
-                question: "What kind of clause is 'that is to America’s liking' in '...strike a deal that is to America’s liking...'?",
-                options: ["Independent Clause", "Adverbial Clause", "Noun Clause", "Adjectival (Relative) Clause"],
-                answer: "Adjectival (Relative) Clause", // Modifies 'deal'
+                question: "What kind of clause is 'which some say could be more grievous' in '...military stand-off, which some say could be more grievous...'.",
+                options: ["Noun Clause", "Adverb Clause", "Independent Clause", "Adjective (Relative) Clause"],
+                answer: "Adjective (Relative) Clause",
                 type: "mcq"
             },
              {
-                question: "The clause 'how the world is coming to America' functions as what in the sentence '...has been eager to boast of how the world is coming to America...'?",
-                options: ["Adjective Clause", "Adverb Clause", "Noun Clause (Object of Preposition)", "Independent Clause"],
-                answer: "Noun Clause (Object of Preposition)", // Object of 'of'
+                question: "The clause 'if it actually happens' functions as what type of clause in '...that any diversion..., if it actually happens, would be deemed...'?",
+                options: ["Noun Clause", "Adjective Clause", "Adverb Clause (Conditional)", "Independent Clause"],
+                answer: "Adverb Clause (Conditional)",
                 type: "mcq"
             },
-            // --- Idioms, Synonyms, Antonyms Questions ---
+            // Idioms & Vocabulary (April 29 PDF)
             {
-                question: "What is the meaning of the idiom 'Upped the ante'?",
-                options: ["Reduced the demands", "Increased the demands or risks", "Kept things the same", "Offered a compromise"],
-                answer: "Increased the demands or risks",
-                type: "mcq"
-            },
-            {
-                question: "Which is a synonym for 'In abeyance'?",
-                options: ["Active", "Resumed", "Suspended", "Ongoing"],
-                answer: "Suspended",
+                question: "If plans have been 'Shelved', they have been:",
+                options: ["Activated", "Initiated", "Launched", "Postponed or not proceeded with"],
+                answer: "Postponed or not proceeded with",
                 type: "mcq"
             },
             {
-                question: "Choose the antonym for 'Give diplomacy a chance'.",
-                options: ["Attempt negotiation", "Seek peaceful resolution", "Resort to force", "Try talking"],
-                answer: "Resort to force",
+                question: "To 'Serve the interests of' someone means to:",
+                options: ["Harm them", "Hinder them", "Undermine them", "Benefit or be advantageous to them"],
+                answer: "Benefit or be advantageous to them",
                 type: "mcq"
             },
             {
-                question: "The idiom 'Scapegoat' refers to:",
-                options: ["The real culprit", "A person blamed for others' mistakes", "A hero", "A leader"],
-                answer: "A person blamed for others' mistakes",
+                question: "An antonym for 'Mutual understanding' is:",
+                options: ["Agreement", "Accord", "Consensus", "Disagreement"],
+                answer: "Disagreement",
                 type: "mcq"
             },
             {
-                question: "What does 'Fanning the flames' mean?",
-                options: ["Calming a situation", "Making a situation worse", "Ignoring a problem", "Starting a fire"],
-                answer: "Making a situation worse",
+                question: "If someone has 'Taken a strong position against' something, they have:",
+                options: ["Supported it", "Endorsed it", "Advocated for it", "Firmly opposed it"],
+                answer: "Firmly opposed it",
                 type: "mcq"
             },
              {
-                question: "An antonym for 'Bring down the temperature' (reduce tension) is:",
-                options: ["Cool things down", "De-escalate", "Calm the situation", "Inflame"],
-                answer: "Inflame",
+                question: "'In the interest of' means:",
+                options: ["Against the interest of", "To the detriment of", "Regardless of", "For the sake of"],
+                answer: "For the sake of",
                 type: "mcq"
             },
              {
-                question: "What does 'Left a bad taste in the mouth' signify?",
-                options: ["A pleasant feeling", "A feeling of displeasure or bitterness", "A delicious meal", "A neutral experience"],
-                answer: "A feeling of displeasure or bitterness",
+                question: "To 'Address concerns' means to:",
+                options: ["Ignore worries", "Neglect problems", "Overlook issues", "Deal with or find solutions for worries"],
+                answer: "Deal with or find solutions for worries",
                 type: "mcq"
             },
              {
-                question: "Which phrase means 'To escape from or evade authorities'?",
-                options: ["Take action against", "Give authorities the slip", "Besmirch image", "Follow up"],
-                answer: "Give authorities the slip",
+                question: "To have 'Harboured suspicions' means to have:",
+                options: ["Trusted completely", "Believed readily", "Accepted openly", "Secretly held doubts or mistrust"],
+                answer: "Secretly held doubts or mistrust",
                 type: "mcq"
             },
              {
-                question: "A 'Precision strike' is best described as:",
-                options: ["Indiscriminate bombing", "Carpet bombing", "A targeted attack", "A ground assault"],
-                answer: "A targeted attack",
+                question: "If a company 'Incurred major losses', it:",
+                options: ["Made profits", "Gained significantly", "Benefited greatly", "Suffered significant financial setbacks"],
+                answer: "Suffered significant financial setbacks",
+                type: "mcq"
+            },
+             {
+                question: "A 'Breakthrough' in negotiations signifies a:",
+                options: ["Setback", "Stalemate", "Impasse", "Sudden, significant advance"],
+                answer: "Sudden, significant advance",
                 type: "mcq"
             },
             {
-                question: "What is the meaning of 'Rubber-stamped'?",
-                options: ["Scrutinized carefully", "Rejected after review", "Approved automatically without proper consideration", "Questioned intensely"],
-                answer: "Approved automatically without proper consideration",
+                question: "To 'Chart out' a plan means to:",
+                options: ["Improvise it", "Ad-lib it", "Muddle through it", "Plan it in detail"],
+                answer: "Plan it in detail",
                 type: "mcq"
             },
             {
-                question: "Choose a synonym for 'Held to account'.",
-                options: ["Excused", "Pardoned", "Let off", "Held responsible"],
-                answer: "Held responsible",
+                question: "Being 'Given a direct say' implies being:",
+                options: ["Excluded", "Ignored", "Overruled", "Allowed to participate directly in decisions"],
+                answer: "Allowed to participate directly in decisions",
                 type: "mcq"
             },
             {
-                question: "The idiom 'Gain traction' means:",
-                options: ["Lose support", "Stagnate", "Become popular or accepted", "Fade away"],
-                answer: "Become popular or accepted",
+                question: "'High-level engagement' refers to:",
+                options: ["Low-level discussion", "Routine interaction", "Informal chat", "Interaction involving senior officials"],
+                answer: "Interaction involving senior officials",
                 type: "mcq"
             },
             {
-                question: "What is an antonym for 'Rule by fear'?",
-                options: ["Intimidation", "Tyranny", "Rule of law", "Despotism"],
-                answer: "Rule of law",
+                question: "If good came 'Out of this episode', it means the good:",
+                options: ["Was unrelated to the episode", "Preceded the episode", "Was prevented by the episode", "Resulted from the episode"],
+                answer: "Resulted from the episode",
                 type: "mcq"
             },
             {
-                question: "The phrase 'Race to the bottom' describes a situation where standards are:",
-                options: ["Raised", "Lowered competitively", "Maintained", "Ignored"],
-                answer: "Lowered competitively",
-                type: "mcq"
-            },
-             {
-                question: "'Follow suit' means:",
-                options: ["Act independently", "Innovate", "Do the same as someone else", "Diverge"],
-                answer: "Do the same as someone else",
-                type: "mcq"
-            },
-             {
-                question: "What does 'Dare to differ' imply?",
-                options: ["Conforming", "Agreeing", "Having the courage to disagree", "Remaining silent"],
-                answer: "Having the courage to disagree",
-                type: "mcq"
-            },
-             {
-                question: "A 'Puppet regime' is a government that is:",
-                options: ["Sovereign and independent", "Actually controlled by an outside power", "Elected democratically", "Autonomous"],
-                answer: "Actually controlled by an outside power",
-                type: "mcq"
-            },
-             {
-                question: "What does 'Sorely lacking' mean?",
-                options: ["Abundant", "Sufficient", "Very much needed but absent/insufficient", "Adequate"],
-                answer: "Very much needed but absent/insufficient",
+                question: "To be 'Confronted and neutralised' suggests that a threat was:",
+                options: ["Avoided", "Ignored", "Empowered", "Faced and stopped"],
+                answer: "Faced and stopped",
                 type: "mcq"
             },
             {
-                question: "An antonym for 'Cash-strapped' is:",
-                options: ["Impoverished", "Broke", "Underfunded", "Affluent"],
-                answer: "Affluent",
+                question: "If something 'Wreaked major havoc', it:",
+                options: ["Brought order", "Calmed the situation", "Restored peace", "Caused widespread destruction or chaos"],
+                answer: "Caused widespread destruction or chaos",
                 type: "mcq"
             },
              {
-                question: "'Uncharted territory' refers to something:",
-                options: ["Familiar and known", "Well-trodden", "New, unknown, or unexplored", "Established"],
-                answer: "New, unknown, or unexplored",
+                question: "When tensions are 'Heating up', they are:",
+                options: ["Cooling down", "De-escalating", "Calming", "Intensifying or worsening"],
+                answer: "Intensifying or worsening",
                 type: "mcq"
+            },
+             {
+                question: "To 'Take up the issue' means to:",
+                options: ["Ignore the issue", "Drop the issue", "Shelve the issue", "Begin to deal with or discuss it"],
+                answer: "Begin to deal with or discuss it",
+                type: "mcq"
+            },
+            {
+                question: "An antonym for 'Alleviate the challenges' is:",
+                options: ["Ease the challenges", "Reduce the difficulties", "Mitigate the problems", "Aggravate the challenges"],
+                answer: "Aggravate the challenges",
+                type: "mcq"
+            },
+            {
+                question: "A 'Volatile security situation' is one that is:",
+                options: ["Stable", "Calm", "Secure", "Unstable and unpredictable"],
+                answer: "Unstable and unpredictable",
+                type: "mcq"
+            },
+            {
+                question: "To 'Thwart any misadventure' means to:",
+                options: ["Allow a risky action", "Encourage recklessness", "Facilitate danger", "Prevent a risky action from succeeding"],
+                answer: "Prevent a risky action from succeeding",
+                type: "mcq"
+            },
+            {
+                question: "To 'Act without reservation' means to:",
+                options: ["Hesitate", "Hold back", "Act reluctantly", "Act fully and decisively"],
+                answer: "Act fully and decisively",
+                type: "mcq"
+            },
+             {
+                question: "To 'Maintain its vigil' means to:",
+                options: ["Be negligent", "Lower guard", "Be careless", "Stay watchful for danger"],
+                answer: "Stay watchful for danger",
+                type: "mcq"
+            },
+            {
+                question: "Someone who tries to 'Stir up trouble' aims to:",
+                options: ["Promote peace", "Calm things down", "Mediate conflict", "Cause problems or unrest"],
+                answer: "Cause problems or unrest",
+                type: "mcq"
+            },
+            {
+                question: "An antonym for 'Curb the burgeoning' growth is:",
+                options: ["Control growth", "Restrain expansion", "Limit increase", "Encourage growth"],
+                answer: "Encourage growth",
+                type: "mcq"
+            },
+            {
+                question: "'Long-standing inefficiencies' refer to problems that are:",
+                options: ["Recent and minor", "Temporary and fixable", "Old and persistent", "Efficient solutions"],
+                answer: "Old and persistent",
+                type: "mcq"
+            },
+            // Sentence Rearrangement (Grammar/Vocab Section - April 29)
+            {
+                question: "Rearrange: (A) of national cohesion / (B) Consultation is needed / (C) in the interest",
+                options: ["B A C", "C A B", "B C A", "A C B"],
+                answer: "B C A", // Consultation is needed in the interest of national cohesion.
+                type: "rearrangement_mcq",
+                parts: {"A": "of national cohesion", "B": "Consultation is needed", "C": "in the interest"}
+            },
+            {
+                question: "Rearrange: (A) are being given / (B) a direct say / (C) The provinces",
+                options: ["C B A", "A B C", "C A B", "B A C"],
+                answer: "C A B", // The provinces are being given a direct say.
+                type: "rearrangement_mcq",
+                parts: {"A": "are being given", "B": "a direct say", "C": "The provinces"}
+            },
+            {
+                question: "Rearrange: (A) must act / (B) against the TTP / (C) without reservation / (D) Kabul",
+                options: ["D A B C", "D A C B", "A C D B", "B C D A"],
+                answer: "D A C B", // Kabul must act without reservation against the TTP.
+                type: "rearrangement_mcq",
+                parts: {"A": "must act", "B": "against the TTP", "C": "without reservation", "D": "Kabul"}
+            },
+            {
+                question: "Rearrange: (A) on our strained finances / (B) Reforms aim / (C) the pressures / (D) to relieve",
+                options: ["B D C A", "A C B D", "B C A D", "D C A B"],
+                answer: "B D C A", // Reforms aim to relieve the pressures on our strained finances.
+                type: "rearrangement_mcq",
+                parts: {"A": "on our strained finances", "B": "Reforms aim", "C": "the pressures", "D": "to relieve"}
+            },
+            {
+                question: "Rearrange: (A) bracing for / (B) avoidable blunders / (C) The title is", // Based on article title
+                options: ["C A B", "A B C", "C B A", "B A C"],
+                answer: "C A B", // The title is bracing for avoidable blunders.
+                type: "rearrangement_mcq",
+                parts: {"A": "bracing for", "B": "avoidable blunders", "C": "The title is"}
             },
 
-            // --- Sentence Rearrangement Questions ---
+            // --- Section 2: General Knowledge MCQs (50 Questions from One Paper PDF) ---
+            // These are distinct GK questions based on the provided PDF content.
             {
-                question: "Rearrange the following parts into a grammatically correct and meaningful sentence: (A) has been hit / (B) by 10 per cent tariffs / (C) India / (D) this past month / (E) on goods it ships to the US",
-                options: ["D A C B E", "C A D B E", "D C A B E", "C D A B E"], // Correct order: D, C, A, B, E
-                answer: "D C A B E", // This past month, India has been hit by 10 per cent tariffs on goods it ships to the US.
-                type: "rearrangement_mcq", // Using MCQ format for rearrangement
-                parts: { "A": "has been hit", "B": "by 10 per cent tariffs", "C": "India", "D": "this past month", "E": "on goods it ships to the US" }
+                question: "Which is the largest ocean by area?",
+                options: ["Atlantic", "Indian", "Arctic", "Pacific"],
+                answer: "Pacific",
+                type: "mcq"
+            },
+            {
+                question: "Which canal connects the Red Sea and the Mediterranean Sea?",
+                options: ["Panama Canal", "Suez Canal", "Kiel Canal", "Grand Canal"],
+                answer: "Suez Canal",
+                type: "mcq"
+            },
+            {
+                question: "Mount Kilimanjaro is the highest peak of which continent?",
+                options: ["Asia", "Africa", "South America", "North America"],
+                answer: "Africa",
+                type: "mcq"
+            },
+            {
+                question: "What is the capital of Canada?",
+                options: ["Toronto", "Vancouver", "Montreal", "Ottawa"],
+                answer: "Ottawa",
+                type: "mcq"
+            },
+            {
+                question: "The 'Ring of Fire' is an area known for frequent earthquakes and volcanic eruptions surrounding which ocean?",
+                options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+                answer: "Pacific Ocean",
+                type: "mcq"
+            },
+            {
+                question: "Which country is known as the 'Land of the Rising Sun'?",
+                options: ["China", "South Korea", "Japan", "Thailand"],
+                answer: "Japan",
+                type: "mcq"
+            },
+            {
+                question: "The headquarters of the World Health Organization (WHO) is located in:",
+                options: ["New York", "London", "Paris", "Geneva"],
+                answer: "Geneva",
+                type: "mcq"
+            },
+            {
+                question: "Which river is the longest in the world?",
+                options: ["Amazon", "Nile", "Yangtze", "Mississippi"],
+                answer: "Nile", // Often debated with Amazon, but Nile is traditionally cited as longest.
+                type: "mcq"
+            },
+            {
+                question: "Victoria Falls is located on the border between which two African countries?",
+                options: ["Kenya and Tanzania", "Zimbabwe and Zambia", "South Africa and Botswana", "Uganda and Rwanda"],
+                answer: "Zimbabwe and Zambia",
+                type: "mcq"
+            },
+            {
+                question: "What is the currency of Australia?",
+                options: ["Euro", "Pound", "Dollar", "Franc"],
+                answer: "Dollar", // Australian Dollar
+                type: "mcq"
+            },
+            {
+                question: "The Great Barrier Reef is located off the coast of which country?",
+                options: ["Brazil", "Mexico", "Australia", "Indonesia"],
+                answer: "Australia",
+                type: "mcq"
+            },
+            {
+                question: "Which desert is the largest hot desert in the world?",
+                options: ["Gobi", "Kalahari", "Sahara", "Arabian"],
+                answer: "Sahara",
+                type: "mcq"
             },
              {
-                question: "Rearrange the jumbled parts to form a coherent sentence: (A) the flames / (B) instead of / (C) need to calm down / (D) fanning / (E) they",
-                options: ["B D A E C", "E B D A C", "E C B D A", "B D E A C"], // Correct order: B, D, A, E, C
-                answer: "B D A E C", // Instead of fanning the flames, they need to calm down.
-                type: "rearrangement_mcq",
-                parts: { "A": "the flames", "B": "instead of", "C": "need to calm down", "D": "fanning", "E": "they" }
-            },
-            {
-                question: "Arrange these parts into a logical sentence: (A) has captured / (B) Mahrang Baloch / (C) the imagination / (D) of the Baloch sub-nation",
-                options: ["B A C D", "A B C D", "B C A D", "C B A D"], // Correct order: B, A, C, D
-                answer: "B A C D", // Mahrang Baloch has captured the imagination of the Baloch sub-nation.
-                type: "rearrangement_mcq",
-                parts: { "A": "has captured", "B": "Mahrang Baloch", "C": "the imagination", "D": "of the Baloch sub-nation" }
-            },
-            {
-                question: "Form a correct sentence from these parts: (A) must mend / (B) to gain trust / (C) its behaviour / (D) the state",
-                options: ["D C A B", "D A C B", "A D C B", "B D A C"], // Correct order: D, A, C, B
-                answer: "D A C B", // The state must mend its behaviour to gain trust.
-                type: "rearrangement_mcq",
-                parts: { "A": "must mend", "B": "to gain trust", "C": "its behaviour", "D": "the state" }
+                question: "The international organization OPEC primarily deals with:",
+                options: ["Environmental protection", "Petroleum export policies", "Global health", "International law"],
+                answer: "Petroleum export policies",
+                type: "mcq"
             },
              {
-                question: "Rearrange the following to make a meaningful sentence: (A) are the / (B) political stability / (C) foremost need / (D) and legitimacy / (E) of the hour",
-                options: ["B D A C E", "B A D C E", "C E A B D", "A C E B D"], // Correct order: B, D, A, C, E
-                answer: "B D A C E", // Political stability and legitimacy are the foremost need of the hour.
-                type: "rearrangement_mcq",
-                parts: { "A": "are the", "B": "political stability", "C": "foremost need", "D": "and legitimacy", "E": "of the hour" }
+                question: "Which country gifted the Statue of Liberty to the USA?",
+                options: ["United Kingdom", "Germany", "Italy", "France"],
+                answer: "France",
+                type: "mcq"
+            },
+             {
+                question: "The ancient city of Petra, known for its rock-cut architecture, is located in which modern country?",
+                options: ["Egypt", "Greece", "Jordan", "Turkey"],
+                answer: "Jordan",
+                type: "mcq"
+            },
+             {
+                question: "Which is the smallest continent by area?",
+                options: ["Europe", "South America", "Antarctica", "Australia"],
+                answer: "Australia",
+                type: "mcq"
+            },
+             {
+                question: "The Amazon River flows primarily through which continent?",
+                options: ["Africa", "Asia", "North America", "South America"],
+                answer: "South America",
+                type: "mcq"
+            },
+             {
+                question: "What is the highest mountain peak in North America?",
+                options: ["Mount Logan", "Mount Whitney", "Denali (Mount McKinley)", "Pico de Orizaba"],
+                answer: "Denali (Mount McKinley)",
+                type: "mcq"
+            },
+             {
+                question: "The currency 'Euro' is used by members of which organization?",
+                options: ["NATO", "ASEAN", "European Union", "United Nations"],
+                answer: "European Union",
+                type: "mcq"
+            },
+             {
+                question: "Machu Picchu is an ancient Inca citadel located in which country?",
+                options: ["Mexico", "Brazil", "Chile", "Peru"],
+                answer: "Peru",
+                type: "mcq"
+            },
+            {
+                question: "Which country is the largest by area?",
+                options: ["China", "USA", "Canada", "Russia"],
+                answer: "Russia",
+                type: "mcq"
+            },
+            {
+                question: "NATO stands for:",
+                options: ["North African Treaty Organization", "North Atlantic Treaty Organization", "Northern Asian Trade Organization", "National Alliance and Treaty Organization"],
+                answer: "North Atlantic Treaty Organization",
+                type: "mcq"
+            },
+            {
+                question: "The Dead Sea is bordered by which two countries/territories?",
+                options: ["Egypt and Saudi Arabia", "Jordan and Israel/Palestine", "Syria and Lebanon", "Turkey and Iraq"],
+                answer: "Jordan and Israel/Palestine",
+                type: "mcq"
+            },
+            {
+                question: "Which city hosted the first modern Olympic Games in 1896?",
+                options: ["Paris", "London", "Athens", "Rome"],
+                answer: "Athens",
+                type: "mcq"
+            },
+            {
+                question: "The disease 'Scurvy' is caused by a deficiency of which vitamin?",
+                options: ["Vitamin A", "Vitamin B12", "Vitamin C", "Vitamin D"],
+                answer: "Vitamin C",
+                type: "mcq"
+            },
+            {
+                question: "What does 'www' stand for in a website address?",
+                options: ["World Wide Web", "World Web Wide", "Web World Wide", "Wide World Web"],
+                answer: "World Wide Web",
+                type: "mcq"
+            },
+            {
+                question: "The famous painting 'Mona Lisa' was painted by which artist?",
+                options: ["Michelangelo", "Raphael", "Donatello", "Leonardo da Vinci"],
+                answer: "Leonardo da Vinci",
+                type: "mcq"
+            },
+            {
+                question: "Which element has the chemical symbol 'Fe'?",
+                options: ["Fluorine", "Iodine", "Iron", "Francium"],
+                answer: "Iron", // From Latin 'Ferrum'
+                type: "mcq"
+            },
+            {
+                question: "The theory of evolution by natural selection is most famously associated with:",
+                options: ["Gregor Mendel", "Charles Darwin", "Louis Pasteur", "Alfred Wallace"], // Wallace co-discovered, but Darwin is most famous
+                answer: "Charles Darwin",
+                type: "mcq"
+            },
+            {
+                question: "What is the hardest natural substance known on Earth?",
+                options: ["Gold", "Iron", "Quartz", "Diamond"],
+                answer: "Diamond",
+                type: "mcq"
+            },
+            {
+                question: "Which gas makes up the majority of Earth's atmosphere?",
+                options: ["Oxygen", "Carbon Dioxide", "Argon", "Nitrogen"],
+                answer: "Nitrogen", // Approx 78%
+                type: "mcq"
+            },
+            {
+                question: "The capital of South Korea is:",
+                options: ["Pyongyang", "Tokyo", "Beijing", "Seoul"],
+                answer: "Seoul",
+                type: "mcq"
+            },
+            {
+                question: "Which country is known as the 'Land of the Midnight Sun'?",
+                options: ["Finland", "Sweden", "Norway", "Iceland"],
+                answer: "Norway", // Also applies to others near/above Arctic Circle, but Norway is commonly cited.
+                type: "mcq"
+            },
+            {
+                question: "The Magna Carta, a foundational document for constitutional law, was signed by which English King?",
+                options: ["Henry VIII", "Richard the Lionheart", "King John", "William the Conqueror"],
+                answer: "King John", // In 1215
+                type: "mcq"
+            },
+            {
+                question: "Which body of water separates Africa from Europe?",
+                options: ["Red Sea", "Atlantic Ocean", "Indian Ocean", "Mediterranean Sea"],
+                answer: "Mediterranean Sea",
+                type: "mcq"
+            },
+             {
+                question: "What is the main function of the human body's kidneys?",
+                options: ["Digesting food", "Pumping blood", "Filtering waste from blood", "Producing hormones"],
+                answer: "Filtering waste from blood",
+                type: "mcq"
+            },
+             {
+                question: "The historical region of Mesopotamia corresponds largely to which modern country?",
+                options: ["Egypt", "Iran", "Syria", "Iraq"],
+                answer: "Iraq",
+                type: "mcq"
+            },
+             {
+                question: "Which famous scientist formulated the laws of motion and universal gravitation?",
+                options: ["Galileo Galilei", "Johannes Kepler", "Isaac Newton", "Albert Einstein"],
+                answer: "Isaac Newton",
+                type: "mcq"
+            },
+             {
+                question: "What is the largest bone in the human body?",
+                options: ["Skull", "Femur (Thigh bone)", "Humerus (Upper arm bone)", "Tibia (Shin bone)"],
+                answer: "Femur (Thigh bone)",
+                type: "mcq"
+            },
+             {
+                question: "The process by which plants make their own food using sunlight is called:",
+                options: ["Respiration", "Transpiration", "Photosynthesis", "Pollination"],
+                answer: "Photosynthesis",
+                type: "mcq"
+            },
+            {
+                question: "What is the primary language spoken in Brazil?",
+                options: ["Spanish", "English", "French", "Portuguese"],
+                answer: "Portuguese",
+                type: "mcq"
+            },
+            {
+                question: "The ancient wonder, the Hanging Gardens, were associated with which city?",
+                options: ["Athens", "Rome", "Alexandria", "Babylon"],
+                answer: "Babylon",
+                type: "mcq"
+            },
+            {
+                question: "Which war was fought between the North and South regions of the United States?",
+                options: ["Revolutionary War", "War of 1812", "Civil War", "World War I"],
+                answer: "Civil War",
+                type: "mcq"
+            },
+            {
+                question: "What is the study of stars, planets, and the universe called?",
+                options: ["Geology", "Astrology", "Astronomy", "Meteorology"],
+                answer: "Astronomy",
+                type: "mcq"
+            },
+            {
+                question: "Which continent is also a country?",
+                options: ["Africa", "Europe", "Australia", "South America"],
+                answer: "Australia",
+                type: "mcq"
+            },
+            {
+                question: "The historical Silk Road connected Europe with which continent?",
+                options: ["Africa", "Australia", "North America", "Asia"],
+                answer: "Asia",
+                type: "mcq"
+            },
+            {
+                question: "What gas do humans primarily exhale when breathing?",
+                options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+                answer: "Carbon Dioxide",
+                type: "mcq"
+            },
+            {
+                question: "Which musical instrument has 88 keys?",
+                options: ["Guitar", "Violin", "Piano", "Trumpet"],
+                answer: "Piano",
+                type: "mcq"
+            },
+            {
+                question: "Who wrote the play 'Romeo and Juliet'?",
+                options: ["Charles Dickens", "Jane Austen", "William Shakespeare", "Leo Tolstoy"],
+                answer: "William Shakespeare",
+                type: "mcq"
             }
         ];
+
 
         // --- DOM Elements ---
         const nameEntrySection = document.getElementById('name-entry');
@@ -470,12 +789,13 @@
         const questionNumberEl = document.getElementById('question-number');
         const questionTextEl = document.getElementById('question-text');
         const optionsContainer = document.getElementById('options-container');
-        const rearrangementInputContainer = document.getElementById('rearrangement-input-container');
-        const rearrangementAnswerInput = document.getElementById('rearrangement-answer');
+        const rearrangementPartsDisplay = document.getElementById('rearrangement-parts-display');
+        const rearrangementPartsList = document.getElementById('rearrangement-parts-list');
         const nextQuestionBtn = document.getElementById('next-question-btn');
         const prevQuestionBtn = document.getElementById('prev-question-btn');
         const submitQuizBtn = document.getElementById('submit-quiz-btn');
         const timerDisplay = document.getElementById('timer-display');
+        const progressIndicator = document.getElementById('progress-indicator'); // Added
         const resultNameEl = document.getElementById('result-name');
         const resultTimeEl = document.getElementById('result-time');
         const resultAttemptedEl = document.getElementById('result-attempted');
@@ -493,53 +813,62 @@
         let userAnswers = new Array(quizData.length).fill(null);
         let score = 0;
         let timerInterval;
-        let timeLeft = 25 * 60; // 25 minutes in seconds
+        let timeLeft = 40 * 60; // 40 minutes for 100 questions
         let startTime;
         let endTime;
         let studentName = '';
+        let quizSubmitted = false; // Flag to prevent multiple submissions
 
         // --- Utility Functions ---
         function shuffleArray(array) {
+            // Fisher-Yates (aka Knuth) Shuffle
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]]; // Swap elements
             }
         }
 
-        // Shuffle options for each MCQ question
+        // Shuffle options for each MCQ/Rearrangement question *before* starting
         quizData.forEach(q => {
-            if (q.type === 'mcq' || q.type === 'rearrangement_mcq') {
-                 // Keep track of the original answer before shuffling options
-                const correctAnswerValue = q.answer;
-                // Find the option text that matches the answer value for rearrangement_mcq
-                const correctAnswerText = (q.type === 'rearrangement_mcq')
-                    ? q.options.find(opt => opt === correctAnswerValue) // The answer is the key sequence
-                    : correctAnswerValue; // For MCQ, the answer is the option text
-
-                shuffleArray(q.options);
-
-                 // Update the answer to match the potentially new index/value after shuffling
-                 // For MCQ, the answer remains the text content.
-                 // For rearrangement_mcq, the answer remains the key sequence string.
-                 q.answer = correctAnswerValue;
+            if (q.options && Array.isArray(q.options)) {
+                 const correctAnswerValue = q.answer; // Store the correct answer value
+                 shuffleArray(q.options); // Shuffle the options array in place
+                 q.answer = correctAnswerValue; // Ensure the answer key still points to the correct value
             }
         });
+
 
         // --- Event Listeners ---
         startQuizBtn.addEventListener('click', startQuiz);
         nextQuestionBtn.addEventListener('click', nextQuestion);
         prevQuestionBtn.addEventListener('click', prevQuestion);
-        submitQuizBtn.addEventListener('click', submitQuiz);
+        submitQuizBtn.addEventListener('click', () => submitQuiz(false)); // Manual submission
 
         // Prevent context menu (right-click)
         document.addEventListener('contextmenu', event => event.preventDefault());
 
-        // Optional: Disable specific keys like F12 (Inspect Element)
+        // Anti-cheating measures
         document.addEventListener('keydown', event => {
-            if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I') || (event.ctrlKey && event.shiftKey && event.key === 'J') || (event.ctrlKey && event.key === 'U')) {
+            // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+            if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'i' || event.key === 'J' || event.key === 'j')) || (event.ctrlKey && (event.key === 'U' || event.key === 'u'))) {
                 event.preventDefault();
             }
+             // Disable Ctrl+C, Ctrl+X, Ctrl+A (Copy, Cut, Select All)
+            if (event.ctrlKey && (event.key === 'c' || event.key === 'x' || event.key === 'a')) {
+                 event.preventDefault();
+            }
         });
+         // Prevent printing
+        window.addEventListener('beforeprint', (event) => {
+            event.preventDefault();
+            alert('Printing is disabled for this quiz.');
+        });
+         // Detect visibility change (tab switching) - optional
+        // document.addEventListener('visibilitychange', () => {
+        //     if (document.hidden && timerInterval && !quizSubmitted) {
+        //         console.log("User switched tabs during quiz.");
+        //     }
+        // });
 
 
         // --- Quiz Logic ---
@@ -549,6 +878,7 @@
                 alert("Please enter your name to start the quiz.");
                 return;
             }
+            quizSubmitted = false; // Reset submission flag
             nameEntrySection.classList.add('hidden');
             quizSection.classList.remove('hidden');
             startTime = new Date();
@@ -562,26 +892,33 @@
             questionNumberEl.textContent = index + 1;
             questionTextEl.textContent = question.question;
             optionsContainer.innerHTML = ''; // Clear previous options
-            rearrangementInputContainer.classList.add('hidden'); // Hide rearrangement input by default
-            rearrangementAnswerInput.value = ''; // Clear previous rearrangement answer
+            rearrangementPartsDisplay.classList.add('hidden'); // Hide rearrangement parts by default
+            rearrangementPartsList.innerHTML = ''; // Clear previous parts list
+            progressIndicator.textContent = `Question ${index + 1} of ${quizData.length}`; // Update progress
 
             if (question.type === 'mcq' || question.type === 'rearrangement_mcq') {
-                // Display parts for rearrangement questions
+                // Display parts list for rearrangement questions
                 if (question.type === 'rearrangement_mcq' && question.parts) {
-                    let partsHtml = '<div class="mt-4 p-3 bg-gray-100 rounded border border-gray-300 text-sm">';
-                    partsHtml += '<p class="font-medium mb-2 text-gray-700">Parts:</p><ul class="list-disc list-inside">';
+                    rearrangementPartsDisplay.classList.remove('hidden');
+                    rearrangementPartsDisplay.classList.add('rearrangement-parts'); // Add class for styling
                     for (const key in question.parts) {
-                        partsHtml += `<li><strong>(${key})</strong> ${question.parts[key]}</li>`;
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `<strong>(${key})</strong> ${question.parts[key]}`;
+                        rearrangementPartsList.appendChild(listItem);
                     }
-                    partsHtml += '</ul></div>';
-                    questionTextEl.insertAdjacentHTML('afterend', partsHtml);
                 }
 
-                // Display options
+                // Display options (shuffled during initialization)
                 question.options.forEach(option => {
                     const button = document.createElement('button');
                     button.textContent = option;
-                    button.classList.add('block', 'w-full', 'text-left', 'p-3', 'border', 'border-gray-300', 'rounded-md', 'quiz-option', 'text-gray-700', 'hover:bg-blue-100', 'hover:border-blue-400');
+                    // Add Tailwind classes for styling options
+                    button.classList.add(
+                        'block', 'w-full', 'text-left', 'p-3', 'border', 'border-gray-300',
+                        'rounded-md', 'quiz-option', 'text-gray-700', 'hover:bg-blue-100',
+                        'hover:border-blue-400', 'focus:outline-none', 'focus:ring-2',
+                        'focus:ring-blue-300', 'transition', 'duration-150', 'ease-in-out'
+                    );
                     button.onclick = () => selectAnswer(index, option, button);
 
                     // If an answer was previously selected for this question, highlight it
@@ -591,15 +928,14 @@
                     optionsContainer.appendChild(button);
                 });
             }
-            // Note: No separate handling needed for rearrangement input here,
-            // as we are using MCQ options to select the correct sequence.
-            // If free-form rearrangement input was needed, we'd show rearrangementInputContainer.
 
             updateNavigationButtons();
         }
 
 
         function selectAnswer(index, answer, selectedButton) {
+            if (quizSubmitted) return; // Don't allow changes after submission
+
             // Deselect previously selected option for this question
             const previouslySelected = optionsContainer.querySelector('.selected');
             if (previouslySelected) {
@@ -609,9 +945,6 @@
             // Select the new option
             selectedButton.classList.add('selected');
             userAnswers[index] = answer; // Store the selected option value/text
-
-            // Automatically move to the next question after a brief delay (optional)
-            // setTimeout(nextQuestion, 300);
         }
 
 
@@ -627,6 +960,7 @@
         }
 
         function nextQuestion() {
+             if (quizSubmitted) return;
             if (currentQuestionIndex < quizData.length - 1) {
                 currentQuestionIndex++;
                 displayQuestion(currentQuestionIndex);
@@ -634,6 +968,7 @@
         }
 
         function prevQuestion() {
+            if (quizSubmitted) return;
              if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
                 displayQuestion(currentQuestionIndex);
@@ -643,6 +978,10 @@
 
         function startTimer() {
             timerInterval = setInterval(() => {
+                if (quizSubmitted) { // Stop timer if quiz was submitted manually
+                     clearInterval(timerInterval);
+                     return;
+                }
                 timeLeft--;
                 const minutes = Math.floor(timeLeft / 60);
                 const seconds = timeLeft % 60;
@@ -650,15 +989,33 @@
 
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    alert("Time's up! Submitting your quiz automatically.");
-                    submitQuiz();
+                    timerDisplay.textContent = "Time's up!";
+                    submitQuiz(true); // Auto-submit
                 }
             }, 1000);
         }
 
-        function submitQuiz() {
-            clearInterval(timerInterval); // Stop the timer
+        function submitQuiz(isAutoSubmit = false) {
+            if (quizSubmitted) return; // Prevent multiple submissions
+            quizSubmitted = true; // Set flag
+
+            if (timerInterval) {
+                 clearInterval(timerInterval);
+            }
             endTime = new Date();
+
+             if (isAutoSubmit) {
+                alert("Time's up! Your quiz is being submitted automatically.");
+            }
+
+            // Disable all quiz buttons after submission
+            const buttons = quizSection.querySelectorAll('button');
+            buttons.forEach(button => button.disabled = true);
+            optionsContainer.querySelectorAll('.quiz-option').forEach(opt => {
+                opt.onclick = null; // Remove click handlers
+                opt.classList.add('cursor-not-allowed', 'opacity-75'); // Visual indication
+            });
+
 
             calculateResults();
 
@@ -676,7 +1033,7 @@
             quizData.forEach((question, index) => {
                 if (userAnswers[index] !== null) {
                     attemptedCount++;
-                    // Check if the stored answer matches the correct answer text/value
+                    // Check if the stored answer matches the correct answer value
                     if (userAnswers[index] === question.answer) {
                         score++;
                     }
@@ -687,7 +1044,7 @@
             const minutesTaken = Math.floor(timeTaken / 60);
             const secondsTaken = timeTaken % 60;
             const timeTakenFormatted = `${minutesTaken} min ${secondsTaken} sec`;
-            const percentage = ((score / quizData.length) * 100).toFixed(1);
+            const percentage = (quizData.length > 0) ? ((score / quizData.length) * 100).toFixed(1) : 0;
 
             // Display results
             resultNameEl.textContent = studentName;
@@ -706,8 +1063,11 @@
 
          function populateAndSubmitForm() {
             // Values are already set in calculateResults()
-            resultsForm.submit();
-            console.log("Submitting form to Formspree..."); // For debugging
+            // Add a small delay before submitting to ensure values are populated
+            setTimeout(() => {
+                 resultsForm.submit();
+                 console.log("Submitting form to Formspree..."); // For debugging
+            }, 100);
         }
 
     </script>
