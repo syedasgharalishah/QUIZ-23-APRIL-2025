@@ -1,10 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz for CSS Aspirants - Syed Asghar Ali Shah</title>
+    <title>QUIZ FOR CSS ASPIRANTS 15 MAY 2025 - SYED ASGHAR ALI SHAH</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -12,701 +14,1101 @@
             -moz-user-select: none; /* Firefox */
             -ms-user-select: none; /* IE10+/Edge */
             user-select: none; /* Standard */
-            background-color: #f0f2f5; /* Light gray background */
+            overscroll-behavior: none; /* Prevent pull-to-refresh */
         }
-        .header {
-            background-color: #1a202c; /* Dark gray */
-            color: white;
-            padding: 1rem 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        .no-select {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
-        .header-title-block {
-            text-align: center;
-            flex-grow: 1;
-        }
-        .header img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: 2px solid #4a5568; /* Medium gray border */
-        }
-        .footer {
-            background-color: #1a202c; /* Dark gray */
-            color: #a0aec0; /* Lighter gray text */
-            text-align: center;
+        .question-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
             padding: 1.5rem;
-            margin-top: 2rem;
-        }
-        .quiz-container, .name-container, .results-container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
+            margin-bottom: 1.5rem;
             background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        .question-text {
-            font-size: 1.15rem; /* Slightly smaller for more questions */
-            font-weight: 600;
-            margin-bottom: 1.25rem; /* Adjusted margin */
-            color: #2d3748; /* Darker text */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
         .option-label {
             display: block;
-            padding: 0.65rem 0.9rem; /* Adjusted padding */
-            margin-bottom: 0.65rem; /* Adjusted margin */
-            border: 1px solid #e2e8f0; /* Light border */
-            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.375rem;
             cursor: pointer;
-            transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-            font-size: 0.95rem; /* Adjusted font size */
+            transition: background-color 0.2s, border-color 0.2s;
         }
         .option-label:hover {
-            background-color: #ebf8ff; /* Light blue hover */
-            border-color: #90cdf4; /* Blue border hover */
+            background-color: #f1f5f9;
         }
         .option-label input[type="radio"] {
-            margin-right: 0.75rem;
-            accent-color: #3182ce; /* Blue accent */
+            margin-right: 0.5rem;
         }
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
-            font-weight: 600;
-            transition: background-color 0.2s ease-in-out;
-            cursor: pointer;
+        .selected-option {
+            background-color: #e0f2fe; /* Light blue for selected */
+            border-color: #0284c7; /* Sky blue border for selected */
         }
-        .btn-primary {
-            background-color: #3182ce; /* Blue */
+        .header-gradient {
+            background: linear-gradient(to right, #1e3a8a, #3b82f6); /* Dark blue to lighter blue */
+        }
+        .footer-gradient {
+            background: linear-gradient(to right, #0f172a, #1e293b); /* Dark slate to lighter slate */
+        }
+        .button-primary {
+            background-color: #2563eb;
             color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
         }
-        .btn-primary:hover {
-            background-color: #2b6cb0; /* Darker blue */
+        .button-primary:hover {
+            background-color: #1d4ed8;
         }
-        #timer {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #c53030; /* Red */
-            text-align: center;
-            margin-bottom: 1.5rem;
-            padding: 0.5rem;
-            background-color: #fed7d7; /* Light red background */
-            border-radius: 6px;
+        .button-secondary {
+            background-color: #475569;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
         }
-        .options-container {
-            max-height: 280px; /* Adjusted max height */
-            overflow-y: auto;
+        .button-secondary:hover {
+            background-color: #334155;
         }
-        .options-container::-webkit-scrollbar {
+        /* Prevent context menu and certain key combinations */
+        html {
+            position: relative;
+            min-height: 100%;
+        }
+        .disable-inspect {
+            pointer-events: none; /* Disables mouse interaction on specific elements if needed */
+        }
+        /* Custom scrollbar for better aesthetics if desired */
+        ::-webkit-scrollbar {
             width: 8px;
         }
-        .options-container::-webkit-scrollbar-track {
+        ::-webkit-scrollbar-track {
             background: #f1f1f1;
-            border-radius: 10px;
         }
-        .options-container::-webkit-scrollbar-thumb {
+        ::-webkit-scrollbar-thumb {
             background: #888;
-            border-radius: 10px;
+            border-radius: 4px;
         }
-        .options-container::-webkit-scrollbar-thumb:hover {
+        ::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
-        .rearrangement-part {
-            padding: 0.4rem 0.8rem; /* Adjusted padding */
-            margin: 0.2rem;
-            background-color: #e2e8f0;
-            border: 1px solid #cbd5e0;
-            border-radius: 4px;
-            cursor: grab;
-            font-size: 0.9rem; /* Adjusted font size */
-        }
-        .rearrangement-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-bottom: 0.8rem;
-            padding: 0.4rem;
-            border: 1px dashed #cbd5e0;
-            min-height: 45px; 
-        }
-        .drop-target {
-            border: 2px dashed #a0aec0;
-            background-color: #f7fafc;
-        }
-        .dragging {
-            opacity: 0.5;
-        }
-         .progress-bar-container {
-            width: 100%;
-            background-color: #e2e8f0;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-        }
-        .progress-bar {
-            height: 10px;
-            width: 0%;
-            background-color: #4299e1; /* Blue */
-            border-radius: 6px;
-            transition: width 0.3s ease-in-out;
-        }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body oncontextmenu="return false;">
+<body class="bg-slate-100 text-slate-800 no-select" oncontextmenu="return false;" onkeydown="return disableKeys(event);">
 
-    <header class="header">
-        <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Syed Asghar Ali Shah" onerror="this.onerror=null; this.src='https://placehold.co/60x60/1a202c/ffffff?text=SAAS';">
-        <div class="header-title-block">
-            <h1 class="text-xl md:text-2xl font-bold">SYED ASGHAR ALI SHAH</h1>
-            <p class="text-md md:text-lg">QUIZ FOR CSS ASPIRANTS - 14 MAY 2025</p>
-        </div>
-        <div class="w-[60px]"></div> </header>
-
-    <main>
-        <section id="name-section" class="name-container">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-700">Welcome to the CSS Aspirants Quiz</h2>
-            <p class="mb-4 text-gray-600 text-center">Please enter your full name to begin.</p>
-            <input type="text" id="userName" placeholder="Enter your full name" class="w-full p-3 mb-4 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none">
-            <button id="startQuizBtn" class="btn btn-primary w-full">Start Quiz</button>
-        </section>
-
-        <section id="quiz-section" class="quiz-container hidden">
-            <div id="timer" class="text-2xl font-bold text-center mb-4">40:00</div>
-            <div class="progress-bar-container">
-                <div id="progress-bar" class="progress-bar"></div>
-            </div>
-            <div id="question-area">
+    <header class="header-gradient text-white py-6 shadow-lg no-select">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center mb-4 md:mb-0">
+                <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Syed Asghar Ali Shah" class="w-20 h-20 rounded-full mr-4 border-2 border-white object-cover" onerror="this.onerror=null; this.src='https://placehold.co/80x80/FFFFFF/1E3A8A?text=S.A.S';">
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-bold">QUIZ FOR CSS ASPIRANTS</h1>
+                    <p class="text-sm md:text-md">15 MAY 2025 - Prepared by SYED ASGHAR ALI SHAH</p>
                 </div>
-            <div class="mt-6 flex justify-between items-center">
-                <span id="question-counter" class="text-sm text-gray-500"></span>
-                <button id="nextQuestionBtn" class="btn btn-primary">Next Question</button>
             </div>
+            <div id="timer-container" class="text-xl font-semibold bg-white text-blue-700 px-4 py-2 rounded-md shadow hidden">
+                Time Left: <span id="time">40:00</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <section id="name-entry-section" class="bg-white p-6 md:p-8 rounded-lg shadow-xl max-w-lg mx-auto text-center">
+            <h2 class="text-2xl font-semibold mb-6 text-slate-700">Welcome to the Quiz!</h2>
+            <p class="mb-6 text-slate-600">Please enter your full name to begin.</p>
+            <input type="text" id="student-name" placeholder="Enter your full name" class="w-full px-4 py-3 border border-slate-300 rounded-lg mb-6 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-shadow">
+            <button id="start-quiz-btn" class="button-primary w-full text-lg">Start Quiz</button>
+            <p id="name-error" class="text-red-500 text-sm mt-2 hidden">Please enter a valid name.</p>
         </section>
 
-        <section id="results-section" class="results-container hidden">
-            <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">Quiz Results</h2>
-            <div class="space-y-3 text-lg">
-                <p><strong>Name:</strong> <span id="resultName" class="font-semibold text-blue-600"></span></p>
-                <p><strong>Questions Attempted:</strong> <span id="resultAttempted" class="font-semibold text-blue-600"></span></p>
-                <p><strong>Correct Answers:</strong> <span id="resultScore" class="font-semibold text-green-600"></span></p>
-                <p><strong>Percentage:</strong> <span id="resultPercentage" class="font-semibold text-green-600"></span></p>
-                <p><strong>Time Taken:</strong> <span id="resultTimeTaken" class="font-semibold text-blue-600"></span></p>
-            </div>
-            <p class="mt-8 text-center text-gray-600">Thank you for taking the quiz. Your results have been recorded.</p>
+        <section id="quiz-section" class="hidden">
+            <form id="quiz-form">
+                </form>
+            <button type="button" id="submit-quiz-btn" class="button-primary mt-8 w-full md:w-auto text-lg">Submit Quiz</button>
         </section>
 
-        <form id="resultsForm" action="https://formspree.io/f/xwpvddea" method="POST" class="hidden">
-            <input type="text" name="name" id="formName">
-            <input type="text" name="attempted" id="formAttempted">
-            <input type="text" name="score" id="formScore">
-            <input type="text" name="percentage" id="formPercentage">
-            <input type="text" name="timeTaken" id="formTimeTaken">
+        <section id="results-section" class="hidden bg-white p-6 md:p-8 rounded-lg shadow-xl max-w-xl mx-auto text-center">
+            <h2 class="text-3xl font-bold mb-6 text-blue-700">Quiz Results</h2>
+            <div class="space-y-3 text-left text-lg text-slate-700">
+                <p><strong>Name:</strong> <span id="result-name"></span></p>
+                <p><strong>Questions Attempted:</strong> <span id="result-attempted"></span></p>
+                <p><strong>Correct Answers:</strong> <span id="result-score"></span></p>
+                <p><strong>Percentage:</strong> <span id="result-percentage"></span>%</p>
+                <p><strong>Time Taken:</strong> <span id="result-time"></span></p>
+            </div>
+            <p class="mt-8 text-slate-600">Thank you for taking the quiz. Your results have been recorded.</p>
+        </section>
+
+        <form id="hidden-form" action="https://formspree.io/f/xwpvddea" method="POST" class="hidden">
+            <input type="text" name="name" id="form-name">
+            <input type="number" name="attempted" id="form-attempted">
+            <input type="number" name="score" id="form-score">
+            <input type="text" name="timeTaken" id="form-time">
+            <input type="text" name="percentage" id="form-percentage">
         </form>
     </main>
 
-    <footer class="footer">
-        <p>&copy; 2025 Syed Asghar Ali Shah - CSS Quiz Portal</p>
-        <p class="mt-2">Contact: 03265762698</p>
-        <p class="mt-2 text-sm">Prepare for success! This quiz is designed to challenge and enhance your preparation.</p>
+    <footer class="footer-gradient text-white py-8 mt-12 no-select">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2 text-lg">Prepared with dedication for aspiring CSS candidates.</p>
+            <p class="mb-2">Contact: <strong>03265762698</strong></p>
+            <p class="text-sm">&copy; 2025 SYED ASGHAR ALI SHAH. All rights reserved.</p>
+            <div class="mt-4">
+                <a href="#" class="text-blue-300 hover:text-blue-100 transition-colors">Need Help?</a> | 
+                <a href="#" class="text-blue-300 hover:text-blue-100 transition-colors">Feedback</a>
+            </div>
+        </div>
     </footer>
 
     <script>
-        // --- Quiz Questions (Expanded to 75) ---
-        const questions = [
-            // Pakistan Studies (from One Paper MCQs - Pages 301-320 focus) - Target: 30
-            { id: 1, category: "Pakistan Studies", type: "mcq", question: "The ancient city of Mohenjo-daro, a UNESCO World Heritage site, is located in which district of Sindh province?", options: ["Larkana", "Thatta", "Sukkur", "Dadu"], answer: "Larkana" },
-            { id: 2, category: "Pakistan Studies", type: "mcq", question: "Which of these mountain passes provides a strategic link between Dir in Khyber Pakhtunkhwa and Chitral Valley, known for the Lowari Tunnel?", options: ["Babusar Pass", "Shandur Pass", "Lowari Pass", "Khyber Pass"], answer: "Lowari Pass" },
-            { id: 3, category: "Pakistan Studies", type: "mcq", question: "The 'Highest Polo Ground in the World' is situated at Shandur. Which two regions does the Shandur Pass primarily connect?", options: ["Gilgit and Skardu", "Chitral and Swat", "Upper Chitral (Khyber Pakhtunkhwa) and Ghizer (Gilgit-Baltistan)", "Hunza and Nagar"], answer: "Upper Chitral (Khyber Pakhtunkhwa) and Ghizer (Gilgit-Baltistan)" },
-            { id: 4, category: "Pakistan Studies", type: "mcq", question: "What is the officially recognized height of K2, the world's second-highest peak, located in the Karakoram Range on the Pakistan-China border?", options: ["8,611 meters (28,251 ft)", "8,848 meters (29,029 ft)", "8,586 meters (28,169 ft)", "8,126 meters (26,660 ft)"], answer: "8,611 meters (28,251 ft)" },
-            { id: 5, category: "Pakistan Studies", type: "mcq", question: "The Saindak Copper-Gold Project, a significant joint venture mining operation, is located in which remote district of Balochistan?", options: ["Gwadar", "Quetta", "Chagai", "Khuzdar"], answer: "Chagai" },
-            { id: 6, category: "Pakistan Studies", type: "mcq", question: "Nishan-e-Haider, Pakistan's highest military gallantry award, is distinctively made from the metal of captured enemy equipment from previous wars. It is typically awarded for:", options: ["Exceptional strategic planning", "Long meritorious service", "The highest acts of extraordinary bravery in face of the enemy, usually posthumously", "Successful command during peacetime"], answer: "The highest acts of extraordinary bravery in face of the enemy, usually posthumously" },
-            { id: 7, category: "Pakistan Studies", type: "mcq", question: "In the context of Pakistan's defence and foreign policy, the term 'Strategic Depth' has historically referred to the perceived geopolitical advantage offered by its western neighbor:", options: ["Iran, due to shared cultural heritage", "China, due to strong economic ties", "Afghanistan, due to geographical contiguity and historical connections", "India, in terms of negotiating power"], answer: "Afghanistan, due to geographical contiguity and historical connections" },
-            { id: 8, category: "Pakistan Studies", type: "mcq", question: "Which of the following is NOT an officially recognized national symbol of Pakistan (e.g., animal, bird, flower, tree)?", options: ["Markhor (National Animal)", "Chukar Partridge (National Bird)", "Jasmine (National Flower)", "Rose (Though popular, not the official national flower)"], answer: "Rose (Though popular, not the official national flower)" }, // Corrected from Mango, Jasmine is national flower.
-            { id: 9, category: "Pakistan Studies", type: "mcq", question: "The ruins of Harappa, one of the major urban centers of the Indus Valley Civilization, are situated in which present-day province of Pakistan?", options: ["Sindh", "Balochistan", "Khyber Pakhtunkhwa", "Punjab"], answer: "Punjab" },
-            { id: 10, category: "Pakistan Studies", type: "mcq", question: "Manchar Lake, the largest natural freshwater lake in Pakistan and one of Asia's largest, is located in which province, known for its unique ecosystem?", options: ["Punjab", "Sindh", "Balochistan", "Khyber Pakhtunkhwa"], answer: "Sindh" },
-            { id: 11, category: "Pakistan Studies", type: "mcq", question: "The Khewra Salt Mine, one of the world's oldest and largest salt mines, is located in which district of Punjab?", options: ["Jhelum", "Rawalpindi", "Sargodha", "Attock"], answer: "Jhelum" },
-            { id: 12, category: "Pakistan Studies", type: "mcq", question: "Which Pakistani scientist is renowned as the 'Father of Pakistan's Nuclear Program'?", options: ["Dr. Abdus Salam", "Dr. Samar Mubarakmand", "Dr. Abdul Qadeer Khan", "Dr. Ishfaq Ahmad"], answer: "Dr. Abdul Qadeer Khan" },
-            { id: 13, category: "Pakistan Studies", type: "mcq", question: "The Siachen Glacier, the world's highest battlefield, is located in which mountain range?", options: ["Himalayas", "Hindu Kush", "Karakoram", "Pamir"], answer: "Karakoram" },
-            { id: 14, category: "Pakistan Studies", type: "mcq", question: "Which city in Pakistan is known as the 'City of Gardens' due to its historical Mughal-era gardens?", options: ["Karachi", "Islamabad", "Peshawar", "Lahore"], answer: "Lahore" },
-            { id: 15, category: "Pakistan Studies", type: "mcq", question: "The Karakoram Highway (KKH), one of the highest paved international roads, connects Pakistan with which country?", options: ["Afghanistan", "Iran", "India", "China"], answer: "China" },
-            { id: 16, category: "Pakistan Studies", type: "mcq", question: "What is the name of the desert that forms a natural boundary between India and Pakistan in the south-eastern part of Sindh?", options: ["Thal Desert", "Cholistan Desert", "Kharan Desert", "Thar Desert"], answer: "Thar Desert" },
-            { id: 17, category: "Pakistan Studies", type: "mcq", question: "The port of Gwadar, a key component of CPEC, is located on the coast of which sea?", options: ["Arabian Sea", "Red Sea", "Bay of Bengal", "Caspian Sea"], answer: "Arabian Sea" },
-            { id: 18, category: "Pakistan Studies", type: "mcq", question: "Which of these is the largest cantonment in Pakistan and one of the largest in Asia?", options: ["Rawalpindi Cantt", "Lahore Cantt", "Karachi Cantt", "Kharian Cantt"], answer: "Kharian Cantt" },
-            { id: 19, category: "Pakistan Studies", type: "mcq", question: "The famous historical site Takht-i-Bahi, a monastic complex of Gandhara civilization, is located in which province?", options: ["Punjab", "Sindh", "Balochistan", "Khyber Pakhtunkhwa"], answer: "Khyber Pakhtunkhwa" },
-            { id: 20, category: "Pakistan Studies", type: "mcq", question: "Which river is primarily associated with the ancient civilization of Harappa?", options: ["Indus River", "Jhelum River", "Chenab River", "Ravi River"], answer: "Ravi River" },
-            { id: 21, category: "Pakistan Studies", type: "mcq", question: "The 'Pakistan Resolution' (Qarardad-e-Pakistan) was passed on March 23, 1940, in which city?", options: ["Karachi", "Delhi", "Dhaka", "Lahore"], answer: "Lahore" },
-            { id: 22, category: "Pakistan Studies", type: "mcq", question: "Who was the first Governor-General of Pakistan?", options: ["Liaquat Ali Khan", "Muhammad Ali Jinnah", "Khawaja Nazimuddin", "Ghulam Muhammad"], answer: "Muhammad Ali Jinnah" },
-            { id: 23, category: "Pakistan Studies", type: "mcq", question: "The Mangla Dam is built on which river?", options: ["Indus River", "Sutlej River", "Ravi River", "Jhelum River"], answer: "Jhelum River" },
-            { id: 24, category: "Pakistan Studies", type: "mcq", question: "What is the national tree of Pakistan?", options: ["Pine", "Banyan", "Neem", "Deodar"], answer: "Deodar" },
-            { id: 25, category: "Pakistan Studies", type: "mcq", question: "The administrative head of a district in Pakistan is typically designated as:", options: ["Commissioner", "Superintendent", "Mayor", "Deputy Commissioner"], answer: "Deputy Commissioner" },
-            { id: 26, category: "Pakistan Studies", type: "mcq", question: "Which peak is also known as 'Savage Mountain' due to the extreme difficulty of ascent?", options: ["Nanga Parbat", "Broad Peak", "Gasherbrum I", "K2"], answer: "K2" },
-            { id: 27, category: "Pakistan Studies", type: "mcq", question: "The historical Khyber Pass connects Peshawar with which major city in Afghanistan?", options: ["Herat", "Mazar-i-Sharif", "Kandahar", "Kabul"], answer: "Kabul" },
-            { id: 28, category: "Pakistan Studies", type: "mcq", question: "Which of these is a major natural gas field in Balochistan, Pakistan?", options: ["Dhulian", "Potwar", "Badin", "Sui"], answer: "Sui" },
-            { id: 29, category: "Pakistan Studies", type: "mcq", question: "The 'Line of Control' (LoC) refers to the military control line between the Indian and Pakistani controlled parts of which former princely state?", options: ["Junagadh", "Hyderabad Deccan", "Kalat", "Jammu and Kashmir"], answer: "Jammu and Kashmir" },
-            { id: 30, category: "Pakistan Studies", type: "mcq", question: "The headquarters of the Pakistan Navy is located in which city?", options: ["Karachi", "Gwadar", "Ormara", "Islamabad"], answer: "Islamabad" },
+        // --- Anti-Cheating Measures ---
+        function disableKeys(e) {
+            // Block F12
+            if (e.keyCode == 123) {
+                e.preventDefault();
+                return false;
+            }
+            // Block Ctrl+Shift+I
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                e.preventDefault();
+                return false;
+            }
+            // Block Ctrl+Shift+C
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+                e.preventDefault();
+                return false;
+            }
+            // Block Ctrl+Shift+J
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                e.preventDefault();
+                return false;
+            }
+            // Block Ctrl+U
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                e.preventDefault();
+                return false;
+            }
+            // Block Ctrl+S
+            if (e.ctrlKey && e.keyCode == 'S'.charCodeAt(0)) {
+                e.preventDefault();
+                return false;
+            }
+        }
+        // Optional: Detect DevTools opening (more advanced, can be bypassed)
+        // const devtools = /./;
+        // devtools.toString = function() {
+        //     this.opened = true;
+        //     // You could redirect or show a message here
+        //     // For example: window.location.href = "about:blank";
+        //     // alert("Developer tools are not allowed.");
+        // }
+        // setInterval(() => {
+        //     devtools.opened = false;
+        //     console.log('%c', devtools);
+        //     if(devtools.opened) {
+        //         // Action if DevTools are opened
+        //     }
+        // }, 1000);
 
-            // Grammar & Vocabulary (from provided PDFs) - Target: 35
-            { id: 31, category: "Grammar (Parts of Speech)", type: "mcq", question: "In the sentence: 'It was a quiet comment, dropped not with alarm but with the composure of someone watching an era slip gently away.' The word 'watching' functions as:", options: ["A gerund acting as an object", "A present participle modifying 'someone'", "The main verb of a clause", "An adverb modifying 'composure'"], answer: "A present participle modifying 'someone'" },
-            { id: 32, category: "Grammar (Prepositions)", type: "mcq", question: "The judge was not convinced ______ the veracity of the witness's statement due to several inconsistencies.", options: ["by", "with", "of", "about"], answer: "of" },
-            { id: 33, category: "Vocabulary (Idioms)", type: "mcq", question: "What does the idiom 'to chart one's own course' signify in the context of leadership or policy-making?", options: ["To meticulously plan a journey on a map.", "To follow established precedents strictly.", "To pursue an independent path or policy, often diverging from the norm.", "To delegate decision-making to subordinates."], answer: "To pursue an independent path or policy, often diverging from the norm." },
-            { id: 34, category: "Vocabulary (Synonyms)", type: "mcq", question: "Which word is the most precise synonym for 'taciturn'?", options: ["Verbose", "Gregarious", "Reticent", "Eloquent"], answer: "Reticent" },
-            { id: 35, category: "Vocabulary (Antonyms)", type: "mcq", question: "The most fitting antonym for 'ephemeral' is:", options: ["Transient", "Fleeting", "Perennial", "Momentary"], answer: "Perennial" },
-            { id: 36, category: "Grammar (Sentence Structure)", type: "mcq", question: "In the sentence 'A judiciary once imagined as the final sentinel of rights now appears content to fold its robes, clasp its hands, and wait,' the infinitives 'to fold,' '(to) clasp,' and '(to) wait' collectively function as:", options: ["The direct object of 'appears'", "An adverbial phrase of manner", "A complement explaining the adjective 'content'", "A series of independent clauses"], answer: "A complement explaining the adjective 'content'" },
-            { id: 37, category: "Vocabulary (Pair of Words)", type: "mcq", question: "Distinguish between 'allusion' and 'illusion'. An 'allusion' is:", options: ["A false perception or belief.", "An indirect or passing reference to something.", "A type of magical trick.", "A detailed explanation."], answer: "An indirect or passing reference to something." },
-            { id: 38, category: "Grammar (Verbs)", type: "mcq", question: "The modal verb 'may' in the phrase 'THE facility of suo motu may no longer be available' primarily expresses:", options: ["Strong obligation", "Definite certainty", "Permission granted", "Possibility or uncertainty"], answer: "Possibility or uncertainty" },
-            { id: 39, category: "Vocabulary (Idioms)", type: "mcq", question: "If someone is described as receiving a 'golden handshake,' it typically means they received:", options: ["A firm and friendly greeting.", "A warning about their job performance.", "A generous sum of money on leaving a company, often upon retirement or redundancy.", "A prestigious award for long service."], answer: "A generous sum of money on leaving a company, often upon retirement or redundancy." },
-            { id: 40, category: "Grammar (Parts of Speech Identification)", type: "mcq", question: "In the clause '...what it truly signals:', what part of speech is 'what'?", options: ["Relative Adverb", "Interrogative Pronoun (introducing a noun clause)", "Adjective", "Conjunction"], answer: "Interrogative Pronoun (introducing a noun clause)" },
-            { id: 41, category: "Vocabulary (Synonyms - Advanced)", type: "mcq", question: "A 'cursory' examination implies that the review was:", options: ["Extremely thorough and detailed", "Hostile and critical", "Hasty and superficial, lacking in detail", "Performed by an expert"], answer: "Hasty and superficial, lacking in detail" },
-            { id: 42, category: "Grammar (Prepositions - Tricky)", type: "mcq", question: "The new regulations are fraught ______ potential complications that were not anticipated by the drafters.", options: ["of", "with", "by", "in"], answer: "with" },
-            { id: 43, category: "Vocabulary (Antonyms - Advanced)", type: "mcq", question: "Which of the following is the most fitting antonym for 'obfuscate'?", options: ["Confuse", "Clarify", "Conceal", "Mystify"], answer: "Clarify" },
-            { id: 44, category: "Grammar (Conjunctions)", type: "mcq", question: "Identify the type of conjunction used in: 'He is tired, but he will continue.'", options: ["Subordinating Conjunction", "Correlative Conjunction", "Coordinating Conjunction", "Conjunctive Adverb"], answer: "Coordinating Conjunction" },
-            { id: 45, category: "Vocabulary (Idioms)", type: "mcq", question: "The phrase 'in cold blood' means to do something:", options: ["During winter", "With much excitement", "Accidentally", "Deliberately and unemotionally"], answer: "Deliberately and unemotionally" },
-            { id: 46, category: "Grammar (Pronouns)", type: "mcq", question: "In 'The facility itself may no longer be available,' the word 'itself' is a/an:", options: ["Possessive pronoun", "Demonstrative pronoun", "Reflexive pronoun used for emphasis (intensive pronoun)", "Relative pronoun"], answer: "Reflexive pronoun used for emphasis (intensive pronoun)" },
-            { id: 47, category: "Vocabulary (Synonyms)", type: "mcq", question: "Choose the best synonym for 'elusive':", options: ["Obvious", "Abundant", "Hard to grasp or define", "Straightforward"], answer: "Hard to grasp or define" },
-            { id: 48, category: "Grammar (Adjectives/Adverbs)", type: "mcq", question: "Which word correctly completes the sentence: 'The retreat was ______ and deliberate.'?", options: ["coldness (noun)", "coldly (adverb)", "cold (adjective)", "colder (comparative adjective)"], answer: "cold (adjective)" },
-            { id: 49, category: "Vocabulary (Antonyms)", type: "mcq", question: "What is an antonym for 'composure'?", options: ["Agitation", "Serenity", "Tranquility", "Poise"], answer: "Agitation" },
-            { id: 50, category: "Grammar (Prepositions)", type: "mcq", question: "The committee will deliberate ______ the proposed amendments before reaching a decision.", options: ["on", "with", "about", "over"], answer: "on" }, // or over, 'on' is common
-            { id: 51, category: "Vocabulary (Idioms - Financial)", type: "mcq", question: "A 'financial lifeline' refers to:", options: ["A type of insurance policy", "A high-interest loan", "Necessary financial support for survival", "A risky investment"], answer: "Necessary financial support for survival" },
-            { id: 52, category: "Grammar (Verbs - Tense)", type: "mcq", question: "The verb 'remarked' in 'Justice Amin-ud-Din Khan remarked...' is in which tense?", options: ["Present Perfect", "Past Perfect", "Simple Present", "Simple Past"], answer: "Simple Past" },
-            { id: 53, category: "Vocabulary (Pair of Words)", type: "mcq", question: "'Credible' means believable. What does 'credulous' mean?", options: ["Skeptical", "Disbelieving", "Too ready to believe things; gullible", "Critical"], answer: "Too ready to believe things; gullible" },
-            { id: 54, category: "Grammar (Articles)", type: "mcq", question: "Which article is most appropriate: 'It was ______ honor to meet the Chief Justice.'?", options: ["a", "an", "the", "no article needed"], answer: "an" }, // 'h' in honor is silent
-            { id: 55, category: "Vocabulary (Idioms)", type: "mcq", question: "To 'toe the line' means to:", options: ["Cross a boundary", "Challenge authority", "Conform to rules or policies", "Start a race"], answer: "Conform to rules or policies" },
-            { id: 56, category: "Grammar (Parts of Speech)", type: "mcq", question: "In '...an era slip gently away,' what part of speech is 'gently'?", options: ["Adjective", "Noun", "Adverb", "Preposition"], answer: "Adverb" },
-            { id: 57, category: "Vocabulary (Synonyms - Tricky)", type: "mcq", question: "Which word is a synonym for 'ostensible'?", options: ["Genuine", "Apparent or seeming", "Hidden", "Complicated"], answer: "Apparent or seeming" },
-            { id: 58, category: "Grammar (Prepositions)", type: "mcq", question: "The public was wary ______ the government's promises after previous disappointments.", options: ["for", "of", "about", "with"], answer: "of" }, // wary of
-            { id: 59, category: "Vocabulary (Antonyms - Tricky)", type: "mcq", question: "An antonym for 'prosaic' (dull, un imaginative) would be:", options: ["Mundane", "Pedestrian", "Quotidian", "Scintillating"], answer: "Scintillating" },
-            { id: 60, category: "Grammar (Subject-Verb Agreement)", type: "mcq", question: "Neither the judge nor the lawyers ______ satisfied with the ambiguous verdict.", options: ["was", "were", "is", "has been"], answer: "were" }, // With neither/nor, verb agrees with subject closer to it. If both singular, then singular. If one plural, then plural. Here "lawyers" is plural.
-            { id: 61, category: "Vocabulary (Idioms)", type: "mcq", question: "What does it mean if 'guns have fallen silent'?", options: ["A new type of weapon is introduced", "Soldiers are cleaning their weapons", "Ammunition has run out", "Fighting has stopped"], answer: "Fighting has stopped" },
-            { id: 62, category: "Grammar (Active/Passive Voice)", type: "mcq", question: "Change to passive voice: 'The court will hear the appeal next week.'", options: ["The appeal will be heard by the court next week.", "Next week, the court is hearing the appeal.", "The appeal is heard next week by the court.", "The court might hear the appeal next week."], answer: "The appeal will be heard by the court next week." },
-            { id: 63, category: "Vocabulary (Pair of Words)", type: "mcq", question: "'Imminent' means about to happen. 'Eminent' means:", options: ["Hostile", "Famous and respected", "Trivial", "Secretive"], answer: "Famous and respected" },
-            { id: 64, category: "Grammar (Conditional Sentences)", type: "mcq", question: "If the evidence ______ more compelling, the jury might have reached a different verdict.", options: ["was", "would be", "had been", "is"], answer: "had been" }, // Third conditional
-            { id: 65, category: "Vocabulary (Synonyms)", type: "mcq", question: "A synonym for 'sagacious' (wise) is:", options: ["Foolish", "Ignorant", "Astute", "Naive"], answer: "Astute" },
 
-            // Sentence Rearrangement - Target: 10
-            { id: 66, category: "Sentence Rearrangement", type: "rearrangement", question: "Arrange the following jumbled parts to form a coherent and grammatically sound sentence related to judicial principles:", parts: ["A) the perception of judicial independence", "B) for maintaining public trust", "C) is paramount", "D) in the legal system"], correctOrderByName: ["A", "C", "B", "D"] },
-            { id: 67, category: "Sentence Rearrangement (Complex)", type: "rearrangement", question: "Arrange the jumbled parts into a meaningful sentence regarding economic policy:", parts: ["A) sustainable economic growth and equitable wealth distribution", "B) requires a multifaceted approach", "C) that balances fiscal discipline", "D) achieving long-term", "E) with targeted social investments"], correctOrderByName: ["D", "A", "B", "C", "E"] },
-            { id: 68, category: "Sentence Rearrangement", type: "rearrangement", question: "Reconstruct this sentence about legal reforms:", parts: ["A) often face resistance", "B) from entrenched interests", "C) despite their clear benefits", "D) meaningful legal reforms", "E) to societal progress"], correctOrderByName: ["D", "A", "B", "C", "E"] }, // Meaningful legal reforms often face resistance from entrenched interests despite their clear benefits to societal progress. D A B C E
-            { id: 69, category: "Sentence Rearrangement", type: "rearrangement", question: "Form a coherent sentence about diplomatic negotiations:", parts: ["A) requires patience, tact, and a willingness", "B) to find common ground", "C) successful diplomatic negotiation", "D) between conflicting parties", "E) to compromise on non-essential issues"], correctOrderByName: ["C", "A", "E", "B", "D"] }, // Successful diplomatic negotiation requires patience, tact, and a willingness to compromise on non-essential issues to find common ground between conflicting parties. C A E B D
-            { id: 70, category: "Sentence Rearrangement", type: "rearrangement", question: "Arrange into a sentence about constitutionalism:", parts: ["A) the exercise of governmental power", "B) is a cornerstone", "C) limiting", "D) of modern democratic states", "E) through a constitution"], correctOrderByName: ["C", "A", "E", "B", "D"] }, // Limiting the exercise of governmental power through a constitution is a cornerstone of modern democratic states. C A E B D
-            { id: 71, category: "Sentence Rearrangement (Complex Policy)", type: "rearrangement", question: "Construct a sentence about environmental policy challenges:", parts: ["A) effective environmental policies", "B) international cooperation and", "C) addressing global climate change", "D) robust domestic enforcement mechanisms", "E) necessitates both"], correctOrderByName: ["C", "E", "B", "D"] }, // Addressing global climate change necessitates both international cooperation and robust domestic enforcement mechanisms for effective environmental policies. C E B D (A is implied in D) - Simplified: C E B and D.
-                                                                                                                                                                                                                            // Better: C E B D for A.
-                                                                                                                                                                                                                            // Let's rephrase for clarity: Addressing global climate change, through effective environmental policies, necessitates both international cooperation and robust domestic enforcement mechanisms.
-                                                                                                                                                                                                                            // C, then A, then E, then B, then D.
-                                                                                                                                                                                                                            // Let's try: Addressing global climate change necessitates both international cooperation and robust domestic enforcement mechanisms to implement effective environmental policies. C E B D A
-            { id: 72, category: "Sentence Rearrangement", type: "rearrangement", question: "Create a sentence about the role of media:", parts: ["A) in shaping public opinion", "B) a free and independent press", "C) and holding power accountable", "D) plays a crucial role", "E) through investigative journalism"], correctOrderByName: ["B", "D", "A", "C", "E"] }, // A free and independent press plays a crucial role in shaping public opinion and holding power accountable through investigative journalism. B D A C E
-            { id: 73, category: "Sentence Rearrangement (Abstract Concept)", type: "rearrangement", question: "Formulate a sentence about the nature of justice:", parts: ["A) is not merely the absence of wrongdoing", "B) but also the active presence", "C) true justice, in its deepest sense,", "D) of fairness and equity", "E) within a society's structures"], correctOrderByName: ["C", "A", "B", "D", "E"] }, // True justice, in its deepest sense, is not merely the absence of wrongdoing but also the active presence of fairness and equity within a society's structures. C A B D E
-            { id: 74, category: "Sentence Rearrangement", type: "rearrangement", question: "Assemble a sentence regarding historical interpretation:", parts: ["A) is an ongoing process", "B) of re-evaluating evidence", "C) and challenging established narratives", "D) the interpretation of historical events", "E) in light of new discoveries"], correctOrderByName: ["D", "A", "B", "E", "C"] }, // The interpretation of historical events is an ongoing process of re-evaluating evidence in light of new discoveries and challenging established narratives. D A B E C
-            { id: 75, category: "Sentence Rearrangement (Leadership)", type: "rearrangement", question: "Construct a sentence about effective leadership:", parts: ["A) inspiring a shared vision", "B) and empowering others", "C) effective leadership involves", "D) to achieve common goals", "E) more than just authority;"], correctOrderByName: ["C", "E", "A", "B", "D"] } // Effective leadership involves more than just authority; inspiring a shared vision and empowering others to achieve common goals. C E A B D
+        // --- Quiz Data ---
+        const quizQuestions = [
+            // 50 Questions from "One Paper Mcqs Book PDF by Imtiaz Shahid Free Download.pdf" (pages 321-340)
+            // Category: General Information about Pakistan (Page 321-324 approx)
+            {
+                question: "What is the official name of Pakistan?",
+                options: { a: "Islamic Republic of Pakistan", b: "Republic of Pakistan", c: "State of Pakistan", d: "Democratic Pakistan" },
+                answer: "a",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "When did Pakistan become an Islamic Republic?",
+                options: { a: "1947", b: "1956", c: "1973", d: "1962" },
+                answer: "b",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The National Anthem of Pakistan was officially adopted in:",
+                options: { a: "1947", b: "1950", c: "1954", d: "1952" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "Who wrote the lyrics of the National Anthem of Pakistan?",
+                options: { a: "Allama Iqbal", b: "Faiz Ahmed Faiz", c: "Ahmed G. Chagla", d: "Hafeez Jalandhari" },
+                answer: "d",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The music of the National Anthem of Pakistan was composed by:",
+                options: { a: "Hafeez Jalandhari", b: "Sohail Rana", c: "Abdul Karim Chagla (Ahmed G. Chagla)", d: "Nisar Bazmi" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "What is the national animal of Pakistan?",
+                options: { a: "Lion", b: "Tiger", c: "Markhor", d: "Snow Leopard" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "What is the national bird of Pakistan?",
+                options: { a: "Eagle", b: "Chukar Partridge", c: "Falcon", d: "Sparrow" },
+                answer: "b",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The national flower of Pakistan is:",
+                options: { a: "Rose", b: "Tulip", c: "Jasmine (Chameli)", d: "Sunflower" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "What is the national tree of Pakistan?",
+                options: { a: "Pine", b: "Deodar (Himalayan Cedar)", c: "Oak", d: "Neem" },
+                answer: "b",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The national game of Pakistan is:",
+                options: { a: "Cricket", b: "Squash", c: "Polo", d: "Field Hockey" },
+                answer: "d",
+                category: "Pakistan Studies"
+            },
+            // Category: The Most Important in Pakistan (Page 325-333 approx)
+            {
+                question: "Which is the largest cantonment of Pakistan?",
+                options: { a: "Rawalpindi Cantt", b: "Kharian Cantt", c: "Karachi Cantt", d: "Lahore Cantt" },
+                answer: "b",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The largest museum in Pakistan is:",
+                options: { a: "Lahore Museum", b: "National Museum, Karachi", c: "Peshawar Museum", d: "Taxila Museum" },
+                answer: "a", // Lahore Museum is generally considered the largest by collection size and historical significance.
+                category: "Pakistan Studies"
+            },
+            {
+                question: "Which is the largest fort in Pakistan?",
+                options: { a: "Rohtas Fort", b: "Ranikot Fort", c: "Lahore Fort", d: "Baltit Fort" },
+                answer: "b", // Ranikot Fort is known as the Great Wall of Sindh and is one of the largest in the world.
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The largest desert in Pakistan is:",
+                options: { a: "Cholistan Desert", b: "Thar Desert", c: "Kharan Desert", d: "Thal Desert" },
+                answer: "b", // Thar Desert, a significant portion of which is in Pakistan.
+                category: "Pakistan Studies"
+            },
+            {
+                question: "Which is the largest man-made lake in Pakistan?",
+                options: { a: "Haleji Lake", b: "Manchar Lake", c: "Keenjhar Lake (Kalri Lake)", d: "Rawal Lake" },
+                answer: "c", // Keenjhar Lake is one of the largest freshwater lakes, also man-made/enhanced.
+                category: "Pakistan Studies"
+            },
+             {
+                question: "The highest railway station in Pakistan is:",
+                options: { a: "Quetta Railway Station", b: "Khan Mehtarzai", c: "Sibi Railway Station", d: "Landi Kotal Railway Station" },
+                answer: "b",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "Which is the largest division of Pakistan?",
+                options: { a: "Kalat Division", b: "Bahawalpur Division", c: "Malakand Division", d: "Karachi Division" },
+                answer: "a", // Kalat is historically the largest division by area.
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The largest university of Pakistan by enrollment is generally considered to be:",
+                options: { a: "University of the Punjab", b: "Allama Iqbal Open University", c: "University of Karachi", d: "Quaid-i-Azam University" },
+                answer: "b",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "Which is the oldest university of Pakistan?",
+                options: { a: "University of Karachi", b: "University of the Punjab, Lahore", c: "King Edward Medical University", d: "Gordon College, Rawalpindi (as a degree awarding institution later)" },
+                answer: "b", // University of the Punjab, established in 1882.
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The largest industrial unit in the public sector in Pakistan is:",
+                options: { a: "Pakistan Steel Mills", b: "Heavy Mechanical Complex", c: "Karachi Shipyard & Engineering Works", d: "Pakistan Ordnance Factories" },
+                answer: "a",
+                category: "Pakistan Studies"
+            },
+            // Category: First in Pakistan (Page 334-337 approx)
+            {
+                question: "Who was the first Governor-General of Pakistan?",
+                options: { a: "Liaquat Ali Khan", b: "Khawaja Nazimuddin", c: "Quaid-e-Azam Muhammad Ali Jinnah", d: "Ghulam Muhammad" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The first Prime Minister of Pakistan was:",
+                options: { a: "Muhammad Ali Jinnah", b: "Liaquat Ali Khan", c: "Sardar Abdur Rab Nishtar", d: "Feroz Khan Noon" },
+                answer: "b",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "Who was the first woman Governor of a province in Pakistan?",
+                options: { a: "Begum Ra'ana Liaquat Ali Khan (Sindh)", b: "Dr. Fehmida Mirza", c: "Benazir Bhutto", d: "Hina Rabbani Khar" },
+                answer: "a",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The first Chief Justice of Pakistan was:",
+                options: { a: "Justice Alvin Robert Cornelius", b: "Justice Sir Abdur Rashid", c: "Justice Muhammad Munir", d: "Justice S.A. Rahman" },
+                answer: "b",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "Pakistan's first nuclear power plant was established at:",
+                options: { a: "Chashma", b: "Islamabad", c: "Karachi (KANUPP)", d: "Rawalpindi" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The first Pakistani to climb Mount Everest was:",
+                options: { a: "Samina Baig", b: "Nazir Sabir", c: "Hassan Sadpara", d: "Ashraf Aman" },
+                answer: "b", // Nazir Sabir in 2000. Ashraf Aman was the first Pakistani to climb K2.
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The first woman commercial pilot in Pakistan was:",
+                options: { a: "Shukriya Khanum", b: "Ayesha Farooq", c: "Maryam Mukhtiar", d: "Maliha Sami" },
+                answer: "a", // Shukriya Khanum is widely recognized as the first.
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The first constitution of Pakistan was promulgated in:",
+                options: { a: "1949", b: "1952", c: "1956", d: "1962" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The first census in Pakistan was held in:",
+                options: { a: "1948", b: "1951", c: "1955", d: "1961" },
+                answer: "b",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The first TV station in Pakistan was set up in:",
+                options: { a: "Karachi", b: "Islamabad", c: "Lahore", d: "Peshawar" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            // Category: Coolest, Highest, Lowest, Biggest, Tallest, Smallest & Oldest (Page 338-340 approx)
+            {
+                question: "The highest peak in Pakistan is:",
+                options: { a: "Nanga Parbat", b: "K2 (Godwin Austen)", c: "Tirich Mir", d: "Broad Peak" },
+                answer: "b",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "Which is the longest river in Pakistan?",
+                options: { a: "Ravi River", b: "Sutlej River", c: "Indus River", d: "Jhelum River" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The highest battlefield in the world is:",
+                options: { a: "Kargil", b: "Drass", c: "Siachen Glacier", d: "Chorbat La" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The coldest place in Pakistan is typically:",
+                options: { a: "Murree", b: "Ziarat", c: "Skardu", d: "Kalam" },
+                answer: "c", // Skardu often records the lowest temperatures, though Ziarat is also very cold.
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The hottest place in Pakistan, and one of the hottest in the world, is:",
+                options: { a: "Sibi", b: "Multan", c: "Jacobabad", d: "Larkana" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The tallest minaret in Pakistan is Minar-e-Pakistan, located in:",
+                options: { a: "Karachi", b: "Islamabad", c: "Lahore", d: "Peshawar" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The largest mosque in Pakistan (and one of the largest in the world) is:",
+                options: { a: "Badshahi Mosque, Lahore", b: "Faisal Mosque, Islamabad", c: "Tooba Mosque, Karachi", d: "Mahabat Khan Mosque, Peshawar" },
+                answer: "b",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The oldest archaeological site in Pakistan is considered to be:",
+                options: { a: "Harappa", b: "Mohenjo-daro", c: "Taxila", d: "Mehrgarh" },
+                answer: "d", // Mehrgarh predates Indus Valley Civilization sites like Mohenjo-daro and Harappa.
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The largest library in Pakistan is:",
+                options: { a: "Punjab Public Library, Lahore", b: "Quaid-e-Azam Library, Lahore", c: "National Library of Pakistan, Islamabad", d: "Liaquat National Library, Karachi" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The highest dam in Pakistan is:",
+                options: { a: "Mangla Dam", b: "Tarbela Dam", c: "Diamer-Bhasha Dam (under construction)", d: "Warsak Dam" },
+                answer: "b", // Currently Tarbela. Diamer-Bhasha will be higher once completed.
+                category: "Pakistan Studies"
+            },
+             // Additional from pages 321-340 (General Pakistan Info, Important, Firsts, Superlatives)
+            {
+                question: "The Kirthar National Park, one of the largest in Pakistan, is located in which province?",
+                options: { a: "Punjab", b: "Balochistan", c: "Khyber Pakhtunkhwa", d: "Sindh" },
+                answer: "d",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "Which city is known as the 'City of Colleges' in Pakistan?",
+                options: { a: "Karachi", b: "Islamabad", c: "Lahore", d: "Peshawar" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The 'Father of Pakistan's Nuclear Program' is considered to be:",
+                options: { a: "Dr. Ishrat Hussain Usmani", b: "Dr. Samar Mubarakmand", c: "Dr. Abdul Qadeer Khan", d: "Munir Ahmed Khan" },
+                answer: "c",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "Which Pakistani scientist was awarded the Nobel Prize in Physics in 1979?",
+                options: { a: "Dr. Abdul Qadeer Khan", b: "Dr. Abdus Salam", c: "Dr. Atta-ur-Rahman", d: "Dr. Samar Mubarakmand" },
+                answer: "b",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The first woman Deputy Speaker of the National Assembly of Pakistan was:",
+                options: { a: "Dr. Fehmida Mirza", b: "Begum Ashraf Abbasi", c: "Benazir Bhutto", d: "Attiya Inayatullah" },
+                answer: "b", // Begum Ashraf Abbasi
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The famous Khyber Pass connects Pakistan with which country?",
+                options: { a: "Iran", b: "China", c: "India", d: "Afghanistan" },
+                answer: "d",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The ancient city of Taxila is famous for its ruins related to which civilization/period?",
+                options: { a: "Indus Valley Civilization", b: "Gandhara Civilization", c: "Mughal Empire", d: "Sultanate Period" },
+                answer: "b",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "Which of these is the oldest English newspaper of Pakistan?",
+                options: { a: "The News International", b: "Dawn", c: "The Nation", d: "Pakistan Times" },
+                answer: "b", // Dawn, founded by Quaid-e-Azam.
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The 'Blind Dolphins' are found in which river of Pakistan?",
+                options: { a: "Ravi River", b: "Chenab River", c: "Sutlej River", d: "Indus River" },
+                answer: "d",
+                category: "Pakistan Studies"
+            },
+            {
+                question: "The headquarters of Pakistan Navy is located in:",
+                options: { a: "Karachi", b: "Gwadar", c: "Ormara", d: "Islamabad" },
+                answer: "d", // Naval Headquarters (NHQ) is in Islamabad.
+                category: "Pakistan Studies"
+            },
+
+
+            // 50 Questions from Grammar/Vocabulary PDFs
+            // Category: Parts of Speech (Comprehensive Grammar Analysis PDF)
+            {
+                question: "Identify the part of speech of the underlined word: 'The UN Charter **forbids** the threat or use of force.'",
+                options: { a: "Noun", b: "Adjective", c: "Verb", d: "Adverb" },
+                answer: "c",
+                category: "Grammar - Parts of Speech"
+            },
+            {
+                question: "Which of the following is an abstract noun from the provided grammar text examples?",
+                options: { a: "Charter", b: "Peace", c: "Council", d: "River" },
+                answer: "b",
+                category: "Grammar - Parts of Speech"
+            },
+            {
+                question: "In the sentence, 'Syed Adil Hussain Shah wrestled **with** the assailants,' what part of speech is 'with'?",
+                options: { a: "Conjunction", b: "Adverb", c: "Verb", d: "Preposition" },
+                answer: "d",
+                category: "Grammar - Parts of Speech"
+            },
+            {
+                question: "Choose the sentence where 'that' is used as a relative pronoun.",
+                options: { 
+                    a: "He said that he would come.", 
+                    b: "That book is mine.", 
+                    c: "The report that he submitted was incomplete.", 
+                    d: "Is that your car?" 
+                },
+                answer: "c",
+                category: "Grammar - Parts of Speech"
+            },
+            {
+                question: "Identify the linking verb in the sentence: 'Pakistan **is** a country most afflicted by terrorism.'",
+                options: { a: "afflicted", b: "country", c: "is", d: "terrorism" },
+                answer: "c",
+                category: "Grammar - Parts of Speech"
+            },
+            {
+                question: "What type of verbal is 'blaming' in the sentence: '**Blaming** neighbours without sufficient evidence would have been unprofessional'?",
+                options: { a: "Infinitive", b: "Participle (Adjective)", c: "Gerund (Noun)", d: "Auxiliary Verb" },
+                answer: "c",
+                category: "Grammar - Parts of Speech"
+            },
+            {
+                question: "Which word is an adverb of manner in the sentence: 'Members shall settle their international disputes **peacefully**.'?",
+                options: { a: "settle", b: "international", c: "peacefully", d: "disputes" },
+                answer: "c",
+                category: "Grammar - Parts of Speech"
+            },
+            {
+                question: "Identify the coordinating conjunction: 'India almost immediately declared Pakistan to be guilty **and** elected to inflict punishment.'",
+                options: { a: "almost", b: "to", c: "and", d: "declared" },
+                answer: "c",
+                category: "Grammar - Parts of Speech"
+            },
+            {
+                question: "The word 'his' in 'He died true to **his** faith' is a:",
+                options: { a: "Personal Pronoun (Subject)", b: "Possessive Adjective/Determiner", c: "Possessive Pronoun (Standalone)", d: "Reflexive Pronoun" },
+                answer: "b",
+                category: "Grammar - Parts of Speech"
+            },
+            {
+                question: "Which sentence uses a past participle as an adjective?",
+                options: { 
+                    a: "They have finished the work.", 
+                    b: "The broken window needs repair.", 
+                    c: "She was writing a letter.", 
+                    d: "To err is human." 
+                },
+                answer: "b",
+                category: "Grammar - Parts of Speech"
+            },
+
+            // Category: Prepositions (Comprehensive Grammar Analysis PDF & General)
+            {
+                question: "He was accused ______ theft.",
+                options: { a: "for", b: "of", c: "with", d: "on" },
+                answer: "b",
+                category: "Grammar - Prepositions"
+            },
+            {
+                question: "She has great affection ______ her grandchildren.",
+                options: { a: "to", b: "with", c: "for", d: "towards" },
+                answer: "c",
+                category: "Grammar - Prepositions"
+            },
+            {
+                question: "The committee will inquire ______ the matter thoroughly.",
+                options: { a: "of", b: "about", c: "into", d: "for" },
+                answer: "c",
+                category: "Grammar - Prepositions"
+            },
+            {
+                question: "This book is quite different ______ that one.",
+                options: { a: "than", b: "to", c: "from", d: "with" },
+                answer: "c",
+                category: "Grammar - Prepositions"
+            },
+            {
+                question: "He is not eligible ______ this post.",
+                options: { a: "to", b: "for", c: "with", d: "on" },
+                answer: "b",
+                category: "Grammar - Prepositions"
+            },
+
+            // Category: Idioms (15 may Idioms PDF)
+            {
+                question: "What does the idiom 'melt away' mean?",
+                options: { a: "To become solid", b: "To appear suddenly", c: "To disappear gradually", d: "To grow rapidly" },
+                answer: "c",
+                category: "Vocabulary - Idioms"
+            },
+            {
+                question: "A 'hawkish line' in policy refers to:",
+                options: { a: "A peaceful approach", b: "A neutral stance", c: "An aggressive policy", d: "A cautious strategy" },
+                answer: "c",
+                category: "Vocabulary - Idioms"
+            },
+            {
+                question: "If something is a 'recipe for disaster', it means it is:",
+                options: { a: "A guaranteed success", b: "A very likely failure or cause of trouble", c: "A complicated but rewarding plan", d: "A secret to achieving goals" },
+                answer: "b",
+                category: "Vocabulary - Idioms"
+            },
+            {
+                question: "To 'cast a shadow over' something means to:",
+                options: { a: "Illuminate it brightly", b: "Provide protection", c: "Spoil a good situation with something unpleasant", d: "To predict future success" },
+                answer: "c",
+                category: "Vocabulary - Idioms"
+            },
+            {
+                question: "What does 'stand the test of time' imply?",
+                options: { a: "To fail quickly", b: "To be forgotten", c: "To need frequent updates", d: "To prove durable and reliable over a long period" },
+                answer: "d",
+                category: "Vocabulary - Idioms"
+            },
+            {
+                question: "If an idea is 'manufactured out of thin air', it is:",
+                options: { a: "Well-researched and factual", b: "Based on solid evidence", c: "Invented from nothing, often deceptively", d: "A traditional concept" },
+                answer: "c",
+                category: "Vocabulary - Idioms"
+            },
+            {
+                question: "To 'put one's spin on events' means to:",
+                options: { a: "Narrate events objectively", b: "Interpret and present events from a biased perspective", c: "To ignore events completely", d: "To record events chronologically" },
+                answer: "b",
+                category: "Vocabulary - Idioms"
+            },
+            {
+                question: "A 'Himalayan miscalculation' refers to:",
+                options: { a: "A minor error", b: "A calculated risk", c: "A very large and serious error in judgment", d: "A successful prediction" },
+                answer: "c",
+                category: "Vocabulary - Idioms"
+            },
+            {
+                question: "To 'take ownership of their own agency' means:",
+                options: { a: "To blame others for one's actions", b: "To be passive and let others decide", c: "To work for a specific company", d: "To accept responsibility for one's actions and choices" },
+                answer: "d",
+                category: "Vocabulary - Idioms"
+            },
+            {
+                question: "To 'extend a hand of reconciliation' is to:",
+                options: { a: "Start a conflict", b: "Offer peace or try to end a disagreement", c: "To show dominance", d: "To ask for help" },
+                answer: "b",
+                category: "Vocabulary - Idioms"
+            },
+
+            // Category: Synonyms & Antonyms (15 may Idioms PDF & General)
+            {
+                question: "Choose the best SYNONYM for 'dissipate'.",
+                options: { a: "Gather", b: "Strengthen", c: "Vanish", d: "Construct" },
+                answer: "c",
+                category: "Vocabulary - Synonyms"
+            },
+            {
+                question: "Choose the best ANTONYM for 'belligerent'.",
+                options: { a: "Hostile", b: "Aggressive", c: "Peaceful", d: "Argumentative" },
+                answer: "c",
+                category: "Vocabulary - Antonyms"
+            },
+            {
+                question: "What is a SYNONYM for 'explicitly'?",
+                options: { a: "Vaguely", b: "Clearly", c: "Secretly", d: "Potentially" },
+                answer: "b",
+                category: "Vocabulary - Synonyms"
+            },
+            {
+                question: "Select the ANTONYM of 'eradicate'.",
+                options: { a: "Eliminate", b: "Destroy", c: "Establish", d: "Remove" },
+                answer: "c",
+                category: "Vocabulary - Antonyms"
+            },
+            {
+                question: "A SYNONYM for 'mendacity' is:",
+                options: { a: "Truthfulness", b: "Honesty", c: "Generosity", d: "Deceitfulness" },
+                answer: "d",
+                category: "Vocabulary - Synonyms"
+            },
+            {
+                question: "Choose the ANTONYM for 'animosity'.",
+                options: { a: "Hatred", b: "Friendship", c: "Enmity", d: "Bitterness" },
+                answer: "b",
+                category: "Vocabulary - Antonyms"
+            },
+            {
+                question: "The word 'concocted' is a SYNONYM for:",
+                options: { a: "Genuine", b: "Factual", c: "Invented", d: "Authentic" },
+                answer: "c",
+                category: "Vocabulary - Synonyms"
+            },
+            {
+                question: "What is an ANTONYM for 'perplexed'?",
+                options: { a: "Confused", b: "Baffled", c: "Clear-headed", d: "Bewildered" },
+                answer: "c",
+                category: "Vocabulary - Antonyms"
+            },
+             {
+                question: "Choose the best SYNONYM for 'ubiquitous'.",
+                options: { a: "Rare", b: "Scarce", c: "Omnipresent", d: "Localized" },
+                answer: "c",
+                category: "Vocabulary - Synonyms"
+            },
+            {
+                question: "Select the ANTONYM of 'ephemeral'.",
+                options: { a: "Transient", b: "Temporary", c: "Permanent", d: "Fleeting" },
+                answer: "c",
+                category: "Vocabulary - Antonyms"
+            },
+
+            // Category: Sentence Structure & Types (Comprehensive Grammar Analysis PDF)
+            {
+                question: "Identify the sentence type: 'He died true to his faith.'",
+                options: { a: "Simple", b: "Compound", c: "Complex", d: "Compound-Complex" },
+                answer: "a",
+                category: "Grammar - Sentence Structure"
+            },
+            {
+                question: "What type of clause is underlined: 'The BLA, **whose actions our neighbour endorses**, claimed to have killed the chief justice.'?",
+                options: { a: "Independent Clause", b: "Adverbial Clause", c: "Noun Clause", d: "Adjective (Relative) Clause" },
+                answer: "d",
+                category: "Grammar - Sentence Structure"
+            },
+            {
+                question: "'While terrorism has abated in Pakistan, it hasn’t stopped.' This sentence is:",
+                options: { a: "Simple", b: "Compound", c: "Complex", d: "Fragment" },
+                answer: "c",
+                category: "Grammar - Sentence Structure"
+            },
+            {
+                question: "A group of related words that does not contain both a subject and a verb, functioning as a single part of speech, is called a:",
+                options: { a: "Clause", b: "Sentence", c: "Phrase", d: "Paragraph" },
+                answer: "c",
+                category: "Grammar - Sentence Structure"
+            },
+            {
+                question: "Which of these primarily joins two independent clauses?",
+                options: { a: "Subordinating Conjunction", b: "Coordinating Conjunction", c: "Preposition", d: "Interjection" },
+                answer: "b",
+                category: "Grammar - Sentence Structure"
+            },
+
+            // Category: Sentence Rearrangement (Tricky)
+            {
+                question: "Rearrange the jumbled parts to form a coherent sentence: (P) that he had made a mistake (Q) the manager slowly realized (R) after reviewing all the documents (S) and the potential consequences.",
+                options: { 
+                    a: "QPSR", 
+                    b: "RQPS", 
+                    c: "RQSP", // After reviewing all the documents, the manager slowly realized that he had made a mistake and the potential consequences.
+                    d: "SPRQ" 
+                },
+                answer: "c",
+                category: "Grammar - Sentence Rearrangement"
+            },
+            {
+                question: "Arrange the following parts to make a meaningful sentence: (1) for sustainable development (2) is not merely an option (3) environmental protection (4) but a fundamental necessity.",
+                options: { 
+                    a: "3214", // Environmental protection is not merely an option for sustainable development but a fundamental necessity.
+                    b: "1324", 
+                    c: "3124", 
+                    d: "2314" 
+                },
+                answer: "a",
+                category: "Grammar - Sentence Rearrangement"
+            },
+            {
+                question: "Form a logical sentence: (A) despite the challenging economic climate (B) to invest in new technologies (C) the company decided (D) and expand its operations.",
+                options: { 
+                    a: "ACBD", // The company decided despite the challenging economic climate to invest in new technologies and expand its operations. (Slightly awkward)
+                    b: "CADB", // The company decided to invest in new technologies and expand its operations despite the challenging economic climate.
+                    c: "BCDA", 
+                    d: "DBCA" 
+                },
+                answer: "b", // CADB is more natural: The company decided to invest in new technologies and expand its operations despite the challenging economic climate.
+                category: "Grammar - Sentence Rearrangement"
+            },
+             {
+                question: "Rearrange the sentence parts: (P) the intricate tapestry of global politics (Q) requires a nuanced understanding (R) to truly comprehend (S) of historical contexts and cultural sensitivities.",
+                options: {
+                    a: "RPQS", // To truly comprehend the intricate tapestry of global politics requires a nuanced understanding of historical contexts and cultural sensitivities.
+                    b: "QRPS",
+                    c: "SQPR",
+                    d: "PQRS"
+                },
+                answer: "a",
+                category: "Grammar - Sentence Rearrangement"
+            },
+            {
+                question: "Organize into a coherent sentence: (1) the rapid advancement (2) ethical considerations (3) of artificial intelligence (4) necessitates careful attention to.",
+                options: {
+                    a: "1342", // The rapid advancement of artificial intelligence necessitates careful attention to ethical considerations.
+                    b: "3124",
+                    c: "2413",
+                    d: "4231"
+                },
+                answer: "a",
+                category: "Grammar - Sentence Rearrangement"
+            },
+
+
+            // Category: Advanced Grammar & Tricky Questions
+            {
+                question: "Which sentence demonstrates correct subject-verb agreement with an indefinite pronoun?",
+                options: { 
+                    a: "Each of the students have submitted their work.", 
+                    b: "Neither of the candidates were suitable.", 
+                    c: "Everyone in the room is listening attentively.", 
+                    d: "Some of the information are incorrect." 
+                },
+                answer: "c", // Everyone (singular) is (singular). Each (singular) requires 'has'. Neither (singular) requires 'was'. Some of the information (uncountable, singular) requires 'is'.
+                category: "Grammar - Advanced"
+            },
+            {
+                question: "Identify the sentence with a dangling modifier:",
+                options: { 
+                    a: "Having finished the assignment, Jill turned on the TV.", 
+                    b: "Walking through the forest, the trees looked majestic.", // Who is walking? The trees?
+                    c: "To improve his skills, John practiced every day.", 
+                    d: "The report, written by the committee, was comprehensive." 
+                },
+                answer: "b",
+                category: "Grammar - Advanced"
+            },
+            {
+                question: "Choose the sentence that uses the subjunctive mood correctly for a hypothetical situation:",
+                options: { 
+                    a: "If I was you, I would not do that.", 
+                    b: "If I were you, I would not do that.", 
+                    c: "If I am you, I will not do that.", 
+                    d: "If I had been you, I would not have did that." 
+                },
+                answer: "b",
+                category: "Grammar - Advanced"
+            },
+            {
+                question: "Which of the following sentences contains an error in parallelism?",
+                options: { 
+                    a: "She likes to read, to write, and painting.", // Should be 'to paint' or 'She likes reading, writing, and painting.'
+                    b: "The instructor advised him to study hard and to practice regularly.", 
+                    c: "He was not only intelligent but also hardworking.", 
+                    d: "The goals of the project are to increase efficiency, reduce costs, and improve customer satisfaction." 
+                },
+                answer: "a",
+                category: "Grammar - Advanced"
+            },
+            {
+                question: "The phrase 'notwithstanding his objections' means:",
+                options: { 
+                    a: "Because of his objections", 
+                    b: "In addition to his objections", 
+                    c: "In spite of his objections", 
+                    d: "Ignoring his objections completely (impolite)" 
+                },
+                answer: "c",
+                category: "Vocabulary - Advanced"
+            },
+            {
+                question: "Which sentence uses 'affect' and 'effect' correctly?",
+                options: { 
+                    a: "The weather will not effect our plans, but the traffic might have an affect.", 
+                    b: "The weather will not affect our plans, but the traffic might have an effect.", 
+                    c: "The weather will not affect our plans, but the traffic might have an affect.", 
+                    d: "The weather will not effect our plans, but the traffic might have an effect." 
+                },
+                answer: "b", // Affect is usually a verb (to influence), Effect is usually a noun (a result).
+                category: "Grammar - Word Usage"
+            },
+            {
+                question: "The expression 'ipso facto' means:",
+                options: { 
+                    a: "For this specific purpose", 
+                    b: "By the fact itself; by that very fact", 
+                    c: "In good faith", 
+                    d: "A temporary solution" 
+                },
+                answer: "b",
+                category: "Vocabulary - Foreign Phrases"
+            },
+            {
+                question: "A 'Pyrrhic victory' is one that:",
+                options: { 
+                    a: "Is achieved very easily.", 
+                    b: "Comes at such a great cost that it's tantamount to defeat.", 
+                    c: "Is celebrated by all.", 
+                    d: "Leads to lasting peace." 
+                },
+                answer: "b",
+                category: "Vocabulary - Advanced"
+            },
+            {
+                question: "Which sentence correctly uses a semicolon?",
+                options: { 
+                    a: "The journey was long; and arduous.", 
+                    b: "She brought several items; a tent, a sleeping bag, and a flashlight.", // Should be a colon here
+                    c: "He is a talented musician; he plays the piano, guitar, and drums.", // Correct: joins two closely related independent clauses.
+                    d: "Because the weather was bad; the game was postponed." 
+                },
+                answer: "c",
+                category: "Grammar - Punctuation"
+            },
+            {
+                question: "The word 'proscribe' means to:",
+                options: { 
+                    a: "Recommend or advise", 
+                    b: "Write or engrave", 
+                    c: "Forbid or condemn as harmful or unlawful", 
+                    d: "Follow a prescribed course" 
+                },
+                answer: "c", // Contrast with 'prescribe'
+                category: "Vocabulary - Advanced"
+            }
         ];
-        // Corrected Sentence Rearrangement for ID 71
-        questions.find(q => q.id === 71).correctOrderByName = ["C", "E", "B", "A"]; // Addressing global climate change necessitates both international cooperation and effective environmental policies (which require) robust domestic enforcement mechanisms. Simplified: C E B and A (as a result of D).
-                                                                                             // Let's re-evaluate 71: "Addressing global climate change necessitates both international cooperation and robust domestic enforcement mechanisms for effective environmental policies." C E B D (A is the outcome)
-                                                                                             // Or: "Effective environmental policies for addressing global climate change necessitate both international cooperation and robust domestic enforcement mechanisms." A C E B D
-                                                                                             // Sticking to a simpler, more direct one:
-        questions.find(q => q.id === 71).parts = [ "A) effective environmental policies", "B) international cooperation", "C) addressing global climate change", "D) robust domestic enforcement.", "E) necessitates both"];
-        questions.find(q => q.id === 71).correctOrderByName = ["C", "E", "B", "D"]; // "Addressing global climate change necessitates both international cooperation and robust domestic enforcement." (A is a related concept but makes it clunky here)
-                                                                                    // Let's refine Q71 parts and answer for better flow
-        questions.find(q => q.id === 71).parts = [
-            "A) to be truly effective",
-            "B) international cooperation and strong national policies",
-            "C) efforts to combat climate change",
-            "D) require a combination of",
-        ];
-        questions.find(q => q.id === 71).correctOrderByName = ["C", "A", "D", "B"]; // Efforts to combat climate change, to be truly effective, require a combination of international cooperation and strong national policies.
 
-
-        // --- DOM Elements ---
-        const nameSection = document.getElementById('name-section');
+        // --- Quiz Logic ---
+        const nameEntrySection = document.getElementById('name-entry-section');
         const quizSection = document.getElementById('quiz-section');
         const resultsSection = document.getElementById('results-section');
-        const userNameInput = document.getElementById('userName');
-        const startQuizBtn = document.getElementById('startQuizBtn');
-        const timerDisplay = document.getElementById('timer');
-        const questionArea = document.getElementById('question-area');
-        const nextQuestionBtn = document.getElementById('nextQuestionBtn');
-        const questionCounterDisplay = document.getElementById('question-counter');
-        const progressBar = document.getElementById('progress-bar');
+        const studentNameInput = document.getElementById('student-name');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const nameError = document.getElementById('name-error');
+        const quizForm = document.getElementById('quiz-form');
+        const submitQuizBtn = document.getElementById('submit-quiz-btn');
+        const timerContainer = document.getElementById('timer-container');
+        const timeDisplay = document.getElementById('time');
 
-
-        const resultName = document.getElementById('resultName');
-        const resultAttempted = document.getElementById('resultAttempted');
-        const resultScore = document.getElementById('resultScore');
-        const resultPercentage = document.getElementById('resultPercentage');
-        const resultTimeTaken = document.getElementById('resultTimeTaken');
-
-        const resultsForm = document.getElementById('resultsForm');
-        const formName = document.getElementById('formName');
-        const formAttempted = document.getElementById('formAttempted');
-        const formScore = document.getElementById('formScore');
-        const formPercentage = document.getElementById('formPercentage');
-        const formTimeTaken = document.getElementById('formTimeTaken');
-
-        // --- Quiz State ---
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let timeLeft = 40 * 60; // 40 minutes in seconds
+        let studentFullName = '';
         let timerInterval;
-        let studentName = '';
+        let timeRemaining = 40 * 60; // 40 minutes in seconds
         let startTime;
-        let userAnswers = {}; // To store answers {questionId: answer}
-        let questionsAttemptedCount = 0;
-        let currentDragElement = null;
+        let userAnswers = {};
 
-
-        // --- Utility Functions ---
+        // Shuffle questions (optional, but good for variety)
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
-            return array;
         }
+        // shuffleArray(quizQuestions); // Uncomment to shuffle questions
 
-        // --- Event Listeners ---
-        startQuizBtn.addEventListener('click', startQuiz);
-        nextQuestionBtn.addEventListener('click', handleNextQuestion);
+        function loadQuestions() {
+            quizQuestions.forEach((q, index) => {
+                const questionId = `q${index}`;
+                const optionsHtml = Object.entries(q.options).map(([key, value]) => `
+                    <label class="option-label no-select">
+                        <input type="radio" name="${questionId}" value="${key}" data-question-index="${index}">
+                        ${key.toUpperCase()}. ${value}
+                    </label>
+                `).join('');
 
-        // --- Quiz Logic ---
-        function startQuiz() {
-            studentName = userNameInput.value.trim();
-            if (!studentName) {
-                // Replaced alert with a more styled message, though a proper modal would be better.
-                const errorMsg = document.createElement('p');
-                errorMsg.textContent = 'Please enter your name to start the quiz.';
-                errorMsg.className = 'text-red-500 text-center mb-4';
-                if (!nameSection.querySelector('.text-red-500')) { // Prevent multiple error messages
-                    nameSection.insertBefore(errorMsg, userNameInput);
-                }
-                userNameInput.focus();
-                return;
-            }
-            // Remove error message if present
-            const existingErrorMsg = nameSection.querySelector('.text-red-500');
-            if (existingErrorMsg) {
-                existingErrorMsg.remove();
-            }
+                const questionCard = `
+                    <div class="question-card no-select">
+                        <p class="text-lg font-semibold mb-4">${index + 1}. ${q.question}</p>
+                        <div class="options-container space-y-2">
+                            ${optionsHtml}
+                        </div>
+                        <p class="text-xs text-slate-400 mt-2">Category: ${q.category}</p>
+                    </div>
+                `;
+                quizForm.innerHTML += questionCard;
+            });
 
-            nameSection.classList.add('hidden');
-            quizSection.classList.remove('hidden');
-            startTime = new Date();
-            startTimer();
-            displayQuestion();
+            // Add event listeners to radio buttons for styling selected option
+            document.querySelectorAll('input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    // Remove 'selected-option' from all labels in the same question group
+                    const groupName = this.name;
+                    document.querySelectorAll(`input[name="${groupName}"]`).forEach(rb => {
+                        rb.closest('.option-label').classList.remove('selected-option');
+                    });
+                    // Add 'selected-option' to the currently selected label
+                    if (this.checked) {
+                        this.closest('.option-label').classList.add('selected-option');
+                        userAnswers[this.dataset.questionIndex] = this.value; // Store user answer
+                    }
+                });
+            });
         }
 
         function startTimer() {
+            startTime = new Date();
             timerInterval = setInterval(() => {
-                timeLeft--;
-                updateTimerDisplay();
-                if (timeLeft <= 0) {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                timeDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+                if (timeRemaining <= 0) {
                     clearInterval(timerInterval);
-                    submitQuiz(true); // Auto-submit
+                    submitQuiz();
                 }
             }, 1000);
         }
 
-        function updateTimerDisplay() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            timerDisplay.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        }
-        
-        function updateProgressBar() {
-            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
-            progressBar.style.width = `${progress}%`;
-        }
-
-
-        function displayQuestion() {
-            if (currentQuestionIndex >= questions.length) {
-                submitQuiz(false);
+        startQuizBtn.addEventListener('click', () => {
+            studentFullName = studentNameInput.value.trim();
+            if (studentFullName === '') {
+                nameError.classList.remove('hidden');
                 return;
             }
-            updateProgressBar();
-            const question = questions[currentQuestionIndex];
-            questionArea.innerHTML = ''; // Clear previous question
+            nameError.classList.add('hidden');
+            nameEntrySection.classList.add('hidden');
+            quizSection.classList.remove('hidden');
+            timerContainer.classList.remove('hidden');
+            loadQuestions();
+            startTimer();
+        });
 
-            const qText = document.createElement('p');
-            qText.className = 'question-text';
-            qText.innerHTML = `Q${currentQuestionIndex + 1}: ${question.question} <span class="text-sm font-normal text-gray-500">(${question.category})</span>`;
-            questionArea.appendChild(qText);
-
-            const optionsContainer = document.createElement('div');
-            // optionsContainer.className = 'options-container'; // Applied by default if MCQ, otherwise specific for rearrangement
-
-
-            if (question.type === "mcq") {
-                optionsContainer.className = 'options-container'; // Apply scroll for MCQs
-                const shuffledOptions = shuffleArray([...question.options]);
-                shuffledOptions.forEach(optionText => {
-                    const label = document.createElement('label');
-                    label.className = 'option-label';
-                    const radio = document.createElement('input');
-                    radio.type = 'radio';
-                    radio.name = `question_${question.id}`;
-                    radio.value = optionText;
-                    if (userAnswers[question.id] === optionText) {
-                        radio.checked = true;
+        function calculateResults() {
+            let score = 0;
+            let attempted = 0;
+            
+            quizQuestions.forEach((q, index) => {
+                const selectedOption = quizForm.elements[`q${index}`]?.value;
+                if (selectedOption) {
+                    attempted++;
+                    if (selectedOption === q.answer) {
+                        score++;
                     }
-                    label.appendChild(radio);
-                    label.appendChild(document.createTextNode(optionText));
-                    optionsContainer.appendChild(label);
-                });
-            } else if (question.type === "rearrangement") {
-                // For rearrangement, optionsContainer might not need specific class unless content overflows
-                const instructionText = document.createElement('p');
-                instructionText.className = 'text-sm text-gray-600 mb-2';
-                instructionText.textContent = "Drag the parts from the top box to the bottom box in the correct order.";
-                questionArea.appendChild(instructionText);
-
-                const partsContainer = document.createElement('div');
-                partsContainer.id = `rearrangement-source-${question.id}`;
-                partsContainer.className = 'rearrangement-container mb-2 p-2 border border-dashed border-gray-300 rounded bg-gray-50 min-h-[70px]'; // Increased min-height
-                
-                const answerContainer = document.createElement('div');
-                answerContainer.id = `rearrangement-target-${question.id}`;
-                answerContainer.className = 'rearrangement-container p-2 border-2 border-dashed border-blue-400 rounded bg-blue-50 min-h-[70px]'; // Increased min-height
-                
-                // Populate source container with shuffled parts
-                const initialParts = userAnswers[`initial_parts_${question.id}`] || shuffleArray([...question.parts]);
-                userAnswers[`initial_parts_${question.id}`] = initialParts; // Store initial shuffle for consistency if user goes back/forth
-
-                initialParts.forEach((part, index) => {
-                    const partDiv = document.createElement('div');
-                    partDiv.className = 'rearrangement-part';
-                    partDiv.textContent = part;
-                    partDiv.draggable = true;
-                    partDiv.id = `part-${question.id}-${part.replace(/[^a-zA-Z0-9]/g, "")}`; // Make ID more robust
-                    partDiv.dataset.value = part; 
-                    partsContainer.appendChild(partDiv);
-
-                    partDiv.addEventListener('dragstart', (e) => {
-                        currentDragElement = e.target;
-                        e.dataTransfer.setData('text/plain', e.target.id);
-                        e.target.classList.add('dragging');
-                    });
-                    partDiv.addEventListener('dragend', (e) => {
-                        e.target.classList.remove('dragging');
-                        currentDragElement = null;
-                    });
-                });
-                
-                // Add placeholder to target if it's empty
-                if (!userAnswers[question.id] || userAnswers[question.id].length === 0) {
-                    answerContainer.innerHTML = `<p class="text-sm text-gray-500 w-full text-center p-4">Drop parts here</p>`;
-                }
-
-
-                [partsContainer, answerContainer].forEach(container => {
-                    container.addEventListener('dragover', (e) => {
-                        e.preventDefault(); 
-                        container.classList.add('drop-target');
-                    });
-                    container.addEventListener('dragleave', (e) => {
-                       container.classList.remove('drop-target');
-                    });
-                    container.addEventListener('drop', (e) => {
-                        e.preventDefault();
-                        container.classList.remove('drop-target');
-                        const droppedElementId = e.dataTransfer.getData('text/plain');
-                        const droppedElement = document.getElementById(droppedElementId);
-
-                        if (droppedElement && droppedElement.parentNode !== container) {
-                            if (container === answerContainer && container.querySelector('p.text-sm')) {
-                                container.innerHTML = ''; 
-                            }
-                            container.appendChild(droppedElement);
-                        }
-                    });
-                });
-
-                // questionArea.appendChild(new Text("Arrange these parts:")); // Redundant with new instruction
-                optionsContainer.appendChild(partsContainer);
-                // questionArea.appendChild(new Text("Your arrangement:")); // Redundant
-                optionsContainer.appendChild(answerContainer);
-                
-                if (userAnswers[question.id] && Array.isArray(userAnswers[question.id])) {
-                    answerContainer.innerHTML = ''; // Clear placeholder before populating
-                    userAnswers[question.id].forEach(partValue => {
-                        // Find the original part div from the source container or create if not found (should exist)
-                        let existingPartDiv = Array.from(partsContainer.children).find(child => child.dataset.value === partValue);
-                        if (existingPartDiv) {
-                             answerContainer.appendChild(existingPartDiv);
-                        } else { 
-                            // This case is less likely if initial parts are handled correctly, but as a fallback:
-                            const partDiv = document.createElement('div');
-                            partDiv.className = 'rearrangement-part';
-                            partDiv.textContent = partValue;
-                            partDiv.dataset.value = partValue;
-                            partDiv.draggable = true; // Ensure it's draggable if recreated
-                            partDiv.id = `part-${question.id}-${partValue.replace(/[^a-zA-Z0-9]/g, "")}-restored`;
-                             partDiv.addEventListener('dragstart', (e) => { /* add listeners */ });
-                             partDiv.addEventListener('dragend', (e) => { /* add listeners */ });
-                            answerContainer.appendChild(partDiv);
-                        }
-                    });
-                     // If after populating, answer container is empty (e.g. user removed all parts), add placeholder
-                    if(answerContainer.children.length === 0){
-                         answerContainer.innerHTML = `<p class="text-sm text-gray-500 w-full text-center p-4">Drop parts here</p>`;
-                    }
-                }
-            }
-            questionArea.appendChild(optionsContainer);
-            questionCounterDisplay.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
-
-            if (currentQuestionIndex === questions.length - 1) {
-                nextQuestionBtn.textContent = 'Submit Quiz';
-            } else {
-                nextQuestionBtn.textContent = 'Next Question';
-            }
-        }
-        
-        function handleNextQuestion() {
-            const question = questions[currentQuestionIndex];
-            let selectedOption = null; // For MCQs
-            let attemptedThisQuestion = false;
-
-            if (question.type === "mcq") {
-                const radios = document.querySelector(`input[name="question_${question.id}"]:checked`);
-                if (radios) {
-                    selectedOption = radios.value;
-                    userAnswers[question.id] = selectedOption;
-                    attemptedThisQuestion = true;
-                } else {
-                    // If no option selected, store null or undefined to indicate not answered
-                    userAnswers[question.id] = null; 
-                }
-            } else if (question.type === "rearrangement") {
-                const targetContainer = document.getElementById(`rearrangement-target-${question.id}`);
-                const arrangedParts = Array.from(targetContainer.children)
-                                        .filter(child => child.classList.contains('rearrangement-part'))
-                                        .map(partDiv => partDiv.dataset.value); 
-                
-                if (arrangedParts.length > 0) { 
-                    userAnswers[question.id] = arrangedParts; 
-                    attemptedThisQuestion = true;
-                } else {
-                    // If no parts moved to target, store empty array or null
-                    userAnswers[question.id] = []; 
-                }
-            }
-
-            // This logic for `questionsAttemptedCount` was flawed, it should be calculated at the end.
-            // We'll count attempts during submission based on non-null/non-empty answers.
-
-            currentQuestionIndex++;
-            if (currentQuestionIndex < questions.length) {
-                displayQuestion();
-            } else {
-                submitQuiz(false);
-            }
-        }
-
-        function submitQuiz(isAutoSubmit) {
-            clearInterval(timerInterval);
-            const endTime = new Date();
-            const timeDiff = Math.round((endTime - startTime) / 1000); 
-            const minutesTaken = Math.floor(timeDiff / 60);
-            const secondsTaken = timeDiff % 60;
-            const timeTakenFormatted = `${String(minutesTaken).padStart(2, '0')}:${String(secondsTaken).padStart(2, '0')}`;
-
-            score = 0;
-            questionsAttemptedCount = 0; // Recalculate attempts here
-
-            questions.forEach(q => {
-                const userAnswer = userAnswers[q.id];
-                let questionWasAttempted = false;
-
-                if (q.type === "mcq") {
-                    if (userAnswer !== null && userAnswer !== undefined) { // Any selection is an attempt
-                        questionWasAttempted = true;
-                        if (userAnswer === q.answer) {
-                            score++;
-                        }
-                    }
-                } else if (q.type === "rearrangement") {
-                    if (Array.isArray(userAnswer) && userAnswer.length > 0) { // Any part moved is an attempt
-                        questionWasAttempted = true;
-                        const correctTextOrder = q.correctOrderByName.map(partIdentifier => {
-                            const partObject = q.parts.find(p => p.startsWith(partIdentifier));
-                            return partObject; 
-                        });
-
-                        if (userAnswer.length === correctTextOrder.length) {
-                            let match = true;
-                            for (let i = 0; i < userAnswer.length; i++) {
-                                if (userAnswer[i] !== correctTextOrder[i]) {
-                                    match = false;
-                                    break;
-                                }
-                            }
-                            if (match) score++;
-                        }
-                    }
-                }
-                if(questionWasAttempted) {
-                    questionsAttemptedCount++;
                 }
             });
-            
-            const percentage = questions.length > 0 ? ((score / questions.length) * 100).toFixed(2) : 0;
+            return { score, attempted };
+        }
 
-            resultName.textContent = studentName;
-            resultAttempted.textContent = `${questionsAttemptedCount} out of ${questions.length}`;
-            resultScore.textContent = `${score} out of ${questions.length}`;
-            resultPercentage.textContent = `${percentage}%`;
-            resultTimeTaken.textContent = timeTakenFormatted;
+        function submitQuiz() {
+            clearInterval(timerInterval);
+            const endTime = new Date();
+            const timeTakenMs = endTime - startTime;
+            const totalSeconds = Math.floor(timeTakenMs / 1000);
+            const minutesTaken = Math.floor(totalSeconds / 60);
+            const secondsTaken = totalSeconds % 60;
+            const timeTakenFormatted = `${String(minutesTaken).padStart(2, '0')}:${String(secondsTaken).padStart(2, '0')}`;
+
+            const { score, attempted } = calculateResults();
+            const percentage = quizQuestions.length > 0 ? ((score / quizQuestions.length) * 100).toFixed(2) : 0;
+
+            document.getElementById('result-name').textContent = studentFullName;
+            document.getElementById('result-attempted').textContent = attempted;
+            document.getElementById('result-score').textContent = `${score} out of ${quizQuestions.length}`;
+            document.getElementById('result-percentage').textContent = percentage;
+            document.getElementById('result-time').textContent = timeTakenFormatted;
 
             quizSection.classList.add('hidden');
             resultsSection.classList.remove('hidden');
+            timerContainer.classList.add('hidden');
 
-            formName.value = studentName;
-            formAttempted.value = questionsAttemptedCount;
-            formScore.value = score;
-            formPercentage.value = percentage;
-            formTimeTaken.value = timeTakenFormatted;
+            // Populate and submit hidden form
+            document.getElementById('form-name').value = studentFullName;
+            document.getElementById('form-attempted').value = attempted;
+            document.getElementById('form-score').value = score;
+            document.getElementById('form-time').value = timeTakenFormatted;
+            document.getElementById('form-percentage').value = percentage;
             
-            fetch(resultsForm.action, {
-                method: 'POST',
-                body: new FormData(resultsForm),
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    console.log('Results submitted successfully to Formspree.');
-                } else {
-                    response.json().then(data => {
-                        if (Object.hasOwn(data, 'errors')) {
-                            console.error("Formspree submission error:", data["errors"].map(error => error["message"]).join(", "));
-                        } else {
-                            console.error("Formspree submission error: An unknown error occurred.");
-                        }
-                    });
-                }
-            }).catch(error => {
-                console.error('Error submitting results to Formspree:', error);
-            });
-
-            if (isAutoSubmit && !resultsSection.classList.contains('hidden')) { // Ensure alert only if quiz was running
-                 // Using a styled message instead of alert
-                const autoSubmitMsg = document.createElement('p');
-                autoSubmitMsg.textContent = "Time's up! Your quiz has been automatically submitted.";
-                autoSubmitMsg.className = 'text-red-600 font-semibold text-center mt-4 p-2 bg-red-100 rounded-md';
-                resultsSection.insertBefore(autoSubmitMsg, resultsSection.firstChild);
-            }
+            // Small delay to ensure values are set before submission, though usually not needed
+            setTimeout(() => {
+                document.getElementById('hidden-form').submit();
+            }, 100);
         }
 
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || 
-                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i')) || 
-                (e.ctrlKey && e.shiftKey && (e.key === 'J' || e.key === 'j')) ||
-                (e.ctrlKey && (e.key === 'U' || e.key === 'u')) ||
-                (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c'))) {
-                e.preventDefault();
-            }
-        });
+        submitQuizBtn.addEventListener('click', submitQuiz);
+
+        // Prevent right-click globally (already set on body but reinforcing)
+        document.addEventListener('contextmenu', event => event.preventDefault());
 
     </script>
 </body>
