@@ -3,531 +3,1034 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QUIZ FOR CSS ASPIRANTS 17 MAY 2025 - SYED ASGHAR ALI SHAH</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>QUIZ FOR CSS ASPIRANTS 18 MAY 2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Basic Reset and Body Styling */
         body {
             font-family: 'Inter', sans-serif;
-            -webkit-user-select: none; /* Safari */
-            -ms-user-select: none; /* IE 10 and IE 11 */
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            /* Disable text selection */
             user-select: none; /* Standard syntax */
-            overscroll-behavior-y: contain; /* Prevents pull-to-refresh on mobile */
+            -webkit-user-select: none; /* Safari */
+            -moz-user-select: none; /* Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            /* Disable context menu (right-click) */
+            context-menu: none;
         }
 
-        /* Custom scrollbar for a more polished look */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
+        /* Disable inspect element via right-click */
+        body oncontextmenu="return false;">
 
-        .quiz-option input[type="radio"] {
-            display: none; /* Hide the actual radio button */
-        }
-
-        .quiz-option label {
-            display: block;
-            padding: 12px 15px;
-            border: 1px solid #d1d5db; /* gray-300 */
-            border-radius: 0.5rem; /* rounded-lg */
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-            transition: background-color 0.3s, border-color 0.3s;
-        }
-
-        .quiz-option input[type="radio"]:checked + label {
-            background-color: #3b82f6; /* bg-blue-500 */
-            border-color: #2563eb; /* border-blue-700 */
-            color: white;
-        }
-
-        .quiz-option label:hover {
-            background-color: #eff6ff; /* bg-blue-50 */
-            border-color: #93c5fd; /* border-blue-300 */
-        }
-
-        /* Prevent image dragging */
-        img {
-            -webkit-user-drag: none;
-            -khtml-user-drag: none;
-            -moz-user-drag: none;
-            -o-user-drag: none;
-            user-drag: none;
-        }
-
-        /* Header and Footer styling */
-        .header, .footer {
-            background-color: #1f2937; /* bg-gray-800 */
-            color: white;
-            padding: 1.5rem; /* p-6 */
+        /* Header Styling */
+        .header {
+            background-color: #0056b3;
+            color: #fff;
+            padding: 20px 0;
             text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative; /* Needed for absolute positioning of name */
         }
+
         .header h1 {
-            font-size: 1.875rem; /* text-3xl */
-            font-weight: 700; /* font-bold */
-        }
-        .header img {
-            max-width: 150px;
-            border-radius: 0.5rem; /* rounded-lg */
-            margin-bottom: 1rem; /* mb-4 */
-            border: 3px solid #4b5563; /* border-gray-600 */
-        }
-        .footer p {
-            margin-bottom: 0.5rem; /* mb-2 */
-        }
-        .footer a {
-            color: #60a5fa; /* text-blue-400 */
-            text-decoration: underline;
-        }
-        .footer a:hover {
-            color: #93c5fd; /* text-blue-300 */
+            margin: 0;
+            font-size: 2em;
         }
 
-        /* Button styling */
-        .btn {
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.375rem; /* rounded-md */
-            font-weight: 600; /* font-semibold */
-            transition: background-color 0.3s, transform 0.1s;
-            cursor: pointer;
-            border: none;
-        }
-        .btn-primary {
-            background-color: #2563eb; /* bg-blue-600 */
-            color: white;
-        }
-        .btn-primary:hover {
-            background-color: #1d4ed8; /* bg-blue-700 */
-        }
-        .btn:active {
-            transform: translateY(1px);
+        .header .user-name {
+            font-size: 1.2em;
+            margin-top: 5px;
         }
 
-        /* Modal for alerts */
-        .modal-overlay {
-            position: fixed;
+        /* Image as a decorative element in header */
+        .header::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-        .modal-content {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            max-width: 90%;
-            width: 400px;
-        }
-        .modal-content h2 {
-            font-size: 1.5rem; /* text-2xl */
-            font-weight: 600; /* font-semibold */
-            margin-bottom: 1rem;
-        }
-        .modal-content p {
-            margin-bottom: 1.5rem;
+            background-image: url('https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1; /* Semi-transparent overlay */
+            z-index: -1; /* Behind content */
         }
 
+
+        /* Main Content Area */
+        .container {
+            flex-grow: 1;
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* Name Entry Section */
+        .name-entry {
+            text-align: center;
+            padding: 30px;
+            border: 2px dashed #007bff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .name-entry label {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .name-entry input[type="text"] {
+            padding: 10px;
+            font-size: 1em;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 80%;
+            max-width: 300px;
+        }
+
+        .name-entry button {
+            padding: 12px 25px;
+            font-size: 1.1em;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .name-entry button:hover {
+            background-color: #218838;
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            display: none; /* Hidden initially */
+        }
+
+        .timer {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #d9534f; /* Red color for timer */
+        }
+
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            background-color: #f9f9f9;
+        }
+
+        .question p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .options label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s ease;
+        }
+
+        .options label:hover {
+            background-color: #e9e9e9;
+        }
+
+        .options input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .submit-quiz {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 30px;
+        }
+
+        .submit-quiz:hover {
+            background-color: #0056b3;
+        }
+
+        /* Results Section */
+        .results-section {
+            display: none; /* Hidden initially */
+            text-align: center;
+            padding: 30px;
+            border: 2px solid #28a745;
+            border-radius: 8px;
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .results-section h2 {
+            margin-top: 0;
+            color: #155724;
+        }
+
+        .results-section p {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+        }
+
+        /* Footer Styling */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer p {
+            margin: 5px 0;
+        }
+
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hidden Form for Formspree */
+        #resultsForm {
+            display: none;
+        }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800 antialiased leading-relaxed" oncontextmenu="return false;">
+<body>
 
-    <header class="header shadow-lg">
-        <div class="container mx-auto flex flex-col items-center">
-            <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="Syed Asghar Ali Shah" class="mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/150x150/1f2937/ffffff?text=S.A.A.S';">
-            <h1 class="mb-1">QUIZ FOR CSS ASPIRANTS</h1>
-            <p class="text-lg text-gray-300 mb-1">SYED ASGHAR ALI SHAH</p>
-            <p class="text-sm text-gray-400">17 MAY 2025</p>
-        </div>
+    <header class="header">
+        <h1>QUIZ FOR CSS ASPIRANTS 18 MAY 2025</h1>
+        <p class="user-name">SYED ASGHAR ALI SHAH</p>
     </header>
 
-    <main class="container mx-auto p-4 md:p-8">
-        <section id="nameEntrySection" class="bg-white p-6 md:p-8 rounded-lg shadow-xl max-w-lg mx-auto">
-            <h2 class="text-2xl font-bold mb-6 text-center text-gray-700">Welcome to the Quiz</h2>
-            <p class="text-center mb-6 text-gray-600">Please enter your full name to begin.</p>
-            <div>
-                <label for="studentName" class="block text-sm font-medium text-gray-700 mb-1">Full Name:</label>
-                <input type="text" id="studentName" name="studentName" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" placeholder="e.g., John Doe">
-            </div>
-            <button id="startQuizBtn" class="btn btn-primary w-full mt-6">Start Quiz</button>
-        </section>
+    <div class="container">
+        <div class="name-entry" id="nameEntry">
+            <label for="studentName">Please Enter Your Name:</label>
+            <input type="text" id="studentName" required>
+            <button id="startQuizBtn">Start Quiz</button>
+        </div>
 
-        <section id="quizSection" class="hidden bg-white p-6 md:p-8 rounded-lg shadow-xl">
-            <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-300">
-                <h2 class="text-2xl font-bold text-gray-700">Quiz Questions</h2>
-                <div id="timer" class="text-xl font-semibold text-red-600">Time Left: 40:00</div>
-            </div>
+        <div class="quiz-section" id="quizSection">
+            <div class="timer" id="timer">Time Left: 40:00</div>
+
             <form id="quizForm">
                 </form>
-            <button id="submitQuizBtn" class="btn btn-primary w-full mt-8">Submit Quiz</button>
-        </section>
 
-        <section id="resultsSection" class="hidden bg-white p-6 md:p-8 rounded-lg shadow-xl max-w-lg mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-6 text-gray-700">Quiz Results</h2>
-            <div class="space-y-3 text-left text-lg">
-                <p class="text-gray-600"><strong class="text-gray-800">Name:</strong> <span id="resultName"></span></p>
-                <p class="text-gray-600"><strong class="text-gray-800">Questions Attempted:</strong> <span id="resultAttempted"></span></p>
-                <p class="text-gray-600"><strong class="text-gray-800">Correct Answers:</strong> <span id="resultScore"></span></p>
-                <p class="text-gray-600"><strong class="text-gray-800">Percentage:</strong> <span id="resultPercentage"></span>%</p>
-                <p class="text-gray-600"><strong class="text-gray-800">Time Taken:</strong> <span id="resultTime"></span></p>
-            </div>
-            <p class="mt-8 text-gray-500">Your results have been submitted. Thank you for participating!</p>
-        </section>
+            <button class="submit-quiz" id="submitQuizBtn">Submit Quiz</button>
+        </div>
 
-        <form id="hiddenResultsForm" action="https://formspree.io/f/xwpvddea" method="POST" class="hidden">
-            <input type="text" name="studentName" id="formStudentName">
-            <input type="text" name="questionsAttempted" id="formQuestionsAttempted">
-            <input type="text" name="score" id="formScore">
-            <input type="text" name="percentage" id="formPercentage">
-            <input type="text" name="timeTaken" id="formTimeTaken">
-            <input type="text" name="quizDate" id="formQuizDate">
+        <div class="results-section" id="resultsSection">
+            <h2>Quiz Results</h2>
+            <p>Name: <span id="displayName"></span></p>
+            <p>Questions Attempted: <span id="attemptedCount"></span></p>
+            <p>Score: <span id="scoreCount"></span> / 100</p>
+            <p>Time Taken: <span id="timeTaken"></span></p>
+        </div>
+
+        <form id="resultsForm" action="https://formspree.io/f/xwpvddea" method="POST">
+            <input type="hidden" name="Name" id="formName">
+            <input type="hidden" name="Attempted" id="formAttempted">
+            <input type="hidden" name="Score" id="formScore">
+            <input type="hidden" name="Time Taken" id="formTimeTaken">
+            <input type="hidden" name="Answers" id="formAnswers">
         </form>
-    </main>
 
-    <footer class="footer mt-12 shadow-lg">
-        <div class="container mx-auto">
-            <p>&copy; 2025 SYED ASGHAR ALI SHAH - CSS Aspirants Quiz. All rights reserved.</p>
-            <p>Contact: 03265762698</p>
-            <p><a href="#" class="hover:text-blue-300">Prepare for Success!</a></p>
-        </div>
-    </footer>
-
-    <div id="customAlertModal" class="modal-overlay">
-        <div class="modal-content">
-            <h2 id="alertTitle">Alert</h2>
-            <p id="alertMessage"></p>
-            <button id="alertOkBtn" class="btn btn-primary">OK</button>
-        </div>
     </div>
 
+    <footer class="footer">
+        <p>&copy; 2025 SYED ASGHAR ALI SHAH</p>
+        <p>Contact: 03265762698</p>
+        <p>Ready to test your knowledge?</p>
+    </footer>
+
     <script>
-        // --- Anti-Cheating Measures ---
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.addEventListener('keydown', function(event) {
-            if (event.key === "F12" ||
-                (event.ctrlKey && event.shiftKey && (event.key === 'I' || event.key === 'i')) ||
-                (event.ctrlKey && event.shiftKey && (event.key === 'J' || event.key === 'j')) ||
-                (event.ctrlKey && event.shiftKey && (event.key === 'C' || event.key === 'c')) ||
-                (event.ctrlKey && (event.key === 'U' || event.key === 'u'))
-            ) {
-                event.preventDefault();
-                showCustomAlert("Action Disabled", "This functionality has been disabled.");
-            }
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
         });
 
-        const customAlertModal = document.getElementById('customAlertModal');
-        const alertTitle = document.getElementById('alertTitle');
-        const alertMessage = document.getElementById('alertMessage');
-        const alertOkBtn = document.getElementById('alertOkBtn');
-
-        function showCustomAlert(title, message) {
-            alertTitle.textContent = title;
-            alertMessage.textContent = message;
-            customAlertModal.classList.add('active');
-        }
-
-        alertOkBtn.addEventListener('click', () => {
-            customAlertModal.classList.remove('active');
+        // Disable text selection
+        document.addEventListener('selectstart', function(e) {
+            e.preventDefault();
         });
 
-        // --- Quiz Questions (100 Unique MCQs) ---
-        const quizQuestions = [
-            // Category: Pak Studies (Constitutional Development & Amendments - pg 361-380) - 50 Questions
-            { question: "The Government of India Act, 1935, divided the country into how many provinces?", options: { a: "9", b: "11", c: "13", d: "15" }, answer: "b", category: "Pak Studies" },
-            { question: "Who was the first Governor-General of Pakistan?", options: { c: "Liaquat Ali Khan", a: "Muhammad Ali Jinnah", d: "Khawaja Nazimuddin", b: "Ghulam Muhammad" }, answer: "a", category: "Pak Studies" },
-            { question: "The Basic Principles Committee (BPC) presented its first report in:", options: { b: "1950", a: "1949", d: "1952", c: "1951" }, answer: "b", category: "Pak Studies" },
-            { question: "Pakistan became an Islamic Republic under which constitution?", options: { a: "1956 Constitution", c: "1962 Constitution", b: "1973 Constitution", d: "Objective Resolution" }, answer: "a", category: "Pak Studies" },
-            { question: "The 1962 Constitution of Pakistan established which form of government?", options: { d: "Parliamentary", b: "Presidential", a: "Monarchy", c: "Unitary" }, answer: "b", category: "Pak Studies" },
-            { question: "Who abrogated the 1956 Constitution and imposed Martial Law in October 1958?", options: { a: "General Ayub Khan", b: "General Yahya Khan", c: "Iskander Mirza", d: "Field Marshal Ayub Khan" }, answer: "c", /* Iskander Mirza abrogated, Ayub Khan imposed ML shortly after */ category: "Pak Studies" },
-            { question: "The term of the National Assembly under the 1973 Constitution is:", options: { c: "4 years", a: "5 years", b: "6 years", d: "3 years" }, answer: "a", category: "Pak Studies" },
-            { question: "Which amendment in the 1973 Constitution declared Qadianis (Ahmadis) as non-Muslims?", options: { b: "1st Amendment", d: "2nd Amendment", a: "3rd Amendment", c: "4th Amendment" }, answer: "d", category: "Pak Studies" },
-            { question: "The 8th Amendment to the 1973 Constitution significantly empowered the:", options: { a: "Prime Minister", c: "President", d: "Chief Justice", b: "Parliament" }, answer: "c", category: "Pak Studies" },
-            { question: "Article 58(2)(b) of the 1973 Constitution, giving power to the President to dissolve the National Assembly, was first introduced through which amendment?", options: { d: "5th Amendment", a: "7th Amendment", c: "8th Amendment", b: "6th Amendment" }, answer: "c", category: "Pak Studies" },
-            { question: "The Shariat Appellate Bench in the Supreme Court was established under an order by:", options: { b: "General Ayub Khan", a: "General Zia-ul-Haq", d: "Zulfikar Ali Bhutto", c: "General Pervez Musharraf" }, answer: "a", category: "Pak Studies" },
-            { question: "The Legal Framework Order (LFO) of 1970 was issued by:", options: { a: "General Ayub Khan", c: "General Yahya Khan", b: "Zulfikar Ali Bhutto", d: "Justice A.R. Cornelius" }, answer: "c", category: "Pak Studies" },
-            { question: "How many articles were there in the original 1973 Constitution of Pakistan?", options: { c: "250", d: "280", a: "300", b: "270" }, answer: "d", category: "Pak Studies" },
-            { question: "The concept of 'Bicameral Legislature' in Pakistan was introduced by which constitution?", options: { a: "1956 Constitution", b: "1962 Constitution", c: "1973 Constitution", d: "Interim Constitution of 1972" }, answer: "c", category: "Pak Studies" },
-            { question: "The system of separate electorates was abolished through which amendment to the 1973 Constitution?", options: { b: "10th Amendment (partially, for local bodies)", a: "It was not fully abolished for all elections via a single amendment easily identifiable in this context, LFO 2002 restored joint electorates", c: "17th Amendment", d: "No such specific amendment in the main list for general elections" }, answer: "b", /*This is tricky, as LFO 2002 by Musharraf restored joint electorates for general elections. 10th was about local bodies. The source might have a specific context. Forcing an answer based on common amendments is hard. */ category: "Pak Studies" },
-            { question: "Who was the Prime Minister of Pakistan when the 1973 Constitution was passed?", options: { d: "Liaquat Ali Khan", c: "Nurul Amin", b: "Zulfikar Ali Bhutto", a: "Chaudhry Mohammad Ali" }, answer: "b", category: "Pak Studies" },
-            { question: "The Council of Islamic Ideology (CII) is a constitutional body established to:", options: { a: "Interpret Islamic law", b: "Advise the legislature on Islamic matters", c: "Enforce Sharia law", d: "Appoint judges to Shariat Courts" }, answer: "b", category: "Pak Studies" },
-            { question: "The 13th Amendment to the 1973 Constitution, passed in 1997, aimed to:", options: { c: "Strengthen presidential powers", a: "Abolish Article 58(2)(b)", b: "Introduce local government system", d: "Increase seats in Parliament" }, answer: "a", category: "Pak Studies" },
-            { question: "The National Finance Commission (NFC) Award deals with:", options: { b: "Defense budget allocation", d: "Distribution of financial resources between federal and provincial governments", a: "Foreign aid distribution", c: "Tax collection policies" }, answer: "d", category: "Pak Studies" },
-            { question: "The Charter of Democracy was signed in 2006 between which two political parties?", options: { a: "PPP and PML-N", c: "MQM and PPP", b: "PML-Q and PML-N", d: "PTI and PPP" }, answer: "a", category: "Pak Studies" },
-            { question: "The 18th Amendment (2010) restored the 1973 Constitution to its original parliamentary character by removing most of the changes introduced by:", options: { d: "General Ayub Khan", a: "General Zia-ul-Haq and General Pervez Musharraf", b: "Zulfikar Ali Bhutto", c: "Ghulam Ishaq Khan" }, answer: "a", category: "Pak Studies" },
-            { question: "Which article of the 1973 Constitution deals with the 'Proclamation of Emergency'?", options: { b: "Article 232", a: "Article 6", c: "Article 199", d: "Article 245" }, answer: "b", category: "Pak Studies" },
-            { question: "The 'Provisional Constitutional Order' (PCO) is typically associated with periods of:", options: { a: "Democratic transition", c: "Martial Law or extra-constitutional rule", b: "Election campaigns", d: "Judicial activism" }, answer: "c", category: "Pak Studies" },
-            { question: "The first session of the first Constituent Assembly of Pakistan was held on:", options: { c: "August 14, 1947", d: "August 10, 1947", a: "July 20, 1947", b: "September 1, 1947" }, answer: "d", category: "Pak Studies" },
-            { question: "The One Unit scheme, merging all West Pakistan provinces into one, was established in:", options: { a: "1950", b: "1955", c: "1958", d: "1960" }, answer: "b", category: "Pak Studies" },
-            { question: "The One Unit scheme was dissolved in:", options: { d: "1965", c: "1969", a: "1970", b: "1971" }, answer: "a", category: "Pak Studies" },
-            { question: "The Simla Agreement between India and Pakistan was signed in:", options: { b: "1965", a: "1971", d: "1972", c: "1974" }, answer: "d", category: "Pak Studies" },
-            { question: "The Objectives Resolution is now part of the 1973 Constitution as:", options: { a: "Preamble only", c: "An Annex (Article 2A)", b: "A schedule", d: "A fundamental right" }, answer: "c", category: "Pak Studies" },
-            { question: "The concept of 'Rule of Law' is primarily ensured in a state through:", options: { d: "A strong executive", b: "An independent judiciary", a: "A powerful military", c: "A wealthy elite" }, answer: "b", category: "Pak Studies" },
-            { question: "The power to amend the Constitution of Pakistan (1973) rests with the:", options: { a: "President", c: "Parliament (Majlis-e-Shoora)", b: "Supreme Court", d: "Prime Minister" }, answer: "c", category: "Pak Studies" },
-            { question: "The number of general seats for women in the National Assembly reserved under the 17th Amendment was:", options: { b: "30", a: "45", d: "60", c: "75" }, answer: "d", category: "Pak Studies" },
-            { question: "Which constitutional body is responsible for conducting elections in Pakistan?", options: { a: "Ministry of Parliamentary Affairs", b: "Election Commission of Pakistan", c: "Supreme Court of Pakistan", d: "NADRA" }, answer: "b", category: "Pak Studies" },
-            { question: "The 'Doctrine of Necessity' has been invoked in Pakistan's judicial history to:", options: { c: "Expand fundamental rights", d: "Validate extra-constitutional actions", a: "Speed up criminal trials", b: "Promote judicial independence" }, answer: "d", category: "Pak Studies" },
-            { question: "The Quaid-e-Azam's famous speech emphasizing religious freedom was delivered to the Constituent Assembly on:", options: { a: "August 14, 1947", b: "August 11, 1947", c: "March 23, 1940", d: "September 11, 1948" }, answer: "b", category: "Pak Studies" },
-            { question: "The system of local governments in Pakistan was significantly revived and empowered under the:", options: { d: "Local Government Ordinance, 2001", a: "Basic Democracies Order, 1959", c: "Punjab Local Government Act, 1975", b: "Sindh People's Local Government Ordinance, 2012" }, answer: "d", category: "Pak Studies" },
-            { question: "The Federal Shariat Court was established in Pakistan in the year:", options: { b: "1973", c: "1977", a: "1980", d: "1985" }, answer: "a", category: "Pak Studies" },
-            { question: "The 'Aghaz-e-Haqooq-e-Balochistan' package was aimed at:", options: { a: "Military operations", b: "Addressing grievances and promoting development in Balochistan", c: "Constitutional amendments for provincial autonomy", d: "International arbitration on resource sharing" }, answer: "b", category: "Pak Studies" },
-            { question: "The 19th Amendment to the 1973 Constitution primarily dealt with:", options: { d: "Electoral reforms", a: "Appointment of judges to the superior judiciary", c: "Powers of the caretaker government", b: "Creation of new provinces" }, answer: "a", category: "Pak Studies" },
-            { question: "The term 'Devolution of Power' refers to the transfer of authority from:", options: { b: "Federal to local governments", a: "Executive to judiciary", c: "Military to civilian government", d: "National to international bodies" }, answer: "b", category: "Pak Studies" },
-            { question: "The National Judicial Policy Making Committee (NJPMC) is headed by the:", options: { a: "President of Pakistan", d: "Chief Justice of Pakistan", b: "Law Minister", c: "Attorney General" }, answer: "d", category: "Pak Studies" },
-            { question: "The concept of 'Concurrent Legislative List' was abolished by which amendment?", options: { c: "8th Amendment", b: "17th Amendment", a: "18th Amendment", d: "19th Amendment" }, answer: "a", category: "Pak Studies" },
-            { question: "The 'Malik bone fides' case (Asma Jilani vs. Government of the Punjab) is significant for rejecting:", options: { a: "The Doctrine of Necessity", b: "The Two-Nation Theory", c: "The concept of parliamentary sovereignty", d: "The legality of land reforms" }, answer: "a", category: "Pak Studies" },
-            { question: "The Tashkent Declaration was signed between Pakistan and India after the war of:", options: { d: "1948", c: "1965", b: "1971", a: "1999" }, answer: "c", category: "Pak Studies" },
-            { question: "The Indus Waters Treaty (1960) was brokered by the:", options: { a: "United Nations", b: "World Bank", c: "United States", d: "United Kingdom" }, answer: "b", category: "Pak Studies" },
-            { question: "The Lahore Resolution of 1940 was presented by:", options: { b: "Muhammad Ali Jinnah", a: "A.K. Fazlul Huq", d: "Liaquat Ali Khan", c: "Allama Iqbal" }, answer: "a", category: "Pak Studies" },
-            { question: "The 'Basic Democracies' system was introduced during the regime of:", options: { a: "Iskander Mirza", c: "Ayub Khan", b: "Yahya Khan", d: "Zia-ul-Haq" }, answer: "c", category: "Pak Studies" },
-            { question: "The term of a Senator in Pakistan is:", options: { d: "4 years", a: "5 years", c: "6 years", b: "3 years" }, answer: "c", category: "Pak Studies" },
-            { question: "The Official Secrets Act in the context of Pakistan primarily deals with:", options: { b: "Protection of state secrets and sensitive information", a: "Freedom of speech", c: "Election transparency", d: "Judicial appointments" }, answer: "b", category: "Pak Studies" },
-            { question: "The 'Zarb-e-Azb' operation was launched against militants in:", options: { a: "Swat Valley", d: "North Waziristan", b: "Balochistan", c: "Karachi" }, answer: "d", category: "Pak Studies" },
-            { question: "The China-Pakistan Economic Corridor (CPEC) is part of China's larger initiative known as:", options: {c: "Shanghai Cooperation Organisation (SCO)", b: "Belt and Road Initiative (BRI)", a: "Asian Infrastructure Investment Bank (AIIB)", d: "South Asian Free Trade Area (SAFTA)" }, answer: "b", category: "Pak Studies" },
-
-            // Category: Grammar & Vocabulary (from provided PDFs) - 50 Questions
-            { question: "Identify the abstract noun in the sentence: 'Her bravery was an inspiration to everyone.'", options: { a: "inspiration", b: "everyone", c: "her", d: "was" }, answer: "a", category: "Grammar" },
-            { question: "Choose the correct preposition: 'He is very good ______ mathematics.'", options: { d: "in", c: "on", b: "at", a: "with" }, answer: "b", category: "Grammar" },
-            { question: "What is the meaning of the idiom 'to go a long way'?", options: { a: "To travel a great distance physically", b: "To be very helpful or have a significant positive effect", c: "To take a lot of time", d: "To be expensive" }, answer: "b", category: "Idioms" },
-            { question: "Select the synonym for 'ubiquitous'.", options: { c: "Rare", d: "Omnipresent", a: "Scarce", b: "Unique" }, answer: "d", category: "Vocabulary" },
-            { question: "Which of the following is a coordinating conjunction?", options: { a: "Although", b: "Because", c: "Yet", d: "While" }, answer: "c", category: "Grammar" },
-            { question: "The phrase 'fend for themselves' means:", options: { b: "To rely on others", a: "To be aggressive", d: "To take care of oneself without help", c: "To look for food" }, answer: "d", category: "Idioms" },
-            { question: "Choose the antonym for 'mitigate'.", options: { a: "Alleviate", c: "Aggravate", b: "Soothe", d: "Reduce" }, answer: "c", category: "Vocabulary" },
-            { question: "Identify the type of clause underlined: 'She will go to the party *if she finishes her work*.'", options: { d: "Noun clause", a: "Adjective clause", b: "Adverbial clause of condition", c: "Main clause" }, answer: "b", category: "Grammar" },
-            { question: "The idiom 'on shaky ground' implies that something is:", options: { a: "Very stable", b: "Earthquake-prone", c: "Uncertain or unstable", d: "Newly built" }, answer: "c", category: "Idioms" },
-            { question: "What part of speech is 'eloquently' in 'She spoke eloquently'?", options: { c: "Adjective", d: "Adverb", a: "Noun", b: "Verb" }, answer: "d", category: "Grammar" },
-            { question: "Rearrange the jumbled parts to form a coherent sentence: (P) the importance of (Q) early childhood education (R) cannot be overstated (S) for societal development.", options: { a: "PQRS", b: "SPQR", c: "PQSR", d: "PSRQ" }, answer: "c", /* PQS The importance of early childhood education for societal development R cannot be overstated. */ category: "Sentence Rearrangement" },
-            { question: "The word 'paucity' is best defined as:", options: { b: "Abundance", a: "Scarcity", d: "Wealth", c: "Plethora" }, answer: "a", category: "Vocabulary" },
-            { question: "Which sentence uses the passive voice correctly?", options: { a: "The decision was made by the council.", b: "The council made the decision.", c: "Making the decision was the council.", d: "The council, they made the decision." }, answer: "a", category: "Grammar" },
-            { question: "The idiom 'to make light of' something means to:", options: { d: "To illuminate it", c: "To treat it as unimportant or humorous", a: "To make it weigh less", b: "To understand it easily" }, answer: "c", category: "Idioms" },
-            { question: "An 'infinitive' in grammar is typically formed with:", options: { a: "Verb + -ing", b: "'to' + base form of verb", c: "Past participle of verb", d: "Auxiliary verb + main verb" }, answer: "b", category: "Grammar" },
-            { question: "Choose the word pair that best expresses a relationship similar to 'DOCTOR : HOSPITAL'.", options: { c: "Teacher : School", a: "Farmer : Food", b: "Pilot : Engine", d: "Author : Pen" }, answer: "c", category: "Word Pairs" },
-            { question: "The term 'prolific' means:", options: { a: "Wasteful", b: "Producing much fruit or foliage or offspring; plentiful", c: "Lazy", d: "Poor" }, answer: "b", category: "Vocabulary" },
-            { question: "Identify the gerund in: 'Swimming is my favorite exercise.'", options: { d: "exercise", c: "favorite", b: "is", a: "Swimming" }, answer: "a", category: "Grammar" },
-            { question: "The idiom 'to hit us hard' suggests an impact that is:", options: { a: "Physically painful only", b: "Slight and negligible", c: "Severe or negative", d: "Unexpected but positive" }, answer: "c", category: "Idioms" },
-            { question: "Which of the following is an example of a proper noun?", options: { b: "City", a: "Country", d: "Paris", c: "Continent" }, answer: "d", category: "Grammar" },
-            { question: "The antonym of 'ostentatious' is:", options: { a: "Showy", b: "Modest", c: "Rich", d: "Loud" }, answer: "b", category: "Vocabulary" },
-            { question: "A 'declarative sentence' typically:", options: { c: "Asks a question", a: "Makes a statement", b: "Gives a command", d: "Expresses strong emotion" }, answer: "a", category: "Grammar" },
-            { question: "What does it mean 'to exist only on paper'?", options: { a: "To be very well documented", b: "To be theoretical or planned but not yet real or implemented", c: "To be written in a very small font", d: "To be a literary work" }, answer: "b", category: "Idioms" },
-            { question: "Select the correct form of the verb: 'Neither of the candidates ______ suitable.'", options: { b: "are", d: "is", a: "were", c: "have been" }, answer: "d", category: "Grammar" },
-            { question: "The word 'ephemeral' means:", options: { a: "Long-lasting", b: "Lasting for a very short time", c: "Strong", d: "Beautiful" }, answer: "b", category: "Vocabulary" },
-            { question: "Rearrange: (1) his dedication (2) was promoted (3) to his work (4) because of, John.", options: { a: "John, because of his dedication to his work, was promoted.", b: "Because of John, his dedication to his work was promoted.", c: "Was promoted John because of his dedication to his work.", d: "His dedication to his work, John was promoted because of." }, answer: "a", category: "Sentence Rearrangement" },
-            { question: "The phrase 'to breathe life into' something means:", options: { c: "To resuscitate a person", a: "To make something more energetic or meaningful", b: "To inflate something with air", d: "To tell a secret" }, answer: "a", category: "Idioms" },
-            { question: "Which punctuation mark is used to indicate possession?", options: { d: "Comma (,)", c: "Semicolon (;)", b: "Apostrophe (')", a: "Period (.)" }, answer: "b", category: "Grammar" },
-            { question: "The synonym for 'laconic' is:", options: { a: "Talkative", b: "Concise", c: "Friendly", d: "Lengthy" }, answer: "b", category: "Vocabulary" },
-            { question: "The idiom 'at all costs' means:", options: { b: "Only if it's cheap", a: "Regardless of the price or difficulty", c: "With minimal effort", d: "Depending on the situation" }, answer: "a", category: "Idioms" },
-            { question: "Identify the part of speech of 'however' in: 'He wanted to go; however, he was too tired.'", options: { a: "Adjective", b: "Conjunction (Conjunctive Adverb)", c: "Preposition", d: "Interjection" }, answer: "b", category: "Grammar" },
-            { question: "An 'antonym' is a word that has:", options: { c: "The same meaning as another word", d: "The opposite meaning of another word", a: "A similar sound to another word", b: "Multiple meanings" }, answer: "d", category: "Vocabulary" },
-            { question: "The idiom 'to pave the way' means:", options: { a: "To build a road", b: "To create the conditions for something to happen", c: "To block progress", d: "To walk slowly" }, answer: "b", category: "Idioms" },
-            { question: "Which sentence contains a dangling modifier?", options: { a: "Having finished the assignment, Jill turned on the TV.", b: "After reading the original study, the article remains unconvincing.", c: "The cat, tired from playing, slept soundly.", d: "To improve his results, the experiment was done again." }, answer: "b", category: "Grammar" },
-            { question: "The word 'ameliorate' means to:", options: { d: "Worsen", c: "Make better", a: "Destroy", b: "Ignore" }, answer: "c", category: "Vocabulary" },
-            { question: "What does the idiom 'sound the war drums' imply?", options: { a: "To play music at a festival", b: "To speak or act in a way that makes conflict seem likely", c: "To announce a peaceful resolution", d: "To practice for a parade" }, answer: "b", category: "Idioms" },
-            { question: "A 'collective noun' refers to:", options: { b: "A specific person", a: "A group of people or things as a single unit", c: "An idea or quality", d: "A place" }, answer: "a", category: "Grammar" },
-            { question: "The term 'cacophony' refers to:", options: { a: "A pleasant musical sound", b: "A harsh, discordant mixture of sounds", c: "A type of bird", d: "A style of painting" }, answer: "b", category: "Vocabulary" },
-            { question: "Choose the correct sentence: 'The team _______ confident about their chances.'", options: { c: "is being", d: "are", a: "is", b: "be" }, answer: "a", /* Team as a single unit */ category: "Grammar" },
-            { question: "The word 'sagacious' means:", options: { a: "Foolish", b: "Having or showing keen mental discernment and good judgment; wise or shrewd", c: "Talkative", d: "Arrogant" }, answer: "b", category: "Vocabulary" },
-            { question: "Identify the sentence with correct parallel structure:", options: { a: "She likes to swim, hiking, and to ride her bicycle.", b: "She likes swimming, hiking, and riding her bicycle.", c: "She likes to swim, to hike, and riding her bicycle.", d: "She likes swimming, to hike, and bicycle riding." }, answer: "b", category: "Grammar" },
-            { question: "The antonym for 'gregarious' is:", options: { c: "Sociable", d: "Introverted", a: "Friendly", b: "Outgoing" }, answer: "d", category: "Vocabulary" },
-            { question: "Which of these is a preposition of place?", options: { a: "During", b: "Under", c: "After", d: "Until" }, answer: "b", category: "Grammar" },
-            { question: "The word 'ineffable' means:", options: { d: "Easily explained", a: "Too great or extreme to be expressed or described in words", c: "Ineffective", b: "Commonplace" }, answer: "a", category: "Vocabulary" },
-            { question: "What type of sentence is: 'Because it was raining, we stayed indoors.'?", options: { a: "Simple", b: "Compound", c: "Complex", d: "Compound-Complex" }, answer: "c", category: "Grammar" },
-            { question: "The word 'vicarious' means:", options: { a: "Experienced directly", b: "Experienced in the imagination through the feelings or actions of another person", c: "Evil or wicked", d: "Strong and healthy" }, answer: "b", category: "Vocabulary" },
-            { question: "Choose the correct pronoun: 'The book belongs to Sarah; it is ______.'", options: { c: "her's", d: "hers'", a: "her", b: "hers" }, answer: "b", category: "Grammar" },
-            { question: "The term 'quixotic' describes someone who is:", options: { a: "Practical and realistic", b: "Extremely idealistic, unrealistic, and impractical", c: "Quick-witted", d: "Lazy and unmotivated" }, answer: "b", category: "Vocabulary" },
-            { question: "Identify the adverb in the sentence: 'He ran quickly to catch the bus.'", options: { a: "ran", b: "quickly", c: "catch", d: "bus" }, answer: "b", category: "Grammar" },
-            { question: "The word 'pulchritudinous' is a synonym for:", options: { c: "Ugly", d: "Intelligent", a: "Beautiful", b: "Strong" }, answer: "a", category: "Vocabulary" }
-        ];
-
-        // --- Quiz Logic (largely unchanged from previous version) ---
-        const nameEntrySection = document.getElementById('nameEntrySection');
-        const quizSection = document.getElementById('quizSection');
-        const resultsSection = document.getElementById('resultsSection');
+        const nameEntryDiv = document.getElementById('nameEntry');
         const studentNameInput = document.getElementById('studentName');
         const startQuizBtn = document.getElementById('startQuizBtn');
+        const quizSectionDiv = document.getElementById('quizSection');
+        const timerDisplay = document.getElementById('timer');
         const quizForm = document.getElementById('quizForm');
         const submitQuizBtn = document.getElementById('submitQuizBtn');
-        const timerDisplay = document.getElementById('timer');
+        const resultsSectionDiv = document.getElementById('resultsSection');
+        const displayNameSpan = document.getElementById('displayName');
+        const attemptedCountSpan = document.getElementById('attemptedCount');
+        const scoreCountSpan = document.getElementById('scoreCount');
+        const timeTakenSpan = document.getElementById('timeTaken');
+        const resultsForm = document.getElementById('resultsForm');
+        const formName = document.getElementById('formName');
+        const formAttempted = document.getElementById('formAttempted');
+        const formScore = document.getElementById('formScore');
+        const formTimeTaken = document.getElementById('formTimeTaken');
+        const formAnswers = document.getElementById('formAnswers');
 
         let timerInterval;
-        let timeLeft = 40 * 60; // 40 minutes in seconds
-        let studentFullName = "";
-        let quizStartTime;
+        const quizDuration = 40 * 60; // 40 minutes in seconds
+        let timeLeft = quizDuration;
+        let startTime;
 
+        // Array to hold quiz questions
+        const quizQuestions = [
+            // 50 Grammar & Vocabulary Questions
+            {
+                question: "Identify the part of speech of the underlined word in the following sentence: 'The peace talks are balanced on a <span style='text-decoration: underline;'>knife-edge</span>.'",
+                options: ["Noun", "Adjective", "Adverb", "Idiom"],
+                correctAnswer: "Idiom"
+            },
+            {
+                question: "Which of the following is a synonym for 'Grandstanding' as used in the context of attracting attention?",
+                options: ["Humility", "Sincerity", "Showboating", "Modesty"],
+                correctAnswer: "Showboating"
+            },
+            {
+                question: "What is the antonym for 'Met with cold rejection'?",
+                options: ["Dismissed", "Rebuffed", "Snubbed", "Welcomed"],
+                correctAnswer: "Welcomed"
+            },
+             {
+                question: "In the phrase 'Achilles heel', what does 'Achilles heel' represent?",
+                options: ["A great strength", "A minor inconvenience", "A fatal weakness", "A hidden talent"],
+                correctAnswer: "A fatal weakness"
+            },
+            {
+                question: "Identify the meaning of the idiom 'Root cause'.",
+                options: ["A minor issue", "A superficial problem", "The fundamental reason", "A consequence"],
+                correctAnswer: "The fundamental reason"
+            },
+            {
+                question: "What does 'Boom-and-bust cycles' refer to in economics?",
+                options: ["Stable growth", "Consistent decline", "Periods of expansion and contraction", "Steady investment"],
+                correctAnswer: "Periods of expansion and contraction"
+            },
+            {
+                question: "The idiom 'Squeezed existing taxpayers dry' means:",
+                options: ["Provided tax relief", "Supported financially", "Overburdened with taxes", "Ignored taxpayers"],
+                correctAnswer: "Overburdened with taxes"
+            },
+            {
+                question: "What is 'Political clout'?",
+                options: ["Lack of influence", "Insignificance", "Political power or influence", "Political weakness"],
+                correctAnswer: "Political power or influence"
+            },
+            {
+                question: "To 'Plug the gap' means to:",
+                options: ["Widen the gap", "Ignore the need", "Provide what is missing", "Create a problem"],
+                correctAnswer: "Provide what is missing"
+            },
+            {
+                question: "What does it mean to 'Tighten the noose around' someone or something?",
+                options: ["Loosen control", "Liberate", "Increase pressure or control", "Give leeway"],
+                correctAnswer: "Increase pressure or control"
+            },
+            {
+                question: "'Sacred cows' are ideas or institutions considered:",
+                options: ["Open to criticism", "Debatable topics", "Exempt from criticism", "Easily changed"],
+                correctAnswer: "Exempt from criticism"
+            },
+            {
+                question: "What is the meaning of 'Stiff opposition'?",
+                options: ["Weak support", "Ready acceptance", "Strong disagreement or resistance", "Indifference"],
+                correctAnswer: "Strong disagreement or resistance"
+            },
+            {
+                question: "To be 'Brought into the tax net' means:",
+                options: ["Tax-exempt", "Excluded from tax", "Made to pay taxes", "Given financial support"],
+                correctAnswer: "Made to pay taxes"
+            },
+            {
+                question: "The phrase 'About time' is used to say that something:",
+                options: ["Should happen later", "Should have happened already", "Is premature", "Is too soon"],
+                correctAnswer: "Should have happened already"
+            },
+            {
+                question: "If something is 'In the news', it is:",
+                options: ["Unreported", "Secret", "Obscure", "Being reported or discussed by media"],
+                correctAnswer: "Being reported or discussed by media"
+            },
+            {
+                question: "To 'Serve as a warning' means to be:",
+                options: ["An incentive", "An encouragement", "A deterrent example", "A reward"],
+                correctAnswer: "A deterrent example"
+            },
+            {
+                question: "What does 'Long way to go' imply?",
+                options: ["Nearly finished", "Almost there", "A lot of progress still needed", "Completion is imminent"],
+                correctAnswer: "A lot of progress still needed"
+            },
+            {
+                question: "If something 'Come to light', it means to:",
+                options: ["Remain hidden", "Be concealed", "Become known or revealed", "Disappear"],
+                correctAnswer: "Become known or revealed"
+            },
+            {
+                question: "To 'Respond in kind' means to:",
+                options: ["Ignore the action", "Turn the other cheek", "React in the same way", "Offer a different response"],
+                correctAnswer: "React in the same way"
+            },
+            {
+                question: "The phrase 'Leaves little room for' means:",
+                options: ["Allows much possibility", "Enables", "Restricts or limits possibility", "Facilitates"],
+                correctAnswer: "Restricts or limits possibility"
+            },
+             {
+                question: "A 'Sobering counterpoint' is a contrasting element that makes one think:",
+                options: ["Lightheartedly", "Trivially", "Seriously", "Optimistically"],
+                correctAnswer: "Seriously"
+            },
+            {
+                question: "'Back-to-back challenges' are difficulties that occur:",
+                options: ["Infrequently", "Randomly", "One after another", "With long breaks"],
+                correctAnswer: "One after another"
+            },
+            {
+                question: "To 'Cultivate stable ties' means to:",
+                options: ["Damage relations", "Create instability", "Develop and maintain reliable relationships", "Ignore connections"],
+                correctAnswer: "Develop and maintain reliable relationships"
+            },
+            {
+                question: "What is a 'Strategic counterweight'?",
+                options: ["An aggravating factor", "A destabilizer", "A force that balances another power", "A minor influence"],
+                correctAnswer: "A force that balances another power"
+            },
+            {
+                question: "A 'Grounded assessment' is an evaluation that is:",
+                options: ["Idealistic", "Biased", "Unrealistic", "Realistic and sensible"],
+                correctAnswer: "Realistic and sensible"
+            },
+            {
+                question: "'Backchannel mechanisms' are communication channels that are:",
+                options: ["Official", "Public", "Transparent", "Unofficial or secret"],
+                correctAnswer: "Unofficial or secret"
+            },
+            {
+                question: "The 'Prevailing mood' is the feeling or atmosphere that is:",
+                options: ["Minority", "Fleeting", "Dominant", "Hidden"],
+                correctAnswer: "Dominant"
+            },
+            {
+                question: "'Unyielding' means:",
+                options: ["Flexible", "Compliant", "Giving way to pressure", "Not giving way to pressure"],
+                correctAnswer: "Not giving way to pressure"
+            },
+            {
+                question: "What does 'Political cost' refer to?",
+                options: ["Political gain", "Advantage", "Negative political consequences", "Popularity"],
+                correctAnswer: "Negative political consequences"
+            },
+            {
+                question: "To 'Reshape the contours' of something means to:",
+                options: ["Maintain the basic form", "Preserve", "Change the basic form or outline", "Keep static"],
+                correctAnswer: "Change the basic form or outline"
+            },
+            {
+                question: "'Core concerns' are the issues or worries that are:",
+                options: ["Minor", "Peripheral", "Unimportant", "Most important"],
+                correctAnswer: "Most important"
+            },
+            {
+                question: "To 'Yield sustainable peace' means to:",
+                options: ["Cause conflict", "Disrupt stability", "Achieve lasting peace", "Create temporary calm"],
+                correctAnswer: "Achieve lasting peace"
+            },
+            {
+                question: "A 'Nuclear flashpoint' is a situation where:",
+                options: ["Nuclear conflict is impossible", "Nuclear conflict could erupt", "There is assurance of safety", "It is a zone of peace"],
+                correctAnswer: "Nuclear conflict could erupt"
+            },
+            {
+                question: "A 'Proactive role' involves taking action to:",
+                options: ["React to events", "Maintain the status quo", "Cause change rather than react", "Be passive"],
+                correctAnswer: "Cause change rather than react"
+            },
+            {
+                question: "'De-escalating tensions' means:",
+                options: ["Aggravating the situation", "Heightening conflict", "Reducing the intensity of conflict", "Ignoring the problem"],
+                correctAnswer: "Reducing the intensity of conflict"
+            },
+            {
+                question: "To 'Nudge both sides towards dialogue' means to:",
+                options: ["Discourage communication", "Fuel animosity", "Force negotiations", "Gently encourage talks"],
+                correctAnswer: "Gently encourage talks"
+            },
+            {
+                question: "If someone is 'Conspicuously silent', they are:",
+                options: ["Outspoken", "Vocal", "Communicative", "Noticeably quiet when expected to speak"],
+                correctAnswer: "Noticeably quiet when expected to speak"
+            },
+            {
+                question: "A 'Transformative role' is a role that causes:",
+                options: ["Insignificant change", "Maintaining status quo", "A significant and positive change", "Negative impact"],
+                correctAnswer: "A significant and positive change"
+            },
+            {
+                question: "'Long-dormant' means:",
+                options: ["Active", "Awake", "Operational", "Inactive for a long time"],
+                correctAnswer: "Inactive for a long time"
+            },
+            {
+                question: "What is a 'Breakthrough'?",
+                options: ["A setback", "An impasse", "Stagnation", "An important discovery or development"],
+                correctAnswer: "An important discovery or development"
+            },
+            {
+                question: "To be 'On the sidelines' means:",
+                options: ["Actively participating", "Central", "Involved", "Not actively involved but watching"],
+                correctAnswer: "Not actively involved but watching"
+            },
+            {
+                question: "If someone is 'Sidelined', they are:",
+                options: ["Promoted", "Included", "Pushed to a position of less importance", "Central"],
+                correctAnswer: "Pushed to a position of less importance"
+            },
+            {
+                question: "To 'Gain traction' means to:",
+                options: ["Lose support", "Fade away", "Be rejected", "Become popular or accepted"],
+                correctAnswer: "Become popular or accepted"
+            },
+            {
+                question: "To 'Produce tangible results' means to achieve results that are:",
+                options: ["Vague", "Without effect", "Real and can be shown", "Unmeasurable"],
+                correctAnswer: "Real and can be shown"
+            },
+            {
+                question: "To 'Come forward' means to:",
+                options: ["Hold back", "Remain silent", "Conceal information", "Offer help or information"],
+                correctAnswer: "Offer help or information"
+            },
+            {
+                question: "The question 'When will the penny drop?' means:",
+                options: ["When will they remain oblivious?", "When will they stay ignorant?", "When will they finally understand?", "When will they make the same mistake?"],
+                correctAnswer: "When will they finally understand?"
+            },
+             {
+                question: "In the pair of words 'War and Peace', what do they represent?",
+                options: ["Growth and decline", "Advantages and disadvantages", "Conflict and its resolution or absence", "Success and difficulty"],
+                correctAnswer: "Conflict and its resolution or absence"
+            },
+            {
+                question: "What does the pair 'Death and Destruction' signify?",
+                options: ["Growth and prosperity", "Fatalities and widespread damage", "Compromise and concession", "Moral correctness"],
+                correctAnswer: "Fatalities and widespread damage"
+            },
+            {
+                question: "The pair 'Boom and Bust' describes periods of:",
+                options: ["Stable economy", "Consistent growth", "Rapid economic growth followed by decline", "Financial support"],
+                correctAnswer: "Rapid economic growth followed by decline"
+            },
+            {
+                question: "What is meant by the pair 'Pros and Cons'?",
+                options: ["Mutual concessions", "Good and bad experiences", "Advantages and disadvantages", "Cause and effect"],
+                correctAnswer: "Advantages and disadvantages"
+            },
+            // 50 MCQs from One Paper Mcqs Book PDF (Pages 381-400)
+            // Note: Questions below are extracted or derived from the content of pages 381-400
+            // from 'One Paper Mcqs Book PDF by Imtiaz Shahid Free Download.pdf'.
+            // Options are randomized and may not follow the original sequence.
+             {
+                question: "Which of the following is the landlocked country?",
+                options: ["Nigeria", "Kenya", "Sri Lanka", "Uganda"],
+                correctAnswer: "Uganda"
+            },
+            {
+                question: "Capital of Zimbabwe is:",
+                options: ["Seoul", "Pretoria", "Harare", "None of these"],
+                correctAnswer: "Harare"
+            },
+            {
+                question: "Communist Revolution took place in Russia in the month of:",
+                options: ["March", "June", "October", "November"],
+                correctAnswer: "October"
+            },
+            {
+                question: "Pulitzer is an American Award in the field of:",
+                options: ["Sports", "Scuba", "Music", "Letters and journalism"],
+                correctAnswer: "Letters and journalism"
+            },
+            {
+                question: "Fifth Column refers to:",
+                options: ["Huge pillar", "long writing", "Loyalty", "Treachery"],
+                correctAnswer: "Treachery"
+            },
+            {
+                question: "The cheapest source of electricity is:",
+                options: ["Nuclear", "Solar", "Thermal", "Hydel"],
+                correctAnswer: "Hydel"
+            },
+            {
+                question: "Colossium, an amphitheatre was built in:",
+                options: ["Athens", "Naples", "Milan", "Rome"],
+                correctAnswer: "Rome"
+            },
+            {
+                question: "Moorish Kingdom of Granada (Spain) surrendered to Christians in the year.",
+                options: ["1453", "1526", "1556", "1492"],
+                correctAnswer: "1492"
+            },
+            {
+                question: "Blind Dolphins are found in:",
+                options: ["Ganges River", "Nile River", "Yangtze River", "None"],
+                correctAnswer: "None" // Indus River is mentioned as where they are found, which is not an option.
+            },
+            {
+                question: "The cash balance of the company is more than the cash balance of US:",
+                options: ["Microsoft", "Bechtel", "DuPont", "Apple"],
+                correctAnswer: "Apple"
+            },
+            {
+                question: "On 18th May 1974 India exploded first nuclear devise under the code name of:",
+                options: ["Operation Blue Star", "Operation Gibraltar", "Operation Rakshak", "Operation Smiling Buddah"],
+                correctAnswer: "Operation Smiling Buddah"
+            },
+            {
+                question: "Which crop is longest according to period between cultivation and harvest?",
+                options: ["Cotton", "Rice", "Wheat", "Sugarcane"],
+                correctAnswer: "Sugarcane"
+            },
+            {
+                question: "Furakha Dam on river Ganga is disputed between:",
+                options: ["India and Pakistan", "India and Nepal", "India and Bangladesh", "India and China"],
+                correctAnswer: "India and Bangladesh"
+            },
+            {
+                question: "Which dam is constructed by India under the violation of \"Indus Water Treaty\"?",
+                options: ["Sallasal dam", "Wullar dam", "All of above", "Baghlihar dam"],
+                correctAnswer: "Baghlihar dam"
+            },
+            {
+                question: "What is meant by causeway?",
+                options: ["Marsh soil", "Salty ocean", "Road on Hill", "A raised path"],
+                correctAnswer: "A raised path"
+            },
+            {
+                question: "\"Night Watch\" paintings belongs to:",
+                options: ["Michelangelo", "Leonardo", "Rembrandt van Rijn", "Picasso"],
+                correctAnswer: "Rembrandt van Rijn"
+            },
+            {
+                question: "What is Big Ben?",
+                options: ["Clock", "Cinema", "Road", "Tower"],
+                correctAnswer: "Clock"
+            },
+            {
+                question: "Which is the wisest bird in European countries?",
+                options: ["Owl", "Eagle", "Sparrow", "Parrot"],
+                correctAnswer: "Owl"
+            },
+             {
+                question: "Which of the following Russian's oil and gas company which provides oil and gas to European countries?",
+                options: ["BSGO Company", "Gestapo Company", "Philips Oil and Gas Company", "Gazprom Company"],
+                correctAnswer: "Gazprom Company"
+            },
+            {
+                question: "In which year European rulers captured Palestine from the Muslims in Crusade War?",
+                options: ["1095", "1115", "1199", "1099"],
+                correctAnswer: "1099"
+            },
+            {
+                question: "What is Ivy League?",
+                options: ["A group of People in Switzerland", "A football league tournament", "A group of Islands in Atlantic Ocean", "A group of Eight Universities in USA"],
+                correctAnswer: "A group of Eight Universities in USA"
+            },
+            {
+                question: "Talban's movement was started in 1994 from which city of Afghanistan?",
+                options: ["Kabul", "Hirat", "None of these", "Kandhar"],
+                correctAnswer: "Kandhar"
+            },
+            {
+                question: "Digital Divide term is related with:",
+                options: ["Economics", "Political Science", "Journalism", "Socio economic difference technology era"],
+                correctAnswer: "Socio economic difference technology era"
+            },
+            {
+                question: "What is the name of the place where World Trade Centre (USA) was located?",
+                options: ["Paradise Point", "Golden Point", "Golden City Point", "Ground Zero"],
+                correctAnswer: "Ground Zero"
+            },
+            {
+                question: "The Muslim people of Xinjiang province are called:",
+                options: ["Bantu", "Hutu", "Berber", "Uighur"],
+                correctAnswer: "Uighur"
+            },
+            {
+                question: "What is \"Ikebana\"?",
+                options: ["Greek Art of fighting", "Art of dancing and music", "None of the above", "Japanese Art of flower arrangement"],
+                correctAnswer: "Japanese Art of flower arrangement"
+            },
+            {
+                question: "Gestapo was the secret police organization of:",
+                options: ["Italy", "Russia", "USA", "Germany"],
+                correctAnswer: "Germany"
+            },
+            {
+                question: "Which of the following colours are primary colours?",
+                options: ["White, Red Black", "Black, Red, Blue", "Green, Red Black", "Red, Blue, Green"],
+                correctAnswer: "Red, Blue, Green"
+            },
+            {
+                question: "Which of the following inventions is the oldest?",
+                options: ["Clock", "Barometre", "Cycle", "Microscope"],
+                correctAnswer: "Clock" // Assuming clock predates microscope and barometer, and cycle is much newer.
+            },
+            {
+                question: "What is Holocaust?",
+                options: ["Killing of Jews during World War I", "Killing of Germans during World War II", "Killing of Japanese during World War II", "Killing of Jews during World War II"],
+                correctAnswer: "Killing of Jews during World War II"
+            },
+            {
+                question: "What is Choreography?",
+                options: ["Art of music", "Art of gardening", "Art of fight", "Art of dancing"],
+                correctAnswer: "Art of dancing"
+            },
+            {
+                question: "A writ direct to the person detaining another and commanding him to produce the body of the prisoner at a certain time and place with the day and cause of his caption and detention is called:",
+                options: ["Writ of Quo Warrants", "Writ of Certiorari", "Writ of Prohibition", "Writ of Habeas Corpus"],
+                correctAnswer: "Writ of Habeas Corpus"
+            },
+             {
+                question: "Which of the following woman Prime Ministers has longest tenure?",
+                options: ["Indira Gandhi", "Banizir Bhutto", "None of these", "Bandaranaike"],
+                correctAnswer: "Bandaranaike"
+            },
+            {
+                question: "Herry Poter is the famous character of:",
+                options: ["J.F Marshal", "R.V Menin", "None of these", "J.K Rowlling"],
+                correctAnswer: "J.K Rowlling"
+            },
+            {
+                question: "Which of the following civilization were located on the banks of Tigris?",
+                options: ["Indus civilization", "Egyptian civilization", "Greek civilization", "Samarian civilization"],
+                correctAnswer: "Samarian civilization"
+            },
+            {
+                question: "Who defeated the Mongols in 14th century?",
+                options: ["Khawarzim Shah", "Zaheer-ud-Din Babar", "None of the above", "Rakn-ud-Din Berber"],
+                correctAnswer: "Rakn-ud-Din Berber"
+            },
+            {
+                question: "What is the meaning of \"Vishnu\"?",
+                options: ["The helper", "The destroyer", "The creator", "The preserver"],
+                correctAnswer: "The preserver"
+            },
+            {
+                question: "In which year Egypt nationalized Suez Canal?",
+                options: ["1950", "1954", "1960", "1956"],
+                correctAnswer: "1956"
+            },
+            {
+                question: "What is \"Armageddon\"?",
+                options: ["A last day of Universe", "A name of film", "None of the above", "A final battle between nations which will end the world"],
+                correctAnswer: "A final battle between nations which will end the world"
+            },
+            {
+                question: "Pinpoint the correct statement?",
+                options: ["Canada has maple leaf on its flag", "Chow is the type of dog found in China", "Synagogue is Jewish place of worship", "All of these"],
+                correctAnswer: "All of these"
+            },
+            {
+                question: "Skylab was space laboratory launched in 1973. It belonged to:",
+                options: ["USSR", "Britain", "China", "USA"],
+                correctAnswer: "USA"
+            },
+            {
+                question: "In which year Sky Lab did brock up in the atmosphere and fell back to the earth?",
+                options: ["1977", "1970", "1980", "1979"],
+                correctAnswer: "1979"
+            },
+            {
+                question: "The majority of 'Kurd Population' is living in:",
+                options: ["Afghanistan", "Jordan", "Iraq", "Turkey"],
+                correctAnswer: "Turkey" // Kurds live in multiple countries including Turkey, Iraq, Iran, and Syria. Turkey has the largest population.
+            },
+            {
+                question: "Universal Declaration of Human Rights was adopted by United Nations on:",
+                options: ["10 December 1954", "10 December 1946", "10 December 1949", "10 December 1948"],
+                correctAnswer: "10 December 1948"
+            },
+             {
+                question: "What are called the remnants of the mummy wrapping around of the Pharaohs and Priests?",
+                options: ["Balini", "Fascism", "None of these", "Bandage"],
+                correctAnswer: "Bandage"
+            },
+            {
+                question: "The 'Black September' organization was founded in:",
+                options: ["1940", "1950", "1960", "1970"],
+                correctAnswer: "1970"
+            },
+            {
+                question: "Etymology is the study of what?",
+                options: ["Human behaviour", "Animal behaviour", "Urban development", "Origin of words"],
+                correctAnswer: "Origin of words"
+            },
+            {
+                question: "\"Guru Granth Sahib\" is the Holy Book of:",
+                options: ["Hindus and Sikhs", "Sikhs", "Muslims", "Hindus and Todas"],
+                correctAnswer: "Sikhs"
+            },
+            {
+                question: "Which country is Palestine fighting with?",
+                options: ["Jordan", "Lebanon", "Syria", "Israel"],
+                correctAnswer: "Israel"
+            },
+            {
+                question: "The largest religious group in Cambodia is:",
+                options: ["Christianity", "Islam", "Hinduism", "Buddhism"],
+                correctAnswer: "Buddhism"
+            },
+            {
+                question: "Kurds are fighting against Turkey with which troops?",
+                options: ["US troops", "Syrian troops", "Iraqi troops", "None of these"],
+                correctAnswer: "None of these" // Kurds fight with various groups depending on the specific conflict and region.
+            },
+            {
+                question: "Long March was the name of 9600-km retreat in 1934. Who undertook the Long March?",
+                options: ["Chiang Kai-shek", "Mao Zedong", "Both of them", "None of them"],
+                correctAnswer: "Mao Zedong" // Led by Mao Zedong and the Red Army.
+            },
+            {
+                question: "The secret society that is reputed to commit organized crime founded in Sicily in 1800's is:",
+                options: ["Mafia", "Bongos", "Triads", "None of these"],
+                correctAnswer: "Mafia"
+            },
+            {
+                question: "Which charter King John signed in 1215?",
+                options: ["John Accord", "Forest Charter", "Magna Carta", "None of these"],
+                correctAnswer: "Magna Carta"
+            },
+            {
+                question: "The weaves ending with ... are called:",
+                options: ["Pausing", "Linking", "Words of these", "None of these"],
+                correctAnswer: "Pausing" // Refers to ellipsis (...) indicating a pause or unfinished thought.
+            },
+            {
+                question: "When did Mercury Project, first manned space programme by USA, carry the first American into space?",
+                options: ["1959", "1960", "1961", "1962"],
+                correctAnswer: "1961" // Alan Shepard's flight in Freedom 7.
+            },
+             {
+                question: "Name the Animal (Insect) related with 'Bubonic Plague'?",
+                options: ["Rat", "Dog", "Cat", "Flea"],
+                correctAnswer: "Flea" // Fleas on rats transmitted the plague.
+            },
+            {
+                question: "What is Zionism?",
+                options: ["Association in the support of Egypt", "Association in the support of Syria", "Association in the support of Israel", "All of these"],
+                correctAnswer: "Association in the support of Israel"
+            },
+            {
+                question: "If you were in 11-gate, you would be among what?",
+                options: ["German", "British", "Dutch", "French"],
+                correctAnswer: "British" // Refers to the 11+ exam in the UK, a test for secondary school entry.
+            },
+            {
+                question: "What is Blitzkrieg?",
+                options: ["Sudden military offensive", "Stealth attack", "Defensive strategy", "None of these"],
+                correctAnswer: "Sudden military offensive"
+            },
+            {
+                question: "\"Goat\" is the symbol of:",
+                options: ["Poland", "Russia", "USA", "Romania"],
+                correctAnswer: "Romania" // The Romanian national football team is nicknamed "The Tricolours", but the national symbol is an eagle. The reference to "Goat" might be related to a specific context not immediately obvious from the provided text snippet. However, based on the provided options and common knowledge, Romania is the most likely answer if this is a known symbol within that context.
+            },
+            {
+                question: "Which country allows the system of 'Qadiani'?",
+                options: ["Iran", "Russia", "USA", "None of these"],
+                correctAnswer: "None of these" // Qadianis (Ahmadiyya Muslim Community) face significant persecution and legal restrictions in several countries, including Pakistan. No country "allows the system" in a way that implies full acceptance and freedom from discrimination.
+            },
+            {
+                question: "When was the second Islamic Summit conference held in Lahore with the participation of 37 Heads of States?",
+                options: ["1971", "1972", "1974", "1973"],
+                correctAnswer: "1974"
+            },
+            {
+                question: "Term the two-word pairs joined together by 'within' or 'with'?",
+                options: ["Michelangelo", "Rembrandt van Rijn", "Samarian-swiss", "None of these"],
+                correctAnswer: "None of these" // The question seems to be asking for examples of paired words connected by 'within' or 'with'. The options provided are unrelated names or terms.
+            },
+            {
+                question: "Russian 'Pentagon' or 'Attention Pentagon':",
+                options: ["Smolkin", "Putin", "Kremlin", "None of these"],
+                correctAnswer: "Kremlin" // The Kremlin is the official residence of the Russian President and the seat of the Russian government, often referred to metaphorically as the center of power, similar to the Pentagon in the US.
+            },
+            {
+                question: "Who was called 'First Female astronomer', who was wife of 'Caroline Herschel'? Discoverer?",
+                options: ["Leena", "Term", "None of these", "Herschel"],
+                correctAnswer: "Herschel" // Caroline Herschel was a famous female astronomer; the question might be poorly phrased, possibly referring to her brother William Herschel, also a renowned astronomer. Assuming it refers to the family name associated with astronomy.
+            },
+            {
+                question: "The microscope is related with 'enlarged' objective. What was invented by 'Compound microscope'?",
+                options: ["Projection", "Battery", "Bulb", "None of these"],
+                correctAnswer: "None of these" // The compound microscope was invented by Zacharias Janssen and his father Hans Janssen around the late 16th century. It uses multiple lenses to achieve higher magnification. The options provided are unrelated inventions.
+            },
+            {
+                question: "Roman Emperor was the first man who watched 'Smith's' flight on 1st December 1911. What Francisco Parminder discovered?",
+                options: ["Tea", "Coffee", "None of these", "Gold"],
+                correctAnswer: "None of these" // The question seems to contain inaccuracies and irrelevant information. The first powered flight was by the Wright brothers in 1903. Francisco Parminder is not a widely known historical figure associated with a significant discovery mentioned here.
+            }
+        ];
+
+        // Function to shuffle array (Fisher-Yates Algorithm)
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
             }
+            return array;
         }
 
-        function loadQuestions() {
-            shuffleArray(quizQuestions); // Shuffle the order of questions
-            quizForm.innerHTML = ''; // Clear previous questions if any
-            quizQuestions.forEach((q, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.classList.add('mb-8', 'p-4', 'border', 'border-gray-200', 'rounded-lg', 'bg-gray-50');
-                questionDiv.innerHTML = `<p class="font-semibold text-lg mb-4 text-gray-700">${index + 1}. ${q.question}</p>`;
+        // Shuffle the quiz questions
+        const shuffledQuestions = shuffleArray(quizQuestions);
 
-                const optionsContainer = document.createElement('div');
-                optionsContainer.classList.add('space-y-2');
+        // Function to render questions
+        function renderQuestions() {
+            quizForm.innerHTML = ''; // Clear previous questions
+            shuffledQuestions.forEach((q, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.classList.add('question');
+                questionElement.innerHTML = `<p>${index + 1}. ${q.question}</p><div class="options"></div>`;
 
-                const optionKeys = Object.keys(q.options);
-                shuffleArray(optionKeys); // Shuffle the order of options for each question
+                const optionsDiv = questionElement.querySelector('.options');
+                const shuffledOptions = shuffleArray([...q.options]); // Shuffle options for each question
 
-                optionKeys.forEach(key => {
-                    const optionId = `q${index}_${key}`;
-                    const optionDiv = document.createElement('div');
-                    optionDiv.classList.add('quiz-option');
-                    optionDiv.innerHTML = `
-                        <input type="radio" id="${optionId}" name="question${index}" value="${key}">
-                        <label for="${optionId}" class="text-gray-600">${q.options[key]}</label>
+                shuffledOptions.forEach((option, i) => {
+                    const optionId = `q${index}_option${i}`;
+                    optionsDiv.innerHTML += `
+                        <input type="radio" id="${optionId}" name="question${index}" value="${option}">
+                        <label for="${optionId}">${option}</label><br>
                     `;
-                    optionsContainer.appendChild(optionDiv);
                 });
-                questionDiv.appendChild(optionsContainer);
-                quizForm.appendChild(questionDiv);
+
+                quizForm.appendChild(questionElement);
             });
         }
 
+        // Function to start the timer
         function startTimer() {
-            quizStartTime = new Date();
+            startTime = Date.now();
             timerInterval = setInterval(() => {
                 timeLeft--;
                 const minutes = Math.floor(timeLeft / 60);
                 const seconds = timeLeft % 60;
-                timerDisplay.textContent = `Time Left: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                timerDisplay.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    showCustomAlert("Time's Up!", "Your time is up. The quiz will be submitted automatically.");
-                    processQuizSubmission();
+                    handleSubmit(true); // Auto-submit
                 }
             }, 1000);
         }
 
-        startQuizBtn.addEventListener('click', () => {
-            studentFullName = studentNameInput.value.trim();
-            if (studentFullName === "") {
-                showCustomAlert("Name Required", "Please enter your full name to start the quiz.");
-                return;
-            }
-            nameEntrySection.classList.add('hidden');
-            quizSection.classList.remove('hidden');
-            loadQuestions();
-            startTimer();
-        });
+        // Function to handle quiz submission
+        function handleSubmit(isAutoSubmit = false) {
+            clearInterval(timerInterval); // Stop the timer
 
-        function calculateResults() {
+            const endTime = Date.now();
+            const timeTakenMs = endTime - startTime;
+            const timeTakenSeconds = Math.floor(timeTakenMs / 1000);
+            const minutesTaken = Math.floor(timeTakenSeconds / 60);
+            const secondsTaken = timeTakenSeconds % 60;
+            const formattedTimeTaken = `${minutesTaken}m ${secondsTaken}s`;
+
             let score = 0;
             let attempted = 0;
-            quizQuestions.forEach((q, index) => {
+            const answers = {};
+
+            shuffledQuestions.forEach((q, index) => {
                 const selectedOption = document.querySelector(`input[name="question${index}"]:checked`);
                 if (selectedOption) {
                     attempted++;
-                    if (selectedOption.value === q.answer) {
+                    const userAnswer = selectedOption.value;
+                    answers[index] = userAnswer; // Store user answer
+                    if (userAnswer === q.correctAnswer) {
                         score++;
                     }
-                }
-            });
-            return { score, attempted };
-        }
-
-        function formatTimeTaken(startTime, endTime) {
-            const diffMs = endTime - startTime;
-            const totalSeconds = Math.floor(diffMs / 1000);
-            const minutes = Math.floor(totalSeconds / 60);
-            const seconds = totalSeconds % 60;
-            return `${minutes} minutes and ${seconds} seconds`;
-        }
-
-        function processQuizSubmission() {
-            clearInterval(timerInterval); // Stop the timer
-            const quizEndTime = new Date();
-            const timeTaken = quizStartTime ? formatTimeTaken(quizStartTime, quizEndTime) : "N/A (Timer issue or immediate submission)";
-
-
-            const { score, attempted } = calculateResults();
-            const totalQuestions = quizQuestions.length;
-            const percentage = totalQuestions > 0 ? (score / totalQuestions * 100).toFixed(2) : "0.00";
-
-            document.getElementById('resultName').textContent = studentFullName;
-            document.getElementById('resultAttempted').textContent = `${attempted} out of ${totalQuestions}`;
-            document.getElementById('resultScore').textContent = `${score} out of ${totalQuestions}`;
-            document.getElementById('resultPercentage').textContent = percentage;
-            document.getElementById('resultTime').textContent = timeTaken;
-
-            quizSection.classList.add('hidden');
-            resultsSection.classList.remove('hidden');
-
-            document.getElementById('formStudentName').value = studentFullName;
-            document.getElementById('formQuestionsAttempted').value = attempted;
-            document.getElementById('formScore').value = score;
-            document.getElementById('formPercentage').value = percentage;
-            document.getElementById('formTimeTaken').value = timeTaken;
-            document.getElementById('formQuizDate').value = new Date().toLocaleDateString();
-
-            const hiddenForm = document.getElementById('hiddenResultsForm');
-            const formData = new FormData(hiddenForm);
-
-            fetch(hiddenForm.action, {
-                method: 'POST',
-                body: formData,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    console.log("Results submitted successfully to Formspree.");
                 } else {
-                    response.json().then(data => {
-                        if (Object.hasOwn(data, 'errors')) {
-                            console.error("Formspree submission error:", data["errors"].map(error => error["message"]).join(", "));
-                        } else {
-                            console.error("Formspree submission error: An unknown error occurred.");
-                        }
-                    });
+                     answers[index] = 'Not Attempted'; // Mark as not attempted
                 }
-            }).catch(error => {
-                console.error("Error submitting results to Formspree:", error);
             });
+
+            // Display results
+            quizSectionDiv.style.display = 'none';
+            resultsSectionDiv.style.display = 'block';
+            displayNameSpan.textContent = studentNameInput.value;
+            attemptedCountSpan.textContent = attempted;
+            scoreCountSpan.textContent = score;
+            timeTakenSpan.textContent = formattedTimeTaken;
+
+            // Populate and submit Formspree form
+            formName.value = studentNameInput.value;
+            formAttempted.value = attempted;
+            formScore.value = score;
+            formTimeTaken.value = formattedTimeTaken;
+            formAnswers.value = JSON.stringify(answers); // Store answers as JSON string
+
+            // Submit the form
+            resultsForm.submit();
+
+            // Optional: Provide feedback on answers (can be added here)
         }
 
+        // Event listener for Start Quiz button
+        startQuizBtn.addEventListener('click', () => {
+            const studentName = studentNameInput.value.trim();
+            if (studentName) {
+                nameEntryDiv.style.display = 'none';
+                quizSectionDiv.style.display = 'block';
+                renderQuestions();
+                startTimer();
+            } else {
+                alert('Please enter your name to start the quiz.');
+            }
+        });
+
+        // Event listener for Submit Quiz button
         submitQuizBtn.addEventListener('click', () => {
-            // A better approach for confirmation would be a custom modal that returns a promise
-            // For now, using the existing simple alert and then proceeding.
-            showCustomAlert("Confirm Submission", "Are you sure you want to submit the quiz? Click OK on this alert and the submission will proceed if you intended to submit.");
-            // The user has to click OK on the custom alert.
-            // To make this truly conditional on OK, the alertOkBtn's event listener would need to call processQuizSubmission.
-            // Given the current simple alert, we'll proceed after a brief moment, assuming they saw it.
-            // This is a simplification. A real confirm dialog is better.
-            const originalAlertOkAction = alertOkBtn.onclick;
-            alertOkBtn.onclick = () => {
-                customAlertModal.classList.remove('active');
-                processQuizSubmission();
-                alertOkBtn.onclick = originalAlertOkAction; // Restore original OK action if any
-            };
+            handleSubmit(false); // Manual submit
         });
 
     </script>
+
 </body>
 </html>
