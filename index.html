@@ -3,909 +3,1268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Aspirants Quiz - SYED ASGHAR ALI SHAH</title>
+    <title>CSS MPT Daily Quiz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Custom CSS for animations and specific styles not easily done with Tailwind */
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f2f5;
-            color: #333;
-            -webkit-user-select: none; /* Safari */
-            -ms-user-select: none; /* IE 10 and IE 11 */
-            user-select: none; /* Standard syntax */
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA; /* Specified background color */
+            color: #2C3E50; /* Specified default text color */
+            -webkit-user-select: none; /* Disable text selection for security */
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
-        .header, .footer {
-            background-color: #003366; /* Dark Blue */
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+        /* Prevent copy/paste, right-click, and developer tools by controlling pointer events */
+        body.quiz-active {
+            pointer-events: auto; /* Re-enable pointer events for quiz content */
         }
-        .header {
+        body:not(.quiz-active) {
+            pointer-events: none; /* Disable pointer events on login/name screen to enforce security */
+        }
+        /* Explicitly enable pointer events for interactive containers */
+        #login-container, #name-container, #quiz-container, #results-container {
+            pointer-events: auto;
+        }
+
+        /* Gradient button styling with hover effect */
+        .gradient-button {
+            background-image: linear-gradient(to right, #E6E6FA, #FFDAB9); /* Specified gradient colors */
+            transition: transform 0.2s ease-in-out; /* Smooth transition for hover */
+        }
+        .gradient-button:hover {
+            transform: scale(1.05); /* Grow by 5% on hover */
+        }
+
+        /* Progress bar inner fill with gradient */
+        .progress-bar-inner {
+            background-image: linear-gradient(to right, #20B2AA, #3EB489); /* Specified gradient colors */
+            transition: width 0.5s ease-in-out; /* Smooth transition for width changes */
+        }
+
+        /* Option card styling with hover effect */
+        .option-card {
+            transition: transform 0.2s ease-in-out, background-color 0.3s ease-in-out; /* Smooth transitions */
+        }
+        .option-card:hover {
+            transform: scale(1.05); /* Grow by 5% on hover */
+        }
+
+        /* Pulse animation for correct answer feedback */
+        @keyframes pulse-green {
+            0% { transform: scale(1); background-color: #90EE90; }
+            50% { transform: scale(1.02); background-color: #90EE90; }
+            100% { transform: scale(1); background-color: #90EE90; }
+        }
+        .pulse-green {
+            animation: pulse-green 0.5s ease-in-out;
+        }
+
+        /* Shake animation for wrong answer feedback */
+        @keyframes shake-red {
+            0% { transform: translateX(0); background-color: #FF6B6B; }
+            20% { transform: translateX(-5px); }
+            40% { transform: translateX(5px); }
+            60% { transform: translateX(-5px); }
+            80% { transform: translateX(5px); }
+            100% { transform: translateX(0); background-color: #FF6B6B; }
+        }
+        .shake-red {
+            animation: shake-red 0.5s ease-in-out;
+        }
+
+        /* Today's Special Question golden border */
+        .special-question-border {
+            border: 4px solid #FFD700; /* Specified golden border color */
+        }
+
+        /* Sticky date bar positioning */
+        .sticky-date-bar {
+            position: sticky;
+            top: 1rem; /* Distance from the top */
+            z-index: 100; /* Ensure it stays on top of other content */
+        }
+
+        /* Mobile specific sticky date bar positioning (top-left) */
+        @media (max-width: 767px) {
+            .sticky-date-bar {
+                left: 1rem;
+                right: auto;
+            }
+        }
+        /* Desktop specific sticky date bar positioning (top-right) */
+        @media (min-width: 768px) {
+            .sticky-date-bar {
+                right: 1rem;
+                left: auto;
+            }
+        }
+
+        /* Drag and Drop specific styles */
+        .draggable {
+            cursor: grab; /* Indicate draggable item */
+            touch-action: none; /* Disable default touch actions to prevent scrolling conflicts during drag */
+        }
+        .dropzone {
+            border: 2px dashed #6D6875; /* Dashed border for drop target */
+            min-height: 50px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center;
+            padding: 1rem;
+            border-radius: 0.5rem;
         }
-        .header img {
-            height: 60px;
-            width: 60px;
-            border-radius: 50%;
-            margin-right: 20px;
-            border: 2px solid #fff;
+        .dropzone.hover {
+            background-color: #e0e0e0; /* Highlight on hover/drag-over */
         }
-        .header-title-container {
-            flex-grow: 1;
-            text-align: center;
+        .drag-correct {
+            background-color: #90EE90; /* Green for correct drop */
         }
-        .header h1 {
-            margin: 0;
-            font-size: 1.8em;
-            font-weight: bold;
-        }
-        .header .user-name {
-            font-size: 1.2em;
-            margin-top: 5px;
-            color: #ffc107; /* Gold */
-        }
-        .footer {
-            padding: 20px;
-            font-size: 0.9em;
-        }
-        .footer p {
-            margin: 5px 0;
-        }
-        .footer a {
-            color: #ffc107;
-            text-decoration: none;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
-        .container {
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-        }
-        #name-entry input[type="text"], button {
-            padding: 12px 15px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1em;
-        }
-        #name-entry input[type="text"] {
-            width: calc(100% - 34px); /* Adjust for padding and border */
-        }
-        button {
-            background-color: #0056b3; /* Medium Blue */
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #003d82; /* Darker Blue */
-        }
-        #quiz-section {
-            display: none; /* Hidden initially */
-        }
-        #timer {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #d9534f; /* Red */
-            text-align: center;
-            margin-bottom: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px dashed #ccc;
-            border-radius: 4px;
-        }
-        .question-container {
-            margin-bottom: 25px;
-            padding: 15px;
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            background-color: #fcfcfc;
-        }
-        .question-container p {
-            font-size: 1.1em;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .options label {
-            display: block;
-            margin-bottom: 8px;
-            padding: 10px;
-            border-radius: 4px;
-            background-color: #f9f9f9;
-            border: 1px solid #eee;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-        }
-        .options label:hover {
-            background-color: #e9ecef; /* Light Grey */
-        }
-        .options input[type="radio"] {
-            margin-right: 10px;
-            display: none; /* Hide original radio button */
-        }
-        .options label.selected {
-            background-color: #cfe2ff; /* Light Blue for selected */
-            border-color: #9ec5fe;
-        }
-        #results-section {
-            padding: 20px;
-            margin-top: 20px;
-            border: 1px solid #28a745; /* Green */
-            border-radius: 5px;
-            background-color: #e6ffed; /* Light Green */
-        }
-        #results-section h2 {
-            color: #155724; /* Dark Green */
-            text-align: center;
-        }
-        /* Prevent text selection */
-        ::selection { background: transparent; }
-        ::-moz-selection { background: transparent; }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .header {
-                flex-direction: column;
-            }
-            .header img {
-                margin-bottom: 10px;
-            }
-            .header h1 {
-                font-size: 1.5em;
-            }
-            .header .user-name {
-                font-size: 1em;
-            }
-            #timer {
-                font-size: 1.2em;
-            }
-            .container {
-                margin: 10px;
-                padding: 15px;
-            }
+        .drag-wrong {
+            background-color: #FF6B6B; /* Red for wrong drop */
         }
     </style>
 </head>
-<body oncontextmenu="return false;">
+<body class="min-h-screen flex items-center justify-center p-4">
 
-    <div class="header">
-        <img src="https://media-hosting.imagekit.io//0b9a4af30efb4482/WhatsApp%20Image%202025-02-28%20at%203.15.19%20AM.jpeg?Expires=1835349432&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=jwJPYv24ynvpiPUADnh2kUGPUbG6OBggLpvXOj6~ZZAgts7lamWPTIZKmuIaQ5WaRUAG568acIjSbBE1XrKsIPvCHTXKNA-XF6ppaM~tacD0TMTVoTFd7-EsYFsesMaR~5AK7n5qr33hIwKVawluJ1rkdqmuQokM~T~W~O~6Yo-qXgYGio2IvfBsu1u~wEi1Cnk-5pAOavMUb9IfeY7E4FNwGBgiLCiHugKJD9sAY8As7S0szpehWI8WIQzMzNUFN4wvtPAamSART1m5nlUT4uLcvwdr-C1pk4kJN6I0itWzZEbZN04ANZexY3dpBhUDO0~UvQBCps64LPKIQBRYtA__" alt="User Image">
-        <div class="header-title-container">
-            <h1>QUIZ FOR CSS ASPIRANTS 20 MAY 2025</h1>
-            <div class="user-name">SYED ASGHAR ALI SHAH</div>
+    <div id="login-container" class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full text-center">
+        <h2 class="text-3xl font-bold mb-6 text-[#2C3E50]">Welcome to CSS MPT Quiz</h2>
+        <div class="mb-4">
+            <input type="text" id="login-id" placeholder="Enter ID (free)" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3EB489]">
         </div>
-        <div id="timer-container" style="display: none;">
-            <div id="timer">40:00</div>
+        <div class="mb-6">
+            <input type="password" id="login-password" placeholder="Enter Password (free)" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3EB489]">
+        </div>
+        <button id="login-button" class="gradient-button text-[#2C3E50] font-bold py-3 px-6 rounded-md w-full shadow-lg">Login</button>
+        <p id="login-error" class="text-red-500 mt-4 hidden">Invalid ID or Password.</p>
+    </div>
+
+    <div id="name-container" class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full text-center hidden">
+        <h2 class="text-3xl font-bold mb-6 text-[#2C3E50]">Enter Your Details</h2>
+        <div class="mb-4">
+            <input type="text" id="candidate-name" placeholder="Enter your full name" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3EB489]">
+        </div>
+        <button id="start-quiz-button" class="gradient-button text-[#2C3E50] font-bold py-3 px-6 rounded-md w-full shadow-lg">Start Quiz</button>
+        <p id="name-error" class="text-red-500 mt-4 hidden">Please enter your name.</p>
+    </div>
+
+    <div id="quiz-container" class="w-full max-w-4xl bg-white p-6 rounded-lg shadow-xl hidden relative">
+        <div class="sticky-date-bar absolute bg-white p-2 rounded-lg shadow-md text-[#6D6875] text-sm flex items-center space-x-2">
+            <i class="fas fa-calendar-alt"></i> <span id="live-date"></span>
+        </div>
+
+        <header class="text-center mb-6">
+            <h1 class="text-4xl font-bold text-[#2C3E50] mb-2">CSS MPT Daily Quiz – <span id="quiz-date"></span></h1>
+            <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                <div id="progress-bar" class="progress-bar-inner h-2.5 rounded-full" style="width: 0%;"></div>
+            </div>
+            <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Quiz Banner" class="w-full rounded-lg mb-4 shadow-md">
+            <div class="text-center text-[#2C3E50] mb-4">
+                <p class="font-bold text-lg">DAWNDIGEST</p>
+                <p>PREPARED BY: SYED ASGHAR ALI SHAH</p>
+                <p>Contact: 03265762698</p>
+                <p class="text-sm text-gray-500 mt-2">Updated on: <span id="updated-date"></span></p>
+            </div>
+            <div class="h-1 bg-[#FFF5EE] my-6 rounded-full"></div> </header>
+
+        <div id="question-card" class="bg-[#F8F9FA] p-6 rounded-lg shadow-md mb-6">
+            <p class="text-lg font-semibold mb-4 text-[#2C3E50]" id="question-number"></p>
+            <p class="text-xl mb-6 text-[#2C3E50]" id="question-text"></p>
+            <div id="question-image-container" class="mb-4 hidden">
+                <img id="question-image" src="" alt="Question Image" class="w-full max-h-64 object-contain rounded-md shadow-sm">
+            </div>
+            <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                </div>
+            <div id="drag-drop-container" class="hidden flex flex-col items-center justify-center space-y-4">
+                <p class="text-lg font-semibold text-[#2C3E50]">Drag the correct answer to the box:</p>
+                <div id="drag-items" class="flex flex-wrap justify-center gap-4 mb-4">
+                    </div>
+                <div id="drop-zone" class="dropzone w-64 h-20 bg-gray-100 rounded-md flex items-center justify-center text-gray-500">
+                    Drop here
+                </div>
+            </div>
+            <div id="feedback-container" class="mt-6 p-4 rounded-md hidden">
+                <p id="feedback-message" class="font-bold"></p>
+                <p id="explanation-text" class="mt-2 text-sm"></p>
+            </div>
+        </div>
+
+        <div class="flex justify-between items-center mt-6">
+            <button id="prev-button" class="gradient-button text-[#2C3E50] font-bold py-2 px-4 rounded-md shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">Previous</button>
+            <span id="progress-text" class="text-[#2C3E50] font-medium">0% Complete</span>
+            <button id="next-button" class="gradient-button text-[#2C3E50] font-bold py-2 px-4 rounded-md shadow-lg">Next</button>
+        </div>
+        <div class="h-1 bg-[#FFF5EE] my-6 rounded-full"></div> <div class="text-center text-sm text-gray-500">
+            <p>Time Remaining: <span id="timer">40:00</span></p>
         </div>
     </div>
 
-    <div class="container">
-        <div id="name-entry">
-            <h2>Enter Your Name to Begin</h2>
-            <input type="text" id="student-name" placeholder="Full Name" required>
-            <button onclick="startQuiz()">Start Quiz</button>
-        </div>
-
-        <div id="quiz-section">
-            <form id="quiz-form">
-                <button type="button" onclick="submitQuiz()">Submit Quiz</button>
-            </form>
-        </div>
-
-        <div id="results-section" style="display: none;">
-            <h2>Quiz Results</h2>
-            <p id="result-name"></p>
-            <p id="result-attempted"></p>
-            <p id="result-score"></p>
-            <p id="result-time-taken"></p>
-            <p>Your results have been submitted. Thank you for participating!</p>
-        </div>
+    <div id="results-container" class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full text-center hidden">
+        <h2 class="text-3xl font-bold mb-6 text-[#2C3E50]">Quiz Results</h2>
+        <p class="text-lg mb-2"><span class="font-semibold">Candidate Name:</span> <span id="result-candidate-name"></span></p>
+        <p class="text-lg mb-2"><span class="font-semibold">Score:</span> <span id="result-score"></span> / 100</p>
+        <p class="text-lg mb-2"><span class="font-semibold">Time Taken:</span> <span id="result-time-taken"></span></p>
+        <p class="text-lg mb-6"><span class="font-semibold">Questions Attempted:</span> <span id="result-attempted"></span></p>
+        <button id="retake-quiz-button" class="gradient-button text-[#2C3E50] font-bold py-3 px-6 rounded-md w-full shadow-lg">Retake Quiz</button>
     </div>
-
-    <div class="footer">
-        <p>Contact: 03265762698</p>
-        <p>&copy; 2025 SYED ASGHAR ALI SHAH - All Rights Reserved.</p>
-        <p><a href="#">Back to Top</a></p>
-    </div>
-
-    <form id="hidden-form" action="https://formspree.io/f/xwpvddea" method="POST" style="display:none;">
-        <input type="text" name="studentName" id="form-student-name">
-        <input type="number" name="questionsAttempted" id="form-questions-attempted">
-        <input type="number" name="score" id="form-score">
-        <input type="text" name="timeTaken" id="form-time-taken">
-    </form>
 
     <script>
+        // --- Global Variables and Constants ---
+        const LOGIN_ID = 'free';
+        const LOGIN_PASSWORD = 'free';
+        const QUIZ_DURATION_MINUTES = 40;
+        const FORMSPREE_URL = 'https://formspree.io/f/xwpvddea';
+        const QUIZ_IMAGE_BANNER = 'https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg';
+
+        let questions = []; // Array to hold quiz questions
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let attemptedQuestions = 0;
         let timerInterval;
-        let timeLeft = 40 * 60; // 40 minutes in seconds
-        let timeTaken = 0;
-        let quizSubmitted = false;
+        let timeElapsed = 0;
+        let candidateName = '';
+        let quizStartTime;
+        let quizOrderSeed; // Seed for unique quiz order randomization
 
-        const questions = [
-            // 50 Grammar/Vocabulary MCQs
-            {
-                question: "Identify the part of speech of the underlined word: 'The *late* poet Kaifi Azmi described a strange method.'",
-                options: { A: "Noun", B: "Adverb", C: "Adjective", D: "Preposition" },
-                answer: "C"
-            },
-            {
-                question: "Choose the correct preposition: 'The new research will build ____ the groundwork laid by previous studies.'",
-                options: { A: "over", B: "on", C: "with", D: "from" },
-                answer: "B"
-            },
-            {
-                question: "What is the meaning of the idiom 'On the brink of'?",
-                options: { A: "Completely safe from a situation", B: "Very close to a particular situation", C: "Having completed a task", D: "Indifferent to a situation" },
-                answer: "B"
-            },
-            {
-                question: "Select the synonym for 'Rhetoric' in the context of 'dial down the rhetoric'.",
-                options: { A: "Silence", B: "Whisper", C: "Exaggerated speech", D: "Factual statement" },
-                answer: "C"
-            },
-            {
-                question: "Which of the following is an antonym for 'Status quo'?",
-                options: { A: "Normality", B: "Existing condition", C: "Revolution", D: "Current situation" },
-                answer: "C"
-            },
-            {
-                question: "The phrase 'Achieving a breakthrough' means:",
-                options: { A: "Facing a major setback", B: "Reaching a stalemate", C: "Making an important discovery after effort", D: "Repeating an old experiment" },
-                answer: "C"
-            },
-            {
-                question: "What does the idiom 'Mend fences' signify?",
-                options: { A: "To build a physical barrier", B: "To escalate a conflict", C: "To repair a damaged relationship", D: "To ignore a disagreement" },
-                answer: "C"
-            },
-            {
-                question: "In the sentence, 'THE late poet and film lyricist Kaifi Azmi described a strange method...', 'THE' is a:",
-                options: { A: "Proper Noun", B: "Indefinite Article", C: "Definite Article", D: "Adjective" },
-                answer: "C"
-            },
-            {
-                question: "Identify the type of clause: '...which has come to bear a close resemblance...'",
-                options: { A: "Independent Clause", B: "Noun Clause", C: "Adverbial Clause", D: "Dependent (Relative) Clause" },
-                answer: "D"
-            },
-            {
-                question: "The word 'writing' in 'method of writing film songs' is a:",
-                options: { A: "Present Participle", B: "Gerund", C: "Infinitive", D: "Verb (Past Tense)" },
-                answer: "B"
-            },
-            {
-                question: "What is the function of an Em Dash (—) in writing?",
-                options: { A: "To indicate possession", B: "To end a sentence", C: "To set off parenthetical, explanatory phrases with emphasis", D: "To connect two closely related independent clauses" },
-                answer: "C"
-            },
-            {
-                question: "The sentence 'Modi’s diplomacy plies along a similar prefabricated rut of right-wing ideology' is a:",
-                options: { A: "Simple Sentence", B: "Compound Sentence", C: "Complex Sentence", D: "Compound-Complex Sentence" },
-                answer: "A"
-            },
-            {
-                question: "In 'Instead of leaning on flexibility...', 'leaning' is a:",
-                options: { A: "Verb (main)", B: "Adjective", C: "Gerund", D: "Adverb" },
-                answer: "C"
-            },
-            {
-                question: "The phrase 'at the mercy of' implies:",
-                options: { A: "Being in a protected state", B: "Having control over a situation", C: "Being in a situation where something has complete power over you", D: "Showing kindness to others" },
-                answer: "C"
-            },
-            {
-                question: "Choose the word pair that represents an opposing state:",
-                options: { A: "Hope : Aspiration", B: "War : Conflict", C: "Stability : Fragility", D: "Dissent : Disagreement" },
-                answer: "C"
-            },
-            {
-                question: "Rearrange the following segments to form a coherent sentence: 1. was required to pen the lyrics / 2. Kaifi said that he / 3. like other great songwriters, / 4. along prescribed tunes.",
-                options: { A: "2-1-4-3", B: "2-3-1-4", C: "4-1-3-2", D: "3-2-1-4" },
-                answer: "B" // Kaifi said that he, like other great songwriters, was required to pen the lyrics along prescribed tunes.
-            },
-            {
-                question: "Identify the voice of the verb in: 'The peace agreement was a hard-won victory.'",
-                options: { A: "Active Voice", B: "Passive Voice", C: "This sentence has no voice", D: "Middle Voice" },
-                answer: "A" // 'was' is a linking verb, 'hard-won' is an adjective. The main action of 'winning' is implied within 'hard-won victory'. If it were passive related to agreement: 'The peace agreement was achieved...'
-            },
-             {
-                question: "What is the most suitable antonym for 'Hard-won'?",
-                options: { A: "Challenging", B: "Effortful", C: "Easily gained", D: "Deserved" },
-                answer: "C"
-            },
-            {
-                question: "The phrase 'Business as usual' typically implies:",
-                options: { A: "A major crisis", B: "A significant disruption", C: "A normal, routine situation", D: "An emergency state" },
-                answer: "C"
-            },
-            {
-                question: "'Hold one's ground' means to:",
-                options: { A: "Retreat quickly", B: "Give way under pressure", C: "Maintain one's position firmly", D: "Surrender immediately" },
-                answer: "C"
-            },
-            {
-                question: "In 'The reality of the situation was far more complex', 'reality' is a(n):",
-                options: { A: "Adjective", B: "Verb", C: "Noun", D: "Adverb" },
-                answer: "C"
-            },
-            {
-                question: "What type of phrase is 'to bear a close resemblance' in the sentence: '...which has come to bear a close resemblance...'?",
-                options: { A: "Gerund Phrase", B: "Prepositional Phrase", C: "Infinitive Phrase", D: "Participial Phrase" },
-                answer: "C"
-            },
-            {
-                question: "The word 'canvassing' in '...canvassing support for the tycoons...' is functioning as a:",
-                options: { A: "Noun", B: "Adjective", C: "Present Participle (forming a participial phrase)", D: "Verb (finite)" },
-                answer: "C"
-            },
-            {
-                question: "Which part of speech is 'closely' in 'bear a close resemblance' (if rephrased as 'resemble closely')?",
-                options: { A: "Adjective", B: "Adverb", C: "Preposition", D: "Conjunction" },
-                answer: "B" // The original phrase is "a close resemblance", 'close' is an adjective. If it were 'resemble closely', then 'closely' is an adverb. Let's rephrase question to match structure.
-            },
-             {
-                question: "In the phrase 'a close resemblance', what part of speech is 'close'?",
-                options: { A: "Adverb", B: "Noun", C: "Adjective", D: "Verb" },
-                answer: "C"
-            },
-            {
-                question: "The conjunction 'and' in 'poet and film lyricist' is a:",
-                options: { A: "Subordinating Conjunction", B: "Correlative Conjunction", C: "Coordinating Conjunction", D: "Conjunctive Adverb" },
-                answer: "C"
-            },
-            {
-                question: "Identify the correct meaning of 'Dial down the rhetoric'.",
-                options: { A: "Increase the emotional content", B: "Speak more loudly", C: "Reduce the intensity or exaggeration in speech", D: "Use more complex vocabulary" },
-                answer: "C"
-            },
-            {
-                question: "An appropriate synonym for 'Dissent' in the context of 'Freedom of speech allows for dissent' is:",
-                options: { A: "Agreement", B: "Conformity", C: "Disagreement", D: "Silence" },
-                answer: "C"
-            },
-            {
-                question: "The relationship between 'Hope' and 'Despair' is one of:",
-                options: { A: "Synonymy", B: "Antonymy", C: "Causation", D: "Association" },
-                answer: "B"
-            },
-            {
-                question: "A 'prepositional phrase' typically begins with a preposition and ends with a/an:",
-                options: { A: "Verb", B: "Adjective", C: "Object of the preposition (noun/pronoun/gerund)", D: "Adverb" },
-                answer: "C"
-            },
-            {
-                question: "Which sentence uses 'Rhetoric' in a way that suggests persuasive but potentially insincere or exaggerated language?",
-                options: { A: "The manual provided clear rhetoric for operating the machine.", B: "His speech was filled with powerful rhetoric that moved the audience, but lacked substance.", C: "She studied classical rhetoric to improve her debating skills.", D: "The rhetoric of the scientific paper was precise and objective." },
-                answer: "B"
-            },
-            // 30 done, 20 more from Grammar/Vocab
-            {
-                question: "What is the function of the infinitive phrase in: 'He was required <i>to pen the lyrics</i>'?",
-                options: { A: "Subject of the verb 'was required'", B: "Adjectival, modifying 'he'", C: "Adverbial complement, explaining what was required", D: "Direct object of 'required'" },
-                answer: "C"
-            },
-            {
-                question: "The term 'Fragility' is best contrasted with:",
-                options: { A: "Weakness", B: "Delicacy", C: "Resilience", D: "Brittleness" },
-                answer: "C"
-            },
-            {
-                question: "In the sentence, 'It was akin to digging the grave first...', 'akin' is a(n):",
-                options: { A: "Adverb", B: "Noun", C: "Adjective (predicate adjective)", D: "Preposition" },
-                answer: "C"
-            },
-            {
-                question: "Which of these is NOT a synonym for 'On the brink of'?",
-                options: { A: "On the verge of", B: "Nearing", C: "Distant from", D: "On the edge of" },
-                answer: "C"
-            },
-            {
-                question: "The phrase 'Build on the groundwork' suggests:",
-                options: { A: "Starting completely anew", B: "Demolishing previous efforts", C: "Using earlier work as a basis for further development", D: "Ignoring foundational principles" },
-                answer: "C"
-            },
-            {
-                question: "'Conformity' is best described as:",
-                options: { A: "Behavior that challenges social norms", B: "Disagreement with official views", C: "Behavior in accordance with socially accepted conventions", D: "A state of constant change" },
-                answer: "C"
-            },
-            {
-                question: "Identify the tense of the verb 'has come' in 'which has come to bear...'.",
-                options: { A: "Simple Past", B: "Past Perfect", C: "Present Perfect", D: "Future Perfect" },
-                answer: "C"
-            },
-            {
-                question: "A 'gerund phrase' always functions as a:",
-                options: { A: "Verb", B: "Adjective", C: "Adverb", D: "Noun" },
-                answer: "D"
-            },
-            {
-                question: "What does 'Passive Voice' generally emphasize?",
-                options: { A: "The doer of the action", B: "The action itself or the recipient of the action", C: "The time of the action", D: "The manner of the action" },
-                answer: "B"
-            },
-            {
-                question: "The word 'obsequiously' (adverb modifying 'leaning' in a hypothetical sentence 'He was obsequiously leaning towards the powerful figure') would mean leaning in what manner?",
-                options: { A: "Casually", B: "Aggressively", C: "Servilely or fawningly", D: "Confidently" },
-                answer: "C"
-            },
-            {
-                question: "Which sentence structure is 'It was akin to digging the grave first and then looking for a body to fit the size.'?",
-                options: { A: "Compound", B: "Complex", C: "Simple", D: "Compound-Complex" },
-                answer: "C" // "It" is subject, "was" is verb. The rest is a prepositional phrase acting as subject complement.
-            },
-            {
-                question: "The preposition 'along' in 'plies along a similar prefabricated rut' indicates:",
-                options: { A: "Opposition", B: "Time sequence", C: "Path or direction", D: "Accompaniment with" },
-                answer: "C"
-            },
-            {
-                question: "In the phrase 'pro-Hindutva NRI crowds', 'pro-Hindutva' functions as a(n):",
-                options: { A: "Noun", B: "Adverb", C: "Adjective", D: "Verb" },
-                answer: "C"
-            },
-            {
-                question: "What does 'Stalemate' (an antonym for 'breakthrough') mean?",
-                options: { A: "A significant advancement", B: "A situation with no progress or resolution; a deadlock", C: "A minor setback", D: "A rapid development" },
-                answer: "B"
-            },
-            {
-                question: "If diplomacy 'submits to the overreach of the leader’s crony capitalist friends,' it means diplomacy is:",
-                options: { A: "Asserting its independence", B: "Challenging improper influence", C: "Yielding to excessive or undue influence", D: "Ignoring external pressures" },
-                answer: "C"
-            },
-            {
-                question: "Rearrange for clarity: 1. of seasoned diplomats / 2. instead of leaning on / 3. to pick and choose / 4. flexibility and creativity.",
-                options: { A: "2-4-1-3", B: "1-3-2-4", C: "2-1-4-3", D: "4-1-3-2" },
-                answer: "A" // Instead of leaning on flexibility and creativity of seasoned diplomats to pick and choose
-            },
-            {
-                question: "The phrase 'global carpetbaggers' likely refers to individuals who are:",
-                options: { A: "Generous philanthropists helping globally", B: "Exploitative outsiders seeking profit in unstable situations", C: "Respected international diplomats", D: "Local community leaders" },
-                answer: "B"
-            },
-             {
-                question: "Which of the following is a determiner? '...described *a* strange method...'",
-                options: { A: "strange", B: "described", C: "a", D: "method" },
-                answer: "C"
-            },
-            {
-                question: "The word 'Seasoned' in 'seasoned diplomats' means:",
-                options: { A: "Novice and inexperienced", B: "Spicy and flavorful", C: "Experienced and proficient", D: "Temporary and part-time" },
-                answer: "C"
-            },
-            {
-                question: "What is the primary function of a 'Coordinating Conjunction' like 'but' or 'and'?",
-                options: { A: "To introduce a subordinate clause", B: "To connect words, phrases, or independent clauses of equal grammatical rank", C: "To modify a verb or adjective", D: "To show possession" },
-                answer: "B"
-            }, // End of 50 Grammar/Vocab
+        // --- DOM Elements ---
+        const loginContainer = document.getElementById('login-container');
+        const loginIdInput = document.getElementById('login-id');
+        const loginPasswordInput = document.getElementById('login-password');
+        const loginButton = document.getElementById('login-button');
+        const loginError = document.getElementById('login-error');
 
-            // 50 MCQs from "One Paper MCQS PDF" (General Knowledge section based on available content)
-            // Using questions from sources 209-224 and similar general knowledge content from the provided PDF.
-            {
-                question: "Which of the following African nations is distinctly landlocked, meaning it has no direct access to the sea?",
-                options: { A: "Nigeria", B: "Kenya", C: "Uganda", D: "Tanzania" },
-                answer: "C" // Based on Q1 [cite: 209]
-            },
-            {
-                question: "The capital city of Zimbabwe, a nation in Southern Africa, is officially recognized as:",
-                options: { A: "Lusaka", B: "Pretoria", C: "Harare", D: "Maputo" },
-                answer: "C" // Based on Q2 [cite: 209]
-            },
-            {
-                question: "The historically significant Communist Revolution in Russia predominantly unfolded during which month of 1917?",
-                options: { A: "March", B: "June", C: "October", D: "November" }, // Original answer is October (Oct Rev), but sometimes Feb/March Rev is also considered. November by Gregorian. Given options, October (Julian) / November (Gregorian). Source says Oct [cite: 209]
-                answer: "C"
-            },
-            {
-                question: "The Pulitzer Prize, a prestigious American award, is primarily conferred for achievements in which domain?",
-                options: { A: "Scientific research", B: "Letters and journalism", C: "Athletic excellence", D: "Visual arts" },
-                answer: "B" // Based on Q4 [cite: 209]
-            },
-            {
-                question: "In strategic and intelligence parlance, the term 'Fifth Column' denotes:",
-                options: { A: "A supportive external ally", B: "An ancient architectural feature", C: "Acts of treachery or subversion from within", D: "A reserve military unit" },
-                answer: "C" // Based on Q5 [cite: 209]
-            },
-            {
-                question: "From an economic and infrastructural perspective, which source of electricity generation is often considered the cheapest over its operational lifetime?",
-                options: { A: "Nuclear fission", B: "Solar photovoltaic", C: "Thermal (coal/gas)", D: "Hydel (hydroelectric)" },
-                answer: "D" // Based on Q6 [cite: 209]
-            },
-            {
-                question: "The Colosseum, a monumental amphitheatre of antiquity, was constructed in which European capital?",
-                options: { A: "Athens", B: "Rome", C: "Naples", D: "Constantinople" },
-                answer: "B" // Based on Q7 [cite: 209]
-            },
-            {
-                question: "The Moorish Kingdom of Granada in Spain eventually capitulated to Christian forces in which significant year, marking a turning point in Iberian history?",
-                options: { A: "1453", B: "1492", C: "1526", D: "1556" },
-                answer: "B" // Based on Q8 [cite: 209]
-            },
-            {
-                question: "India conducted its first nuclear device explosion on May 18, 1974, under the clandestine code name:",
-                options: { A: "Operation Shakti", B: "Operation Smiling Buddha", C: "Operation Blue Star", D: "Operation Vijay" },
-                answer: "B" // Based on Q11 [cite: 209]
-            },
-            {
-                question: "Among the following agricultural crops, which typically has the longest gestation period between its cultivation and subsequent harvest?",
-                options: { A: "Rice", B: "Cotton", C: "Wheat", D: "Sugarcane" },
-                answer: "D" // Based on Q12 [cite: 209]
-            },
-            {
-                question: "A 'causeway' is best defined as:",
-                options: { A: "A deep trench for water", B: "A raised path or road across wet ground or water", C: "A type of bridge suspension", D: "A natural land bridge" },
-                answer: "B" // Based on Q15 [cite: 210]
-            },
-            {
-                question: "The iconic painting 'Night Watch' is a celebrated masterpiece attributed to which Dutch Golden Age artist?",
-                options: { A: "Johannes Vermeer", B: "Frans Hals", C: "Rembrandt van Rijn", D: "Vincent van Gogh" },
-                answer: "C" // Based on Q16 [cite: 210]
-            },
-            {
-                question: "What is 'Big Ben' in London primarily known as?",
-                options: { A: "A famous bridge", B: "The great bell of the clock at the north end of the Palace of Westminster", C: "A royal palace", D: "A historical museum" },
-                answer: "B" // Based on Q17 [cite: 211] (though often refers to the clock tower itself)
-            },
-            {
-                question: "In European folklore and symbolism, which bird is often considered the wisest?",
-                options: { A: "Eagle", B: "Raven", C: "Owl", D: "Dove" },
-                answer: "C" // Based on Q18 [cite: 211]
-            },
-            {
-                question: "Gazprom is a massive energy company, primarily associated with Russia, that is a major supplier of what to European countries?",
-                options: { A: "Coal and Timber", B: "Uranium and Nuclear Fuel", C: "Oil and Gas", D: "Renewable energy technology" },
-                answer: "C" // Based on Q19 [cite: 211]
-            },
-             {
-                question: "The 'Ivy League' is a term predominantly associated with:",
-                options: { A: "A group of historic research universities in the northeastern United States", B: "A European financial consortium", C: "An international sports federation", D: "A chain of luxury hotels" },
-                answer: "A" // Based on Q21 [cite: 211]
-            },
-            {
-                question: "The term 'Digital Divide' primarily refers to disparities in:",
-                options: { A: "Access to and use of information and communication technologies", B: "Mathematical abilities across populations", C: "Voting patterns between urban and rural areas", D: "Understanding of digital currencies" },
-                answer: "A" // Based on Q23 [cite: 214]
-            },
-            {
-                question: "What is the common name for the site where the World Trade Centre towers stood in New York City prior to their destruction?",
-                options: { A: "Liberty Point", B: "Ground Zero", C: "Memorial Plaza", D: "Freedom Square" },
-                answer: "B" // Based on Q24 [cite: 215]
-            },
-            {
-                question: "The Uighur people are an ethnic minority primarily residing in which province of China?",
-                options: { A: "Tibet", B: "Sichuan", C: "Xinjiang", D: "Guangdong" },
-                answer: "C" // Based on Q25 [cite: 215]
-            },
-            {
-                question: "'Ikebana' is the traditional Japanese art form focused on:",
-                options: { A: "Calligraphy", B: "Flower arrangement", C: "Martial arts", D: "Tea ceremony" },
-                answer: "B" // Based on Q26 [cite: 216]
-            },
-            {
-                question: "The Gestapo was the notorious secret police organization of which 20th-century European state?",
-                options: { A: "Soviet Union (NKVD)", B: "Fascist Italy (OVRA)", C: "Nazi Germany", D: "Imperial Japan (Kempeitai)" },
-                answer: "C" // Based on Q27 [cite: 216]
-            },
-            {
-                question: "In the additive color model (RGB), which of the following are considered primary colors?",
-                options: { A: "Red, Yellow, Blue", B: "Cyan, Magenta, Yellow", C: "Red, Green, Blue", D: "Orange, Green, Violet" },
-                answer: "C" // Based on Q28 [cite: 216]
-            },
-            {
-                question: "Considering their historical development, which of these inventions is generally considered the oldest?",
-                options: { A: "Microscope", B: "Barometer", C: "Mechanical Clock", D: "Bicycle" },
-                answer: "A" // Based on Q29[cite: 216]. Clock is actually older in general context. Microscope (Janssen, ~1590), Clock (Mechanical escapement, ~1300s, earlier forms exist). The source has Clock as the answer. Let's stick to the source's implied logic if it's tricky. The question does not specify mechanical clock. Sun dials etc are very old. Barometer (Torricelli, 1643), Cycle (1800s). Given options, and general "Clock" not "Mechanical Clock", 'Clock' is indeed very old.
-                // Re-evaluating Q29 in source PDF: The options are (a) Clock (c) Barometre (b) Microscope (d) Cycle. The provided answer key (not shown here but assumed by user) would be needed to be certain of Imtiaz Shahid's intended answer. Mechanical clocks are ancient. Microscopes late 16th/early 17th. Barometer mid 17th. Cycle 19th. So Clock is oldest.
-            },
-             {
-                question: "Considering their historical development, which of these inventions is generally the oldest?",
-                options: { A: "Microscope", B: "Barometer", C: "Mechanical Clock", D: "Bicycle" },
-                // From PDF[cite: 216]: Options are Clock, Microscope, Barometer, Cycle. Assuming the typical understanding, mechanical clocks predate microscopes.
-                answer: "C" // This is the most plausible oldest among the choices given common knowledge.
-            },
-            {
-                question: "The term 'Holocaust' specifically refers to the genocide of approximately six million Jews by:",
-                options: { A: "The Ottoman Empire during WWI", B: "The Nazi regime and its collaborators during WWII", C: "The Soviet Union under Stalin", D: "The Khmer Rouge in Cambodia" },
-                answer: "B" // Based on Q30 [cite: 216]
-            },
-            {
-                question: "'Choreography' is the art primarily concerned with:",
-                options: { A: "Musical composition", B: "The design and sequence of dance movements", C: "Landscape gardening", D: "Theatrical stage design" },
-                answer: "B" // Based on Q31 [cite: 217]
-            },
-            // 25 from Gen Knowledge, 25 more needed
-            {
-                question: "A 'Writ of Habeas Corpus' is a legal directive primarily intended to:",
-                options: { A: "Challenge the legality of a person's detention", B: "Prohibit a lower court from exceeding its jurisdiction", C: "Compel a public official to perform a duty", D: "Review the decision of a lower court for errors of law" },
-                answer: "A" // Based on Q32 [cite: 217]
-            },
-            {
-                question: "Which Indian Prime Minister holds the record for the longest tenure in that office?",
-                options: { A: "Indira Gandhi", B: "Jawaharlal Nehru", C: "Manmohan Singh", D: "Narendra Modi" },
-                answer: "B" // Source Q34 [cite: 218] asks about *woman* PMs. Indira is the answer there. This is a modified tougher question. Jawaharlal Nehru had longest overall. If sticking to source Q34 intent, it's Indira for women. Given general knowledge, Nehru for overall. Let's match Q34 for *woman* PM.
-            },
-            {
-                question: "Which female Prime Minister has had the longest tenure globally or among prominent examples?",
-                // Source Q34 refers to Indira Gandhi, Sirimavo Bandaranaike, Benazir Bhutto. Indira Gandhi had a longer tenure than Bandaranaike overall.
-                options: { A: "Margaret Thatcher (UK)", B: "Indira Gandhi (India)", C: "Golda Meir (Israel)", D: "Sirimavo Bandaranaike (Sri Lanka)" },
-                answer: "B" // Indira Gandhi's total tenure was longer than Bandaranaike's.
-            },
-            {
-                question: "The immensely popular character 'Harry Potter' was created by which British author?",
-                options: { A: "J.R.R. Tolkien", B: "C.S. Lewis", C: "J.K. Rowling", D: "Roald Dahl" },
-                answer: "C" // Based on Q35 [cite: 218]
-            },
-            {
-                question: "The ancient Sumerian civilization, one of the world's earliest, was primarily located on the banks of which major river system?",
-                options: { A: "Nile", B: "Indus", C: "Tigris-Euphrates", D: "Yellow River" },
-                answer: "C" // Based on Q36 [cite: 219] (Tigris is mentioned)
-            },
-            {
-                question: "In what year did Egypt, under the leadership of Gamal Abdel Nasser, nationalize the Suez Canal, leading to an international crisis?",
-                options: { A: "1948", B: "1952", C: "1956", D: "1967" },
-                answer: "C" // Based on Q39 [cite: 221]
-            },
-            {
-                question: "The apocalyptic term 'Armageddon' in eschatological prophecies usually signifies:",
-                options: { A: "The dawn of a new golden age", B: "A final, cataclysmic battle between the forces of good and evil", C: "A period of unprecedented global peace", D: "The discovery of a hidden truth" },
-                answer: "B" // Based on Q40 [cite: 222]
-            },
-            {
-                question: "Which of the following statements is factually correct regarding national symbols or places of worship?",
-                options: { A: "The Canadian flag features a prominent oak leaf.", B: "A pagoda is the primary place of worship in Judaism.", C: "A synagogue is a Jewish place of worship.", D: "The primary symbol on the Sri Lankan flag is a dragon." },
-                answer: "C" // Based on Q41 [cite: 223] (all of these were true in the source, I made others false)
-            },
-            {
-                question: "The Skylab space laboratory, launched in 1973, was a project undertaken by which nation's space agency?",
-                options: { A: "USSR (Soviet Union)", B: "USA (United States)", C: "European Space Agency (ESA)", D: "China (CNSA)" },
-                answer: "B" // Based on Q42 [cite: 223]
-            },
-            {
-                question: "In which year did the Skylab space station disintegrate and fall back to Earth, with debris scattering over Western Australia and the Indian Ocean?",
-                options: { A: "1977", B: "1979", C: "1981", D: "1983" },
-                answer: "B" // Based on Q43 [cite: 224]
-            },
-            {
-                question: "The majority of the Kurdish population is dispersed across several Middle Eastern countries, but the largest concentration resides within the borders of:",
-                options: { A: "Iran", B: "Iraq", C: "Syria", D: "Turkey" },
-                answer: "D" // Based on Q44 [cite: 224]
-            },
-            {
-                question: "The Universal Declaration of Human Rights (UDHR) was adopted by the United Nations General Assembly on which significant date?",
-                options: { A: "October 24, 1945", B: "December 10, 1948", C: "July 4, 1776", D: "January 1, 1950" },
-                answer: "B" // Based on Q45 [cite: 224] (Source says 10 December 1954 which is incorrect, actual is 1948)
-            },
-            // Correcting UDHR date based on general knowledge, as source Q45 is wrong.
-             {
-                question: "The Universal Declaration of Human Rights (UDHR) was adopted by the United Nations General Assembly on:",
-                options: { A: "December 10, 1945", B: "December 10, 1948", C: "December 10, 1950", D: "December 10, 1954" },
-                answer: "B" // Corrected from source data
-            },
-            {
-                question: "Which city is famously known as the 'City of Seven Hills' and was the capital of a vast ancient empire?",
-                options: { A: "Athens", B: "Jerusalem", C: "Rome", D: "Constantinople (Istanbul)" },
-                answer: "C" // General Knowledge, often in such books
-            },
-            {
-                question: "The 'Forbidden City' is a historic palace complex located in which Asian capital?",
-                options: { A: "Tokyo", B: "Seoul", C: "Bangkok", D: "Beijing" },
-                answer: "D" // Common GK
-            },
-            {
-                question: "What is the primary currency used in Japan?",
-                options: { A: "Won", B: "Yuan", C: "Yen", D: "Ringgit" },
-                answer: "C" // Common GK
-            },
-             {
-                question: "The 'Land of the Rising Sun' is a popular epithet for which country?",
-                options: { A: "China", B: "South Korea", C: "Japan", D: "Vietnam" },
-                answer: "C" // Common GK
-            },
-            {
-                question: "Which of these international organizations has its headquarters in Geneva, Switzerland?",
-                options: { A: "NATO (North Atlantic Treaty Organization)", B: "World Health Organization (WHO)", C: "International Monetary Fund (IMF)", D: "UNESCO (United Nations Educational, Scientific and Cultural Organization)" },
-                answer: "B" // Common GK
-            },
-            {
-                question: "The Great Barrier Reef, the world's largest coral reef system, is located off the coast of which country?",
-                options: { A: "Brazil", B: "Australia", C: "Mexico", D: "Indonesia" },
-                answer: "B" // Common GK
-            },
-            {
-                question: "Mount Everest, the highest peak in the world, is part of which mountain range?",
-                options: { A: "Andes", B: "Alps", C: "Rockies", D: "Himalayas" },
-                answer: "D" // Common GK
-            },
-            {
-                question: "The ancient city of Petra, known for its rock-cut architecture, is a major tourist attraction in which Middle Eastern country?",
-                options: { A: "Egypt", B: "Israel", C: "Jordan", D: "Saudi Arabia" },
-                answer: "C" // Common GK
-            },
-            {
-                question: "Which river is the longest in the world?",
-                options: { A: "Amazon River", B: "Nile River", C: "Yangtze River", D: "Mississippi River" },
-                answer: "A" // Amazon is longest, Nile is close second (or vice-versa depending on measurement criteria, but Amazon is often cited as longest now). The PDF section on Rivers [cite: 194] might list this. For trickiness: Nile is traditionally taught but Amazon can be argued for total discharge/length by some.
-                           // Let's check if Imtiaz Shahid's book specifies: "Important Rivers" source [194] is just a ToC entry.
-                           // General Information does not specify. Let's use the more modern understanding.
-            },
-            {
-                question: "The historical 'Iron Curtain' metaphorically described the division between:",
-                options: { A: "North and South Korea", B: "Eastern and Western Europe during the Cold War", C: "The USA and Mexico", D: "Mainland China and Taiwan" },
-                answer: "B" // Common GK
-            },
-            {
-                question: "Which of these is NOT a permanent member of the UN Security Council?",
-                options: { A: "France", B: "Germany", C: "United Kingdom", D: "China" },
-                answer: "B" // Common GK, UN is in ToC [cite: 195]
-            },
-            {
-                question: "The 'Renaissance' was a period of great cultural and artistic change that began in which European country?",
-                options: { A: "France", B: "England", C: "Italy", D: "Spain" },
-                answer: "C" // Common GK
-            },
-             {
-                question: "Aung San Suu Kyi is a prominent political figure from which Southeast Asian nation?",
-                options: { A: "Thailand", B: "Vietnam", C: "Myanmar (Burma)", D: "Malaysia" },
-                answer: "C" // Common GK
-            },
-            {
-                question: "The Nobel Peace Prize is awarded in which Scandinavian city?",
-                options: { A: "Stockholm, Sweden", B: "Oslo, Norway", C: "Copenhagen, Denmark", D: "Helsinki, Finland" },
-                answer: "B" // Common GK, Nobel Prize section exists [cite: 195]
-            }
-            // Total 100 questions.
-        ];
+        const nameContainer = document.getElementById('name-container');
+        const candidateNameInput = document.getElementById('candidate-name');
+        const startQuizButton = document.getElementById('start-quiz-button');
+        const nameError = document.getElementById('name-error');
 
+        const quizContainer = document.getElementById('quiz-container');
+        const liveDateSpan = document.getElementById('live-date');
+        const quizDateSpan = document.getElementById('quiz-date');
+        const updatedDateSpan = document.getElementById('updated-date');
+        const progressBar = document.getElementById('progress-bar');
+        const questionNumberSpan = document.getElementById('question-number');
+        const questionTextPara = document.getElementById('question-text');
+        const questionImageContainer = document.getElementById('question-image-container');
+        const questionImage = document.getElementById('question-image');
+        const optionsContainer = document.getElementById('options-container');
+        const dragDropContainer = document.getElementById('drag-drop-container');
+        const dragItemsContainer = document.getElementById('drag-items');
+        const dropZone = document.getElementById('drop-zone');
+        const feedbackContainer = document.getElementById('feedback-container');
+        const feedbackMessage = document.getElementById('feedback-message');
+        const explanationText = document.getElementById('explanation-text');
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const progressText = document.getElementById('progress-text');
+        const timerSpan = document.getElementById('timer');
+
+        const resultsContainer = document.getElementById('results-container');
+        const resultCandidateName = document.getElementById('result-candidate-name');
+        const resultScore = document.getElementById('result-score');
+        const resultTimeTaken = document.getElementById('result-time-taken');
+        const resultAttempted = document.getElementById('result-attempted');
+        const retakeQuizButton = document.getElementById('retake-quiz-button');
+
+        // --- Utility Functions ---
+
+        /**
+         * Shuffles an array using the Fisher-Yates (Knuth) shuffle algorithm.
+         * @param {Array} array The array to shuffle.
+         * @returns {Array} The shuffled array.
+         */
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
+                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
             }
+            return array;
         }
 
-        function loadQuestions() {
-            shuffleArray(questions); // Shuffle the order of questions
-            const quizForm = document.getElementById('quiz-form');
-            let questionHTML = '';
-            questions.forEach((q, index) => {
-                questionHTML += `<div class="question-container" id="q-${index}">`;
-                questionHTML += `<p>${index + 1}. ${q.question}</p>`;
-                questionHTML += `<div class="options">`;
-
-                // Shuffle options for each question
-                let optionKeys = Object.keys(q.options);
-                shuffleArray(optionKeys);
-
-                optionKeys.forEach(key => {
-                    questionHTML += `<label onclick="selectOption(this, 'q${index}-option')">
-                                        <input type="radio" name="q${index}-option" value="${key}">
-                                        ${key}: ${q.options[key]}
-                                     </label>`;
-                });
-                questionHTML += `</div></div>`;
-            });
-            quizForm.innerHTML = questionHTML + '<button type="button" onclick="submitQuiz()">Submit Quiz</button>';
-        }
-        
-        function selectOption(labelElement, groupName) {
-            // Remove 'selected' class from all labels in the same group
-            document.querySelectorAll(`input[name="${groupName}"]`).forEach(rb => {
-                rb.parentElement.classList.remove('selected');
-            });
-            // Add 'selected' class to the clicked label and check its radio button
-            labelElement.classList.add('selected');
-            labelElement.querySelector('input[type="radio"]').checked = true;
-        }
-
-
-        function startQuiz() {
-            const studentName = document.getElementById('student-name').value.trim();
-            if (studentName === "") {
-                alert("Please enter your name to start the quiz.");
-                return;
-            }
-            document.getElementById('name-entry').style.display = 'none';
-            document.getElementById('quiz-section').style.display = 'block';
-            document.getElementById('timer-container').style.display = 'block';
-            document.getElementById('timer').style.color = '#003366'; // Reset timer color
-
-            loadQuestions();
-            startTimer();
-        }
-
-        function startTimer() {
-            const timerDisplay = document.getElementById('timer');
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                timeTaken++;
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                timerDisplay.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-
-                if (timeLeft <= 60) { // Last minute warning
-                    timerDisplay.style.color = '#d9534f'; // Red
-                }
-
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    alert("Time's up! The quiz will be submitted automatically.");
-                    submitQuiz(true); // Auto-submit
-                }
-            }, 1000);
-        }
-
-        function calculateResults() {
-            let score = 0;
-            let attempted = 0;
-            questions.forEach((q, index) => {
-                const selectedOption = document.querySelector(`input[name="q${index}-option"]:checked`);
-                if (selectedOption) {
-                    attempted++;
-                    if (selectedOption.value === q.answer) {
-                        score++;
-                    }
-                }
-            });
-            return { score, attempted };
-        }
-
-        function submitQuiz(autoSubmitted = false) {
-            if (quizSubmitted) return; // Prevent multiple submissions
-            quizSubmitted = true;
-
-            clearInterval(timerInterval);
-            const results = calculateResults();
-            const studentName = document.getElementById('student-name').value;
-            const timeTakenFormatted = formatTime(timeTaken);
-
-            document.getElementById('quiz-section').style.display = 'none';
-            document.getElementById('timer-container').style.display = 'none';
-            document.getElementById('results-section').style.display = 'block';
-
-            document.getElementById('result-name').textContent = `Name: ${studentName}`;
-            document.getElementById('result-attempted').textContent = `Questions Attempted: ${results.attempted} / ${questions.length}`;
-            document.getElementById('result-score').textContent = `Score: ${results.score} / ${questions.length}`;
-            document.getElementById('result-time-taken').textContent = `Time Taken: ${timeTakenFormatted}`;
-
-            // Populate and submit hidden form
-            document.getElementById('form-student-name').value = studentName;
-            document.getElementById('form-questions-attempted').value = results.attempted;
-            document.getElementById('form-score').value = results.score;
-            document.getElementById('form-time-taken').value = timeTakenFormatted;
-            document.getElementById('hidden-form').submit();
-
-            if (!autoSubmitted && timeLeft > 0) {
-                // User submitted manually before time up
-            }
-        }
-
+        /**
+         * Formats total seconds into a MM:SS string.
+         * @param {number} totalSeconds The total number of seconds to format.
+         * @returns {string} The formatted time string (e.g., "05:30").
+         */
         function formatTime(totalSeconds) {
             const minutes = Math.floor(totalSeconds / 60);
             const seconds = totalSeconds % 60;
-            return `${minutes} minute(s) and ${seconds} second(s)`;
+            return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
         }
 
-        // Disable inspect element and copy-paste (basic deterrents)
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault();
+        /**
+         * Generates or retrieves a unique seed for quiz order randomization,
+         * ensuring the same order for 24 hours for a given user.
+         * @returns {number} The unique seed.
+         */
+        function getDailyQuizSeed() {
+            const today = new Date().toDateString();
+            let storedSeed = localStorage.getItem('quizSeed');
+            let storedDate = localStorage.getItem('quizSeedDate');
+
+            if (storedSeed && storedDate === today) {
+                return parseInt(storedSeed, 10);
+            } else {
+                const newSeed = Math.floor(Math.random() * 1000000); // Generate a new random seed
+                localStorage.setItem('quizSeed', newSeed);
+                localStorage.setItem('quizSeedDate', today);
+                return newSeed;
             }
-             if (e.ctrlKey && (e.key === 'c' || e.key === 'x' || e.key === 'a')) {
-                e.preventDefault();
+        }
+
+        /**
+         * Sets a custom random seed for Math.random() to ensure reproducible shuffles.
+         * This is a simple pseudorandom number generator for demonstration.
+         * @param {number} seed The seed to initialize the PRNG.
+         */
+        function setSeed(seed) {
+            Math.random = function() {
+                const x = Math.sin(seed++) * 10000;
+                return x - Math.floor(x);
+            };
+        }
+
+        /**
+         * Applies security measures to prevent cheating, such as disabling right-click,
+         * copy/paste, and common developer console shortcuts.
+         */
+        function applySecurityMeasures() {
+            // Disable right-click context menu
+            document.addEventListener('contextmenu', e => e.preventDefault());
+
+            // Disable copy, paste, and cut actions
+            document.addEventListener('copy', e => e.preventDefault());
+            document.addEventListener('paste', e => e.preventDefault());
+            document.addEventListener('cut', e => e.preventDefault());
+
+            // Disable specific keyboard shortcuts (Ctrl+U, Ctrl+Shift+I, F12)
+            document.addEventListener('keydown', e => {
+                // F12 key
+                if (e.key === 'F12') {
+                    e.preventDefault();
+                }
+                // Ctrl+Shift+I (Windows/Linux) or Cmd+Option+I (Mac)
+                if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'I') {
+                    e.preventDefault();
+                }
+                // Ctrl+U (Windows/Linux) or Cmd+U (Mac)
+                if ((e.ctrlKey || e.metaKey) && e.key === 'U') {
+                    e.preventDefault();
+                }
+            });
+
+            // Add a class to the body to manage pointer events for security
+            document.body.classList.add('quiz-active');
+        }
+
+        /**
+         * Generates a unique ID string, primarily used for drag-and-drop elements.
+         * @returns {string} A unique ID.
+         */
+        function generateUniqueId() {
+            return 'drag-item-' + Math.random().toString(36).substr(2, 9);
+        }
+
+        // --- Quiz Data (100 MCQs from PDF and custom interactive questions) ---
+        // Difficulty: 1 (Easy), 2 (Medium), 3 (Tough)
+        // Type: 'mcq' for multiple choice, 'image' for image-based MCQ, 'drag-drop' for drag and drop
+        const rawQuestions = [
+            // General Knowledge (Pages 9-12)
+            { id: 'gk1', question: 'Which of the following is the landlocked country?', options: ['Nigeria', 'Kenya', 'Sri Lanka', 'Uganda'], answer: 'Uganda', explanation: 'Uganda is a landlocked country in East Africa. Nigeria, Kenya, and Sri Lanka all have coastlines.', difficulty: 1, type: 'mcq' },
+            { id: 'gk2', question: 'Capital of Zimbabwe is:', options: ['Seoul', 'Pretoria', 'Harare', 'None of these'], answer: 'Harare', explanation: 'Harare is the capital and most populous city of Zimbabwe.', difficulty: 1, type: 'mcq' },
+            { id: 'gk3', question: 'Communist Revolution took place in Russia in the month of:', options: ['March', 'June', 'October', 'November'], answer: 'October', explanation: 'The October Revolution (also known as the Bolshevik Revolution) occurred in October 1917, according to the Julian calendar then in use in Russia.', difficulty: 2, type: 'mcq' },
+            { id: 'gk4', question: 'Pulitzer is an American Award in the field of:', options: ['Sports', 'Scuba', 'Letters and journalism', 'Music'], answer: 'Letters and journalism', explanation: 'The Pulitzer Prize is an award for achievements in newspaper, magazine, and online journalism, literature, and musical composition within the United States.', difficulty: 1, type: 'mcq' },
+            { id: 'gk5', question: 'Fifth Column refers to:', options: ['Huge pillar', 'long writing', 'Loyalty', 'Treachery'], answer: 'Treachery', explanation: 'A fifth column is a group of people who undermine a larger group from within, usually in favor of an enemy group or nation.', difficulty: 2, type: 'mcq' },
+            { id: 'gk6', question: 'The cheapest source of electricity is:', options: ['Hydel', 'Nuclear', 'Solar', 'Thermal'], answer: 'Hydel', explanation: 'Hydropower (Hydel) is generally considered one of the cheapest sources of electricity due to its low operating costs and long lifespan, though initial investment can be high.', difficulty: 2, type: 'mcq' },
+            { id: 'gk7', question: 'Colosseum, an amphitheatre was built in:', options: ['Athens', 'Naples', 'Rome', 'Milan'], answer: 'Rome', explanation: 'The Colosseum is an oval amphitheatre in the centre of the city of Rome, Italy.', difficulty: 1, type: 'mcq' },
+            { id: 'gk8', question: 'Moorish Kingdom of Granada (Spain) surrendered to Christians in the year:', options: ['1453', '1492', '1526', '1556'], answer: '1492', explanation: 'The Nasrid Kingdom of Granada, the last Muslim stronghold in Spain, surrendered to the Catholic Monarchs in 1492, marking the end of the Reconquista.', difficulty: 3, type: 'mcq' },
+            { id: 'gk9', question: 'Blind Dolphins are found in:', options: ['Ganges River', 'Nile River', 'Yangtze River', 'None'], answer: 'Ganges River', explanation: 'The Ganges River Dolphin is a freshwater dolphin found in the Ganges and Brahmaputra Rivers and their tributaries in India, Bangladesh, and Nepal. They are functionally blind.', difficulty: 2, type: 'mcq' },
+            { id: 'gk10', question: 'The cash balance of the company is more than the cash balance of US:', options: ['Apple', 'Microsoft', 'Bechtel', 'DuPont'], answer: 'Apple', explanation: 'Historically, Apple has at times held a larger cash reserve than the US government, though this fluctuates.', difficulty: 3, type: 'mcq' },
+            { id: 'gk11', question: 'On 18th May 1974 India exploded first nuclear devise under the code name of:', options: ['Operation Blue Star Rakshak', 'Operation Gibraltar', 'Operation Smiling Buddah', 'Operation'], answer: 'Operation Smiling Buddah', explanation: 'India conducted its first nuclear test, code-named "Smiling Buddha," on May 18, 1974.', difficulty: 2, type: 'mcq' },
+            { id: 'gk12', question: 'Which crop is longest according to period between cultivation and harvest?', options: ['Cotton', 'Sugarcane', 'Rice', 'Wheat'], answer: 'Sugarcane', explanation: 'Sugarcane has a long growing season, often taking 10-18 months from cultivation to harvest.', difficulty: 2, type: 'mcq' },
+            { id: 'gk13', question: 'Furakha Dam on river Ganga is disputed between:', options: ['India and Pakistan', 'India and Nepal', 'India and China', 'India and Bangladesh'], answer: 'India and Bangladesh', explanation: 'The Farakka Barrage on the Ganges River has been a long-standing point of contention between India and Bangladesh.', difficulty: 3, type: 'mcq' },
+            { id: 'gk14', question: 'Which dam is constructed by India under the violation of "Indus Water Treaty"?', options: ['Sallasal dam', 'Baghlihar dam', 'Wullar dam', 'All of above'], answer: 'Baghlihar dam', explanation: 'The Baglihar Dam project has been a source of dispute between India and Pakistan, with Pakistan alleging it violates the Indus Waters Treaty.', difficulty: 3, type: 'mcq' },
+            { id: 'gk15', question: 'What is meant by causeway?', options: ['A raised path', 'Marsh soil', 'Salty ocean', 'Road on Hill'], answer: 'A raised path', explanation: 'A causeway is a raised road or track across low or wet ground or a body of water.', difficulty: 1, type: 'mcq' },
+            { id: 'gk16', question: '"Night Watch" paintings belongs to:', options: ['Michelangelo', 'Picasso', 'Leonardo', 'Rembrandt van Rijn'], answer: 'Rembrandt van Rijn', explanation: '"The Night Watch" is a 1642 painting by Rembrandt van Rijn, a Dutch Golden Age painter.', difficulty: 2, type: 'mcq' },
+            { id: 'gk17', question: 'What is Big Ben?', options: ['Clock', 'Tower', 'Cinema', 'Road'], answer: 'Clock', explanation: 'Big Ben is the nickname for the Great Bell of the clock at the north end of the Palace of Westminster in London, and is often extended to refer to the clock tower itself.', difficulty: 1, type: 'mcq' },
+            { id: 'gk18', question: 'Which is the wisest bird in European countries?', options: ['Owl', 'Eagle', 'Parrot', 'Sparrow'], answer: 'Owl', explanation: 'The owl is often associated with wisdom and knowledge in European folklore and literature.', difficulty: 1, type: 'mcq' },
+            { id: 'gk19', question: 'Which of the following Russian\'s oil and gas company which provides oil and gas to European countries?', options: ['BSGO Company', 'Gazprom Company', 'Gestapo Company', 'Philips Oil and Gas Company'], answer: 'Gazprom Company', explanation: 'Gazprom is a large Russian majority state-owned multinational energy corporation.', difficulty: 2, type: 'mcq' },
+            { id: 'gk20', question: 'In which year European rulers captured Palestine from the Muslims in Crusade War?', options: ['1095', '1099', '1115', '1199'], answer: '1099', explanation: 'Jerusalem was captured by the Crusaders in 1099 during the First Crusade.', difficulty: 3, type: 'mcq' },
+            { id: 'gk21', question: 'What is Ivy League?', options: ['A group of Eight Universities in USA', 'A group of People in Switzerland', 'A football league tournament', 'A group of Islands in Atlantic Ocean'], answer: 'A group of Eight Universities in USA', explanation: 'The Ivy League is an American collegiate athletic conference comprising eight private research universities in the Northeastern United States.', difficulty: 1, type: 'mcq' },
+            { id: 'gk22', question: 'Talban\'s movement was started in 1994 from which city of Afghanistan?', options: ['Kabul', 'Hirat', 'Kandhar', 'None of these'], answer: 'Kandhar', explanation: 'The Taliban movement originated in 1994 in the southern Afghan province of Kandahar.', difficulty: 2, type: 'mcq' },
+            { id: 'gk23', question: 'Digital Divide term is related with:', options: ['Economics', 'Socio economic difference technology era', 'Political Science', 'Journalism'], answer: 'Socio economic difference technology era', explanation: 'The digital divide refers to the gap between demographics and regions that have access to modern information and communications technology, and those that don\'t or have restricted access.', difficulty: 2, type: 'mcq' },
+            { id: 'gk24', question: 'What is the name of the place where World Trade Centre (USA) was located?', options: ['Ground Zero', 'Paradise Point', 'Golden Point', 'Golden City Point'], answer: 'Ground Zero', explanation: 'Ground Zero is the site of the former World Trade Center complex in New York City, which was destroyed in the September 11 attacks.', difficulty: 1, type: 'mcq' },
+            { id: 'gk25', question: 'The Muslim people of Xinjiang province are called:', options: ['Uighur', 'Bantu', 'Hutu', 'Berber'], answer: 'Uighur', explanation: 'The Uyghurs are a Turkic ethnic group native to the Xinjiang Uyghur Autonomous Region in Northwest China.', difficulty: 2, type: 'mcq' },
+            { id: 'gk26', question: 'What is "Ikebana"?', options: ['Japanese Art of flower arrangement', 'Greek Art of fighting', 'Art of dancing and music', 'None of the above'], answer: 'Japanese Art of flower arrangement', explanation: 'Ikebana is the Japanese art of flower arrangement.', difficulty: 1, type: 'mcq' },
+            { id: 'gk27', question: 'Gestapo was the secret police organization of:', options: ['Italy', 'Russia', 'Germany', 'USA'], answer: 'Germany', explanation: 'The Gestapo was the official secret police of Nazi Germany and German-occupied Europe.', difficulty: 2, type: 'mcq' },
+            { id: 'gk28', question: 'Which of the following colours are primary colours?', options: ['Red, Blue, Green', 'White, Red Black', 'Black, Red, Blue', 'Green, Red Black'], answer: 'Red, Blue, Green', explanation: 'In additive color mixing (like light on screens), the primary colors are Red, Green, and Blue (RGB).', difficulty: 1, type: 'mcq' },
+            { id: 'gk29', question: 'Which of the following inventions is the oldest?', options: ['Clock', 'Microscope', 'Barometre', 'Cycle'], answer: 'Clock', explanation: 'Mechanical clocks have a long history, with early forms dating back centuries before microscopes, barometers, or bicycles.', difficulty: 2, type: 'mcq' },
+            { id: 'gk30', question: 'What is Holocaust?', options: ['Killing of Jews during World War I', 'Killing of Jews during World War II', 'Killing of Germans during World War II', 'Killing of Japanese during World War II'], answer: 'Killing of Jews during World War II', explanation: 'The Holocaust was the genocide of European Jews during World War II.', difficulty: 1, type: 'mcq' },
+            { id: 'gk31', question: 'What is Choreography?', options: ['Art of dancing', 'Art of music', 'Art of gardening', 'Art of fight'], answer: 'Art of dancing', explanation: 'Choreography is the art of designing sequences of movements.', difficulty: 1, type: 'mcq' },
+            { id: 'gk32', question: 'A writ direct to the person detaining another and commanding him to produce the body of the prisoner at a certain time and place with the day and cause of his caption and detention is called:', options: ['Writ of Quo Warrants', 'Writ of Certiorari', 'Writ of Prohibition', 'Writ of Habeas Corpus'], answer: 'Writ of Habeas Corpus', explanation: 'A writ of Habeas Corpus is a legal action that requires a person under arrest to be brought before a judge or into court.', difficulty: 3, type: 'mcq' },
+            { id: 'gk33', question: 'Sanchi Stupa is located in:', options: ['Utar Perdesh', 'Madhia Perdesh', 'Banarass', 'Madrass'], answer: 'Madhia Perdesh', explanation: 'The Great Stupa at Sanchi is one of the oldest stone structures in India, located in Madhya Pradesh.', difficulty: 3, type: 'mcq' },
+            { id: 'gk34', question: 'Which of the following woman Prime Ministers has longest tenure?', options: ['Indira Gandhi', 'Banizir Bhutto', 'Bandaranaike', 'None of these'], answer: 'Bandaranaike', explanation: 'Sirimavo Bandaranaike of Sri Lanka holds the record for the longest tenure as a female head of government.', difficulty: 3, type: 'mcq' },
+            { id: 'gk35', question: 'Herry Poter is the famous character of:', options: ['J.K Rowlling', 'J.F Marshal', 'R.V Menin', 'None of these'], answer: 'J.K Rowlling', explanation: 'Harry Potter is the titular character and protagonist of J. K. Rowling\'s series of fantasy novels.', difficulty: 1, type: 'mcq' },
+            { id: 'gk36', question: 'Which of the following civilization were located on the banks of Tigris?', options: ['Indus civilization', 'Samarian civilization', 'Egyptian civilization', 'Greek civilization'], answer: 'Samarian civilization', explanation: 'Mesopotamian civilizations, including Sumerian (Samarian), developed along the Tigris and Euphrates rivers.', difficulty: 2, type: 'mcq' },
+            { id: 'gk37', question: 'Who defeated the Mongols in 14th century?', options: ['Khawarzim Shah', 'Rakn-ud-Din Berber', 'Zaheer-ud-Din Babar', 'None of the above'], answer: 'Rakn-ud-Din Berber', explanation: 'Rukn al-Din Baybars, the Mamluk Sultan of Egypt, famously defeated the Mongols at the Battle of Ain Jalut in 1260.', difficulty: 3, type: 'mcq' },
+            { id: 'gk38', question: 'What is the meaning of "Vishnu"?', options: ['The preserver', 'The helper', 'The destroyer', 'The creator'], answer: 'The preserver', explanation: 'In Hinduism, Vishnu is one of the most important gods, known as the Preserver of the universe.', difficulty: 2, type: 'mcq' },
+            { id: 'gk39', question: 'In which year Egypt nationalized Suez Canal?', options: ['1950', '1954', '1956', '1960'], answer: '1956', explanation: 'Egypt nationalized the Suez Canal in 1956, leading to the Suez Crisis.', difficulty: 2, type: 'mcq' },
+            { id: 'gk40', question: 'What is "Armageddon"?', options: ['A final battle between nations which will end the world', 'A last day of Universe', 'A name of film', 'None of the above'], answer: 'A final battle between nations which will end the world', explanation: 'Armageddon is a biblical term referring to the site of a final battle between the forces of good and evil.', difficulty: 3, type: 'mcq' },
+            { id: 'gk41', question: 'Pinpoint the correct statement?', options: ['Canada has maple leaf on its flag', 'Chow is the type of dog found in China', 'Synagogue is Jewish place of worship', 'All of these'], answer: 'All of these', explanation: 'All the given statements are correct.', difficulty: 2, type: 'mcq' },
+            { id: 'gk42', question: 'Skylab was space laboratory launched in 1973. It belonged to:', options: ['USSR', 'USA', 'Britain', 'China'], answer: 'USA', explanation: 'Skylab was the first United States space station, launched by NASA in 1973.', difficulty: 2, type: 'mcq' },
+            { id: 'gk43', question: 'In which year Sky Lab did brock up in the atmosphere and fell back to the earth?', options: ['1977', '1970', '1980', '1979'], answer: '1979', explanation: 'Skylab re-entered Earth\'s atmosphere and disintegrated in 1979.', difficulty: 2, type: 'mcq' },
+            { id: 'gk44', question: 'The majority of \'Kurd Population\' is living in:', options: ['Afghanistan', 'Turkey', 'Iraq', 'Jordan'], answer: 'Turkey', explanation: 'Large Kurdish populations reside in Turkey, Iraq, Iran, and Syria.', difficulty: 2, type: 'mcq' },
+            { id: 'gk45', question: 'Universal Declaration of Human Rights was adopted by United Nations on:', options: ['10 December 1954', '10 December 1948', '24 October 1945', '1 January 1950'], answer: '10 December 1948', explanation: 'The Universal Declaration of Human Rights was adopted by the UN General Assembly on December 10, 1948.', difficulty: 2, type: 'mcq' },
+            { id: 'gk46', question: 'What are called the members of the advisory group of UN Secretary and President?', options: ['Elders', 'Advisors', 'Counselors', 'Delegates'], answer: 'Elders', explanation: 'The term "The Elders" refers to a group of independent global leaders working for peace and human rights, founded by Nelson Mandela.', difficulty: 3, type: 'mcq' },
+            { id: 'gk47', question: 'Entomology is the study of:', options: ['Birds', 'Fish', 'Mammals', 'Insects'], answer: 'Insects', explanation: 'Entomology is the scientific study of insects.', difficulty: 1, type: 'mcq' },
+            { id: 'gk48', question: 'The human behaviour is the study of:', options: ['Sociology', 'Psychology', 'Anthropology', 'Biology'], answer: 'Psychology', explanation: 'Psychology is the scientific study of mind and behavior.', difficulty: 1, type: 'mcq' },
+            { id: 'gk49', question: 'Which is the largest forest in the world?', options: ['Amazon rain forest', 'Congo Basin Forest', 'Taiga Forest', 'Black Forest'], answer: 'Amazon rain forest', explanation: 'The Amazon rainforest is the largest tropical rainforest in the world.', difficulty: 1, type: 'mcq' },
+            { id: 'gk50', question: 'Guru Granth Sahib" is the Holy Book of:', options: ['Hinduism', 'Buddhism', 'Sikhism', 'Jainism'], answer: 'Sikhism', explanation: 'Guru Granth Sahib is the central holy scripture of Sikhism.', difficulty: 2, type: 'mcq' },
+            { id: 'gk51', question: 'Which is the largest group in Cambodia?', options: ['Cambodian', 'Vietnamese', 'Chinese', 'Thai'], answer: 'Cambodian', explanation: 'The Khmer people are the largest ethnic group in Cambodia, often referred to as Cambodian.', difficulty: 2, type: 'mcq' },
+            { id: 'gk52', question: 'Long March was the name of:', options: ['Communist retreat', 'Great Wall construction', 'Trade route', 'Ancient invasion'], answer: 'Communist retreat', explanation: 'The Long March was a military retreat undertaken by the Red Army of the Communist Party of China.', difficulty: 2, type: 'mcq' },
+            { id: 'gk53', question: 'The secret society that is reputed to commit organized crime founded in Sicily in 1860\'s:', options: ['Mafia', 'Yakuza', 'Triads', 'Cartel'], answer: 'Mafia', explanation: 'The Mafia originated in Sicily, Italy, in the mid-19th century.', difficulty: 2, type: 'mcq' },
+            { id: 'gk54', question: 'Which charter King John signed in 1215?', options: ['Bill of Rights', 'Magna Carta', 'Petition of Right', 'Habeas Corpus Act'], answer: 'Magna Carta', explanation: 'Magna Carta is a royal charter of rights agreed to by King John of England at Runnymede in 1215.', difficulty: 2, type: 'mcq' },
+            { id: 'gk55', question: 'When did Mercury Project, first manned space programme by USA, carry the first American into space?', options: ['1959', '1961', '1965', '1969'], answer: '1961', explanation: 'Project Mercury was the first human spaceflight program of the United States, with the first American in space in 1961.', difficulty: 2, type: 'mcq' },
+            { id: 'gk56', question: 'Alfred Bernhard Nobel received Nobel Prize from German Government in:', options: ['Chemistry', 'Physics', 'Peace', 'Literature'], answer: 'Chemistry', explanation: 'Alfred Nobel, the founder of the Nobel Prizes, was a chemist, engineer, and inventor.', difficulty: 2, type: 'mcq' },
+            { id: 'gk57', question: 'The first Nobel Prizes were awarded on:', options: ['10 December 1900', '10 December 1901', '10 December 1902', '10 December 1903'], answer: '10 December 1901', explanation: 'The first Nobel Prizes were awarded on December 10, 1901.', difficulty: 2, type: 'mcq' },
+            { id: 'gk58', question: 'What was Pan-Islamism, originated in 1880, in Ottoman Empire?', options: ['Movement for uniting the Islamic Nations', 'Movement for Islamic reform', 'Movement for establishing Caliphate', 'Movement for economic cooperation'], answer: 'Movement for uniting the Islamic Nations', explanation: 'Pan-Islamism is a political ideology advocating the unity of Muslims under one Islamic state or supporting a common Islamic nation.', difficulty: 2, type: 'mcq' },
+            { id: 'gk59', question: 'What movement for re-establishing Caliphate?', options: ['Khilafat Movement', 'Wahhabi Movement', 'Salafi Movement', 'Muslim Brotherhood'], answer: 'Khilafat Movement', explanation: 'The Khilafat Movement was an Indian Muslim movement to restore the Ottoman Caliphate.', difficulty: 2, type: 'mcq' },
+            { id: 'gk60', question: 'The largest iceberg was sunk during her maiden voyage from Southampton to New York City, USA in the North Atlantic Ocean in the year:', options: ['1910', '1912', '1914', '1916'], answer: '1912', explanation: 'The Titanic, which sank in 1912 after hitting an iceberg, was the largest ship of its time.', difficulty: 2, type: 'mcq' },
+            { id: 'gk61', question: 'What is Tour de France?', options: ['French road race for professional cyclists', 'French car race', 'French horse race', 'French boat race'], answer: 'French road race for professional cyclists', explanation: 'The Tour de France is an annual multiple-stage bicycle race primarily held in France.', difficulty: 1, type: 'mcq' },
+            { id: 'gk62', question: 'Vostok I carried first man in space. Vostok I, first in series of Russian spacecraft, took first cosmonaut Vostok I was launched on:', options: ['12 April 1960', '12 April 1961', '12 April 1962', '12 April 1963'], answer: '12 April 1961', explanation: 'Yuri Gagarin became the first man in space aboard Vostok 1 on April 12, 1961.', difficulty: 2, type: 'mcq' },
+            { id: 'gk63', question: 'Burglary of watergate in America in 1972 involving President Richard Nixon and his administration is called:', options: ['Watergate scandal', 'Iran-Contra affair', 'Teapot Dome scandal', 'Whitewater controversy'], answer: 'Watergate scandal', explanation: 'The Watergate scandal was a major political scandal that occurred in the United States during the early 1970s, resulting from the break-in at the Democratic National Committee headquarters at the Watergate Office Building.', difficulty: 2, type: 'mcq' },
+            { id: 'gk64', question: 'The study, life-cycle, life style of animal management and animal husbandry is called:', options: ['Zoology', 'Botany', 'Ecology', 'Genetics'], answer: 'Zoology', explanation: 'Zoology is the scientific study of animals, including their behavior, life cycles, and management.', difficulty: 1, type: 'mcq' },
+            { id: 'gk65', question: 'What is the length of more China Border?', options: ['3,488 km', '4,380 km', '5,488 km', '6,380 km'], answer: '3,488 km', explanation: 'The length of China\'s land border is approximately 22,117 km (13,743 mi), but the specific reference to "more China Border" might refer to a specific segment or interpretation, with 3,488 km being a common option in such MCQs related to its border with India.', difficulty: 2, type: 'mcq' },
+            { id: 'gk66', question: 'Cyprus gained independence from British in 1960. When was it divided into two parts Turkish Republic in Northern Cyprus and Greek Cyprus?', options: ['1970', '1972', '1974', '1976'], answer: '1974', explanation: 'Cyprus was de facto partitioned into a Greek Cypriot south and a Turkish Cypriot north after the Turkish invasion in 1974.', difficulty: 2, type: 'mcq' },
+            { id: 'gk67', question: 'Taxidermy is the art of stuffing of animals and preserving them realistically.', options: ['Hobby of animal collecting', 'Art of preserving animals', 'Art of painting animals', 'Art of hunting animals'], answer: 'Art of preserving animals', explanation: 'Taxidermy is the art of preserving an animal\'s body via mounting or stuffing, for the purpose of display or study.', difficulty: 1, type: 'mcq' },
+            { id: 'gk68', question: 'Louis B Mayer of Metro Goldwyn-Mayer second Academy Award in 1927. How was it given to him?', options: ['Best Picture', 'Best Director', 'Best Actor', 'Good Award'], answer: 'Good Award', explanation: 'Louis B. Mayer received an honorary award at the 1st Academy Awards in 1929 (for 1927/1928 films) for his contributions to the film industry.', difficulty: 2, type: 'mcq' },
+            { id: 'gk69', question: 'What is the term BA?', options: ['Events took place before the Christ', 'Events took place after the Christ', 'Events took place during the Christ', 'Events took place before the birth of Christ'], answer: 'Events took place before the Christ', explanation: 'BA or B.C. (Before Christ) refers to the years before the birth of Jesus Christ.', difficulty: 2, type: 'mcq' },
+            { id: 'gk70', question: 'What is the term AD?', options: ['Events took place after the Christ', 'Events took place during the Christ', 'Events took place before the Christ', 'Events took place after the death of Christ'], answer: 'Events took place after the Christ', explanation: 'AD (Anno Domini) refers to the years after the birth of Jesus Christ.', difficulty: 2, type: 'mcq' },
+            { id: 'gk71', question: 'Who became the first black president of South Africa?', options: ['Nelson Mandela', 'Thabo Mbeki', 'Jacob Zuma', 'Kgalema Motlanthe'], answer: 'Nelson Mandela', explanation: 'Nelson Mandela was an anti-apartheid revolutionary who served as the first president of South Africa from 1994 to 1999.', difficulty: 1, type: 'mcq' },
+            { id: 'gk72', question: 'Amir is radical Islamic military leader who assassinated in 19/09/2001.', options: ['Osama bin Laden', 'Ayman al-Zawahiri', 'Mullah Omar', 'Ahmad Shah Massoud'], answer: 'Ahmad Shah Massoud', explanation: 'Ahmad Shah Massoud was an Afghan political and military leader who was assassinated on September 9, 2001.', difficulty: 3, type: 'mcq' },
+
+            // English (Pages 472-473, 494-495) - Synonyms & Foreign Phrases
+            { id: 'eng1', question: 'Abundant means:', options: ['Scarce', 'Plentiful', 'Rare', 'Limited'], answer: 'Plentiful', explanation: 'Abundant means existing or available in large quantities; plentiful.', difficulty: 1, type: 'mcq' },
+            { id: 'eng2', question: 'Adversity means:', options: ['Prosperity', 'Fortune', 'Misfortune', 'Success'], answer: 'Misfortune', explanation: 'Adversity means difficulties; misfortune.', difficulty: 2, type: 'mcq' },
+            { id: 'eng3', question: 'Benevolent means:', options: ['Cruel', 'Kind', 'Selfish', 'Malicious'], answer: 'Kind', explanation: 'Benevolent means well meaning and kindly.', difficulty: 1, type: 'mcq' },
+            { id: 'eng4', question: 'Candid means:', options: ['Dishonest', 'Secretive', 'Frank', 'Reserved'], answer: 'Frank', explanation: 'Candid means truthful and straightforward; frank.', difficulty: 2, type: 'mcq' },
+            { id: 'eng5', question: 'Diligent means:', options: ['Lazy', 'Careless', 'Hardworking', 'Indifferent'], answer: 'Hardworking', explanation: 'Diligent means having or showing care and conscientiousness in one\'s work or duties.', difficulty: 1, type: 'mcq' },
+            { id: 'eng6', question: 'Elusive means:', options: ['Easy to find', 'Obvious', 'Difficult to find', 'Clear'], answer: 'Difficult to find', explanation: 'Elusive means difficult to find, catch, or achieve.', difficulty: 2, type: 'mcq' },
+            { id: 'eng7', question: 'Fragile means:', options: ['Strong', 'Durable', 'Delicate', 'Resilient'], answer: 'Delicate', explanation: 'Fragile means easily broken or damaged.', difficulty: 1, type: 'mcq' },
+            { id: 'eng8', question: 'Garrulous means:', options: ['Quiet', 'Talkative', 'Reserved', 'Shy'], answer: 'Talkative', explanation: 'Garrulous means excessively talkative, especially on trivial matters.', difficulty: 2, type: 'mcq' },
+            { id: 'eng9', question: 'Hapless means:', options: ['Fortunate', 'Lucky', 'Unlucky', 'Joyful'], answer: 'Unlucky', explanation: 'Hapless means (especially of a person) unfortunate.', difficulty: 2, type: 'mcq' },
+            { id: 'eng10', question: 'Impeccable means:', options: ['Flawed', 'Faulty', 'Imperfect', 'Flawless'], answer: 'Flawless', explanation: 'Impeccable means (of behavior, performance, or appearance) in accordance with the highest standards; faultless.', difficulty: 3, type: 'mcq' },
+            { id: 'eng11', question: 'Ad hoc means:', options: ['Permanent', 'For this special purpose', 'General', 'Official'], answer: 'For this special purpose', explanation: 'Ad hoc means formed, arranged, or done for a particular purpose only as necessary.', difficulty: 2, type: 'mcq' },
+            { id: 'eng12', question: 'Bona fide means:', options: ['Fake', 'In bad faith', 'In good faith', 'Illegal'], answer: 'In good faith', explanation: 'Bona fide means authentic; true and legitimate.', difficulty: 1, type: 'mcq' },
+            { id: 'eng13', question: 'De facto means:', options: ['By law', 'In theory', 'In reality', 'Officially'], answer: 'In reality', explanation: 'De facto means in fact, or in effect, whether by right or not.', difficulty: 2, type: 'mcq' },
+            { id: 'eng14', question: 'Ex officio means:', options: ['By choice', 'By virtue of office', 'By custom', 'By law'], answer: 'By virtue of office', explanation: 'Ex officio means by virtue of one\'s position or office.', difficulty: 2, type: 'mcq' },
+            { id: 'eng15', question: 'Ipso facto means:', options: ['By chance', 'By design', 'By the fact itself', 'By accident'], answer: 'By the fact itself', explanation: 'Ipso facto means by the fact itself; by the very nature of the case.', difficulty: 3, type: 'mcq' },
+
+            // General Abilities (Pages 498-502) - Analogies and basic math/IQ
+            { id: 'ga1', question: 'Bird : Nest :: Dog : ?', options: ['Tree', 'House', 'Kennel', 'Cave'], answer: 'Kennel', explanation: 'A bird lives in a nest, and a dog lives in a kennel.', difficulty: 1, type: 'mcq' },
+            { id: 'ga2', question: 'Doctor : Hospital :: Teacher : ?', options: ['Student', 'Book', 'School', 'Classroom'], answer: 'School', explanation: 'A doctor works in a hospital, and a teacher works in a school.', difficulty: 1, type: 'mcq' },
+            { id: 'ga3', question: 'Day : Night :: White : ?', options: ['Red', 'Blue', 'Black', 'Green'], answer: 'Black', explanation: 'Night is the opposite of day, and black is the opposite of white.', difficulty: 1, type: 'mcq' },
+            { id: 'ga4', question: 'Hot : Cold :: Up : ?', options: ['Down', 'Side', 'Across', 'Forward'], answer: 'Down', explanation: 'Cold is the opposite of hot, and down is the opposite of up.', difficulty: 1, type: 'mcq' },
+            { id: 'ga5', question: 'Tree : Forest :: Book : ?', options: ['Page', 'Author', 'Library', 'Chapter'], answer: 'Library', explanation: 'Many trees make a forest, and many books make a library.', difficulty: 2, type: 'mcq' },
+            { id: 'ga6', question: 'Water : Thirsty :: Food : ?', options: ['Hungry', 'Eat', 'Drink', 'Full'], answer: 'Hungry', explanation: 'Water satisfies thirst, and food satisfies hunger.', difficulty: 1, type: 'mcq' },
+            { id: 'ga7', question: 'Shoe : Foot :: Glove : ?', options: ['Head', 'Hand', 'Leg', 'Arm'], answer: 'Hand', explanation: 'A shoe is worn on a foot, and a glove is worn on a hand.', difficulty: 1, type: 'mcq' },
+            { id: 'ga8', question: 'Car : Road :: Train : ?', options: ['Station', 'Track', 'Engine', 'Platform'], answer: 'Track', explanation: 'A car moves on a road, and a train moves on a track.', difficulty: 1, type: 'mcq' },
+            { id: 'ga9', question: 'Knife : Cut :: Pen : ?', options: ['Draw', 'Read', 'Write', 'Erase'], answer: 'Write', explanation: 'A knife is used to cut, and a pen is used to write.', difficulty: 1, type: 'mcq' },
+            { id: 'ga10', question: 'Sun : Day :: Moon : ?', options: ['Star', 'Night', 'Sky', 'Light'], answer: 'Night', explanation: 'The sun is associated with day, and the moon is associated with night.', difficulty: 1, type: 'mcq' },
+
+            // Image-based Questions (10 questions)
+            {
+                id: 'image1',
+                question: 'Which famous monument is depicted here?',
+                image: 'https://placehold.co/400x200/6D6875/FFFFFF?text=Eiffel+Tower',
+                options: ['Statue of Liberty', 'Eiffel Tower', 'Leaning Tower of Pisa', 'Big Ben'],
+                answer: 'Eiffel Tower',
+                explanation: 'The image shows the Eiffel Tower, a famous landmark in Paris, France.',
+                difficulty: 2,
+                type: 'image'
+            },
+            {
+                id: 'image2',
+                question: 'Which of these flags belongs to Canada?',
+                image: 'https://placehold.co/400x200/2C3E50/FFFFFF?text=Flag+Placeholder',
+                options: [
+                    'https://placehold.co/100x60/FF0000/FFFFFF?text=USA', // Placeholder for USA flag
+                    'https://placehold.co/100x60/0000FF/FFFFFF?text=UK', // Placeholder for UK flag
+                    'https://placehold.co/100x60/FF0000/FFFFFF?text=Canada', // Placeholder for Canada flag
+                    'https://placehold.co/100x60/00FF00/FFFFFF?text=Brazil' // Placeholder for Brazil flag
+                ],
+                answer: 'https://placehold.co/100x60/FF0000/FFFFFF?text=Canada',
+                explanation: 'The Canadian flag features a red maple leaf on a white field, flanked by red bars.',
+                difficulty: 2,
+                type: 'image'
+            },
+            {
+                id: 'image3',
+                question: 'What is the name of this famous bridge?',
+                image: 'https://placehold.co/400x200/6D6875/FFFFFF?text=Golden+Gate+Bridge',
+                options: ['London Bridge', 'Brooklyn Bridge', 'Golden Gate Bridge', 'Sydney Harbour Bridge'],
+                answer: 'Golden Gate Bridge',
+                explanation: 'The image shows the Golden Gate Bridge, a suspension bridge spanning the Golden Gate strait in California, USA.',
+                difficulty: 2,
+                type: 'image'
+            },
+            {
+                id: 'image4',
+                question: 'This iconic building is located in which city?',
+                image: 'https://placehold.co/400x200/2C3E50/FFFFFF?text=Burj+Khalifa',
+                options: ['New York', 'Shanghai', 'Dubai', 'Tokyo'],
+                answer: 'Dubai',
+                explanation: 'The image shows the Burj Khalifa, the tallest building in the world, located in Dubai, United Arab Emirates.',
+                difficulty: 2,
+                type: 'image'
+            },
+            {
+                id: 'image5',
+                question: 'Identify the animal shown, known for its speed.',
+                image: 'https://placehold.co/400x200/6D6875/FFFFFF?text=Cheetah',
+                options: ['Lion', 'Tiger', 'Cheetah', 'Leopard'],
+                answer: 'Cheetah',
+                explanation: 'The image shows a cheetah, the fastest land animal.',
+                difficulty: 1,
+                type: 'image'
+            },
+            {
+                id: 'image6',
+                question: 'Which of these is the flag of Japan?',
+                image: 'https://placehold.co/400x200/2C3E50/FFFFFF?text=Flag+Placeholder',
+                options: [
+                    'https://placehold.co/100x60/FF0000/FFFFFF?text=China',
+                    'https://placehold.co/100x60/FF0000/FFFFFF?text=Japan', // Placeholder for Japan flag
+                    'https://placehold.co/100x60/00FF00/FFFFFF?text=S.Korea',
+                    'https://placehold.co/100x60/0000FF/FFFFFF?text=India'
+                ],
+                answer: 'https://placehold.co/100x60/FF0000/FFFFFF?text=Japan',
+                explanation: 'The flag of Japan features a red disc on a white background.',
+                difficulty: 1,
+                type: 'image'
+            },
+            {
+                id: 'image7',
+                question: 'This image shows a famous historical figure. Who is it?',
+                image: 'https://placehold.co/400x200/6D6875/FFFFFF?text=Abraham+Lincoln',
+                options: ['George Washington', 'Thomas Jefferson', 'Abraham Lincoln', 'Theodore Roosevelt'],
+                answer: 'Abraham Lincoln',
+                explanation: 'The image depicts Abraham Lincoln, the 16th President of the United States.',
+                difficulty: 2,
+                type: 'image'
+            },
+            {
+                id: 'image8',
+                question: 'This natural wonder is known as the world\'s largest waterfall. What is its name?',
+                image: 'https://placehold.co/400x200/2C3E50/FFFFFF?text=Niagara+Falls',
+                options: ['Angel Falls', 'Victoria Falls', 'Niagara Falls', 'Iguazu Falls'],
+                answer: 'Niagara Falls',
+                explanation: 'The image shows Niagara Falls, a collective name for three waterfalls that straddle the international border between Canada and the United States.',
+                difficulty: 2,
+                type: 'image'
+            },
+            {
+                id: 'image9',
+                question: 'This image represents a common scientific symbol. What does it stand for?',
+                image: 'https://placehold.co/400x200/6D6875/FFFFFF?text=Atom+Symbol',
+                options: ['Energy', 'Light', 'Atom', 'Sound'],
+                answer: 'Atom',
+                explanation: 'The image displays a stylized representation of an atom, a fundamental unit of matter.',
+                difficulty: 2,
+                type: 'image'
+            },
+            {
+                id: 'image10',
+                question: 'Which famous river is depicted here?',
+                image: 'https://placehold.co/400x200/2C3E50/FFFFFF?text=Nile+River',
+                options: ['Amazon River', 'Yangtze River', 'Nile River', 'Mississippi River'],
+                answer: 'Nile River',
+                explanation: 'The image shows the Nile River, one of the longest rivers in the world, flowing through northeastern Africa.',
+                difficulty: 1,
+                type: 'image'
+            },
+
+            // Drag and Drop Questions (10 questions)
+            {
+                id: 'dragdrop1',
+                question: 'Drag the capital of Pakistan to the correct country name.',
+                type: 'drag-drop',
+                dragItems: ['Islamabad', 'New Delhi', 'Beijing', 'Dhaka'],
+                dropTarget: 'Pakistan',
+                answer: 'Islamabad',
+                explanation: 'Islamabad is the capital city of Pakistan.',
+                difficulty: 2
+            },
+            {
+                id: 'dragdrop2',
+                question: 'Drag the largest continent to the box.',
+                type: 'drag-drop',
+                dragItems: ['Europe', 'Asia', 'Africa', 'North America'],
+                dropTarget: 'Largest Continent',
+                answer: 'Asia',
+                explanation: 'Asia is the largest continent in the world by both land area and population.',
+                difficulty: 1
+            },
+            {
+                id: 'dragdrop3',
+                question: 'Drag the chemical symbol for Gold to the box.',
+                type: 'drag-drop',
+                dragItems: ['Ag', 'Fe', 'Au', 'Cu'],
+                dropTarget: 'Gold Symbol',
+                answer: 'Au',
+                explanation: 'Au is the chemical symbol for Gold, derived from its Latin name, aurum.',
+                difficulty: 2
+            },
+            {
+                id: 'dragdrop4',
+                question: 'Drag the author of \'Pride and Prejudice\' to the box.',
+                type: 'drag-drop',
+                dragItems: ['Charles Dickens', 'Jane Austen', 'William Shakespeare', 'Mark Twain'],
+                dropTarget: 'Author',
+                answer: 'Jane Austen',
+                explanation: 'Jane Austen was an English novelist known primarily for her six major novels, including "Pride and Prejudice."',
+                difficulty: 2
+            },
+            {
+                id: 'dragdrop5',
+                question: 'Drag the planet closest to the Sun to the box.',
+                type: 'drag-drop',
+                dragItems: ['Earth', 'Mars', 'Venus', 'Mercury'],
+                dropTarget: 'Closest Planet',
+                answer: 'Mercury',
+                explanation: 'Mercury is the smallest planet in our solar system and the closest to the Sun.',
+                difficulty: 1
+            },
+            {
+                id: 'dragdrop6',
+                question: 'Drag the country known as the \'Land of the Rising Sun\' to the box.',
+                type: 'drag-drop',
+                dragItems: ['China', 'South Korea', 'Japan', 'Thailand'],
+                dropTarget: 'Country Name',
+                answer: 'Japan',
+                explanation: 'Japan is often referred to as the "Land of the Rising Sun" due to its position east of the Asian mainland.',
+                difficulty: 1
+            },
+            {
+                id: 'dragdrop7',
+                question: 'Drag the largest desert in the world to the box.',
+                type: 'drag-drop',
+                dragItems: ['Sahara', 'Gobi', 'Arabian', 'Antarctic'],
+                dropTarget: 'Largest Desert',
+                answer: 'Antarctic',
+                explanation: 'The Antarctic Polar Desert is the largest desert in the world, covering most of the continent of Antarctica.',
+                difficulty: 2
+            },
+            {
+                id: 'dragdrop8',
+                question: 'Drag the longest river in the world to the box.',
+                type: 'drag-drop',
+                dragItems: ['Amazon', 'Yangtze', 'Nile', 'Mississippi'],
+                dropTarget: 'Longest River',
+                answer: 'Nile',
+                explanation: 'The Nile River is generally considered the longest river in the world.',
+                difficulty: 2
+            },
+            {
+                id: 'dragdrop9',
+                question: 'Drag the term for a word opposite in meaning to another word.',
+                type: 'drag-drop',
+                dragItems: ['Synonym', 'Homonym', 'Antonym', 'Acronym'],
+                dropTarget: 'Opposite Meaning',
+                answer: 'Antonym',
+                explanation: 'An antonym is a word that means the opposite of another word.',
+                difficulty: 1
+            },
+            {
+                id: 'dragdrop10',
+                question: 'Drag the year Pakistan gained independence to the box.',
+                type: 'drag-drop',
+                dragItems: ['1947', '1950', '1945', '1960'],
+                dropTarget: 'Independence Year',
+                answer: '1947',
+                explanation: 'Pakistan gained independence from British rule on August 14, 1947.',
+                difficulty: 2
+            },
+
+            // Today's Special Question (1 question)
+            {
+                id: 'special-q-1',
+                question: 'What is the largest ocean on Earth?',
+                options: ['Atlantic Ocean', 'Indian Ocean', 'Arctic Ocean', 'Pacific Ocean'],
+                answer: 'Pacific Ocean',
+                explanation: 'The Pacific Ocean is the largest and deepest of Earth\'s five oceanic divisions.',
+                difficulty: 1,
+                type: 'mcq',
+                isSpecial: true // This will be "Today's Special Question"
+            }
+        ];
+
+        // --- Quiz Initialization and Flow ---
+
+        /**
+         * Initializes the quiz data, shuffles questions based on difficulty and 'surprise mode',
+         * and sets up the first question.
+         */
+        function initializeQuiz() {
+            // Separate questions by difficulty and type
+            const easyMCQs = rawQuestions.filter(q => q.difficulty === 1 && q.type === 'mcq' && !q.isSpecial);
+            const mediumMCQs = rawQuestions.filter(q => q.difficulty === 2 && q.type === 'mcq');
+            const toughMCQs = rawQuestions.filter(q => q.difficulty === 3 && q.type === 'mcq');
+
+            const imageQuestions = rawQuestions.filter(q => q.type === 'image');
+            const dragDropQuestions = rawQuestions.filter(q => q.type === 'drag-drop');
+            const specialQuestion = rawQuestions.find(q => q.isSpecial);
+
+            // Shuffle each pool independently
+            shuffleArray(easyMCQs);
+            shuffleArray(mediumMCQs);
+            shuffleArray(toughMCQs);
+            shuffleArray(imageQuestions);
+            shuffleArray(dragDropQuestions);
+
+            // Assemble the final 100 questions
+            questions = [];
+
+            // Add special question first if it exists and is for today
+            const today = new Date().toDateString();
+            const quizDate = new Date().toDateString(); // Assuming quiz is always for today
+            if (specialQuestion && today === quizDate) {
+                questions.push(specialQuestion);
+            }
+
+            // Distribute questions to meet the 100 count and difficulty targets
+            // Prioritize filling the required types (image, drag-drop) first within difficulty
+            let easyCount = 0;
+            let mediumCount = 0;
+            let toughCount = 0;
+
+            // Add image questions (aim for 10)
+            for (let i = 0; i < Math.min(10, imageQuestions.length); i++) {
+                questions.push(imageQuestions[i]);
+                if (imageQuestions[i].difficulty === 1) easyCount++;
+                else if (imageQuestions[i].difficulty === 2) mediumCount++;
+                else toughCount++;
+            }
+
+            // Add drag-drop questions (aim for 10)
+            for (let i = 0; i < Math.min(10, dragDropQuestions.length); i++) {
+                questions.push(dragDropQuestions[i]);
+                if (dragDropQuestions[i].difficulty === 1) easyCount++;
+                else if (dragDropQuestions[i].difficulty === 2) mediumCount++;
+                else toughCount++;
+            }
+
+            // Fill remaining easy questions (target 10 total easy)
+            for (let i = 0; easyCount < 10 && i < easyMCQs.length; i++) {
+                if (!questions.some(q => q.id === easyMCQs[i].id)) { // Avoid duplicates
+                    questions.push(easyMCQs[i]);
+                    easyCount++;
+                }
+            }
+
+            // Fill remaining medium questions (target 50 total medium)
+            for (let i = 0; mediumCount < 50 && i < mediumMCQs.length; i++) {
+                if (!questions.some(q => q.id === mediumMCQs[i].id)) {
+                    questions.push(mediumMCQs[i]);
+                    mediumCount++;
+                }
+            }
+
+            // Fill remaining tough questions (target 40 total tough)
+            for (let i = 0; toughCount < 40 && i < toughMCQs.length; i++) {
+                if (!questions.some(q => q.id === toughMCQs[i].id)) {
+                    questions.push(toughMCQs[i]);
+                    toughCount++;
+                }
+            }
+
+            // If we still don't have 100 questions, fill with any remaining MCQs
+            let allOtherMCQs = rawQuestions.filter(q => q.type === 'mcq' && !q.isSpecial && !questions.some(existingQ => existingQ.id === q.id));
+            shuffleArray(allOtherMCQs);
+            while (questions.length < 100 && allOtherMCQs.length > 0) {
+                questions.push(allOtherMCQs.pop());
+            }
+
+            // Ensure special question is unique and only appears once (filter out duplicates if any were added by mistake)
+            if (specialQuestion) {
+                questions = questions.filter((q, index, self) =>
+                    index === self.findIndex((t) => (t.id === q.id))
+                );
+            }
+
+            // Trim to exactly 100 questions if somehow more were added (shouldn't happen with careful selection)
+            questions = questions.slice(0, 100);
+
+            // Apply "Surprise Me" mode for 30% of users
+            const surpriseModeActive = Math.random() < 0.3;
+            if (surpriseModeActive) {
+                shuffleArray(questions); // Shuffle entire quiz order
+            } else {
+                // If not surprise mode, ensure special question is at a predictable spot, e.g., first
+                if (specialQuestion) {
+                    const specialIndex = questions.findIndex(q => q.id === specialQuestion.id);
+                    if (specialIndex !== -1 && specialIndex !== 0) {
+                        const [movedSpecial] = questions.splice(specialIndex, 1);
+                        questions.unshift(movedSpecial);
+                    }
+                }
+            }
+
+            // Shuffle options for all MCQ and Image questions
+            questions.forEach(q => {
+                if (q.type === 'mcq' || q.type === 'image') {
+                    shuffleArray(q.options);
+                }
+            });
+
+            // Reset quiz state variables
+            currentQuestionIndex = 0;
+            score = 0;
+            attemptedQuestions = 0;
+            timeElapsed = 0;
+            quizStartTime = new Date(); // Record quiz start time
+            clearInterval(timerInterval); // Clear any existing timer
+
+            // Set up current date for display
+            const todayDate = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            liveDateSpan.textContent = todayDate.toLocaleDateString('en-US', options);
+            quizDateSpan.textContent = todayDate.toLocaleDateString('en-US', options);
+            updatedDateSpan.textContent = todayDate.toLocaleDateString('en-US', options);
+
+            startTimer(); // Start the quiz timer
+            loadQuestion(); // Load the first question
+            updateProgressBar(); // Update progress bar
+            prevButton.disabled = true; // Disable previous button on first question
+        }
+
+        /**
+         * Loads the current question's content into the UI.
+         */
+        function loadQuestion() {
+            // If all questions are answered, submit the quiz
+            if (currentQuestionIndex >= questions.length) {
+                submitQuiz();
+                return;
+            }
+
+            const question = questions[currentQuestionIndex];
+
+            // Reset UI elements for the new question
+            feedbackContainer.classList.add('hidden');
+            optionsContainer.innerHTML = '';
+            dragDropContainer.classList.add('hidden');
+            questionImageContainer.classList.add('hidden');
+            questionImage.src = '';
+            questionTextPara.classList.remove('special-question-border'); // Remove special border from previous question
+
+            // Apply special question border if it's the designated "Today's Special Question" and it's today's date
+            const todayDate = new Date().toDateString();
+            const quizCurrentDate = new Date().toDateString();
+            if (question.isSpecial && todayDate === quizCurrentDate) {
+                questionTextPara.classList.add('special-question-border');
+            }
+
+            // Update question number and text
+            questionNumberSpan.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+            questionTextPara.textContent = question.question;
+
+            // Handle different question types (MCQ, Image, Drag & Drop)
+            if (question.type === 'mcq' || question.type === 'image') {
+                optionsContainer.classList.remove('hidden'); // Show options container
+                question.options.forEach(option => {
+                    const optionElement = document.createElement('div');
+                    optionElement.classList.add(
+                        'option-card', 'p-4', 'bg-[#FFF5EE]', 'rounded-lg', 'shadow-sm',
+                        'cursor-pointer', 'hover:shadow-md', 'flex', 'items-center',
+                        'justify-center', 'text-center', 'break-words' // Ensure text wraps
+                    );
+                    optionElement.dataset.option = option; // Store option value
+                    // If it's an image-based question, display image; otherwise, display text
+                    optionElement.innerHTML = question.type === 'image' ?
+                        `<img src="${option}" alt="Option" class="w-24 h-auto rounded-md object-contain">` :
+                        option;
+                    // Add event listener for option selection
+                    optionElement.addEventListener('click', () => selectOption(optionElement, option));
+                    optionsContainer.appendChild(optionElement);
+                });
+                // Display main question image if available for image type
+                if (question.type === 'image' && question.image) {
+                    questionImage.src = question.image;
+                    questionImageContainer.classList.remove('hidden');
+                }
+            } else if (question.type === 'drag-drop') {
+                dragDropContainer.classList.remove('hidden'); // Show drag-drop container
+                dragItemsContainer.innerHTML = ''; // Clear previous drag items
+                dropZone.innerHTML = 'Drop here'; // Reset drop zone text
+                dropZone.classList.remove('drag-correct', 'drag-wrong'); // Remove feedback classes
+                dropZone.dataset.answer = ''; // Clear previous answer
+
+                // Create draggable items
+                shuffleArray(question.dragItems).forEach(item => {
+                    const draggableItem = document.createElement('div');
+                    draggableItem.id = generateUniqueId(); // Assign unique ID
+                    draggableItem.classList.add(
+                        'draggable', 'p-3', 'bg-[#FFF5EE]', 'rounded-md', 'shadow-sm',
+                        'cursor-grab', 'text-[#2C3E50]'
+                    );
+                    draggableItem.textContent = item;
+                    draggableItem.setAttribute('draggable', 'true'); // Make element draggable
+                    dragItemsContainer.appendChild(draggableItem);
+
+                    // Desktop drag events
+                    draggableItem.addEventListener('dragstart', (e) => {
+                        e.dataTransfer.setData('text/plain', e.target.textContent); // Set data to be transferred
+                        e.dataTransfer.effectAllowed = 'move'; // Define allowed drag effect
+                    });
+
+                    // Mobile touch events for drag and drop
+                    let initialX, initialY;
+                    draggableItem.addEventListener('touchstart', (e) => {
+                        e.preventDefault(); // Prevent default browser scrolling
+                        const touch = e.touches[0];
+                        // Calculate offset for precise dragging
+                        initialX = touch.clientX - draggableItem.getBoundingClientRect().left;
+                        initialY = touch.clientY - draggableItem.getBoundingClientRect().top;
+
+                        // Position element absolutely for dragging
+                        draggableItem.style.position = 'absolute';
+                        draggableItem.style.zIndex = 1000; // Bring to front
+                        draggableItem.style.width = draggableItem.offsetWidth + 'px'; // Maintain original width
+                        draggableItem.style.height = draggableItem.offsetHeight + 'px'; // Maintain original height
+
+                        // Move the element to the body to ensure it can be dragged anywhere
+                        document.body.appendChild(draggableItem);
+                        moveAt(touch.clientX, touch.clientY);
+                    });
+
+                    draggableItem.addEventListener('touchmove', (e) => {
+                        e.preventDefault(); // Prevent default browser scrolling
+                        const touch = e.touches[0];
+                        moveAt(touch.clientX, touch.clientY); // Move element with touch
+                    });
+
+                    draggableItem.addEventListener('touchend', (e) => {
+                        // Reset element styling after touch ends
+                        draggableItem.style.position = '';
+                        draggableItem.style.zIndex = '';
+                        draggableItem.style.width = '';
+                        draggableItem.style.height = '';
+
+                        // Check if the element was dropped over the dropzone
+                        const touch = e.changedTouches[0];
+                        const dropZoneRect = dropZone.getBoundingClientRect();
+
+                        if (
+                            touch.clientX > dropZoneRect.left &&
+                            touch.clientX < dropZoneRect.right &&
+                            touch.clientY > dropZoneRect.top &&
+                            touch.clientY < dropZoneRect.bottom
+                        ) {
+                            // If dropped on target, handle the drag-drop logic
+                            handleDragDrop(draggableItem.textContent);
+                        } else {
+                            // If not dropped on target, return element to its original container
+                            dragItemsContainer.appendChild(draggableItem);
+                        }
+                    });
+
+                    // Helper function to set element position during touchmove
+                    function moveAt(pageX, pageY) {
+                        draggableItem.style.left = pageX - initialX + 'px';
+                        draggableItem.style.top = pageY - initialY + 'px';
+                    }
+                });
+
+                // Drop zone event listeners for desktop drag-and-drop
+                dropZone.addEventListener('dragover', (e) => {
+                    e.preventDefault(); // Allow drop
+                    e.dataTransfer.dropEffect = 'move';
+                    dropZone.classList.add('hover'); // Add hover effect
+                });
+
+                dropZone.addEventListener('dragleave', () => {
+                    dropZone.classList.remove('hover'); // Remove hover effect
+                });
+
+                dropZone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    dropZone.classList.remove('hover');
+                    const data = e.dataTransfer.getData('text/plain'); // Get dropped data
+                    handleDragDrop(data); // Handle the drop
+                });
+            }
+
+            // Update navigation button states
+            prevButton.disabled = currentQuestionIndex === 0; // Disable 'Previous' on the first question
+            nextButton.textContent = currentQuestionIndex === questions.length - 1 ? 'Submit Quiz' : 'Next'; // Change text to 'Submit Quiz' on the last question
+        }
+
+        /**
+         * Handles the selection of an MCQ option, provides feedback, and updates score.
+         * @param {HTMLElement} selectedElement The HTML element of the selected option.
+         * @param {string} selectedOption The text content or image URL of the selected option.
+         */
+        function selectOption(selectedElement, selectedOption) {
+            const question = questions[currentQuestionIndex];
+            // Determine if the selected option is correct
+            const isCorrect = (question.type === 'image' && selectedOption === question.answer) ||
+                              (question.type !== 'image' && selectedOption === question.answer);
+
+            // Disable all options after selection to prevent multiple answers
+            Array.from(optionsContainer.children).forEach(option => {
+                option.style.pointerEvents = 'none';
+            });
+
+            if (isCorrect) {
+                selectedElement.classList.add('pulse-green'); // Apply correct animation
+                feedbackMessage.textContent = 'Correct!';
+                feedbackMessage.classList.add('text-green-600');
+                score++; // Increment score
+            } else {
+                selectedElement.classList.add('shake-red'); // Apply wrong animation
+                feedbackMessage.textContent = 'Wrong!';
+                feedbackMessage.classList.add('text-red-600');
+                // Highlight the correct answer
+                Array.from(optionsContainer.children).forEach(option => {
+                    if (option.dataset.option === question.answer) {
+                        option.classList.add('bg-green-200'); // Light green background for correct answer
+                    }
+                });
+            }
+
+            explanationText.textContent = question.explanation; // Display explanation
+            feedbackContainer.classList.remove('hidden'); // Show feedback container
+            feedbackContainer.classList.add(isCorrect ? 'bg-green-100' : 'bg-red-100'); // Set background color based on correctness
+
+            // Mark question as attempted if not already
+            if (!question.attempted) {
+                attemptedQuestions++;
+                question.attempted = true;
+                question.userAnswer = selectedOption; // Store user's chosen answer
+            }
+        }
+
+        /**
+         * Handles the logic for drag-and-drop questions.
+         * @param {string} droppedItem The text content of the item that was dropped into the zone.
+         */
+        function handleDragDrop(droppedItem) {
+            const question = questions[currentQuestionIndex];
+            const isCorrect = droppedItem === question.answer; // Check if dropped item is the correct answer
+
+            dropZone.textContent = droppedItem; // Display the dropped item in the drop zone
+            dropZone.dataset.answer = droppedItem; // Store the dropped item
+
+            // Disable further dragging/dropping for this question
+            Array.from(dragItemsContainer.children).forEach(item => item.setAttribute('draggable', 'false'));
+            dropZone.style.pointerEvents = 'none';
+
+            if (isCorrect) {
+                dropZone.classList.add('drag-correct'); // Apply correct feedback styling
+                feedbackMessage.textContent = 'Correct!';
+                feedbackMessage.classList.add('text-green-600');
+                score++; // Increment score
+            } else {
+                dropZone.classList.add('drag-wrong'); // Apply wrong feedback styling
+                feedbackMessage.textContent = 'Wrong!';
+                feedbackMessage.classList.add('text-red-600');
+                // Display the correct answer in the explanation
+                explanationText.textContent = `The correct answer was "${question.answer}". ${question.explanation}`;
+            }
+
+            // If not already set, display the explanation
+            if (!explanationText.textContent) {
+                explanationText.textContent = question.explanation;
+            }
+            feedbackContainer.classList.remove('hidden'); // Show feedback container
+            feedbackContainer.classList.add(isCorrect ? 'bg-green-100' : 'bg-red-100'); // Set background color based on correctness
+
+            // Mark question as attempted if not already
+            if (!question.attempted) {
+                attemptedQuestions++;
+                question.attempted = true;
+                question.userAnswer = droppedItem; // Store user's chosen answer
+            }
+        }
+
+
+        /**
+         * Updates the visual progress bar and percentage text.
+         */
+        function updateProgressBar() {
+            const progress = (currentQuestionIndex / questions.length) * 100;
+            progressBar.style.width = `${progress}%`; // Set width for animated progress bar
+            progressText.textContent = `${Math.round(progress)}% Complete`; // Update percentage text
+        }
+
+        /**
+         * Starts the quiz timer and updates the display every second.
+         */
+        function startTimer() {
+            const totalSeconds = QUIZ_DURATION_MINUTES * 60;
+            timeElapsed = 0; // Reset time elapsed
+            timerSpan.textContent = formatTime(totalSeconds); // Display initial time
+
+            timerInterval = setInterval(() => {
+                timeElapsed++;
+                const remainingSeconds = totalSeconds - timeElapsed;
+
+                if (remainingSeconds <= 0) {
+                    clearInterval(timerInterval); // Stop timer
+                    timerSpan.textContent = '00:00'; // Display 00:00
+                    submitQuiz(); // Auto-submit when time runs out
+                } else {
+                    timerSpan.textContent = formatTime(remainingSeconds); // Update remaining time
+                }
+            }, 1000); // Update every 1 second
+        }
+
+        /**
+         * Navigates to the next question or submits the quiz if it's the last question.
+         */
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++; // Increment question index
+                loadQuestion(); // Load the next question
+                updateProgressBar(); // Update progress bar
+            } else {
+                submitQuiz(); // If it's the last question, submit the quiz
+            }
+        }
+
+        /**
+         * Navigates to the previous question.
+         */
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--; // Decrement question index
+                loadQuestion(); // Load the previous question
+                updateProgressBar(); // Update progress bar
+            }
+        }
+
+        /**
+         * Submits the quiz, displays results, and sends data to Formspree.
+         */
+        function submitQuiz() {
+            clearInterval(timerInterval); // Stop the timer
+            quizContainer.classList.add('hidden'); // Hide quiz interface
+            resultsContainer.classList.remove('hidden'); // Show results interface
+
+            const quizDurationSeconds = (new Date() - quizStartTime) / 1000; // Calculate total time taken
+
+            // Display results in the results container
+            resultCandidateName.textContent = candidateName;
+            resultScore.textContent = score;
+            resultTimeTaken.textContent = formatTime(quizDurationSeconds);
+            resultAttempted.textContent = attemptedQuestions;
+
+            // Prepare data for Formspree submission
+            const formData = new FormData();
+            formData.append('Candidate Name', candidateName);
+            formData.append('Score', `${score} / ${questions.length}`);
+            formData.append('Time Taken', formatTime(quizDurationSeconds));
+            formData.append('Questions Attempted', attemptedQuestions);
+            formData.append('Quiz Date', new Date().toLocaleDateString());
+
+            // Include details of each question for comprehensive results
+            questions.forEach((q, index) => {
+                formData.append(`Question ${index + 1}`, q.question);
+                formData.append(`User Answer ${index + 1}`, q.userAnswer || 'Not Attempted');
+                formData.append(`Correct Answer ${index + 1}`, q.answer || 'N/A');
+            });
+
+            // Send data to Formspree using fetch API
+            fetch(FORMSPREE_URL, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json' // Request JSON response
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('Quiz results submitted successfully!');
+                } else {
+                    console.error('Failed to submit quiz results.');
+                }
+            })
+            .catch(error => {
+                console.error('Error submitting quiz results:', error);
+            });
+        }
+
+        // --- Event Listeners ---
+
+        // Login button click handler
+        loginButton.addEventListener('click', () => {
+            const id = loginIdInput.value;
+            const password = loginPasswordInput.value;
+
+            if (id === LOGIN_ID && password === LOGIN_PASSWORD) {
+                loginContainer.classList.add('hidden'); // Hide login
+                nameContainer.classList.remove('hidden'); // Show name entry
+                loginError.classList.add('hidden'); // Hide error
+            } else {
+                loginError.classList.remove('hidden'); // Show error
             }
         });
 
-    </script>
+        // Start Quiz button click handler
+        startQuizButton.addEventListener('click', () => {
+            const name = candidateNameInput.value.trim();
+            if (name) {
+                candidateName = name; // Store candidate name
+                nameContainer.classList.add('hidden'); // Hide name entry
+                quizContainer.classList.remove('hidden'); // Show quiz
+                nameError.classList.add('hidden'); // Hide error
+                applySecurityMeasures(); // Apply security measures once quiz starts
+                initializeQuiz(); // Initialize and start the quiz
+            } else {
+                nameError.classList.remove('hidden'); // Show error if name is empty
+            }
+        });
 
+        // Navigation buttons
+        nextButton.addEventListener('click', nextQuestion);
+        prevButton.addEventListener('click', prevQuestion);
+
+        // Retake Quiz button click handler
+        retakeQuizButton.addEventListener('click', () => {
+            resultsContainer.classList.add('hidden'); // Hide results
+            loginContainer.classList.remove('hidden'); // Go back to login for a fresh start
+            // Reset all quiz state variables
+            currentQuestionIndex = 0;
+            score = 0;
+            attemptedQuestions = 0;
+            timeElapsed = 0;
+            candidateName = '';
+            loginIdInput.value = '';
+            loginPasswordInput.value = '';
+            candidateNameInput.value = '';
+            document.body.classList.remove('quiz-active'); // Remove security class
+            clearInterval(timerInterval); // Ensure timer is stopped
+            // Re-generate a new seed for a new quiz instance
+            quizOrderSeed = getDailyQuizSeed();
+            setSeed(quizOrderSeed);
+        });
+
+        // --- Initial Setup on Page Load ---
+        // Initialize unique quiz order seed on page load
+        quizOrderSeed = getDailyQuizSeed();
+        setSeed(quizOrderSeed);
+
+        // Set initial dates for display (before quiz starts)
+        const initialToday = new Date();
+        const initialOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+        liveDateSpan.textContent = initialToday.toLocaleDateString('en-US', initialOptions);
+        updatedDateSpan.textContent = initialToday.toLocaleDateString('en-US', initialOptions);
+
+    </script>
 </body>
 </html>
