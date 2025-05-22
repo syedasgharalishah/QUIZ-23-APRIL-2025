@@ -103,30 +103,6 @@
                 left: auto;
             }
         }
-
-        /* Drag and Drop specific styles */
-        .draggable {
-            cursor: grab; /* Indicate draggable item */
-            touch-action: none; /* Disable default touch actions to prevent scrolling conflicts during drag */
-        }
-        .dropzone {
-            border: 2px dashed #6D6875; /* Dashed border for drop target */
-            min-height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            border-radius: 0.5rem;
-        }
-        .dropzone.hover {
-            background-color: #e0e0e0; /* Highlight on hover/drag-over */
-        }
-        .drag-correct {
-            background-color: #90EE90; /* Green for correct drop */
-        }
-        .drag-wrong {
-            background-color: #FF6B6B; /* Red for wrong drop */
-        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
@@ -174,19 +150,8 @@
         <div id="question-card" class="bg-[#F8F9FA] p-6 rounded-lg shadow-md mb-6">
             <p class="text-lg font-semibold mb-4 text-[#2C3E50]" id="question-number"></p>
             <p class="text-xl mb-6 text-[#2C3E50]" id="question-text"></p>
-            <div id="question-image-container" class="mb-4 hidden">
-                <img id="question-image" src="" alt="Question Image" class="w-full max-h-64 object-contain rounded-md shadow-sm">
-            </div>
             <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 </div>
-            <div id="drag-drop-container" class="hidden flex flex-col items-center justify-center space-y-4">
-                <p class="text-lg font-semibold text-[#2C3E50]">Drag the correct answer to the box:</p>
-                <div id="drag-items" class="flex flex-wrap justify-center gap-4 mb-4">
-                    </div>
-                <div id="drop-zone" class="dropzone w-64 h-20 bg-gray-100 rounded-md flex items-center justify-center text-gray-500">
-                    Drop here
-                </div>
-            </div>
             <div id="feedback-container" class="mt-6 p-4 rounded-md hidden">
                 <p id="feedback-message" class="font-bold"></p>
                 <p id="explanation-text" class="mt-2 text-sm"></p>
@@ -249,12 +214,7 @@
         const progressBar = document.getElementById('progress-bar');
         const questionNumberSpan = document.getElementById('question-number');
         const questionTextPara = document.getElementById('question-text');
-        const questionImageContainer = document.getElementById('question-image-container');
-        const questionImage = document.getElementById('question-image');
         const optionsContainer = document.getElementById('options-container');
-        const dragDropContainer = document.getElementById('drag-drop-container');
-        const dragItemsContainer = document.getElementById('drag-items');
-        const dropZone = document.getElementById('drop-zone');
         const feedbackContainer = document.getElementById('feedback-container');
         const feedbackMessage = document.getElementById('feedback-message');
         const explanationText = document.getElementById('explanation-text');
@@ -361,19 +321,11 @@
             document.body.classList.add('quiz-active');
         }
 
-        /**
-         * Generates a unique ID string, primarily used for drag-and-drop elements.
-         * @returns {string} A unique ID.
-         */
-        function generateUniqueId() {
-            return 'drag-item-' + Math.random().toString(36).substr(2, 9);
-        }
-
         // --- Quiz Data (100 MCQs from PDF and custom interactive questions) ---
+        // All questions are now 'mcq' type.
         // Difficulty: 1 (Easy), 2 (Medium), 3 (Tough)
-        // Type: 'mcq' for multiple choice, 'image' for image-based MCQ, 'drag-drop' for drag and drop
         const rawQuestions = [
-            // General Knowledge (Pages 9-12)
+            // General Knowledge (Pages 9-12, extended to cover more GK topics)
             { id: 'gk1', question: 'Which of the following is the landlocked country?', options: ['Nigeria', 'Kenya', 'Sri Lanka', 'Uganda'], answer: 'Uganda', explanation: 'Uganda is a landlocked country in East Africa. Nigeria, Kenya, and Sri Lanka all have coastlines.', difficulty: 1, type: 'mcq' },
             { id: 'gk2', question: 'Capital of Zimbabwe is:', options: ['Seoul', 'Pretoria', 'Harare', 'None of these'], answer: 'Harare', explanation: 'Harare is the capital and most populous city of Zimbabwe.', difficulty: 1, type: 'mcq' },
             { id: 'gk3', question: 'Communist Revolution took place in Russia in the month of:', options: ['March', 'June', 'October', 'November'], answer: 'October', explanation: 'The October Revolution (also known as the Bolshevik Revolution) occurred in October 1917, according to the Julian calendar then in use in Russia.', difficulty: 2, type: 'mcq' },
@@ -407,16 +359,16 @@
             { id: 'gk31', question: 'What is Choreography?', options: ['Art of dancing', 'Art of music', 'Art of gardening', 'Art of fight'], answer: 'Art of dancing', explanation: 'Choreography is the art of designing sequences of movements.', difficulty: 1, type: 'mcq' },
             { id: 'gk32', question: 'A writ direct to the person detaining another and commanding him to produce the body of the prisoner at a certain time and place with the day and cause of his caption and detention is called:', options: ['Writ of Quo Warrants', 'Writ of Certiorari', 'Writ of Prohibition', 'Writ of Habeas Corpus'], answer: 'Writ of Habeas Corpus', explanation: 'A writ of Habeas Corpus is a legal action that requires a person under arrest to be brought before a judge or into court.', difficulty: 3, type: 'mcq' },
             { id: 'gk33', question: 'Sanchi Stupa is located in:', options: ['Utar Perdesh', 'Madhia Perdesh', 'Banarass', 'Madrass'], answer: 'Madhia Perdesh', explanation: 'The Great Stupa at Sanchi is one of the oldest stone structures in India, located in Madhya Pradesh.', difficulty: 3, type: 'mcq' },
-            { id: 'gk34', question: 'Which of the following woman Prime Ministers has longest tenure?', options: ['Indira Gandhi', 'Banizir Bhutto', 'Bandaranaike', 'None of these'], answer: 'Bandaranaike', explanation: 'Sirimavo Bandaranaike of Sri Lanka holds the record for the longest tenure as a female head of government.', difficulty: 3, type: 'mcq' },
-            { id: 'gk35', question: 'Herry Poter is the famous character of:', options: ['J.K Rowlling', 'J.F Marshal', 'R.V Menin', 'None of these'], answer: 'J.K Rowlling', explanation: 'Harry Potter is the titular character and protagonist of J. K. Rowling\'s series of fantasy novels.', difficulty: 1, type: 'mcq' },
+            { id: 'gk34', question: 'Which of the following woman Prime Ministers has longest tenure?', options: ['Indira Gandhi', 'Benazir Bhutto', 'Bandaranaike', 'None of these'], answer: 'Bandaranaike', explanation: 'Sirimavo Bandaranaike of Sri Lanka holds the record for the longest tenure as a female head of government.', difficulty: 3, type: 'mcq' },
+            { id: 'gk35', question: 'Harry Potter is the famous character of:', options: ['J.K Rowling', 'J.F Marshal', 'R.V Menin', 'None of these'], answer: 'J.K Rowling', explanation: 'Harry Potter is the titular character and protagonist of J. K. Rowling\'s series of fantasy novels.', difficulty: 1, type: 'mcq' },
             { id: 'gk36', question: 'Which of the following civilization were located on the banks of Tigris?', options: ['Indus civilization', 'Samarian civilization', 'Egyptian civilization', 'Greek civilization'], answer: 'Samarian civilization', explanation: 'Mesopotamian civilizations, including Sumerian (Samarian), developed along the Tigris and Euphrates rivers.', difficulty: 2, type: 'mcq' },
-            { id: 'gk37', question: 'Who defeated the Mongols in 14th century?', options: ['Khawarzim Shah', 'Rakn-ud-Din Berber', 'Zaheer-ud-Din Babar', 'None of the above'], answer: 'Rakn-ud-Din Berber', explanation: 'Rukn al-Din Baybars, the Mamluk Sultan of Egypt, famously defeated the Mongols at the Battle of Ain Jalut in 1260.', difficulty: 3, type: 'mcq' },
+            { id: 'gk37', question: 'Who defeated the Mongols in 14th century?', options: ['Khawarzim Shah', 'Rukn-ud-Din Baybars', 'Zaheer-ud-Din Babar', 'None of the above'], answer: 'Rukn-ud-Din Baybars', explanation: 'Rukn al-Din Baybars, the Mamluk Sultan of Egypt, famously defeated the Mongols at the Battle of Ain Jalut in 1260.', difficulty: 3, type: 'mcq' },
             { id: 'gk38', question: 'What is the meaning of "Vishnu"?', options: ['The preserver', 'The helper', 'The destroyer', 'The creator'], answer: 'The preserver', explanation: 'In Hinduism, Vishnu is one of the most important gods, known as the Preserver of the universe.', difficulty: 2, type: 'mcq' },
             { id: 'gk39', question: 'In which year Egypt nationalized Suez Canal?', options: ['1950', '1954', '1956', '1960'], answer: '1956', explanation: 'Egypt nationalized the Suez Canal in 1956, leading to the Suez Crisis.', difficulty: 2, type: 'mcq' },
             { id: 'gk40', question: 'What is "Armageddon"?', options: ['A final battle between nations which will end the world', 'A last day of Universe', 'A name of film', 'None of the above'], answer: 'A final battle between nations which will end the world', explanation: 'Armageddon is a biblical term referring to the site of a final battle between the forces of good and evil.', difficulty: 3, type: 'mcq' },
             { id: 'gk41', question: 'Pinpoint the correct statement?', options: ['Canada has maple leaf on its flag', 'Chow is the type of dog found in China', 'Synagogue is Jewish place of worship', 'All of these'], answer: 'All of these', explanation: 'All the given statements are correct.', difficulty: 2, type: 'mcq' },
             { id: 'gk42', question: 'Skylab was space laboratory launched in 1973. It belonged to:', options: ['USSR', 'USA', 'Britain', 'China'], answer: 'USA', explanation: 'Skylab was the first United States space station, launched by NASA in 1973.', difficulty: 2, type: 'mcq' },
-            { id: 'gk43', question: 'In which year Sky Lab did brock up in the atmosphere and fell back to the earth?', options: ['1977', '1970', '1980', '1979'], answer: '1979', explanation: 'Skylab re-entered Earth\'s atmosphere and disintegrated in 1979.', difficulty: 2, type: 'mcq' },
+            { id: 'gk43', question: 'In which year Sky Lab did break up in the atmosphere and fell back to the earth?', options: ['1977', '1970', '1980', '1979'], answer: '1979', explanation: 'Skylab re-entered Earth\'s atmosphere and disintegrated in 1979.', difficulty: 2, type: 'mcq' },
             { id: 'gk44', question: 'The majority of \'Kurd Population\' is living in:', options: ['Afghanistan', 'Turkey', 'Iraq', 'Jordan'], answer: 'Turkey', explanation: 'Large Kurdish populations reside in Turkey, Iraq, Iran, and Syria.', difficulty: 2, type: 'mcq' },
             { id: 'gk45', question: 'Universal Declaration of Human Rights was adopted by United Nations on:', options: ['10 December 1954', '10 December 1948', '24 October 1945', '1 January 1950'], answer: '10 December 1948', explanation: 'The Universal Declaration of Human Rights was adopted by the UN General Assembly on December 10, 1948.', difficulty: 2, type: 'mcq' },
             { id: 'gk46', question: 'What are called the members of the advisory group of UN Secretary and President?', options: ['Elders', 'Advisors', 'Counselors', 'Delegates'], answer: 'Elders', explanation: 'The term "The Elders" refers to a group of independent global leaders working for peace and human rights, founded by Nelson Mandela.', difficulty: 3, type: 'mcq' },
@@ -424,30 +376,38 @@
             { id: 'gk48', question: 'The human behaviour is the study of:', options: ['Sociology', 'Psychology', 'Anthropology', 'Biology'], answer: 'Psychology', explanation: 'Psychology is the scientific study of mind and behavior.', difficulty: 1, type: 'mcq' },
             { id: 'gk49', question: 'Which is the largest forest in the world?', options: ['Amazon rain forest', 'Congo Basin Forest', 'Taiga Forest', 'Black Forest'], answer: 'Amazon rain forest', explanation: 'The Amazon rainforest is the largest tropical rainforest in the world.', difficulty: 1, type: 'mcq' },
             { id: 'gk50', question: 'Guru Granth Sahib" is the Holy Book of:', options: ['Hinduism', 'Buddhism', 'Sikhism', 'Jainism'], answer: 'Sikhism', explanation: 'Guru Granth Sahib is the central holy scripture of Sikhism.', difficulty: 2, type: 'mcq' },
-            { id: 'gk51', question: 'Which is the largest group in Cambodia?', options: ['Cambodian', 'Vietnamese', 'Chinese', 'Thai'], answer: 'Cambodian', explanation: 'The Khmer people are the largest ethnic group in Cambodia, often referred to as Cambodian.', difficulty: 2, type: 'mcq' },
+            { id: 'gk51', question: 'Which is the largest ethnic group in Cambodia?', options: ['Cambodian', 'Vietnamese', 'Chinese', 'Thai'], answer: 'Cambodian', explanation: 'The Khmer people are the largest ethnic group in Cambodia, often referred to as Cambodian.', difficulty: 2, type: 'mcq' },
             { id: 'gk52', question: 'Long March was the name of:', options: ['Communist retreat', 'Great Wall construction', 'Trade route', 'Ancient invasion'], answer: 'Communist retreat', explanation: 'The Long March was a military retreat undertaken by the Red Army of the Communist Party of China.', difficulty: 2, type: 'mcq' },
             { id: 'gk53', question: 'The secret society that is reputed to commit organized crime founded in Sicily in 1860\'s:', options: ['Mafia', 'Yakuza', 'Triads', 'Cartel'], answer: 'Mafia', explanation: 'The Mafia originated in Sicily, Italy, in the mid-19th century.', difficulty: 2, type: 'mcq' },
             { id: 'gk54', question: 'Which charter King John signed in 1215?', options: ['Bill of Rights', 'Magna Carta', 'Petition of Right', 'Habeas Corpus Act'], answer: 'Magna Carta', explanation: 'Magna Carta is a royal charter of rights agreed to by King John of England at Runnymede in 1215.', difficulty: 2, type: 'mcq' },
             { id: 'gk55', question: 'When did Mercury Project, first manned space programme by USA, carry the first American into space?', options: ['1959', '1961', '1965', '1969'], answer: '1961', explanation: 'Project Mercury was the first human spaceflight program of the United States, with the first American in space in 1961.', difficulty: 2, type: 'mcq' },
-            { id: 'gk56', question: 'Alfred Bernhard Nobel received Nobel Prize from German Government in:', options: ['Chemistry', 'Physics', 'Peace', 'Literature'], answer: 'Chemistry', explanation: 'Alfred Nobel, the founder of the Nobel Prizes, was a chemist, engineer, and inventor.', difficulty: 2, type: 'mcq' },
+            { id: 'gk56', question: 'Alfred Bernhard Nobel received Nobel Prize in:', options: ['Chemistry', 'Physics', 'Peace', 'Literature'], answer: 'Chemistry', explanation: 'Alfred Nobel, the founder of the Nobel Prizes, was a chemist, engineer, and inventor.', difficulty: 2, type: 'mcq' },
             { id: 'gk57', question: 'The first Nobel Prizes were awarded on:', options: ['10 December 1900', '10 December 1901', '10 December 1902', '10 December 1903'], answer: '10 December 1901', explanation: 'The first Nobel Prizes were awarded on December 10, 1901.', difficulty: 2, type: 'mcq' },
             { id: 'gk58', question: 'What was Pan-Islamism, originated in 1880, in Ottoman Empire?', options: ['Movement for uniting the Islamic Nations', 'Movement for Islamic reform', 'Movement for establishing Caliphate', 'Movement for economic cooperation'], answer: 'Movement for uniting the Islamic Nations', explanation: 'Pan-Islamism is a political ideology advocating the unity of Muslims under one Islamic state or supporting a common Islamic nation.', difficulty: 2, type: 'mcq' },
-            { id: 'gk59', question: 'What movement for re-establishing Caliphate?', options: ['Khilafat Movement', 'Wahhabi Movement', 'Salafi Movement', 'Muslim Brotherhood'], answer: 'Khilafat Movement', explanation: 'The Khilafat Movement was an Indian Muslim movement to restore the Ottoman Caliphate.', difficulty: 2, type: 'mcq' },
+            { id: 'gk59', question: 'What movement aimed for re-establishing Caliphate?', options: ['Khilafat Movement', 'Wahhabi Movement', 'Salafi Movement', 'Muslim Brotherhood'], answer: 'Khilafat Movement', explanation: 'The Khilafat Movement was an Indian Muslim movement to restore the Ottoman Caliphate.', difficulty: 2, type: 'mcq' },
             { id: 'gk60', question: 'The largest iceberg was sunk during her maiden voyage from Southampton to New York City, USA in the North Atlantic Ocean in the year:', options: ['1910', '1912', '1914', '1916'], answer: '1912', explanation: 'The Titanic, which sank in 1912 after hitting an iceberg, was the largest ship of its time.', difficulty: 2, type: 'mcq' },
             { id: 'gk61', question: 'What is Tour de France?', options: ['French road race for professional cyclists', 'French car race', 'French horse race', 'French boat race'], answer: 'French road race for professional cyclists', explanation: 'The Tour de France is an annual multiple-stage bicycle race primarily held in France.', difficulty: 1, type: 'mcq' },
             { id: 'gk62', question: 'Vostok I carried first man in space. Vostok I, first in series of Russian spacecraft, took first cosmonaut Vostok I was launched on:', options: ['12 April 1960', '12 April 1961', '12 April 1962', '12 April 1963'], answer: '12 April 1961', explanation: 'Yuri Gagarin became the first man in space aboard Vostok 1 on April 12, 1961.', difficulty: 2, type: 'mcq' },
             { id: 'gk63', question: 'Burglary of watergate in America in 1972 involving President Richard Nixon and his administration is called:', options: ['Watergate scandal', 'Iran-Contra affair', 'Teapot Dome scandal', 'Whitewater controversy'], answer: 'Watergate scandal', explanation: 'The Watergate scandal was a major political scandal that occurred in the United States during the early 1970s, resulting from the break-in at the Democratic National Committee headquarters at the Watergate Office Building.', difficulty: 2, type: 'mcq' },
             { id: 'gk64', question: 'The study, life-cycle, life style of animal management and animal husbandry is called:', options: ['Zoology', 'Botany', 'Ecology', 'Genetics'], answer: 'Zoology', explanation: 'Zoology is the scientific study of animals, including their behavior, life cycles, and management.', difficulty: 1, type: 'mcq' },
-            { id: 'gk65', question: 'What is the length of more China Border?', options: ['3,488 km', '4,380 km', '5,488 km', '6,380 km'], answer: '3,488 km', explanation: 'The length of China\'s land border is approximately 22,117 km (13,743 mi), but the specific reference to "more China Border" might refer to a specific segment or interpretation, with 3,488 km being a common option in such MCQs related to its border with India.', difficulty: 2, type: 'mcq' },
+            { id: 'gk65', question: 'What is the length of the border between China and India (disputed section)?', options: ['3,488 km', '4,380 km', '5,488 km', '6,380 km'], answer: '3,488 km', explanation: 'The length of the disputed border between China and India is approximately 3,488 km.', difficulty: 2, type: 'mcq' },
             { id: 'gk66', question: 'Cyprus gained independence from British in 1960. When was it divided into two parts Turkish Republic in Northern Cyprus and Greek Cyprus?', options: ['1970', '1972', '1974', '1976'], answer: '1974', explanation: 'Cyprus was de facto partitioned into a Greek Cypriot south and a Turkish Cypriot north after the Turkish invasion in 1974.', difficulty: 2, type: 'mcq' },
             { id: 'gk67', question: 'Taxidermy is the art of stuffing of animals and preserving them realistically.', options: ['Hobby of animal collecting', 'Art of preserving animals', 'Art of painting animals', 'Art of hunting animals'], answer: 'Art of preserving animals', explanation: 'Taxidermy is the art of preserving an animal\'s body via mounting or stuffing, for the purpose of display or study.', difficulty: 1, type: 'mcq' },
-            { id: 'gk68', question: 'Louis B Mayer of Metro Goldwyn-Mayer second Academy Award in 1927. How was it given to him?', options: ['Best Picture', 'Best Director', 'Best Actor', 'Good Award'], answer: 'Good Award', explanation: 'Louis B. Mayer received an honorary award at the 1st Academy Awards in 1929 (for 1927/1928 films) for his contributions to the film industry.', difficulty: 2, type: 'mcq' },
-            { id: 'gk69', question: 'What is the term BA?', options: ['Events took place before the Christ', 'Events took place after the Christ', 'Events took place during the Christ', 'Events took place before the birth of Christ'], answer: 'Events took place before the Christ', explanation: 'BA or B.C. (Before Christ) refers to the years before the birth of Jesus Christ.', difficulty: 2, type: 'mcq' },
+            { id: 'gk68', question: 'Louis B Mayer of Metro Goldwyn-Mayer received an honorary Academy Award in 1927 for:', options: ['Best Picture', 'Best Director', 'Best Actor', 'Contributions to the industry'], answer: 'Contributions to the industry', explanation: 'Louis B. Mayer received an honorary award at the 1st Academy Awards in 1929 (for 1927/1928 films) for his contributions to the film industry.', difficulty: 2, type: 'mcq' },
+            { id: 'gk69', question: 'What is the term BC?', options: ['Events took place before the Christ', 'Events took place after the Christ', 'Events took place during the Christ', 'Events took place before the birth of Christ'], answer: 'Events took place before the Christ', explanation: 'BC (Before Christ) refers to the years before the birth of Jesus Christ.', difficulty: 2, type: 'mcq' },
             { id: 'gk70', question: 'What is the term AD?', options: ['Events took place after the Christ', 'Events took place during the Christ', 'Events took place before the Christ', 'Events took place after the death of Christ'], answer: 'Events took place after the Christ', explanation: 'AD (Anno Domini) refers to the years after the birth of Jesus Christ.', difficulty: 2, type: 'mcq' },
             { id: 'gk71', question: 'Who became the first black president of South Africa?', options: ['Nelson Mandela', 'Thabo Mbeki', 'Jacob Zuma', 'Kgalema Motlanthe'], answer: 'Nelson Mandela', explanation: 'Nelson Mandela was an anti-apartheid revolutionary who served as the first president of South Africa from 1994 to 1999.', difficulty: 1, type: 'mcq' },
-            { id: 'gk72', question: 'Amir is radical Islamic military leader who assassinated in 19/09/2001.', options: ['Osama bin Laden', 'Ayman al-Zawahiri', 'Mullah Omar', 'Ahmad Shah Massoud'], answer: 'Ahmad Shah Massoud', explanation: 'Ahmad Shah Massoud was an Afghan political and military leader who was assassinated on September 9, 2001.', difficulty: 3, type: 'mcq' },
+            { id: 'gk72', question: 'Ahmad Shah Massoud, a radical Islamic military leader, was assassinated on:', options: ['September 11, 2001', 'September 9, 2001', 'October 7, 2001', 'December 25, 2001'], answer: 'September 9, 2001', explanation: 'Ahmad Shah Massoud was an Afghan political and military leader who was assassinated on September 9, 2001.', difficulty: 3, type: 'mcq' },
+            { id: 'gk73', question: 'The headquarters of the International Court of Justice is located in:', options: ['New York', 'Geneva', 'The Hague', 'Brussels'], answer: 'The Hague', explanation: 'The International Court of Justice (ICJ) is based at the Peace Palace in The Hague, Netherlands.', difficulty: 2, type: 'mcq' },
+            { id: 'gk74', question: 'Which country is known as the "Land of the Rising Sun"?', options: ['China', 'South Korea', 'Japan', 'Thailand'], answer: 'Japan', explanation: 'Japan is often referred to as the "Land of the Rising Sun" due to its position east of the Asian mainland.', difficulty: 1, type: 'mcq' },
+            { id: 'gk75', question: 'The largest democracy in the world is:', options: ['United States', 'India', 'Indonesia', 'Canada'], answer: 'India', explanation: 'India is the world\'s largest democracy by population.', difficulty: 1, type: 'mcq' },
+            { id: 'gk76', question: 'The ancient city of Troy was located in what modern-day country?', options: ['Greece', 'Italy', 'Turkey', 'Egypt'], answer: 'Turkey', explanation: 'The archaeological site of Troy is located in present-day Turkey.', difficulty: 2, type: 'mcq' },
+            { id: 'gk77', question: 'The term "Iron Curtain" was coined by:', options: ['Winston Churchill', 'Joseph Stalin', 'Franklin D. Roosevelt', 'Harry S. Truman'], answer: 'Winston Churchill', explanation: 'Winston Churchill used the phrase "Iron Curtain" to describe the division between Western and Eastern Europe during the Cold War.', difficulty: 2, type: 'mcq' },
+            { id: 'gk78', question: 'Which continent is the driest?', options: ['Africa', 'Asia', 'Australia', 'Antarctica'], answer: 'Antarctica', explanation: 'Antarctica is the driest continent, with very little precipitation.', difficulty: 1, type: 'mcq' },
+            { id: 'gk79', question: 'The Great Barrier Reef is located off the coast of:', options: ['Brazil', 'Australia', 'South Africa', 'Mexico'], answer: 'Australia', explanation: 'The Great Barrier Reef is the world\'s largest coral reef system, located off the coast of Queensland, Australia.', difficulty: 1, type: 'mcq' },
+            { id: 'gk80', question: 'The highest mountain in Africa is:', options: ['Mount Everest', 'Mount Kilimanjaro', 'Mount Fuji', 'Mount Blanc'], answer: 'Mount Kilimanjaro', explanation: 'Mount Kilimanjaro is the highest mountain in Africa and the highest single free-standing mountain in the world.', difficulty: 2, type: 'mcq' },
 
-            // English (Pages 472-473, 494-495) - Synonyms & Foreign Phrases
+            // English (Synonyms, Antonyms, Analogies, Sentence Completion)
             { id: 'eng1', question: 'Abundant means:', options: ['Scarce', 'Plentiful', 'Rare', 'Limited'], answer: 'Plentiful', explanation: 'Abundant means existing or available in large quantities; plentiful.', difficulty: 1, type: 'mcq' },
             { id: 'eng2', question: 'Adversity means:', options: ['Prosperity', 'Fortune', 'Misfortune', 'Success'], answer: 'Misfortune', explanation: 'Adversity means difficulties; misfortune.', difficulty: 2, type: 'mcq' },
             { id: 'eng3', question: 'Benevolent means:', options: ['Cruel', 'Kind', 'Selfish', 'Malicious'], answer: 'Kind', explanation: 'Benevolent means well meaning and kindly.', difficulty: 1, type: 'mcq' },
@@ -463,8 +423,28 @@
             { id: 'eng13', question: 'De facto means:', options: ['By law', 'In theory', 'In reality', 'Officially'], answer: 'In reality', explanation: 'De facto means in fact, or in effect, whether by right or not.', difficulty: 2, type: 'mcq' },
             { id: 'eng14', question: 'Ex officio means:', options: ['By choice', 'By virtue of office', 'By custom', 'By law'], answer: 'By virtue of office', explanation: 'Ex officio means by virtue of one\'s position or office.', difficulty: 2, type: 'mcq' },
             { id: 'eng15', question: 'Ipso facto means:', options: ['By chance', 'By design', 'By the fact itself', 'By accident'], answer: 'By the fact itself', explanation: 'Ipso facto means by the fact itself; by the very nature of the case.', difficulty: 3, type: 'mcq' },
+            { id: 'eng16', question: 'The antonym of "Ameliorate" is:', options: ['Improve', 'Worsen', 'Enhance', 'Mitigate'], answer: 'Worsen', explanation: 'Ameliorate means to make (something bad or unsatisfactory) better. Its antonym is worsen.', difficulty: 3, type: 'mcq' },
+            { id: 'eng17', question: 'Choose the correct synonym for "Ubiquitous":', options: ['Rare', 'Common', 'Scarce', 'Limited'], answer: 'Common', explanation: 'Ubiquitous means present, appearing, or found everywhere. Common is its synonym.', difficulty: 2, type: 'mcq' },
+            { id: 'eng18', question: 'Complete the analogy: Architect : Building :: Sculptor : ?', options: ['Paint', 'Statue', 'Canvas', 'Clay'], answer: 'Statue', explanation: 'An architect designs a building, and a sculptor creates a statue.', difficulty: 2, type: 'mcq' },
+            { id: 'eng19', question: 'The word "Ephemeral" means:', options: ['Permanent', 'Lasting', 'Short-lived', 'Eternal'], answer: 'Short-lived', explanation: 'Ephemeral means lasting for a very short time.', difficulty: 3, type: 'mcq' },
+            { id: 'eng20', question: 'Fill in the blank: He was so tired that he could barely keep his eyes _______.', options: ['closed', 'open', 'shut', 'blinking'], answer: 'open', explanation: 'The phrase "keep his eyes open" implies staying awake or alert.', difficulty: 1, type: 'mcq' },
+            { id: 'eng21', question: 'The antonym of "Pernicious" is:', options: ['Harmful', 'Beneficial', 'Destructive', 'Malicious'], answer: 'Beneficial', explanation: 'Pernicious means having a harmful effect, especially in a gradual or subtle way. Its antonym is beneficial.', difficulty: 3, type: 'mcq' },
+            { id: 'eng22', question: 'Choose the correct synonym for "Profligate":', options: ['Thrifty', 'Extravagant', 'Frugal', 'Economical'], answer: 'Extravagant', explanation: 'Profligate means recklessly extravagant or wasteful in the use of resources.', difficulty: 3, type: 'mcq' },
+            { id: 'eng23', question: 'Complete the analogy: Pen : Write :: Knife : ?', options: ['Cut', 'Eat', 'Stab', 'Cook'], answer: 'Cut', explanation: 'A pen is used to write, and a knife is used to cut.', difficulty: 1, type: 'mcq' },
+            { id: 'eng24', question: 'The word "Sycophant" means:', options: ['Leader', 'Follower', 'Flatterer', 'Critic'], answer: 'Flatterer', explanation: 'A sycophant is a person who acts obsequiously toward someone important in order to gain advantage.', difficulty: 3, type: 'mcq' },
+            { id: 'eng25', question: 'Fill in the blank: She was ______ by the sudden noise.', options: ['startled', 'calmed', 'relaxed', 'soothed'], answer: 'startled', explanation: 'Startled means feeling or showing sudden shock or alarm.', difficulty: 2, type: 'mcq' },
+            { id: 'eng26', question: 'The antonym of "Cacophony" is:', options: ['Harmony', 'Noise', 'Discord', 'Clamor'], answer: 'Harmony', explanation: 'Cacophony means a harsh, discordant mixture of sounds. Its antonym is harmony.', difficulty: 3, type: 'mcq' },
+            { id: 'eng27', question: 'Choose the correct synonym for "Parsimonious":', options: ['Generous', 'Extravagant', 'Stingy', 'Bountiful'], answer: 'Stingy', explanation: 'Parsimonious means unwilling to spend money or use resources; stingy or frugal.', difficulty: 3, type: 'mcq' },
+            { id: 'eng28', question: 'Complete the analogy: Finger : Hand :: Toe : ?', options: ['Arm', 'Leg', 'Foot', 'Knee'], answer: 'Foot', explanation: 'A finger is part of a hand, and a toe is part of a foot.', difficulty: 1, type: 'mcq' },
+            { id: 'eng29', question: 'The word "Gregarious" means:', options: ['Shy', 'Introverted', 'Sociable', 'Reserved'], answer: 'Sociable', explanation: 'Gregarious means (of a person) fond of company; sociable.', difficulty: 2, type: 'mcq' },
+            { id: 'eng30', question: 'Fill in the blank: The old house was in a state of _______.', options: ['repair', 'disrepair', 'renovation', 'perfection'], answer: 'disrepair', explanation: 'Disrepair means the state of being broken or in poor condition.', difficulty: 2, type: 'mcq' },
+            { id: 'eng31', question: 'The antonym of "Obfuscate" is:', options: ['Clarify', 'Confuse', 'Obscure', 'Complicate'], answer: 'Clarify', explanation: 'Obfuscate means to make obscure, unclear, or unintelligible. Its antonym is clarify.', difficulty: 3, type: 'mcq' },
+            { id: 'eng32', question: 'Choose the correct synonym for "Alacrity":', options: ['Reluctance', 'Hesitation', 'Eagerness', 'Slowness'], answer: 'Eagerness', explanation: 'Alacrity means brisk and cheerful readiness.', difficulty: 3, type: 'mcq' },
+            { id: 'eng33', question: 'Complete the analogy: Pilot : Airplane :: Driver : ?', options: ['Car', 'Road', 'Wheel', 'Engine'], answer: 'Car', explanation: 'A pilot operates an airplane, and a driver operates a car.', difficulty: 1, type: 'mcq' },
+            { id: 'eng34', question: 'The word "Paucity" means:', options: ['Abundance', 'Scarcity', 'Plenty', 'Sufficiency'], answer: 'Scarcity', explanation: 'Paucity means the presence of something only in small or insufficient quantities or amounts; scarcity.', difficulty: 2, type: 'mcq' },
+            { id: 'eng35', question: 'Fill in the blank: He was ______ to admit his mistake.', options: ['eager', 'reluctant', 'willing', 'happy'], answer: 'reluctant', explanation: 'Reluctant means unwilling and hesitant.', difficulty: 2, type: 'mcq' },
 
-            // General Abilities (Pages 498-502) - Analogies and basic math/IQ
+            // General Abilities (Logical Reasoning, Series, Basic Math)
             { id: 'ga1', question: 'Bird : Nest :: Dog : ?', options: ['Tree', 'House', 'Kennel', 'Cave'], answer: 'Kennel', explanation: 'A bird lives in a nest, and a dog lives in a kennel.', difficulty: 1, type: 'mcq' },
             { id: 'ga2', question: 'Doctor : Hospital :: Teacher : ?', options: ['Student', 'Book', 'School', 'Classroom'], answer: 'School', explanation: 'A doctor works in a hospital, and a teacher works in a school.', difficulty: 1, type: 'mcq' },
             { id: 'ga3', question: 'Day : Night :: White : ?', options: ['Red', 'Blue', 'Black', 'Green'], answer: 'Black', explanation: 'Night is the opposite of day, and black is the opposite of white.', difficulty: 1, type: 'mcq' },
@@ -475,222 +455,40 @@
             { id: 'ga8', question: 'Car : Road :: Train : ?', options: ['Station', 'Track', 'Engine', 'Platform'], answer: 'Track', explanation: 'A car moves on a road, and a train moves on a track.', difficulty: 1, type: 'mcq' },
             { id: 'ga9', question: 'Knife : Cut :: Pen : ?', options: ['Draw', 'Read', 'Write', 'Erase'], answer: 'Write', explanation: 'A knife is used to cut, and a pen is used to write.', difficulty: 1, type: 'mcq' },
             { id: 'ga10', question: 'Sun : Day :: Moon : ?', options: ['Star', 'Night', 'Sky', 'Light'], answer: 'Night', explanation: 'The sun is associated with day, and the moon is associated with night.', difficulty: 1, type: 'mcq' },
+            { id: 'ga11', question: 'What comes next in the sequence: 2, 4, 8, 16, ?', options: ['20', '24', '32', '64'], answer: '32', explanation: 'This is a geometric progression where each number is twice the previous one (2*2=4, 4*2=8, etc.). So, 16*2=32.', difficulty: 1, type: 'mcq' },
+            { id: 'ga12', question: 'If a car travels at 60 km/h, how long will it take to cover 180 km?', options: ['2 hours', '3 hours', '4 hours', '5 hours'], answer: '3 hours', explanation: 'Time = Distance / Speed = 180 km / 60 km/h = 3 hours.', difficulty: 1, type: 'mcq' },
+            { id: 'ga13', question: 'Which number is the odd one out: 3, 5, 7, 9, 11?', options: ['3', '5', '7', '9'], answer: '9', explanation: 'All other numbers are prime numbers, while 9 is a composite number (3x3).', difficulty: 2, type: 'mcq' },
+            { id: 'ga14', question: 'Complete the series: A, C, E, G, ?', options: ['H', 'I', 'J', 'K'], answer: 'I', explanation: 'The series follows skipping one letter (A, skip B, C, skip D, E...). So, after G, skip H, then I.', difficulty: 1, type: 'mcq' },
+            { id: 'ga15', question: 'If 5 men can build a wall in 10 days, how many days will 10 men take to build the same wall?', options: ['2 days', '5 days', '10 days', '20 days'], answer: '5 days', explanation: 'This is an inverse proportion problem. (Men1 * Days1) = (Men2 * Days2). So, (5 * 10) = (10 * Days2) => 50 = 10 * Days2 => Days2 = 5.', difficulty: 2, type: 'mcq' },
+            { id: 'ga16', question: 'What is 15% of 200?', options: ['15', '20', '30', '40'], answer: '30', explanation: '15% of 200 = (15/100) * 200 = 0.15 * 200 = 30.', difficulty: 1, type: 'mcq' },
+            { id: 'ga17', question: 'Find the missing number: 1, 4, 9, 16, ?', options: ['20', '25', '30', '36'], answer: '25', explanation: 'This is a series of perfect squares (1^2, 2^2, 3^2, 4^2). The next is 5^2 = 25.', difficulty: 1, type: 'mcq' },
+            { id: 'ga18', question: 'If "CAT" is coded as "3120", how is "DOG" coded?', options: ['4157', '41517', '41507', '41510'], answer: '4157', explanation: 'C=3, A=1, T=20. So D=4, O=15, G=7. Thus, DOG = 4157.', difficulty: 2, type: 'mcq' },
+            { id: 'ga19', question: 'A sum of money doubles itself in 5 years at simple interest. In how many years will it become four times?', options: ['10 years', '15 years', '20 years', '25 years'], answer: '15 years', explanation: 'If it doubles in 5 years, it means 100% interest in 5 years. To become four times (300% interest), it will take 3 * 5 = 15 years.', difficulty: 3, type: 'mcq' },
+            { id: 'ga20', question: 'Which is the largest prime number less than 100?', options: ['91', '93', '97', '99'], answer: '97', explanation: '97 is a prime number, meaning it is only divisible by 1 and itself. 91 (7x13), 93 (3x31), 99 (9x11) are not prime.', difficulty: 2, type: 'mcq' },
 
-            // Image-based Questions (10 questions)
-            {
-                id: 'image1',
-                question: 'Which famous monument is depicted here?',
-                image: 'https://placehold.co/400x200/6D6875/FFFFFF?text=Eiffel+Tower',
-                options: ['Statue of Liberty', 'Eiffel Tower', 'Leaning Tower of Pisa', 'Big Ben'],
-                answer: 'Eiffel Tower',
-                explanation: 'The image shows the Eiffel Tower, a famous landmark in Paris, France.',
-                difficulty: 2,
-                type: 'image'
-            },
-            {
-                id: 'image2',
-                question: 'Which of these flags belongs to Canada?',
-                image: 'https://placehold.co/400x200/2C3E50/FFFFFF?text=Flag+Placeholder',
-                options: [
-                    'https://placehold.co/100x60/FF0000/FFFFFF?text=USA', // Placeholder for USA flag
-                    'https://placehold.co/100x60/0000FF/FFFFFF?text=UK', // Placeholder for UK flag
-                    'https://placehold.co/100x60/FF0000/FFFFFF?text=Canada', // Placeholder for Canada flag
-                    'https://placehold.co/100x60/00FF00/FFFFFF?text=Brazil' // Placeholder for Brazil flag
-                ],
-                answer: 'https://placehold.co/100x60/FF0000/FFFFFF?text=Canada',
-                explanation: 'The Canadian flag features a red maple leaf on a white field, flanked by red bars.',
-                difficulty: 2,
-                type: 'image'
-            },
-            {
-                id: 'image3',
-                question: 'What is the name of this famous bridge?',
-                image: 'https://placehold.co/400x200/6D6875/FFFFFF?text=Golden+Gate+Bridge',
-                options: ['London Bridge', 'Brooklyn Bridge', 'Golden Gate Bridge', 'Sydney Harbour Bridge'],
-                answer: 'Golden Gate Bridge',
-                explanation: 'The image shows the Golden Gate Bridge, a suspension bridge spanning the Golden Gate strait in California, USA.',
-                difficulty: 2,
-                type: 'image'
-            },
-            {
-                id: 'image4',
-                question: 'This iconic building is located in which city?',
-                image: 'https://placehold.co/400x200/2C3E50/FFFFFF?text=Burj+Khalifa',
-                options: ['New York', 'Shanghai', 'Dubai', 'Tokyo'],
-                answer: 'Dubai',
-                explanation: 'The image shows the Burj Khalifa, the tallest building in the world, located in Dubai, United Arab Emirates.',
-                difficulty: 2,
-                type: 'image'
-            },
-            {
-                id: 'image5',
-                question: 'Identify the animal shown, known for its speed.',
-                image: 'https://placehold.co/400x200/6D6875/FFFFFF?text=Cheetah',
-                options: ['Lion', 'Tiger', 'Cheetah', 'Leopard'],
-                answer: 'Cheetah',
-                explanation: 'The image shows a cheetah, the fastest land animal.',
-                difficulty: 1,
-                type: 'image'
-            },
-            {
-                id: 'image6',
-                question: 'Which of these is the flag of Japan?',
-                image: 'https://placehold.co/400x200/2C3E50/FFFFFF?text=Flag+Placeholder',
-                options: [
-                    'https://placehold.co/100x60/FF0000/FFFFFF?text=China',
-                    'https://placehold.co/100x60/FF0000/FFFFFF?text=Japan', // Placeholder for Japan flag
-                    'https://placehold.co/100x60/00FF00/FFFFFF?text=S.Korea',
-                    'https://placehold.co/100x60/0000FF/FFFFFF?text=India'
-                ],
-                answer: 'https://placehold.co/100x60/FF0000/FFFFFF?text=Japan',
-                explanation: 'The flag of Japan features a red disc on a white background.',
-                difficulty: 1,
-                type: 'image'
-            },
-            {
-                id: 'image7',
-                question: 'This image shows a famous historical figure. Who is it?',
-                image: 'https://placehold.co/400x200/6D6875/FFFFFF?text=Abraham+Lincoln',
-                options: ['George Washington', 'Thomas Jefferson', 'Abraham Lincoln', 'Theodore Roosevelt'],
-                answer: 'Abraham Lincoln',
-                explanation: 'The image depicts Abraham Lincoln, the 16th President of the United States.',
-                difficulty: 2,
-                type: 'image'
-            },
-            {
-                id: 'image8',
-                question: 'This natural wonder is known as the world\'s largest waterfall. What is its name?',
-                image: 'https://placehold.co/400x200/2C3E50/FFFFFF?text=Niagara+Falls',
-                options: ['Angel Falls', 'Victoria Falls', 'Niagara Falls', 'Iguazu Falls'],
-                answer: 'Niagara Falls',
-                explanation: 'The image shows Niagara Falls, a collective name for three waterfalls that straddle the international border between Canada and the United States.',
-                difficulty: 2,
-                type: 'image'
-            },
-            {
-                id: 'image9',
-                question: 'This image represents a common scientific symbol. What does it stand for?',
-                image: 'https://placehold.co/400x200/6D6875/FFFFFF?text=Atom+Symbol',
-                options: ['Energy', 'Light', 'Atom', 'Sound'],
-                answer: 'Atom',
-                explanation: 'The image displays a stylized representation of an atom, a fundamental unit of matter.',
-                difficulty: 2,
-                type: 'image'
-            },
-            {
-                id: 'image10',
-                question: 'Which famous river is depicted here?',
-                image: 'https://placehold.co/400x200/2C3E50/FFFFFF?text=Nile+River',
-                options: ['Amazon River', 'Yangtze River', 'Nile River', 'Mississippi River'],
-                answer: 'Nile River',
-                explanation: 'The image shows the Nile River, one of the longest rivers in the world, flowing through northeastern Africa.',
-                difficulty: 1,
-                type: 'image'
-            },
+            // Additional Medium and Tough GK Questions to reach 100
+            { id: 'gk81', question: 'The capital of Australia is:', options: ['Sydney', 'Melbourne', 'Canberra', 'Perth'], answer: 'Canberra', explanation: 'Canberra is the capital city of Australia.', difficulty: 1, type: 'mcq' },
+            { id: 'gk82', question: 'The deepest point in the world\'s oceans is the:', options: ['Mariana Trench', 'Puerto Rico Trench', 'Java Trench', 'Kermadec Trench'], answer: 'Mariana Trench', explanation: 'The Mariana Trench, located in the western Pacific Ocean, is the deepest oceanic trench on Earth.', difficulty: 2, type: 'mcq' },
+            { id: 'gk83', question: 'Who wrote "War and Peace"?', options: ['Leo Tolstoy', 'Fyodor Dostoevsky', 'Anton Chekhov', 'Ivan Turgenev'], answer: 'Leo Tolstoy', explanation: '"War and Peace" is a novel by the Russian author Leo Tolstoy.', difficulty: 2, type: 'mcq' },
+            { id: 'gk84', question: 'The currency of Japan is the:', options: ['Yuan', 'Won', 'Yen', 'Rupee'], answer: 'Yen', explanation: 'The official currency of Japan is the Japanese Yen.', difficulty: 1, type: 'mcq' },
+            { id: 'gk85', question: 'The largest desert in Asia is the:', options: ['Sahara Desert', 'Gobi Desert', 'Arabian Desert', 'Thar Desert'], answer: 'Gobi Desert', explanation: 'The Gobi Desert is the largest desert in Asia.', difficulty: 2, type: 'mcq' },
+            { id: 'gk86', question: 'The chemical symbol for water is:', options: ['CO2', 'O2', 'H2O', 'NaCl'], answer: 'H2O', explanation: 'H2O is the chemical formula for water, indicating two hydrogen atoms and one oxygen atom.', difficulty: 1, type: 'mcq' },
+            { id: 'gk87', question: 'The first man to step on the Moon was:', options: ['Buzz Aldrin', 'Yuri Gagarin', 'Neil Armstrong', 'Michael Collins'], answer: 'Neil Armstrong', explanation: 'Neil Armstrong was the first person to walk on the Moon on July 20, 1969.', difficulty: 1, type: 'mcq' },
+            { id: 'gk88', question: 'Which planet is known as the "Red Planet"?', options: ['Venus', 'Mars', 'Jupiter', 'Saturn'], answer: 'Mars', explanation: 'Mars is often called the "Red Planet" due to its reddish appearance caused by iron oxide on its surface.', difficulty: 1, type: 'mcq' },
+            { id: 'gk89', question: 'The longest river in the world is the:', options: ['Amazon River', 'Nile River', 'Yangtze River', 'Mississippi River'], answer: 'Nile River', explanation: 'The Nile River is generally considered the longest river in the world.', difficulty: 2, type: 'mcq' },
+            { id: 'gk90', question: 'The capital of Spain is:', options: ['Barcelona', 'Lisbon', 'Madrid', 'Rome'], answer: 'Madrid', explanation: 'Madrid is the capital and most populous city of Spain.', difficulty: 1, type: 'mcq' },
+            { id: 'gk91', question: 'The process by which plants make their own food is called:', options: ['Respiration', 'Transpiration', 'Photosynthesis', 'Germination'], answer: 'Photosynthesis', explanation: 'Photosynthesis is the process used by plants, algae and cyanobacteria to convert light energy into chemical energy.', difficulty: 1, type: 'mcq' },
+            { id: 'gk92', question: 'Who was the first female Prime Minister of Pakistan?', options: ['Fatima Jinnah', 'Benazir Bhutto', 'Begum Ra\'ana Liaquat Ali Khan', 'Hina Rabbani Khar'], answer: 'Benazir Bhutto', explanation: 'Benazir Bhutto was the first woman to head a democratic government in a Muslim-majority country.', difficulty: 2, type: 'mcq' },
+            { id: 'gk93', question: 'The largest organ in the human body is the:', options: ['Heart', 'Brain', 'Skin', 'Liver'], answer: 'Skin', explanation: 'The skin is the largest organ of the human body.', difficulty: 1, type: 'mcq' },
+            { id: 'gk94', question: 'The year in which World War I began was:', options: ['1910', '1914', '1918', '1922'], answer: '1914', explanation: 'World War I began on July 28, 1914.', difficulty: 2, type: 'mcq' },
+            { id: 'gk95', question: 'The chemical symbol for Gold is:', options: ['Ag', 'Fe', 'Au', 'Cu'], answer: 'Au', explanation: 'Au is the chemical symbol for Gold, derived from its Latin name, aurum.', difficulty: 1, type: 'mcq' },
+            { id: 'gk96', question: 'The inventor of the telephone was:', options: ['Thomas Edison', 'Alexander Graham Bell', 'Nikola Tesla', 'Guglielmo Marconi'], answer: 'Alexander Graham Bell', explanation: 'Alexander Graham Bell is widely credited with inventing the first practical telephone.', difficulty: 2, type: 'mcq' },
+            { id: 'gk97', question: 'The study of earthquakes is called:', options: ['Geology', 'Meteorology', 'Seismology', 'Volcanology'], answer: 'Seismology', explanation: 'Seismology is the scientific study of earthquakes and the propagation of elastic waves through the Earth or through other planet-like bodies.', difficulty: 2, type: 'mcq' },
+            { id: 'gk98', question: 'The largest continent by area is:', options: ['Africa', 'Europe', 'Asia', 'North America'], answer: 'Asia', explanation: 'Asia is the largest continent in the world by both land area and population.', difficulty: 1, type: 'mcq' },
+            { id: 'gk99', question: 'The capital of France is:', options: ['Berlin', 'London', 'Rome', 'Paris'], answer: 'Paris', explanation: 'Paris is the capital and most populous city of France.', difficulty: 1, type: 'mcq' },
+            { id: 'gk100', question: 'Which famous scientist developed the theory of relativity?', options: ['Isaac Newton', 'Albert Einstein', 'Galileo Galilei', 'Stephen Hawking'], answer: 'Albert Einstein', explanation: 'Albert Einstein developed the theory of relativity, one of the two pillars of modern physics.', difficulty: 2, type: 'mcq' },
 
-            // Drag and Drop Questions (10 questions)
-            {
-                id: 'dragdrop1',
-                question: 'Drag the capital of Pakistan to the correct country name.',
-                type: 'drag-drop',
-                dragItems: ['Islamabad', 'New Delhi', 'Beijing', 'Dhaka'],
-                dropTarget: 'Pakistan',
-                answer: 'Islamabad',
-                explanation: 'Islamabad is the capital city of Pakistan.',
-                difficulty: 2
-            },
-            {
-                id: 'dragdrop2',
-                question: 'Drag the largest continent to the box.',
-                type: 'drag-drop',
-                dragItems: ['Europe', 'Asia', 'Africa', 'North America'],
-                dropTarget: 'Largest Continent',
-                answer: 'Asia',
-                explanation: 'Asia is the largest continent in the world by both land area and population.',
-                difficulty: 1
-            },
-            {
-                id: 'dragdrop3',
-                question: 'Drag the chemical symbol for Gold to the box.',
-                type: 'drag-drop',
-                dragItems: ['Ag', 'Fe', 'Au', 'Cu'],
-                dropTarget: 'Gold Symbol',
-                answer: 'Au',
-                explanation: 'Au is the chemical symbol for Gold, derived from its Latin name, aurum.',
-                difficulty: 2
-            },
-            {
-                id: 'dragdrop4',
-                question: 'Drag the author of \'Pride and Prejudice\' to the box.',
-                type: 'drag-drop',
-                dragItems: ['Charles Dickens', 'Jane Austen', 'William Shakespeare', 'Mark Twain'],
-                dropTarget: 'Author',
-                answer: 'Jane Austen',
-                explanation: 'Jane Austen was an English novelist known primarily for her six major novels, including "Pride and Prejudice."',
-                difficulty: 2
-            },
-            {
-                id: 'dragdrop5',
-                question: 'Drag the planet closest to the Sun to the box.',
-                type: 'drag-drop',
-                dragItems: ['Earth', 'Mars', 'Venus', 'Mercury'],
-                dropTarget: 'Closest Planet',
-                answer: 'Mercury',
-                explanation: 'Mercury is the smallest planet in our solar system and the closest to the Sun.',
-                difficulty: 1
-            },
-            {
-                id: 'dragdrop6',
-                question: 'Drag the country known as the \'Land of the Rising Sun\' to the box.',
-                type: 'drag-drop',
-                dragItems: ['China', 'South Korea', 'Japan', 'Thailand'],
-                dropTarget: 'Country Name',
-                answer: 'Japan',
-                explanation: 'Japan is often referred to as the "Land of the Rising Sun" due to its position east of the Asian mainland.',
-                difficulty: 1
-            },
-            {
-                id: 'dragdrop7',
-                question: 'Drag the largest desert in the world to the box.',
-                type: 'drag-drop',
-                dragItems: ['Sahara', 'Gobi', 'Arabian', 'Antarctic'],
-                dropTarget: 'Largest Desert',
-                answer: 'Antarctic',
-                explanation: 'The Antarctic Polar Desert is the largest desert in the world, covering most of the continent of Antarctica.',
-                difficulty: 2
-            },
-            {
-                id: 'dragdrop8',
-                question: 'Drag the longest river in the world to the box.',
-                type: 'drag-drop',
-                dragItems: ['Amazon', 'Yangtze', 'Nile', 'Mississippi'],
-                dropTarget: 'Longest River',
-                answer: 'Nile',
-                explanation: 'The Nile River is generally considered the longest river in the world.',
-                difficulty: 2
-            },
-            {
-                id: 'dragdrop9',
-                question: 'Drag the term for a word opposite in meaning to another word.',
-                type: 'drag-drop',
-                dragItems: ['Synonym', 'Homonym', 'Antonym', 'Acronym'],
-                dropTarget: 'Opposite Meaning',
-                answer: 'Antonym',
-                explanation: 'An antonym is a word that means the opposite of another word.',
-                difficulty: 1
-            },
-            {
-                id: 'dragdrop10',
-                question: 'Drag the year Pakistan gained independence to the box.',
-                type: 'drag-drop',
-                dragItems: ['1947', '1950', '1945', '1960'],
-                dropTarget: 'Independence Year',
-                answer: '1947',
-                explanation: 'Pakistan gained independence from British rule on August 14, 1947.',
-                difficulty: 2
-            },
-
-            // Today's Special Question (1 question)
+            // Today's Special Question (1 question) - Must be an MCQ
             {
                 id: 'special-q-1',
                 question: 'What is the largest ocean on Earth?',
@@ -710,21 +508,16 @@
          * and sets up the first question.
          */
         function initializeQuiz() {
-            // Separate questions by difficulty and type
-            const easyMCQs = rawQuestions.filter(q => q.difficulty === 1 && q.type === 'mcq' && !q.isSpecial);
-            const mediumMCQs = rawQuestions.filter(q => q.difficulty === 2 && q.type === 'mcq');
-            const toughMCQs = rawQuestions.filter(q => q.difficulty === 3 && q.type === 'mcq');
-
-            const imageQuestions = rawQuestions.filter(q => q.type === 'image');
-            const dragDropQuestions = rawQuestions.filter(q => q.type === 'drag-drop');
+            // Separate questions by difficulty
+            const easyQuestions = rawQuestions.filter(q => q.difficulty === 1 && !q.isSpecial);
+            const mediumQuestions = rawQuestions.filter(q => q.difficulty === 2 && !q.isSpecial);
+            const toughQuestions = rawQuestions.filter(q => q.difficulty === 3 && !q.isSpecial);
             const specialQuestion = rawQuestions.find(q => q.isSpecial);
 
             // Shuffle each pool independently
-            shuffleArray(easyMCQs);
-            shuffleArray(mediumMCQs);
-            shuffleArray(toughMCQs);
-            shuffleArray(imageQuestions);
-            shuffleArray(dragDropQuestions);
+            shuffleArray(easyQuestions);
+            shuffleArray(mediumQuestions);
+            shuffleArray(toughQuestions);
 
             // Assemble the final 100 questions
             questions = [];
@@ -737,56 +530,47 @@
             }
 
             // Distribute questions to meet the 100 count and difficulty targets
-            // Prioritize filling the required types (image, drag-drop) first within difficulty
-            let easyCount = 0;
-            let mediumCount = 0;
-            let toughCount = 0;
+            // Target: 10 Easy, 50 Medium, 40 Tough
+            const targetEasy = 10;
+            const targetMedium = 50;
+            const targetTough = 40;
 
-            // Add image questions (aim for 10)
-            for (let i = 0; i < Math.min(10, imageQuestions.length); i++) {
-                questions.push(imageQuestions[i]);
-                if (imageQuestions[i].difficulty === 1) easyCount++;
-                else if (imageQuestions[i].difficulty === 2) mediumCount++;
-                else toughCount++;
+            let currentEasyCount = 0;
+            let currentMediumCount = 0;
+            let currentToughCount = 0;
+
+            // Account for special question's difficulty
+            if (specialQuestion) {
+                if (specialQuestion.difficulty === 1) currentEasyCount++;
+                else if (specialQuestion.difficulty === 2) currentMediumCount++;
+                else currentToughCount++;
             }
 
-            // Add drag-drop questions (aim for 10)
-            for (let i = 0; i < Math.min(10, dragDropQuestions.length); i++) {
-                questions.push(dragDropQuestions[i]);
-                if (dragDropQuestions[i].difficulty === 1) easyCount++;
-                else if (dragDropQuestions[i].difficulty === 2) mediumCount++;
-                else toughCount++;
+            // Add easy questions
+            for (let i = 0; currentEasyCount < targetEasy && i < easyQuestions.length; i++) {
+                questions.push(easyQuestions[i]);
+                currentEasyCount++;
             }
 
-            // Fill remaining easy questions (target 10 total easy)
-            for (let i = 0; easyCount < 10 && i < easyMCQs.length; i++) {
-                if (!questions.some(q => q.id === easyMCQs[i].id)) { // Avoid duplicates
-                    questions.push(easyMCQs[i]);
-                    easyCount++;
-                }
+            // Add medium questions
+            for (let i = 0; currentMediumCount < targetMedium && i < mediumQuestions.length; i++) {
+                questions.push(mediumQuestions[i]);
+                currentMediumCount++;
             }
 
-            // Fill remaining medium questions (target 50 total medium)
-            for (let i = 0; mediumCount < 50 && i < mediumMCQs.length; i++) {
-                if (!questions.some(q => q.id === mediumMCQs[i].id)) {
-                    questions.push(mediumMCQs[i]);
-                    mediumCount++;
-                }
+            // Add tough questions
+            for (let i = 0; currentToughCount < targetTough && i < toughQuestions.length; i++) {
+                questions.push(toughQuestions[i]);
+                currentToughCount++;
             }
 
-            // Fill remaining tough questions (target 40 total tough)
-            for (let i = 0; toughCount < 40 && i < toughMCQs.length; i++) {
-                if (!questions.some(q => q.id === toughMCQs[i].id)) {
-                    questions.push(toughMCQs[i]);
-                    toughCount++;
-                }
-            }
-
-            // If we still don't have 100 questions, fill with any remaining MCQs
-            let allOtherMCQs = rawQuestions.filter(q => q.type === 'mcq' && !q.isSpecial && !questions.some(existingQ => existingQ.id === q.id));
-            shuffleArray(allOtherMCQs);
-            while (questions.length < 100 && allOtherMCQs.length > 0) {
-                questions.push(allOtherMCQs.pop());
+            // If we still don't have 100 questions (due to limited raw data or distribution issues),
+            // fill up with remaining questions from any pool, prioritizing non-special ones.
+            // This loop ensures we hit 100 questions if enough raw data is available.
+            const allRemainingQuestions = rawQuestions.filter(q => !questions.some(existingQ => existingQ.id === q.id));
+            shuffleArray(allRemainingQuestions); // Shuffle remaining to ensure randomness
+            while (questions.length < 100 && allRemainingQuestions.length > 0) {
+                questions.push(allRemainingQuestions.pop());
             }
 
             // Ensure special question is unique and only appears once (filter out duplicates if any were added by mistake)
@@ -814,11 +598,9 @@
                 }
             }
 
-            // Shuffle options for all MCQ and Image questions
+            // Shuffle options for all MCQ questions
             questions.forEach(q => {
-                if (q.type === 'mcq' || q.type === 'image') {
-                    shuffleArray(q.options);
-                }
+                shuffleArray(q.options);
             });
 
             // Reset quiz state variables
@@ -857,9 +639,6 @@
             // Reset UI elements for the new question
             feedbackContainer.classList.add('hidden');
             optionsContainer.innerHTML = '';
-            dragDropContainer.classList.add('hidden');
-            questionImageContainer.classList.add('hidden');
-            questionImage.src = '';
             questionTextPara.classList.remove('special-question-border'); // Remove special border from previous question
 
             // Apply special question border if it's the designated "Today's Special Question" and it's today's date
@@ -873,131 +652,22 @@
             questionNumberSpan.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
             questionTextPara.textContent = question.question;
 
-            // Handle different question types (MCQ, Image, Drag & Drop)
-            if (question.type === 'mcq' || question.type === 'image') {
-                optionsContainer.classList.remove('hidden'); // Show options container
-                question.options.forEach(option => {
-                    const optionElement = document.createElement('div');
-                    optionElement.classList.add(
-                        'option-card', 'p-4', 'bg-[#FFF5EE]', 'rounded-lg', 'shadow-sm',
-                        'cursor-pointer', 'hover:shadow-md', 'flex', 'items-center',
-                        'justify-center', 'text-center', 'break-words' // Ensure text wraps
-                    );
-                    optionElement.dataset.option = option; // Store option value
-                    // If it's an image-based question, display image; otherwise, display text
-                    optionElement.innerHTML = question.type === 'image' ?
-                        `<img src="${option}" alt="Option" class="w-24 h-auto rounded-md object-contain">` :
-                        option;
-                    // Add event listener for option selection
-                    optionElement.addEventListener('click', () => selectOption(optionElement, option));
-                    optionsContainer.appendChild(optionElement);
-                });
-                // Display main question image if available for image type
-                if (question.type === 'image' && question.image) {
-                    questionImage.src = question.image;
-                    questionImageContainer.classList.remove('hidden');
-                }
-            } else if (question.type === 'drag-drop') {
-                dragDropContainer.classList.remove('hidden'); // Show drag-drop container
-                dragItemsContainer.innerHTML = ''; // Clear previous drag items
-                dropZone.innerHTML = 'Drop here'; // Reset drop zone text
-                dropZone.classList.remove('drag-correct', 'drag-wrong'); // Remove feedback classes
-                dropZone.dataset.answer = ''; // Clear previous answer
+            // Handle MCQ type questions (all questions are now MCQs)
+            optionsContainer.classList.remove('hidden'); // Ensure options container is visible
+            question.options.forEach(option => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add(
+                    'option-card', 'p-4', 'bg-[#FFF5EE]', 'rounded-lg', 'shadow-sm',
+                    'cursor-pointer', 'hover:shadow-md', 'flex', 'items-center',
+                    'justify-center', 'text-center', 'break-words' // Ensure text wraps
+                );
+                optionElement.dataset.option = option; // Store option value
+                optionElement.textContent = option; // Display option text
+                // Add event listener for option selection
+                optionElement.addEventListener('click', () => selectOption(optionElement, option));
+                optionsContainer.appendChild(optionElement);
+            });
 
-                // Create draggable items
-                shuffleArray(question.dragItems).forEach(item => {
-                    const draggableItem = document.createElement('div');
-                    draggableItem.id = generateUniqueId(); // Assign unique ID
-                    draggableItem.classList.add(
-                        'draggable', 'p-3', 'bg-[#FFF5EE]', 'rounded-md', 'shadow-sm',
-                        'cursor-grab', 'text-[#2C3E50]'
-                    );
-                    draggableItem.textContent = item;
-                    draggableItem.setAttribute('draggable', 'true'); // Make element draggable
-                    dragItemsContainer.appendChild(draggableItem);
-
-                    // Desktop drag events
-                    draggableItem.addEventListener('dragstart', (e) => {
-                        e.dataTransfer.setData('text/plain', e.target.textContent); // Set data to be transferred
-                        e.dataTransfer.effectAllowed = 'move'; // Define allowed drag effect
-                    });
-
-                    // Mobile touch events for drag and drop
-                    let initialX, initialY;
-                    draggableItem.addEventListener('touchstart', (e) => {
-                        e.preventDefault(); // Prevent default browser scrolling
-                        const touch = e.touches[0];
-                        // Calculate offset for precise dragging
-                        initialX = touch.clientX - draggableItem.getBoundingClientRect().left;
-                        initialY = touch.clientY - draggableItem.getBoundingClientRect().top;
-
-                        // Position element absolutely for dragging
-                        draggableItem.style.position = 'absolute';
-                        draggableItem.style.zIndex = 1000; // Bring to front
-                        draggableItem.style.width = draggableItem.offsetWidth + 'px'; // Maintain original width
-                        draggableItem.style.height = draggableItem.offsetHeight + 'px'; // Maintain original height
-
-                        // Move the element to the body to ensure it can be dragged anywhere
-                        document.body.appendChild(draggableItem);
-                        moveAt(touch.clientX, touch.clientY);
-                    });
-
-                    draggableItem.addEventListener('touchmove', (e) => {
-                        e.preventDefault(); // Prevent default browser scrolling
-                        const touch = e.touches[0];
-                        moveAt(touch.clientX, touch.clientY); // Move element with touch
-                    });
-
-                    draggableItem.addEventListener('touchend', (e) => {
-                        // Reset element styling after touch ends
-                        draggableItem.style.position = '';
-                        draggableItem.style.zIndex = '';
-                        draggableItem.style.width = '';
-                        draggableItem.style.height = '';
-
-                        // Check if the element was dropped over the dropzone
-                        const touch = e.changedTouches[0];
-                        const dropZoneRect = dropZone.getBoundingClientRect();
-
-                        if (
-                            touch.clientX > dropZoneRect.left &&
-                            touch.clientX < dropZoneRect.right &&
-                            touch.clientY > dropZoneRect.top &&
-                            touch.clientY < dropZoneRect.bottom
-                        ) {
-                            // If dropped on target, handle the drag-drop logic
-                            handleDragDrop(draggableItem.textContent);
-                        } else {
-                            // If not dropped on target, return element to its original container
-                            dragItemsContainer.appendChild(draggableItem);
-                        }
-                    });
-
-                    // Helper function to set element position during touchmove
-                    function moveAt(pageX, pageY) {
-                        draggableItem.style.left = pageX - initialX + 'px';
-                        draggableItem.style.top = pageY - initialY + 'px';
-                    }
-                });
-
-                // Drop zone event listeners for desktop drag-and-drop
-                dropZone.addEventListener('dragover', (e) => {
-                    e.preventDefault(); // Allow drop
-                    e.dataTransfer.dropEffect = 'move';
-                    dropZone.classList.add('hover'); // Add hover effect
-                });
-
-                dropZone.addEventListener('dragleave', () => {
-                    dropZone.classList.remove('hover'); // Remove hover effect
-                });
-
-                dropZone.addEventListener('drop', (e) => {
-                    e.preventDefault();
-                    dropZone.classList.remove('hover');
-                    const data = e.dataTransfer.getData('text/plain'); // Get dropped data
-                    handleDragDrop(data); // Handle the drop
-                });
-            }
 
             // Update navigation button states
             prevButton.disabled = currentQuestionIndex === 0; // Disable 'Previous' on the first question
@@ -1007,13 +677,12 @@
         /**
          * Handles the selection of an MCQ option, provides feedback, and updates score.
          * @param {HTMLElement} selectedElement The HTML element of the selected option.
-         * @param {string} selectedOption The text content or image URL of the selected option.
+         * @param {string} selectedOption The text content of the selected option.
          */
         function selectOption(selectedElement, selectedOption) {
             const question = questions[currentQuestionIndex];
             // Determine if the selected option is correct
-            const isCorrect = (question.type === 'image' && selectedOption === question.answer) ||
-                              (question.type !== 'image' && selectedOption === question.answer);
+            const isCorrect = (selectedOption === question.answer);
 
             // Disable all options after selection to prevent multiple answers
             Array.from(optionsContainer.children).forEach(option => {
@@ -1048,50 +717,6 @@
                 question.userAnswer = selectedOption; // Store user's chosen answer
             }
         }
-
-        /**
-         * Handles the logic for drag-and-drop questions.
-         * @param {string} droppedItem The text content of the item that was dropped into the zone.
-         */
-        function handleDragDrop(droppedItem) {
-            const question = questions[currentQuestionIndex];
-            const isCorrect = droppedItem === question.answer; // Check if dropped item is the correct answer
-
-            dropZone.textContent = droppedItem; // Display the dropped item in the drop zone
-            dropZone.dataset.answer = droppedItem; // Store the dropped item
-
-            // Disable further dragging/dropping for this question
-            Array.from(dragItemsContainer.children).forEach(item => item.setAttribute('draggable', 'false'));
-            dropZone.style.pointerEvents = 'none';
-
-            if (isCorrect) {
-                dropZone.classList.add('drag-correct'); // Apply correct feedback styling
-                feedbackMessage.textContent = 'Correct!';
-                feedbackMessage.classList.add('text-green-600');
-                score++; // Increment score
-            } else {
-                dropZone.classList.add('drag-wrong'); // Apply wrong feedback styling
-                feedbackMessage.textContent = 'Wrong!';
-                feedbackMessage.classList.add('text-red-600');
-                // Display the correct answer in the explanation
-                explanationText.textContent = `The correct answer was "${question.answer}". ${question.explanation}`;
-            }
-
-            // If not already set, display the explanation
-            if (!explanationText.textContent) {
-                explanationText.textContent = question.explanation;
-            }
-            feedbackContainer.classList.remove('hidden'); // Show feedback container
-            feedbackContainer.classList.add(isCorrect ? 'bg-green-100' : 'bg-red-100'); // Set background color based on correctness
-
-            // Mark question as attempted if not already
-            if (!question.attempted) {
-                attemptedQuestions++;
-                question.attempted = true;
-                question.userAnswer = droppedItem; // Store user's chosen answer
-            }
-        }
-
 
         /**
          * Updates the visual progress bar and percentage text.
