@@ -94,36 +94,46 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
-        /* Quiz Header Section Styling */
-        .header {
+        /* Sticky Header for Quiz essential info */
+        .sticky-quiz-info-bar {
             background-color: #F8F9FA;
-            padding: 20px 0;
+            padding: 15px 20px; /* Adjusted padding */
             width: 100%;
-            position: sticky; /* Sticky header */
-            top: 0;
+            position: sticky; /* Make it sticky */
+            top: 0; /* Stick to the top of its scrolling container */
             z-index: 1000;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border-radius: 0 0 10px 10px; /* Rounded bottom corners for sticky bar */
+            box-sizing: border-box; /* Include padding in width calculation */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Live Date Display Styling */
         .live-date {
             color: #6D6875; /* Color as per specification */
             font-weight: bold;
-            position: absolute;
-            top: 20px;
-            right: 20px; /* Desktop position */
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
+            width: 100%; /* Take full width within sticky bar */
+            justify-content: flex-end; /* Align to right within sticky bar */
+        }
+         @media (max-width: 768px) {
+            .live-date {
+                justify-content: flex-start; /* Align to left on mobile */
+            }
         }
 
-        /* Quiz Title Styling */
+        /* Quiz Title Styling (This will now scroll with content) */
         .quiz-title {
             color: #2C3E50;
             font-weight: bold;
             font-family: 'Inter', sans-serif;
             text-align: center;
             font-size: 2.2em;
-            margin-top: 20px;
+            margin-top: 20px; /* Added margin-top for separation from sticky bar */
             margin-bottom: 15px;
         }
 
@@ -134,7 +144,7 @@
             border-radius: 10px;
             height: 15px;
             overflow: hidden;
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* Margin within sticky bar */
         }
 
         /* Animated Progress Bar */
@@ -146,12 +156,20 @@
             transition: width 0.3s ease-in-out; /* Smooth animation */
         }
 
+        /* Banner Section (non-sticky) */
+        .banner-section {
+            width: 100%;
+            margin-top: 20px; /* Space from top */
+            margin-bottom: 20px; /* Space from quiz card */
+            text-align: center;
+        }
+
         /* Image Banner Styling */
         .banner-image {
             width: 100%;
             height: auto;
             border-radius: 10px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
@@ -160,7 +178,6 @@
             font-weight: bold;
             color: #2C3E50;
             text-align: center;
-            margin-bottom: 30px;
             line-height: 1.5;
         }
 
@@ -305,17 +322,74 @@
             color: #20B2AA; /* Accent color for results */
         }
 
+        /* Security Features: Disable selection, copy, right-click */
+        body {
+            -webkit-user-select: none;  /* Safari */
+            -moz-user-select: none;     /* Firefox */
+            -ms-user-select: none;      /* IE 10+ */
+            user-select: none;          /* Standard syntax */
+        }
+
+        /* Modal for Alerts (custom implementation) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 2000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            color: #2C3E50;
+            position: relative;
+        }
+
+        .modal-content h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .modal-content p {
+            margin-bottom: 20px;
+        }
+
+        .modal-content button {
+            background: linear-gradient(to right, #20B2AA, #3EB489);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .modal-content button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
         /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .live-date {
-                top: 15px;
-                left: 15px; /* Mobile: Top-left */
-                right: auto;
-                font-size: 0.9em;
-            }
             .quiz-title {
                 font-size: 1.8em;
-                margin-top: 50px; /* Adjust for sticky date at top-left */
+                margin-top: 15px; /* Adjust for spacing below sticky bar */
             }
             .banner-text {
                 font-size: 0.9em;
@@ -338,14 +412,6 @@
                 width: 100%;
             }
         }
-
-        /* Security Features: Disable selection, copy, right-click */
-        body {
-            -webkit-user-select: none;  /* Safari */
-            -moz-user-select: none;     /* Firefox */
-            -ms-user-select: none;      /* IE 10+ */
-            user-select: none;          /* Standard syntax */
-        }
     </style>
 </head>
 <body>
@@ -367,35 +433,40 @@
         </div>
     </div>
 
+    <!-- Main Quiz Application Container -->
     <div id="quiz-app" class="container" style="display: none;">
-        <div class="header">
+        <!-- Sticky Header Bar for essential quiz info -->
+        <div class="sticky-quiz-info-bar">
             <div class="live-date" id="live-date-display">
                 <i class="far fa-calendar-alt mr-2"></i> <span id="current-date"></span>
             </div>
-            <h1 class="quiz-title" id="quiz-title">CSS MPT Daily Quiz – <span id="quiz-date"></span></h1>
             <div class="progress-bar-container">
                 <div class="progress-bar" id="progress-bar"></div>
             </div>
-            <div class="text-center mb-6">
-                <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Quiz Banner" class="banner-image">
-                <p class="banner-text">
-                    DAWNDIGEST<br>
-                    PREPARED BY: SYED ASGHAR ALI SHAH<br>
-                    Contact: 03265762698<br>
-                    Updated on: <span id="updated-date"></span>
-                </p>
-            </div>
-        </div>
-
-        <div class="quiz-card">
-            <div class="flex justify-between items-center w-full mb-4">
+            <div class="flex justify-between items-center w-full mt-4">
                 <div class="text-lg font-semibold" id="question-counter">Question 1/100</div>
                 <div class="text-lg font-semibold" id="timer">40:00</div>
             </div>
+        </div>
+
+        <!-- Non-sticky Banner Section -->
+        <div class="banner-section">
+            <h1 class="quiz-title" id="quiz-title">CSS MPT Daily Quiz – <span id="quiz-date"></span></h1>
+            <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Quiz Banner" class="banner-image">
+            <p class="banner-text">
+                DAWNDIGEST<br>
+                PREPARED BY: SYED ASGHAR ALI SHAH<br>
+                Contact: 03265762698<br>
+                Updated on: <span id="updated-date"></span>
+            </p>
+        </div>
+
+        <!-- Quiz Questions Card -->
+        <div class="quiz-card">
             <div class="question-container">
                 <p class="question-text" id="question-text"></p>
                 <div class="options-container" id="options-container">
-                    </div>
+                </div>
                 <div class="explanation" id="explanation" style="display: none;"></div>
             </div>
             <div class="quiz-navigation">
@@ -414,6 +485,15 @@
             <p>Total Score: <strong id="results-score"></strong></p>
             <p>Time Taken: <strong id="results-time"></strong></p>
             <p>Questions Attempted: <strong id="results-attempted"></strong></p>
+        </div>
+    </div>
+
+    <!-- Custom Modal for Alerts -->
+    <div id="custom-alert-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3 id="modal-title"></h3>
+            <p id="modal-message"></p>
+            <button id="modal-ok-btn">OK</button>
         </div>
     </div>
 
@@ -480,6 +560,29 @@
         const resultsTime = document.getElementById('results-time');
         const resultsAttempted = document.getElementById('results-attempted');
 
+        // Modal elements
+        const customAlertModal = document.getElementById('custom-alert-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalMessage = document.getElementById('modal-message');
+        const modalOkBtn = document.getElementById('modal-ok-btn');
+
+        /**
+         * Displays a custom alert modal.
+         * @param {string} title The title for the modal.
+         * @param {string} message The message to display in the modal.
+         */
+        function showCustomAlert(title, message) {
+            modalTitle.textContent = title;
+            modalMessage.textContent = message;
+            customAlertModal.style.display = 'flex'; // Use flex to center the modal
+        }
+
+        // Event listener to close the modal
+        modalOkBtn.addEventListener('click', () => {
+            customAlertModal.style.display = 'none';
+        });
+
+
         // --- Date and Time Functions ---
         /**
          * Returns the current date in a formatted string (e.g., "May 29, 2025").
@@ -493,22 +596,12 @@
 
         /**
          * Updates the live date display in the header and quiz title.
-         * Adjusts position for mobile/desktop.
          */
         function updateLiveDate() {
             const date = getFormattedDate();
             currentDateSpan.textContent = date;
             quizTitleSpan.textContent = date;
             updatedDateSpan.textContent = date;
-
-            // Position live date for mobile (top-left) and desktop (top-right)
-            if (window.innerWidth <= 768) {
-                liveDateDisplay.style.right = 'auto';
-                liveDateDisplay.style.left = '15px';
-            } else {
-                liveDateDisplay.style.left = 'auto';
-                liveDateDisplay.style.right = '20px';
-            }
         }
 
         // --- Timer Functions ---
@@ -1393,7 +1486,7 @@
             },
             {
                 question: "Change into indirect speech: The old man said, 'I cannot walk any further.'",
-                options: ["The old man said that he could not walk any further.", "The old man said that I cannot walk any further.", "The old man said that he cannot walk any further.", "The old man said he couldn't walk any further."],
+                options: ["The old man said that he could not walk any further.", "The old man said that I cannot walk any further.", "He said that he cannot walk any further.", "The old man said he couldn't walk any further."],
                 answer: 0,
                 explanation: "'Cannot' changes to 'could not' in indirect speech.",
                 difficulty: "easy"
@@ -2251,13 +2344,14 @@
                 quizApp.style.display = 'block'; // Show the quiz app
                 initQuiz(); // Initialize and start the quiz
             } else {
-                alert('Please enter your full name to start the quiz.'); // Using alert for simplicity, could be a custom modal
+                showCustomAlert('Name Required', 'Please enter your full name to start the quiz.');
             }
         });
 
         // --- Initial Setup ---
         updateLiveDate();
-        window.addEventListener('resize', updateLiveDate); // Update date position on resize
+        // The live date position is now handled by CSS within the sticky-quiz-info-bar
+        // window.addEventListener('resize', updateLiveDate); // No longer needed for positioning
     </script>
 </body>
 </html>
