@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS MPT Daily Quiz - June 11, 2025</title>
+    <title>CSS MPT Daily Quiz - June 12, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -346,7 +346,7 @@
 
     <script>
         // Set the current date for display and logic
-        const CURRENT_DATE_STR = "June 11, 2025"; // Updated for June 11 quiz
+        const CURRENT_DATE_STR = "June 12, 2025"; // Updated for June 12 quiz
         const CURRENT_DATE = new Date(CURRENT_DATE_STR);
 
         // Update header dates
@@ -645,8 +645,8 @@
             const password = document.getElementById('loginPassword').value;
             const loginError = document.getElementById('loginError');
 
-            // Login credentials for June 11 quiz
-            const expectedLoginId = "11JUNE"; 
+            // Login credentials for June 12 quiz
+            const expectedLoginId = "12JUNE"; 
             const expectedPassword = "free";
 
             if (id === expectedLoginId && password === expectedPassword) {
@@ -693,189 +693,263 @@
             // Clear previous questions
             quizQuestions.length = 0;
 
-            // General Knowledge (20 MCQs)
-            const generalKnowledgeMCQs = [
-                // GK - June 11: Nicknames of Famous Personalities: Page 74 & Personalities: Pages 75-78 (20 MCQs)
-                { question: "Who is known as the 'Frontier Gandhi'?", options: ["Mahatma Gandhi", "Khan Abdul Ghaffar Khan", "Jawaharlal Nehru", "Sardar Vallabhbhai Patel"], correctOptionIndex: 1, explanation: "Khan Abdul Ghaffar Khan, a Pashtun independence activist, was known as the 'Frontier Gandhi' due to his non-violent opposition to British rule.", difficulty: "easy", source_page: 74 },
-                { question: "The 'Iron Lady' refers to which prominent political figure?", options: ["Queen Elizabeth II", "Indira Gandhi", "Margaret Thatcher", "Benazir Bhutto"], correctOptionIndex: 2, explanation: "Margaret Thatcher, former Prime Minister of the UK, was famously known as the 'Iron Lady'.", difficulty: "easy", source_page: 74 },
-                { question: "Who is known as the 'Quaid-e-Azam'?", options: ["Allama Iqbal", "Liaquat Ali Khan", "Muhammad Ali Jinnah", "Sir Syed Ahmed Khan"], correctOptionIndex: 2, explanation: "Muhammad Ali Jinnah, the founder of Pakistan, is respectfully addressed as Quaid-e-Azam (Great Leader).", difficulty: "easy", source_page: 74 },
-                { question: "Which personality is known as 'Baba-e-Qaum' (Father of the Nation) in Pakistan?", options: ["Allama Iqbal", "Muhammad Ali Jinnah", "Liaquat Ali Khan", "Fatima Jinnah"], correctOptionIndex: 1, explanation: "Muhammad Ali Jinnah is also known as Baba-e-Qaum in Pakistan.", difficulty: "easy", source_page: 74 },
-                { question: "Who was the first Prime Minister of Pakistan?", options: ["Muhammad Ali Jinnah", "Liaquat Ali Khan", "Khawaja Nazimuddin", "Muhammad Ali Bogra"], correctOptionIndex: 1, explanation: "Liaquat Ali Khan served as the first Prime Minister of Pakistan.", difficulty: "easy", source_page: 75 },
-                { question: "Who was the first Governor-General of Pakistan?", options: ["Liaquat Ali Khan", "Muhammad Ali Jinnah", "Khawaja Nazimuddin", "Ghulam Muhammad"], correctOptionIndex: 1, explanation: "Muhammad Ali Jinnah served as the first Governor-General of Pakistan.", difficulty: "easy", source_page: 75 },
-                { question: "Who authored 'The Spirit of Islam'?", options: ["Sir Syed Ahmed Khan", "Allama Iqbal", "Syed Amir Ali", "Hali"], correctOptionIndex: 2, explanation: "Syed Amir Ali was a prominent Indian Muslim jurist and author who wrote 'The Spirit of Islam'.", difficulty: "medium", source_page: 75 },
-                { question: "Who is considered the founder of the 'Two-Nation Theory'?", options: ["Muhammad Ali Jinnah", "Sir Syed Ahmed Khan", "Allama Iqbal", "Chaudhry Rahmat Ali"], correctOptionIndex: 1, explanation: "Sir Syed Ahmed Khan is generally credited with articulating the concept that led to the Two-Nation Theory.", difficulty: "medium", source_page: 76 },
-                { question: "Which Pakistani Nobel laureate is known for his work in Physics?", options: ["Dr. Abdus Salam", "Dr. A.Q. Khan", "Dr. Samar Mubarakmand", "Dr. Pervez Hoodbhoy"], correctOptionIndex: 0, explanation: "Dr. Abdus Salam was a Pakistani theoretical physicist and a Nobel Prize laureate in Physics for his contributions to the electroweak unification.", difficulty: "easy", source_page: 76 },
-                { question: "Who was the first woman Prime Minister of Pakistan?", options: ["Fatima Jinnah", "Benazir Bhutto", "Begum Ra'ana Liaquat Ali Khan", "Hina Rabbani Khar"], correctOptionIndex: 1, explanation: "Benazir Bhutto was the first woman to head a democratic government in a Muslim-majority country.", difficulty: "easy", source_page: 77 },
-                { question: "Who was the first President of Pakistan?", options: ["Muhammad Ali Jinnah", "Iskander Mirza", "Ayub Khan", "Zulfiqar Ali Bhutto"], correctOptionIndex: 1, explanation: "Iskander Mirza became the first President of Pakistan upon the promulgation of the 1956 Constitution.", difficulty: "medium", source_page: 77 },
-                { question: "Who is known as the 'Poet of Humanity'?", options: ["Allama Iqbal", "Faiz Ahmed Faiz", "Ghalib", "Rabindranath Tagore"], correctOptionIndex: 3, explanation: "Rabindranath Tagore is often referred to as the 'Poet of Humanity' or 'Bard of Bengal'.", difficulty: "tough", source_page: 74 },
-                { question: "The 'Grand Old Man of India' refers to:", options: ["Mahatma Gandhi", "Jawaharlal Nehru", "Dadabhai Naoroji", "Sardar Vallabhbhai Patel"], correctOptionIndex: 2, explanation: "Dadabhai Naoroji was an Indian Parsi liberal political leader and a prominent figure in the early days of Indian nationalism, known as the 'Grand Old Man of India'.", difficulty: "medium", source_page: 74 },
-                { question: "Who was the first Chief Justice of Pakistan?", options: ["Sir Abdur Rashid", "Muhammad Munir", "Justice A. R. Cornelius", "Justice Hamoodur Rahman"], correctOptionIndex: 0, explanation: "Sir Abdur Rashid served as the first Chief Justice of Pakistan.", difficulty: "tough", source_page: 77 },
-                { question: "Who was the first woman Governor of the State Bank of Pakistan?", options: ["Shamshad Akhtar", "Dr. Ishrat Husain", "Riffat Khan", "Tariq Sultan"], correctOptionIndex: 0, explanation: "Dr. Shamshad Akhtar was the first woman to hold the position of Governor of the State Bank of Pakistan.", difficulty: "tough", source_page: 78 },
-                { question: "Who is known as the 'Lady with the Lamp'?", options: ["Mother Teresa", "Florence Nightingale", "Clara Barton", "Edith Cavell"], correctOptionIndex: 1, explanation: "Florence Nightingale was a celebrated English social reformer and statistician, and the founder of modern nursing, known as 'The Lady with the Lamp'.", difficulty: "easy", source_page: 74 },
-                { question: "Who was the first Muslim to win a Nobel Prize?", options: ["Anwar Sadat", "Muhammad Yunus", "Abdus Salam", "Naguib Mahfouz"], correctOptionIndex: 2, explanation: "Dr. Abdus Salam was the first Muslim to receive a Nobel Prize (Physics, 1979).", difficulty: "easy", source_page: 76 },
-                { question: "The 'Father of Modern Chemistry' is:", options: ["Marie Curie", "Antoine Lavoisier", "John Dalton", "Dmitri Mendeleev"], correctOptionIndex: 1, explanation: "Antoine Lavoisier is widely regarded as the 'Father of Modern Chemistry'.", difficulty: "medium", source_page: 74 },
-                { question: "Who was the first Chief of Army Staff of Pakistan?", options: ["General Frank Messervy", "General Ayub Khan", "General Muhammad Musa", "General Tikka Khan"], correctOptionIndex: 0, explanation: "General Frank Messervy was the first Commander-in-Chief of the Pakistan Army.", difficulty: "tough", source_page: 77 },
-                { question: "Which Pakistani personality was awarded the UN Human Rights Prize in 2013?", options: ["Dr. Ruth Pfau", "Malala Yousafzai", "Abdul Sattar Edhi", "Dr. Abdus Salam"], correctOptionIndex: 1, explanation: "Malala Yousafzai received the United Nations Human Rights Prize in 2013.", difficulty: "easy", source_page: 78 }
-            ];
-            quizQuestions.push(...generalKnowledgeMCQs);
+            // --- Week 3 Topics (June 6-11) ---
 
-            // Mathematics (40 MCQs)
-            const mathematicsMCQs = [
-                // Math - June 11: Area Problems: Pages 538-540 (40 MCQs)
-                { question: "What is the area of a rectangle with length 10 cm and width 5 cm?", options: ["15 cm²", "25 cm²", "50 cm²", "100 cm²"], correctOptionIndex: 2, explanation: "Area of rectangle = length × width = 10 cm × 5 cm = 50 cm².", difficulty: "easy", source_page: 538 },
-                { question: "Find the area of a square whose side is 7 cm.", options: ["14 cm²", "28 cm²", "49 cm²", "35 cm²"], correctOptionIndex: 2, explanation: "Area of square = side × side = 7 cm × 7 cm = 49 cm².", difficulty: "easy", source_page: 538 },
-                { question: "The area of a triangle with base 8 cm and height 6 cm is:", options: ["24 cm²", "48 cm²", "14 cm²", "20 cm²"], correctOptionIndex: 0, explanation: "Area of triangle = (1/2) × base × height = (1/2) × 8 cm × 6 cm = 24 cm².", difficulty: "easy", source_page: 538 },
-                { question: "What is the area of a circle with radius 7 cm? (Use π = 22/7)", options: ["44 cm²", "154 cm²", "22 cm²", "14 cm²"], correctOptionIndex: 1, explanation: "Area of circle = πr² = (22/7) × 7² = (22/7) × 49 = 22 × 7 = 154 cm².", difficulty: "medium", source_page: 539 },
-                { question: "The perimeter of a square is 36 cm. What is its area?", options: ["81 cm²", "36 cm²", "24 cm²", "18 cm²"], correctOptionIndex: 0, explanation: "Perimeter of square = 4 × side. 36 = 4 × side => side = 9 cm. Area = 9 cm × 9 cm = 81 cm².", difficulty: "medium", source_page: 538 },
-                { question: "A rectangular field has an area of 120 m². If its length is 15 m, what is its width?", options: ["8 m", "10 m", "12 m", "14 m"], correctOptionIndex: 0, explanation: "Area = length × width. 120 = 15 × width => width = 120/15 = 8 m.", difficulty: "easy", source_page: 538 },
-                { question: "What is the area of a parallelogram with base 12 cm and height 5 cm?", options: ["30 cm²", "60 cm²", "17 cm²", "40 cm²"], correctOptionIndex: 1, explanation: "Area of parallelogram = base × height = 12 cm × 5 cm = 60 cm².", difficulty: "easy", source_page: 539 },
-                { question: "The diagonal of a square is 10 cm. What is its area?", options: ["100 cm²", "50 cm²", "25 cm²", "75 cm²"], correctOptionIndex: 1, explanation: "Area of square = (1/2) × (diagonal)² = (1/2) × 10² = (1/2) × 100 = 50 cm².", difficulty: "tough", source_page: 538 },
-                { question: "The circumference of a circle is 44 cm. What is its area? (Use π = 22/7)", options: ["7 cm²", "14 cm²", "154 cm²", "22 cm²"], correctOptionIndex: 2, explanation: "Circumference = 2πr. 44 = 2 × (22/7) × r => 44 = (44/7) × r => r = 7 cm. Area = πr² = (22/7) × 7² = 154 cm².", difficulty: "tough", source_page: 539 },
-                { question: "A path 2 m wide runs around a rectangular park which is 50 m long and 30 m wide. Find the area of the path.", options: ["328 m²", "164 m²", "1600 m²", "1500 m²"], correctOptionIndex: 0, explanation: "Area of park = 50x30 = 1500 m². New length with path = 50+2+2 = 54 m. New width with path = 30+2+2 = 34 m. Area with path = 54x34 = 1836 m². Area of path = 1836 - 1500 = 336 m². None of the options exactly matches. Assuming the closest option 328 m² is intended, or there is a slight variation in the problem's interpretation.", difficulty: "tough", source_page: 540 },
-                { question: "What is the area of a rhombus whose diagonals are 16 cm and 12 cm?", options: ["48 cm²", "96 cm²", "192 cm²", "60 cm²"], correctOptionIndex: 1, explanation: "Area of rhombus = (1/2) × d1 × d2 = (1/2) × 16 cm × 12 cm = 8 × 12 = 96 cm².", difficulty: "medium", source_page: 539 },
-                { question: "The base of a triangle is twice its height. If its area is 36 cm², find its height.", options: ["6 cm", "8 cm", "12 cm", "4 cm"], correctOptionIndex: 0, explanation: "Area = (1/2) × base × height. Let height = h, base = 2h. 36 = (1/2) × (2h) × h => 36 = h². h = 6 cm.", difficulty: "tough", source_page: 538 },
-                { question: "What is the area of a trapezium whose parallel sides are 10 cm and 14 cm, and height is 5 cm?", options: ["30 cm²", "60 cm²", "70 cm²", "120 cm²"], correctOptionIndex: 1, explanation: "Area of trapezium = (1/2) × (sum of parallel sides) × height = (1/2) × (10+14) × 5 = (1/2) × 24 × 5 = 12 × 5 = 60 cm².", difficulty: "medium", source_page: 539 },
-                { question: "If the area of a square is 144 cm², what is the length of its side?", options: ["10 cm", "12 cm", "14 cm", "16 cm"], correctOptionIndex: 1, explanation: "Area = side². 144 = side² => side = 12 cm.", difficulty: "easy", source_page: 538 },
-                { question: "A rectangle has an area of 80 cm² and its width is 8 cm. What is its perimeter?", options: ["18 cm", "20 cm", "36 cm", "40 cm"], correctOptionIndex: 2, explanation: "Area = length × width. 80 = length × 8 => length = 10 cm. Perimeter = 2 × (length + width) = 2 × (10 + 8) = 2 × 18 = 36 cm.", difficulty: "medium", source_page: 538 },
-                { question: "The ratio of the sides of two squares is 2:3. What is the ratio of their areas?", options: ["2:3", "4:9", "8:27", "16:81"], correctOptionIndex: 1, explanation: "If ratio of sides is a:b, then ratio of areas is a²:b². So, 2²:3² = 4:9.", difficulty: "tough", source_page: 538 },
-                { question: "What is the area of a semi-circle with radius 7 cm? (Use π = 22/7)", options: ["77 cm²", "154 cm²", "308 cm²", "38.5 cm²"], correctOptionIndex: 0, explanation: "Area of semi-circle = (1/2)πr² = (1/2) × (22/7) × 7² = (1/2) × 22 × 7 = 11 × 7 = 77 cm².", difficulty: "medium", source_page: 539 },
-                { question: "A room is 10 m long and 8 m wide. How many square meters of carpet are needed to cover the floor?", options: ["18 m²", "80 m²", "36 m²", "100 m²"], correctOptionIndex: 1, explanation: "Area of floor = length × width = 10 m × 8 m = 80 m².", difficulty: "easy", source_page: 538 },
-                { question: "If the area of an equilateral triangle is 4sqrt(3) cm², find its side.", options: ["2 cm", "4 cm", "6 cm", "8 cm"], correctOptionIndex: 1, explanation: "Area of equilateral triangle = (sqrt(3)/4) * side^2. 4sqrt(3) = (sqrt(3)/4) * side^2 => 16 = side^2 => side = 4 cm.", difficulty: "tough", source_page: 539 },
-                { question: "The length and width of a rectangle are increased by 10%. What is the percentage increase in its area?", options: ["10%", "20%", "21%", "100%"], correctOptionIndex: 2, explanation: "If length is L, width is W, original area = LW. New length = 1.1L, new width = 1.1W. New area = (1.1L)(1.1W) = 1.21LW. Percentage increase = ((1.21LW - LW)/LW) * 100 = 0.21 * 100 = 21%.", difficulty: "tough", source_page: 540 },
-                { question: "What is the area of a path 1m wide outside a square garden of side 8m?", options: ["16 m²", "20 m²", "36 m²", "17 m²"], correctOptionIndex: 2, explanation: "Area of garden = 8x8 = 64 m². Outer side with path = 8+1+1 = 10 m. Outer area = 10x10 = 100 m². Area of path = 100 - 64 = 36 m².", difficulty: "medium", source_page: 540 },
-                { question: "The area of a square is 25 cm². What is its perimeter?", options: ["5 cm", "10 cm", "20 cm", "25 cm"], correctOptionIndex: 2, explanation: "Area = side². 25 = side² => side = 5 cm. Perimeter = 4 × side = 4 × 5 = 20 cm.", difficulty: "easy", source_page: 538 },
-                { question: "A rectangular plot is 40 m long and 25 m wide. It is to be fenced. If the cost of fencing is Rs. 10 per meter, what is the total cost?", options: ["Rs. 650", "Rs. 1300", "Rs. 1000", "Rs. 2000"], correctOptionIndex: 1, explanation: "Perimeter = 2 × (length + width) = 2 × (40 + 25) = 2 × 65 = 130 m. Total cost = 130 m × Rs. 10/m = Rs. 1300.", difficulty: "medium", source_page: 540 },
-                { question: "What is the area of a right-angled triangle whose perpendicular sides are 3 cm and 4 cm?", options: ["6 cm²", "12 cm²", "7 cm²", "10 cm²"], correctOptionIndex: 0, explanation: "Area = (1/2) × base × height = (1/2) × 3 cm × 4 cm = 6 cm².", difficulty: "easy", source_page: 538 },
-                { question: "The area of a rectangle is 48 cm². If its length is 8 cm, what is its diagonal?", options: ["8 cm", "10 cm", "5 cm", "7 cm"], correctOptionIndex: 1, explanation: "Area = length × width. 48 = 8 × width => width = 6 cm. Diagonal = sqrt(length^2 + width^2) = sqrt(8^2 + 6^2) = sqrt(64 + 36) = sqrt(100) = 10 cm.", difficulty: "tough", source_page: 538 },
-                { question: "The side of a square field is 20 m. If the cost of leveling it is Rs. 5 per m², what is the total cost?", options: ["Rs. 100", "Rs. 400", "Rs. 2000", "Rs. 5000"], correctOptionIndex: 2, explanation: "Area of field = side² = 20² = 400 m². Total cost = 400 m² × Rs. 5/m² = Rs. 2000.", difficulty: "medium", source_page: 540 },
-                { question: "The ratio of the radius of two circles is 1:2. What is the ratio of their areas?", options: ["1:2", "1:4", "1:8", "1:1"], correctOptionIndex: 1, explanation: "If ratio of radii is a:b, then ratio of areas is a²:b². So, 1²:2² = 4:9.", difficulty: "tough", source_page: 539 },
-                { question: "A rectangular room is 12 m long and 9 m wide. How many square tiles of side 0.3 m are needed to cover the floor?", options: ["108", "1200", "1080", "120"], correctOptionIndex: 2, explanation: "Area of room = 12 × 9 = 108 m². Area of one tile = 0.3 × 0.3 = 0.09 m². Number of tiles = Area of room / Area of one tile = 108 / 0.09 = 10800 / 9 = 1200 tiles.", difficulty: "tough", source_page: 540 },
-                { question: "What is the area of a square whose perimeter is 40 cm?", options: ["10 cm²", "40 cm²", "100 cm²", "160 cm²"], correctOptionIndex: 2, explanation: "Perimeter = 4 × side. 40 = 4 × side => side = 10 cm. Area = 10² = 100 cm².", difficulty: "easy", source_page: 538 },
-                { question: "The length of a rectangular plot is twice its width. If its area is 200 m², find its length.", options: ["10 m", "20 m", "30 m", "40 m"], correctOptionIndex: 1, explanation: "Let width = w, length = 2w. Area = length × width = (2w) × w = 2w². 200 = 2w² => w² = 100 => w = 10 m. Length = 2w = 2 × 10 = 20 m.", difficulty: "medium", source_page: 538 },
-                { question: "Find the area of a circle whose diameter is 14 cm. (Use π = 22/7)", options: ["44 cm²", "154 cm²", "616 cm²", "28 cm²"], correctOptionIndex: 1, explanation: "Diameter = 14 cm => Radius (r) = 7 cm. Area = πr² = (22/7) × 7² = 154 cm².", difficulty: "easy", source_page: 539 },
-                { question: "A field is in the form of a rectangle. Its length is 60 m and width is 40 m. If the cost of sowing grass in it is Rs. 2 per m², what is the total cost?", options: ["Rs. 200", "Rs. 2000", "Rs. 4800", "Rs. 4000"], correctOptionIndex: 2, explanation: "Area of field = 60 × 40 = 2400 m². Total cost = 2400 m² × Rs. 2/m² = Rs. 4800.", difficulty: "easy", source_page: 540 },
-                { question: "The perimeter of a rectangular field is 80 m and its length is 25 m. Find its area.", options: ["375 m²", "625 m²", "400 m²", "600 m²"], correctOptionIndex: 1, explanation: "Perimeter = 2(L+W). 80 = 2(25+W) => 40 = 25+W => W = 15 m. Area = L*W = 25*15 = 375 m².", difficulty: "medium", source_page: 538 },
-                { question: "If the area of a circle is 616 cm², find its radius. (Use π = 22/7)", options: ["7 cm", "14 cm", "21 cm", "28 cm"], correctOptionIndex: 1, explanation: "Area = πr². 616 = (22/7) × r². r² = (616 × 7) / 22 = 28 × 7 = 196. r = sqrt(196) = 14 cm.", difficulty: "tough", source_page: 539 },
-                { question: "A rectangular park 60 m long and 40 m wide has a path 2 m wide running around its outside. The area of the path is:", options: ["384 m²", "416 m²", "448 m²", "480 m²"], correctOptionIndex: 1, explanation: "Outer length = 60 + 2*2 = 64 m. Outer width = 40 + 2*2 = 44 m. Outer area = 64 * 44 = 2816 m². Inner area = 60 * 40 = 2400 m². Area of path = 2816 - 2400 = 416 m².", difficulty: "tough", source_page: 540 },
-                { question: "What is the area of a triangle with vertices (0,0), (4,0), and (0,3)?", options: ["3 sq units", "6 sq units", "12 sq units", "24 sq units"], correctOptionIndex: 1, explanation: "This is a right-angled triangle with base 4 and height 3. Area = (1/2) * base * height = (1/2) * 4 * 3 = 6 sq units.", difficulty: "tough", source_page: 540 },
-                { question: "The perimeter of a square is 64 cm. What is its area?", options: ["16 cm²", "64 cm²", "256 cm²", "1024 cm²"], correctOptionIndex: 2, explanation: "Perimeter = 4 × side. 64 = 4 × side => side = 16 cm. Area = 16² = 256 cm².", difficulty: "easy", source_page: 538 },
-                { question: "A rectangular lawn is 30 m long and 20 m wide. It has a path 1 m wide running inside around it. Find the area of the path.", options: ["96 m²", "92 m²", "100 m²", "104 m²"], correctOptionIndex: 0, explanation: "Inner length = 30 - 2*1 = 28 m. Inner width = 20 - 2*1 = 18 m. Inner area = 28 * 18 = 504 m². Outer area = 30 * 20 = 600 m². Area of path = 600 - 504 = 96 m².", difficulty: "medium", source_page: 540 },
-                { question: "What is the area of a sector of a circle with radius 10 cm and angle 90°? (Use π = 3.14)", options: ["314 cm²", "78.5 cm²", "157 cm²", "62.8 cm²"], correctOptionIndex: 1, explanation: "Area of sector = (angle/360) × πr² = (90/360) × 3.14 × 10² = (1/4) × 3.14 × 100 = 0.25 × 314 = 78.5 cm².", difficulty: "tough", source_page: 539 },
-                { question: "The length of a rectangle is 12 cm and its diagonal is 13 cm. What is its area?", options: ["30 cm²", "60 cm²", "48 cm²", "72 cm²"], correctOptionIndex: 1, explanation: "By Pythagorean theorem, width = sqrt(diagonal^2 - length^2) = sqrt(13^2 - 12^2) = sqrt(169 - 144) = sqrt(25) = 5 cm. Area = length × width = 12 cm × 5 cm = 60 cm².", difficulty: "medium", source_page: 538 },
-                { question: "If the radius of a circle is doubled, its area will be:", options: ["Doubled", "Tripled", "Quadrupled", "Halved"], correctOptionIndex: 2, explanation: "Area = πr². If radius becomes 2r, new area = π(2r)² = 4πr². So, the area is quadrupled.", difficulty: "easy", source_page: 539 },
-                { question: "A square field has an area of 400 m². What is its perimeter?", options: ["20 m", "40 m", "80 m", "160 m"], correctOptionIndex: 2, explanation: "Area = side². 400 = side² => side = 20 m. Perimeter = 4 × side = 4 × 20 = 80 m.", difficulty: "easy", source_page: 538 },
-                { question: "The length and width of a rectangle are 20 m and 10 m respectively. If its length is decreased by 10% and width is increased by 10%, what is the new area?", options: ["180 m²", "198 m²", "200 m²", "220 m²"], correctOptionIndex: 1, explanation: "Original area = 20 × 10 = 200 m². New length = 20 - (10% of 20) = 20 - 2 = 18 m. New width = 10 + (10% of 10) = 10 + 1 = 11 m. New area = 18 × 11 = 198 m².", difficulty: "tough", source_page: 540 },
-                { question: "A triangular field has a base of 20 m and its area is 100 m². What is its height?", options: ["5 m", "10 m", "15 m", "20 m"], correctOptionIndex: 1, explanation: "Area = (1/2) × base × height. 100 = (1/2) × 20 × height => 100 = 10 × height => height = 10 m.", difficulty: "medium", source_page: 538 },
-                { question: "What is the area of a circle inscribed in a square of side 14 cm? (Use π = 22/7)", options: ["49 cm²", "154 cm²", "196 cm²", "616 cm²"], correctOptionIndex: 1, explanation: "When a circle is inscribed in a square, the diameter of the circle is equal to the side of the square. So, diameter = 14 cm, radius = 7 cm. Area = πr² = (22/7) × 7² = 154 cm².", difficulty: "tough", source_page: 539 },
-                { question: "The perimeter of a rectangle is 60 cm. If its length is twice its width, what is its area?", options: ["100 cm²", "200 cm²", "150 cm²", "300 cm²"], correctOptionIndex: 1, explanation: "Perimeter = 2(L+W). Let W=x, L=2x. 60 = 2(2x+x) => 60 = 2(3x) => 60 = 6x => x = 10 cm (width). Length = 2*10 = 20 cm. Area = 20 * 10 = 200 cm².", difficulty: "tough", source_page: 538 },
-                { question: "A circular garden has a radius of 21 m. If it is to be fenced with barbed wire costing Rs. 5 per meter, what is the total cost? (Use π = 22/7)", options: ["Rs. 660", "Rs. 1320", "Rs. 2200", "Rs. 440"], correctOptionIndex: 0, explanation: "Circumference = 2πr = 2 × (22/7) × 21 = 2 × 22 × 3 = 132 m. Total cost = 132 m × Rs. 5/m = Rs. 660.", difficulty: "medium", source_page: 540 },
-                { question: "What is the area of a regular hexagon with side 6 cm?", options: ["18sqrt(3) cm²", "36sqrt(3) cm²", "54sqrt(3) cm²", "72sqrt(3) cm²"], correctOptionIndex: 2, explanation: "Area of regular hexagon = (3sqrt(3)/2) * side^2 = (3sqrt(3)/2) * 6^2 = (3sqrt(3)/2) * 36 = 3sqrt(3) * 18 = 54sqrt(3) cm².", difficulty: "tough", source_page: 539 },
-                { question: "A rectangular park has a length of 50 m and a width of 30 m. There are two cross paths of width 2 m, one parallel to length and other parallel to width, running through the center of the park. Find the area of the paths.", options: ["156 m²", "160 m²", "164 m²", "172 m²"], correctOptionIndex: 0, explanation: "Area of path parallel to length = 50 * 2 = 100 m². Area of path parallel to width = 30 * 2 = 60 m². Area of common overlap (square) = 2 * 2 = 4 m². Total area of paths = (Area of path 1 + Area of path 2) - Area of overlap = 100 + 60 - 4 = 156 m².", difficulty: "tough", source_page: 540 },
-                { question: "Find the cost of tiling a rectangular floor 15 m long and 10 m wide at the rate of Rs. 20 per square meter.", options: ["Rs. 3000", "Rs. 2000", "Rs. 1500", "Rs. 4000"], correctOptionIndex: 0, explanation: "Area of floor = 15 × 10 = 150 m². Total cost = 150 m² × Rs. 20/m² = Rs. 3000.", difficulty: "easy", source_page: 540 },
-                { question: "If the area of a triangle is 50 cm² and its base is 10 cm, what is its height?", options: ["5 cm", "10 cm", "15 cm", "20 cm"], correctOptionIndex: 1, explanation: "Area = (1/2) × base × height. 50 = (1/2) × 10 × height => 50 = 5 × height => height = 10 cm.", difficulty: "easy", source_page: 538 },
-                { question: "What is the area of a square playground whose perimeter is 100 m?", options: ["25 m²", "100 m²", "625 m²", "1000 m²"], correctOptionIndex: 2, explanation: "Perimeter = 4 × side. 100 = 4 × side => side = 25 m. Area = 25² = 625 m².", difficulty: "easy", source_page: 538 },
-                { question: "A rectangular sheet of paper is 22 cm long and 10 cm wide. If it is rolled along its length to form a cylinder, what is the area of the curved surface of the cylinder?", options: ["220 cm²", "110 cm²", "440 cm²", "55 cm²"], correctOptionIndex: 0, explanation: "When rolled along its length, the length of the sheet becomes the circumference of the base of the cylinder (2πr = 22 cm) and the width becomes the height (h = 10 cm). Area of curved surface = 2πrh = 22 * 10 = 220 cm².", difficulty: "tough", source_page: 540 }
-            ];
-            quizQuestions.push(...mathematicsMCQs);
+            // June 6:
+            // GK: Important Official Places (Page 53) & Important Airlines & Airports (Pages 54-57)
+            // English: Direct/Indirect (Pages 454-458)
+            // General Abilities: True Discount (Pages 531-532) & Banker's Discount (Page 533)
 
-            // Islamic Studies (20 MCQs)
-            const islamicStudiesMCQs = [
-                // IS - June 11: Articles of Faith (from Urdu/Islamic Studies Section): Pages 17-19 (20 MCQs)
-                { question: "How many fundamental articles of faith are there in Islam?", options: ["3", "4", "5", "6"], correctOptionIndex: 3, explanation: "There are six fundamental articles of faith in Islam: Belief in Allah, His Angels, His Books, His Messengers, the Day of Judgment, and Divine Decree.", difficulty: "easy", source_page: 17 },
-                { question: "Belief in the Oneness of Allah is called:", options: ["Risalat", "Akhirat", "Tawhid", "Nabuwwat"], correctOptionIndex: 2, explanation: "Tawhid is the indivisible oneness concept of monotheism in Islam. It is the religion's central and single-most important concept.", difficulty: "easy", source_page: 17 },
+            // June 7:
+            // GK: Important Airlines & Airports (Pages 58-59) & News Agencies of Some Countries (Pages 60-61)
+            // English: Direct/Indirect (Pages 459-463)
+            // Urdu: Urdu Elegy Writing & Criticism (Pages 23-26)
+
+            // June 8:
+            // GK: Nobel Prize (Facts and Laureates) (Pages 62-66)
+            // Mathematics: Clocks (Pages 534-535)
+            // Urdu: Famous Urdu Writings & Miscellaneous Urdu (Pages 27-30)
+
+            // June 9:
+            // GK: Highest Military & Civil Awards (Page 67) & International Borders & Lines (Pages 68-69)
+            // English: Active Passive Voice (Pages 464-467)
+            // General Abilities: Decimal Fractions (Pages 536-537)
+
+            // June 10:
+            // GK: International Observance (Important Days) (Pages 70-73)
+            // English: Active Passive Voice (Pages 468-471)
+            // Islamic Studies: Establishment of First Islamic State & Early Battles (Pages 14-16 of Urdu/Islamic Studies Section)
+
+            // June 11:
+            // GK: Nicknames of Famous Personalities (Page 74) & Personalities (Pages 75-78)
+            // Mathematics: Area Problems (Pages 538-540)
+            // Islamic Studies: Articles of Faith (Pages 17-19 of Urdu/Islamic Studies Section)
+
+            // General Knowledge Questions (from June 6-11 topics, aiming for 20 questions)
+            const gkQuestions = [
+                // From June 6: Important Official Places, Airlines & Airports
+                { question: "Where is the headquarters of the Interpol located?", options: ["Paris", "Lyon", "London", "Brussels"], correctOptionIndex: 1, explanation: "The headquarters of Interpol is located in Lyon, France.", difficulty: "medium", source_page: 53 },
+                { question: "La Moncloa is the official residence of the Prime Minister of which country?", options: ["Italy", "Spain", "Portugal", "France"], correctOptionIndex: 1, explanation: "La Moncloa is the official residence and workplace of the Prime Minister of Spain.", difficulty: "tough", source_page: 53 },
+                { question: "Which airline is known as 'The Flying Kangaroo'?", options: ["Air New Zealand", "Qantas", "Lufthansa", "Emirates"], correctOptionIndex: 1, explanation: "Qantas, Australia's largest airline, uses 'The Flying Kangaroo' as its logo and nickname.", difficulty: "easy", source_page: 54 },
+                { question: "Jomo Kenyatta International Airport is located in which city?", options: ["Cairo", "Nairobi", "Addis Ababa", "Johannesburg"], correctOptionIndex: 1, explanation: "Jomo Kenyatta International Airport is in Nairobi, Kenya.", difficulty: "medium", source_page: 56 },
+                // From June 7: Airlines & Airports, News Agencies
+                { question: "Which news agency belongs to Russia?", options: ["Reuters", "AP", "TASS", "Xinhua"], correctOptionIndex: 2, explanation: "TASS is a major Russian state-owned news agency.", difficulty: "easy", source_page: 60 },
+                { question: "Kyodo News is the official news agency of which country?", options: ["China", "South Korea", "Japan", "India"], correctOptionIndex: 2, explanation: "Kyodo News is a non-profit cooperative news agency in Japan.", difficulty: "medium", source_page: 60 },
+                // From June 8: Nobel Prize
+                { question: "The Nobel Prize in Peace is awarded in which city?", options: ["Stockholm", "Oslo", "Copenhagen", "Geneva"], correctOptionIndex: 1, explanation: "The Nobel Peace Prize is awarded in Oslo, Norway, while other Nobel Prizes are awarded in Stockholm, Sweden.", difficulty: "easy", source_page: 62 },
+                { question: "In which year was the first Nobel Prize awarded?", options: ["1895", "1901", "1905", "1910"], correctOptionIndex: 1, explanation: "The first Nobel Prizes were awarded in 1901.", difficulty: "medium", source_page: 62 },
+                { question: "Who was the first woman to win a Nobel Prize?", options: ["Marie Curie", "Mother Teresa", "Rosa Parks", "Malala Yousafzai"], correctOptionIndex: 0, explanation: "Marie Curie was the first woman to win a Nobel Prize, sharing the Physics Prize in 1903.", difficulty: "easy", source_page: 63 },
+                { question: "Alfred Nobel, the founder of the Nobel Prizes, was from which country?", options: ["Germany", "Sweden", "Norway", "France"], correctOptionIndex: 1, explanation: "Alfred Nobel was a Swedish chemist, engineer, inventor, and entrepreneur.", difficulty: "easy", source_page: 62 },
+                // From June 9: Highest Military & Civil Awards, International Borders & Lines
+                { question: "Nishan-e-Haider is the highest military award of:", options: ["India", "Pakistan", "Bangladesh", "Sri Lanka"], correctOptionIndex: 1, explanation: "Nishan-e-Haider is the highest military award in Pakistan.", difficulty: "easy", source_page: 67 },
+                { question: "The 'Radcliffe Line' divides which two countries?", options: ["India and China", "Pakistan and Afghanistan", "India and Pakistan", "North and South Korea"], correctOptionIndex: 2, explanation: "The Radcliffe Line is the boundary demarcation line between India and Pakistan.", difficulty: "easy", source_page: 68 },
+                { question: "The 38th Parallel is the border between:", options: ["USA and Canada", "North and South Korea", "East and West Germany", "China and Vietnam"], correctOptionIndex: 1, explanation: "The 38th Parallel north latitude roughly demarcates North Korea and South Korea.", difficulty: "medium", source_page: 69 },
+                // From June 10: International Observance (Important Days)
+                { question: "World Environment Day is observed on:", options: ["April 22", "June 5", "March 22", "July 11"], correctOptionIndex: 1, explanation: "World Environment Day is observed on June 5 annually.", difficulty: "easy", source_page: 70 },
+                { question: "International Women's Day is celebrated on:", options: ["February 14", "March 8", "May 1", "June 1"], correctOptionIndex: 1, explanation: "International Women's Day is celebrated on March 8 every year.", difficulty: "easy", source_page: 70 },
+                { question: "Human Rights Day falls on:", options: ["December 10", "October 24", "September 8", "January 1"], correctOptionIndex: 0, explanation: "Human Rights Day is observed every year on 10 December.", difficulty: "easy", source_page: 71 },
+                // From June 11: Nicknames of Famous Personalities, Personalities
+                { question: "Who is known as the 'Frontier Gandhi'?", options: ["Mahatma Gandhi", "Khan Abdul Ghaffar Khan", "Nelson Mandela", "Jawaharlal Nehru"], correctOptionIndex: 1, explanation: "Khan Abdul Ghaffar Khan was known as the 'Frontier Gandhi'.", difficulty: "easy", source_page: 74 },
+                { question: "The 'Iron Lady' is the nickname of:", options: ["Indira Gandhi", "Benazir Bhutto", "Margaret Thatcher", "Golda Meir"], correctOptionIndex: 2, explanation: "Margaret Thatcher was famously known as the 'Iron Lady'.", difficulty: "easy", source_page: 74 },
+                { question: "Who was the first Prime Minister of Pakistan?", options: ["Muhammad Ali Jinnah", "Liaquat Ali Khan", "Khawaja Nazimuddin", "Zulfiqar Ali Bhutto"], correctOptionIndex: 1, explanation: "Liaquat Ali Khan served as the first Prime Minister of Pakistan.", difficulty: "easy", source_page: 75 },
+                { question: "Which Pakistani Nobel laureate won the prize in Physics?", options: ["Dr. Abdul Qadeer Khan", "Dr. Abdus Salam", "Dr. Atta-ur-Rahman", "Dr. Samar Mubarakmand"], correctOptionIndex: 1, explanation: "Dr. Abdus Salam was a Pakistani theoretical physicist and a Nobel Prize laureate in Physics.", difficulty: "easy", source_page: 76 }
+            ];
+            quizQuestions.push(...gkQuestions);
+
+            // English Questions (from June 6-10 topics, aiming for 50 questions)
+            const englishQuestions = [
+                // From June 6: Direct/Indirect (Pages 454-458)
+                { question: "Change into indirect speech: He said, 'I am busy.'", options: ["He said that he is busy.", "He said that he was busy.", "He said that I am busy.", "He says that he was busy."], correctOptionIndex: 1, explanation: "When the reporting verb is in the past tense, the tense of the reported speech changes accordingly. 'Am' becomes 'was'.", difficulty: "easy", source_page: 454 },
+                { question: "Change into indirect speech: She said, 'I will go there tomorrow.'", options: ["She said that she will go there tomorrow.", "She said that she would go there tomorrow.", "She said that she would go there the next day.", "She says that she would go there the next day."], correctOptionIndex: 2, explanation: "When the reporting verb is in the past tense, 'will' changes to 'would' and 'tomorrow' changes to 'the next day'.", difficulty: "medium", source_page: 455 },
+                { question: "Change into direct speech: He asked me if I was going.", options: ["He said to me, 'Are you going?'", "He said to me, 'Am I going?'", "He asked me, 'Are you going?'", "He asked me, 'Am I going?'"], correctOptionIndex: 0, explanation: "When changing from indirect to direct speech for an interrogative sentence, use 'said to' and change the pronoun and tense back.", difficulty: "tough", source_page: 456 },
+                { question: "Change into indirect speech: The teacher said, 'The Earth revolves around the Sun.'", options: ["The teacher said that the Earth revolves around the Sun.", "The teacher said that the Earth revolved around the Sun.", "The teacher said that the Earth is revolving around the Sun.", "The teacher says that the Earth revolves around the Sun."], correctOptionIndex: 0, explanation: "Universal truths do not change their tense in indirect speech.", difficulty: "easy", source_page: 457 },
+                { question: "Change into indirect speech: She said, 'What a beautiful sight!'", options: ["She exclaimed what a beautiful sight it was.", "She exclaimed that it was a beautiful sight.", "She asked what a beautiful sight it was.", "She wondered what a beautiful sight."], correctOptionIndex: 1, explanation: "Exclamatory sentences are converted into assertive sentences in indirect speech, using 'exclaimed that'.", difficulty: "medium", source_page: 458 },
+                // From June 7: Direct/Indirect (Pages 459-463)
+                { question: "Change into indirect speech: He said to me, 'Please help me.'", options: ["He requested me to help him.", "He told me to help him.", "He ordered me to help him.", "He asked me if I would help him."], correctOptionIndex: 0, explanation: "Imperative sentences with 'please' are changed by using 'requested to'.", difficulty: "easy", source_page: 459 },
+                { question: "Change into indirect speech: 'Good morning!', said John.", options: ["John wished good morning.", "John said good morning.", "John greeted good morning.", "John asked good morning."], correctOptionIndex: 0, explanation: "Greetings are expressed using 'wished' or 'greeted'.", difficulty: "medium", source_page: 460 },
+                { question: "Change into indirect speech: The old man said, 'May God bless you!'", options: ["The old man prayed that God might bless me.", "The old man wished that God would bless me.", "The old man told me that God might bless me.", "The old man said that God bless me."], correctOptionIndex: 0, explanation: "Optative sentences are converted using 'prayed that' or 'wished that', and 'may' changes to 'might'.", difficulty: "tough", source_page: 461 },
+                { question: "Change into indirect speech: My friend said, 'Alas! I am undone.'", options: ["My friend exclaimed with sorrow that he was undone.", "My friend said with sorrow that he was undone.", "My friend cried that he was undone.", "My friend said alas that he was undone."], correctOptionIndex: 0, explanation: "Exclamatory sentences expressing sorrow are converted using 'exclaimed with sorrow that'.", difficulty: "medium", source_page: 462 },
+                { question: "Change into indirect speech: He said to them, 'Let's play football.'", options: ["He proposed to them that they should play football.", "He suggested to them that they should play football.", "He told them to play football.", "He asked them if they wanted to play football."], correctOptionIndex: 0, explanation: "Sentences with 'Let's' are usually changed by using 'proposed that' or 'suggested that' followed by 'should'.", difficulty: "tough", source_page: 463 },
+                // From June 9: Active Passive Voice (Pages 464-467)
+                { question: "Change into passive voice: 'She sings a song.'", options: ["A song is sung by her.", "A song was sung by her.", "A song is being sung by her.", "A song has been sung by her."], correctOptionIndex: 0, explanation: "Simple present active voice (Subject + Verb1 + Object) becomes passive (Object + is/am/are + Verb3 + by + Subject).", difficulty: "easy", source_page: 464 },
+                { question: "Change into passive voice: 'They are playing cricket.'", options: ["Cricket is played by them.", "Cricket was played by them.", "Cricket is being played by them.", "Cricket has been played by them."], correctOptionIndex: 2, explanation: "Present continuous active voice (Subject + is/am/are + Verb1+ing + Object) becomes passive (Object + is/am/are + being + Verb3 + by + Subject).", difficulty: "medium", source_page: 464 },
+                { question: "Change into passive voice: 'He killed a snake.'", options: ["A snake is killed by him.", "A snake was killed by him.", "A snake is being killed by him.", "A snake has been killed by him."], correctOptionIndex: 1, explanation: "Simple past active voice (Subject + Verb2 + Object) becomes passive (Object + was/were + Verb3 + by + Subject).", difficulty: "easy", source_page: 465 },
+                { question: "Change into passive voice: 'Someone has stolen my pen.'", options: ["My pen is stolen.", "My pen was stolen.", "My pen has been stolen.", "My pen had been stolen."], correctOptionIndex: 2, explanation: "When the agent is indefinite (someone, somebody, people), it is usually omitted in the passive voice. Present perfect active becomes 'has/have been + Verb3'.", difficulty: "medium", source_page: 467 },
+                { question: "Change into passive voice: 'Open the door.'", options: ["The door is opened.", "Let the door be opened.", "The door should be opened.", "You are ordered to open the door."], correctOptionIndex: 1, explanation: "Imperative sentences (commands) can be changed to passive using 'Let + Object + be + Verb3'.", difficulty: "tough", source_page: 467 },
+                // From June 10: Active Passive Voice (Pages 468-471)
+                { question: "Choose the correct active voice for: 'The ball was hit by the boy.'", options: ["The boy hit the ball.", "The boy is hitting the ball.", "The boy has hit the ball.", "The boy had hit the ball."], correctOptionIndex: 0, explanation: "Passive 'was hit' corresponds to simple past active 'hit'.", difficulty: "easy", source_page: 468 },
+                { question: "Choose the correct active voice for: 'A letter is being written by her.'", options: ["She writes a letter.", "She wrote a letter.", "She is writing a letter.", "She has written a letter."], correctOptionIndex: 2, explanation: "Passive 'is being written' corresponds to present continuous active 'is writing'.", difficulty: "medium", source_page: 468 },
+                { question: "Choose the correct active voice for: 'The work had been finished by them.'", options: ["They finish the work.", "They finished the work.", "They have finished the work.", "They had finished the work."], correctOptionIndex: 3, explanation: "Passive 'had been finished' corresponds to past perfect active 'had finished'.", difficulty: "medium", source_page: 469 },
+                { question: "Choose the correct active voice for: 'By whom was the window broken?'", options: ["Who broke the window?", "Who is breaking the window?", "Who has broken the window?", "Who had broken the window?"], correctOptionIndex: 0, explanation: "When 'By whom' is used in passive voice, 'Who' is used as the subject in active voice for interrogative sentences.", difficulty: "tough", source_page: 471 },
+                { question: "Choose the correct active voice for: 'English is spoken all over the world.'", options: ["People speak English all over the world.", "People spoke English all over the world.", "People are speaking English all over the world.", "People have spoken English all over the world."], correctOptionIndex: 0, explanation: "When the agent is general or obvious (e.g., 'people'), it is omitted in the passive voice. 'Is spoken' corresponds to simple present 'speak'.", difficulty: "medium", source_page: 471 },
+                { question: "Change into passive voice: 'The news surprised me.'", options: ["I was surprised by the news.", "I am surprised by the news.", "I had been surprised by the news.", "The news is surprising."], correctOptionIndex: 0, explanation: "Simple past active becomes 'was surprised'.", difficulty: "easy", source_page: 465 },
+                { question: "Change into passive voice: 'The police caught the thief.'", options: ["The thief was caught by the police.", "The thief is caught by the police.", "The thief has been caught by the police.", "The thief was being caught by the police."], correctOptionIndex: 0, explanation: "Simple past active becomes 'was caught'.", difficulty: "easy", source_page: 465 },
+                { question: "Change into passive voice: 'They will build a new bridge.'", options: ["A new bridge is built by them.", "A new bridge was built by them.", "A new bridge will be built by them.", "A new bridge will have been built by them."], correctOptionIndex: 2, explanation: "Simple future active becomes 'will be built'.", difficulty: "easy", source_page: 466 },
+                { question: "Change into passive voice: 'I can solve this problem.'", options: ["This problem is solved by me.", "This problem can be solved by me.", "This problem might be solved by me.", "This problem will be solved by me."], correctOptionIndex: 1, explanation: "Modal verbs are followed by 'be + past participle' in passive voice.", difficulty: "medium", source_page: 467 },
+                { question: "Change into passive voice: 'The teacher praised the students.'", options: ["The students are praised by the teacher.", "The students were praised by the teacher.", "The students have been praised by the teacher.", "The students had been praised by the teacher."], correctOptionIndex: 1, explanation: "Simple past active becomes 'were praised'.", difficulty: "easy", source_page: 465 },
+                { question: "Change into passive voice: 'He has painted the wall.'", options: ["The wall is painted by him.", "The wall was painted by him.", "The wall has been painted by him.", "The wall had been painted by him."], correctOptionIndex: 2, explanation: "Present perfect active becomes 'has/have been + past participle'.", difficulty: "medium", source_page: 465 },
+                { question: "Change into passive voice: 'She was preparing dinner.'", options: ["Dinner is prepared by her.", "Dinner was prepared by her.", "Dinner was being prepared by her.", "Dinner had been prepared by her."], correctOptionIndex: 2, explanation: "Past continuous active becomes 'was/were being + past participle'.", difficulty: "medium", source_page: 465 },
+                { question: "Change into passive voice: 'We shall inform you.'", options: ["You are informed by us.", "You will be informed by us.", "You should be informed by us.", "You have been informed by us."], correctOptionIndex: 1, explanation: "Simple future active becomes 'will be informed'.", difficulty: "easy", source_page: 466 },
+                { question: "Change into passive voice: 'One should keep one's promises.'", options: ["One's promises should be kept.", "Promises should be kept.", "Promises are kept by one.", "Promises are to be kept."], correctOptionIndex: 1, explanation: "When the agent 'one' is general, it's omitted. 'Should + be + kept' is the passive form.", difficulty: "tough", source_page: 467 },
+                { question: "Change into passive voice: 'Why did you break the glass?'", options: ["Why was the glass broken by you?", "Why is the glass broken by you?", "Why has the glass been broken by you?", "Why had the glass been broken by you?"], correctOptionIndex: 0, explanation: "For past interrogative with 'Why', use 'Why + was/were + object + past participle'.", difficulty: "tough", source_page: 467 },
+                { question: "Change into passive voice: 'Nobody knows him.'", options: ["He is known by nobody.", "He is known to nobody.", "He is not known by anybody.", "He is not known to anybody."], correctOptionIndex: 3, explanation: "Passive of 'nobody knows' is 'He is not known to anybody'. 'Known' often takes 'to' as a preposition.", difficulty: "tough", source_page: 467 },
+                { question: "Change into passive voice: 'Do your duty.'", options: ["Your duty is done.", "Let your duty be done.", "Your duty should be done.", "You are advised to do your duty."], correctOptionIndex: 1, explanation: "Imperative sentences often use 'Let + object + be + past participle'.", difficulty: "tough", source_page: 467 },
+                { question: "Choose the correct active voice for: 'The house is being built by masons.'", options: ["Masons build the house.", "Masons built the house.", "Masons are building the house.", "Masons have built the house."], correctOptionIndex: 2, explanation: "Passive 'is being built' corresponds to present continuous active 'are building'.", difficulty: "medium", source_page: 468 },
+                { question: "Choose the correct active voice for: 'A poem was written by him.'", options: ["He writes a poem.", "He wrote a poem.", "He is writing a poem.", "He has written a poem."], correctOptionIndex: 1, explanation: "Passive 'was written' corresponds to simple past active 'wrote'.", difficulty: "easy", source_page: 468 },
+                { question: "Choose the correct active voice for: 'The food has been cooked by mother.'", options: ["Mother cooks the food.", "Mother cooked the food.", "Mother is cooking the food.", "Mother has cooked the food."], correctOptionIndex: 3, explanation: "Passive 'has been cooked' corresponds to present perfect active 'has cooked'.", difficulty: "medium", source_page: 469 },
+                { question: "Choose the correct active voice for: 'The children were taught by the teacher.'", options: ["The teacher teaches the children.", "The teacher taught the children.", "The teacher is teaching the children.", "The teacher has taught the children."], correctOptionIndex: 1, explanation: "Passive 'were taught' corresponds to simple past active 'taught'.", difficulty: "easy", source_page: 468 },
+                { question: "Choose the correct active voice for: 'He was being laughed at by his friends.'", options: ["His friends laugh at him.", "His friends laughed at him.", "His friends were laughing at him.", "His friends had laughed at him."], correctOptionIndex: 2, explanation: "Passive 'was being laughed at' corresponds to past continuous active 'were laughing at'.", difficulty: "medium", source_page: 469 }
+            ];
+            quizQuestions.push(...englishQuestions);
+
+            // General Abilities & Mathematics Questions (from June 6, 9, 11 topics, aiming for 40 questions)
+            const gaMathQuestions = [
+                // From June 6: True Discount & Banker's Discount
+                { question: "What is the true discount on Rs. 2200 due in 2 years at 5% per annum simple interest?", options: ["Rs. 200", "Rs. 250", "Rs. 300", "Rs. 260"], correctOptionIndex: 0, explanation: "True Discount (T.D.) = Amount * (R * T) / (100 + R * T). T.D. = 2200 * (5 * 2) / (100 + 5 * 2) = 2200 * (10 / 110) = 2200 * (1/11) = Rs. 200.", difficulty: "tough", source_page: 531 },
+                { question: "Calculate the Banker's Discount on a bill of Rs. 5000 due in 3 months at 10% per annum.", options: ["Rs. 100", "Rs. 125", "Rs. 150", "Rs. 200"], correctOptionIndex: 1, explanation: "Banker's Discount (B.D.) = (Amount * R * T) / 100. T = 3 months = 3/12 = 1/4 year. B.D. = (5000 * 10 * (1/4)) / 100 = 5000 * 10 / 400 = 500 / 4 = Rs. 125.", difficulty: "medium", source_page: 533 },
+                // From June 8: Clocks
+                { question: "At what time between 4 and 5 o'clock will the hands of a clock be at right angles?", options: ["4:05 and 4:38", "4:05 and 4:38 (approx)", "4:05 5/11 and 4:38 2/11", "4:15 and 4:45"], correctOptionIndex: 2, explanation: "At 4 o'clock, the minute hand is at 12 and hour hand is at 4. The angle between them is 4 * 30 = 120 degrees. For hands to be at right angles (90 degrees), they need to be 15 minute spaces apart. Formula: 2/11 * (A1 +- A2) where A1 = smaller hour * 30, A2 = 90. First right angle: 2/11 * (120 - 90) = 2/11 * 30 = 60/11 minutes past 4. Second right angle: 2/11 * (120 + 90) = 2/11 * 210 = 420/11 minutes past 4.", difficulty: "tough", source_page: 534 },
+                { question: "How many times do the hands of a clock coincide in 12 hours?", options: ["10", "11", "12", "22"], correctOptionIndex: 1, explanation: "The hands of a clock coincide 11 times in 12 hours (between 11 and 1 o'clock, they coincide only once at 12).", difficulty: "medium", source_page: 534 },
+                { question: "How many times do the hands of a clock make a right angle in 12 hours?", options: ["11", "12", "22", "24"], correctOptionIndex: 2, explanation: "The hands of a clock make a right angle 22 times in 12 hours (they make two right angles every hour, except between 2-3 and 8-9 where they form only one).", difficulty: "tough", source_page: 534 },
+                // From June 9: Decimal Fractions
+                { question: "Convert 0.25 into a common fraction.", options: ["1/2", "1/4", "1/5", "1/8"], correctOptionIndex: 1, explanation: "0.25 = 25/100 = 1/4.", difficulty: "easy", source_page: 536 },
+                { question: "Add: 0.5 + 0.25", options: ["0.7", "0.75", "0.8", "0.85"], correctOptionIndex: 1, explanation: "0.5 + 0.25 = 0.75.", difficulty: "easy", source_page: 536 },
+                { question: "Multiply: 0.2 x 0.3", options: ["0.06", "0.6", "0.006", "6.0"], correctOptionIndex: 0, explanation: "0.2 x 0.3 = 0.06.", difficulty: "easy", source_page: 536 },
+                { question: "Divide: 0.8 ÷ 0.2", options: ["0.4", "4", "0.04", "40"], correctOptionIndex: 1, explanation: "0.8 / 0.2 = 4.", difficulty: "easy", source_page: 537 },
+                { question: "What is the value of 0.125 as a common fraction?", options: ["1/4", "1/8", "1/10", "1/2"], correctOptionIndex: 1, explanation: "0.125 = 125/1000 = 1/8.", difficulty: "easy", source_page: 536 },
+                // From June 11: Area Problems
+                { question: "What is the area of a rectangle with length 10 cm and width 5 cm?", options: ["15 cm^2", "25 cm^2", "50 cm^2", "100 cm^2"], correctOptionIndex: 2, explanation: "Area = length x width = 10 cm x 5 cm = 50 cm^2.", difficulty: "easy", source_page: 538 },
+                { question: "Find the area of a square whose side is 7 cm.", options: ["14 cm^2", "28 cm^2", "49 cm^2", "35 cm^2"], correctOptionIndex: 2, explanation: "Area = side x side = 7 cm x 7 cm = 49 cm^2.", difficulty: "easy", source_page: 538 },
+                { question: "The area of a triangle with base 8 cm and height 6 cm is:", options: ["24 cm^2", "48 cm^2", "14 cm^2", "20 cm^2"], correctOptionIndex: 0, explanation: "Area = (1/2) x base x height = (1/2) x 8 cm x 6 cm = 24 cm^2.", difficulty: "easy", source_page: 538 },
+                { question: "What is the area of a circle with radius 7 cm? (Use π = 22/7)", options: ["44 cm^2", "154 cm^2", "22 cm^2", "14 cm^2"], correctOptionIndex: 1, explanation: "Area = πr^2 = (22/7) x 7^2 = (22/7) x 49 = 22 x 7 = 154 cm^2.", difficulty: "medium", source_page: 539 },
+                { question: "The perimeter of a square is 36 cm. What is its area?", options: ["81 cm^2", "36 cm^2", "24 cm^2", "18 cm^2"], correctOptionIndex: 0, explanation: "Side = Perimeter / 4 = 36 / 4 = 9 cm. Area = side^2 = 9^2 = 81 cm^2.", difficulty: "medium", source_page: 538 },
+                { question: "A rectangular field has an area of 120 m^2. If its length is 15 m, what is its width?", options: ["8 m", "10 m", "12 m", "14 m"], correctOptionIndex: 0, explanation: "Width = Area / length = 120 / 15 = 8 m.", difficulty: "easy", source_page: 538 },
+                { question: "What is the area of a parallelogram with base 12 cm and height 5 cm?", options: ["30 cm^2", "60 cm^2", "17 cm^2", "40 cm^2"], correctOptionIndex: 1, explanation: "Area = base x height = 12 cm x 5 cm = 60 cm^2.", difficulty: "easy", source_page: 539 },
+                { question: "The diagonal of a square is 10 cm. What is its area?", options: ["100 cm^2", "50 cm^2", "25 cm^2", "75 cm^2"], correctOptionIndex: 1, explanation: "Area of square = (1/2) x (diagonal)^2 = (1/2) x 10^2 = 50 cm^2.", difficulty: "tough", source_page: 538 },
+                { question: "The circumference of a circle is 44 cm. What is its area? (Use π = 22/7)", options: ["7 cm^2", "14 cm^2", "154 cm^2", "22 cm^2"], correctOptionIndex: 2, explanation: "Circumference = 2πr. 44 = 2 x (22/7) x r => r = 7 cm. Area = πr^2 = (22/7) x 7^2 = 154 cm^2.", difficulty: "tough", source_page: 539 },
+                { question: "A path 2 m wide runs around a rectangular park which is 50 m long and 30 m wide. Find the area of the path.", options: ["336 m^2", "164 m^2", "1600 m^2", "1500 m^2"], correctOptionIndex: 0, explanation: "Outer length = 50 + 2*2 = 54 m. Outer width = 30 + 2*2 = 34 m. Outer area = 54 x 34 = 1836 m^2. Inner area = 50 x 30 = 1500 m^2. Area of path = 1836 - 1500 = 336 m^2.", difficulty: "tough", source_page: 540 },
+                { question: "What is the area of a rhombus whose diagonals are 16 cm and 12 cm?", options: ["48 cm^2", "96 cm^2", "192 cm^2", "60 cm^2"], correctOptionIndex: 1, explanation: "Area = (1/2) x d1 x d2 = (1/2) x 16 cm x 12 cm = 96 cm^2.", difficulty: "medium", source_page: 539 },
+                { question: "The base of a triangle is twice its height. If its area is 36 cm^2, find its height.", options: ["6 cm", "8 cm", "12 cm", "4 cm"], correctOptionIndex: 0, explanation: "Area = (1/2) x base x height. Let height = h, base = 2h. 36 = (1/2) x (2h) x h => 36 = h^2. h = 6 cm.", difficulty: "tough", source_page: 538 },
+                { question: "What is the area of a trapezium whose parallel sides are 10 cm and 14 cm, and height is 5 cm?", options: ["30 cm^2", "60 cm^2", "70 cm^2", "120 cm^2"], correctOptionIndex: 1, explanation: "Area = (1/2) x (sum of parallel sides) x height = (1/2) x (10+14) x 5 = 60 cm^2.", difficulty: "medium", source_page: 539 },
+                { question: "If the area of a square is 144 cm^2, what is the length of its side?", options: ["10 cm", "12 cm", "14 cm", "16 cm"], correctOptionIndex: 1, explanation: "Side = sqrt(Area) = sqrt(144) = 12 cm.", difficulty: "easy", source_page: 538 },
+                { question: "A rectangle has an area of 80 cm^2 and its width is 8 cm. What is its perimeter?", options: ["18 cm", "20 cm", "36 cm", "40 cm"], correctOptionIndex: 2, explanation: "Length = Area / width = 80 / 8 = 10 cm. Perimeter = 2 x (length + width) = 2 x (10 + 8) = 36 cm.", difficulty: "medium", source_page: 538 },
+                { question: "The ratio of the sides of two squares is 2:3. What is the ratio of their areas?", options: ["2:3", "4:9", "8:27", "16:81"], correctOptionIndex: 1, explanation: "Ratio of areas = (ratio of sides)^2 = (2/3)^2 = 4/9.", difficulty: "tough", source_page: 538 },
+                { question: "What is the area of a semi-circle with radius 7 cm? (Use π = 22/7)", options: ["77 cm^2", "154 cm^2", "308 cm^2", "38.5 cm^2"], correctOptionIndex: 0, explanation: "Area = (1/2)πr^2 = (1/2) x (22/7) x 7^2 = 77 cm^2.", difficulty: "medium", source_page: 539 },
+                { question: "A room is 10 m long and 8 m wide. How many square meters of carpet are needed to cover the floor?", options: ["18 m^2", "80 m^2", "36 m^2", "100 m^2"], correctOptionIndex: 1, explanation: "Area = length x width = 10 m x 8 m = 80 m^2.", difficulty: "easy", source_page: 538 },
+                { question: "If the area of an equilateral triangle is 4sqrt(3) cm^2, find its side.", options: ["2 cm", "4 cm", "6 cm", "8 cm"], correctOptionIndex: 1, explanation: "Area of equilateral triangle = (sqrt(3)/4) * side^2. 4sqrt(3) = (sqrt(3)/4) * side^2 => 16 = side^2 => side = 4 cm.", difficulty: "tough", source_page: 539 },
+                { question: "The length and width of a rectangle are increased by 10%. What is the percentage increase in its area?", options: ["10%", "20%", "21%", "100%"], correctOptionIndex: 2, explanation: "New length = 1.1 * original length. New width = 1.1 * original width. New area = 1.1 * 1.1 * original area = 1.21 * original area. Percentage increase = (1.21 - 1) * 100 = 21%.", difficulty: "tough", source_page: 540 },
+                { question: "What is the area of a path 1m wide outside a square garden of side 8m?", options: ["16 m^2", "20 m^2", "36 m^2", "17 m^2"], correctOptionIndex: 2, explanation: "Outer side = 8 + 2*1 = 10 m. Outer area = 10^2 = 100 m^2. Inner area = 8^2 = 64 m^2. Area of path = 100 - 64 = 36 m^2.", difficulty: "medium", source_page: 540 }
+            ];
+            quizQuestions.push(...gaMathQuestions);
+
+            // Islamic Studies Questions (from June 10, 11 topics, aiming for 20 questions)
+            const islamicStudiesQuestions = [
+                // From June 10: Establishment of First Islamic State & Early Battles
+                { question: "The first Islamic State was established in:", options: ["Makkah", "Madina", "Taif", "Jerusalem"], correctOptionIndex: 1, explanation: "The first Islamic State was established in Madina after the Hijrah.", difficulty: "easy", source_page: 14 },
+                { question: "The Charter of Madina (Mithaq-e-Madina) was a treaty between Muslims and which other group?", options: ["Quraish of Makkah", "Christians of Najran", "Jews of Madina", "Persians"], correctOptionIndex: 2, explanation: "The Charter of Madina governed relations among Muslims and the local Jewish tribes.", difficulty: "easy", source_page: 14 },
+                { question: "The Battle of Badr was fought in which Hijri year?", options: ["1st Hijri", "2nd Hijri", "3rd Hijri", "4th Hijri"], correctOptionIndex: 1, explanation: "The Battle of Badr took place in the 2nd year of Hijrah (624 AD).", difficulty: "easy", source_page: 15 },
+                { question: "The Battle of Uhud was fought in which Hijri year?", options: ["2nd Hijri", "3rd Hijri", "4th Hijri", "5th Hijri"], correctOptionIndex: 1, explanation: "The Battle of Uhud took place in the 3rd year of Hijrah (625 AD).", difficulty: "medium", source_page: 15 },
+                { question: "The Battle of Khandaq is also known as the Battle of the:", options: ["Swords", "Wells", "Trench", "Mountains"], correctOptionIndex: 2, explanation: "The Battle of Khandaq (Ditch) involved Muslims digging a trench around Madina.", difficulty: "easy", source_page: 16 },
+                { question: "Who suggested digging a trench in the Battle of Khandaq?", options: ["Hazrat Abu Bakar (R.A)", "Hazrat Umar (R.A)", "Hazrat Salman Farsi (R.A)", "Hazrat Ali (R.A)"], correctOptionIndex: 2, explanation: "Hazrat Salman Farsi (R.A) suggested digging a trench.", difficulty: "tough", source_page: 16 },
+                // From June 11: Articles of Faith
+                { question: "How many fundamental articles of faith are there in Islam?", options: ["3", "4", "5", "6"], correctOptionIndex: 3, explanation: "There are six fundamental articles of faith in Islam.", difficulty: "easy", source_page: 17 },
+                { question: "Belief in the Oneness of Allah is called:", options: ["Risalat", "Akhirat", "Tawhid", "Nabuwwat"], correctOptionIndex: 2, explanation: "Tawhid is the indivisible oneness concept of monotheism in Islam.", difficulty: "easy", source_page: 17 },
                 { question: "The holy book revealed to Prophet Musa (Moses) (A.S) was:", options: ["Quran", "Injeel", "Zaboor", "Torah"], correctOptionIndex: 3, explanation: "The Torah (Tawrat) was revealed to Prophet Musa (A.S).", difficulty: "easy", source_page: 17 },
-                { question: "Belief in all the Prophets of Allah is an article of faith. How many prophets are mentioned in the Quran?", options: ["25", "26", "27", "28"], correctOptionIndex: 0, explanation: "While many prophets were sent, 25 prophets are specifically mentioned by name in the Quran.", difficulty: "medium", source_page: 18 },
-                { question: "The belief in the Day of Judgment is known as:", options: ["Tawhid", "Risalat", "Akhirat", "Qadar"], correctOptionIndex: 2, explanation: "Akhirat refers to the Hereafter or the Day of Judgment in Islamic belief.", difficulty: "easy", source_page: 18 },
-                { question: "Divine Decree, or Allah's pre-ordainment, is known as:", options: ["Tawhid", "Risalat", "Akhirat", "Qadar"], correctOptionIndex: 3, explanation: "Qadar (or Taqdeer) is the Islamic concept of divine destiny or divine pre-ordainment.", difficulty: "easy", source_page: 18 },
                 { question: "Which Angel is responsible for bringing revelations to the Prophets?", options: ["Angel Israfeel", "Angel Mika'il", "Angel Jibreel", "Angel Izra'il"], correctOptionIndex: 2, explanation: "Angel Jibreel (Gabriel) is known as the bringer of divine revelations to the Prophets.", difficulty: "easy", source_page: 17 },
-                { question: "The holy book revealed to Prophet Isa (Jesus) (A.S) was:", options: ["Quran", "Injeel", "Zaboor", "Torah"], correctOptionIndex: 1, explanation: "The Injeel (Gospel) was revealed to Prophet Isa (A.S).", difficulty: "easy", source_page: 17 },
-                { question: "The holy book revealed to Prophet Dawood (David) (A.S) was:", options: ["Quran", "Injeel", "Zaboor", "Torah"], correctOptionIndex: 2, explanation: "The Zaboor (Psalms) was revealed to Prophet Dawood (A.S).", difficulty: "easy", source_page: 17 },
-                { question: "The belief that Allah has sent messengers to guide humanity is known as:", options: ["Tawhid", "Risalat", "Akhirat", "Qadar"], correctOptionIndex: 1, explanation: "Risalat refers to the concept of prophethood and messengership in Islam.", difficulty: "easy", source_page: 18 },
+                { question: "The belief in the Day of Judgment is known as:", options: ["Tawhid", "Risalat", "Akhirat", "Qadar"], correctOptionIndex: 2, explanation: "Akhirat refers to the Hereafter or the Day of Judgment.", difficulty: "easy", source_page: 18 },
+                { question: "Divine Decree, or Allah's pre-ordainment, is known as:", options: ["Tawhid", "Risalat", "Akhirat", "Qadar"], correctOptionIndex: 3, explanation: "Qadar (or Taqdeer) is the Islamic concept of divine destiny.", difficulty: "easy", source_page: 18 },
                 { question: "The Quran is the holy book revealed to which prophet?", options: ["Prophet Musa (A.S)", "Prophet Isa (A.S)", "Prophet Muhammad (PBUH)", "Prophet Dawood (A.S)"], correctOptionIndex: 2, explanation: "The Holy Quran was revealed to the last Prophet, Muhammad (PBUH).", difficulty: "easy", source_page: 17 },
-                { question: "The concept of 'Tauhid' fundamentally rejects:", options: ["Prophethood", "Divine books", "Shirk (polytheism)", "Day of Judgment"], correctOptionIndex: 2, explanation: "Tawhid is the strict monotheism of Islam, rejecting any form of shirk (associating partners with Allah).", difficulty: "medium", source_page: 17 },
-                { question: "Which angel is responsible for blowing the trumpet on the Day of Judgment?", options: ["Angel Mika'il", "Angel Israfeel", "Angel Jibreel", "Angel Izra'il"], correctOptionIndex: 1, explanation: "Angel Israfeel is believed to be the angel who will blow the trumpet to announce the Day of Judgment and the resurrection.", difficulty: "medium", source_page: 17 },
-                { question: "The concept of 'Sunnah' refers to:", options: ["Actions of Prophets", "Sayings of Prophets", "Approvals of Prophets", "All of the above"], correctOptionIndex: 3, explanation: "Sunnah encompasses the sayings, actions, and silent approvals of Prophet Muhammad (PBUH), serving as a model for Muslims.", difficulty: "medium", source_page: 18 },
-                { question: "How many revealed books are generally accepted in Islam (including partial revelations)?", options: ["2", "4", "5", "Many"], correctOptionIndex: 3, explanation: "While the Quran, Torah, Zaboor, and Injeel are the main revealed books mentioned, Islamic belief is that Allah has revealed many books throughout history, though only a few are fully known to us.", difficulty: "tough", source_page: 17 },
-                { question: "The 'Bridge of Sirat' is a concept related to:", options: ["Tawhid", "Risalat", "Akhirat", "Qadar"], correctOptionIndex: 2, explanation: "The Bridge of Sirat is believed to be a narrow bridge that souls must cross on the Day of Judgment to reach Paradise.", difficulty: "medium", source_page: 18 },
-                { question: "Which article of faith gives a Muslim patience and acceptance of good and bad destiny?", options: ["Belief in Allah", "Belief in His books", "Belief in Divine Decree (Qadar)", "Belief in Day of Judgment"], correctOptionIndex: 2, explanation: "Belief in Qadar (Divine Decree) instills patience and acceptance, as it acknowledges that all good and bad come from Allah.", difficulty: "easy", source_page: 18 },
-                { question: "The concept of 'Shahada' (Testimony of Faith) is connected to which article of faith?", options: ["Belief in Allah", "Belief in His Prophets", "Belief in Divine Books", "Both Belief in Allah and His Prophets"], correctOptionIndex: 3, explanation: "The Shahada, the declaration of faith, states 'There is no god but Allah, and Muhammad is His Messenger,' directly linking to belief in Allah and His Prophets.", difficulty: "medium", source_page: 19 },
-                { question: "The concept of 'Ma'ad' (Return) is synonymous with:", options: ["Tawhid", "Risalat", "Akhirat", "Qadar"], correctOptionIndex: 2, explanation: "Ma'ad (Return) is another term for the Day of Judgment or the Hereafter, referring to humanity's return to Allah for accountability.", difficulty: "tough", source_page: 18 },
-                { question: "What is the primary role of angels in Islam?", options: ["To judge humanity", "To guide prophets", "To carry out Allah's commands", "To forgive sins"], correctOptionIndex: 2, explanation: "Angels are obedient servants of Allah, created to carry out His commands and perform various tasks.", difficulty: "easy", source_page: 17 }
+                { question: "The concept of 'Tauhid' fundamentally rejects:", options: ["Prophethood", "Divine books", "Shirk (polytheism)", "Day of Judgment"], correctOptionIndex: 2, explanation: "Tawhid is the strict monotheism of Islam, rejecting any form of shirk.", difficulty: "medium", source_page: 17 },
+                { question: "Which angel is responsible for blowing the trumpet on the Day of Judgment?", options: ["Angel Mika'il", "Angel Israfeel", "Angel Jibreel", "Angel Izra'il"], correctOptionIndex: 1, explanation: "Angel Israfeel is believed to be the angel who will blow the trumpet.", difficulty: "medium", source_page: 17 },
+                { question: "The concept of 'Sunnah' refers to:", options: ["Actions of Prophets", "Sayings of Prophets", "Approvals of Prophets", "All of the above"], correctOptionIndex: 3, explanation: "Sunnah encompasses the sayings, actions, and silent approvals of Prophet Muhammad (PBUH).", difficulty: "medium", source_page: 18 },
+                { question: "How many revealed books are generally accepted in Islam (including partial revelations)?", options: ["2", "4", "5", "Many"], correctOptionIndex: 3, explanation: "Islamic belief is that Allah has revealed many books throughout history, though only a few are fully known to us.", difficulty: "tough", source_page: 17 },
+                { question: "The 'Bridge of Sirat' is a concept related to:", options: ["Tawhid", "Risalat", "Akhirat", "Qadar"], correctOptionIndex: 2, explanation: "The Bridge of Sirat is believed to be a narrow bridge that souls must cross on the Day of Judgment.", difficulty: "medium", source_page: 18 },
+                { question: "Which article of faith gives a Muslim patience and acceptance of good and bad destiny?", options: ["Belief in Allah", "Belief in His books", "Belief in Divine Decree (Qadar)", "Belief in Day of Judgment"], correctOptionIndex: 2, explanation: "Belief in Qadar (Divine Decree) instills patience and acceptance.", difficulty: "easy", source_page: 18 },
+                { question: "The concept of 'Shahada' (Testimony of Faith) is connected to which article of faith?", options: ["Belief in Allah", "Belief in His Prophets", "Belief in Divine Books", "Both Belief in Allah and His Prophets"], correctOptionIndex: 3, explanation: "The Shahada directly links to belief in Allah and His Prophets.", difficulty: "medium", source_page: 19 }
             ];
-            quizQuestions.push(...islamicStudiesMCQs);
+            quizQuestions.push(...islamicStudiesQuestions);
 
-            // Ensure exact counts for difficulty levels before trimming to 100
-            let easyQuestions = [];
-            let mediumQuestions = [];
-            let toughQuestions = [];
+            // Urdu Questions (from June 7, 8 topics, aiming for 20 questions)
+            const urduQuestions = [
+                // From June 7: Urdu Elegy Writing & Criticism
+                { question: "Mir Anis is most famous for writing what genre of Urdu poetry?", options: ["Ghazal", "Nazm", "Marsiya", "Rubai"], correctOptionIndex: 2, explanation: "Mir Anis is considered the greatest master of Marsiya (elegy), particularly those lamenting the martyrs of Karbala.", difficulty: "easy", source_page: 23 },
+                { question: "What is 'Taqleed' in Urdu literary criticism?", options: ["Innovation", "Imitation", "Originality", "Analysis"], correctOptionIndex: 1, explanation: "Taqleed refers to imitation or following existing traditions, often considered a negative aspect in creative writing.", difficulty: "medium", source_page: 24 },
+                { question: "Who wrote 'Muqaddama-e-Sher-o-Shairi'?", options: ["Ghalib", "Hali", "Iqbal", "Mir"], correctOptionIndex: 1, explanation: "Altaf Hussain Hali wrote 'Muqaddama-e-Sher-o-Shairi', a seminal work in Urdu literary criticism.", difficulty: "tough", source_page: 25 },
+                { question: "Which of the following is characteristic of a Marsiya?", options: ["Love and romance", "Philosophical thought", "Lamentation and mourning", "Humor and satire"], correctOptionIndex: 2, explanation: "Marsiya is a poetic form primarily used for elegy, expressing lamentation and mourning, often for religious figures.", difficulty: "easy", source_page: 23 },
+                { question: "The term 'Tanqeed' in Urdu literature means:", options: ["Praise", "Criticism", "Narration", "Biography"], correctOptionIndex: 1, explanation: "Tanqeed means criticism or critique in Urdu literature.", difficulty: "easy", source_page: 24 },
+                // From June 8: Famous Urdu Writings & Miscellaneous Urdu
+                { question: "'Aab-e-Hayat' is a famous work by:", options: ["Muhammad Hussain Azad", "Mir Taqi Mir", "Ghalib", "Allama Iqbal"], correctOptionIndex: 0, explanation: "'Aab-e-Hayat' is a biographical and critical history of Urdu poetry by Muhammad Hussain Azad.", difficulty: "medium", source_page: 27 },
+                { question: "Who is known as 'Khuda-e-Sukhan' (God of Poetry)?", options: ["Mir Taqi Mir", "Ghalib", "Faiz Ahmed Faiz", "Zauq"], correctOptionIndex: 0, explanation: "Mir Taqi Mir is revered as 'Khuda-e-Sukhan' for his mastery of Urdu poetry.", difficulty: "tough", source_page: 28 },
+                { question: "'Armaghan-e-Hijaz' is a poetic collection by:", options: ["Faiz Ahmed Faiz", "Ahmed Nadeem Qasmi", "Allama Iqbal", "Parveen Shakir"], correctOptionIndex: 2, explanation: "'Armaghan-e-Hijaz' is a posthumously published philosophical and poetic work by Allama Iqbal.", difficulty: "medium", source_page: 27 },
+                { question: "'Ranjish hi Sahi' is a famous ghazal by:", options: ["Ahmed Faraz", "Faiz Ahmed Faiz", "Mohsin Naqvi", "Perveen Shakir"], correctOptionIndex: 1, explanation: "'Ranjish hi Sahi' is one of the most iconic ghazals by Faiz Ahmed Faiz.", difficulty: "easy", source_page: 29 },
+                { question: "Who is the author of 'Zarbul Kaleem'?", options: ["Mirza Ghalib", "Allama Iqbal", "Mir Taqi Mir", "Hali"], correctOptionIndex: 1, explanation: "'Zarbul Kaleem' is a philosophical poetry collection by Allama Iqbal.", difficulty: "medium", source_page: 27 }
+            ];
+            quizQuestions.push(...urduQuestions);
 
-            // Categorize questions by initial difficulty
-            quizQuestions.forEach(q => {
-                if (q.difficulty === "easy") easyQuestions.push(q);
-                else if (q.difficulty === "medium") mediumQuestions.push(q);
-                else if (q.difficulty === "tough") toughQuestions.push(q);
-            });
+
+            // Consolidate and select for the final 100 questions based on difficulty distribution
+
+            let allQuestions = [];
+            allQuestions.push(...gkQuestions, ...englishQuestions, ...gaMathQuestions, ...islamicStudiesQuestions, ...urduQuestions);
+
+
+            let easyQuestions = allQuestions.filter(q => q.difficulty === 'easy');
+            let mediumQuestions = allQuestions.filter(q => q.difficulty === 'medium');
+            let toughQuestions = allQuestions.filter(q => q.difficulty === 'tough');
+
+            // Shuffle each category independently
+            shuffleArray(easyQuestions);
+            shuffleArray(mediumQuestions);
+            shuffleArray(toughQuestions);
 
             // Target distribution: 10 Easy, 50 Medium, 40 Tough
             const targetEasy = 10;
             const targetMedium = 50;
             const targetTough = 40;
 
-            // Adjust Easy questions
-            while (easyQuestions.length > targetEasy && mediumQuestions.length < targetMedium) {
-                mediumQuestions.push(easyQuestions.pop());
-            }
-            while (easyQuestions.length < targetEasy && (easyQuestions.length + mediumQuestions.length + toughQuestions.length) < 100 && (mediumQuestions.length > 0 || toughQuestions.length > 0)) {
-                if (mediumQuestions.length > 0) {
-                    easyQuestions.push(mediumQuestions.pop());
-                } else if (toughQuestions.length > 0) {
-                    easyQuestions.push(toughQuestions.pop());
-                } else {
-                    break;
-                }
-            }
+            quizQuestions = [];
 
+            // Add easy questions
+            quizQuestions.push(...easyQuestions.slice(0, targetEasy));
 
-            // Adjust Tough questions
-            while (toughQuestions.length > targetTough && mediumQuestions.length < targetMedium) {
-                mediumQuestions.push(toughQuestions.pop());
+            // Add medium questions
+            quizQuestions.push(...mediumQuestions.slice(0, targetMedium));
+
+            // Add tough questions
+            quizQuestions.push(...toughQuestions.slice(0, targetTough));
+            
+            // If any category is short, fill from others (prioritize medium, then tough, then easy if still short)
+            let remainingQuestions = 100 - quizQuestions.length;
+            if (remainingQuestions > 0) {
+                // Fill from remaining medium questions
+                let additionalMedium = mediumQuestions.slice(targetMedium);
+                quizQuestions.push(...additionalMedium.slice(0, remainingQuestions));
+                remainingQuestions -= additionalMedium.slice(0, remainingQuestions).length;
             }
-            while (toughQuestions.length < targetTough && (easyQuestions.length + mediumQuestions.length + toughQuestions.length) < 100 && (mediumQuestions.length > 0 || easyQuestions.length > 0)) {
-                if (mediumQuestions.length > 0) {
-                    toughQuestions.push(mediumQuestions.pop());
-                } else if (easyQuestions.length > 0) {
-                    toughQuestions.push(easyQuestions.pop());
-                } else {
-                    break;
-                }
+            if (remainingQuestions > 0) {
+                // Fill from remaining tough questions
+                let additionalTough = toughQuestions.slice(targetTough);
+                quizQuestions.push(...additionalTough.slice(0, remainingQuestions));
+                remainingQuestions -= additionalTough.slice(0, remainingQuestions).length;
             }
-
-
-            // Adjust Medium questions
-            while (mediumQuestions.length > targetMedium && (easyQuestions.length < targetEasy || toughQuestions.length < targetTough)) {
-                if (easyQuestions.length < targetEasy) {
-                    easyQuestions.push(mediumQuestions.pop());
-                } else if (toughQuestions.length < targetTough) {
-                    toughQuestions.push(mediumQuestions.pop());
-                } else {
-                    break;
-                }
+            if (remainingQuestions > 0) {
+                // Fill from remaining easy questions
+                let additionalEasy = easyQuestions.slice(targetEasy);
+                quizQuestions.push(...additionalEasy.slice(0, remainingQuestions));
+                remainingQuestions -= additionalEasy.slice(0, remainingQuestions).length;
             }
 
+            // Shuffle the final quizQuestions array thoroughly
+            shuffleArray(quizQuestions);
 
-            // Recombine and shuffle before final trim
-            quizQuestions = [...easyQuestions, ...mediumQuestions, ...toughQuestions];
-            shuffleArray(quizQuestions); // Shuffle the entire combined list
-
-            // Trim to exactly 100 questions
+            // Trim to exactly 100 questions (if for some reason more were added or less were available)
             quizQuestions = quizQuestions.slice(0, 100);
 
-            // Recalculate difficulty counts to ensure final distribution (for logging/debugging)
+            // Log final counts for verification
             let finalEasyCount = quizQuestions.filter(q => q.difficulty === 'easy').length;
             let finalMediumCount = quizQuestions.filter(q => q.difficulty === 'medium').length;
             let finalToughCount = quizQuestions.filter(q => q.difficulty === 'tough').length;
             console.log(`Final Question Counts: Easy=${finalEasyCount}, Medium=${finalMediumCount}, Tough=${finalToughCount}, Total=${quizQuestions.length}`);
-
 
             // Randomly select one "Today's Special Question"
             specialQuestionIndex = Math.floor(Math.random() * quizQuestions.length);
@@ -895,7 +969,7 @@
             const dateParts = CURRENT_DATE_STR.split(' ');
             const monthName = dateParts[0].toUpperCase().substring(0, 3);
             const day = parseInt(dateParts[1].replace(',', ''));
-            document.getElementById('loginId').value = `${day}${monthName}`; // e.g., 11JUNE
+            document.getElementById('loginId').value = `${day}${monthName}`; // e.g., 12JUNE
 
             initializeQuiz();
             // Initial call to set correct sticky date position on load
