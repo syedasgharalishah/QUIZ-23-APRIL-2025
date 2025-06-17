@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS MPT Daily Quiz - June 12, 2025</title>
+    <title>CSS MPT Daily Quiz - June 13, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -346,7 +346,7 @@
 
     <script>
         // Set the current date for display and logic
-        const CURRENT_DATE_STR = "June 12, 2025"; // Updated for June 12 quiz
+        const CURRENT_DATE_STR = "June 13, 2025"; // Updated for June 13 quiz
         const CURRENT_DATE = new Date(CURRENT_DATE_STR);
 
         // Update header dates
@@ -645,8 +645,8 @@
             const password = document.getElementById('loginPassword').value;
             const loginError = document.getElementById('loginError');
 
-            // Login credentials for June 12 quiz
-            const expectedLoginId = "12JUNE"; 
+            // Login credentials for June 13 quiz
+            const expectedLoginId = "13JUNE";
             const expectedPassword = "free";
 
             if (id === expectedLoginId && password === expectedPassword) {
@@ -693,263 +693,207 @@
             // Clear previous questions
             quizQuestions.length = 0;
 
-            // --- Week 3 Topics (June 6-11) ---
-
-            // June 6:
-            // GK: Important Official Places (Page 53) & Important Airlines & Airports (Pages 54-57)
-            // English: Direct/Indirect (Pages 454-458)
-            // General Abilities: True Discount (Pages 531-532) & Banker's Discount (Page 533)
-
-            // June 7:
-            // GK: Important Airlines & Airports (Pages 58-59) & News Agencies of Some Countries (Pages 60-61)
-            // English: Direct/Indirect (Pages 459-463)
-            // Urdu: Urdu Elegy Writing & Criticism (Pages 23-26)
-
-            // June 8:
-            // GK: Nobel Prize (Facts and Laureates) (Pages 62-66)
-            // Mathematics: Clocks (Pages 534-535)
-            // Urdu: Famous Urdu Writings & Miscellaneous Urdu (Pages 27-30)
-
-            // June 9:
-            // GK: Highest Military & Civil Awards (Page 67) & International Borders & Lines (Pages 68-69)
-            // English: Active Passive Voice (Pages 464-467)
-            // General Abilities: Decimal Fractions (Pages 536-537)
-
-            // June 10:
-            // GK: International Observance (Important Days) (Pages 70-73)
-            // English: Active Passive Voice (Pages 468-471)
-            // Islamic Studies: Establishment of First Islamic State & Early Battles (Pages 14-16 of Urdu/Islamic Studies Section)
-
-            // June 11:
-            // GK: Nicknames of Famous Personalities (Page 74) & Personalities (Pages 75-78)
-            // Mathematics: Area Problems (Pages 538-540)
-            // Islamic Studies: Articles of Faith (Pages 17-19 of Urdu/Islamic Studies Section)
-
-            // General Knowledge Questions (from June 6-11 topics, aiming for 20 questions)
-            const gkQuestions = [
-                // From June 6: Important Official Places, Airlines & Airports
-                { question: "Where is the headquarters of the Interpol located?", options: ["Paris", "Lyon", "London", "Brussels"], correctOptionIndex: 1, explanation: "The headquarters of Interpol is located in Lyon, France.", difficulty: "medium", source_page: 53 },
-                { question: "La Moncloa is the official residence of the Prime Minister of which country?", options: ["Italy", "Spain", "Portugal", "France"], correctOptionIndex: 1, explanation: "La Moncloa is the official residence and workplace of the Prime Minister of Spain.", difficulty: "tough", source_page: 53 },
-                { question: "Which airline is known as 'The Flying Kangaroo'?", options: ["Air New Zealand", "Qantas", "Lufthansa", "Emirates"], correctOptionIndex: 1, explanation: "Qantas, Australia's largest airline, uses 'The Flying Kangaroo' as its logo and nickname.", difficulty: "easy", source_page: 54 },
-                { question: "Jomo Kenyatta International Airport is located in which city?", options: ["Cairo", "Nairobi", "Addis Ababa", "Johannesburg"], correctOptionIndex: 1, explanation: "Jomo Kenyatta International Airport is in Nairobi, Kenya.", difficulty: "medium", source_page: 56 },
-                // From June 7: Airlines & Airports, News Agencies
-                { question: "Which news agency belongs to Russia?", options: ["Reuters", "AP", "TASS", "Xinhua"], correctOptionIndex: 2, explanation: "TASS is a major Russian state-owned news agency.", difficulty: "easy", source_page: 60 },
-                { question: "Kyodo News is the official news agency of which country?", options: ["China", "South Korea", "Japan", "India"], correctOptionIndex: 2, explanation: "Kyodo News is a non-profit cooperative news agency in Japan.", difficulty: "medium", source_page: 60 },
-                // From June 8: Nobel Prize
-                { question: "The Nobel Prize in Peace is awarded in which city?", options: ["Stockholm", "Oslo", "Copenhagen", "Geneva"], correctOptionIndex: 1, explanation: "The Nobel Peace Prize is awarded in Oslo, Norway, while other Nobel Prizes are awarded in Stockholm, Sweden.", difficulty: "easy", source_page: 62 },
-                { question: "In which year was the first Nobel Prize awarded?", options: ["1895", "1901", "1905", "1910"], correctOptionIndex: 1, explanation: "The first Nobel Prizes were awarded in 1901.", difficulty: "medium", source_page: 62 },
-                { question: "Who was the first woman to win a Nobel Prize?", options: ["Marie Curie", "Mother Teresa", "Rosa Parks", "Malala Yousafzai"], correctOptionIndex: 0, explanation: "Marie Curie was the first woman to win a Nobel Prize, sharing the Physics Prize in 1903.", difficulty: "easy", source_page: 63 },
-                { question: "Alfred Nobel, the founder of the Nobel Prizes, was from which country?", options: ["Germany", "Sweden", "Norway", "France"], correctOptionIndex: 1, explanation: "Alfred Nobel was a Swedish chemist, engineer, inventor, and entrepreneur.", difficulty: "easy", source_page: 62 },
-                // From June 9: Highest Military & Civil Awards, International Borders & Lines
-                { question: "Nishan-e-Haider is the highest military award of:", options: ["India", "Pakistan", "Bangladesh", "Sri Lanka"], correctOptionIndex: 1, explanation: "Nishan-e-Haider is the highest military award in Pakistan.", difficulty: "easy", source_page: 67 },
-                { question: "The 'Radcliffe Line' divides which two countries?", options: ["India and China", "Pakistan and Afghanistan", "India and Pakistan", "North and South Korea"], correctOptionIndex: 2, explanation: "The Radcliffe Line is the boundary demarcation line between India and Pakistan.", difficulty: "easy", source_page: 68 },
-                { question: "The 38th Parallel is the border between:", options: ["USA and Canada", "North and South Korea", "East and West Germany", "China and Vietnam"], correctOptionIndex: 1, explanation: "The 38th Parallel north latitude roughly demarcates North Korea and South Korea.", difficulty: "medium", source_page: 69 },
-                // From June 10: International Observance (Important Days)
-                { question: "World Environment Day is observed on:", options: ["April 22", "June 5", "March 22", "July 11"], correctOptionIndex: 1, explanation: "World Environment Day is observed on June 5 annually.", difficulty: "easy", source_page: 70 },
-                { question: "International Women's Day is celebrated on:", options: ["February 14", "March 8", "May 1", "June 1"], correctOptionIndex: 1, explanation: "International Women's Day is celebrated on March 8 every year.", difficulty: "easy", source_page: 70 },
-                { question: "Human Rights Day falls on:", options: ["December 10", "October 24", "September 8", "January 1"], correctOptionIndex: 0, explanation: "Human Rights Day is observed every year on 10 December.", difficulty: "easy", source_page: 71 },
-                // From June 11: Nicknames of Famous Personalities, Personalities
-                { question: "Who is known as the 'Frontier Gandhi'?", options: ["Mahatma Gandhi", "Khan Abdul Ghaffar Khan", "Nelson Mandela", "Jawaharlal Nehru"], correctOptionIndex: 1, explanation: "Khan Abdul Ghaffar Khan was known as the 'Frontier Gandhi'.", difficulty: "easy", source_page: 74 },
-                { question: "The 'Iron Lady' is the nickname of:", options: ["Indira Gandhi", "Benazir Bhutto", "Margaret Thatcher", "Golda Meir"], correctOptionIndex: 2, explanation: "Margaret Thatcher was famously known as the 'Iron Lady'.", difficulty: "easy", source_page: 74 },
-                { question: "Who was the first Prime Minister of Pakistan?", options: ["Muhammad Ali Jinnah", "Liaquat Ali Khan", "Khawaja Nazimuddin", "Zulfiqar Ali Bhutto"], correctOptionIndex: 1, explanation: "Liaquat Ali Khan served as the first Prime Minister of Pakistan.", difficulty: "easy", source_page: 75 },
-                { question: "Which Pakistani Nobel laureate won the prize in Physics?", options: ["Dr. Abdul Qadeer Khan", "Dr. Abdus Salam", "Dr. Atta-ur-Rahman", "Dr. Samar Mubarakmand"], correctOptionIndex: 1, explanation: "Dr. Abdus Salam was a Pakistani theoretical physicist and a Nobel Prize laureate in Physics.", difficulty: "easy", source_page: 76 }
+            // General Knowledge (20 MCQs)
+            const generalKnowledgeMCQs = [
+                // GK - June 13: Personalities: Pages 79-82 & Books & Literature: Pages 83-85 (20 MCQs)
+                { question: "Who was the founder of the Mughal Empire in India?", options: ["Akbar", "Humayun", "Babur", "Shah Jahan"], correctOptionIndex: 2, explanation: "Babur founded the Mughal Empire in India after his victory in the Battle of Panipat in 1526.", difficulty: "easy", source_page: 79 },
+                { question: "Who is known as the 'Father of the Nation' in India?", options: ["Jawaharlal Nehru", "Sardar Vallabhbhai Patel", "Mahatma Gandhi", "Subhas Chandra Bose"], correctOptionIndex: 2, explanation: "Mahatma Gandhi is revered as the 'Father of the Nation' in India for his role in the independence movement.", difficulty: "easy", source_page: 79 },
+                { question: "Who composed the national anthem of Pakistan, 'Qaumi Taranah'?", options: ["Allama Iqbal", "Hafeez Jalandhari", "Faiz Ahmed Faiz", "Ahmed Nadeem Qasmi"], correctOptionIndex: 1, explanation: "Hafeez Jalandhari composed the lyrics for Pakistan's national anthem.", difficulty: "easy", source_page: 79 },
+                { question: "Who was the first woman President of the UN General Assembly?", options: ["Indira Gandhi", "Benazir Bhutto", "Vijaya Lakshmi Pandit", "Golda Meir"], correctOptionIndex: 2, explanation: "Vijaya Lakshmi Pandit, an Indian diplomat and politician, was the first woman to be elected President of the UN General Assembly.", difficulty: "medium", source_page: 80 },
+                { question: "Who is the author of 'War and Peace'?", options: ["Fyodor Dostoevsky", "Leo Tolstoy", "Anton Chekhov", "Ivan Turgenev"], correctOptionIndex: 1, explanation: "'War and Peace' is a monumental novel by the Russian author Leo Tolstoy.", difficulty: "easy", source_page: 83 },
+                { question: "Which famous scientist developed the theory of relativity?", options: ["Isaac Newton", "Albert Einstein", "Stephen Hawking", "Niels Bohr"], correctOptionIndex: 1, explanation: "Albert Einstein is renowned for his theories of special and general relativity.", difficulty: "easy", source_page: 80 },
+                { question: "Who painted the 'Mona Lisa'?", options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"], correctOptionIndex: 2, explanation: "The 'Mona Lisa' is a masterpiece by the Italian Renaissance artist Leonardo da Vinci.", difficulty: "easy", source_page: 81 },
+                { question: "Who is the author of 'The Alchemist'?", options: ["Gabriel García Márquez", "Paulo Coelho", "Haruki Murakami", "Milan Kundera"], correctOptionIndex: 1, explanation: "'The Alchemist' is a celebrated novel by the Brazilian author Paulo Coelho.", difficulty: "medium", source_page: 83 },
+                { question: "Which personality is known for saying 'I have a dream'?", options: ["Nelson Mandela", "Martin Luther King Jr.", "Abraham Lincoln", "John F. Kennedy"], correctOptionIndex: 1, explanation: "Martin Luther King Jr. delivered his iconic 'I Have a Dream' speech during the March on Washington for Jobs and Freedom.", difficulty: "easy", source_page: 81 },
+                { question: "Who wrote 'A Brief History of Time'?", options: ["Carl Sagan", "Neil deGrasse Tyson", "Brian Greene", "Stephen Hawking"], correctOptionIndex: 3, explanation: "'A Brief History of Time' is a popular science book by the physicist Stephen Hawking.", difficulty: "medium", source_page: 84 },
+                { question: "Who was the first Muslim woman to become a head of government (Prime Minister)?", options: ["Indira Gandhi", "Benazir Bhutto", "Golda Meir", "Sirimavo Bandaranaike"], correctOptionIndex: 1, explanation: "Benazir Bhutto of Pakistan was the first woman elected to head a Muslim nation.", difficulty: "easy", source_page: 82 },
+                { question: "Who is the author of 'Pride and Prejudice'?", options: ["Charlotte Brontë", "Jane Austen", "Emily Brontë", "Mary Shelley"], correctOptionIndex: 1, explanation: "'Pride and Prejudice' is a classic novel by Jane Austen.", difficulty: "medium", source_page: 83 },
+                { question: "Which personality is credited with inventing the light bulb?", options: ["Nikola Tesla", "Alexander Graham Bell", "Thomas Edison", "Guglielmo Marconi"], correctOptionIndex: 2, explanation: "Thomas Edison is widely credited for developing a practical incandescent light bulb.", difficulty: "medium", source_page: 82 },
+                { question: "Who is the author of 'Nineteen Eighty-Four' (1984)?", options: ["Aldous Huxley", "George Orwell", "Ray Bradbury", "H.G. Wells"], correctOptionIndex: 1, explanation: "'Nineteen Eighty-Four' is a dystopian social science fiction novel by George Orwell.", difficulty: "medium", source_page: 84 },
+                { question: "Who is known as the 'Father of Computer Science' and Artificial Intelligence?", options: ["Charles Babbage", "Alan Turing", "John von Neumann", "Claude Shannon"], correctOptionIndex: 1, explanation: "Alan Turing is widely considered the 'Father of Theoretical Computer Science and Artificial Intelligence'.", difficulty: "tough", source_page: 81 },
+                { question: "Which book is a collection of poems by Allama Muhammad Iqbal?", options: ["Javid Nama", "Bang-e-Dra", "Bal-e-Jibril", "All of the above"], correctOptionIndex: 3, explanation: "All of the listed options are well-known collections of poetry by Allama Muhammad Iqbal.", difficulty: "medium", source_page: 84 },
+                { question: "Who was the first Secretary-General of the United Nations?", options: ["Dag Hammarskjöld", "U Thant", "Trygve Lie", "Kurt Waldheim"], correctOptionIndex: 2, explanation: "Trygve Lie of Norway was the first Secretary-General of the United Nations.", difficulty: "tough", source_page: 80 },
+                { question: "Who wrote 'The Origin of Species'?", options: ["Gregor Mendel", "Charles Darwin", "Alfred Russel Wallace", "Louis Pasteur"], correctOptionIndex: 1, explanation: "'On the Origin of Species' is a work of scientific literature by Charles Darwin which is considered to be the foundation of evolutionary biology.", difficulty: "medium", source_page: 85 },
+                { question: "Which famous personality received the Nobel Peace Prize for his efforts in resolving the conflict in Northern Ireland?", options: ["Nelson Mandela", "Desmond Tutu", "John Hume", "Kofi Annan"], correctOptionIndex: 2, explanation: "John Hume, a prominent Irish politician, was a co-recipient of the Nobel Peace Prize in 1998 for his role in the Northern Ireland peace process.", difficulty: "tough", source_page: 81 },
+                { question: "Which of the following is a famous Urdu novel by Mirza Hadi Ruswa?", options: ["Umrao Jaan Ada", "Aangan", "Khuda Ki Basti", "Raja Gidh"], correctOptionIndex: 0, explanation: "'Umrao Jaan Ada' is a famous Urdu novel by Mirza Hadi Ruswa.", difficulty: "tough", source_page: 85 }
             ];
-            quizQuestions.push(...gkQuestions);
+            quizQuestions.push(...generalKnowledgeMCQs);
 
-            // English Questions (from June 6-10 topics, aiming for 50 questions)
-            const englishQuestions = [
-                // From June 6: Direct/Indirect (Pages 454-458)
-                { question: "Change into indirect speech: He said, 'I am busy.'", options: ["He said that he is busy.", "He said that he was busy.", "He said that I am busy.", "He says that he was busy."], correctOptionIndex: 1, explanation: "When the reporting verb is in the past tense, the tense of the reported speech changes accordingly. 'Am' becomes 'was'.", difficulty: "easy", source_page: 454 },
-                { question: "Change into indirect speech: She said, 'I will go there tomorrow.'", options: ["She said that she will go there tomorrow.", "She said that she would go there tomorrow.", "She said that she would go there the next day.", "She says that she would go there the next day."], correctOptionIndex: 2, explanation: "When the reporting verb is in the past tense, 'will' changes to 'would' and 'tomorrow' changes to 'the next day'.", difficulty: "medium", source_page: 455 },
-                { question: "Change into direct speech: He asked me if I was going.", options: ["He said to me, 'Are you going?'", "He said to me, 'Am I going?'", "He asked me, 'Are you going?'", "He asked me, 'Am I going?'"], correctOptionIndex: 0, explanation: "When changing from indirect to direct speech for an interrogative sentence, use 'said to' and change the pronoun and tense back.", difficulty: "tough", source_page: 456 },
-                { question: "Change into indirect speech: The teacher said, 'The Earth revolves around the Sun.'", options: ["The teacher said that the Earth revolves around the Sun.", "The teacher said that the Earth revolved around the Sun.", "The teacher said that the Earth is revolving around the Sun.", "The teacher says that the Earth revolves around the Sun."], correctOptionIndex: 0, explanation: "Universal truths do not change their tense in indirect speech.", difficulty: "easy", source_page: 457 },
-                { question: "Change into indirect speech: She said, 'What a beautiful sight!'", options: ["She exclaimed what a beautiful sight it was.", "She exclaimed that it was a beautiful sight.", "She asked what a beautiful sight it was.", "She wondered what a beautiful sight."], correctOptionIndex: 1, explanation: "Exclamatory sentences are converted into assertive sentences in indirect speech, using 'exclaimed that'.", difficulty: "medium", source_page: 458 },
-                // From June 7: Direct/Indirect (Pages 459-463)
-                { question: "Change into indirect speech: He said to me, 'Please help me.'", options: ["He requested me to help him.", "He told me to help him.", "He ordered me to help him.", "He asked me if I would help him."], correctOptionIndex: 0, explanation: "Imperative sentences with 'please' are changed by using 'requested to'.", difficulty: "easy", source_page: 459 },
-                { question: "Change into indirect speech: 'Good morning!', said John.", options: ["John wished good morning.", "John said good morning.", "John greeted good morning.", "John asked good morning."], correctOptionIndex: 0, explanation: "Greetings are expressed using 'wished' or 'greeted'.", difficulty: "medium", source_page: 460 },
-                { question: "Change into indirect speech: The old man said, 'May God bless you!'", options: ["The old man prayed that God might bless me.", "The old man wished that God would bless me.", "The old man told me that God might bless me.", "The old man said that God bless me."], correctOptionIndex: 0, explanation: "Optative sentences are converted using 'prayed that' or 'wished that', and 'may' changes to 'might'.", difficulty: "tough", source_page: 461 },
-                { question: "Change into indirect speech: My friend said, 'Alas! I am undone.'", options: ["My friend exclaimed with sorrow that he was undone.", "My friend said with sorrow that he was undone.", "My friend cried that he was undone.", "My friend said alas that he was undone."], correctOptionIndex: 0, explanation: "Exclamatory sentences expressing sorrow are converted using 'exclaimed with sorrow that'.", difficulty: "medium", source_page: 462 },
-                { question: "Change into indirect speech: He said to them, 'Let's play football.'", options: ["He proposed to them that they should play football.", "He suggested to them that they should play football.", "He told them to play football.", "He asked them if they wanted to play football."], correctOptionIndex: 0, explanation: "Sentences with 'Let's' are usually changed by using 'proposed that' or 'suggested that' followed by 'should'.", difficulty: "tough", source_page: 463 },
-                // From June 9: Active Passive Voice (Pages 464-467)
-                { question: "Change into passive voice: 'She sings a song.'", options: ["A song is sung by her.", "A song was sung by her.", "A song is being sung by her.", "A song has been sung by her."], correctOptionIndex: 0, explanation: "Simple present active voice (Subject + Verb1 + Object) becomes passive (Object + is/am/are + Verb3 + by + Subject).", difficulty: "easy", source_page: 464 },
-                { question: "Change into passive voice: 'They are playing cricket.'", options: ["Cricket is played by them.", "Cricket was played by them.", "Cricket is being played by them.", "Cricket has been played by them."], correctOptionIndex: 2, explanation: "Present continuous active voice (Subject + is/am/are + Verb1+ing + Object) becomes passive (Object + is/am/are + being + Verb3 + by + Subject).", difficulty: "medium", source_page: 464 },
-                { question: "Change into passive voice: 'He killed a snake.'", options: ["A snake is killed by him.", "A snake was killed by him.", "A snake is being killed by him.", "A snake has been killed by him."], correctOptionIndex: 1, explanation: "Simple past active voice (Subject + Verb2 + Object) becomes passive (Object + was/were + Verb3 + by + Subject).", difficulty: "easy", source_page: 465 },
-                { question: "Change into passive voice: 'Someone has stolen my pen.'", options: ["My pen is stolen.", "My pen was stolen.", "My pen has been stolen.", "My pen had been stolen."], correctOptionIndex: 2, explanation: "When the agent is indefinite (someone, somebody, people), it is usually omitted in the passive voice. Present perfect active becomes 'has/have been + Verb3'.", difficulty: "medium", source_page: 467 },
-                { question: "Change into passive voice: 'Open the door.'", options: ["The door is opened.", "Let the door be opened.", "The door should be opened.", "You are ordered to open the door."], correctOptionIndex: 1, explanation: "Imperative sentences (commands) can be changed to passive using 'Let + Object + be + Verb3'.", difficulty: "tough", source_page: 467 },
-                // From June 10: Active Passive Voice (Pages 468-471)
-                { question: "Choose the correct active voice for: 'The ball was hit by the boy.'", options: ["The boy hit the ball.", "The boy is hitting the ball.", "The boy has hit the ball.", "The boy had hit the ball."], correctOptionIndex: 0, explanation: "Passive 'was hit' corresponds to simple past active 'hit'.", difficulty: "easy", source_page: 468 },
-                { question: "Choose the correct active voice for: 'A letter is being written by her.'", options: ["She writes a letter.", "She wrote a letter.", "She is writing a letter.", "She has written a letter."], correctOptionIndex: 2, explanation: "Passive 'is being written' corresponds to present continuous active 'is writing'.", difficulty: "medium", source_page: 468 },
-                { question: "Choose the correct active voice for: 'The work had been finished by them.'", options: ["They finish the work.", "They finished the work.", "They have finished the work.", "They had finished the work."], correctOptionIndex: 3, explanation: "Passive 'had been finished' corresponds to past perfect active 'had finished'.", difficulty: "medium", source_page: 469 },
-                { question: "Choose the correct active voice for: 'By whom was the window broken?'", options: ["Who broke the window?", "Who is breaking the window?", "Who has broken the window?", "Who had broken the window?"], correctOptionIndex: 0, explanation: "When 'By whom' is used in passive voice, 'Who' is used as the subject in active voice for interrogative sentences.", difficulty: "tough", source_page: 471 },
-                { question: "Choose the correct active voice for: 'English is spoken all over the world.'", options: ["People speak English all over the world.", "People spoke English all over the world.", "People are speaking English all over the world.", "People have spoken English all over the world."], correctOptionIndex: 0, explanation: "When the agent is general or obvious (e.g., 'people'), it is omitted in the passive voice. 'Is spoken' corresponds to simple present 'speak'.", difficulty: "medium", source_page: 471 },
-                { question: "Change into passive voice: 'The news surprised me.'", options: ["I was surprised by the news.", "I am surprised by the news.", "I had been surprised by the news.", "The news is surprising."], correctOptionIndex: 0, explanation: "Simple past active becomes 'was surprised'.", difficulty: "easy", source_page: 465 },
-                { question: "Change into passive voice: 'The police caught the thief.'", options: ["The thief was caught by the police.", "The thief is caught by the police.", "The thief has been caught by the police.", "The thief was being caught by the police."], correctOptionIndex: 0, explanation: "Simple past active becomes 'was caught'.", difficulty: "easy", source_page: 465 },
-                { question: "Change into passive voice: 'They will build a new bridge.'", options: ["A new bridge is built by them.", "A new bridge was built by them.", "A new bridge will be built by them.", "A new bridge will have been built by them."], correctOptionIndex: 2, explanation: "Simple future active becomes 'will be built'.", difficulty: "easy", source_page: 466 },
-                { question: "Change into passive voice: 'I can solve this problem.'", options: ["This problem is solved by me.", "This problem can be solved by me.", "This problem might be solved by me.", "This problem will be solved by me."], correctOptionIndex: 1, explanation: "Modal verbs are followed by 'be + past participle' in passive voice.", difficulty: "medium", source_page: 467 },
-                { question: "Change into passive voice: 'The teacher praised the students.'", options: ["The students are praised by the teacher.", "The students were praised by the teacher.", "The students have been praised by the teacher.", "The students had been praised by the teacher."], correctOptionIndex: 1, explanation: "Simple past active becomes 'were praised'.", difficulty: "easy", source_page: 465 },
-                { question: "Change into passive voice: 'He has painted the wall.'", options: ["The wall is painted by him.", "The wall was painted by him.", "The wall has been painted by him.", "The wall had been painted by him."], correctOptionIndex: 2, explanation: "Present perfect active becomes 'has/have been + past participle'.", difficulty: "medium", source_page: 465 },
-                { question: "Change into passive voice: 'She was preparing dinner.'", options: ["Dinner is prepared by her.", "Dinner was prepared by her.", "Dinner was being prepared by her.", "Dinner had been prepared by her."], correctOptionIndex: 2, explanation: "Past continuous active becomes 'was/were being + past participle'.", difficulty: "medium", source_page: 465 },
-                { question: "Change into passive voice: 'We shall inform you.'", options: ["You are informed by us.", "You will be informed by us.", "You should be informed by us.", "You have been informed by us."], correctOptionIndex: 1, explanation: "Simple future active becomes 'will be informed'.", difficulty: "easy", source_page: 466 },
-                { question: "Change into passive voice: 'One should keep one's promises.'", options: ["One's promises should be kept.", "Promises should be kept.", "Promises are kept by one.", "Promises are to be kept."], correctOptionIndex: 1, explanation: "When the agent 'one' is general, it's omitted. 'Should + be + kept' is the passive form.", difficulty: "tough", source_page: 467 },
-                { question: "Change into passive voice: 'Why did you break the glass?'", options: ["Why was the glass broken by you?", "Why is the glass broken by you?", "Why has the glass been broken by you?", "Why had the glass been broken by you?"], correctOptionIndex: 0, explanation: "For past interrogative with 'Why', use 'Why + was/were + object + past participle'.", difficulty: "tough", source_page: 467 },
-                { question: "Change into passive voice: 'Nobody knows him.'", options: ["He is known by nobody.", "He is known to nobody.", "He is not known by anybody.", "He is not known to anybody."], correctOptionIndex: 3, explanation: "Passive of 'nobody knows' is 'He is not known to anybody'. 'Known' often takes 'to' as a preposition.", difficulty: "tough", source_page: 467 },
-                { question: "Change into passive voice: 'Do your duty.'", options: ["Your duty is done.", "Let your duty be done.", "Your duty should be done.", "You are advised to do your duty."], correctOptionIndex: 1, explanation: "Imperative sentences often use 'Let + object + be + past participle'.", difficulty: "tough", source_page: 467 },
-                { question: "Choose the correct active voice for: 'The house is being built by masons.'", options: ["Masons build the house.", "Masons built the house.", "Masons are building the house.", "Masons have built the house."], correctOptionIndex: 2, explanation: "Passive 'is being built' corresponds to present continuous active 'are building'.", difficulty: "medium", source_page: 468 },
-                { question: "Choose the correct active voice for: 'A poem was written by him.'", options: ["He writes a poem.", "He wrote a poem.", "He is writing a poem.", "He has written a poem."], correctOptionIndex: 1, explanation: "Passive 'was written' corresponds to simple past active 'wrote'.", difficulty: "easy", source_page: 468 },
-                { question: "Choose the correct active voice for: 'The food has been cooked by mother.'", options: ["Mother cooks the food.", "Mother cooked the food.", "Mother is cooking the food.", "Mother has cooked the food."], correctOptionIndex: 3, explanation: "Passive 'has been cooked' corresponds to present perfect active 'has cooked'.", difficulty: "medium", source_page: 469 },
-                { question: "Choose the correct active voice for: 'The children were taught by the teacher.'", options: ["The teacher teaches the children.", "The teacher taught the children.", "The teacher is teaching the children.", "The teacher has taught the children."], correctOptionIndex: 1, explanation: "Passive 'were taught' corresponds to simple past active 'taught'.", difficulty: "easy", source_page: 468 },
-                { question: "Choose the correct active voice for: 'He was being laughed at by his friends.'", options: ["His friends laugh at him.", "His friends laughed at him.", "His friends were laughing at him.", "His friends had laughed at him."], correctOptionIndex: 2, explanation: "Passive 'was being laughed at' corresponds to past continuous active 'were laughing at'.", difficulty: "medium", source_page: 469 }
+            // English (40 MCQs)
+            const englishMCQs = [
+                // English - June 13: Synonyms: Pages 472-478 (40 MCQs)
+                { question: "Choose the synonym for 'Abundant'.", options: ["Scarce", "Plentiful", "Rare", "Limited"], correctOptionIndex: 1, explanation: "'Abundant' means existing or available in large quantities; plentiful.", difficulty: "easy", source_page: 472 },
+                { question: "What is a synonym for 'Benevolent'?", options: ["Cruel", "Kind", "Selfish", "Strict"], correctOptionIndex: 1, explanation: "'Benevolent' means well meaning and kindly, hence 'Kind'.", difficulty: "easy", source_page: 472 },
+                { question: "Which word is a synonym for 'Diligent'?", options: ["Lazy", "Careless", "Industrious", "Slow"], correctOptionIndex: 2, explanation: "'Diligent' means having or showing care and conscientiousness in one's work or duties; 'Industrious' is the closest synonym.", difficulty: "medium", source_page: 473 },
+                { question: "Find the synonym for 'Elaborate'.", options: ["Simple", "Complex", "Basic", "Plain"], correctOptionIndex: 1, explanation: "'Elaborate' means involving many carefully arranged parts or details; detailed and complicated in design and planning. 'Complex' is a good synonym.", difficulty: "easy", source_page: 473 },
+                { question: "What is a synonym for 'Fragile'?", options: ["Strong", "Durable", "Brittle", "Solid"], correctOptionIndex: 2, explanation: "'Fragile' means easily broken or damaged; 'Brittle' is a close synonym.", difficulty: "easy", source_page: 474 },
+                { question: "Choose the synonym for 'Garrulous'.", options: ["Quiet", "Talkative", "Shy", "Reserved"], correctOptionIndex: 1, explanation: "'Garrulous' means excessively talkative, especially on trivial matters. 'Talkative' is the direct synonym.", difficulty: "medium", source_page: 474 },
+                { question: "Which word is a synonym for 'Humble'?", options: ["Arrogant", "Modest", "Proud", "Boastful"], correctOptionIndex: 1, explanation: "'Humble' means having or showing a modest or low estimate of one's own importance; 'Modest' is the best synonym.", difficulty: "easy", source_page: 474 },
+                { question: "Find the synonym for 'Impeccable'.", options: ["Flawed", "Perfect", "Faulty", "Defective"], correctOptionIndex: 1, explanation: "'Impeccable' means in accordance with the highest standards of propriety; faultless; 'Perfect' is the closest synonym.", difficulty: "tough", source_page: 475 },
+                { question: "What is a synonym for 'Jubilant'?", options: ["Sad", "Depressed", "Joyful", "Angry"], correctOptionIndex: 2, explanation: "'Jubilant' means feeling or expressing great happiness and triumph; 'Joyful' is a direct synonym.", difficulty: "medium", source_page: 475 },
+                { question: "Choose the synonym for 'Keen'.", options: ["Dull", "Sharp", "Indifferent", "Apathetic"], correctOptionIndex: 1, explanation: "'Keen' can mean having or showing a strong desire or enthusiasm, or (of a sense) highly developed; or (of a blade) sharp. 'Sharp' is a common synonym in context.", difficulty: "easy", source_page: 475 },
+                { question: "Which word is a synonym for 'Lavish'?", options: ["Scanty", "Generous", "Frugal", "Meager"], correctOptionIndex: 1, explanation: "'Lavish' means sumptuously rich, elaborate, or luxurious; or (of a person) very generous or extravagant. 'Generous' fits the meaning of giving freely.", difficulty: "medium", source_page: 476 },
+                { question: "Find the synonym for 'Magnanimous'.", options: ["Petty", "Vindictive", "Generous", "Spiteful"], correctOptionIndex: 2, explanation: "'Magnanimous' means very generous or forgiving, especially toward a rival or less powerful person. 'Generous' is a direct synonym.", difficulty: "tough", source_page: 476 },
+                { question: "What is a synonym for 'Nurture'?", options: ["Neglect", "Foster", "Harm", "Destroy"], correctOptionIndex: 1, explanation: "'Nurture' means care for and encourage the growth or development of. 'Foster' is a good synonym.", difficulty: "easy", source_page: 476 },
+                { question: "Choose the synonym for 'Obscure'.", options: ["Clear", "Vague", "Obvious", "Prominent"], correctOptionIndex: 1, explanation: "'Obscure' means not discovered or known about; uncertain. 'Vague' is a suitable synonym.", difficulty: "medium", source_page: 477 },
+                { question: "Which word is a synonym for 'Peculiar'?", options: ["Normal", "Common", "Strange", "Regular"], correctOptionIndex: 2, explanation: "'Peculiar' means strange or odd; 'Strange' is a direct synonym.", difficulty: "easy", source_page: 477 },
+                { question: "Find the synonym for 'Quandary'.", options: ["Certainty", "Dilemma", "Solution", "Clarity"], correctOptionIndex: 1, explanation: "'Quandary' means a state of perplexity or uncertainty over what to do in a difficult situation; a 'Dilemma'.", difficulty: "tough", source_page: 477 },
+                { question: "What is a synonym for 'Resilient'?", options: ["Weak", "Flexible", "Rigid", "Fragile"], correctOptionIndex: 1, explanation: "'Resilient' means (of a person or animal) able to withstand or recover quickly from difficult conditions; or (of a substance or object) able to recoil or spring back into shape; 'Flexible' is a close synonym in the physical sense, and also implies adaptability.", difficulty: "medium", source_page: 478 },
+                { question: "Choose the synonym for 'Serene'.", options: ["Agitated", "Calm", "Chaotic", "Noisy"], correctOptionIndex: 1, explanation: "'Serene' means calm, peaceful, and untroubled; 'Calm' is a direct synonym.", difficulty: "easy", source_page: 478 },
+                { question: "Which word is a synonym for 'Trivial'?", options: ["Important", "Significant", "Insignificant", "Major"], correctOptionIndex: 2, explanation: "'Trivial' means of little value or importance; 'Insignificant' is a direct synonym.", difficulty: "easy", source_page: 478 },
+                { question: "Find the synonym for 'Ubiquitous'.", options: ["Rare", "Common", "Scarce", "Limited"], correctOptionIndex: 1, explanation: "'Ubiquitous' means present, appearing, or found everywhere; 'Common' is the best synonym.", difficulty: "tough", source_page: 478 },
+                { question: "Choose the synonym for 'Vigilant'.", options: ["Careless", "Alert", "Inattentive", "Sleepy"], correctOptionIndex: 1, explanation: "'Vigilant' means keeping careful watch for possible danger or difficulties; 'Alert' is a direct synonym.", difficulty: "medium", source_page: 479 },
+                { question: "What is a synonym for 'Wane'?", options: ["Increase", "Decrease", "Grow", "Expand"], correctOptionIndex: 1, explanation: "'Wane' means (of the moon) have a progressively smaller part of its visible surface illuminated, so it looks as if it is decreasing in size; or (especially of a condition or feeling) decrease in vigour or extent; become weaker. 'Decrease' is the best synonym.", difficulty: "medium", source_page: 479 },
+                { question: "Which word is a synonym for 'Zeal'.", options: ["Apathy", "Enthusiasm", "Indifference", "Lethargy"], correctOptionIndex: 1, explanation: "'Zeal' means great energy or enthusiasm in pursuit of a cause or an objective; 'Enthusiasm' is the best synonym.", difficulty: "medium", source_page: 479 },
+                { question: "Find the synonym for 'Acquire'.", options: ["Lose", "Obtain", "Relinquish", "Forfeit"], correctOptionIndex: 1, explanation: "'Acquire' means to get or obtain something.", difficulty: "easy", source_page: 472 },
+                { question: "What is a synonym for 'Bliss'?", options: ["Sorrow", "Joy", "Misery", "Grief"], correctOptionIndex: 1, explanation: "'Bliss' means perfect happiness; 'Joy' is a close synonym.", difficulty: "easy", source_page: 472 },
+                { question: "Choose the synonym for 'Candid'.", options: ["Dishonest", "Frank", "Deceitful", "Evasive"], correctOptionIndex: 1, explanation: "'Candid' means truthful and straightforward; frank.", difficulty: "medium", source_page: 473 },
+                { question: "Which word is a synonym for 'Deteriorate'?", options: ["Improve", "Worsen", "Develop", "Flourish"], correctOptionIndex: 1, explanation: "'Deteriorate' means become progressively worse; 'Worsen' is a direct synonym.", difficulty: "easy", source_page: 473 },
+                { question: "Find the synonym for 'Eloquent'.", options: ["Inarticulate", "Articulate", "Stammering", "Mumbling"], correctOptionIndex: 1, explanation: "'Eloquent' means fluent or persuasive in speaking or writing; 'Articulate' is a good synonym.", difficulty: "medium", source_page: 474 },
+                { question: "What is a synonym for 'Fathom'?", options: ["Misunderstand", "Comprehend", "Ignore", "Estimate"], correctOptionIndex: 1, explanation: "'Fathom' means to understand a difficult problem or an enigmatic person after much thought; 'Comprehend' is the closest synonym.", difficulty: "tough", source_page: 474 },
+                { question: "Choose the synonym for 'Gaudy'.", options: ["Subtle", "Tasteful", "Ostentatious", "Plain"], correctOptionIndex: 2, explanation: "'Gaudy' means extravagantly bright or showy, typically tasteless; 'Ostentatious' is a good synonym.", difficulty: "tough", source_page: 474 },
+                { question: "Which word is a synonym for 'Hapless'?", options: ["Lucky", "Unfortunate", "Fortunate", "Joyful"], correctOptionIndex: 1, explanation: "'Hapless' means (especially of a person) unfortunate; 'Unfortunate' is a direct synonym.", difficulty: "medium", source_page: 475 },
+                { question: "Find the synonym for 'Incessant'.", options: ["Intermittent", "Continuous", "Sporadic", "Occasional"], correctOptionIndex: 1, explanation: "'Incessant' means (of something unpleasant) continuing without pause or interruption; 'Continuous' is the best synonym.", difficulty: "medium", source_page: 475 },
+                { question: "What is a synonym for 'Jocose'?", options: ["Serious", "Humorous", "Solemn", "Grave"], correctOptionIndex: 1, explanation: "'Jocose' means playful or humorous; 'Humorous' is a direct synonym.", difficulty: "tough", source_page: 475 },
+                { question: "Choose the synonym for 'Luminous'.", options: ["Dark", "Bright", "Dim", "Obscure"], correctOptionIndex: 1, explanation: "'Luminous' means emitting or reflecting light; shining; 'Bright' is a direct synonym.", difficulty: "easy", source_page: 476 },
+                { question: "Which word is a synonym for 'Mitigate'?", options: ["Aggravate", "Alleviate", "Worsen", "Intensify"], correctOptionIndex: 1, explanation: "'Mitigate' means make less severe, serious, or painful; 'Alleviate' is the best synonym.", difficulty: "medium", source_page: 476 },
+                { question: "Find the synonym for 'Nefarious'.", options: ["Virtuous", "Wicked", "Honest", "Good"], correctOptionIndex: 1, explanation: "'Nefarious' means (typically of an action or activity) wicked or criminal; 'Wicked' is a direct synonym.", difficulty: "tough", source_page: 476 },
+                { question: "What is a synonym for 'Opportune'?", options: ["Inconvenient", "Timely", "Unsuitable", "Ill-timed"], correctOptionIndex: 1, explanation: "'Opportune' means (of a time or occasion) well-chosen or particularly favorable or appropriate; 'Timely' is the best synonym.", difficulty: "medium", source_page: 477 },
+                { question: "Choose the synonym for 'Pensive'.", options: ["Thoughtless", "Meditative", "Carefree", "Joyful"], correctOptionIndex: 1, explanation: "'Pensive' means engaged in, involving, or reflecting deep or serious thought; 'Meditative' is a good synonym.", difficulty: "medium", source_page: 477 },
+                { question: "Which word is a synonym for 'Quell'?", options: ["Incite", "Suppress", "Arouse", "Provoke"], correctOptionIndex: 1, explanation: "'Quell' means to put an end to (a rebellion or other disorder), typically by the use of force; 'Suppress' is a direct synonym.", difficulty: "tough", source_page: 477 },
+                { question: "Find the synonym for 'Rectify'.", options: ["Worsen", "Correct", "Damage", "Aggravate"], correctOptionIndex: 1, explanation: "'Rectify' means to put right; correct.", difficulty: "easy", source_page: 478 }
             ];
-            quizQuestions.push(...englishQuestions);
+            quizQuestions.push(...englishMCQs);
 
-            // General Abilities & Mathematics Questions (from June 6, 9, 11 topics, aiming for 40 questions)
-            const gaMathQuestions = [
-                // From June 6: True Discount & Banker's Discount
-                { question: "What is the true discount on Rs. 2200 due in 2 years at 5% per annum simple interest?", options: ["Rs. 200", "Rs. 250", "Rs. 300", "Rs. 260"], correctOptionIndex: 0, explanation: "True Discount (T.D.) = Amount * (R * T) / (100 + R * T). T.D. = 2200 * (5 * 2) / (100 + 5 * 2) = 2200 * (10 / 110) = 2200 * (1/11) = Rs. 200.", difficulty: "tough", source_page: 531 },
-                { question: "Calculate the Banker's Discount on a bill of Rs. 5000 due in 3 months at 10% per annum.", options: ["Rs. 100", "Rs. 125", "Rs. 150", "Rs. 200"], correctOptionIndex: 1, explanation: "Banker's Discount (B.D.) = (Amount * R * T) / 100. T = 3 months = 3/12 = 1/4 year. B.D. = (5000 * 10 * (1/4)) / 100 = 5000 * 10 / 400 = 500 / 4 = Rs. 125.", difficulty: "medium", source_page: 533 },
-                // From June 8: Clocks
-                { question: "At what time between 4 and 5 o'clock will the hands of a clock be at right angles?", options: ["4:05 and 4:38", "4:05 and 4:38 (approx)", "4:05 5/11 and 4:38 2/11", "4:15 and 4:45"], correctOptionIndex: 2, explanation: "At 4 o'clock, the minute hand is at 12 and hour hand is at 4. The angle between them is 4 * 30 = 120 degrees. For hands to be at right angles (90 degrees), they need to be 15 minute spaces apart. Formula: 2/11 * (A1 +- A2) where A1 = smaller hour * 30, A2 = 90. First right angle: 2/11 * (120 - 90) = 2/11 * 30 = 60/11 minutes past 4. Second right angle: 2/11 * (120 + 90) = 2/11 * 210 = 420/11 minutes past 4.", difficulty: "tough", source_page: 534 },
-                { question: "How many times do the hands of a clock coincide in 12 hours?", options: ["10", "11", "12", "22"], correctOptionIndex: 1, explanation: "The hands of a clock coincide 11 times in 12 hours (between 11 and 1 o'clock, they coincide only once at 12).", difficulty: "medium", source_page: 534 },
-                { question: "How many times do the hands of a clock make a right angle in 12 hours?", options: ["11", "12", "22", "24"], correctOptionIndex: 2, explanation: "The hands of a clock make a right angle 22 times in 12 hours (they make two right angles every hour, except between 2-3 and 8-9 where they form only one).", difficulty: "tough", source_page: 534 },
-                // From June 9: Decimal Fractions
-                { question: "Convert 0.25 into a common fraction.", options: ["1/2", "1/4", "1/5", "1/8"], correctOptionIndex: 1, explanation: "0.25 = 25/100 = 1/4.", difficulty: "easy", source_page: 536 },
-                { question: "Add: 0.5 + 0.25", options: ["0.7", "0.75", "0.8", "0.85"], correctOptionIndex: 1, explanation: "0.5 + 0.25 = 0.75.", difficulty: "easy", source_page: 536 },
-                { question: "Multiply: 0.2 x 0.3", options: ["0.06", "0.6", "0.006", "6.0"], correctOptionIndex: 0, explanation: "0.2 x 0.3 = 0.06.", difficulty: "easy", source_page: 536 },
-                { question: "Divide: 0.8 ÷ 0.2", options: ["0.4", "4", "0.04", "40"], correctOptionIndex: 1, explanation: "0.8 / 0.2 = 4.", difficulty: "easy", source_page: 537 },
-                { question: "What is the value of 0.125 as a common fraction?", options: ["1/4", "1/8", "1/10", "1/2"], correctOptionIndex: 1, explanation: "0.125 = 125/1000 = 1/8.", difficulty: "easy", source_page: 536 },
-                // From June 11: Area Problems
-                { question: "What is the area of a rectangle with length 10 cm and width 5 cm?", options: ["15 cm^2", "25 cm^2", "50 cm^2", "100 cm^2"], correctOptionIndex: 2, explanation: "Area = length x width = 10 cm x 5 cm = 50 cm^2.", difficulty: "easy", source_page: 538 },
-                { question: "Find the area of a square whose side is 7 cm.", options: ["14 cm^2", "28 cm^2", "49 cm^2", "35 cm^2"], correctOptionIndex: 2, explanation: "Area = side x side = 7 cm x 7 cm = 49 cm^2.", difficulty: "easy", source_page: 538 },
-                { question: "The area of a triangle with base 8 cm and height 6 cm is:", options: ["24 cm^2", "48 cm^2", "14 cm^2", "20 cm^2"], correctOptionIndex: 0, explanation: "Area = (1/2) x base x height = (1/2) x 8 cm x 6 cm = 24 cm^2.", difficulty: "easy", source_page: 538 },
-                { question: "What is the area of a circle with radius 7 cm? (Use π = 22/7)", options: ["44 cm^2", "154 cm^2", "22 cm^2", "14 cm^2"], correctOptionIndex: 1, explanation: "Area = πr^2 = (22/7) x 7^2 = (22/7) x 49 = 22 x 7 = 154 cm^2.", difficulty: "medium", source_page: 539 },
-                { question: "The perimeter of a square is 36 cm. What is its area?", options: ["81 cm^2", "36 cm^2", "24 cm^2", "18 cm^2"], correctOptionIndex: 0, explanation: "Side = Perimeter / 4 = 36 / 4 = 9 cm. Area = side^2 = 9^2 = 81 cm^2.", difficulty: "medium", source_page: 538 },
-                { question: "A rectangular field has an area of 120 m^2. If its length is 15 m, what is its width?", options: ["8 m", "10 m", "12 m", "14 m"], correctOptionIndex: 0, explanation: "Width = Area / length = 120 / 15 = 8 m.", difficulty: "easy", source_page: 538 },
-                { question: "What is the area of a parallelogram with base 12 cm and height 5 cm?", options: ["30 cm^2", "60 cm^2", "17 cm^2", "40 cm^2"], correctOptionIndex: 1, explanation: "Area = base x height = 12 cm x 5 cm = 60 cm^2.", difficulty: "easy", source_page: 539 },
-                { question: "The diagonal of a square is 10 cm. What is its area?", options: ["100 cm^2", "50 cm^2", "25 cm^2", "75 cm^2"], correctOptionIndex: 1, explanation: "Area of square = (1/2) x (diagonal)^2 = (1/2) x 10^2 = 50 cm^2.", difficulty: "tough", source_page: 538 },
-                { question: "The circumference of a circle is 44 cm. What is its area? (Use π = 22/7)", options: ["7 cm^2", "14 cm^2", "154 cm^2", "22 cm^2"], correctOptionIndex: 2, explanation: "Circumference = 2πr. 44 = 2 x (22/7) x r => r = 7 cm. Area = πr^2 = (22/7) x 7^2 = 154 cm^2.", difficulty: "tough", source_page: 539 },
-                { question: "A path 2 m wide runs around a rectangular park which is 50 m long and 30 m wide. Find the area of the path.", options: ["336 m^2", "164 m^2", "1600 m^2", "1500 m^2"], correctOptionIndex: 0, explanation: "Outer length = 50 + 2*2 = 54 m. Outer width = 30 + 2*2 = 34 m. Outer area = 54 x 34 = 1836 m^2. Inner area = 50 x 30 = 1500 m^2. Area of path = 1836 - 1500 = 336 m^2.", difficulty: "tough", source_page: 540 },
-                { question: "What is the area of a rhombus whose diagonals are 16 cm and 12 cm?", options: ["48 cm^2", "96 cm^2", "192 cm^2", "60 cm^2"], correctOptionIndex: 1, explanation: "Area = (1/2) x d1 x d2 = (1/2) x 16 cm x 12 cm = 96 cm^2.", difficulty: "medium", source_page: 539 },
-                { question: "The base of a triangle is twice its height. If its area is 36 cm^2, find its height.", options: ["6 cm", "8 cm", "12 cm", "4 cm"], correctOptionIndex: 0, explanation: "Area = (1/2) x base x height. Let height = h, base = 2h. 36 = (1/2) x (2h) x h => 36 = h^2. h = 6 cm.", difficulty: "tough", source_page: 538 },
-                { question: "What is the area of a trapezium whose parallel sides are 10 cm and 14 cm, and height is 5 cm?", options: ["30 cm^2", "60 cm^2", "70 cm^2", "120 cm^2"], correctOptionIndex: 1, explanation: "Area = (1/2) x (sum of parallel sides) x height = (1/2) x (10+14) x 5 = 60 cm^2.", difficulty: "medium", source_page: 539 },
-                { question: "If the area of a square is 144 cm^2, what is the length of its side?", options: ["10 cm", "12 cm", "14 cm", "16 cm"], correctOptionIndex: 1, explanation: "Side = sqrt(Area) = sqrt(144) = 12 cm.", difficulty: "easy", source_page: 538 },
-                { question: "A rectangle has an area of 80 cm^2 and its width is 8 cm. What is its perimeter?", options: ["18 cm", "20 cm", "36 cm", "40 cm"], correctOptionIndex: 2, explanation: "Length = Area / width = 80 / 8 = 10 cm. Perimeter = 2 x (length + width) = 2 x (10 + 8) = 36 cm.", difficulty: "medium", source_page: 538 },
-                { question: "The ratio of the sides of two squares is 2:3. What is the ratio of their areas?", options: ["2:3", "4:9", "8:27", "16:81"], correctOptionIndex: 1, explanation: "Ratio of areas = (ratio of sides)^2 = (2/3)^2 = 4/9.", difficulty: "tough", source_page: 538 },
-                { question: "What is the area of a semi-circle with radius 7 cm? (Use π = 22/7)", options: ["77 cm^2", "154 cm^2", "308 cm^2", "38.5 cm^2"], correctOptionIndex: 0, explanation: "Area = (1/2)πr^2 = (1/2) x (22/7) x 7^2 = 77 cm^2.", difficulty: "medium", source_page: 539 },
-                { question: "A room is 10 m long and 8 m wide. How many square meters of carpet are needed to cover the floor?", options: ["18 m^2", "80 m^2", "36 m^2", "100 m^2"], correctOptionIndex: 1, explanation: "Area = length x width = 10 m x 8 m = 80 m^2.", difficulty: "easy", source_page: 538 },
-                { question: "If the area of an equilateral triangle is 4sqrt(3) cm^2, find its side.", options: ["2 cm", "4 cm", "6 cm", "8 cm"], correctOptionIndex: 1, explanation: "Area of equilateral triangle = (sqrt(3)/4) * side^2. 4sqrt(3) = (sqrt(3)/4) * side^2 => 16 = side^2 => side = 4 cm.", difficulty: "tough", source_page: 539 },
-                { question: "The length and width of a rectangle are increased by 10%. What is the percentage increase in its area?", options: ["10%", "20%", "21%", "100%"], correctOptionIndex: 2, explanation: "New length = 1.1 * original length. New width = 1.1 * original width. New area = 1.1 * 1.1 * original area = 1.21 * original area. Percentage increase = (1.21 - 1) * 100 = 21%.", difficulty: "tough", source_page: 540 },
-                { question: "What is the area of a path 1m wide outside a square garden of side 8m?", options: ["16 m^2", "20 m^2", "36 m^2", "17 m^2"], correctOptionIndex: 2, explanation: "Outer side = 8 + 2*1 = 10 m. Outer area = 10^2 = 100 m^2. Inner area = 8^2 = 64 m^2. Area of path = 100 - 64 = 36 m^2.", difficulty: "medium", source_page: 540 }
+            // General Abilities (40 MCQs)
+            const generalAbilitiesMCQs = [
+                // GA - June 13: Volume and Surface Area: Pages 541-543 (40 MCQs)
+                { question: "What is the volume of a cube with a side length of 5 cm?", options: ["25 cm³", "125 cm³", "150 cm³", "100 cm³"], correctOptionIndex: 1, explanation: "Volume of a cube = side³ = 5³ = 125 cm³.", difficulty: "easy", source_page: 541 },
+                { question: "Calculate the total surface area of a cube with a side length of 4 cm.", options: ["16 cm²", "64 cm²", "96 cm²", "144 cm²"], correctOptionIndex: 2, explanation: "Total surface area of a cube = 6 × side² = 6 × 4² = 6 × 16 = 96 cm².", difficulty: "easy", source_page: 541 },
+                { question: "A rectangular box (cuboid) is 10 cm long, 5 cm wide, and 2 cm high. What is its volume?", options: ["17 cm³", "50 cm³", "100 cm³", "170 cm³"], correctOptionIndex: 2, explanation: "Volume of cuboid = length × width × height = 10 × 5 × 2 = 100 cm³.", difficulty: "easy", source_page: 541 },
+                { question: "Find the lateral surface area of a cuboid that is 8 m long, 6 m wide, and 3 m high.", options: ["48 m²", "84 m²", "144 m²", "156 m²"], correctOptionIndex: 1, explanation: "Lateral surface area of cuboid = 2 × height × (length + width) = 2 × 3 × (8 + 6) = 6 × 14 = 84 m².", difficulty: "medium", source_page: 541 },
+                { question: "What is the volume of a cylinder with a radius of 7 cm and a height of 10 cm? (Use π = 22/7)", options: ["154 cm³", "440 cm³", "1540 cm³", "770 cm³"], correctOptionIndex: 2, explanation: "Volume of cylinder = πr²h = (22/7) × 7² × 10 = (22/7) × 49 × 10 = 22 × 7 × 10 = 1540 cm³.", difficulty: "medium", source_page: 542 },
+                { question: "Calculate the curved surface area of a cylinder with radius 3 cm and height 7 cm. (Use π = 22/7)", options: ["66 cm²", "132 cm²", "154 cm²", "198 cm²"], correctOptionIndex: 1, explanation: "Curved surface area of cylinder = 2πrh = 2 × (22/7) × 3 × 7 = 2 × 22 × 3 = 132 cm².", difficulty: "medium", source_page: 542 },
+                { question: "Find the volume of a cone with radius 3 cm and height 7 cm. (Use π = 22/7)", options: ["22 cm³", "44 cm³", "66 cm³", "198 cm³"], correctOptionIndex: 2, explanation: "Volume of cone = (1/3)πr²h = (1/3) × (22/7) × 3² × 7 = (1/3) × 22 × 9 = 22 × 3 = 66 cm³.", difficulty: "tough", source_page: 542 },
+                { question: "What is the volume of a sphere with a radius of 3 cm? (Use π = 22/7)", options: ["36 cm³", "113.14 cm³", "792/7 cm³", "792 cm³"], correctOptionIndex: 2, explanation: "Volume of sphere = (4/3)πr³ = (4/3) × (22/7) × 3³ = (4/3) × (22/7) × 27 = 4 × (22/7) × 9 = 792/7 cm³. Approximately 113.14 cm³.", difficulty: "tough", source_page: 543 },
+                { question: "Calculate the surface area of a sphere with a radius of 7 cm. (Use π = 22/7)", options: ["154 cm²", "308 cm²", "616 cm²", "44 cm²"], correctOptionIndex: 2, explanation: "Surface area of sphere = 4πr² = 4 × (22/7) × 7² = 4 × 22 × 7 = 616 cm².", difficulty: "medium", source_page: 543 },
+                { question: "A cube has a volume of 216 cm³. What is the length of its side?", options: ["4 cm", "5 cm", "6 cm", "8 cm"], correctOptionIndex: 2, explanation: "Volume = side³. 216 = side³ => side = 6 cm.", difficulty: "medium", source_page: 541 },
+                { question: "The dimensions of a room are 12 m, 10 m, and 4 m (length, width, height). Find the area of its four walls.", options: ["88 m²", "176 m²", "240 m²", "480 m²"], correctOptionIndex: 1, explanation: "Area of four walls (lateral surface area of cuboid) = 2 × height × (length + width) = 2 × 4 × (12 + 10) = 8 × 22 = 176 m².", difficulty: "easy", source_page: 541 },
+                { question: "A cylindrical tank has a base radius of 14 m and a height of 5 m. How much water can it hold (in m³)? (Use π = 22/7)", options: ["1100 m³", "2200 m³", "3080 m³", "4400 m³"], correctOptionIndex: 2, explanation: "Volume of cylinder = πr²h = (22/7) × 14² × 5 = (22/7) × 196 × 5 = 22 × 28 × 5 = 3080 m³.", difficulty: "medium", source_page: 542 },
+                { question: "If the surface area of a cube is 294 cm², what is its volume?", options: ["343 cm³", "216 cm³", "125 cm³", "64 cm³"], correctOptionIndex: 0, explanation: "Surface area = 6 × side². 294 = 6 × side² => side² = 49 => side = 7 cm. Volume = side³ = 7³ = 343 cm³.", difficulty: "tough", source_page: 541 },
+                { question: "The radius of a sphere is doubled. How many times does its volume increase?", options: ["2 times", "4 times", "8 times", "16 times"], correctOptionIndex: 2, explanation: "Original volume = (4/3)πr³. New radius = 2r. New volume = (4/3)π(2r)³ = (4/3)π(8r³) = 8 × (4/3)πr³. The volume increases 8 times.", difficulty: "tough", source_page: 543 },
+                { question: "What is the volume of a pyramid with a square base of side 6 cm and a height of 10 cm?", options: ["60 cm³", "120 cm³", "180 cm³", "360 cm³"], correctOptionIndex: 1, explanation: "Volume of pyramid = (1/3) × base area × height. Base area = 6² = 36 cm². Volume = (1/3) × 36 × 10 = 12 × 10 = 120 cm³.", difficulty: "tough", source_page: 543 },
+                { question: "A cylindrical pillar has a diameter of 7 m and a height of 10 m. Find the cost of painting its curved surface at Rs. 20 per m². (Use π = 22/7)", options: ["Rs. 2200", "Rs. 4400", "Rs. 1100", "Rs. 3300"], correctOptionIndex: 1, explanation: "Radius = diameter/2 = 7/2 = 3.5 m. Curved surface area = 2πrh = 2 × (22/7) × 3.5 × 10 = 2 × 22 × 0.5 × 10 = 22 × 10 = 220 m². Cost = 220 × 20 = Rs. 4400.", difficulty: "medium", source_page: 542 },
+                { question: "How many bricks of dimensions 25 cm × 10 cm × 8 cm are required to build a wall 10 m long, 4 m high, and 20 cm thick?", options: ["2000", "4000", "5000", "10000"], correctOptionIndex: 1, explanation: "Volume of wall = 10 m * 4 m * 0.2 m = 8 m³. Volume of one brick = 0.25 m * 0.1 m * 0.08 m = 0.002 m³. Number of bricks = 8 / 0.002 = 4000 bricks.", difficulty: "tough", source_page: 541 },
+                { question: "If the total surface area of a cuboid is 220 cm² and its length is 10 cm and width is 5 cm, find its height.", options: ["2 cm", "3 cm", "4 cm", "5 cm"], correctOptionIndex: 2, explanation: "Total Surface Area = 2(lw + lh + wh). 220 = 2(10*5 + 10*h + 5*h) => 110 = 50 + 15h => 60 = 15h => h = 4 cm.", difficulty: "tough", source_page: 541 },
+                { question: "What is the volume of a right circular cone whose base radius is 6 cm and slant height is 10 cm? (Use π = 3.14)", options: ["100.48 cm³", "201.06 cm³", "301.44 cm³", "402.12 cm³"], correctOptionIndex: 2, explanation: "First find height (h). Slant height (l), radius (r), height (h) form a right triangle: l² = r² + h². 10² = 6² + h² => 100 = 36 + h² => h² = 64 => h = 8 cm. Volume of cone = (1/3)πr²h = (1/3) × 3.14 × 6² × 8 = (1/3) × 3.14 × 36 × 8 = 3.14 × 12 × 8 = 3.14 × 96 = 301.44 cm³.", difficulty: "tough", source_page: 542 },
+                { question: "A solid metal sphere of radius 3 cm is melted and recast into a cone of height 3 cm. Find the radius of the cone.", options: ["3 cm", "6 cm", "9 cm", "12 cm"], correctOptionIndex: 1, explanation: "Volume of sphere = (4/3)πR³. Volume of cone = (1/3)πr²h. Equating volumes: (4/3)π(3³) = (1/3)πr²(3). 4 * 27 / 3 = r² * 3 / 3. 4 * 9 = r². r² = 36. r = 6 cm.", difficulty: "tough", source_page: 543 },
+                { question: "How many liters of water can a rectangular tank hold if its dimensions are 2 m x 1.5 m x 1 m?", options: ["300 liters", "3000 liters", "30000 liters", "30 liters"], correctOptionIndex: 1, explanation: "Volume = length × width × height = 2 m × 1.5 m × 1 m = 3 m³. Since 1 m³ = 1000 liters, 3 m³ = 3000 liters.", difficulty: "easy", source_page: 541 },
+                { question: "The volume of a cuboid is 480 cm³. If its length is 12 cm and width is 8 cm, what is its height?", options: ["4 cm", "5 cm", "6 cm", "8 cm"], correctOptionIndex: 1, explanation: "Volume = length × width × height. 480 = 12 × 8 × height => 480 = 96 × height => height = 480/96 = 5 cm.", difficulty: "easy", source_page: 541 },
+                { question: "What is the total surface area of a closed cylinder with radius 7 cm and height 10 cm? (Use π = 22/7)", options: ["440 cm²", "748 cm²", "880 cm²", "1540 cm²"], correctOptionIndex: 1, explanation: "Total surface area = 2πr(r + h) = 2 × (22/7) × 7 × (7 + 10) = 2 × 22 × 17 = 44 × 17 = 748 cm².", difficulty: "tough", source_page: 542 },
+                { question: "The ratio of the radii of two cylinders is 1:2 and their heights are in the ratio 2:1. What is the ratio of their volumes?", options: ["1:1", "1:2", "1:4", "2:1"], correctOptionIndex: 1, explanation: "Volume of cylinder = πr²h. Let r1=x, h1=2y; r2=2x, h2=y. V1 = π(x)²(2y) = 2πx²y. V2 = π(2x)²(y) = π(4x²)(y) = 4πx²y. Ratio V1:V2 = 2πx²y : 4πx²y = 2:4 = 1:2.", difficulty: "tough", source_page: 542 },
+                { question: "A metallic cone of height 24 cm and base radius 6 cm is melted to form a sphere. What is the radius of the sphere?", options: ["3 cm", "6 cm", "9 cm", "12 cm"], correctOptionIndex: 1, explanation: "Volume of cone = (1/3)πr²h = (1/3)π(6²)(24) = (1/3)π(36)(24) = π(12)(24) = 288π cm³. Volume of sphere = (4/3)πR³. Equating volumes: 288π = (4/3)πR³ => R³ = 288 * (3/4) = 72 * 3 = 216. R = 6 cm.", difficulty: "tough", source_page: 543 },
+                { question: "A cuboid has length 15 cm, width 10 cm, and height 5 cm. What is its total surface area?", options: ["300 cm²", "400 cm²", "550 cm²", "600 cm²"], correctOptionIndex: 2, explanation: "Total Surface Area = 2(lw + lh + wh) = 2(15*10 + 15*5 + 10*5) = 2(150 + 75 + 50) = 2(275) = 550 cm².", difficulty: "medium", source_page: 541 },
+                { question: "The volume of a cylinder is 3080 cm³ and its radius is 7 cm. What is its height? (Use π = 22/7)", options: ["10 cm", "20 cm", "25 cm", "30 cm"], correctOptionIndex: 1, explanation: "Volume of cylinder = πr²h. 3080 = (22/7) × 7² × h => 3080 = 22 × 7 × h => 3080 = 154 × h => h = 3080/154 = 20 cm.", difficulty: "medium", source_page: 542 },
+                { question: "What is the volume of a square pyramid with base side 4 cm and height 9 cm?", options: ["16 cm³", "36 cm³", "48 cm³", "144 cm³"], correctOptionIndex: 2, explanation: "Base area = side² = 4² = 16 cm². Volume = (1/3) × base area × height = (1/3) × 16 × 9 = 16 × 3 = 48 cm³.", difficulty: "medium", source_page: 543 },
+                { question: "The surface area of a sphere is 154 cm². What is its radius? (Use π = 22/7)", options: ["3.5 cm", "7 cm", "14 cm", "21 cm"], correctOptionIndex: 0, explanation: "Surface area = 4πr². 154 = 4 × (22/7) × r² => 154 = (88/7) × r² => r² = (154 × 7) / 88 = (7 × 7) / 4 = 49/4. r = 7/2 = 3.5 cm.", difficulty: "tough", source_page: 543 },
+                { question: "A cubical tank has a volume of 8000 liters. What is the length of its side in meters?", options: ["2 m", "4 m", "8 m", "10 m"], correctOptionIndex: 0, explanation: "8000 liters = 8 m³ (since 1000 liters = 1 m³). Volume of cube = side³. 8 = side³ => side = 2 m.", difficulty: "easy", source_page: 541 },
+                { question: "How many small cubes of side 2 cm can be cut from a larger cube of side 8 cm?", options: ["4", "16", "64", "128"], correctOptionIndex: 2, explanation: "Volume of large cube = 8³ = 512 cm³. Volume of small cube = 2³ = 8 cm³. Number of small cubes = Volume of large cube / Volume of small cube = 512 / 8 = 64.", difficulty: "medium", source_page: 541 },
+                { question: "The circumference of the base of a cylinder is 22 cm and its height is 10 cm. Find its volume. (Use π = 22/7)", options: ["385 cm³", "770 cm³", "1540 cm³", "3080 cm³"], correctOptionIndex: 0, explanation: "Circumference = 2πr. 22 = 2 × (22/7) × r => r = 7/2 = 3.5 cm. Volume = πr²h = (22/7) × (3.5)² × 10 = (22/7) × 12.25 × 10 = 22 × 1.75 × 10 = 38.5 × 10 = 385 cm³.", difficulty: "tough", source_page: 542 },
+                { question: "A spherical ball has a diameter of 21 cm. What is its volume? (Use π = 22/7)", options: ["4851 cm³", "9702 cm³", "19404 cm³", "2425.5 cm³"], correctOptionIndex: 0, explanation: "Radius = diameter/2 = 21/2 = 10.5 cm. Volume = (4/3)πr³ = (4/3) × (22/7) × (10.5)³ = (4/3) × (22/7) × 1157.625 = 4 × 22 × 1157.625 / 21 = 88 × 55.125 = 4851 cm³.", difficulty: "tough", source_page: 543 },
+                { question: "The length of a cuboid is 3 times its height and its width is 2 times its height. If the height is 5 cm, find its volume.", options: ["150 cm³", "300 cm³", "750 cm³", "1500 cm³"], correctOptionIndex: 2, explanation: "Height = 5 cm. Length = 3 × 5 = 15 cm. Width = 2 × 5 = 10 cm. Volume = 15 × 10 × 5 = 750 cm³.", difficulty: "medium", source_page: 541 },
+                { question: "A well has a diameter of 3.5 m and a depth of 20 m. What is the volume of earth taken out? (Use π = 22/7)", options: ["192.5 m³", "1925 m³", "19.25 m³", "96.25 m³"], correctOptionIndex: 0, explanation: "Radius = diameter/2 = 3.5/2 = 1.75 m. Volume = πr²h = (22/7) × (1.75)² × 20 = (22/7) × 3.0625 × 20 = 22 × 0.4375 × 20 = 22 × 8.75 = 192.5 m³.", difficulty: "medium", source_page: 542 },
+                { question: "What is the largest volume of a cone that can be carved from a cube of side 6 cm?", options: ["18π cm³", "36π cm³", "54π cm³", "72π cm³"], correctOptionIndex: 1, explanation: "The largest cone will have its base diameter equal to the side of the cube (6 cm) and its height equal to the side of the cube (6 cm). So, radius = 3 cm, height = 6 cm. Volume = (1/3)πr²h = (1/3)π(3²)(6) = (1/3)π(9)(6) = π(3)(6) = 18π cm³.", difficulty: "tough", source_page: 542 },
+                { question: "If the radius of a cylinder is halved and its height is doubled, how does its volume change?", options: ["Remains same", "Halved", "Doubled", "Quadrupled"], correctOptionIndex: 1, explanation: "Original volume = πr²h. New radius = r/2, new height = 2h. New volume = π(r/2)²(2h) = π(r²/4)(2h) = (1/2)πr²h. The volume is halved.", difficulty: "tough", source_page: 542 },
+                { question: "A cubical box has a volume of 64 m³. What is the total surface area of the box?", options: ["16 m²", "96 m²", "192 m²", "384 m²"], correctOptionIndex: 1, explanation: "Volume = side³. 64 = side³ => side = 4 m. Total surface area = 6 × side² = 6 × 4² = 6 × 16 = 96 m².", difficulty: "easy", source_page: 541 },
+                { question: "What is the volume of a sphere whose surface area is 616 cm²? (Use π = 22/7)", options: ["1437.33 cm³", "2425.5 cm³", "4851 cm³", "19404 cm³"], correctOptionIndex: 0, explanation: "Surface area = 4πr². 616 = 4 × (22/7) × r² => 154 = (88/7) × r² => r² = (154 × 7) / 88 = (7 × 7) / 4 = 49/4. r = 7/2 = 3.5 cm. Volume = (4/3)πr³ = (4/3) × (22/7) × 7³ = (4/3) × 22 × 49 = 4312/3 = 1437.33 cm³ (approx). The first option is 1437.33 so it is the correct answer.", difficulty: "tough", source_page: 543 },
+                { question: "A rectangular tank is 20 m long, 10 m wide, and 5 m deep. Find its capacity in cubic meters.", options: ["100 m³", "200 m³", "500 m³", "1000 m³"], correctOptionIndex: 3, explanation: "Capacity (Volume) = length × width × depth = 20 × 10 × 5 = 1000 m³.", difficulty: "easy", source_page: 541 },
+                { question: "The height of a cone is 12 cm and its base radius is 5 cm. Find its slant height.", options: ["13 cm", "10 cm", "15 cm", "17 cm"], correctOptionIndex: 0, explanation: "Slant height (l) = sqrt(r² + h²) = sqrt(5² + 12²) = sqrt(25 + 144) = sqrt(169) = 13 cm.", difficulty: "medium", source_page: 542 },
+                { question: "What is the area of the base of a cylinder if its volume is 770 cm³ and height is 5 cm? (Use π = 22/7)", options: ["154 cm²", "77 cm²", "44 cm²", "308 cm²"], correctOptionIndex: 0, explanation: "Volume = Base Area × height. 770 = Base Area × 5 => Base Area = 770/5 = 154 cm².", difficulty: "medium", source_page: 542 },
+                { question: "A solid cube is cut into 8 small cubes of equal volume. What is the ratio of the surface area of the larger cube to the total surface area of the 8 small cubes?", options: ["1:1", "1:2", "2:1", "1:4"], correctOptionIndex: 1, explanation: "If a large cube is cut into 8 small cubes, the side of each small cube is half the side of the large cube (since 2³=8). Let large side = 2a, small side = a. Surface Area (large) = 6(2a)² = 24a². Surface Area (small) = 6a². Total surface area of 8 small cubes = 8 * 6a² = 48a². Ratio = 24a² : 48a² = 1:2.", difficulty: "tough", source_page: 541 },
+                { question: "The radii of two cylinders are in the ratio 2:3 and their heights are in the ratio 5:3. The ratio of their volumes is:", options: ["10:9", "20:27", "4:9", "2:3"], correctOptionIndex: 1, explanation: "V1/V2 = (πr1²h1) / (πr2²h2) = (r1/r2)² * (h1/h2) = (2/3)² * (5/3) = (4/9) * (5/3) = 20/27.", difficulty: "tough", source_page: 542 },
+                { question: "How much metal is required to make a closed cylindrical pipe of inner radius 7 cm, outer radius 14 cm, and length 10 cm? (Volume of metal) (Use π = 22/7)", options: ["3080 cm³", "4620 cm³", "32340 cm³", "46200 cm³"], correctOptionIndex: 1, explanation: "Volume of outer cylinder = π(R_outer)²h = (22/7) × 14² × 10 = (22/7) × 196 × 10 = 22 × 28 × 10 = 6160 cm³. Volume of inner cylinder = π(R_inner)²h = (22/7) × 7² × 10 = (22/7) × 49 × 10 = 22 × 7 × 10 = 1540 cm³. Volume of metal = Outer Volume - Inner Volume = 6160 - 1540 = 4620 cm³.", difficulty: "tough", source_page: 542 },
+                { question: "A tank has a volume of 200 m³. If its length is 10 m and height is 4 m, find its width.", options: ["4 m", "5 m", "6 m", "8 m"], correctOptionIndex: 1, explanation: "Volume = L × W × H. 200 = 10 × W × 4 => 200 = 40W => W = 5 m.", difficulty: "easy", source_page: 541 },
+                { question: "The diameter of a roller is 84 cm and its length is 120 cm. It takes 500 complete revolutions to level a playground. Find the area of the playground in m². (Use π = 22/7)", options: ["792 m²", "1584 m²", "7920 m²", "15840 m²"], correctOptionIndex: 1, explanation: "Radius = 84/2 = 42 cm = 0.42 m. Length (height of cylinder) = 120 cm = 1.2 m. Area covered in one revolution = Curved surface area of roller = 2πrh = 2 × (22/7) × 0.42 × 1.2 = 2 × 22 × 0.06 × 1.2 = 44 × 0.072 = 3.168 m². Total area = 500 × 3.168 = 1584 m².", difficulty: "tough", source_page: 542 },
+                { question: "A cone and a cylinder have the same base radius and the same height. If the volume of the cylinder is 300 cm³, what is the volume of the cone?", options: ["100 cm³", "150 cm³", "200 cm³", "300 cm³"], correctOptionIndex: 0, explanation: "Volume of cylinder = πr²h. Volume of cone = (1/3)πr²h. So, Volume of cone = (1/3) × Volume of cylinder = (1/3) × 300 = 100 cm³.", difficulty: "easy", source_page: 542 },
+                { question: "The volume of a hemisphere is 18π cm³. Find its radius.", options: ["3 cm", "6 cm", "9 cm", "12 cm"], correctOptionIndex: 0, explanation: "Volume of hemisphere = (2/3)πr³. 18π = (2/3)πr³ => 18 = (2/3)r³ => r³ = 18 × (3/2) = 27. r = 3 cm.", difficulty: "tough", source_page: 543 },
+                { question: "What is the area of a sheet required to make a closed cylindrical tank of height 0.9 m and base diameter 1.4 m? (Use π = 22/7)", options: ["6.16 m²", "7.04 m²", "7.48 m²", "8.36 m²"], correctOptionIndex: 1, explanation: "Radius = 1.4/2 = 0.7 m. Total surface area = 2πr(r + h) = 2 × (22/7) × 0.7 × (0.7 + 0.9) = 2 × 22 × 0.1 × 1.6 = 4.4 × 1.6 = 7.04 m².", difficulty: "tough", source_page: 542 }
             ];
-            quizQuestions.push(...gaMathQuestions);
-
-            // Islamic Studies Questions (from June 10, 11 topics, aiming for 20 questions)
-            const islamicStudiesQuestions = [
-                // From June 10: Establishment of First Islamic State & Early Battles
-                { question: "The first Islamic State was established in:", options: ["Makkah", "Madina", "Taif", "Jerusalem"], correctOptionIndex: 1, explanation: "The first Islamic State was established in Madina after the Hijrah.", difficulty: "easy", source_page: 14 },
-                { question: "The Charter of Madina (Mithaq-e-Madina) was a treaty between Muslims and which other group?", options: ["Quraish of Makkah", "Christians of Najran", "Jews of Madina", "Persians"], correctOptionIndex: 2, explanation: "The Charter of Madina governed relations among Muslims and the local Jewish tribes.", difficulty: "easy", source_page: 14 },
-                { question: "The Battle of Badr was fought in which Hijri year?", options: ["1st Hijri", "2nd Hijri", "3rd Hijri", "4th Hijri"], correctOptionIndex: 1, explanation: "The Battle of Badr took place in the 2nd year of Hijrah (624 AD).", difficulty: "easy", source_page: 15 },
-                { question: "The Battle of Uhud was fought in which Hijri year?", options: ["2nd Hijri", "3rd Hijri", "4th Hijri", "5th Hijri"], correctOptionIndex: 1, explanation: "The Battle of Uhud took place in the 3rd year of Hijrah (625 AD).", difficulty: "medium", source_page: 15 },
-                { question: "The Battle of Khandaq is also known as the Battle of the:", options: ["Swords", "Wells", "Trench", "Mountains"], correctOptionIndex: 2, explanation: "The Battle of Khandaq (Ditch) involved Muslims digging a trench around Madina.", difficulty: "easy", source_page: 16 },
-                { question: "Who suggested digging a trench in the Battle of Khandaq?", options: ["Hazrat Abu Bakar (R.A)", "Hazrat Umar (R.A)", "Hazrat Salman Farsi (R.A)", "Hazrat Ali (R.A)"], correctOptionIndex: 2, explanation: "Hazrat Salman Farsi (R.A) suggested digging a trench.", difficulty: "tough", source_page: 16 },
-                // From June 11: Articles of Faith
-                { question: "How many fundamental articles of faith are there in Islam?", options: ["3", "4", "5", "6"], correctOptionIndex: 3, explanation: "There are six fundamental articles of faith in Islam.", difficulty: "easy", source_page: 17 },
-                { question: "Belief in the Oneness of Allah is called:", options: ["Risalat", "Akhirat", "Tawhid", "Nabuwwat"], correctOptionIndex: 2, explanation: "Tawhid is the indivisible oneness concept of monotheism in Islam.", difficulty: "easy", source_page: 17 },
-                { question: "The holy book revealed to Prophet Musa (Moses) (A.S) was:", options: ["Quran", "Injeel", "Zaboor", "Torah"], correctOptionIndex: 3, explanation: "The Torah (Tawrat) was revealed to Prophet Musa (A.S).", difficulty: "easy", source_page: 17 },
-                { question: "Which Angel is responsible for bringing revelations to the Prophets?", options: ["Angel Israfeel", "Angel Mika'il", "Angel Jibreel", "Angel Izra'il"], correctOptionIndex: 2, explanation: "Angel Jibreel (Gabriel) is known as the bringer of divine revelations to the Prophets.", difficulty: "easy", source_page: 17 },
-                { question: "The belief in the Day of Judgment is known as:", options: ["Tawhid", "Risalat", "Akhirat", "Qadar"], correctOptionIndex: 2, explanation: "Akhirat refers to the Hereafter or the Day of Judgment.", difficulty: "easy", source_page: 18 },
-                { question: "Divine Decree, or Allah's pre-ordainment, is known as:", options: ["Tawhid", "Risalat", "Akhirat", "Qadar"], correctOptionIndex: 3, explanation: "Qadar (or Taqdeer) is the Islamic concept of divine destiny.", difficulty: "easy", source_page: 18 },
-                { question: "The Quran is the holy book revealed to which prophet?", options: ["Prophet Musa (A.S)", "Prophet Isa (A.S)", "Prophet Muhammad (PBUH)", "Prophet Dawood (A.S)"], correctOptionIndex: 2, explanation: "The Holy Quran was revealed to the last Prophet, Muhammad (PBUH).", difficulty: "easy", source_page: 17 },
-                { question: "The concept of 'Tauhid' fundamentally rejects:", options: ["Prophethood", "Divine books", "Shirk (polytheism)", "Day of Judgment"], correctOptionIndex: 2, explanation: "Tawhid is the strict monotheism of Islam, rejecting any form of shirk.", difficulty: "medium", source_page: 17 },
-                { question: "Which angel is responsible for blowing the trumpet on the Day of Judgment?", options: ["Angel Mika'il", "Angel Israfeel", "Angel Jibreel", "Angel Izra'il"], correctOptionIndex: 1, explanation: "Angel Israfeel is believed to be the angel who will blow the trumpet.", difficulty: "medium", source_page: 17 },
-                { question: "The concept of 'Sunnah' refers to:", options: ["Actions of Prophets", "Sayings of Prophets", "Approvals of Prophets", "All of the above"], correctOptionIndex: 3, explanation: "Sunnah encompasses the sayings, actions, and silent approvals of Prophet Muhammad (PBUH).", difficulty: "medium", source_page: 18 },
-                { question: "How many revealed books are generally accepted in Islam (including partial revelations)?", options: ["2", "4", "5", "Many"], correctOptionIndex: 3, explanation: "Islamic belief is that Allah has revealed many books throughout history, though only a few are fully known to us.", difficulty: "tough", source_page: 17 },
-                { question: "The 'Bridge of Sirat' is a concept related to:", options: ["Tawhid", "Risalat", "Akhirat", "Qadar"], correctOptionIndex: 2, explanation: "The Bridge of Sirat is believed to be a narrow bridge that souls must cross on the Day of Judgment.", difficulty: "medium", source_page: 18 },
-                { question: "Which article of faith gives a Muslim patience and acceptance of good and bad destiny?", options: ["Belief in Allah", "Belief in His books", "Belief in Divine Decree (Qadar)", "Belief in Day of Judgment"], correctOptionIndex: 2, explanation: "Belief in Qadar (Divine Decree) instills patience and acceptance.", difficulty: "easy", source_page: 18 },
-                { question: "The concept of 'Shahada' (Testimony of Faith) is connected to which article of faith?", options: ["Belief in Allah", "Belief in His Prophets", "Belief in Divine Books", "Both Belief in Allah and His Prophets"], correctOptionIndex: 3, explanation: "The Shahada directly links to belief in Allah and His Prophets.", difficulty: "medium", source_page: 19 }
-            ];
-            quizQuestions.push(...islamicStudiesQuestions);
-
-            // Urdu Questions (from June 7, 8 topics, aiming for 20 questions)
-            const urduQuestions = [
-                // From June 7: Urdu Elegy Writing & Criticism
-                { question: "Mir Anis is most famous for writing what genre of Urdu poetry?", options: ["Ghazal", "Nazm", "Marsiya", "Rubai"], correctOptionIndex: 2, explanation: "Mir Anis is considered the greatest master of Marsiya (elegy), particularly those lamenting the martyrs of Karbala.", difficulty: "easy", source_page: 23 },
-                { question: "What is 'Taqleed' in Urdu literary criticism?", options: ["Innovation", "Imitation", "Originality", "Analysis"], correctOptionIndex: 1, explanation: "Taqleed refers to imitation or following existing traditions, often considered a negative aspect in creative writing.", difficulty: "medium", source_page: 24 },
-                { question: "Who wrote 'Muqaddama-e-Sher-o-Shairi'?", options: ["Ghalib", "Hali", "Iqbal", "Mir"], correctOptionIndex: 1, explanation: "Altaf Hussain Hali wrote 'Muqaddama-e-Sher-o-Shairi', a seminal work in Urdu literary criticism.", difficulty: "tough", source_page: 25 },
-                { question: "Which of the following is characteristic of a Marsiya?", options: ["Love and romance", "Philosophical thought", "Lamentation and mourning", "Humor and satire"], correctOptionIndex: 2, explanation: "Marsiya is a poetic form primarily used for elegy, expressing lamentation and mourning, often for religious figures.", difficulty: "easy", source_page: 23 },
-                { question: "The term 'Tanqeed' in Urdu literature means:", options: ["Praise", "Criticism", "Narration", "Biography"], correctOptionIndex: 1, explanation: "Tanqeed means criticism or critique in Urdu literature.", difficulty: "easy", source_page: 24 },
-                // From June 8: Famous Urdu Writings & Miscellaneous Urdu
-                { question: "'Aab-e-Hayat' is a famous work by:", options: ["Muhammad Hussain Azad", "Mir Taqi Mir", "Ghalib", "Allama Iqbal"], correctOptionIndex: 0, explanation: "'Aab-e-Hayat' is a biographical and critical history of Urdu poetry by Muhammad Hussain Azad.", difficulty: "medium", source_page: 27 },
-                { question: "Who is known as 'Khuda-e-Sukhan' (God of Poetry)?", options: ["Mir Taqi Mir", "Ghalib", "Faiz Ahmed Faiz", "Zauq"], correctOptionIndex: 0, explanation: "Mir Taqi Mir is revered as 'Khuda-e-Sukhan' for his mastery of Urdu poetry.", difficulty: "tough", source_page: 28 },
-                { question: "'Armaghan-e-Hijaz' is a poetic collection by:", options: ["Faiz Ahmed Faiz", "Ahmed Nadeem Qasmi", "Allama Iqbal", "Parveen Shakir"], correctOptionIndex: 2, explanation: "'Armaghan-e-Hijaz' is a posthumously published philosophical and poetic work by Allama Iqbal.", difficulty: "medium", source_page: 27 },
-                { question: "'Ranjish hi Sahi' is a famous ghazal by:", options: ["Ahmed Faraz", "Faiz Ahmed Faiz", "Mohsin Naqvi", "Perveen Shakir"], correctOptionIndex: 1, explanation: "'Ranjish hi Sahi' is one of the most iconic ghazals by Faiz Ahmed Faiz.", difficulty: "easy", source_page: 29 },
-                { question: "Who is the author of 'Zarbul Kaleem'?", options: ["Mirza Ghalib", "Allama Iqbal", "Mir Taqi Mir", "Hali"], correctOptionIndex: 1, explanation: "'Zarbul Kaleem' is a philosophical poetry collection by Allama Iqbal.", difficulty: "medium", source_page: 27 }
-            ];
-            quizQuestions.push(...urduQuestions);
+            quizQuestions.push(...generalAbilitiesMCQs);
 
 
-            // Consolidate and select for the final 100 questions based on difficulty distribution
+            // Ensure exact counts for difficulty levels before trimming to 100
+            let easyQuestions = [];
+            let mediumQuestions = [];
+            let toughQuestions = [];
 
-            let allQuestions = [];
-            allQuestions.push(...gkQuestions, ...englishQuestions, ...gaMathQuestions, ...islamicStudiesQuestions, ...urduQuestions);
-
-
-            let easyQuestions = allQuestions.filter(q => q.difficulty === 'easy');
-            let mediumQuestions = allQuestions.filter(q => q.difficulty === 'medium');
-            let toughQuestions = allQuestions.filter(q => q.difficulty === 'tough');
-
-            // Shuffle each category independently
-            shuffleArray(easyQuestions);
-            shuffleArray(mediumQuestions);
-            shuffleArray(toughQuestions);
+            // Categorize questions by initial difficulty
+            quizQuestions.forEach(q => {
+                if (q.difficulty === "easy") easyQuestions.push(q);
+                else if (q.difficulty === "medium") mediumQuestions.push(q);
+                else if (q.difficulty === "tough") toughQuestions.push(q);
+            });
 
             // Target distribution: 10 Easy, 50 Medium, 40 Tough
             const targetEasy = 10;
             const targetMedium = 50;
             const targetTough = 40;
 
-            quizQuestions = [];
-
-            // Add easy questions
-            quizQuestions.push(...easyQuestions.slice(0, targetEasy));
-
-            // Add medium questions
-            quizQuestions.push(...mediumQuestions.slice(0, targetMedium));
-
-            // Add tough questions
-            quizQuestions.push(...toughQuestions.slice(0, targetTough));
-            
-            // If any category is short, fill from others (prioritize medium, then tough, then easy if still short)
-            let remainingQuestions = 100 - quizQuestions.length;
-            if (remainingQuestions > 0) {
-                // Fill from remaining medium questions
-                let additionalMedium = mediumQuestions.slice(targetMedium);
-                quizQuestions.push(...additionalMedium.slice(0, remainingQuestions));
-                remainingQuestions -= additionalMedium.slice(0, remainingQuestions).length;
+            // Adjust Easy questions
+            while (easyQuestions.length > targetEasy && mediumQuestions.length < targetMedium) {
+                mediumQuestions.push(easyQuestions.pop());
             }
-            if (remainingQuestions > 0) {
-                // Fill from remaining tough questions
-                let additionalTough = toughQuestions.slice(targetTough);
-                quizQuestions.push(...additionalTough.slice(0, remainingQuestions));
-                remainingQuestions -= additionalTough.slice(0, remainingQuestions).length;
-            }
-            if (remainingQuestions > 0) {
-                // Fill from remaining easy questions
-                let additionalEasy = easyQuestions.slice(targetEasy);
-                quizQuestions.push(...additionalEasy.slice(0, remainingQuestions));
-                remainingQuestions -= additionalEasy.slice(0, remainingQuestions).length;
+            while (easyQuestions.length < targetEasy && (easyQuestions.length + mediumQuestions.length + toughQuestions.length) < 100 && (mediumQuestions.length > 0 || toughQuestions.length > 0)) {
+                if (mediumQuestions.length > 0) {
+                    easyQuestions.push(mediumQuestions.pop());
+                } else if (toughQuestions.length > 0) {
+                    easyQuestions.push(toughQuestions.pop());
+                } else {
+                    break;
+                }
             }
 
-            // Shuffle the final quizQuestions array thoroughly
-            shuffleArray(quizQuestions);
 
-            // Trim to exactly 100 questions (if for some reason more were added or less were available)
+            // Adjust Tough questions
+            while (toughQuestions.length > targetTough && mediumQuestions.length < targetMedium) {
+                mediumQuestions.push(toughQuestions.pop());
+            }
+            while (toughQuestions.length < targetTough && (easyQuestions.length + mediumQuestions.length + toughQuestions.length) < 100 && (mediumQuestions.length > 0 || easyQuestions.length > 0)) {
+                if (mediumQuestions.length > 0) {
+                    toughQuestions.push(mediumQuestions.pop());
+                } else if (easyQuestions.length > 0) {
+                    toughQuestions.push(easyQuestions.pop());
+                } else {
+                    break;
+                }
+            }
+
+
+            // Adjust Medium questions
+            while (mediumQuestions.length > targetMedium && (easyQuestions.length < targetEasy || toughQuestions.length < targetTough)) {
+                if (easyQuestions.length < targetEasy) {
+                    easyQuestions.push(mediumQuestions.pop());
+                } else if (toughQuestions.length < targetTough) {
+                    toughQuestions.push(mediumQuestions.pop());
+                } else {
+                    break;
+                }
+            }
+
+
+            // Recombine and shuffle before final trim
+            quizQuestions = [...easyQuestions, ...mediumQuestions, ...toughQuestions];
+            shuffleArray(quizQuestions); // Shuffle the entire combined list
+
+            // Trim to exactly 100 questions
             quizQuestions = quizQuestions.slice(0, 100);
 
-            // Log final counts for verification
+            // Recalculate difficulty counts to ensure final distribution (for logging/debugging)
             let finalEasyCount = quizQuestions.filter(q => q.difficulty === 'easy').length;
             let finalMediumCount = quizQuestions.filter(q => q.difficulty === 'medium').length;
             let finalToughCount = quizQuestions.filter(q => q.difficulty === 'tough').length;
             console.log(`Final Question Counts: Easy=${finalEasyCount}, Medium=${finalMediumCount}, Tough=${finalToughCount}, Total=${quizQuestions.length}`);
+
 
             // Randomly select one "Today's Special Question"
             specialQuestionIndex = Math.floor(Math.random() * quizQuestions.length);
@@ -969,7 +913,7 @@
             const dateParts = CURRENT_DATE_STR.split(' ');
             const monthName = dateParts[0].toUpperCase().substring(0, 3);
             const day = parseInt(dateParts[1].replace(',', ''));
-            document.getElementById('loginId').value = `${day}${monthName}`; // e.g., 12JUNE
+            document.getElementById('loginId').value = `${day}${monthName}`; // e.g., 13JUNE
 
             initializeQuiz();
             // Initial call to set correct sticky date position on load
