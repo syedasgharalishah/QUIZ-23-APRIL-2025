@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS MPT Daily Quiz - June 18, 2025</title>
+    <title>CSS MPT Daily Quiz - June 19, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -346,7 +346,7 @@
 
     <script>
         // Set the current date for display and logic
-        const CURRENT_DATE_STR = "June 18, 2025"; // Updated for June 18 quiz
+        const CURRENT_DATE_STR = "June 19, 2025"; // Updated for June 19 quiz
         const CURRENT_DATE = new Date(CURRENT_DATE_STR);
 
         // Update header dates
@@ -645,8 +645,8 @@
             const password = document.getElementById('loginPassword').value;
             const loginError = document.getElementById('loginError');
 
-            // Login credentials for June 18 quiz
-            const expectedLoginId = "18JUNE"; 
+            // Login credentials for June 19 quiz
+            const expectedLoginId = "19JUNE"; 
             const expectedPassword = "free";
 
             if (id === expectedLoginId && password === expectedPassword) {
@@ -693,189 +693,149 @@
             // Clear previous questions
             quizQuestions.length = 0;
 
-            // General Knowledge (20 MCQs)
+            // General Knowledge (50 MCQs) - Pages 151-170 from Previous MCQs Papers
             const generalKnowledgeMCQs = [
-                // GK - June 18: Political Science: Pages 136-140 & General Knowledge & Current Affairs: Pages 141-150
-                { question: "What is the primary function of a constitution?", options: ["To outline national history", "To establish laws and principles for governance", "To list all citizens' names", "To manage international relations"], correctOptionIndex: 1, explanation: "A constitution defines the framework of government, establishes fundamental laws, and guarantees citizens' rights.", difficulty: "easy", source_page: 136 },
-                { question: "Which form of government is characterized by the rule of the people, either directly or through elected representatives?", options: ["Monarchy", "Oligarchy", "Democracy", "Autocracy"], correctOptionIndex: 2, explanation: "Democracy is a system of government where citizens exercise power either directly or through elected representatives.", difficulty: "easy", source_page: 136 },
-                { question: "What is meant by 'separation of powers' in a government?", options: ["Division of powers between central and local governments", "Division of powers among legislative, executive, and judicial branches", "Separation of military and civilian control", "Division of powers between ruling and opposition parties"], correctOptionIndex: 1, explanation: "Separation of powers divides governmental authority into distinct branches to prevent abuse of power by one branch.", difficulty: "medium", source_page: 137 },
-                { question: "What is the significance of the 18th Amendment in Pakistan's Constitution?", options: ["It introduced the presidential system", "It abolished provincial autonomy", "It removed the President's power to dissolve assemblies and restored the parliamentary system", "It made Urdu the national language"], correctOptionIndex: 2, explanation: "The 18th Amendment (2010) significantly curtailed the President's powers and strengthened parliamentary democracy in Pakistan.", difficulty: "tough", source_page: 138 },
-                { question: "What is the concept of 'rule of law'?", options: ["Rule by the most powerful individuals", "Rule by majority vote only", "All citizens are subject to law, equally enforced", "Rule by religious decrees"], correctOptionIndex: 2, explanation: "The rule of law implies that all individuals and institutions are accountable to laws that are publicly promulgated, equally enforced, and independently adjudicated.", difficulty: "medium", source_page: 137 },
-                { question: "Which document serves as the supreme law of Pakistan?", options: ["Preamble to the Constitution", "The Holy Quran", "The Constitution of Pakistan", "Acts of Parliament"], correctOptionIndex: 2, explanation: "The Constitution of the Islamic Republic of Pakistan is the supreme law of Pakistan.", difficulty: "easy", source_page: 136 },
-                { question: "What is 'parliamentary democracy'?", options: ["A system where the head of government is directly elected by the people", "A system where the executive branch is accountable to the legislature", "A system where the military holds supreme power", "A system where all decisions are made by public referendums"], correctOptionIndex: 1, explanation: "In a parliamentary democracy, the executive (government) is formed by and accountable to the legislative body (parliament).", difficulty: "medium", source_page: 137 },
-                { question: "What is the role of the judiciary in a democratic system?", options: ["To formulate laws", "To enforce laws through the police", "To interpret laws and administer justice", "To implement government policies"], correctOptionIndex: 2, explanation: "The judiciary's role is to interpret and apply laws, resolve disputes, and ensure justice.", difficulty: "medium", source_page: 137 },
-                { question: "Who is the current Secretary-General of the United Nations?", options: ["Ban Ki-moon", "Kofi Annan", "António Guterres", "Boutros Boutros-Ghali"], correctOptionIndex: 2, explanation: "As of June 2025, António Guterres is the current Secretary-General of the United Nations.", difficulty: "easy", source_page: 141 }, // Assuming this question is from previous papers
-                { question: "Which international organization focuses on global trade rules?", options: ["IMF", "World Bank", "WTO", "UNICEF"], correctOptionIndex: 2, explanation: "The World Trade Organization (WTO) is an intergovernmental organization that regulates international trade.", difficulty: "easy", source_page: 142 }, // Assuming this question is from previous papers
-                { question: "The G7 consists of major industrialized democracies. Which country is *not* a member of G7?", options: ["Canada", "Italy", "China", "Germany"], correctOptionIndex: 2, explanation: "China is not a member of the G7. The G7 countries are Canada, France, Germany, Italy, Japan, the United Kingdom, and the United States.", difficulty: "medium", source_page: 143 }, // Assuming this question is from previous papers
-                { question: "What is the primary objective of the World Bank?", options: ["Promoting international trade", "Providing military assistance", "Reducing poverty and supporting development", "Regulating global financial markets"], correctOptionIndex: 2, explanation: "The World Bank's main goal is to reduce poverty and support development through financial and technical assistance to developing countries.", difficulty: "medium", source_page: 144 }, // Assuming this question is from previous papers
-                { question: "Which multilateral forum primarily addresses global economic cooperation?", options: ["UN Security Council", "G20", "NATO", "Amnesty International"], correctOptionIndex: 1, explanation: "The G20 (Group of Twenty) is an international forum for the governments and central bank governors from 19 countries and the European Union (EU) that primarily addresses major issues related to the global economy.", difficulty: "tough", source_page: 145 }, // Assuming this question is from previous papers
-                { question: "What is the significance of the Belt and Road Initiative (BRI)?", options: ["A global military alliance", "A Chinese global infrastructure development strategy", "An international human rights campaign", "A space exploration program"], correctOptionIndex: 1, explanation: "The Belt and Road Initiative (BRI) is a global infrastructure development strategy adopted by the Chinese government in 2013 to invest in nearly 150 countries and international organizations.", difficulty: "tough", source_page: 146 }, // Assuming this question is from previous papers
-                { question: "Define 'federalism'.", options: ["A system of government where all power is concentrated in a central authority", "A system where power is divided between a central government and regional governments", "A system where power is held by a single ruler", "A system where religious laws govern the state"], correctOptionIndex: 1, explanation: "Federalism is a system of government in which power is divided between a national (federal) government and various regional (state or provincial) governments.", difficulty: "medium", source_page: 137 },
-                { question: "What does 'suffrage' refer to?", options: ["The right to hold public office", "The right to vote in political elections", "The right to freedom of speech", "The right to fair trial"], correctOptionIndex: 1, explanation: "Suffrage is the right to vote in public elections.", difficulty: "easy", source_page: 136 },
-                { question: "Which city is the headquarters of the International Court of Justice?", options: ["New York", "Geneva", "The Hague", "Brussels"], correctOptionIndex: 2, explanation: "The International Court of Justice (ICJ) is headquartered at the Peace Palace in The Hague, Netherlands.", difficulty: "easy", source_page: 147 }, // Assuming this question is from previous papers
-                { question: "What is the purpose of the International Criminal Court (ICC)?", options: ["To resolve disputes between states", "To prosecute individuals for genocide, war crimes, and crimes against humanity", "To provide humanitarian aid", "To regulate global financial markets"], correctOptionIndex: 1, explanation: "The ICC investigates and, where warranted, tries individuals charged with the gravest crimes of concern to the international community: genocide, war crimes, crimes against humanity, and the crime of aggression.", difficulty: "tough", source_page: 148 }, // Assuming this question is from previous papers
-                { question: "Which of these is a core principle of democracy?", options: ["Authoritarianism", "Totalitarianism", "Popular sovereignty", "Nepotism"], correctOptionIndex: 2, explanation: "Popular sovereignty is the principle that the authority of a state and its government are created and sustained by the consent of its people, through their elected representatives.", difficulty: "medium", source_page: 139 },
-                { question: "What is the role of an 'Ombudsman' in a governmental system?", options: ["To act as head of state", "To represent the government in court", "To investigate complaints against public authorities", "To manage national finances"], correctOptionIndex: 2, explanation: "An Ombudsman is an official, usually appointed by the government, who investigates complaints against public authorities on behalf of individual citizens.", difficulty: "tough", source_page: 140 }
+                { question: "When did Pakistan become a member of the United Nations?", options: ["1947", "1948", "1949", "1950"], correctOptionIndex: 0, explanation: "Pakistan became a member of the United Nations on September 30, 1947.", difficulty: "easy", source_page: 151 },
+                { question: "The 'Durand Line' is the border between Pakistan and which country?", options: ["India", "Afghanistan", "Iran", "China"], correctOptionIndex: 1, explanation: "The Durand Line demarcates the border between Pakistan and Afghanistan.", difficulty: "easy", source_page: 152 },
+                { question: "Which mountain range is located in Pakistan?", options: ["Himalayas", "Andes", "Alps", "Rocky Mountains"], correctOptionIndex: 0, explanation: "The Himalayas, Karakoram, and Hindu Kush mountain ranges are partly located in Pakistan.", difficulty: "easy", source_page: 153 },
+                { question: "What is the capital of Canada?", options: ["Toronto", "Vancouver", "Ottawa", "Montreal"], correctOptionIndex: 2, explanation: "The capital city of Canada is Ottawa.", difficulty: "easy", source_page: 154 },
+                { question: "Which river is the longest in the world?", options: ["Amazon", "Nile", "Yangtze", "Mississippi"], correctOptionIndex: 1, explanation: "The Nile River is generally considered the longest river in the world.", difficulty: "easy", source_page: 155 },
+                { question: "What is the currency of Japan?", options: ["Yuan", "Won", "Yen", "Rupee"], correctOptionIndex: 2, explanation: "The official currency of Japan is the Japanese Yen.", difficulty: "easy", source_page: 156 },
+                { question: "Which continent is known as the 'Dark Continent'?", options: ["Asia", "Africa", "South America", "Europe"], correctOptionIndex: 1, explanation: "Africa was historically referred to as the 'Dark Continent' by Europeans, mainly due to the challenges of exploration.", difficulty: "medium", source_page: 157 },
+                { question: "The headquarters of the International Monetary Fund (IMF) are located in:", options: ["London", "New York", "Washington D.C.", "Geneva"], correctOptionIndex: 2, explanation: "The IMF's headquarters are located in Washington, D.C., United States.", difficulty: "medium", source_page: 158 },
+                { question: "Which country is the largest producer of coffee in the world?", options: ["Colombia", "Vietnam", "Brazil", "Ethiopia"], correctOptionIndex: 2, explanation: "Brazil is the largest producer of coffee globally.", difficulty: "medium", source_page: 159 },
+                { question: "The Suez Canal connects which two bodies of water?", options: ["Mediterranean Sea and Atlantic Ocean", "Red Sea and Arabian Sea", "Mediterranean Sea and Red Sea", "Black Sea and Aegean Sea"], correctOptionIndex: 2, explanation: "The Suez Canal connects the Mediterranean Sea to the Red Sea, providing a direct route for maritime trade.", difficulty: "medium", source_page: 160 },
+                { question: "What is the deepest ocean trench in the world?", options: ["Puerto Rico Trench", "Java Trench", "Mariana Trench", "Kermadec Trench"], correctOptionIndex: 2, explanation: "The Mariana Trench, located in the western Pacific Ocean, is the deepest known oceanic trench on Earth.", difficulty: "medium", source_page: 161 },
+                { question: "Which city is known as the 'City of Seven Hills'?", options: ["Rome", "Athens", "Istanbul", "Jerusalem"], correctOptionIndex: 0, explanation: "Rome is famously known as the 'City of Seven Hills' due to its geographical location.", difficulty: "medium", source_page: 162 },
+                { question: "What is the primary function of the World Health Organization (WHO)?", options: ["To promote tourism", "To provide financial aid to developing countries", "To coordinate international health efforts", "To regulate global trade"], correctOptionIndex: 2, explanation: "The WHO is a specialized agency of the United Nations responsible for international public health.", difficulty: "easy", source_page: 163 },
+                { question: "Which desert is the largest hot desert in the world?", options: ["Gobi Desert", "Kalahari Desert", "Arabian Desert", "Sahara Desert"], correctOptionIndex: 3, explanation: "The Sahara Desert is the largest hot desert and the third-largest desert in the world after the polar deserts.", difficulty: "medium", source_page: 164 },
+                { question: "The highest waterfall in the world is:", options: ["Niagara Falls", "Victoria Falls", "Angel Falls", "Iguazu Falls"], correctOptionIndex: 2, explanation: "Angel Falls in Venezuela is the world's highest uninterrupted waterfall.", difficulty: "medium", source_page: 165 },
+                { question: "Which continent has the most countries?", options: ["Asia", "Africa", "Europe", "South America"], correctOptionIndex: 1, explanation: "Africa has 54 recognized countries, more than any other continent.", difficulty: "medium", source_page: 166 },
+                { question: "What is the official language of Brazil?", options: ["Spanish", "English", "Portuguese", "French"], correctOptionIndex: 2, explanation: "The official language of Brazil is Portuguese.", difficulty: "medium", source_page: 167 },
+                { question: "The 'Statue of Liberty' is located in which city?", options: ["Los Angeles", "Chicago", "New York City", "Washington D.C."], correctOptionIndex: 2, explanation: "The Statue of Liberty is a colossal neoclassical sculpture on Liberty Island in New York Harbor.", difficulty: "easy", source_page: 168 },
+                { question: "Which international body's primary objective is to maintain international peace and security?", options: ["UNICEF", "World Bank", "NATO", "UN Security Council"], correctOptionIndex: 3, explanation: "The United Nations Security Council (UNSC) has primary responsibility for the maintenance of international peace and security.", difficulty: "tough", source_page: 169 },
+                { question: "Which of the following is an artificial satellite?", options: ["Moon", "Sun", "Mars", "Sputnik 1"], correctOptionIndex: 3, explanation: "Sputnik 1 was the first artificial Earth satellite.", difficulty: "easy", source_page: 170 },
+                { question: "Who was the first female Prime Minister of a Muslim country?", options: ["Indira Gandhi", "Benazir Bhutto", "Golda Meir", "Margaret Thatcher"], correctOptionIndex: 1, explanation: "Benazir Bhutto of Pakistan was the first woman elected to head a democratic government in a Muslim-majority country.", difficulty: "easy", source_page: 151 },
+                { question: "Which organization was founded to promote economic cooperation among Muslim countries?", options: ["Arab League", "OIC", "ECO", "SAARC"], correctOptionIndex: 1, explanation: "The Organization of Islamic Cooperation (OIC) aims to promote Islamic solidarity and economic cooperation.", difficulty: "medium", source_page: 152 },
+                { question: "The highest peak of the Himalayan range in Pakistan is:", options: ["K2", "Nanga Parbat", "Broad Peak", "Gasherbrum I"], correctOptionIndex: 1, explanation: "Nanga Parbat is the second highest mountain in Pakistan and the ninth highest in the world, located in the Himalayas. K2 is in the Karakoram range.", difficulty: "tough", source_page: 153 },
+                { question: "What is the capital of Australia?", options: ["Sydney", "Melbourne", "Canberra", "Perth"], correctOptionIndex: 2, explanation: "The capital city of Australia is Canberra.", difficulty: "easy", source_page: 154 },
+                { question: "Which river is often called the 'Yellow River' and is significant to Chinese civilization?", options: ["Yangtze", "Mekong", "Huang He", "Indus"], correctOptionIndex: 2, explanation: "The Huang He, or Yellow River, is the second-longest river in China and is considered the cradle of Chinese civilization.", difficulty: "medium", source_page: 155 },
+                { question: "Which sea is located between Europe and Africa?", options: ["Red Sea", "Black Sea", "Mediterranean Sea", "Caspian Sea"], correctOptionIndex: 2, explanation: "The Mediterranean Sea is located between Europe to the north, Africa to the south, and Asia to the east.", difficulty: "easy", source_page: 160 },
+                { question: "The deepest point on Earth's land surface is:", options: ["Dead Sea", "Lake Baikal", "Mariana Trench (ocean)", "Bentley Subglacial Trench (Antarctica)"], correctOptionIndex: 3, explanation: "The Bentley Subglacial Trench in Antarctica is considered the lowest point on the surface of the Earth not under open ocean.", difficulty: "tough", source_page: 161 },
+                { question: "Which city is known as the 'Silicon Valley of India'?", options: ["Mumbai", "Delhi", "Bengaluru", "Chennai"], correctOptionIndex: 2, explanation: "Bengaluru (formerly Bangalore) is known as the 'Silicon Valley of India' due to its role as the nation's leading information technology exporter.", difficulty: "medium", source_page: 162 },
+                { question: "Which UN agency deals with refugee protection?", options: ["UNDP", "UNHCR", "UNICEF", "FAO"], correctOptionIndex: 1, explanation: "The United Nations High Commissioner for Refugees (UNHCR) is a UN agency with the mandate to protect refugees, forcibly displaced communities, and stateless people.", difficulty: "medium", source_page: 163 },
+                { question: "The largest desert in Asia is:", options: ["Thar Desert", "Gobi Desert", "Arabian Desert", "Karakum Desert"], correctOptionIndex: 1, explanation: "The Gobi Desert is the largest desert in Asia.", difficulty: "medium", source_page: 164 }
             ];
             quizQuestions.push(...generalKnowledgeMCQs);
 
-            // Urdu (40 MCQs)
+            // Urdu (25 MCQs) - Sir Allama Muhammad Iqbal & Grammar: Urdu Section Pages 39-42
             const urduMCQs = [
-                // Urdu - June 18: Titles and Addresses & Real/Pen Names: Urdu Section Pages 35-38
-                { question: "'اسد' کس مشہور شاعر کا تخلص تھا؟", options: ["میر تقی میر", "مرزا غالب", "علامہ اقبال", "فیض احمد فیض"], correctOptionIndex: 1, explanation: "'اسد' مرزا غالب کا اصل تخلص تھا، بعد میں وہ 'غالب' کے نام سے مشہور ہوئے۔", difficulty: "easy", source_page: 35 },
-                { question: "'حالی' کس عظیم شاعر اور ادیب کا تخلص تھا؟", options: ["الطاف حسین", "محمد حسین آزاد", "شبلی نعمانی", "ذوق"], correctOptionIndex: 0, explanation: "'حالی' مولانا الطاف حسین حالی کا تخلص تھا۔", difficulty: "easy", source_page: 35 },
-                { question: "'شاعر مشرق' کے لقب سے کون سی شخصیت مشہور ہے؟", options: ["فیض احمد فیض", "احمد فراز", "علامہ محمد اقبال", "میر درد"], correctOptionIndex: 2, explanation: "'شاعر مشرق' علامہ محمد اقبال کا معروف لقب ہے۔", difficulty: "easy", source_page: 36 },
-                { question: "'بابائے اردو' کے نام سے کس کو جانا جاتا ہے؟", options: ["ڈپٹی نذیر احمد", "مولوی عبدالحق", "سرسید احمد خان", "مرزا ہادی رسوا"], correctOptionIndex: 1, explanation: "مولوی عبدالحق کو اردو زبان و ادب کے لیے ان کی خدمات کے اعتراف میں 'بابائے اردو' کہا جاتا ہے۔", difficulty: "easy", source_page: 36 },
-                { question: "'درد' اردو کے کس صوفی شاعر کا تخلص تھا؟", options: ["میر تقی میر", "خواجہ میر درد", "غالب", "جوش ملیح آبادی"], correctOptionIndex: 1, explanation: "'درد' خواجہ میر درد کا تخلص تھا، جو اردو کے ایک معروف صوفی شاعر ہیں۔", difficulty: "medium", source_page: 35 },
-                { question: "'مصور غم' کس ادیب کا لقب ہے؟", options: ["کرشن چندر", "سعادت حسن منٹو", "راشد الخیری", "پریم چند"], correctOptionIndex: 2, explanation: "'مصور غم' راشد الخیری کا لقب ہے، جو اپنے غمگین اور اصلاحی افسانوں کی وجہ سے جانے جاتے ہیں۔", difficulty: "tough", source_page: 37 },
-                { question: "'اقبال' کس کا تخلص ہے؟", options: ["فیض", "ساحر", "علامہ محمد اقبال", "فراز"], correctOptionIndex: 2, explanation: "'اقبال' علامہ محمد اقبال کا تخلص ہے۔", difficulty: "easy", source_page: 35 },
-                { question: "'سرسید' کس مصلح اور تعلیمی رہنما کا خطاب ہے؟", options: ["قائد اعظم", "محمد علی جوہر", "مولانا ابوالکلام آزاد", "سرسید احمد خان"], correctOptionIndex: 3, explanation: "'سرسید' سرسید احمد خان کا خطاب ہے، جو علی گڑھ تحریک کے بانی تھے۔", difficulty: "easy", source_page: 36 },
-                { question: "'میر' اردو کے کس عظیم شاعر کا تخلص ہے؟", options: ["میر تقی میر", "میر انیس", "میر ببر علی انیس", "میر حسن"], correctOptionIndex: 0, explanation: "'میر' میر تقی میر کا تخلص ہے، جو اردو شاعری کے امام سمجھے جاتے ہیں۔", difficulty: "medium", source_page: 35 },
-                { question: "'بلبل ہند' کس شاعر کا لقب ہے؟", options: ["امیر خسرو", "ولی دکنی", "داغ دہلوی", "میر درد"], correctOptionIndex: 0, explanation: "'بلبل ہند' کا لقب امیر خسرو کو دیا گیا ہے، جو ایک عظیم شاعر اور موسیقار تھے۔", difficulty: "tough", source_page: 37 },
-                { question: "'غالب' کس شاعر کا تخلص تھا؟", options: ["میر تقی میر", "مرزا اسد اللہ خان", "علامہ اقبال", "حالی"], correctOptionIndex: 1, explanation: "'غالب' مرزا اسد اللہ خان کا تخلص تھا، جو اردو فارسی کے سب سے بڑے شاعروں میں سے ایک ہیں۔", difficulty: "easy", source_page: 35 },
-                { question: "'قومی شاعر' کسے کہا جاتا ہے؟", options: ["فیض احمد فیض", "حبیب جالب", "علامہ محمد اقبال", "احمد ندیم قاسمی"], correctOptionIndex: 2, explanation: "علامہ محمد اقبال کو ان کی ملی شاعری کی وجہ سے 'قومی شاعر' کہا جاتا ہے۔", difficulty: "easy", source_page: 36 },
-                { question: "'آتش' کس لکھنوی شاعر کا تخلص تھا؟", options: ["ناسخ", "آتش لکھنوی", "جرات", "مرزا شوق"], correctOptionIndex: 1, explanation: "'آتش' خواجہ حیدر علی آتش کا تخلص تھا، جو لکھنوی دبستان کے معروف شاعر تھے۔", difficulty: "medium", source_page: 35 },
-                { question: "'مجاہد آزادی' کے لقب سے کون سے قائد مشہور ہیں؟", options: ["قائد اعظم", "علامہ اقبال", "مولانا محمد علی جوہر", "سردار عبدالرب نشتر"], correctOptionIndex: 2, explanation: "مولانا محمد علی جوہر کو 'مجاہد آزادی' کے لقب سے بھی یاد کیا جاتا ہے۔", difficulty: "tough", source_page: 37 },
-                { question: "'جوش' کس انقلابی شاعر کا تخلص تھا؟", options: ["جوش ملیح آبادی", "جوشیلے خاں", "جوش اردو", "جوش بھوپالی"], correctOptionIndex: 0, explanation: "'جوش' جوش ملیح آبادی کا تخلص تھا، جو اپنی انقلابی شاعری کے لیے مشہور ہیں۔", difficulty: "medium", source_page: 35 },
-                { question: "'فخر اردو' کا خطاب کس کو دیا گیا؟", options: ["میر انیس", "مرزا غالب", "شبلی نعمانی", "مولوی عبدالحق"], correctOptionIndex: 3, explanation: "'فخر اردو' کا خطاب بھی مولوی عبدالحق کو دیا جاتا ہے۔", difficulty: "tough", source_page: 37 },
-                { question: "'فانی' کس لکھنوی شاعر کا تخلص تھا؟", options: ["فانی بدایونی", "فانی جوہانسبرگی", "فانی دہلوی", "فانی لکھنوی"], correctOptionIndex: 0, explanation: "'فانی' شوکت علی خان کا تخلص تھا، جو فانی بدایونی کے نام سے مشہور ہیں۔", difficulty: "medium", source_page: 35 },
-                { question: "'پریم چند' کا اصل نام کیا تھا؟", options: ["رام پرکاش", "دھنپت رائے", "شنکر لال", "بھرت رائے"], correctOptionIndex: 1, explanation: "اردو اور ہندی کے عظیم افسانہ نگار پریم چند کا اصل نام دھنپت رائے تھا۔", difficulty: "easy", source_page: 36 },
-                { question: "'مومن' کس کلاسیکی شاعر کا تخلص تھا؟", options: ["مومن خان مومن", "مومن علی", "مومن چغتائی", "مومن دہلوی"], correctOptionIndex: 0, explanation: "'مومن' مومن خان مومن کا تخلص تھا، جو اپنی غزلوں اور عشق و ہجر کے موضوعات کے لیے مشہور ہیں۔", difficulty: "tough", source_page: 35 },
-                { question: "'سلطان الشعراء' کس شاعر کا لقب ہے؟", options: ["میر تقی میر", "محمد رفیع سودا", "ذوق", "میر انیس"], correctOptionIndex: 0, explanation: "'سلطان الشعراء' کا لقب میر تقی میر کو دیا گیا ہے، جو اردو شاعری کے ایک اہم ستون ہیں۔", difficulty: "tough", source_page: 37 },
-                { question: "'ناصر' کس نوحہ خواں شاعر کا تخلص تھا؟", options: ["ناصر کاظمی", "ناصر زیدی", "ناصر حسین", "ناصر جمال"], correctOptionIndex: 0, explanation: "'ناصر' ناصر کاظمی کا تخلص تھا، جو اپنی غزلیات کے لیے مشہور ہیں۔", difficulty: "medium", source_page: 35 },
-                { question: "'سروگوش ہند' کا خطاب کس ادیب کو ملا؟", options: ["خواجہ حسن نظامی", "رشید احمد صدیقی", "مرزا فرحت اللہ بیگ", "احمد شاہ بخاری پطرس"], correctOptionIndex: 0, explanation: "'سروگوش ہند' خواجہ حسن نظامی کا خطاب ہے جو اپنے قلمی نام کے ساتھ مشہور ہوئے۔", difficulty: "tough", source_page: 37 },
-                { question: "'مجروح' کس ترقی پسند شاعر کا تخلص تھا؟", options: ["مجروح سلطان پوری", "مجروح لکھنوی", "مجروح بھوپالی", "مجروح دہلوی"], correctOptionIndex: 0, explanation: "'مجروح' مجروح سلطان پوری کا تخلص تھا، جو ترقی پسند شاعری میں اہم مقام رکھتے ہیں۔", difficulty: "medium", source_page: 35 },
-                { question: "'نواب بہادر' کس ادیب کا خطاب ہے؟", options: ["اشفاق احمد", "شفیق الرحمن", "پطرس بخاری", "مرزا فرحت اللہ بیگ"], correctOptionIndex: 3, explanation: "'نواب بہادر' کا خطاب مرزا فرحت اللہ بیگ کو دیا گیا تھا۔", difficulty: "tough", source_page: 37 },
-                { question: "'فراق' کس شاعر کا تخلص تھا؟", options: ["فراق گورکھپوری", "فراق دہلوی", "فراق لکھنوی", "فراق اودھی"], correctOptionIndex: 0, explanation: "'فراق' رگھوپتی سہائے کا تخلص تھا، جو فراق گورکھپوری کے نام سے مشہور ہیں۔", difficulty: "medium", source_page: 35 },
-                { question: "'دانشور اسلام' کس شخصیت کو کہا جاتا ہے؟", options: ["علامہ محمد اقبال", "مولانا ابوالکلام آزاد", "شبلی نعمانی", "میاں محمد بخش"], correctOptionIndex: 0, explanation: "علامہ محمد اقبال کو ان کے فلسفیانہ خیالات اور اسلامی نظریات کی وجہ سے 'دانشور اسلام' بھی کہا جاتا ہے۔", difficulty: "tough", source_page: 37 },
-                { question: "'پروین' کس مشہور شاعرہ کا تخلص تھا؟", options: ["پروین شاکر", "ادا جعفری", "کشور ناہید", "فہمیدہ ریاض"], correctOptionIndex: 0, explanation: "'پروین' پروین شاکر کا تخلص تھا، جو اردو کی ایک مقبول شاعرہ تھیں۔", difficulty: "easy", source_page: 36 },
-                { question: "'ادیب اعظم' کا خطاب کسے ملا؟", options: ["منشی پریم چند", "ڈپٹی نذیر احمد", "عبدالحلیم شرر", "سرسید احمد خان"], correctOptionIndex: 0, explanation: "'ادیب اعظم' کا خطاب منشی پریم چند کو دیا گیا ہے، جو ہندی اور اردو کے عظیم افسانہ نگار اور ناول نگار ہیں۔", difficulty: "tough", source_page: 37 },
-                { question: "'فانی بدایونی' کا اصلی نام کیا تھا؟", options: ["شوکت علی خان", "محمد خان", "سید محمد", "اسد اللہ خان"], correctOptionIndex: 0, explanation: "فانی بدایونی کا اصلی نام شوکت علی خان تھا۔", difficulty: "medium", source_page: 36 },
-                { question: "'حکیم الامت' کس شخصیت کا لقب ہے؟", options: ["قائد اعظم", "علامہ محمد اقبال", "سرسید احمد خان", "مولانا محمد علی جوہر"], correctOptionIndex: 1, explanation: "'حکیم الامت' علامہ محمد اقبال کا لقب ہے، جو امت کے مسائل کا حل اپنی شاعری میں پیش کرتے تھے۔", difficulty: "easy", source_page: 37 },
-                { question: "'فیض' کس ترقی پسند شاعر کا تخلص تھا؟", options: ["فیض احمد فیض", "فیض علی فیض", "فیض الدین", "فیض احمد"], correctOptionIndex: 0, explanation: "'فیض' فیض احمد فیض کا تخلص تھا، جو اردو کے معروف ترقی پسند اور انقلابی شاعر تھے۔", difficulty: "easy", source_page: 36 },
-                { question: "'اردو کا شیکسپیئر' کسے کہا جاتا ہے؟", options: ["آغا حشر کاشمیری", "امتیاز علی تاج", "مرزا غالب", "سعادت حسن منٹو"], correctOptionIndex: 0, explanation: "آغا حشر کاشمیری کو ان کے ڈراموں اور مکالمہ نگاری کی وجہ سے 'اردو کا شیکسپیئر' کہا جاتا ہے۔", difficulty: "tough", source_page: 37 },
-                { question: "'ذوق' کس استاد شاعر کا تخلص تھا؟", options: ["میر تقی میر", "شیخ ابراہیم ذوق", "مرزا غالب", "نواب مصطفیٰ خان شیفتہ"], correctOptionIndex: 1, explanation: "'ذوق' شیخ ابراہیم ذوق کا تخلص تھا، جو بہادر شاہ ظفر کے استاد بھی تھے۔", difficulty: "medium", source_page: 36 },
-                { question: "'خادم اردو' کسے کہا جاتا ہے؟", options: ["اشفاق احمد", "ابن انشاء", "مولوی عبدالحق", "پطرس بخاری"], correctOptionIndex: 2, explanation: "مولوی عبدالحق کو 'خادم اردو' بھی کہا جاتا ہے، ان کی اردو زبان و ادب کے لیے بے مثال خدمات کی وجہ سے۔", difficulty: "tough", source_page: 38 },
-                { question: "'کلیم' کس شاعر کا تخلص تھا؟", options: ["کلیم الدین احمد", "کلیم عثمانی", "کلیم احمد", "کلیم حیدری"], correctOptionIndex: 1, explanation: "'کلیم' کلیم عثمانی کا تخلص تھا، جو نعت گوئی کے لیے بھی معروف ہیں۔", difficulty: "medium", source_page: 36 },
-                { question: "'امام الہند' کس کا خطاب ہے؟", options: ["مولانا ابوالکلام آزاد", "سرسید احمد خان", "علامہ شبلی نعمانی", "مولانا محمد علی جوہر"], correctOptionIndex: 0, explanation: "'امام الہند' مولانا ابوالکلام آزاد کا خطاب ہے، جو ایک عظیم عالم، مفکر اور آزادی پسند رہنما تھے۔", difficulty: "tough", source_page: 38 },
-                { question: "'جگر' کس غزل گو شاعر کا تخلص تھا؟", options: ["جگر مراد آبادی", "جگر لکھنوی", "جگر دہلوی", "جگر پاکستانی"], correctOptionIndex: 0, explanation: "'جگر' علی سکندر کا تخلص تھا، جو جگر مراد آبادی کے نام سے مشہور ایک عظیم غزل گو شاعر تھے۔", difficulty: "medium", source_page: 36 },
-                { question: "'امیر خسرو' کو کس لقب سے جانا جاتا ہے؟", options: ["طوطی ہند", "بلبل مشرق", "شہنشاہ سخن", "نواب شعراء"], correctOptionIndex: 0, explanation: "امیر خسرو کو 'طوطی ہند' (India's Parrot) کے لقب سے جانا جاتا ہے۔", difficulty: "easy", source_page: 38 },
-                { question: "'شبلی' کس مؤرخ اور سوانح نگار کا تخلص تھا؟", options: ["شبلی نعمانی", "شبلی بخاری", "شبلی لکھنوی", "شبلی قریشی"], correctOptionIndex: 0, explanation: "'شبلی' علامہ شبلی نعمانی کا تخلص تھا، جو اردو کے مشہور مؤرخ، سوانح نگار اور نقاد تھے۔", difficulty: "medium", source_page: 36 },
-                { question: "'عظمت رفتہ' کا مصنف کون ہے؟", options: ["رشید احمد صدیقی", "ڈاکٹر جمیل جالبی", "ڈاکٹر وزیر آغا", "پطرس بخاری"], correctOptionIndex: 0, explanation: "'عظمت رفتہ' رشید احمد صدیقی کی مشہور تصنیف ہے، جو ایک عظیم مزاح نگار اور نقاد تھے۔", difficulty: "tough", source_page: 38 }
+                { question: "علامہ اقبال کس زبان میں شاعری کرتے تھے؟", options: ["عربی اور فارسی", "فارسی اور اردو", "اردو اور پنجابی", "اردو اور سندھی"], correctOptionIndex: 1, explanation: "علامہ اقبال نے بنیادی طور پر فارسی اور اردو دونوں زبانوں میں شاعری کی۔", difficulty: "easy", source_page: 39 },
+                { question: "علامہ اقبال کا پہلا شعری مجموعہ کون سا تھا؟", options: ["بانگ درا", "بال جبریل", "ضرب کلیم", "ارمغان حجاز"], correctOptionIndex: 0, explanation: "بانگ درا علامہ اقبال کا پہلا اردو شعری مجموعہ تھا جو 1924 میں شائع ہوا۔", difficulty: "medium", source_page: 39 },
+                { question: "علامہ اقبال نے ڈاکٹریٹ کی ڈگری کس موضوع پر حاصل کی؟", options: ["اسلامی فلسفہ", "فارسی ادب", "فلسفہ عجم", "علم اقتصادیات"], correctOptionIndex: 2, explanation: "علامہ اقبال نے میونخ یونیورسٹی سے 'فلسفہ عجم' (The Development of Metaphysics in Persia) پر ڈاکٹریٹ کی ڈگری حاصل کی۔", difficulty: "tough", source_page: 40 },
+                { question: "'خودی کا تصور' کس کے فلسفے کا بنیادی جزو ہے؟", options: ["مرزا غالب", "علامہ اقبال", "میر تقی میر", "فیض احمد فیض"], correctOptionIndex: 1, explanation: "علامہ اقبال کے فلسفے کا مرکزی نقطہ 'خودی' کا تصور ہے جو انسان کی انفرادی اور اجتماعی خود شناسی اور ترقی پر زور دیتا ہے۔", difficulty: "easy", source_page: 40 },
+                { question: "علامہ اقبال کی تاریخ پیدائش کیا ہے؟", options: ["9 نومبر 1877", "25 دسمبر 1876", "21 اپریل 1879", "11 نومبر 1888"], correctOptionIndex: 0, explanation: "علامہ محمد اقبال 9 نومبر 1877 کو سیالکوٹ میں پیدا ہوئے۔", difficulty: "easy", source_page: 39 },
+                { question: "علامہ اقبال کی وفات کب ہوئی؟", options: ["21 اپریل 1938", "9 نومبر 1947", "14 اگست 1937", "23 مارچ 1940"], correctOptionIndex: 0, explanation: "علامہ اقبال کا انتقال 21 اپریل 1938 کو ہوا۔", difficulty: "easy", source_page: 39 },
+                { question: "علامہ اقبال کو 'حکیم الامت' کا خطاب کیوں دیا گیا؟", options: ["ان کی طبابت کی وجہ سے", "ان کی فقہی بصیرت کی وجہ سے", "امت کے مسائل کا حل پیش کرنے پر", "ان کی فلسفہ دانی پر"], correctOptionIndex: 2, explanation: "علامہ اقبال کو 'حکیم الامت' اس لیے کہا جاتا ہے کہ انہوں نے اپنی شاعری اور فلسفے کے ذریعے امت مسلمہ کے مسائل کا حل پیش کیا۔", difficulty: "medium", source_page: 40 },
+                { question: "'بال جبریل' کب شائع ہوئی؟", options: ["1924", "1935", "1936", "1938"], correctOptionIndex: 1, explanation: "علامہ اقبال کا مشہور شعری مجموعہ 'بال جبریل' 1935 میں شائع ہوا۔", difficulty: "tough", source_page: 39 },
+                { question: "'سیرت النبی' علامہ اقبال کے کس شعری مجموعے میں شامل ہے؟", options: ["بانگ درا", "ارمغان حجاز", "زبور عجم", "یہ کسی مجموعے میں شامل نہیں ہے"], correctOptionIndex: 3, explanation: "'سیرت النبی' علامہ اقبال کی تصنیف نہیں ہے بلکہ علامہ شبلی نعمانی اور سید سلیمان ندوی کی مشترکہ تصنیف ہے۔", difficulty: "tough", source_page: 40 },
+                { question: "اسم کی تعریف کیا ہے؟", options: ["کسی کام کا نام (Name of an action)", "کسی شخص، جگہ یا چیز کا نام (Name of a person, place, or thing)", "کسی صفت کا نام (Name of a quality)", "کسی حالت کا نام (Name of a state)"], correctOptionIndex: 1, explanation: "اسم (Noun) وہ لفظ ہے جو کسی شخص، جگہ یا چیز کے نام کو ظاہر کرے۔", difficulty: "easy", source_page: 41 },
+                { question: "فعل کی تعریف کیا ہے؟", options: ["کسی نام کو ظاہر کرنا (To show a name)", "کسی کام کا ہونا یا کرنا (To do or be an action)", "کسی کی صفت بیان کرنا (To describe a quality)", "دو جملوں کو جوڑنا (To join two sentences)"], correctOptionIndex: 1, explanation: "فعل (Verb) وہ لفظ ہے جو کسی کام کا ہونا، کرنا یا سہنا ظاہر کرے۔", difficulty: "easy", source_page: 41 },
+                { question: "حرف کی تعریف کیا ہے؟", options: ["وہ لفظ جو اسم اور فعل کے درمیان تعلق پیدا کرے (A word that creates a relationship between noun and verb)", "وہ لفظ جو کسی کام کو ظاہر کرے (A word that shows an action)", "وہ لفظ جو کسی شخص کا نام ہو (A word that is a person's name)", "وہ لفظ جو کسی جگہ کو ظاہر کرے (A word that shows a place)"], correctOptionIndex: 0, explanation: "حرف (Preposition/Conjunction) وہ لفظ ہے جو دو اسموں، دو فعلوں یا اسم اور فعل کے درمیان تعلق پیدا کرے۔", difficulty: "medium", source_page: 42 },
+                { question: "'نظم' کے لغوی معنی کیا ہیں؟", options: ["بکھیرنا (To scatter)", "ترتیب دینا (To arrange)", "اکٹھا کرنا (To gather)", "توڑنا (To break)"], correctOptionIndex: 1, explanation: "نظم کے لغوی معنی 'ترتیب دینا' یا 'موتی پرونا' ہیں۔", difficulty: "medium", source_page: 42 },
+                { question: "علامہ اقبال کے والد کا نام کیا تھا؟", options: ["نور محمد", "شیخ عطا محمد", "محمد رفیق", "شیخ فضل الدین"], correctOptionIndex: 1, explanation: "علامہ اقبال کے والد کا نام شیخ عطا محمد تھا۔", difficulty: "easy", source_page: 39 },
+                { question: "'پیام مشرق' علامہ اقبال کے کس زبان کے مجموعے میں شامل ہے؟", options: ["اردو", "فارسی", "پنجابی", "عربی"], correctOptionIndex: 1, explanation: "'پیام مشرق' علامہ اقبال کا ایک مشہور فارسی شعری مجموعہ ہے۔", difficulty: "tough", source_page: 40 },
+                { question: "'مذکر' اور 'مؤنث' کس کے اقسام ہیں؟", options: ["فعل", "اسم", "حرف", "صفت"], correctOptionIndex: 1, explanation: "مذکر (Masculine) اور مؤنث (Feminine) اسم کی جنس کو ظاہر کرتے ہیں۔", difficulty: "easy", source_page: 41 },
+                { question: "فاعل کسے کہتے ہیں؟", options: ["جس پر کام واقع ہو (On whom the action happens)", "کام کرنے والا (Doer of the action)", "کام (Action)", "حالت (State)"], correctOptionIndex: 1, explanation: "فاعل (Subject) وہ اسم ہوتا ہے جو کسی کام کو کرنے والا ہو۔", difficulty: "medium", source_page: 42 },
+                { question: "مفعول کسے کہتے ہیں؟", options: ["کام کرنے والا (Doer of the action)", "جس پر کام واقع ہو (On whom the action happens)", "کام (Action)", "جگہ (Place)"], correctOptionIndex: 1, explanation: "مفعول (Object) وہ اسم ہوتا ہے جس پر کوئی کام واقع ہو۔", difficulty: "medium", source_page: 42 },
+                { question: "'جاوید نامہ' کس شاعر کی تصنیف ہے؟", options: ["مرزا غالب", "فیض احمد فیض", "علامہ اقبال", "ناصر کاظمی"], correctOptionIndex: 2, explanation: "'جاوید نامہ' علامہ اقبال کی ایک اہم فارسی مثنوی ہے جو ان کے بیٹے جاوید کے نام پر ہے۔", difficulty: "tough", source_page: 40 },
+                { question: "علامہ اقبال نے کس کالج سے تعلیم حاصل کی؟", options: ["گورنمنٹ کالج لاہور", "کینرڈ کالج لاہور", "ایچیسن کالج لاہور", "فارمن کرسچن کالج لاہور"], correctOptionIndex: 0, explanation: "علامہ اقبال نے گورنمنٹ کالج لاہور سے فلسفہ، انگریزی ادب اور عربی میں ماسٹرز کی ڈگری حاصل کی۔", difficulty: "medium", source_page: 39 },
+                { question: "'ضرب کلیم' کب شائع ہوئی؟", options: ["1924", "1935", "1936", "1938"], correctOptionIndex: 2, explanation: "علامہ اقبال کا شعری مجموعہ 'ضرب کلیم' 1936 میں شائع ہوا۔", difficulty: "tough", source_page: 39 },
+                { question: "'اسلوب' سے کیا مراد ہے؟", options: ["شاعری کا وزن (Meter of poetry)", "لکھنے کا انداز یا طریقہ (Style or manner of writing)", "گرامر کا اصول (Grammar rule)", "کہانی کا پلاٹ (Plot of a story)"], correctOptionIndex: 1, explanation: "اسلوب (Style) سے مراد لکھنے یا بیان کرنے کا مخصوص انداز یا طریقہ ہے۔", difficulty: "medium", source_page: 42 },
+                { question: "'اسم معرفہ' کسے کہتے ہیں؟", options: ["عام نام (Common name)", "خاص نام (Proper name)", "صفت کا نام (Name of quality)", "فعل کا نام (Name of action)"], correctOptionIndex: 1, explanation: "اسم معرفہ (Proper Noun) وہ اسم ہے جو کسی خاص شخص، جگہ یا چیز کا نام ہو۔", difficulty: "easy", source_page: 41 },
+                { question: "'اسم نکرہ' کسے کہتے ہیں؟", options: ["خاص نام (Proper name)", "عام نام (Common name)", "صفت کا نام (Name of quality)", "فعل کا نام (Name of action)"], correctOptionIndex: 1, explanation: "اسم نکرہ (Common Noun) وہ اسم ہے جو کسی عام شخص، جگہ یا چیز کا نام ہو۔", difficulty: "easy", source_page: 41 },
+                { question: "'فعل لازم' کسے کہتے ہیں؟", options: ["وہ فعل جسے مفعول کی ضرورت ہو (A verb that needs an object)", "وہ فعل جسے مفعول کی ضرورت نہ ہو (A verb that does not need an object)", "مددگار فعل (Helping verb)", "ماضی کا فعل (Past verb)"], correctOptionIndex: 1, explanation: "فعل لازم (Intransitive Verb) وہ فعل ہوتا ہے جس کے لیے مفعول کی ضرورت نہ ہو۔", difficulty: "tough", source_page: 42 }
             ];
             quizQuestions.push(...urduMCQs);
 
-            // General Abilities (40 MCQs)
-            const generalAbilitiesMCQs = [
-                // GA - June 18: Square Roots and Cube Roots: Pages 551-552
-                { question: "What is the square root of 81?", options: ["7", "8", "9", "10"], correctOptionIndex: 2, explanation: "The square root of 81 is 9, because 9 × 9 = 81.", difficulty: "easy", source_page: 551 },
-                { question: "What is the cube root of 64?", options: ["2", "3", "4", "5"], correctOptionIndex: 2, explanation: "The cube root of 64 is 4, because 4 × 4 × 4 = 64.", difficulty: "easy", source_page: 551 },
-                { question: "Find the value of \\( \\sqrt{144} \\).", options: ["11", "12", "13", "14"], correctOptionIndex: 1, explanation: "The square root of 144 is 12, because 12 × 12 = 144.", difficulty: "easy", source_page: 551 },
-                { question: "Find the value of \\( \\sqrt[3]{216} \\).", options: ["5", "6", "7", "8"], correctOptionIndex: 1, explanation: "The cube root of 216 is 6, because 6 × 6 × 6 = 216.", difficulty: "easy", source_page: 551 },
-                { question: "What is the square root of 0.25?", options: ["0.05", "0.5", "5", "0.005"], correctOptionIndex: 1, explanation: "The square root of 0.25 is 0.5, because 0.5 × 0.5 = 0.25.", difficulty: "medium", source_page: 551 },
-                { question: "What is the cube root of 0.001?", options: ["0.1", "0.01", "1", "0.0001"], correctOptionIndex: 0, explanation: "The cube root of 0.001 is 0.1, because 0.1 × 0.1 × 0.1 = 0.001.", difficulty: "medium", source_page: 551 },
-                { question: "If \\( x^2 = 361 \\), find x.", options: ["17", "18", "19", "21"], correctOptionIndex: 2, explanation: "If \\( x^2 = 361 \\), then \\( x = \\sqrt{361} = 19 \\).", difficulty: "easy", source_page: 551 },
-                { question: "If \\( x^3 = 512 \\), find x.", options: ["6", "7", "8", "9"], correctOptionIndex: 2, explanation: "If \\( x^3 = 512 \\), then \\( x = \\sqrt[3]{512} = 8 \\).", difficulty: "easy", source_page: 551 },
-                { question: "Evaluate \\( \\sqrt{289} \\).", options: ["15", "16", "17", "18"], correctOptionIndex: 2, explanation: "The square root of 289 is 17, because 17 × 17 = 289.", difficulty: "medium", source_page: 551 },
-                { question: "Evaluate \\( \\sqrt[3]{729} \\).", options: ["7", "8", "9", "10"], correctOptionIndex: 2, explanation: "The cube root of 729 is 9, because 9 × 9 × 9 = 729.", difficulty: "medium", source_page: 551 },
-                { question: "The area of a square field is 729 m². What is the length of its side?", options: ["25 m", "27 m", "29 m", "31 m"], correctOptionIndex: 1, explanation: "Area = side². 729 = side² => side = \\( \\sqrt{729} \\) = 27 m.", difficulty: "medium", source_page: 551 },
-                { question: "The volume of a cube is 2744 cm³. What is the length of its side?", options: ["12 cm", "13 cm", "14 cm", "15 cm"], correctOptionIndex: 2, explanation: "Volume = side³. 2744 = side³ => side = \\( \\sqrt[3]{2744} \\) = 14 cm.", difficulty: "tough", source_page: 552 },
-                { question: "Simplify \\( \\sqrt{2401} \\).", options: ["41", "49", "51", "59"], correctOptionIndex: 1, explanation: "The square root of 2401 is 49, because 49 × 49 = 2401.", difficulty: "tough", source_page: 551 },
-                { question: "Simplify \\( \\sqrt[3]{3375} \\).", options: ["10", "15", "20", "25"], correctOptionIndex: 1, explanation: "The cube root of 3375 is 15, because 15 × 15 × 15 = 3375.", difficulty: "tough", source_page: 552 },
-                { question: "What is \\( \\sqrt{0.0025} \\)?", options: ["0.005", "0.05", "0.5", "0.025"], correctOptionIndex: 1, explanation: "The square root of 0.0025 is 0.05, because 0.05 × 0.05 = 0.0025.", difficulty: "medium", source_page: 551 },
-                { question: "What is \\( \\sqrt[3]{0.000216} \\)?", options: ["0.06", "0.6", "0.006", "0.0216"], correctOptionIndex: 0, explanation: "The cube root of 0.000216 is 0.06, because 0.06 × 0.06 × 0.06 = 0.000216.", difficulty: "tough", source_page: 552 },
-                { question: "Find the smallest number by which 128 must be multiplied to make it a perfect cube.", options: ["2", "4", "8", "16"], correctOptionIndex: 1, explanation: "128 = 2^7. To make it a perfect cube (power of 3), we need 2^2 (i.e., 4) more. So 128 * 4 = 512 = 8^3.", difficulty: "tough", source_page: 552 },
-                { question: "Find the smallest number by which 720 must be divided to make it a perfect square.", options: ["2", "5", "10", "20"], correctOptionIndex: 2, explanation: "Prime factorization of 720 is 2^4 × 3^2 × 5^1. To make it a perfect square, we need to remove the odd power of 5. So, 720 must be divided by 5.", difficulty: "tough", source_page: 551 },
-                { question: "Evaluate \\( \\sqrt{5.76} \\).", options: ["2.2", "2.4", "2.6", "2.8"], correctOptionIndex: 1, explanation: "The square root of 5.76 is 2.4, because 2.4 × 2.4 = 5.76.", difficulty: "easy", source_page: 551 },
-                { question: "Evaluate \\( \\sqrt[3]{0.343} \\).", options: ["0.5", "0.6", "0.7", "0.8"], correctOptionIndex: 2, explanation: "The cube root of 0.343 is 0.7, because 0.7 × 0.7 × 0.7 = 0.343.", difficulty: "easy", source_page: 551 },
-                { question: "If the perimeter of a square is 48 cm, what is the length of its diagonal?", options: ["12 cm", "\\( 12\\sqrt{2} \\) cm", "24 cm", "\\( 24\\sqrt{2} \\) cm"], correctOptionIndex: 1, explanation: "Perimeter = 4 × side. 48 = 4 × side => side = 12 cm. Diagonal of a square = side × \\( \\sqrt{2} \\) = \\( 12\\sqrt{2} \\) cm.", difficulty: "medium", source_page: 552 },
-                { question: "If the volume of a cube is 1728 cm³, what is its total surface area?", options: ["144 cm²", "576 cm²", "864 cm²", "108 cm²"], correctOptionIndex: 1, explanation: "Volume = side³. 1728 = side³ => side = \\( \\sqrt[3]{1728} \\) = 12 cm. Total surface area of a cube = 6 × side² = 6 × 12² = 6 × 144 = 864 cm².", difficulty: "tough", source_page: 552 },
-                { question: "Simplify \\( \\sqrt{625/100} \\).", options: ["2.5", "25", "0.25", "5"], correctOptionIndex: 0, explanation: "\\( \\sqrt{625/100} = \\sqrt{6.25} = 2.5 \\).", difficulty: "medium", source_page: 551 },
-                { question: "Simplify \\( \\sqrt[3]{1000/27} \\).", options: ["10/3", "100/9", "3/10", "27/1000"], correctOptionIndex: 0, explanation: "\\( \\sqrt[3]{1000/27} = \\sqrt[3]{1000} / \\sqrt[3]{27} = 10/3 \\).", difficulty: "medium", source_page: 552 },
-                { question: "A school has 1600 students. If the number of rows is equal to the number of students in each row, how many rows are there?", options: ["30", "40", "50", "60"], correctOptionIndex: 1, explanation: "Number of rows = \\( \\sqrt{\\text{total students}} \\) = \\( \\sqrt{1600} \\) = 40 rows.", difficulty: "medium", source_page: 551 },
-                { question: "A box contains 125 small cubes. If the box is a larger cube, how many small cubes are along one edge of the box?", options: ["3", "4", "5", "6"], correctOptionIndex: 2, explanation: "Number of cubes along one edge = \\( \\sqrt[3]{\\text{total small cubes}} \\) = \\( \\sqrt[3]{125} \\) = 5 cubes.", difficulty: "easy", source_page: 552 },
-                { question: "Find the value of \\( \\sqrt{44100} \\).", options: ["210", "200", "220", "240"], correctOptionIndex: 0, explanation: "\\( \\sqrt{44100} = \\sqrt{441 \\times 100} = \\sqrt{441} \\times \\sqrt{100} = 21 \\times 10 = 210 \\).", difficulty: "tough", source_page: 551 },
-                { question: "Find the value of \\( \\sqrt[3]{8000} \\).", options: ["20", "40", "80", "100"], correctOptionIndex: 0, explanation: "\\( \\sqrt[3]{8000} = \\sqrt[3]{8 \\times 1000} = \\sqrt[3]{8} \\times \\sqrt[3]{1000} = 2 \\times 10 = 20 \\).", difficulty: "tough", source_page: 552 },
-                { question: "Which of the following is not a perfect square?", options: ["49", "100", "125", "196"], correctOptionIndex: 2, explanation: "49 (7²), 100 (10²), and 196 (14²) are perfect squares. 125 is a perfect cube (5³), but not a perfect square.", difficulty: "medium", source_page: 551 },
-                { question: "Which of the following is not a perfect cube?", options: ["8", "27", "64", "81"], correctOptionIndex: 3, explanation: "8 (2³), 27 (3³), and 64 (4³) are perfect cubes. 81 is a perfect square (9²), but not a perfect cube.", difficulty: "medium", source_page: 552 },
-                { question: "Simplify \\( \\sqrt{1.69} \\).", options: ["1.1", "1.2", "1.3", "1.4"], correctOptionIndex: 2, explanation: "The square root of 1.69 is 1.3, because 1.3 × 1.3 = 1.69.", difficulty: "easy", source_page: 551 },
-                { question: "Simplify \\( \\sqrt[3]{0.729} \\).", options: ["0.7", "0.8", "0.9", "0.09"], correctOptionIndex: 2, explanation: "The cube root of 0.729 is 0.9, because 0.9 × 0.9 × 0.9 = 0.729.", difficulty: "easy", source_page: 552 },
-                { question: "The hypotenuse of a right-angled triangle is 10 cm, and one leg is 6 cm. What is the length of the other leg?", options: ["4 cm", "5 cm", "7 cm", "8 cm"], correctOptionIndex: 3, explanation: "Using Pythagorean theorem: \\( a^2 + b^2 = c^2 \\). \\( 6^2 + b^2 = 10^2 \\) => \\( 36 + b^2 = 100 \\) => \\( b^2 = 64 \\) => \\( b = \\sqrt{64} = 8 \\) cm.", difficulty: "medium", source_page: 551 },
-                { question: "If \\( a^3 = 27 \\), then \\( a^{2} \\) is:", options: ["3", "6", "9", "81"], correctOptionIndex: 2, explanation: "If \\( a^3 = 27 \\), then \\( a = \\sqrt[3]{27} = 3 \\). Therefore, \\( a^2 = 3^2 = 9 \\).", difficulty: "tough", source_page: 552 },
-                { question: "Find the approximate value of \\( \\sqrt{50} \\).", options: ["6.5", "7.0", "7.1", "7.5"], correctOptionIndex: 2, explanation: "50 is between 49 (7²) and 64 (8²). It's closer to 49. \\( \\sqrt{50} \\approx 7.07 \\), so 7.1 is the closest approximate value.", difficulty: "medium", source_page: 551 },
-                { question: "Find the approximate value of \\( \\sqrt[3]{200} \\).", options: ["5.5", "5.8", "6.0", "6.2"], correctOptionIndex: 1, explanation: "200 is between 125 (5³) and 216 (6³). It's closer to 216. \\( \\sqrt[3]{200} \\approx 5.85 \\), so 5.8 is the closest approximate value.", difficulty: "medium", source_page: 552 },
-                { question: "What is the result of \\( (\\sqrt{11})^2 \\)?", options: ["1", "11", "121", "22"], correctOptionIndex: 1, explanation: "The square of a square root simply gives the number itself. So, \\( (\\sqrt{11})^2 = 11 \\).", difficulty: "easy", source_page: 551 },
-                { question: "What is the result of \\( (\\sqrt[3]{5})^3 \\)?", options: ["1", "5", "25", "125"], correctOptionIndex: 1, explanation: "The cube of a cube root simply gives the number itself. So, \\( (\\sqrt[3]{5})^3 = 5 \\).", difficulty: "easy", source_page: 552 },
-                { question: "A perfect square number cannot end with which of the following digits?", options: ["0", "1", "2", "4"], correctOptionIndex: 2, explanation: "Perfect squares can end with 0, 1, 4, 5, 6, 9. They never end with 2, 3, 7, 8.", difficulty: "tough", source_page: 551 },
-                { question: "The cube of an even number is always:", options: ["Odd", "Even", "Prime", "Negative"], correctOptionIndex: 1, explanation: "The cube of an even number (e.g., 2³=8, 4³=64) is always an even number.", difficulty: "tough", source_page: 552 }
+            // English (25 MCQs) - Comprehensive Review
+            const englishMCQs = [
+                // Vocabulary
+                { question: "Choose the synonym for 'Benevolent':", options: ["Cruel", "Kind", "Selfish", "Angry"], correctOptionIndex: 1, explanation: "Benevolent means well meaning and kindly.", difficulty: "easy" },
+                { question: "Choose the antonym for 'Ephemeral':", options: ["Lasting", "Temporary", "Fleeting", "Short-lived"], correctOptionIndex: 0, explanation: "Ephemeral means lasting for a very short time. Lasting is its antonym.", difficulty: "medium" },
+                { question: "What does the idiom 'break a leg' mean?", options: ["To actually break a leg", "To wish good luck", "To run fast", "To stop performing"], correctOptionIndex: 1, explanation: "'Break a leg' is an idiom used to wish someone good luck, especially before a performance.", difficulty: "easy" },
+                { question: "Choose the synonym for 'Ubiquitous':", options: ["Rare", "Common", "Scarce", "Unique"], correctOptionIndex: 1, explanation: "Ubiquitous means present, appearing, or found everywhere; common.", difficulty: "tough" },
+                { question: "Choose the antonym for 'Pernicious':", options: ["Harmful", "Beneficial", "Malicious", "Destructive"], correctOptionIndex: 1, explanation: "Pernicious means having a harmful effect, especially in a gradual or subtle way. Beneficial is its antonym.", difficulty: "tough" },
+                { question: "What does the phrasal verb 'call off' mean?", options: ["To shout loudly", "To cancel something", "To make a phone call", "To postpone indefinitely"], correctOptionIndex: 1, explanation: "'Call off' means to cancel an event or agreement.", difficulty: "easy" },
+                // Grammar
+                { question: "Identify the part of speech of the underlined word: She sings **beautifully**.", options: ["Noun", "Verb", "Adjective", "Adverb"], correctOptionIndex: 3, explanation: "Beautifully describes how she sings, making it an adverb.", difficulty: "easy" },
+                { question: "Which tense is used in the sentence: 'They **have been studying** for three hours.'?", options: ["Present Simple", "Present Continuous", "Present Perfect", "Present Perfect Continuous"], correctOptionIndex: 3, explanation: "The structure 'have/has been + verb-ing' indicates the Present Perfect Continuous tense.", difficulty: "medium" },
+                { question: "Choose the correct preposition: He is good _____ mathematics.", options: ["at", "in", "on", "for"], correctOptionIndex: 0, explanation: "The correct preposition to use with 'good' when referring to a subject or skill is 'at'.", difficulty: "easy" },
+                { question: "Change into passive voice: 'The students wrote the essay.'", options: ["The essay is written by the students.", "The essay was written by the students.", "The students are writing the essay.", "The essay had been written by the students."], correctOptionIndex: 1, explanation: "To change to passive voice, the object becomes the subject, the verb changes to 'be' + past participle, and the original subject becomes the agent (optional). 'Wrote' is past simple, so 'was written'.", difficulty: "medium" },
+                { question: "Choose the correct article: She is _____ honest person.", options: ["a", "an", "the", "no article"], correctOptionIndex: 1, explanation: "Although 'honest' starts with 'h', the 'h' is silent, and it sounds like it begins with a vowel sound, so 'an' is used.", difficulty: "easy" },
+                { question: "Identify the type of sentence: 'Although it was raining, we went for a walk.'", options: ["Simple", "Compound", "Complex", "Compound-Complex"], correctOptionIndex: 2, explanation: "This is a complex sentence because it contains an independent clause ('we went for a walk') and a dependent clause ('Although it was raining') introduced by a subordinating conjunction ('Although').", difficulty: "tough" },
+                { question: "Correct the sentence: 'Neither John nor his brothers is coming.'", options: ["Neither John nor his brothers are coming.", "Neither John nor his brothers comes.", "Neither John nor his brothers came.", "Neither John nor his brothers have come."], correctOptionIndex: 0, explanation: "When 'neither...nor' connects two subjects, the verb agrees with the subject closer to it. 'Brothers' is plural, so 'are' is correct.", difficulty: "medium" },
+                { question: "Change into indirect speech: He said, 'I am going to the market.'", options: ["He said that he was going to the market.", "He said that I am going to the market.", "He said that he is going to the market.", "He asked if he was going to the market."], correctOptionIndex: 0, explanation: "In indirect speech, the tense shifts (present continuous to past continuous) and pronouns change.", difficulty: "medium" },
+                { question: "Fill in the blank with the appropriate modal verb: You _____ try harder if you want to succeed.", options: ["might", "would", "should", "could"], correctOptionIndex: 2, explanation: "'Should' implies a recommendation or obligation, which fits the context of advice for success.", difficulty: "easy" },
+                // Comprehension/General
+                { question: "The primary purpose of a 'thesis statement' in an essay is:", options: ["To provide background information", "To state the main argument or purpose of the essay", "To summarize the conclusion", "To introduce the author"], correctOptionIndex: 1, explanation: "A thesis statement is a sentence that expresses the main idea of a research paper or essay. It is typically found at the end of the introduction.", difficulty: "medium" },
+                { question: "What is the function of a topic sentence in a paragraph?", options: ["To conclude the paragraph", "To introduce the main idea of the paragraph", "To provide evidence for the main idea", "To transition to the next paragraph"], correctOptionIndex: 1, explanation: "A topic sentence states the main idea of a paragraph and guides the reader on what the paragraph will be about.", difficulty: "easy" },
+                { question: "Which literary device involves a contrast between what is said and what is actually meant?", options: ["Metaphor", "Simile", "Irony", "Allusion"], correctOptionIndex: 2, explanation: "Irony is a literary device where there is a contradiction between appearance and reality, or between expectation and outcome.", difficulty: "tough" },
+                { question: "What does 'plagiarism' refer to?", options: ["Using your own original ideas", "Citing sources correctly", "Presenting someone else's work or ideas as your own without proper attribution", "Collaborating on a project"], correctOptionIndex: 2, explanation: "Plagiarism is the act of presenting another's work or ideas as your own without proper acknowledgement.", difficulty: "easy" },
+                { question: "In academic writing, what is the purpose of 'referencing' or 'citing sources'?", options: ["To make the essay longer", "To show off how many books you've read", "To give credit to original authors and avoid plagiarism", "To confuse the reader"], correctOptionIndex: 2, explanation: "Citing sources is essential for academic integrity, allowing readers to find the original work and giving credit to the creators.", difficulty: "easy" },
+                { question: "What is the common structure of a typical essay?", options: ["Introduction, Body, Conclusion", "Thesis, Evidence, Counter-argument", "Beginning, Middle, End", "Question, Answer, Summary"], correctOptionIndex: 0, explanation: "The standard essay structure includes an introduction (with thesis), body paragraphs (with supporting arguments and evidence), and a conclusion (summarizing and restating the thesis).", difficulty: "easy" },
+                { question: "What is the purpose of a 'summary'?", options: ["To criticize a text", "To provide a brief overview of the main points of a text", "To analyze every detail of a text", "To introduce new information"], correctOptionIndex: 1, explanation: "A summary condenses the essential information of a text into a shorter form, highlighting key points without including minor details or personal opinions.", difficulty: "medium" },
+                { question: "Which of the following is an example of a 'compound sentence'?", options: ["She sings.", "She sings beautifully and he plays well.", "Although she sings, he plays.", "She sings and plays the piano."], correctOptionIndex: 3, explanation: "A compound sentence consists of two or more independent clauses joined by a coordinating conjunction (e.g., 'and', 'but', 'or'). 'She sings' is an independent clause, and 'plays the piano' is another (with an implied subject 'she').", difficulty: "medium" },
+                { question: "What is the main purpose of an 'argumentative essay'?", options: ["To tell a story", "To inform the reader about a topic", "To persuade the reader to accept a particular viewpoint", "To describe a process"], correctOptionIndex: 2, explanation: "An argumentative essay aims to convince the reader of the validity of a particular stance or claim by presenting evidence and reasoning.", difficulty: "medium" },
+                { question: "In grammar, what is a 'conjunction'?", options: ["A word that describes a verb", "A word that expresses an action", "A word that joins words, phrases, or clauses", "A word that names a person, place, or thing"], correctOptionIndex: 2, explanation: "A conjunction is a word used to connect clauses or sentences or to coordinate words in the same clause (e.g., and, but, if).", difficulty: "easy" }
             ];
-            quizQuestions.push(...generalAbilitiesMCQs);
+            quizQuestions.push(...englishMCQs);
 
-            // Ensure exact counts for difficulty levels before trimming to 100
-            let easyQuestions = [];
-            let mediumQuestions = [];
-            let toughQuestions = [];
+            // Dynamically adjust counts to meet targets and total 100 questions
+            let allQuestions = [];
+            allQuestions.push(...generalKnowledgeMCQs, ...urduMCQs, ...englishMCQs);
 
-            // Categorize questions by initial difficulty
-            quizQuestions.forEach(q => {
-                if (q.difficulty === "easy") easyQuestions.push(q);
-                else if (q.difficulty === "medium") mediumQuestions.push(q);
-                else if (q.difficulty === "tough") toughQuestions.push(q);
-            });
+            // Filter by difficulty
+            let easyQuestions = allQuestions.filter(q => q.difficulty === 'easy');
+            let mediumQuestions = allQuestions.filter(q => q.difficulty === 'medium');
+            let toughQuestions = allQuestions.filter(q => q.difficulty === 'tough');
 
-            // Target distribution: 10 Easy, 50 Medium, 40 Tough
+            // Shuffle each difficulty pool independently
+            shuffleArray(easyQuestions);
+            shuffleArray(mediumQuestions);
+            shuffleArray(toughQuestions);
+
+            // Define target counts
+            const targetTotal = 100;
             const targetEasy = 10;
             const targetMedium = 50;
             const targetTough = 40;
 
-            // Adjust Easy questions
-            while (easyQuestions.length > targetEasy && mediumQuestions.length < targetMedium) {
-                mediumQuestions.push(easyQuestions.pop());
-            }
-            while (easyQuestions.length < targetEasy && (easyQuestions.length + mediumQuestions.length + toughQuestions.length) < 100 && (mediumQuestions.length > 0 || toughQuestions.length > 0)) {
-                if (mediumQuestions.length > 0) {
-                    easyQuestions.push(mediumQuestions.pop());
-                } else if (toughQuestions.length > 0) {
-                    easyQuestions.push(toughQuestions.pop());
-                } else {
-                    break;
-                }
-            }
+            // Initialize final quiz array
+            let finalQuiz = [];
 
+            // Add questions from each pool based on target, prioritizing exact match
+            // Start with easy questions
+            finalQuiz = finalQuiz.concat(easyQuestions.slice(0, Math.min(easyQuestions.length, targetEasy)));
 
-            // Adjust Tough questions
-            while (toughQuestions.length > targetTough && mediumQuestions.length < targetMedium) {
-                mediumQuestions.push(toughQuestions.pop());
-            }
-            while (toughQuestions.length < targetTough && (easyQuestions.length + mediumQuestions.length + toughQuestions.length) < 100 && (mediumQuestions.length > 0 || easyQuestions.length > 0)) {
-                if (mediumQuestions.length > 0) {
-                    toughQuestions.push(mediumQuestions.pop());
-                } else if (easyQuestions.length > 0) {
-                    toughQuestions.push(easyQuestions.pop());
-                } else {
-                    break;
-                }
-            }
+            // Then tough questions (to ensure enough tough questions, as they might be fewer initially)
+            finalQuiz = finalQuiz.concat(toughQuestions.slice(0, Math.min(toughQuestions.length, targetTough)));
 
+            // Then medium questions
+            finalQuiz = finalQuiz.concat(mediumQuestions.slice(0, Math.min(mediumQuestions.length, targetMedium)));
 
-            // Adjust Medium questions
-            while (mediumQuestions.length > targetMedium && (easyQuestions.length < targetEasy || toughQuestions.length < targetTough)) {
-                if (easyQuestions.length < targetEasy) {
-                    easyQuestions.push(mediumQuestions.pop());
-                } else if (toughQuestions.length < targetTough) {
-                    toughQuestions.push(mediumQuestions.pop());
-                } else {
-                    break;
-                }
-            }
+            // If still short, add remaining questions from any pool
+            let remainingQuestions = [...easyQuestions.slice(targetEasy), ...mediumQuestions.slice(targetMedium), ...toughQuestions.slice(targetTough)];
+            shuffleArray(remainingQuestions); // Shuffle remaining for randomness
+            finalQuiz = finalQuiz.concat(remainingQuestions.slice(0, targetTotal - finalQuiz.length));
 
+            // If somehow exceeded (shouldn't happen with slice), trim to 100
+            finalQuiz = finalQuiz.slice(0, targetTotal);
 
-            // Recombine and shuffle before final trim
-            quizQuestions = [...easyQuestions, ...mediumQuestions, ...toughQuestions];
-            shuffleArray(quizQuestions); // Shuffle the entire combined list
+            // Final shuffle of the entire quiz for random order presentation
+            shuffleArray(finalQuiz);
+            quizQuestions = finalQuiz;
 
-            // Trim to exactly 100 questions
-            quizQuestions = quizQuestions.slice(0, 100);
 
             // Recalculate difficulty counts to ensure final distribution (for logging/debugging)
             let finalEasyCount = quizQuestions.filter(q => q.difficulty === 'easy').length;
@@ -902,7 +862,7 @@
             const dateParts = CURRENT_DATE_STR.split(' ');
             const monthName = dateParts[0].toUpperCase().substring(0, 3);
             const day = parseInt(dateParts[1].replace(',', ''));
-            document.getElementById('loginId').value = `${day}${monthName}`; // e.g., 18JUNE
+            document.getElementById('loginId').value = `${day}${monthName}`; // e.g., 19JUNE
 
             initializeQuiz();
             // Initial call to set correct sticky date position on load
