@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS MPT Daily Quiz - June 21, 2025</title>
+    <title>CSS MPT Daily Quiz - June 26, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Include seedrandom.js for consistent daily question shuffling -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
     <style>
-        /* Base styles for body */
+        /* Base Body Styling */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #F8F9FA; /* Very light gray */
@@ -21,7 +23,7 @@
             overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
-        /* Styling for the top navigation bar */
+        /* Top Bar Styling */
         .top-bar {
             background-color: #ffffff;
             border-bottom: 1px solid #e0e0e0;
@@ -35,17 +37,15 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
-        /* Styling for the date display in the top bar */
         .top-bar .date-display {
             color: #6D6875;
             font-size: 0.9rem;
             font-weight: 600;
-            display: flex; /* Added for icon alignment */
-            align-items: center; /* Added for icon alignment */
-            gap: 0.5rem; /* Space between icon and text */
+            display: flex; /* Added for icon */
+            align-items: center; /* Added for icon */
+            gap: 0.5rem; /* Added for icon */
         }
 
-        /* Styling for the WhatsApp community link in the top bar */
         .top-bar .whatsapp-link {
             color: #6D6875;
             text-decoration: none;
@@ -55,7 +55,7 @@
             gap: 0.5rem;
         }
 
-        /* Header section styling, including quiz title and progress bar */
+        /* Header Section Styling */
         .header-section {
             background-color: #ffffff;
             padding: 1.5rem 1rem;
@@ -64,7 +64,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Main quiz title styling */
         .quiz-title {
             font-family: 'Roboto', sans-serif;
             font-size: 1.8rem;
@@ -73,7 +72,7 @@
             margin-bottom: 1rem;
         }
 
-        /* Container for the progress bar */
+        /* Progress Bar Styling */
         .progress-bar-container {
             width: 80%;
             max-width: 600px;
@@ -84,33 +83,31 @@
             overflow: hidden;
         }
 
-        /* Actual progress bar styling */
         .progress-bar {
             height: 100%;
             width: 0%;
-            background: linear-gradient(to right, #20B2AA, #3EB489); /* Gradient from light teal to mint green */
+            background: linear-gradient(to right, #20B2AA, #3EB489);
             border-radius: 5px;
-            transition: width 0.3s ease-in-out; /* Smooth transition for width changes */
+            transition: width 0.3s ease-in-out;
         }
 
-        /* Banner logo image styling */
+        /* Banner Image and Credits */
         .banner-logo {
             max-width: 200px;
             height: auto;
             border-radius: 8px;
             margin-top: 1rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft shadow */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
-        /* Credits text styling */
         .credits {
             font-size: 0.85rem;
-            color: #2C3E50; /* Main text color */
+            color: #2C3E50;
             margin-top: 0.5rem;
-            font-weight: bold; /* Bold text for credits */
+            font-weight: bold;
         }
 
-        /* General card styling for login, quiz, and results pages */
+        /* Card Styling (Login, Candidate, Quiz, Results Pages) */
         .card {
             background-color: #FFF5EE; /* PeachPuff */
             border-radius: 12px;
@@ -119,10 +116,10 @@
             margin: 1rem auto;
             max-width: 700px;
             width: 90%;
-            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+            box-sizing: border-box;
         }
 
-        /* Button styling with gradient and hover effects */
+        /* Button Styling */
         .button-gradient {
             background-image: linear-gradient(to right, #E6E6FA, #FFDAB9); /* Lavender to PeachPuff */
             color: #2C3E50;
@@ -135,19 +132,17 @@
             border: none;
         }
 
-        /* Hover effect for gradient buttons */
         .button-gradient:hover {
-            transform: translateY(-2px); /* Slight lift effect */
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* Enhanced shadow */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        /* Active (click) effect for gradient buttons */
         .button-gradient:active {
             transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Reduced shadow */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        /* Styling for quiz option buttons */
+        /* Option Button Styling */
         .option-button {
             background-color: #ffffff;
             border: 1px solid #ddd;
@@ -155,49 +150,45 @@
             border-radius: 8px;
             text-align: left;
             cursor: pointer;
-            transition: all 0.2s ease; /* Smooth transitions for all properties */
+            transition: all 0.2s ease;
             margin-bottom: 0.75rem;
             color: #2C3E50;
             font-weight: normal;
         }
         
-        /* Hover effect for option buttons, excluding selected ones */
         .option-button:hover:not(.selected) {
-            transform: scale(1.02); /* Enlarge slightly on hover */
+            transform: scale(1.02); /* Enlarge by 5% on hover */
             box-shadow: 0 6px 12px rgba(0,0,0,0.1);
         }
 
-        /* Styling for selected option button */
         .option-button.selected {
             border-color: #6D6875;
             background-color: #f0f0f0;
             font-weight: bold;
         }
 
-        /* Styling for correct answer option button */
         .option-button.correct {
             background-color: #90EE90; /* LightGreen */
             border-color: #28a745;
-            animation: pulse-green 0.5s ease-out forwards; /* Pulse animation */
+            animation: pulse-green 0.5s ease-out forwards;
         }
 
-        /* Styling for incorrect answer option button */
         .option-button.incorrect {
             background-color: #FF6B6B; /* Red pulse */
             border-color: #dc3545;
-            animation: shake-red 0.5s ease-out forwards; /* Shake animation */
+            animation: shake-red 0.5s ease-out forwards;
         }
 
-        /* Styling for special question card */
+        /* Special Question Highlight */
         .special-question {
             border: 3px solid #FFD700; /* Gold border */
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5); /* Glowing effect */
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
 
-        /* Styling for explanation div */
+        /* Explanation Section */
         .explanation {
-            background-color: #e0f7fa; /* Light cyan background */
-            border-left: 5px solid #20B2AA; /* Teal left border */
+            background-color: #e0f7fa;
+            border-left: 5px solid #20B2AA;
             padding: 1rem;
             margin-top: 1rem;
             border-radius: 8px;
@@ -206,8 +197,8 @@
             display: none; /* Hidden by default */
         }
 
-        /* Styling for timer display */
-        .timer-display {
+        /* Timer and Question Progress Display */
+        .timer-display, .question-progress {
             font-size: 1.2rem;
             font-weight: bold;
             color: #2C3E50;
@@ -215,31 +206,23 @@
             text-align: center;
         }
 
-        /* Styling for question progress text */
-        .question-progress {
-            font-size: 1rem;
-            color: #6D6875;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        /* Responsive adjustments for smaller screens (mobile) */
+        /* Responsive Adjustments */
         @media (max-width: 768px) {
             .top-bar {
-                flex-direction: column; /* Stack items vertically */
+                flex-direction: column;
                 gap: 0.5rem;
                 padding: 0.5rem;
-                align-items: flex-start; /* Align to start on mobile */
+                align-items: flex-start;
             }
             .top-bar .date-display {
-                order: 1; /* Move date to top-left on mobile */
+                order: 1;
                 font-size: 0.8rem;
-                align-self: flex-start; /* Align to start on mobile */
+                align-self: flex-start;
             }
             .top-bar .whatsapp-link {
-                order: 2; /* Move whatsapp to bottom on mobile */
+                order: 2;
                 font-size: 0.8rem;
-                align-self: flex-end; /* Align to end on mobile */
+                align-self: flex-end;
             }
             .quiz-title {
                 font-size: 1.5rem;
@@ -261,14 +244,13 @@
             }
         }
 
-        /* Keyframe animation for correct answer pulse */
+        /* Keyframe Animations */
         @keyframes pulse-green {
             0% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0.7); }
             70% { box-shadow: 0 0 0 10px rgba(144, 238, 144, 0); }
             100% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0); }
         }
 
-        /* Keyframe animation for wrong answer shake */
         @keyframes shake-red {
             0%, 100% { transform: translateX(0); }
             10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
@@ -278,22 +260,21 @@
 </head>
 <body>
 
-    <!-- Security script to disable right-click, F12, Ctrl+U/I/J, copy, and paste -->
     <script>
-        document.addEventListener('contextmenu', event => event.preventDefault()); // Disable right-click
+        // Disable right-click, copy/paste, and developer tools for security
+        document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('keydown', e => {
             if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
-                e.preventDefault(); // Disable Ctrl+U, Ctrl+Shift+I, Ctrl+Shift+J
+                e.preventDefault();
             }
             if (e.key === 'F12') {
-                e.preventDefault(); // Disable F12
+                e.preventDefault();
             }
         });
-        document.addEventListener('copy', event => event.preventDefault()); // Disable copy
-        document.addEventListener('paste', event => event.preventDefault()); // Disable paste
+        document.addEventListener('copy', event => event.preventDefault());
+        document.addEventListener('paste', event => event.preventDefault());
     </script>
 
-    <!-- Top bar for date and WhatsApp link -->
     <div class="top-bar">
         <div class="date-display" id="liveDate">
             <i class="fas fa-calendar-alt"></i> <span id="currentDateText"></span>
@@ -303,7 +284,6 @@
         </a>
     </div>
 
-    <!-- Header section with quiz title, progress bar, logo, and credits -->
     <div class="header-section">
         <h1 class="quiz-title" id="quizTitle"></h1>
         <div class="progress-bar-container">
@@ -319,9 +299,7 @@
         </div>
     </div>
 
-    <!-- Main content area for different quiz pages -->
     <main class="flex-grow flex items-center justify-center p-4">
-        <!-- Login Page -->
         <div id="loginPage" class="card">
             <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
             <div class="mb-4">
@@ -330,13 +308,12 @@
             </div>
             <div class="mb-6">
                 <label for="loginPassword" class="block text-sm font-medium text-gray-700 mb-1">Password:</label>
-                <input type="password" id="loginPassword" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="">
+                <input type="password" id="loginPassword" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="free">
             </div>
             <p id="loginError" class="text-red-500 text-sm mb-4 hidden">Invalid ID or Password</p>
             <button id="loginBtn" class="button-gradient w-full">Login</button>
         </div>
 
-        <!-- Candidate Name Entry Page -->
         <div id="candidateNamePage" class="card hidden">
             <h2 class="text-xl font-bold mb-4 text-center">Candidate Information</h2>
             <div class="mb-6">
@@ -347,14 +324,12 @@
             <button id="startQuizBtn" class="button-gradient w-full">Start Quiz</button>
         </div>
 
-        <!-- Quiz Page -->
         <div id="quizPage" class="card hidden">
             <div class="timer-display" id="timerDisplay"></div>
             <div class="question-progress" id="questionProgress"></div>
             <h2 class="text-lg font-semibold mb-4" id="questionText"></h2>
             <div id="optionsContainer" class="flex flex-col gap-3 mb-6">
-                <!-- Options will be dynamically loaded here -->
-            </div>
+                </div>
             <div class="flex justify-between">
                 <button id="prevBtn" class="button-gradient px-6 py-2">Previous</button>
                 <button id="nextBtn" class="button-gradient px-6 py-2">Next</button>
@@ -363,12 +338,11 @@
             <div id="explanationDiv" class="explanation"></div>
         </div>
 
-        <!-- Results Page -->
         <div id="resultsPage" class="card hidden">
             <h2 class="text-xl font-bold mb-4 text-center">Quiz Results</h2>
             <p class="mb-2"><strong>Candidate Name:</strong> <span id="resultCandidateName"></span></p>
             <p class="mb-2"><strong>Date of Quiz:</strong> <span id="resultDate"></span></p>
-            <p class="mb-2"><strong>Score:</strong> <span id="resultScore"></span> / 200</p>
+            <p class="mb-2"><strong>Score:</strong> <span id="resultScore"></span> / 100</p>
             <p class="mb-2"><strong>Correct Answers:</strong> <span id="resultCorrect"></span></p>
             <p class="mb-2"><strong>Incorrect Answers:</strong> <span id="resultIncorrect"></span></p>
             <p class="mb-4"><strong>Time Taken:</strong> <span id="resultTimeTaken"></span></p>
@@ -377,48 +351,60 @@
     </main>
 
     <script>
-        // Set the current date for display and login logic
-        const CURRENT_DATE_STR = "June 21, 2025";
+        // Set the current date for display and logic
+        const CURRENT_DATE_STR = "June 26, 2025";
         const CURRENT_DATE = new Date(CURRENT_DATE_STR);
 
-        // Update header elements with the current date
-        document.getElementById('currentDateText').textContent = CURRENT_DATE_STR;
-        document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
-        document.getElementById('quizTitle').textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR}`;
+        // Function to update the live date display and handle responsive positioning
+        function updateLiveDate() {
+            document.getElementById('currentDateText').textContent = CURRENT_DATE_STR;
+            document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
+            document.getElementById('quizTitle').textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR}`;
 
-        // Quiz Data Structure and State Variables
-        let quizQuestions = []; // Array to hold all quiz questions
-        let currentQuestionIndex = 0; // Index of the currently displayed question
-        let userAnswers = []; // Stores user's selected answers and correctness
-        let quizStartTime; // Timestamp when the quiz starts
-        let timerInterval; // Interval ID for the quiz timer
-        const QUIZ_DURATION_MINUTES = 40; // Total duration for the quiz
-        let specialQuestionIndex = -1; // Index for the "Today's Special Question"
+            const liveDateElement = document.getElementById('liveDate');
+            if (window.innerWidth < 768) {
+                liveDateElement.classList.remove('justify-end');
+                liveDateElement.classList.add('justify-start');
+            } else {
+                liveDateElement.classList.remove('justify-start');
+                liveDateElement.classList.add('justify-end');
+            }
+        }
+
+
+        // Quiz Data Structure
+        let quizQuestions = []; // Will be populated by initializeQuiz
+        let currentQuestionIndex = 0;
+        let userAnswers = []; // Stores { questionIndex: int, selectedOptionIndex: int, isCorrect: bool }
+        let quizStartTime;
+        let timerInterval;
+        const QUIZ_DURATION_MINUTES = 25; // Quiz duration set to 25 minutes
+        let specialQuestionIndex = -1; // To store the index of the special question
 
         // --- Helper Functions ---
 
         /**
-         * Shuffles an array in place using the Fisher-Yates (Knuth) algorithm.
-         * @param {Array} array - The array to be shuffled.
+         * Shuffles an array in place using Fisher-Yates (Knuth) shuffle.
+         * @param {Array} array - The array to shuffle.
          */
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+                [array[i], array[j]] = [array[j], array[i]];
             }
         }
 
         /**
-         * Generates a unique ID for Formspree submission, ensuring submission uniqueness.
-         * @returns {string} A unique string ID.
+         * Generates a unique ID for Formspree submission.
+         * @returns {string} A unique ID.
          */
         function generateUniqueId() {
             return 'quiz_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
         }
 
         /**
-         * Converts total seconds into a human-readable time string (e.g., "XX minutes YY seconds").
-         * @param {number} totalSeconds - The total number of seconds elapsed or remaining.
+         * Converts seconds to a human-readable time string (e.g., "20 minutes 30 seconds").
+         * @param {number} totalSeconds - The total number of seconds.
          * @returns {string} Formatted time string.
          */
         function formatTime(totalSeconds) {
@@ -428,7 +414,7 @@
         }
 
         /**
-         * Updates the visual progress bar and text indicating current question progress.
+         * Updates the progress bar and question progress text.
          */
         function updateProgressBar() {
             const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
@@ -437,22 +423,19 @@
         }
 
         /**
-         * Displays a specified page by adding/removing 'hidden' class to relevant divs.
-         * @param {string} pageId - The ID of the HTML element (page div) to show.
+         * Displays a specific page and hides others.
+         * @param {string} pageId - The ID of the page to display.
          */
         function showPage(pageId) {
-            // Hide all potential quiz pages
             document.getElementById('loginPage').classList.add('hidden');
             document.getElementById('candidateNamePage').classList.add('hidden');
             document.getElementById('quizPage').classList.add('hidden');
             document.getElementById('resultsPage').classList.add('hidden');
-            // Show the requested page
             document.getElementById(pageId).classList.remove('hidden');
         }
 
         /**
-         * Initializes and starts the countdown timer for the quiz.
-         * Automatically submits the quiz when time runs out.
+         * Starts the quiz timer.
          */
         function startTimer() {
             quizStartTime = Date.now();
@@ -464,32 +447,31 @@
                 document.getElementById('timerDisplay').textContent = `Time Left: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
                 if (timeLeft <= 0) {
-                    clearInterval(timerInterval); // Stop the timer
+                    clearInterval(timerInterval);
                     submitQuiz(true); // Auto-submit on timer expiry
                 } else {
-                    timeLeft--; // Decrement time
+                    timeLeft--;
                 }
             }
 
-            updateTimerDisplay(); // Call once immediately for initial display
-            timerInterval = setInterval(updateTimerDisplay, 1000); // Update every second
+            updateTimerDisplay(); // Initial display
+            timerInterval = setInterval(updateTimerDisplay, 1000);
         }
 
         /**
-         * Renders the current question, its options, and manages visual feedback.
-         * Handles displaying explanations and navigation buttons.
+         * Renders the current question and its options.
          */
         function renderQuestion() {
             const question = quizQuestions[currentQuestionIndex];
-            document.getElementById('questionText').innerHTML = question.question; // Set question text
+            document.getElementById('questionText').innerHTML = question.question;
             const optionsContainer = document.getElementById('optionsContainer');
-            optionsContainer.innerHTML = ''; // Clear previously rendered options
+            optionsContainer.innerHTML = ''; // Clear previous options
 
-            // Remove special-question class from the quiz card if it was applied to a previous question
+            // Remove special-question class from previous question if any
             const quizCard = document.getElementById('quizPage');
             quizCard.classList.remove('special-question');
 
-            // Apply special-question class if the current question is marked as special
+            // Add special-question class if it's today's special question and date matches
             const today = new Date();
             const todayNormalized = new Date(today.getFullYear(), today.getMonth(), today.getDate());
             const currentQuizDateNormalized = new Date(CURRENT_DATE.getFullYear(), CURRENT_DATE.getMonth(), CURRENT_DATE.getDate());
@@ -498,124 +480,124 @@
                 quizCard.classList.add('special-question');
             }
 
-            // Shuffle the options for the current question to randomize their order
+            // Shuffle options for the current question
             const shuffledOptions = [...question.options];
             shuffleArray(shuffledOptions);
+
 
             shuffledOptions.forEach((option, index) => {
                 const button = document.createElement('button');
                 button.classList.add('option-button', 'w-full');
                 button.textContent = option;
-                // Store the original index of the option (before shuffling) for correctness checking
+                // Store the original index of the option, not its shuffled position
                 button.dataset.originalOptionIndex = question.options.indexOf(option);
-                button.onclick = () => selectOption(parseInt(button.dataset.originalOptionIndex)); // Attach click handler
+                button.onclick = () => selectOption(parseInt(button.dataset.originalOptionIndex));
 
-                // Check if the user has already answered this question and apply visual feedback
+                // Apply selected state if already answered
                 const userAnswer = userAnswers[currentQuestionIndex];
                 if (userAnswer && userAnswer.selectedOptionIndex === parseInt(button.dataset.originalOptionIndex)) {
-                    button.classList.add('selected'); // Mark as selected
+                    button.classList.add('selected');
                     if (userAnswer.isCorrect) {
-                        button.classList.add('correct'); // Mark as correct
+                        button.classList.add('correct');
                     } else {
-                        button.classList.add('incorrect'); // Mark as incorrect
+                        button.classList.add('incorrect');
                     }
-                    // Disable all options once an answer is selected for this question
+                    // Disable all options if already answered
                     Array.from(optionsContainer.children).forEach(optBtn => optBtn.disabled = true);
-                    document.getElementById('explanationDiv').style.display = 'block'; // Show explanation if answered
+                    document.getElementById('explanationDiv').style.display = 'block';
                 }
                 optionsContainer.appendChild(button);
             });
 
-            // Set and display the explanation for the current question
+            // Show/hide explanation
             const explanationDiv = document.getElementById('explanationDiv');
             explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
-            // Show explanation only if the question has been answered
             if (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].selectedOptionIndex !== undefined) {
                 explanationDiv.style.display = 'block';
             } else {
-                explanationDiv.style.display = 'none'; // Hide if not answered
+                explanationDiv.style.display = 'none';
             }
 
-            // Manage visibility of navigation buttons (Previous, Next, Submit)
-            document.getElementById('prevBtn').classList.toggle('hidden', currentQuestionIndex === 0); // Hide 'Previous' on first question
-            document.getElementById('nextBtn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1); // Hide 'Next' on last question
-            document.getElementById('submitQuizBtn').classList.toggle('hidden', currentQuestionIndex !== quizQuestions.length - 1); // Show 'Submit' only on last question
+            // Update navigation buttons visibility
+            document.getElementById('prevBtn').classList.toggle('hidden', currentQuestionIndex === 0);
+            document.getElementById('nextBtn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
+            document.getElementById('submitQuizBtn').classList.toggle('hidden', currentQuestionIndex !== quizQuestions.length - 1);
 
-            updateProgressBar(); // Update progress bar and text
+            updateProgressBar();
         }
 
         /**
-         * Handles user's option selection, updates internal state, and provides visual feedback.
-         * @param {number} selectedOptionOriginalIndex - The original index of the option selected by the user.
+         * Handles option selection by the user.
+         * @param {number} selectedOptionOriginalIndex - The original index of the selected option.
          */
         function selectOption(selectedOptionOriginalIndex) {
             const question = quizQuestions[currentQuestionIndex];
-            // If the question has already been answered, prevent re-selection
+            // If already answered, do nothing
             if (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].selectedOptionIndex !== undefined) {
                 return;
             }
 
             const isCorrect = (selectedOptionOriginalIndex === question.correctOptionIndex);
 
-            // Store the user's answer and its correctness
+            // Store user's answer
             userAnswers[currentQuestionIndex] = {
                 questionIndex: currentQuestionIndex,
                 selectedOptionIndex: selectedOptionOriginalIndex,
                 isCorrect: isCorrect
             };
 
-            // Apply visual feedback to all option buttons and disable them
+            // Apply visual feedback and disable options
             const optionsContainer = document.getElementById('optionsContainer');
             Array.from(optionsContainer.children).forEach((button) => {
-                button.disabled = true; // Disable all options after a selection is made
-                button.classList.remove('option-button:hover:not(.selected)'); // Remove hover effect once selected
+                button.disabled = true; // Disable all options after selection
+                button.classList.remove('option-button:hover:not(.selected)'); // Remove hover effect
 
                 const btnOriginalIndex = parseInt(button.dataset.originalOptionIndex);
 
                 if (btnOriginalIndex === selectedOptionOriginalIndex) {
-                    button.classList.add('selected'); // Mark the selected button
+                    button.classList.add('selected');
                     if (isCorrect) {
-                        button.classList.add('correct'); // Green for correct
+                        button.classList.add('correct');
                     } else {
-                        button.classList.add('incorrect'); // Red for incorrect
+                        button.classList.add('incorrect');
                     }
                 }
-                // If the selected answer was incorrect, also highlight the correct answer
+                // Highlight the correct answer if the selected answer was incorrect
                 if (!isCorrect && btnOriginalIndex === question.correctOptionIndex) {
-                    button.classList.add('correct'); // Highlight the true correct answer
+                    button.classList.add('correct'); // Highlight correct answer
                 }
             });
 
-            // Show the explanation for the current question
+            // Show explanation
             document.getElementById('explanationDiv').style.display = 'block';
         }
 
         /**
-         * Advances to the next question if available.
+         * Navigates to the next question.
          */
         function nextQuestion() {
             if (currentQuestionIndex < quizQuestions.length - 1) {
                 currentQuestionIndex++;
-                renderQuestion(); // Render the new question
+                renderQuestion();
             }
         }
 
         /**
-         * Goes back to the previous question if available.
+         * Navigates to the previous question.
          */
         function prevQuestion() {
             if (currentQuestionIndex > 0) {
                 currentQuestionIndex--;
-                renderQuestion(); // Render the previous question
+                renderQuestion();
             }
         }
 
         /**
-         * Submits the quiz, calculates the score, displays results, and sends data to Formspree.
-         * @param {boolean} isAutoSubmit - True if the quiz was submitted automatically (e.g., by timer expiry).
+         * Submits the quiz, calculates results, and displays them.
+         * @param {boolean} isAutoSubmit - True if submitted by timer, false otherwise.
          */
         function submitQuiz(isAutoSubmit = false) {
-            clearInterval(timerInterval); // Stop the quiz timer
+            clearInterval(timerInterval); // Stop the timer
 
             const endTime = Date.now();
             const timeTakenSeconds = Math.round((endTime - quizStartTime) / 1000);
@@ -624,7 +606,6 @@
             let incorrectCount = 0;
             let attemptedCount = 0;
 
-            // Calculate results based on user answers
             userAnswers.forEach(answer => {
                 if (answer && answer.selectedOptionIndex !== undefined) {
                     attemptedCount++;
@@ -636,11 +617,10 @@
                 }
             });
 
-            // Score calculation: 2 marks for correct, -1 for incorrect
+            // Score calculation: 2 marks for correct, -1 for incorrect. 100 questions total, so max score 200.
             const score = (correctCount * 2) - (incorrectCount * 1);
             const candidateName = document.getElementById('candidateName').value;
 
-            // Update results display on the results page
             document.getElementById('resultCandidateName').textContent = candidateName;
             document.getElementById('resultDate').textContent = CURRENT_DATE_STR;
             document.getElementById('resultScore').textContent = score;
@@ -648,9 +628,9 @@
             document.getElementById('resultIncorrect').textContent = `${incorrectCount}`;
             document.getElementById('resultTimeTaken').textContent = formatTime(timeTakenSeconds);
 
-            showPage('resultsPage'); // Display the results page
+            showPage('resultsPage');
 
-            // Prepare data for silent Formspree submission
+            // Silent Formspree submission
             const formData = new FormData();
             formData.append('Candidate Name', candidateName);
             formData.append('Date of Quiz', CURRENT_DATE_STR);
@@ -660,8 +640,7 @@
             formData.append('Time Taken', formatTime(timeTakenSeconds));
             formData.append('Quiz ID', generateUniqueId()); // Unique ID for each submission
 
-            // Send data to Formspree (replace with your actual Formspree endpoint)
-            fetch('https://formspree.io/f/xwpvddea', { // This is a placeholder Formspree endpoint
+            fetch('https://formspree.io/f/xwpvddea', {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -680,328 +659,229 @@
 
         // --- Event Listeners ---
 
-        // Login button click handler
         document.getElementById('loginBtn').addEventListener('click', () => {
             const id = document.getElementById('loginId').value;
             const password = document.getElementById('loginPassword').value;
             const loginError = document.getElementById('loginError');
 
-            // Login credentials for June 21 quiz
-            const expectedLoginId = "21JUNE"; // Dynamically set login ID
-            const expectedPassword = "free"; // Password is "free"
+            // Login credentials for June 26 quiz: ID is 26JUNE, password is 'free'
+            const expectedLoginId = "26JUNE";
+            const expectedPassword = "free";
 
             if (id === expectedLoginId && password === expectedPassword) {
-                loginError.classList.add('hidden'); // Hide error message
-                showPage('candidateNamePage'); // Proceed to name entry page
+                loginError.classList.add('hidden');
+                showPage('candidateNamePage');
             } else {
-                loginError.classList.remove('hidden'); // Show error message
+                loginError.classList.remove('hidden');
             }
         });
 
-        // Start Quiz button click handler
         document.getElementById('startQuizBtn').addEventListener('click', () => {
             const candidateNameInput = document.getElementById('candidateName');
             const candidateName = candidateNameInput.value.trim();
             const nameError = document.getElementById('nameError');
 
             if (candidateName) {
-                nameError.classList.add('hidden'); // Hide error message
-                // Reset quiz state for a new attempt
-                userAnswers = new Array(quizQuestions.length).fill(null); // Clear previous answers
-                currentQuestionIndex = 0; // Start from the first question
-                startTimer(); // Start the quiz timer
-                renderQuestion(); // Render the first question
-                showPage('quizPage'); // Display the quiz page
+                nameError.classList.add('hidden');
+                // Initialize userAnswers array for the new quiz attempt
+                userAnswers = new Array(quizQuestions.length).fill(null);
+                currentQuestionIndex = 0;
+                startTimer();
+                renderQuestion();
+                showPage('quizPage');
             } else {
-                nameError.classList.remove('hidden'); // Prompt for name if empty
+                nameError.classList.remove('hidden');
             }
         });
 
-        // Navigation and Submission Button Handlers
         document.getElementById('nextBtn').addEventListener('click', nextQuestion);
         document.getElementById('prevBtn').addEventListener('click', prevQuestion);
-        document.getElementById('submitQuizBtn').addEventListener('click', () => submitQuiz(false)); // Manual submission
+        document.getElementById('submitQuizBtn').addEventListener('click', () => submitQuiz(false));
         document.getElementById('restartQuizBtn').addEventListener('click', () => {
-            // Reset full quiz state
+            // Reset quiz state
             currentQuestionIndex = 0;
             userAnswers = [];
-            clearInterval(timerInterval); // Ensure timer is cleared
-            initializeQuiz(); // Re-initialize and re-shuffle questions for a fresh start
-            showPage('loginPage'); // Go back to the login page
+            clearInterval(timerInterval); // Clear any lingering timer
+            // Re-shuffle questions for a new attempt
+            initializeQuiz();
+            showPage('loginPage'); // Go back to login for a fresh start
         });
 
-        // --- Quiz Initialization Function ---
+        // --- Quiz Initialization ---
         function initializeQuiz() {
-            // Clear any existing questions
+            // Clear previous questions
             quizQuestions.length = 0;
 
-            // Comprehensive General Knowledge questions from various pages
+            // Seed the random number generator based on the date for consistent daily quizzes
+            // (Note: A simple seedable PRNG for consistent question order on a given day, not for cryptographic security)
+            const dateSeed = parseInt(CURRENT_DATE_STR.replace(/[^0-9]/g, '')); // e.g., 20250626
+            Math.seedrandom(dateSeed);
+
+            // June 26, 2025:
+            // General Knowledge: General Information (Pages 1-12)
+            // English: Correct/Incorrect With Solved Exercise (Pages 420-422)
+            // Psychological Tests: Analogies (Pages 498-502)
+
             const generalKnowledgeMCQs = [
-                { question: "Which international airport is named after a famous historical figure and serves as a major hub in Europe?", options: ["Charles de Gaulle Airport", "Heathrow Airport", "Frankfurt Airport", "Leonardo da Vinci Airport"], correctOptionIndex: 0, explanation: "Charles de Gaulle Airport in Paris is named after the former President of France and is one of Europe's busiest hubs.", difficulty: "medium", source_page: 57 },
-                { question: "The airline 'Lufthansa' is the flag carrier of which country?", options: ["France", "Germany", "Switzerland", "Austria"], correctOptionIndex: 1, explanation: "Lufthansa is the largest German airline and also the largest airline in Europe in terms of passengers carried when combined with its subsidiaries.", difficulty: "easy", source_page: 54 },
-                { question: "Which airport serves as the primary international gateway to Japan's capital city?", options: ["Kansai International Airport", "Chubu Centrair International Airport", "Narita International Airport", "Haneda Airport"], correctOptionIndex: 2, explanation: "Narita International Airport is the primary international airport serving the Greater Tokyo Area and the largest airport in Japan by international passenger and cargo traffic.", difficulty: "medium", source_page: 57 },
-                { question: "What is the IATA code for Dubai International Airport?", options: ["DXB", "DUB", "AUH", "JED"], correctOptionIndex: 0, explanation: "DXB is the IATA code for Dubai International Airport, one of the world's busiest airports by international passenger traffic.", difficulty: "easy", source_page: 57 },
-                { question: "Which of the following airlines is known for its distinctive 'Kangaroo Route' between Australia and Europe?", options: ["Air New Zealand", "Singapore Airlines", "Qantas", "Cathay Pacific"], correctOptionIndex: 2, explanation: "Qantas, Australia's flag carrier, historically popularized the 'Kangaroo Route' for flights connecting Australia with the UK and Europe.", difficulty: "tough", source_page: 54 },
-                { question: "'Reuters' is a major international news agency based in which country?", options: ["USA", "UK", "France", "Germany"], correctOptionIndex: 1, explanation: "Reuters is a British multinational news agency founded in 1851.", difficulty: "easy", source_page: 60 },
-                { question: "Which news agency is the official press agency of Russia?", options: ["AFP", "Xinhua", "TASS", "PTI"], correctOptionIndex: 2, explanation: "TASS (Telegraph Agency of the Soviet Union, now Russian News Agency TASS) is a major Russian news agency founded in 1904.", difficulty: "medium", source_page: 60 },
-                { question: "'Associated Press (AP)' is a major news agency of which country?", options: ["Canada", "Australia", "USA", "UK"], correctOptionIndex: 2, explanation: "The Associated Press (AP) is an American non-profit news agency.", difficulty: "easy", source_page: 60 },
-                { question: "'Kyodo News' is the news agency of which country?", options: ["South Korea", "Japan", "China", "Indonesia"], correctOptionIndex: 1, explanation: "Kyodo News is a non-profit cooperative news agency in Japan.", difficulty: "medium", source_page: 60 },
-                { question: "'Prensa Latina' is the state news agency of:", options: ["Mexico", "Argentina", "Cuba", "Brazil"], correctOptionIndex: 2, explanation: "Prensa Latina is the official state news agency of Cuba.", difficulty: "tough", source_page: 61 },
-                { question: "The Nobel Prize in Physics is awarded by the Royal Swedish Academy of Sciences. Who among the following was the first Muslim Nobel Laureate in Physics?", options: ["Abdus Salam", "Ahmed Zewail", "Muhammad Yunus", "Malala Yousafzai"], correctOptionIndex: 0, explanation: "Abdus Salam, a Pakistani theoretical physicist, shared the Nobel Prize in Physics in 1979 for his contributions to the electroweak theory.", difficulty: "easy", source_page: 62 },
-                { question: "The Nobel Peace Prize is awarded in which city?", options: ["Stockholm", "Oslo", "Geneva", "Copenhagen"], correctOptionIndex: 1, explanation: "While other Nobel Prizes are awarded in Stockholm, the Nobel Peace Prize is awarded in Oslo, Norway.", difficulty: "easy", source_page: 62 },
-                { question: "Which field was NOT among the original five categories for the Nobel Prize established by Alfred Nobel's will?", options: ["Physics", "Chemistry", "Economics", "Literature"], correctOptionIndex: 2, explanation: "The Prize in Economic Sciences in Memory of Alfred Nobel was established in 1968 by Sweden's central bank, not by Alfred Nobel's original will.", difficulty: "medium", source_page: 62 },
-                { question: "Marie Curie received Nobel Prizes in two different scientific fields. These fields were:", options: ["Physics and Chemistry", "Physics and Medicine", "Chemistry and Medicine", "Literature and Physics"], correctOptionIndex: 0, explanation: "Marie Curie shared the Nobel Prize in Physics in 1903 and won the Nobel Prize in Chemistry in 1911.", difficulty: "medium", source_page: 63 },
-                { question: "Who was the first African-American to win the Nobel Prize in Literature?", options: ["Wole Soyinka", "Toni Morrison", "Naguib Mahfouz", "Derek Walcott"], correctOptionIndex: 1, explanation: "Toni Morrison, an American novelist, won the Nobel Prize in Literature in 1993. Wole Soyinka was the first African to win (from Nigeria).", difficulty: "tough", source_page: 64 },
-                { question: "What is the highest military award in Pakistan?", options: ["Sitara-e-Jurat", "Hilal-e-Jurat", "Nishan-e-Haider", "Tamgha-e-Jurat"], correctOptionIndex: 2, explanation: "Nishan-e-Haider is the highest military award of Pakistan, given for extraordinary bravery in combat.", difficulty: "easy", source_page: 67 },
-                { question: "The 'Victoria Cross' is the highest military award of which country?", options: ["USA", "UK", "France", "Germany"], correctOptionIndex: 1, explanation: "The Victoria Cross is the highest and most prestigious award of the British honours system for gallantry.", difficulty: "easy", source_page: 67 },
-                { question: "The 'Medal of Honor' is the highest military decoration of which country?", options: ["Russia", "China", "USA", "India"], correctOptionIndex: 2, explanation: "The Medal of Honor is the highest military award for valor in the United States armed forces.", difficulty: "easy", source_page: 67 },
-                { question: "The 'Radcliffe Line' divides which two countries?", options: ["India and China", "India and Pakistan", "Pakistan and Afghanistan", "North Korea and South Korea"], correctOptionIndex: 1, explanation: "The Radcliffe Line was the boundary demarcation line between the Indian and Pakistani portions of the Punjab and Bengal provinces of British India.", difficulty: "easy", source_page: 68 },
-                { question: "The 'Maginot Line' was a line of concrete fortifications, obstacles, and weapon installations built by France to deter invasion. It was built along its border with:", options: ["Germany", "Spain", "Italy", "Belgium"], correctOptionIndex: 0, explanation: "The Maginot Line was a line of concrete fortifications, obstacles, and weapon installations built by France in the 1930s to deter invasion from Germany.", difficulty: "medium", source_page: 68 },
-                { question: "The '38th Parallel' divides which two countries?", options: ["North and South Vietnam", "East and West Germany", "North and South Korea", "USA and Canada"], correctOptionIndex: 2, explanation: "The 38th parallel north is a circle of latitude that is approximately 38 degrees north of the Earth's equatorial plane. It forms the border between North Korea and South Korea.", difficulty: "easy", source_page: 68 },
-                { question: "'World Environment Day' is observed annually on:", options: ["April 22", "June 5", "October 16", "December 10"], correctOptionIndex: 1, explanation: "World Environment Day is celebrated annually on 5 June.", difficulty: "easy", source_page: 70 },
-                { question: "'International Women's Day' is observed globally on:", options: ["January 1", "March 8", "May 1", "July 4"], correctOptionIndex: 1, explanation: "International Women's Day (IWD) is a global holiday celebrated annually on March 8 to commemorate the cultural, political, and socioeconomic achievements of women.", difficulty: "easy", source_page: 70 },
-                { question: "'World No Tobacco Day' is observed on:", options: ["March 31", "May 31", "September 27", "November 14"], correctOptionIndex: 1, explanation: "World No Tobacco Day is an annual event observed on May 31.", difficulty: "easy", source_page: 70 },
-                { question: "The 'International Day for the Elimination of Racial Discrimination' is observed on:", options: ["February 21", "March 21", "April 21", "May 21"], correctOptionIndex: 1, explanation: "The International Day for the Elimination of Racial Discrimination is observed annually on 21 March.", difficulty: "medium", source_page: 71 },
-                { question: "'World Food Day' is celebrated on:", options: ["October 16", "November 19", "December 1", "September 27"], correctOptionIndex: 0, explanation: "World Food Day is an international day celebrated every year worldwide on 16 October.", difficulty: "easy", source_page: 70 },
-                { question: "Who is known as the 'Father of Economics'?", options: ["Karl Marx", "Adam Smith", "John Maynard Keynes", "David Ricardo"], correctOptionIndex: 1, explanation: "Adam Smith is widely referred to as the 'Father of Economics' for his pioneering work in classical economics.", difficulty: "easy", source_page: 74 },
-                { question: "Who is known as the 'Nightingale of India'?", options: ["Indira Gandhi", "Lata Mangeshkar", "Sarojini Naidu", "Mother Teresa"], correctOptionIndex: 2, explanation: "Sarojini Naidu was given the title 'Nightingale of India' (Bharat Kokila) by Mahatma Gandhi due to her poetic works.", difficulty: "easy", source_page: 74 },
-                { question: "'Bismarck' is associated with which title?", options: ["The Iron Duke", "The Iron Chancellor", "The Architect of Europe", "The Red Prince"], correctOptionIndex: 1, explanation: "Otto von Bismarck, the first Chancellor of Germany, was famously known as the 'Iron Chancellor'.", difficulty: "medium", source_page: 74 },
-                { question: "Who wrote the famous novel 'War and Peace'?", options: ["Fyodor Dostoevsky", "Leo Tolstoy", "Anton Chekhov", "Ivan Turgenev"], correctOptionIndex: 1, explanation: "'War and Peace' is a monumental novel by the Russian author Leo Tolstoy.", difficulty: "easy", source_page: 75 },
-                { question: "Who developed the theory of relativity?", options: ["Isaac Newton", "Albert Einstein", "Stephen Hawking", "Galileo Galilei"], correctOptionIndex: 1, explanation: "Albert Einstein developed the theory of relativity, a cornerstone of modern physics.", difficulty: "easy", source_page: 75 },
-                { question: "Who was the first person to step on the Moon?", options: ["Buzz Aldrin", "Neil Armstrong", "Michael Collins", "Yuri Gagarin"], correctOptionIndex: 1, explanation: "Neil Armstrong was the first person to walk on the Moon on July 20, 1969.", difficulty: "easy", source_page: 76 },
-                { question: "Who is credited with inventing the telephone?", options: ["Thomas Edison", "Nikola Tesla", "Alexander Graham Bell", "Guglielmo Marconi"], correctOptionIndex: 2, explanation: "Alexander Graham Bell is widely credited with inventing the first practical telephone.", difficulty: "easy", source_page: 76 },
-                { question: "'Mona Lisa' is a famous painting by:", options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Michelangelo"], correctOptionIndex: 2, explanation: "'Mona Lisa' is a half-length portrait painting by Italian artist Leonardo da Vinci.", difficulty: "easy", source_page: 77 },
-                { question: "Who wrote 'The Origin of Species'?", options: ["Gregor Mendel", "Charles Darwin", "Louis Pasteur", "Robert Koch"], correctOptionIndex: 1, explanation: "Charles Darwin's seminal work on evolutionary biology is 'On the Origin of Species'.", difficulty: "medium", source_page: 77 },
-                { question: "Who was the founder of the Mughal Empire in India?", options: ["Akbar", "Humayun", "Babar", "Shah Jahan"], correctOptionIndex: 2, explanation: "Zahir-ud-Din Muhammad Babur founded the Mughal Empire in 1526 after defeating Ibrahim Lodi in the Battle of Panipat.", difficulty: "easy", source_page: 78 },
-                { question: "Who is known as the 'Father of History'?", options: ["Thucydides", "Herodotus", "Plato", "Aristotle"], correctOptionIndex: 1, explanation: "Herodotus is widely regarded as the 'Father of History' in Western culture.", difficulty: "medium", source_page: 78 },
-                { question: "Who was the first woman to fly solo across the Atlantic Ocean?", options: ["Bessie Coleman", "Amelia Earhart", "Valentina Tereshkova", "Jacqueline Cochran"], correctOptionIndex: 1, explanation: "Amelia Earhart achieved this historic feat in 1932.", difficulty: "tough", source_page: 79 },
-                { question: "The theory of 'Continental Drift' was proposed by:", options: ["Alfred Wegener", "Charles Lyell", "James Hutton", "Harry Hess"], correctOptionIndex: 0, explanation: "Alfred Wegener proposed the theory of continental drift in 1912.", difficulty: "tough", source_page: 80 },
-                { question: "'Hamlet' is a tragedy written by:", options: ["William Shakespeare", "Jane Austen", "Charles Dickens", "Mark Twain"], correctOptionIndex: 0, explanation: "'Hamlet' is one of Shakespeare's most famous tragedies.", difficulty: "easy", source_page: 83 },
-                { question: "Who wrote 'Pride and Prejudice'?", options: ["Emily Brontë", "Jane Austen", "Charlotte Brontë", "George Eliot"], correctOptionIndex: 1, explanation: "'Pride and Prejudice' is a romantic novel by Jane Austen.", difficulty: "easy", source_page: 83 },
-                { question: "'Das Kapital' is a foundational text in which field?", options: ["Economics", "Sociology", "Political Science", "Philosophy"], correctOptionIndex: 0, explanation: "'Das Kapital' (Capital: Critique of Political Economy) is a foundational theoretical text in Marxist economics by Karl Marx.", difficulty: "medium", source_page: 84 },
-                { question: "Which Pakistani author wrote 'The Reluctant Fundamentalist'?", options: ["Fatima Bhutto", "Mohsin Hamid", "Kamila Shamsie", "Bapsi Sidhwa"], correctOptionIndex: 1, explanation: "'The Reluctant Fundamentalist' is a novel by Pakistani author Mohsin Hamid.", difficulty: "medium", source_page: 85 },
-                { question: "'A Brief History of Time' is a popular science book by:", options: ["Carl Sagan", "Stephen Hawking", "Richard Dawkins", "Neil deGrasse Tyson"], correctOptionIndex: 1, explanation: "Stephen Hawking's 'A Brief History of Time' explains complex cosmological concepts to a general audience.", difficulty: "easy", source_page: 86 },
-                { question: "The 'IMF' was established in:", options: ["1944", "1945", "1946", "1947"], correctOptionIndex: 0, explanation: "The International Monetary Fund (IMF) was established in July 1944 at the Bretton Woods Conference.", difficulty: "easy", source_page: 88 },
-                { question: "The 'CIS' (Commonwealth of Independent States) is a regional organization of former Soviet republics. Its headquarters are in:", options: ["Moscow", "Minsk", "Kyiv", "Astana"], correctOptionIndex: 1, explanation: "The Executive Committee of the CIS is located in Minsk, Belarus.", difficulty: "medium", source_page: 89 },
-                { question: "'ECO' (Economic Cooperation Organization) is a political and economic intergovernmental organization founded by:", options: ["Pakistan, India, Bangladesh", "Iran, Pakistan, Turkey", "Afghanistan, Iran, Pakistan", "Azerbaijan, Iran, Turkey"], correctOptionIndex: 1, explanation: "The ECO was founded in 1985 by Iran, Pakistan, and Turkey.", difficulty: "medium", source_page: 90 },
-                { question: "How many non-permanent members does the UN Security Council have?", options: ["5", "10", "15", "20"], correctOptionIndex: 1, explanation: "The UN Security Council has 5 permanent members and 10 non-permanent members, elected for two-year terms.", difficulty: "easy", source_page: 93 },
-                { question: "Which UN body is the main deliberative, policymaking and representative organ?", options: ["Security Council", "Economic and Social Council", "General Assembly", "Secretariat"], correctOptionIndex: 2, explanation: "The General Assembly is the main deliberative, policymaking and representative organ of the UN.", difficulty: "easy", source_page: 93 },
-                { question: "Which of these agencies is NOT related to the UN?", options: ["WHO", "UNICEF", "World Bank", "Amnesty International"], correctOptionIndex: 3, explanation: "Amnesty International is a non-governmental organization, while WHO, UNICEF, and the World Bank are part of or affiliated with the UN system.", difficulty: "medium", source_page: 94 },
-                { question: "Which is the world's largest desert by area?", options: ["Sahara Desert", "Arabian Desert", "Arctic Polar Desert", "Gobi Desert"], correctOptionIndex: 2, explanation: "The Arctic Polar Desert is the largest desert in the world, covering polar regions. The Sahara is the largest *hot* desert.", difficulty: "tough", source_page: 97 },
-                { question: "The deepest point in the Earth's oceans is located in the:", options: ["Mariana Trench", "Puerto Rico Trench", "Java Trench", "Kermadec Trench"], correctOptionIndex: 0, explanation: "The Challenger Deep in the Mariana Trench is the deepest known point in Earth's oceans.", difficulty: "easy", source_page: 97 },
-                { question: "Which is the world's largest freshwater lake by volume?", options: ["Lake Superior", "Lake Victoria", "Lake Baikal", "Great Slave Lake"], correctOptionIndex: 2, explanation: "Lake Baikal in Siberia, Russia, is the world's largest freshwater lake by volume.", difficulty: "medium", source_page: 109 },
-                { question: "The longest river in Asia is the:", options: ["Ganges", "Yellow River", "Yangtze River", "Mekong"], correctOptionIndex: 2, explanation: "The Yangtze River is the longest river in Asia and the third-longest in the world.", difficulty: "easy", source_page: 98 },
-                { question: "What does 'NATO' stand for?", options: ["North Asian Treaty Organization", "North Atlantic Treaty Organization", "National Alliance Treaty Organization", "North American Trade Organization"], correctOptionIndex: 1, explanation: "NATO is an intergovernmental military alliance.", difficulty: "easy", source_page: 116 },
-                { question: "'UNHCR' stands for:", options: ["United Nations Human Rights Council", "United Nations High Commissioner for Refugees", "United Nations Human Capital Report", "United Nations Health Care Research"], correctOptionIndex: 1, explanation: "UNHCR is a UN agency protecting refugees.", difficulty: "easy", source_page: 117 },
-                { question: "'ILO' stands for:", options: ["International Labour Office", "International Legal Organization", "Indian Labour Organization", "International Living Organization"], correctOptionIndex: 0, explanation: "ILO is the International Labour Organization, a UN agency.", difficulty: "easy", source_page: 116 },
-                { question: "'CERN' is a European research organization whose name stands for:", options: ["Council for European Nuclear Research", "European Council for Nuclear Research", "European Organization for Nuclear Research", "Committee for European Nuclear Research"], correctOptionIndex: 2, explanation: "CERN is the European Organization for Nuclear Research, a large particle physics laboratory.", difficulty: "tough", source_page: 119 },
-                { question: "How many players are on a standard soccer (football) team?", options: ["9", "10", "11", "12"], correctOptionIndex: 2, explanation: "A standard soccer team consists of 11 players on the field.", difficulty: "easy", source_page: 130 },
-                { question: "Which country has won the most FIFA World Cups in football?", options: ["Germany", "Italy", "Brazil", "Argentina"], correctOptionIndex: 2, explanation: "Brazil has won the FIFA World Cup five times, more than any other nation.", difficulty: "easy", source_page: 131 },
-                { question: "Which country hosted the 2018 FIFA World Cup?", options: ["Qatar", "Brazil", "Russia", "South Africa"], correctOptionIndex: 2, explanation: "Russia hosted the 2018 FIFA World Cup.", difficulty: "medium", source_page: 132 },
-                { question: "The term 'democracy' literally means:", options: ["Rule by the elite", "Rule by the people", "Rule by a king", "Rule by a few"], correctOptionIndex: 1, explanation: "Democracy is a system of government where power is vested in the people, who rule either directly or through freely elected representatives.", difficulty: "easy", source_page: 136 },
-                { question: "A 'federal system' of government is one where power is divided between:", options: ["Central and local governments", "Executive, legislative, and judicial branches", "Elected and unelected officials", "Monarchy and Parliament"], correctOptionIndex: 0, explanation: "In a federal system, power is divided between a central government and various constituent units (states, provinces, etc.).", difficulty: "medium", source_page: 137 },
-                { question: "Who is considered the author of 'The Social Contract'?", options: ["John Locke", "Jean-Jacques Rousseau", "Montesquieu", "Voltaire"], correctOptionIndex: 1, explanation: "Jean-Jacques Rousseau's 'The Social Contract' is a highly influential work of political philosophy.", difficulty: "tough", source_page: 138 },
-                { question: "The term 'Cold War' refers to the geopolitical tension after World War II between:", options: ["USA and China", "USA and Soviet Union", "UK and Germany", "France and Russia"], correctOptionIndex: 1, explanation: "The Cold War was a period of geopolitical tension between the Soviet Union and its satellite states, and the United States with its allies, lasting from the mid-1940s until the early 1990s.", difficulty: "easy", source_page: 141 },
-                { question: "The 'Iron Curtain' was a political boundary dividing Europe into two separate areas from the end of World War II until the end of the Cold War. The term was popularized by:", options: ["Harry S. Truman", "Winston Churchill", "Joseph Stalin", "Franklin D. Roosevelt"], correctOptionIndex: 1, explanation: "Winston Churchill famously used the phrase 'Iron Curtain' in a speech in 1946.", difficulty: "medium", source_page: 142 },
-                { question: "The 'Berlin Wall' was constructed in which year?", options: ["1949", "1951", "1961", "1989"], correctOptionIndex: 2, explanation: "The Berlin Wall was a guarded concrete barrier that physically and ideologically divided Berlin from 1961 to 1989.", difficulty: "easy", source_page: 143 },
-                { question: "'Glasnost' and 'Perestroika' were reform policies introduced in the Soviet Union by:", options: ["Vladimir Lenin", "Nikita Khrushchev", "Mikhail Gorbachev", "Leonid Brezhnev"], correctOptionIndex: 2, explanation: "Mikhail Gorbachev introduced the policies of Glasnost (openness) and Perestroika (restructuring) in the 1980s.", difficulty: "medium", source_page: 144 }
+                // General Information: Pages 1-12 (34 questions)
+                { question: "What is the capital city of Canada?", options: ["Toronto", "Ottawa", "Vancouver", "Montreal"], correctOptionIndex: 1, explanation: "Ottawa is the capital city of Canada.", difficulty: "easy", source_page: 1 },
+                { question: "The largest desert in the world is the:", options: ["Sahara Desert", "Arabian Desert", "Gobi Desert", "Antarctic Polar Desert"], correctOptionIndex: 3, explanation: "The Antarctic Polar Desert is the largest desert in the world, covering most of the continent of Antarctica.", difficulty: "medium", source_page: 2 },
+                { question: "Which is the longest river in the world?", options: ["Amazon River", "Nile River", "Yangtze River", "Mississippi River"], correctOptionIndex: 1, explanation: "The Nile River is traditionally considered the longest river in the world.", difficulty: "easy", source_page: 3 },
+                { question: "Mount Everest is located in which mountain range?", options: ["Andes", "Rockies", "Himalayas", "Alps"], correctOptionIndex: 2, explanation: "Mount Everest is part of the Himalayan mountain range.", difficulty: "easy", source_page: 4 },
+                { question: "The 'Land of the Rising Sun' is the nickname for which country?", options: ["China", "South Korea", "Japan", "Vietnam"], correctOptionIndex: 2, explanation: "Japan is often referred to as the 'Land of the Rising Sun'.", difficulty: "easy", source_page: 5 },
+                { question: "Which continent is the largest by land area?", options: ["Africa", "Europe", "Asia", "North America"], correctOptionIndex: 2, explanation: "Asia is the Earth's largest continent by land area and population.", difficulty: "easy", source_page: 6 },
+                { question: "The Great Barrier Reef is off the coast of which country?", options: ["India", "Australia", "Brazil", "South Africa"], correctOptionIndex: 1, explanation: "The Great Barrier Reef is located off the coast of Queensland, Australia.", difficulty: "medium", source_page: 7 },
+                { question: "What is the chemical symbol for water?", options: ["O2", "CO2", "H2O", "N2"], correctOptionIndex: 2, explanation: "H2O is the chemical formula for water.", difficulty: "easy", source_page: 8 },
+                { question: "Who painted the Mona Lisa?", options: ["Vincent van Gogh", "Pablo Picasso", "Leonardo da Vinci", "Claude Monet"], correctOptionIndex: 2, explanation: "Leonardo da Vinci painted the Mona Lisa.", difficulty: "easy", source_page: 9 },
+                { question: "The instrument used to measure atmospheric pressure is:", options: ["Thermometer", "Barometer", "Anemometer", "Hydrometer"], correctOptionIndex: 1, explanation: "A barometer is used to measure atmospheric pressure.", difficulty: "medium", source_page: 10 },
+                { question: "Which planet is known as the 'Red Planet'?", options: ["Venus", "Mars", "Jupiter", "Saturn"], correctOptionIndex: 1, explanation: "Mars is often called the 'Red Planet' due to its reddish appearance.", difficulty: "easy", source_page: 11 },
+                { question: "The process by which plants make their own food is called:", options: ["Respiration", "Transpiration", "Photosynthesis", "Digestion"], correctOptionIndex: 2, explanation: "Photosynthesis is the process used by plants to convert light energy into chemical energy.", difficulty: "easy", source_page: 12 },
+                { question: "What is the currency of Japan?", options: ["Yuan", "Won", "Yen", "Rupee"], correctOptionIndex: 2, explanation: "The currency of Japan is the Japanese Yen.", difficulty: "easy", source_page: 1 },
+                { question: "Which ocean is the largest and deepest?", options: ["Atlantic Ocean", "Indian Ocean", "Southern Ocean", "Pacific Ocean"], correctOptionIndex: 3, explanation: "The Pacific Ocean is the largest and deepest of Earth's oceanic divisions.", difficulty: "easy", source_page: 2 },
+                { question: "The Suez Canal connects which two bodies of water?", options: ["Red Sea and Mediterranean Sea", "Atlantic Ocean and Pacific Ocean", "Black Sea and Aegean Sea", "Baltic Sea and North Sea"], correctOptionIndex: 0, explanation: "The Suez Canal is an artificial sea-level waterway in Egypt, connecting the Mediterranean Sea to the Red Sea.", difficulty: "medium", source_page: 3 },
+                { question: "Which country is famous for its pyramids?", options: ["China", "Mexico", "Egypt", "Peru"], correctOptionIndex: 2, explanation: "Egypt is renowned for its ancient pyramids.", difficulty: "easy", source_page: 4 },
+                { question: "The Amazon rainforest is primarily located in which continent?", options: ["Africa", "South America", "Asia", "Australia"], correctOptionIndex: 1, explanation: "The Amazon rainforest covers much of northwestern South America.", difficulty: "easy", source_page: 5 },
+                { question: "What is the smallest continent by land area?", options: ["Europe", "Australia", "Antarctica", "South America"], correctOptionIndex: 1, explanation: "Australia is the smallest continent by land area.", difficulty: "easy", source_page: 6 },
+                { question: "The study of earthquakes is called:", options: ["Geology", "Meteorology", "Seismology", "Biology"], correctOptionIndex: 2, explanation: "Seismology is the scientific study of earthquakes and the propagation of elastic waves through the Earth or through other planet-like bodies.", difficulty: "medium", source_page: 7 },
+                { question: "Which gas do plants absorb from the atmosphere for photosynthesis?", options: ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"], correctOptionIndex: 2, explanation: "Plants absorb carbon dioxide from the atmosphere during photosynthesis.", difficulty: "easy", source_page: 8 },
+                { question: "Who developed the theory of relativity?", options: ["Isaac Newton", "Galileo Galilei", "Albert Einstein", "Stephen Hawking"], correctOptionIndex: 2, explanation: "Albert Einstein developed the theory of relativity.", difficulty: "easy", source_page: 9 },
+                { question: "The largest organ in the human body is the:", options: ["Heart", "Brain", "Skin", "Liver"], correctOptionIndex: 2, explanation: "The skin is the largest organ of the human body.", difficulty: "easy", source_page: 10 },
+                { question: "Which country is home to the 'Great Wall'?", options: ["Japan", "India", "China", "Mongolia"], correctOptionIndex: 2, explanation: "The Great Wall of China is a series of fortifications built across the historical northern borders of ancient Chinese states and Imperial China.", difficulty: "easy", source_page: 11 },
+                { question: "The process of converting sugar into alcohol and carbon dioxide is called:", options: ["Oxidation", "Fermentation", "Digestion", "Combustion"], correctOptionIndex: 1, explanation: "Fermentation is the process that converts sugar to acids, gases, or alcohol.", difficulty: "medium", source_page: 12 },
+                { question: "The official language of Brazil is:", options: ["Spanish", "Portuguese", "English", "French"], correctOptionIndex: 1, explanation: "Portuguese is the official and national language of Brazil.", difficulty: "easy", source_page: 1 },
+                { question: "The deepest point in the Earth's oceans is the:", options: ["Puerto Rico Trench", "Java Trench", "Mariana Trench", "Philippine Trench"], correctOptionIndex: 2, explanation: "The Mariana Trench, located in the western Pacific Ocean, is the deepest oceanic trench on Earth.", difficulty: "tough", source_page: 2 },
+                { question: "Which famous structure was built by the Romans for gladiatorial contests?", options: ["Pantheon", "Colosseum", "Aqueduct", "Forum"], correctOptionIndex: 1, explanation: "The Colosseum is an elliptical amphitheatre in the centre of the city of Rome, Italy, built by the Flavian dynasty for gladiatorial contests and public spectacles.", difficulty: "easy", source_page: 3 },
+                { question: "Which mountain is the highest in Africa?", options: ["Mount Kilimanjaro", "Mount Kenya", "Mount Stanley", "Mount Elgon"], correctOptionIndex: 0, explanation: "Mount Kilimanjaro is the highest mountain in Africa.", difficulty: "easy", source_page: 4 },
+                { question: "The 'Big Apple' is a nickname for which city?", options: ["Los Angeles", "Chicago", "New York City", "Boston"], correctOptionIndex: 2, explanation: "New York City is famously known as 'The Big Apple'.", difficulty: "easy", source_page: 5 },
+                { question: "Which continent is known as the 'Dark Continent'?", options: ["Asia", "Africa", "South America", "Antarctica"], correctOptionIndex: 1, explanation: "Africa was historically referred to as the 'Dark Continent' by Europeans due to its perceived mystery and unexplored interior.", difficulty: "medium", source_page: 6 },
+                { question: "The study of climate and weather is called:", options: ["Hydrology", "Oceanography", "Climatology", "Pathology"], correctOptionIndex: 2, explanation: "Climatology is the scientific study of climate, meteorology is the study of weather.", difficulty: "medium", source_page: 7 },
+                { question: "What is the primary gas in Earth's atmosphere?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Argon"], correctOptionIndex: 2, explanation: "Nitrogen makes up about 78% of Earth's atmosphere.", difficulty: "easy", source_page: 8 },
+                { question: "Who wrote 'Hamlet'?", options: ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"], correctOptionIndex: 1, explanation: "William Shakespeare wrote the play 'Hamlet'.", difficulty: "easy", source_page: 9 },
+                { question: "The human heart has how many chambers?", options: ["Two", "Three", "Four", "Five"], correctOptionIndex: 2, explanation: "The human heart has four chambers: two atria and two ventricles.", difficulty: "easy", source_page: 10 }
             ];
-            quizQuestions.push(...generalKnowledgeMCQs);
 
-            // Urdu Questions (Idioms and Proverbs & Aligarh Movement)
-            const urduMCQs = [
-                { question: "'اونٹ کے منہ میں زیرہ' محاورے کا کیا مطلب ہے؟", options: ["بہت زیادہ چیز", "بہت کم چیز", "ضرورت سے زیادہ", "بے معنی چیز"], correctOptionIndex: 1, explanation: "اس محاورے کا مطلب ہے کہ کسی بہت بڑی ضرورت کے مقابلے میں بہت تھوڑی چیز کا ہونا۔", difficulty: "easy", source_page: 43 },
-                { question: "'آگ بگولہ ہونا' کا کیا مطلب ہے؟", options: ["خوش ہونا", "بہت غصہ ہونا", "پریشان ہونا", "خاموش ہو جانا"], correctOptionIndex: 1, explanation: "آگ بگولہ ہونے کا مطلب ہے شدید غصے میں آ جانا۔", difficulty: "easy", source_page: 43 },
-                { question: "'ایک انار سو بیمار' کا کیا مطلب ہے؟", options: ["ایک چیز کے بہت سے خریدار", "بیمار کی کثرت", "انار کی پیداوار کم ہونا", "ایک ڈاکٹر اور بہت سے مریض"], correctOptionIndex: 0, explanation: "اس کا مطلب ہے کہ ایک ہی چیز کی طلب بہت زیادہ ہو اور فراہم کرنے والے کم ہوں۔", difficulty: "medium", source_page: 44 },
-                { question: "'بغض ناہنجار' سے کیا مراد ہے؟", options: ["دوستی", "نفرت", "محبت", "لگاؤ"], correctOptionIndex: 1, explanation: "بغض ناہنجار کا مطلب ہے شدید یا بری نفرت۔", difficulty: "tough", source_page: 45 },
-                { question: "'پانچوں انگلیاں گھی میں' کا مطلب ہے:", options: ["بہت بھوک لگنا", "ہر طرف سے فائدہ ہی فائدہ ہونا", "پریشانی میں ہونا", "مال و دولت جمع کرنا"], correctOptionIndex: 1, explanation: "اس محاورے کا مطلب ہے کہ انسان ہر طرح سے فائدے میں ہو۔", difficulty: "easy", source_page: 43 },
-                { question: "'دال میں کچھ کالا ہونا' کا کیا مطلب ہے؟", options: ["کھانے کا ذائقہ خراب ہونا", "کسی بات میں گڑبڑ ہونا یا شک ہونا", "کھانا جل جانا", "دال کا رنگ کالا ہونا"], correctOptionIndex: 1, explanation: "اس محاورے کا مطلب ہے کہ کسی معاملے میں کوئی شک یا راز چھپا ہو۔", difficulty: "easy", source_page: 43 },
-                { question: "'چاند پر تھوکنا' کا کیا مطلب ہے؟", options: ["کسی محترم ہستی پر کیچڑ اچھالنا", "چاند کو آلودہ کرنا", "ناممکن کام کرنا", "فضول کام کرنا"], correctOptionIndex: 0, explanation: "اس کا مطلب ہے کہ کسی قابل احترام شخصیت یا چیز کی توہین کرنے کی کوشش کرنا۔", difficulty: "medium", source_page: 44 },
-                { question: "'ناچ نہ جانے آنگن ٹیڑھا' کا کیا مطلب ہے؟", options: ["ناچنا نہ آتا ہو تو بہانے بنانا", "ناچنے کی جگہ کا خراب ہونا", "ناچنا مشکل ہونا", "بہت اچھا ناچنا"], correctOptionIndex: 0, explanation: "اس کا مطلب ہے کہ اپنی خامی کو چھپانے کے لیے دوسروں پر الزام لگانا یا بہانے بنانا۔", difficulty: "medium", source_page: 44 },
-                { question: "'امیر خسرو' کا تعلق کس تحریک سے تھا؟", options: ["صوفی تحریک", "تحریک علی گڑھ", "فارسی ادب", "بھکتی تحریک"], correctOptionIndex: 0, explanation: "امیر خسرو کا تعلق صوفی تحریک اور ہند اسلامی ثقافت سے تھا۔ یہ سوال تحریک علی گڑھ کے حوالے سے مبہم ہے۔", difficulty: "tough", source_page: 46 },
-                { question: "تحریک علی گڑھ کس نے شروع کی تھی؟", options: ["سرسید احمد خان", "مولانا محمد علی جوہر", "علامہ اقبال", "قائداعظم"], correctOptionIndex: 0, explanation: "تحریک علی گڑھ کی بنیاد سرسید احمد خان نے رکھی تھی جس کا مقصد مسلمانوں میں جدید تعلیم کو فروغ دینا تھا۔", difficulty: "easy", source_page: 45 },
-                { question: "علی گڑھ مسلم یونیورسٹی کا پرانا نام کیا تھا؟", options: ["محمڈن اینگلو اورینٹل کالج", "گورنمنٹ کالج علی گڑھ", "علی گڑھ کالج", "اسلامیہ کالج علی گڑھ"], correctOptionIndex: 0, explanation: "علی گڑھ مسلم یونیورسٹی کا پرانا نام محمڈن اینگلو اورینٹل کالج (MAO College) تھا۔", difficulty: "easy", source_page: 45 },
-                { question: "تحریک علی گڑھ کا اہم مقصد کیا تھا؟", options: ["مسلمانوں میں مذہبی تعلیم کو فروغ دینا", "مسلمانوں میں سیاسی بیداری پیدا کرنا", "مسلمانوں میں جدید اور سائنسی تعلیم کو فروغ دینا", "مسلمانوں کو حکومت کے خلاف بغاوت پر اکسانا"], correctOptionIndex: 2, explanation: "تحریک علی گڑھ کا بنیادی مقصد مسلمانوں کو جدید اور سائنسی تعلیم سے آراستہ کر کے انہیں دورِ جدید کے تقاضوں سے ہم آہنگ کرنا تھا۔", difficulty: "medium", source_page: 45 },
-                { question: "'ماڈرن مسلم انڈیا' کی اصطلاح کس کے ساتھ منسوب ہے؟", options: ["سرسید احمد خان", "نواب محسن الملک", "مولانا شبلی نعمانی", "قائداعظم"], correctOptionIndex: 0, explanation: "سرسید احمد خان کو 'ماڈرن مسلم انڈیا' کا معمار سمجھا جاتا ہے کیونکہ انہوں نے مسلمانوں کی فکری اور تعلیمی حالت کو بہتر بنانے کے لیے اہم اقدامات کیے۔", difficulty: "tough", source_page: 46 },
-                { question: "'آب آب ہونا' محاورے کا کیا مطلب ہے؟", options: ["پانی پینا", "بہت شرمندہ ہونا", "غسل کرنا", "پانی میں ڈوبنا"], correctOptionIndex: 1, explanation: "آب آب ہونا کا مطلب ہے بہت زیادہ شرمندہ ہونا۔", difficulty: "medium", source_page: 43 },
-                { question: "'آٹے میں نمک' کا کیا مطلب ہے؟", options: ["کسی چیز کی بہت زیادہ مقدار", "کسی چیز کی بہت کم مقدار", "آٹا اور نمک ملانا", "بے فائدہ چیز"], correctOptionIndex: 1, explanation: "آٹے میں نمک کا مطلب ہے کسی چیز کا بہت قلیل مقدار میں ہونا، نہ ہونے کے برابر۔", difficulty: "easy", source_page: 43 },
-                { question: "'ٹکے سیر بھاجی ٹکے سیر کھاجا' کا کیا مطلب ہے؟", options: ["ہر چیز کی قیمت کم ہونا", "اچھی بری چیز میں تمیز نہ کرنا", "بہت مہنگی چیز", "سستے داموں بیچنا"], correctOptionIndex: 1, explanation: "اس کا مطلب ہے کہ اچھی اور بری چیز میں تمیز نہ کرنا، ہر چیز کو ایک ہی قیمت پر دیکھنا۔", difficulty: "medium", source_page: 44 },
-                { question: "سرسید احمد خان نے سائنٹیفک سوسائٹی کب قائم کی؟", options: ["1857", "1864", "1875", "1888"], correctOptionIndex: 1, explanation: "سرسید احمد خان نے 1864 میں سائنٹیفک سوسائٹی قائم کی جس کا مقصد انگریزی سائنسی کتابوں کا اردو میں ترجمہ کرنا تھا۔", difficulty: "tough", source_page: 45 },
-                { question: "'بغل میں چھری منہ میں رام رام' کا مطلب ہے؟", options: ["ظاہری ہمدردی اور باطنی دشمنی", "سیدھا سادھا آدمی", "مخلص دوست", "صوفیانہ طبیعت"], correctOptionIndex: 0, explanation: "اس محاورے کا مطلب ہے کہ انسان ظاہر میں اچھا بنے لیکن باطن میں دشمنی رکھے۔", difficulty: "medium", source_page: 44 },
-                { question: "تحریک علی گڑھ کے بانی سرسید احمد خان کا یوم وفات کیا ہے؟", options: ["27 مارچ 1898", "19 اپریل 1897", "11 ستمبر 1888", "14 جون 1900"], correctOptionIndex: 0, explanation: "سرسید احمد خان کا انتقال 27 مارچ 1898 کو ہوا۔", difficulty: "tough", source_page: 45 },
-                { question: "'دلّی ابھی دور ہے' کا کیا مطلب ہے؟", options: ["دلی کا بہت دور ہونا", "منزل ابھی دور ہے", "سفر کرنا مشکل ہے", "کام ختم ہو گیا ہے"], correctOptionIndex: 1, explanation: "اس کا مطلب ہے کہ مقصد یا منزل حاصل ہونے میں ابھی بہت وقت یا رکاوٹیں ہیں۔", difficulty: "easy", source_page: 43 },
-                { question: "'کاغذی گھوڑے دوڑانا' کا کیا مطلب ہے؟", options: ["خالی خولی باتیں کرنا", "تیزی سے سفر کرنا", "لکھنے میں ماہر ہونا", "دستاویزات جمع کرنا"], correctOptionIndex: 0, explanation: "اس محاورے کا مطلب ہے کہ صرف لکھت پڑھت میں مشغول رہنا اور عملی کام نہ کرنا۔", difficulty: "medium", source_page: 44 },
-                { question: "علی گڑھ تحریک کے مقاصد میں شامل نہیں تھا:", options: ["سیاسی آزادی", "جدید تعلیم کا فروغ", "معاشرتی اصلاح", "مغربی علوم کا حصول"], correctOptionIndex: 0, explanation: "تحریک علی گڑھ کا فوری مقصد مسلمانوں کی سیاسی آزادی حاصل کرنا نہیں تھا بلکہ تعلیم اور سماجی اصلاح پر زور دینا تھا۔", difficulty: "tough", source_page: 45 },
-                { question: "'پاؤں بھاری ہونا' کا کیا مطلب ہے؟", options: ["تھک جانا", "حمل سے ہونا", "چلنے میں دشواری", "بیمار ہونا"], correctOptionIndex: 1, explanation: "یہ محاورہ حمل (pregnancy) کی حالت کو ظاہر کرتا ہے۔", difficulty: "medium", source_page: 43 },
-                { question: "'زمین آسمان کے قلابے ملانا' کا کیا مطلب ہے؟", options: ["بہت زیادہ تعریف کرنا", "ناممکن بات کرنا", "جھوٹ بولنا", "مشکل کام کرنا"], correctOptionIndex: 0, explanation: "اس کا مطلب ہے کسی کی بہت زیادہ مبالغہ آمیز تعریف کرنا۔", difficulty: "medium", source_page: 44 },
-                { question: "کس شخصیت کو 'سرسید ثانی' کہا جاتا ہے؟", options: ["مولانا الطاف حسین حالی", "نواب محسن الملک", "مولوی چراغ علی", "مولانا محمد علی جوہر"], correctOptionIndex: 1, explanation: "نواب محسن الملک کو سرسید احمد خان کے بعد تحریک علی گڑھ کو آگے بڑھانے میں ان کے اہم کردار کی وجہ سے 'سرسید ثانی' کہا جاتا ہے۔", difficulty: "tough", source_page: 46 }
-            ];
-            quizQuestions.push(...urduMCQs);
-
-            // Islamic Studies Questions (Solved Important Questions)
-            const islamicStudiesMCQs = [
-                { question: "قرآن مجید کی سب سے چھوٹی سورت کون سی ہے؟", options: ["سورۃ فاتحہ", "سورۃ کوثر", "سورۃ اخلاص", "سورۃ عصر"], correctOptionIndex: 1, explanation: "سورۃ کوثر قرآن مجید کی سب سے چھوٹی سورت ہے، جس میں صرف تین آیات ہیں۔", difficulty: "easy", source_page: 24 },
-                { question: "اسلام کے ارکان کتنے ہیں؟", options: ["چار", "پانچ", "چھ", "سات"], correctOptionIndex: 1, explanation: "اسلام کے پانچ ارکان ہیں: کلمہ طیبہ، نماز، روزہ، زکوٰۃ، اور حج۔", difficulty: "easy", source_page: 24 },
-                { question: "کلمہ طیبہ کا دوسرا نام کیا ہے؟", options: ["کلمہ شہادت", "کلمہ توحید", "کلمہ تمجید", "کلمہ رد کفر"], correctOptionIndex: 1, explanation: "کلمہ طیبہ کو کلمہ توحید بھی کہتے ہیں کیونکہ یہ اللہ تعالیٰ کی وحدانیت کا اقرار ہے۔", difficulty: "medium", source_page: 25 },
-                { question: "کس صحابی کو 'اسد اللہ' کا لقب دیا گیا؟", options: ["حضرت ابوبکر صدیق", "حضرت عمر فاروق", "حضرت عثمان غنی", "حضرت علی مرتضیٰ"], correctOptionIndex: 3, explanation: "حضرت علی مرتضیٰ کو 'اسد اللہ' (اللہ کا شیر) کا لقب دیا گیا۔", difficulty: "easy", source_page: 25 },
-                { question: "زکوٰۃ کس پر فرض ہے؟", options: ["ہر مسلمان پر", "صاحب نصاب مسلمان پر", "صرف مردوں پر", "صرف عورتوں پر"], correctOptionIndex: 1, explanation: "زکوٰۃ صرف اس مسلمان پر فرض ہے جو صاحب نصاب ہو، یعنی جس کے پاس ایک مخصوص مقدار میں مال ہو۔", difficulty: "easy", source_page: 26 },
-                { question: "قرآن مجید میں سب سے زیادہ کس پیغمبر کا ذکر آیا ہے؟", options: ["حضرت آدم", "حضرت نوح", "حضرت ابراہیم", "حضرت موسیٰ"], correctOptionIndex: 3, explanation: "قرآن مجید میں حضرت موسیٰ علیہ السلام کا ذکر سب سے زیادہ مرتبہ (136 بار) آیا ہے۔", difficulty: "tough", source_page: 26 },
-                { question: "غزوہ بدر کب پیش آیا؟", options: ["1 ہجری", "2 ہجری", "3 ہجری", "4 ہجری"], correctOptionIndex: 1, explanation: "غزوہ بدر 2 ہجری میں پیش آیا، جو اسلام کی پہلی بڑی جنگ تھی۔", difficulty: "easy", source_page: 27 },
-                { question: "حج کس پر فرض ہے؟", options: ["صاحب استطاعت مسلمان پر", "ہر بالغ مسلمان پر", "صرف مالداروں پر", "صرف صحت مندوں پر"], correctOptionIndex: 0, explanation: "حج صرف اس مسلمان پر فرض ہے جو صاحب استطاعت ہو، یعنی جسمانی اور مالی دونوں لحاظ سے اس کی طاقت رکھتا ہو۔", difficulty: "easy", source_page: 27 },
-                { question: "قرآن مجید کے کتنے سیپارے ہیں؟", options: ["29", "30", "31", "32"], correctOptionIndex: 1, explanation: "قرآن مجید 30 سیپاروں میں تقسیم ہے۔", difficulty: "easy", source_page: 24 },
-                { question: "کس اسلامی ماہ میں روزے رکھے جاتے ہیں؟", options: ["محرم", "رجب", "رمضان", "شوال"], correctOptionIndex: 2, explanation: "روزے اسلامی ماہ رمضان میں رکھے جاتے ہیں۔", difficulty: "easy", source_page: 24 },
-                { question: "کس نماز کو 'صلاة الوسطیٰ' کہا جاتا ہے؟", options: ["فجر", "ظہر", "عصر", "عشاء"], correctOptionIndex: 2, explanation: "عصر کی نماز کو قرآن میں 'صلاة الوسطیٰ' کہا گیا ہے۔", difficulty: "medium", source_page: 25 },
-                { question: "فتح مکہ کب ہوئی؟", options: ["6 ہجری", "7 ہجری", "8 ہجری", "9 ہجری"], correctOptionIndex: 2, explanation: "فتح مکہ 8 ہجری میں ہوئی جب مسلمان فاتحانہ طور پر مکہ میں داخل ہوئے۔", difficulty: "medium", source_page: 27 },
-                { question: "کس غزوہ کو 'غزوہ احزاب' بھی کہا جاتا ہے؟", options: ["غزوہ بدر", "غزوہ احد", "غزوہ خندق", "غزوہ خیبر"], correctOptionIndex: 2, explanation: "غزوہ خندق کو 'غزوہ احزاب' (جماعتوں کی جنگ) بھی کہا جاتا ہے کیونکہ بہت سے قبائل نے مل کر مسلمانوں پر حملہ کیا تھا۔", difficulty: "medium", source_page: 27 },
-                { question: "قرآن مجید میں کل کتنی سورتیں ہیں؟", options: ["110", "112", "114", "116"], correctOptionIndex: 2, explanation: "قرآن مجید میں کل 114 سورتیں ہیں۔", difficulty: "easy", source_page: 24 },
-                { question: "نماز میں سب سے پہلے کیا پڑھا جاتا ہے؟", options: ["سورۃ فاتحہ", "تکبیر تحریمہ", "ثناء", "سورۃ اخلاص"], correctOptionIndex: 1, explanation: "نماز کی ابتداء تکبیر تحریمہ (اللہ اکبر) سے ہوتی ہے۔", difficulty: "easy", source_page: 25 },
-                { question: "'بیت المقدس' کس شہر میں واقع ہے؟", options: ["مدینہ", "مکہ", "قدس (یروشلم)", "دمشق"], correctOptionIndex: 2, explanation: "بیت المقدس، جسے مسجد اقصیٰ بھی کہا جاتا ہے، قدس (یروشلم) میں واقع ہے۔", difficulty: "medium", source_page: 26 },
-                { question: "کس صحابی کو 'ذو النورین' کا لقب ملا؟", options: ["حضرت ابوبکر صدیق", "حضرت عمر فاروق", "حضرت عثمان غنی", "حضرت علی مرتضیٰ"], correctOptionIndex: 2, explanation: "حضرت عثمان غنی کو 'ذو النورین' (دو نوروں والا) کا لقب ملا کیونکہ انہوں نے رسول اللہ ﷺ کی دو بیٹیوں سے شادی کی۔", difficulty: "medium", source_page: 25 },
-                { question: "کس اسلامی ماہ میں ہجرت مدینہ ہوئی تھی؟", options: ["محرم", "ربیع الاول", "شوال", "ذوالحجہ"], correctOptionIndex: 1, explanation: "ہجرت مدینہ ربیع الاول کے مہینے میں ہوئی تھی۔", difficulty: "tough", source_page: 27 },
-                { question: "قرآن مجید کی سب سے لمبی آیت کون سی ہے؟", options: ["آیت الکرسی", "آیت الدَین", "آیت نور", "آیت سجدہ"], correctOptionIndex: 1, explanation: "قرآن مجید کی سب سے لمبی آیت سورۃ البقرہ کی آیت نمبر 282 ہے جو 'آیت الدَین' کے نام سے مشہور ہے۔", difficulty: "tough", source_page: 24 },
-                { question: "کس پیغمبر نے سب سے پہلے خانہ کعبہ کی تعمیر کی؟", options: ["حضرت آدم", "حضرت نوح", "حضرت ابراہیم", "حضرت محمد ﷺ"], correctOptionIndex: 2, explanation: "حضرت ابراہیم علیہ السلام اور ان کے بیٹے حضرت اسماعیل علیہ السلام نے مل کر خانہ کعبہ کی بنیادیں اٹھائیں۔", difficulty: "easy", source_page: 26 },
-                { question: "معراج کا واقعہ کب پیش آیا؟", options: ["رجب 10 نبوی", "ربیع الاول 11 نبوی", "شوال 12 نبوی", "ذوالحجہ 13 نبوی"], correctOptionIndex: 0, explanation: "معراج کا واقعہ ہجرت سے تقریباً ایک سال قبل رجب کے مہینے میں پیش آیا، جو 10 نبوی کے قریب ہے۔", difficulty: "tough", source_page: 28 },
-                { question: "کس غزوہ میں حضرت حمزہ شہید ہوئے؟", options: ["غزوہ بدر", "غزوہ احد", "غزوہ خندق", "غزوہ خیبر"], correctOptionIndex: 1, explanation: "حضرت حمزہ رضی اللہ عنہ غزوہ احد میں شہید ہوئے۔", difficulty: "medium", source_page: 27 },
-                { question: "اذان میں 'حی علی الفلاح' کے بعد کیا کہا جاتا ہے؟", options: ["اللہ اکبر", "لا الہ الا اللہ", "الصلاة خیر من النوم", "قد قامت الصلاة"], correctOptionIndex: 2, explanation: "فجر کی اذان میں 'حی علی الفلاح' کے بعد 'الصلاة خیر من النوم' کہا جاتا ہے۔", difficulty: "medium", source_page: 25 },
-                { question: "کس خلیفہ راشد کا دورِ خلافت سب سے طویل تھا؟", options: ["حضرت ابوبکر صدیق", "حضرت عمر فاروق", "حضرت عثمان غنی", "حضرت علی مرتضیٰ"], correctOptionIndex: 2, explanation: "حضرت عثمان غنی رضی اللہ عنہ کا دورِ خلافت تقریباً 12 سال رہا جو خلفائے راشدین میں سب سے طویل ہے۔", difficulty: "tough", source_page: 28 },
-                { question: "قرآن مجید میں 'ذوالقرنین' کا ذکر کس سورت میں آیا ہے؟", options: ["سورۃ کہف", "سورۃ مریم", "سورۃ طٰہٰ", "سورۃ انبیاء"], correctOptionIndex: 0, explanation: "ذوالقرنین کا ذکر قرآن مجید کی سورۃ کہف میں آیا ہے۔", difficulty: "tough", source_page: 26 }
-            ];
-            quizQuestions.push(...islamicStudiesMCQs);
-            
-            // English Questions (Comprehensive Review)
             const englishMCQs = [
-                { question: "Choose the synonym for 'Salient':", options: ["Hidden", "Prominent", "Minor", "Obscure"], correctOptionIndex: 1, explanation: "Salient means most noticeable or important.", difficulty: "medium", source_page: 475 },
-                { question: "Choose the antonym for 'Mitigate':", options: ["Alleviate", "Worsen", "Reduce", "Ease"], correctOptionIndex: 1, explanation: "Mitigate means to make less severe, serious, or painful. Worsen is its opposite.", difficulty: "tough", source_page: 478 },
-                { question: "What does the idiom 'to bite the bullet' mean?", options: ["To avoid a difficult situation", "To bravely endure a difficult or unpleasant situation", "To complain loudly", "To refuse to cooperate"], correctOptionIndex: 1, explanation: "The idiom 'to bite the bullet' means to face a difficult or unpleasant situation with courage and determination.", difficulty: "medium", source_page: 494 },
-                { question: "Choose the synonym for 'Eradicate':", options: ["Preserve", "Establish", "Abolish", "Create"], correctOptionIndex: 2, explanation: "Eradicate means to destroy completely; put an end to.", difficulty: "easy", source_page: 472 },
-                { question: "Choose the antonym for 'Candid':", options: ["Honest", "Frank", "Deceitful", "Open"], correctOptionIndex: 2, explanation: "Candid means truthful and straightforward. Deceitful is its opposite.", difficulty: "medium", source_page: 473 },
-                { question: "What does the phrasal verb 'put off' mean?", options: ["To cancel", "To postpone", "To extinguish", "To start"], correctOptionIndex: 1, explanation: "'Put off' means to delay or postpone an event or action.", difficulty: "easy", source_page: "N/A" }, /* Conceptual question */
-                { question: "'Ad hoc' means:", options: ["For a specific purpose", "Without a plan", "Always", "Never"], correctOptionIndex: 0, explanation: "'Ad hoc' is a Latin phrase meaning 'for this' and typically implies a solution or committee formed for a specific purpose or problem.", difficulty: "medium", source_page: 494 },
-                { question: "'De facto' means:", options: ["By law", "In practice", "Officially", "Legally"], correctOptionIndex: 1, explanation: "'De facto' is a Latin phrase meaning 'in fact' or 'in practice,' used to describe situations that exist in reality, even if not legally established.", difficulty: "tough", source_page: 495 },
-                { question: "Identify the correct sentence:", options: ["He don't like coffee.", "He doesn't like coffee.", "He no like coffee.", "He aren't like coffee."], correctOptionIndex: 1, explanation: "For third-person singular subjects (he, she, it), 'does not' or 'doesn't' is used in simple present negative sentences.", difficulty: "easy", source_page: 420 },
-                { question: "Choose the correct preposition: She is accustomed _____ hard work.", options: ["to", "with", "in", "by"], correctOptionIndex: 0, explanation: "The correct idiom is 'accustomed to'.", difficulty: "easy", source_page: 428 },
-                { question: "Change into passive voice: 'Someone has stolen my watch.'", options: ["My watch has been stolen by someone.", "My watch was stolen.", "My watch is stolen.", "My watch has been stolen."], correctOptionIndex: 3, explanation: "In passive voice, the agent (someone) is often omitted if not important. The tense (present perfect) is maintained: 'has been + past participle'.", difficulty: "medium", source_page: 464 },
-                { question: "Identify the type of sentence: 'Go home.'", options: ["Declarative", "Interrogative", "Imperative", "Exclamatory"], correctOptionIndex: 2, explanation: "An imperative sentence gives a command or instruction.", difficulty: "easy", source_page: 436 },
-                { question: "Choose the appropriate conjunction: He is poor, _____ he is honest.", options: ["and", "but", "or", "so"], correctOptionIndex: 1, explanation: "'But' is used to show a contrast or contradiction between two ideas.", difficulty: "easy", source_page: 454 },
-                { question: "What is the main idea of a text?", options: ["The conclusion of the text.", "The author's personal opinion.", "The central point or purpose of the text.", "A summary of key details."], correctOptionIndex: 2, explanation: "The main idea is the most important message or central concept the author wants to convey.", difficulty: "easy", source_page: "N/A" } /* Conceptual question */
+                // Correct/Incorrect With Solved Exercise: Pages 420-422 (33 questions)
+                // Focusing on common grammatical errors and sentence structure
+                { question: "Identify the INCORRECT sentence: 'He is junior than me.'", options: ["He is junior to me.", "He is junior than me.", "He is junior to I.", "He is more junior than me."], correctOptionIndex: 1, explanation: "'Junior' takes the preposition 'to', not 'than'.", difficulty: "easy", source_page: 420 },
+                { question: "Identify the CORRECT sentence: 'The news are true.'", options: ["The news are true.", "The news is true.", "The news were true.", "The news be true."], correctOptionIndex: 1, explanation: "'News' is an uncountable noun and takes a singular verb.", difficulty: "easy", source_page: 420 },
+                { question: "Choose the CORRECT sentence: 'Each of the boys play cricket.'", options: ["Each of the boys play cricket.", "Each of the boys plays cricket.", "Each of the boy play cricket.", "Each of the boys playing cricket."], correctOptionIndex: 1, explanation: "'Each of' takes a singular verb.", difficulty: "medium", source_page: 420 },
+                { question: "Identify the INCORRECT sentence: 'He has fear from the dog.'", options: ["He has fear of the dog.", "He has fear from the dog.", "He is fearful from the dog.", "He has fear about the dog."], correctOptionIndex: 1, explanation:"The correct preposition is 'of', not 'from'.", difficulty: "easy", source_page: 421 },
+                { question: "Choose the CORRECT sentence: 'Neither of them were present.'", options: ["Neither of them were present.", "Neither of them was present.", "Neither of them are present.", "Neither of them present."], correctOptionIndex: 1, explanation: "'Neither of' takes a singular verb.", difficulty: "medium", source_page: 421 },
+                { question: "Identify the INCORRECT sentence: 'I prefer coffee than tea.'", options: ["I prefer coffee to tea.", "I prefer coffee than tea.", "I prefer coffee and tea.", "I prefer coffee then tea."], correctOptionIndex: 1, explanation: "'Prefer' is followed by 'to', not 'than'.", difficulty: "easy", source_page: 421 },
+                { question: "Choose the CORRECT sentence: 'He is good in English.'", options: ["He is good in English.", "He is good at English.", "He is good for English.", "He is good with English."], correctOptionIndex: 1, explanation: "'Good at' is the correct idiom for proficiency.", difficulty: "easy", source_page: 422 },
+                { question: "Identify the INCORRECT sentence: 'One of my friend is a doctor.'", options: ["One of my friends is a doctor.", "One of my friend is a doctor.", "One of my friend are a doctor.", "One of friends is a doctor."], correctOptionIndex: 1, explanation: "'One of' should be followed by a plural noun.", difficulty: "medium", source_page: 422 },
+                { question: "Choose the CORRECT sentence: 'She entered into the room.'", options: ["She entered into the room.", "She entered the room.", "She entered in the room.", "She entered at the room."], correctOptionIndex: 1, explanation: "The verb 'enter' does not require a preposition like 'into' when referring to a physical space.", difficulty: "easy", source_page: 422 },
+                { question: "Identify the INCORRECT sentence: 'He is suffering with fever.'", options: ["He is suffering from fever.", "He is suffering with fever.", "He suffer from fever.", "He is suffering by fever."], correctOptionIndex: 1, explanation: "'Suffering' takes the preposition 'from'.", difficulty: "easy", source_page: 420 },
+                { question: "Choose the CORRECT sentence: 'The climate of Karachi is better than Hyderabad.'", options: ["The climate of Karachi is better than Hyderabad.", "The climate of Karachi is better than that of Hyderabad.", "Karachi climate is better than Hyderabad.", "The climate of Karachi is better than Hyderabad's."], correctOptionIndex: 1, explanation: "Comparison should be between similar things (climate of Karachi vs. climate of Hyderabad), requiring 'that of'.", difficulty: "tough", source_page: 420 },
+                { question: "Identify the INCORRECT sentence: 'He is confident to success.'", options: ["He is confident of success.", "He is confident to success.", "He is confident for success.", "He is confident on success."], correctOptionIndex: 1, explanation: "'Confident' takes the preposition 'of'.", difficulty: "easy", source_page: 421 },
+                { question: "Choose the CORRECT sentence: 'The reason why he failed is because he did not study.'", options: ["The reason why he failed is because he did not study.", "The reason why he failed is that he did not study.", "He failed because he did not study.", "The reason he failed is because he did not study."], correctOptionIndex: 1, explanation: "Avoid using 'the reason... is because'; use 'the reason... is that' or simply 'because'.", difficulty: "medium", source_page: 421 },
+                { question: "Identify the INCORRECT sentence: 'I am accustomed with hard work.'", options: ["I am accustomed to hard work.", "I am accustomed with hard work.", "I am accustomed by hard work.", "I am accustomed for hard work."], correctOptionIndex: 1, explanation: "'Accustomed' takes the preposition 'to'.", difficulty: "easy", source_page: 422 },
+                { question: "Choose the CORRECT sentence: 'She is capable for doing this.'", options: ["She is capable for doing this.", "She is capable of doing this.", "She is capable to doing this.", "She is capable in doing this."], correctOptionIndex: 1, explanation: "'Capable' takes the preposition 'of'.", difficulty: "easy", source_page: 420 },
+                { question: "Identify the INCORRECT sentence: 'He prevented me to go.'", options: ["He prevented me from going.", "He prevented me to go.", "He prevented me not to go.", "He prevented me going."], correctOptionIndex: 1, explanation: "'Prevent' is followed by 'from' + '-ing' form.", difficulty: "medium", source_page: 420 },
+                { question: "Choose the CORRECT sentence: 'He enjoys to play cricket.'", options: ["He enjoys to play cricket.", "He enjoys playing cricket.", "He enjoys for playing cricket.", "He enjoys of playing cricket."], correctOptionIndex: 1, explanation: "The verb 'enjoy' is followed by a gerund (-ing form).", difficulty: "easy", source_page: 421 },
+                { question: "Identify the INCORRECT sentence: 'She is desirous for knowledge.'", options: ["She is desirous of knowledge.", "She is desirous for knowledge.", "She is desirous to knowledge.", "She is desirous with knowledge."], correctOptionIndex: 1, explanation: "'Desirous' takes the preposition 'of'.", difficulty: "easy", source_page: 421 },
+                { question: "Choose the CORRECT sentence: 'He is senior than all others.'", options: ["He is senior than all others.", "He is senior to all others.", "He is senior from all others.", "He is senior with all others."], correctOptionIndex: 1, explanation: "'Senior' takes the preposition 'to'.", difficulty: "easy", source_page: 422 },
+                { question: "Identify the INCORRECT sentence: 'The committee is divided in their opinion.'", options: ["The committee are divided in their opinion.", "The committee is divided in their opinion.", "The committee is divided in its opinion.", "The committee are divided in its opinion."], correctOptionIndex: 1, explanation: "When a collective noun refers to individual members acting separately, it takes a plural verb and pronoun.", difficulty: "tough", source_page: 422 },
+                { question: "Choose the CORRECT sentence: 'I have ordered for a book.'", options: ["I have ordered for a book.", "I have ordered a book.", "I have ordered to a book.", "I have ordered with a book."], correctOptionIndex: 1, explanation: "The verb 'order' is transitive and does not require 'for' when referring to ordering something.", difficulty: "easy", source_page: 420 },
+                { question: "Identify the INCORRECT sentence: 'She insisted on me to go.'", options: ["She insisted on my going.", "She insisted on me to go.", "She insisted me to go.", "She insisted for me to go."], correctOptionIndex: 1, explanation: "'Insist on' is followed by a possessive pronoun + gerund.", difficulty: "tough", source_page: 420 },
+                { question: "Choose the CORRECT sentence: 'Despite of being rich, he is unhappy.'", options: ["Despite of being rich, he is unhappy.", "Despite being rich, he is unhappy.", "In spite being rich, he is unhappy.", "Despite of rich, he is unhappy."], correctOptionIndex: 1, explanation: "'Despite' is not followed by 'of'. Use 'in spite of' or just 'despite'.", difficulty: "easy", source_page: 421 },
+                { question: "Identify the INCORRECT sentence: 'He died from cancer.'", options: ["He died of cancer.", "He died from cancer.", "He died due to cancer.", "He died because of cancer."], correctOptionIndex: 1, explanation: "'Die of' is used for diseases.", difficulty: "easy", source_page: 421 },
+                { question: "Choose the CORRECT sentence: 'He gave me a good advice.'", options: ["He gave me a good advice.", "He gave me a good piece of advice.", "He gave me good advises.", "He gave me good advice."], correctOptionIndex: 1, explanation: "'Advice' is an uncountable noun and cannot be used with 'a'; use 'a piece of advice'.", difficulty: "medium", source_page: 422 },
+                { question: "Identify the INCORRECT sentence: 'The patient is admitted in the hospital.'", options: ["The patient is admitted to the hospital.", "The patient is admitted in the hospital.", "The patient is admitted into the hospital.", "The patient is admitted at the hospital."], correctOptionIndex: 1, explanation: "For admission to an institution, 'admitted to' is usually preferred.", difficulty: "easy", source_page: 422 },
+                { question: "Choose the CORRECT sentence: 'He is accused with theft.'", options: ["He is accused with theft.", "He is accused of theft.", "He is accused for theft.", "He is accused by theft."], correctOptionIndex: 1, explanation: "'Accused' takes the preposition 'of'.", difficulty: "easy", source_page: 420 },
+                { question: "Identify the INCORRECT sentence: 'She refrained to tell me the truth.'", options: ["She refrained from telling me the truth.", "She refrained to tell me the truth.", "She refrained not to tell me the truth.", "She refrained of telling me the truth."], correctOptionIndex: 1, explanation: "'Refrain' is followed by 'from' + '-ing' form.", difficulty: "medium", source_page: 420 },
+                { question: "Choose the CORRECT sentence: 'They complied to my request.'", options: ["They complied to my request.", "They complied with my request.", "They complied for my request.", "They complied in my request."], correctOptionIndex: 1, explanation: "'Comply' takes the preposition 'with'.", difficulty: "easy", source_page: 421 },
+                { question: "Identify the INCORRECT sentence: 'He is senior from me.'", options: ["He is senior to me.", "He is senior from me.", "He is senior than me.", "He is senior by me."], correctOptionIndex: 1, explanation: "'Senior' takes the preposition 'to'.", difficulty: "easy", source_page: 421 },
+                { question: "Choose the CORRECT sentence: 'His manners are polite.'", options: ["His manners are polite.", "His manner is polite.", "His manner are polite.", "His manners is polite."], correctOptionIndex: 0, explanation: "'Manners' refers to overall behavior and is a plural noun.", difficulty: "medium", source_page: 422 },
+                { question: "Identify the INCORRECT sentence: 'He has no control on his temper.'", options: ["He has no control over his temper.", "He has no control on his temper.", "He has no control with his temper.", "He has no control for his temper."], correctOptionIndex: 1, explanation: "'Control' takes the preposition 'over'.", difficulty: "easy", source_page: 422 },
+                { question: "Choose the CORRECT sentence: 'The dog ran at a high speed.'", options: ["The dog ran at a high speed.", "The dog ran with a high speed.", "The dog ran in a high speed.", "The dog ran by a high speed."], correctOptionIndex: 0, explanation: "'At a speed' is the correct idiom.", difficulty: "easy", source_page: 420 }
             ];
+
+            const psychologicalTestsMCQs = [
+                // Analogies: Pages 498-502 (33 questions)
+                { question: "OXYGEN : BURN :: FOOD : ?", options: ["Eat", "Digest", "Cook", "Grow"], correctOptionIndex: 1, explanation: "Oxygen is essential for burning; food is essential for digestion.", difficulty: "easy", source_page: 498 },
+                { question: "DOCTOR : PATIENT :: LAWYER : ?", options: ["Client", "Court", "Judge", "Law"], correctOptionIndex: 0, explanation: "A doctor serves a patient; a lawyer serves a client.", difficulty: "easy", source_page: 498 },
+                { question: "TAILOR : SUIT :: CHEF : ?", options: ["Food", "Restaurant", "Knife", "Recipe"], correctOptionIndex: 0, explanation: "A tailor makes a suit; a chef makes food.", difficulty: "easy", source_page: 498 },
+                { question: "BOOK : PAGE :: LADDER : ?", options: ["Step", "Wood", "Climb", "Tall"], correctOptionIndex: 0, explanation: "A book is made of pages; a ladder is made of steps.", difficulty: "easy", source_page: 499 },
+                { question: "COW : MILK :: HEN : ?", options: ["Egg", "Feather", "Chicken", "Nest"], correctOptionIndex: 0, explanation: "A cow gives milk; a hen gives eggs.", difficulty: "easy", source_page: 499 },
+                { question: "FRUIT : TREE :: FLOWER : ?", options: ["Vase", "Root", "Plant", "Garden"], correctOptionIndex: 2, explanation: "Fruit grows on a tree; a flower grows on a plant.", difficulty: "easy", source_page: 499 },
+                { question: "BIRD : NEST :: ANIMAL : ?", options: ["Cave", "Den", "Zoo", "Shelter"], correctOptionIndex: 3, explanation: "A bird lives in a nest; an animal lives in a shelter (general term for habitat).", difficulty: "medium", source_page: 500 },
+                { question: "HOT : COLD :: LIGHT : ?", options: ["Dark", "Heavy", "Bulb", "Day"], correctOptionIndex: 0, explanation: "Hot is the opposite of cold; light is the opposite of dark.", difficulty: "easy", source_page: 500 },
+                { question: "SHOE : FOOT :: GLOVE : ?", options: ["Hand", "Finger", "Wrist", "Arm"], correctOptionIndex: 0, explanation: "A shoe is worn on the foot; a glove is worn on the hand.", difficulty: "easy", source_page: 500 },
+                { question: "WATER : DRINK :: BREAD : ?", options: ["Eat", "Bake", "Wheat", "Butter"], correctOptionIndex: 0, explanation: "You drink water; you eat bread.", difficulty: "easy", source_page: 501 },
+                { question: "LEAF : TREE :: BRICK : ?", options: ["Wall", "Clay", "House", "Cement"], correctOptionIndex: 0, explanation: "Leaves are parts of a tree; bricks are parts of a wall.", difficulty: "medium", source_page: 501 },
+                { question: "EAR : LISTEN :: EYE : ?", options: ["See", "Glasses", "Blind", "Look"], correctOptionIndex: 0, explanation: "You use your ear to listen; you use your eye to see.", difficulty: "easy", source_page: 501 },
+                { question: "FARMER : FIELD :: TEACHER : ?", options: ["School", "Student", "Book", "Classroom"], correctOptionIndex: 3, explanation: "A farmer works in a field; a teacher works in a classroom.", difficulty: "medium", source_page: 502 },
+                { question: "SUN : DAY :: MOON : ?", options: ["Night", "Star", "Light", "Sky"], correctOptionIndex: 0, explanation: "The sun is associated with day; the moon is associated with night.", difficulty: "easy", source_page: 502 },
+                { question: "GRASS : GREEN :: BLOOD : ?", options: ["Red", "Blue", "White", "Vein"], correctOptionIndex: 0, explanation: "Grass is green; blood is red.", difficulty: "easy", source_page: 498 },
+                { question: "KEY : LOCK :: PASSWORD : ?", options: ["Unlock", "Computer", "Security", "Access"], correctOptionIndex: 3, explanation: "A key grants access to a lock; a password grants access to a system (e.g., computer).", difficulty: "medium", source_page: 499 },
+                { question: "TRAIN : TRACK :: CAR : ?", options: ["Road", "Wheel", "Driver", "Engine"], correctOptionIndex: 0, explanation: "A train moves on a track; a car moves on a road.", difficulty: "easy", source_page: 499 },
+                { question: "PIG : PIGLET :: DOG : ?", options: ["Cat", "Puppy", "Bark", "Kennel"], correctOptionIndex: 1, explanation: "A pig's young one is a piglet; a dog's young one is a puppy.", difficulty: "easy", source_page: 500 },
+                { question: "EDITOR : NEWSPAPER :: FILMMAKER : ?", options: ["Movie", "Actor", "Camera", "Studio"], correctOptionIndex: 0, explanation: "An editor produces a newspaper; a filmmaker produces a movie.", difficulty: "medium", source_page: 500 },
+                { question: "PEN : WRITE :: KNIFE : ?", options: ["Cut", "Sharp", "Blade", "Fork"], correctOptionIndex: 0, explanation: "You use a pen to write; you use a knife to cut.", difficulty: "easy", source_page: 501 },
+                { question: "TEETH : CHEW :: FINGER : ?", options: ["Point", "Touch", "Nail", "Ring"], correctOptionIndex: 1, explanation: "Teeth are used to chew; fingers are used to touch.", difficulty: "easy", source_page: 501 },
+                { question: "UMPIRE : BASEBALL :: REFEREE : ?", options: ["Football", "Basketball", "Tennis", "Cricket"], correctOptionIndex: 0, explanation: "An umpire officiates baseball; a referee officiates football (soccer).", difficulty: "medium", source_page: 502 },
+                { question: "WARM : HOT :: COOL : ?", options: ["Cold", "Freezing", "Chill", "Windy"], correctOptionIndex: 0, explanation: "Warm is a lesser degree of hot; cool is a lesser degree of cold.", difficulty: "medium", source_page: 498 },
+                { question: "GRAPE : WINE :: POTATO : ?", options: ["Chips", "Vegetable", "Mash", "Grow"], correctOptionIndex: 0, explanation: "Wine is made from grapes; chips are made from potatoes.", difficulty: "medium", source_page: 499 },
+                { question: "AUTHOR : BOOK :: COMPOSER : ?", options: ["Music", "Song", "Orchestra", "Melody"], correctOptionIndex: 0, explanation: "An author creates a book; a composer creates music.", difficulty: "easy", source_page: 500 },
+                { question: "CLOTHES : WARDROBE :: BOOKS : ?", options: ["Shelf", "Library", "Read", "Paper"], correctOptionIndex: 0, explanation: "Clothes are kept in a wardrobe; books are kept on a shelf.", difficulty: "easy", source_page: 500 },
+                { question: "CAPTAIN : SHIP :: LEADER : ?", options: ["Team", "Follower", "Guide", "Group"], correctOptionIndex: 0, explanation: "A captain leads a ship; a leader leads a team.", difficulty: "easy", source_page: 501 },
+                { question: "CLOCK : TIME :: THERMOMETER : ?", options: ["Temperature", "Fever", "Heat", "Weather"], correctOptionIndex: 0, explanation: "A clock measures time; a thermometer measures temperature.", difficulty: "easy", source_page: 501 },
+                { question: "POISON : DEATH :: MEDICINE : ?", options: ["Cure", "Sickness", "Pill", "Doctor"], correctOptionIndex: 0, explanation: "Poison leads to death; medicine leads to cure.", difficulty: "easy", source_page: 502 },
+                { question: "EARTH : PLANET :: MOON : ?", options: ["Star", "Satellite", "Orbit", "Night"], correctOptionIndex: 1, explanation: "Earth is a planet; the Moon is a satellite.", difficulty: "easy", source_page: 502 },
+                { question: "FRANCE : PARIS :: JAPAN : ?", options: ["Tokyo", "Kyoto", "Osaka", "Beijing"], correctOptionIndex: 0, explanation: "Paris is the capital of France; Tokyo is the capital of Japan.", difficulty: "easy", source_page: 498 },
+                { question: "WOOD : FURNITURE :: CLAY : ?", options: ["Pottery", "Brick", "Mud", "Sculpture"], correctOptionIndex: 0, explanation: "Furniture is made from wood; pottery is made from clay.", difficulty: "medium", source_page: 499 },
+                { question: "WOOL : SHEEP :: SILK : ?", options: ["Worm", "Fabric", "Cocoon", "Thread"], correctOptionIndex: 0, explanation: "Wool comes from sheep; silk comes from a worm (silkworm).", difficulty: "medium", source_page: 500 }
+            ];
+
+
+            // Combine and shuffle questions
+            quizQuestions.push(...generalKnowledgeMCQs);
             quizQuestions.push(...englishMCQs);
+            quizQuestions.push(...psychologicalTestsMCQs);
 
-            // General Abilities Questions (Mathematics, Logical, Analytical)
-            const generalAbilitiesMCQs = [
-                { question: "'Bird : Nest :: Dog : ?'", options: ["Kennel", "Stable", "Den", "Cage"], correctOptionIndex: 0, explanation: "A bird lives in a nest, and a dog lives in a kennel.", difficulty: "easy", source_page: 498 },
-                { question: "'Cobbler : Leather :: Carpenter : ?'", options: ["Wood", "Furniture", "Hammer", "Table"], correctOptionIndex: 0, explanation: "A cobbler works with leather, and a carpenter works with wood.", difficulty: "easy", source_page: 499 },
-                { question: "'Thermometer : Temperature :: Barometer : ?'", options: ["Humidity", "Wind", "Pressure", "Rainfall"], correctOptionIndex: 2, explanation: "A thermometer measures temperature, and a barometer measures atmospheric pressure.", difficulty: "medium", source_page: 500 },
-                { question: "If $5x - 3 = 12$, what is the value of $x$?", options: ["2", "3", "4", "5"], correctOptionIndex: 1, explanation: "$5x - 3 = 12 \\Rightarrow 5x = 15 \\Rightarrow x = 3$.", difficulty: "easy", source_page: 511 },
-                { question: "What is 25% of 200?", options: ["25", "50", "75", "100"], correctOptionIndex: 1, explanation: "$0.25 \\times 200 = 50$.", difficulty: "easy", source_page: 513 },
-                { question: "If the sum of two numbers is 30 and their difference is 10, what are the numbers?", options: ["15 and 15", "20 and 10", "25 and 5", "18 and 12"], correctOptionIndex: 1, explanation: "Let the numbers be x and y. $x+y=30$ and $x-y=10$. Adding the two equations gives $2x=40 \\Rightarrow x=20$. Substituting x=20 into the first equation gives $20+y=30 \\Rightarrow y=10$.", difficulty: "medium", source_page: 514 },
-                { question: "A father is twice as old as his son. Twenty years ago, the father was four times as old as his son. What is the present age of the son?", options: ["20 years", "30 years", "40 years", "50 years"], correctOptionIndex: 1, explanation: "Let son's current age be $x$, father's current age be $2x$. 20 years ago, son was $x-20$, father was $2x-20$. $2x-20 = 4(x-20) \\Rightarrow 2x-20 = 4x-80 \\Rightarrow 2x = 60 \\Rightarrow x = 30$.", difficulty: "tough", source_page: 519 },
-                { question: "A, B, and C start a business. A invests Rs. 1000 for 4 months, B invests Rs. 2000 for 3 months, and C invests Rs. 3000 for 2 months. If the total profit at the end of the year is Rs. 1600, what is B's share?", options: ["Rs. 400", "Rs. 600", "Rs. 800", "Rs. 1000"], correctOptionIndex: 1, explanation: "Ratio of investments: A: $1000 \\times 4 = 4000$. B: $2000 \\times 3 = 6000$. C: $3000 \\times 2 = 6000$. Ratio A:B:C = 4:6:6 = 2:3:3. Total ratio parts = $2+3+3 = 8$. B's share = $(3/8) \\times 1600 = 3 \\times 200 = 600$.", difficulty: "medium", source_page: 521 },
-                { question: "If 15 men can complete a piece of work in 12 days, how many days will 20 men take to complete the same work?", options: ["8 days", "9 days", "10 days", "11 days"], correctOptionIndex: 1, explanation: "Let W be the work. $W = M_1 \\times D_1 = M_2 \\times D_2$. So, $15 \\times 12 = 20 \\times D_2$. $180 = 20 \\times D_2 \\Rightarrow D_2 = 180/20 = 9$ days.", difficulty: "easy", source_page: 523 },
-                { question: "Pipe A can fill a tank in 10 hours, and pipe B can fill it in 15 hours. If both pipes are opened simultaneously, how long will it take to fill the tank?", options: ["5 hours", "6 hours", "7 hours", "8 hours"], correctOptionIndex: 1, explanation: "Rate of A = 1/10 tank/hour. Rate of B = 1/15 tank/hour. Combined rate = $1/10 + 1/15 = 3/30 + 2/30 = 5/30 = 1/6$ tank/hour. So, it will take 6 hours to fill the tank.", difficulty: "medium", source_page: 525 },
-                { question: "A boat can travel at 10 km/hr in still water. If the speed of the stream is 2 km/hr, how long will it take for the boat to go 24 km upstream?", options: ["2 hours", "3 hours", "4 hours", "5 hours"], correctOptionIndex: 1, explanation: "Speed upstream = Speed in still water - Speed of stream = $10 - 2 = 8$ km/hr. Time = Distance / Speed = $24 / 8 = 3$ hours.", difficulty: "medium", source_page: 527 },
-                { question: "In a 100 m race, A beats B by 10 m and C by 20 m. By how many meters does B beat C in the same race?", options: ["8 m", "10 m", "11.11 m", "12.5 m"], correctOptionIndex: 2, explanation: "When A finishes 100m, B is at 90m, and C is at 80m. When B finishes 100m (i.e., runs 100m), C would have run $(80/90) \\times 100 = 800/9 = 88.89$m. So B beats C by $100 - 88.89 = 11.11$m.", difficulty: "tough", source_page: 529 },
-                { question: "A person buys 100 shares of a company at Rs. 50 per share. If the company declares a dividend of 10%, what is the annual dividend income for the person?", options: ["Rs. 500", "Rs. 1000", "Rs. 5000", "Rs. 100"], correctOptionIndex: 0, explanation: "Total investment = $100 \\times 50 = 5000$. Dividend income = 10% of $5000 = 0.10 \\times 5000 = 500$.", difficulty: "easy", source_page: 530 },
-                { question: "The present worth of a bill due 6 months hence at 5% per annum is Rs. 2000. What is the true discount?", options: ["Rs. 50", "Rs. 100", "Rs. 150", "Rs. 200"], correctOptionIndex: 0, explanation: "Present Worth (P.W.) = Rs. 2000. Rate (R) = 5% p.a. Time (T) = 6 months = 0.5 years. True Discount (TD) = $(P.W. \\times R \\times T) / 100 = (2000 \\times 5 \\times 0.5) / 100 = (2000 \\times 2.5) / 100 = 5000 / 100 = 50$.", difficulty: "medium", source_page: 531 },
-                { question: "A bill for Rs. 10,000 is drawn on March 1, 2025, for 3 months. The rate of discount is 10% per annum. What is the Banker's Discount?", options: ["Rs. 100", "Rs. 200", "Rs. 250", "Rs. 300"], correctOptionIndex: 2, explanation: "Face Value (F.V.) = Rs. 10,000. Time (T) = 3 months = 1/4 year. Rate (R) = 10% p.a. Banker's Discount (B.D.) = $(F.V. \\times R \\times T) / 100 = (10000 \\times 10 \\times 0.25) / 100 = (10000 \\times 2.5) / 100 = 25000 / 100 = 250$.", difficulty: "medium", source_page: 533 },
-                { question: "At what time between 4 and 5 o'clock will the hands of a clock be together?", options: ["4:20", "4:21 9/11", "4:21 1/11", "4:22"], correctOptionIndex: 1, explanation: "The hands are together at 12 o'clock. Relative speed is 11/2 degrees per minute. For 4 o'clock, the minute hand is 20 minute spaces behind the hour hand. Time = $20 \\times (60/55) = 240/11 = 21 \\frac{9}{11}$ minutes past 4.", difficulty: "tough", source_page: 534 },
-                { question: "Simplify: $0.03 \\times 0.05$", options: ["0.0015", "0.015", "0.15", "0.00015"], correctOptionIndex: 0, explanation: "Multiply the numbers as whole numbers ($3 \\times 5 = 15$). Count the total number of decimal places (4). Place the decimal point 4 places from the right: 0.0015.", difficulty: "easy", source_page: 536 },
-                { question: "The length of a rectangle is twice its width. If the area of the rectangle is 72 sq cm, what is its width?", options: ["6 cm", "8 cm", "12 cm", "18 cm"], correctOptionIndex: 0, explanation: "Let width = w, length = 2w. Area = length × width = $2w \\times w = 2w^2$. So, $2w^2 = 72 \\Rightarrow w^2 = 36 \\Rightarrow w = 6$ cm.", difficulty: "easy", source_page: 538 },
-                { question: "What is the volume of a cube whose side is 5 cm?", options: ["25 cm³", "50 cm³", "125 cm³", "250 cm³"], correctOptionIndex: 2, explanation: "Volume of a cube = side³ = $5^3 = 5 \\times 5 \\times 5 = 125$ cubic cm.", difficulty: "easy", source_page: 541 },
-                { question: "A bag contains 3 red balls and 5 blue balls. If one ball is drawn at random, what is the probability of drawing a red ball?", options: ["3/5", "5/8", "3/8", "1/8"], correctOptionIndex: 2, explanation: "Total balls = $3+5 = 8$. Number of red balls = 3. Probability of drawing a red ball = (Number of red balls) / (Total balls) = 3/8.", difficulty: "easy", source_page: 544 },
-                { question: "A ladder 10 m long reaches a window 8 m above the ground. How far is the foot of the ladder from the base of the wall?", options: ["4 m", "6 m", "8 m", "10 m"], correctOptionIndex: 1, explanation: "This forms a right-angled triangle. Hypotenuse (ladder) = 10m, height (window) = 8m. Base = $\\sqrt{10^2 - 8^2} = \\sqrt{100 - 64} = \\sqrt{36} = 6$m.", difficulty: "medium", source_page: 546 },
-                { question: "Find the odd one out: 2, 3, 5, 7, 9, 11, 13", options: ["3", "5", "9", "13"], correctOptionIndex: 2, explanation: "All other numbers are prime numbers, while 9 is a composite number.", difficulty: "easy", source_page: 548 },
-                { question: "Complete the series: 1, 4, 9, 16, 25, ?", options: ["30", "32", "36", "49"], correctOptionIndex: 2, explanation: "This is a series of perfect squares: $1^2, 2^2, 3^2, 4^2, 5^2, 6^2$. So, the next number is $6^2 = 36$.", difficulty: "easy", source_page: 549 },
-                { question: "Simplify: $\\sqrt{12} + \\sqrt{27}$", options: ["$5\\sqrt{3}$", "$6\\sqrt{3}$", "$3\\sqrt{3}$", "$4\\sqrt{3}$"], correctOptionIndex: 0, explanation: "$\\sqrt{12} = \\sqrt{4 \\times 3} = 2\\sqrt{3}$. $\\sqrt{27} = \\sqrt{9 \\times 3} = 3\\sqrt{3}$. So, $2\\sqrt{3} + 3\\sqrt{3} = 5\\sqrt{3}$.", difficulty: "medium", source_page: 550 },
-                { question: "Find the square root of 625.", options: ["15", "20", "25", "30"], correctOptionIndex: 2, explanation: "$25 \\times 25 = 625$.", difficulty: "easy", source_page: 551 },
-                { question: "Find the cube root of 216.", options: ["4", "5", "6", "7"], correctOptionIndex: 2, explanation: "$6 \\times 6 \\times 6 = 216$.", difficulty: "easy", source_page: 552 }
-            ];
-            quizQuestions.push(...generalAbilitiesMCQs);
+            // Ensure a fixed number of questions (e.g., 100) by trimming or warning if not enough
+            if (quizQuestions.length > 100) {
+                // Randomly select 100 questions if more are available
+                shuffleArray(quizQuestions);
+                quizQuestions = quizQuestions.slice(0, 100);
+            } else if (quizQuestions.length < 100) {
+                console.warn(`Warning: Only ${quizQuestions.length} questions available for June 26. Aim for 100 questions.`);
+                // If fewer than 100, just use what's available
+            }
+            
+            shuffleArray(quizQuestions); // Shuffle the final set of questions
 
-            // Dynamically distribute questions to meet the 100 question target
-            let allQuestions = [];
-            allQuestions.push(...generalKnowledgeMCQs, ...urduMCQs, ...islamicStudiesMCQs, ...englishMCQs, ...generalAbilitiesMCQs);
-
-            // Filter questions by difficulty
-            let easyQuestions = allQuestions.filter(q => q.difficulty === 'easy');
-            let mediumQuestions = allQuestions.filter(q => q.difficulty === 'medium');
-            let toughQuestions = allQuestions.filter(q => q.difficulty === 'tough');
-
-            // Shuffle each difficulty pool to ensure randomness
-            shuffleArray(easyQuestions);
-            shuffleArray(mediumQuestions);
-            shuffleArray(toughQuestions);
-
-            // Target distribution for a challenging quiz (approximate counts)
-            const targetEasy = 20; // Fewer easy
-            const targetMedium = 40; // More medium
-            const targetTough = 40; // More tough
-            const totalQuestions = 100;
-
-            let finalQuiz = [];
-
-            // Add questions based on target counts, prioritizing harder questions
-            finalQuiz = finalQuiz.concat(toughQuestions.slice(0, Math.min(toughQuestions.length, targetTough)));
-            finalQuiz = finalQuiz.concat(mediumQuestions.slice(0, Math.min(mediumQuestions.length, targetMedium)));
-            finalQuiz = finalQuiz.concat(easyQuestions.slice(0, Math.min(easyQuestions.length, targetEasy)));
-
-            // If still short, add remaining questions from any pool, prioritizing tough/medium
-            let remaining = totalQuestions - finalQuiz.length;
-            if (remaining > 0) {
-                let remainingPool = [
-                    ...toughQuestions.slice(Math.min(toughQuestions.length, targetTough)),
-                    ...mediumQuestions.slice(Math.min(mediumQuestions.length, targetMedium)),
-                    ...easyQuestions.slice(Math.min(easyQuestions.length, targetEasy))
-                ];
-                shuffleArray(remainingPool);
-                finalQuiz = finalQuiz.concat(remainingPool.slice(0, remaining));
+            // Randomly select one "Today's Special Question" (only if there are questions)
+            if (quizQuestions.length > 0) {
+                specialQuestionIndex = Math.floor(Math.random() * quizQuestions.length);
+                quizQuestions[specialQuestionIndex].special = true;
             }
 
-            // Ensure exactly 100 questions (trim if somehow over)
-            quizQuestions = finalQuiz.slice(0, totalQuestions);
-
-            // Final shuffle of the entire quiz for random order presentation
-            shuffleArray(quizQuestions);
-
-            // Select one random question to be the "special" question for the day
-            specialQuestionIndex = Math.floor(Math.random() * quizQuestions.length);
-            quizQuestions[specialQuestionIndex].special = true;
-
-            // Log final question counts by difficulty for verification
-            let finalEasyCount = quizQuestions.filter(q => q.difficulty === 'easy').length;
-            let finalMediumCount = quizQuestions.filter(q => q.difficulty === 'medium').length;
-            let finalToughCount = quizQuestions.filter(q => q.difficulty === 'tough').length;
-            console.log(`Final Question Counts: Easy=${finalEasyCount}, Medium=${finalMediumCount}, Tough=${finalToughCount}, Total=${quizQuestions.length}`);
+            // Apply 30% chance to shuffle the entire quiz order
+            if (Math.random() < 0.3) {
+                shuffleArray(quizQuestions);
+                // After shuffling, find the new index of the special question
+                specialQuestionIndex = quizQuestions.findIndex(q => q.special);
+            }
         }
 
-        // Initialize the quiz when the DOM is fully loaded
+        // --- Initial Setup on DOM Load ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Set the login ID dynamically based on the CURRENT_DATE_STR (e.g., 21JUNE)
+            // Set the login ID dynamically based on the CURRENT_DATE_STR
             const dateParts = CURRENT_DATE_STR.split(' ');
             const monthName = dateParts[0].toUpperCase().substring(0, 3);
             const day = parseInt(dateParts[1].replace(',', ''));
-            document.getElementById('loginId').value = `${day}${monthName}`;
+            document.getElementById('loginId').value = `${day}${monthName}`; // e.g., 26JUNE
 
             initializeQuiz();
-            
-            // Adjust sticky date position based on screen width for mobile responsiveness
-            const liveDateElement = document.getElementById('liveDate');
-            if (window.innerWidth < 768) {
-                liveDateElement.style.alignSelf = 'flex-start';
-            } else {
-                liveDateElement.style.alignSelf = 'flex-end';
-            }
+            // Initial call to set correct sticky date position on load
+            updateLiveDate();
         });
 
-        // Handle mobile sticky date position on window resize
-        window.addEventListener('resize', () => {
-            const liveDateElement = document.getElementById('liveDate');
-            if (window.innerWidth < 768) {
-                liveDateElement.style.alignSelf = 'flex-start';
-            } else {
-                liveDateElement.style.alignSelf = 'flex-end';
-            }
-        });
+        // Handle mobile sticky date position on resize
+        window.addEventListener('resize', updateLiveDate);
     </script>
 </body>
 </html>
