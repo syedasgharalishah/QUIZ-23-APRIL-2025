@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS MPT Daily Quiz - July 3, 2025</title>
+    <title>CSS MPT Daily Quiz - July 4, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -86,7 +86,7 @@
         .progress-bar {
             height: 100%;
             width: 0%;
-            background: linear-gradient(to right, #20B2AA, #3EB489);
+            background: linear-gradient(to right, #4682B4, #5F9EA0); /* SteelBlue to CadetBlue */
             border-radius: 5px;
             transition: width 0.3s ease-in-out;
         }
@@ -109,7 +109,7 @@
 
         /* Card Styling (Login, Candidate, Quiz, Results Pages) */
         .card {
-            background-color: #FFF5EE; /* PeachPuff */
+            background-color: #FAF0E6; /* Linen */
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             padding: 1.5rem;
@@ -121,7 +121,7 @@
 
         /* Button Styling */
         .button-gradient {
-            background-image: linear-gradient(to right, #E6E6FA, #FFDAB9); /* Lavender to PeachPuff */
+            background-image: linear-gradient(to right, #B0C4DE, #ADD8E6); /* LightSteelBlue to LightBlue */
             color: #2C3E50;
             font-weight: bold;
             padding: 0.75rem 1.5rem;
@@ -162,20 +162,20 @@
         }
 
         .option-button.selected {
-            border-color: #6D6875;
-            background-color: #f0f0f0;
+            border-color: #4682B4;
+            background-color: #f0f8ff; /* AliceBlue */
             font-weight: bold;
         }
 
         .option-button.correct {
-            background-color: #90EE90; /* LightGreen */
-            border-color: #28a745;
+            background-color: #98FB98; /* PaleGreen */
+            border-color: #2E8B57; /* SeaGreen */
             animation: pulse-green 0.5s ease-out forwards;
         }
 
         .option-button.incorrect {
-            background-color: #FF6B6B; /* Red pulse */
-            border-color: #dc3545;
+            background-color: #F08080; /* LightCoral */
+            border-color: #CD5C5C; /* IndianRed */
             animation: shake-red 0.5s ease-out forwards;
         }
 
@@ -187,8 +187,8 @@
 
         /* Explanation Section */
         .explanation {
-            background-color: #e0f7fa;
-            border-left: 5px solid #20B2AA;
+            background-color: #E0FFFF; /* LightCyan */
+            border-left: 5px solid #4682B4; /* SteelBlue */
             padding: 1rem;
             margin-top: 1rem;
             border-radius: 8px;
@@ -225,9 +225,9 @@
 
         /* Keyframe Animations */
         @keyframes pulse-green {
-            0% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(144, 238, 144, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(152, 251, 152, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(152, 251, 152, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(152, 251, 152, 0); }
         }
 
         @keyframes shake-red {
@@ -328,7 +328,7 @@
 
     <script>
         // Set the current date for display and logic
-        const CURRENT_DATE_STR = "July 3, 2025";
+        const CURRENT_DATE_STR = "July 4, 2025";
         const CURRENT_DATE = new Date(CURRENT_DATE_STR);
 
         // Function to update the live date display
@@ -348,9 +348,10 @@
         let specialQuestionIndex = -1;
 
         // --- Helper Functions ---
-        function shuffleArray(array) {
+        function shuffleArrayWithSeed(array, seed) {
+            let rng = new Math.seedrandom(seed);
             for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
+                const j = Math.floor(rng() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
         }
@@ -408,14 +409,17 @@
             if (question.special) {
                 quizCard.classList.add('special-question');
             }
-
+            
+            // Shuffle options for the current question using a consistent seed
+            const optionSeed = `${CURRENT_DATE_STR}-${currentQuestionIndex}`;
             const shuffledOptions = [...question.options];
-            shuffleArray(shuffledOptions);
+            shuffleArrayWithSeed(shuffledOptions, optionSeed);
 
             shuffledOptions.forEach((option) => {
                 const button = document.createElement('button');
                 button.classList.add('option-button', 'w-full');
                 button.innerHTML = option;
+                // Store the original index to identify the correct answer regardless of shuffle order
                 button.dataset.originalOptionIndex = question.options.indexOf(option);
                 button.onclick = () => selectOption(parseInt(button.dataset.originalOptionIndex));
 
@@ -423,18 +427,35 @@
                 if (userAnswer && userAnswer.selectedOptionIndex === parseInt(button.dataset.originalOptionIndex)) {
                     button.classList.add('selected');
                     button.classList.add(userAnswer.isCorrect ? 'correct' : 'incorrect');
+                    // Disable all buttons if this question has been answered
                     Array.from(optionsContainer.children).forEach(optBtn => optBtn.disabled = true);
                     document.getElementById('explanationDiv').style.display = 'block';
                 }
                 optionsContainer.appendChild(button);
             });
 
+            // Re-disable and show correct answer if navigating back to an answered question
+            const userAnswer = userAnswers[currentQuestionIndex];
+            if (userAnswer && userAnswer.selectedOptionIndex !== undefined) {
+                 Array.from(optionsContainer.children).forEach((button) => {
+                    button.disabled = true;
+                    const btnOriginalIndex = parseInt(button.dataset.originalOptionIndex);
+                    if (btnOriginalIndex === userAnswer.selectedOptionIndex) {
+                        button.classList.add('selected', userAnswer.isCorrect ? 'correct' : 'incorrect');
+                    }
+                    if (!userAnswer.isCorrect && btnOriginalIndex === question.correctOptionIndex) {
+                         button.classList.add('correct');
+                    }
+                });
+            }
+
+
             const explanationDiv = document.getElementById('explanationDiv');
             explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
-            explanationDiv.style.display = (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].selectedOptionIndex !== undefined) ? 'block' : 'none';
+            explanationDiv.style.display = (userAnswer && userAnswer.selectedOptionIndex !== undefined) ? 'block' : 'none';
 
             document.getElementById('prevBtn').classList.toggle('hidden', currentQuestionIndex === 0);
-            document.getElementById('nextBtn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
+            document.getElementById('nextBtn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1 || (userAnswer && userAnswer.selectedOptionIndex !== undefined));
             document.getElementById('submitQuizBtn').classList.toggle('hidden', currentQuestionIndex !== quizQuestions.length - 1);
 
             updateProgressBar();
@@ -458,12 +479,14 @@
                 if (btnOriginalIndex === selectedOptionOriginalIndex) {
                     button.classList.add('selected', isCorrect ? 'correct' : 'incorrect');
                 }
-                if (!isCorrect && btnOriginalIndex === question.correctOptionIndex) {
+                // Always show the correct answer
+                if (btnOriginalIndex === question.correctOptionIndex) {
                     button.classList.add('correct');
                 }
             });
 
             document.getElementById('explanationDiv').style.display = 'block';
+            document.getElementById('nextBtn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
         }
 
         function nextQuestion() {
@@ -503,9 +526,7 @@
             document.getElementById('resultCorrect').textContent = `${correctCount}`;
             document.getElementById('resultIncorrect').textContent = `${incorrectCount}`;
             document.getElementById('resultTimeTaken').textContent = formatTime(timeTakenSeconds);
-            document.getElementById('resultsPage').querySelector('#resultScore').nextElementSibling.innerHTML = `<strong>Correct Answers:</strong> <span id="resultCorrect">${correctCount}</span> / ${quizQuestions.length}`;
-
-
+            
             showPage('resultsPage');
 
             const formData = new FormData();
@@ -529,7 +550,7 @@
         document.getElementById('loginBtn').addEventListener('click', () => {
             const id = document.getElementById('loginId').value.toUpperCase();
             const password = document.getElementById('loginPassword').value;
-            if (id === '03JULY' && password === 'free') {
+            if (id === '04JULY' && password === 'free') {
                 document.getElementById('loginError').classList.add('hidden');
                 showPage('candidateNamePage');
             } else {
@@ -563,130 +584,126 @@
         // --- Quiz Initialization ---
         function initializeQuiz() {
             quizQuestions.length = 0;
-            const dateSeed = parseInt(CURRENT_DATE_STR.replace(/[^0-9]/g, ''));
-            Math.seedrandom(dateSeed);
-
+            const dateSeed = CURRENT_DATE_STR; // Use string seed for seedrandom
+            
             const allQuestions = [
-                // === July 3rd Syllabus Quiz (100 MCQs) ===
-                // To meet the 100 MCQ requirement, this quiz includes the syllabus for July 3rd and July 4th.
+                // === July 4th Syllabus Quiz (100 MCQs) ===
 
-                // --- GK: Geographical Locations (Pages 33-35) - 30 Qs ---
-                { question: "Into how many regions Asia is divided?", options: ["5", "6", "7", "8"], correctOptionIndex: 0, explanation: "Asia is generally divided into 5 regions: Central Asia, East Asia, South Asia, Southeast Asia, and Western Asia.", source_page: 33 },
-                { question: "The region comprising China, Mongolia, North Korea, South Korea, Japan and Taiwan is called:", options: ["Far East", "East Asia", "Both of them", "None of them"], correctOptionIndex: 1, explanation: "This geographical region is known as East Asia.", source_page: 33 },
-                { question: "The region including India, Bangladesh, Bhutan, Sri Lanka, Maldives, Nepal and Pakistan is called:", options: ["South-West Asia", "East Asia", "South Asia", "Southeast Asia"], correctOptionIndex: 2, explanation: "This region, also known as the Indian Subcontinent, is called South Asia.", source_page: 33 },
-                { question: "The region including Afghanistan, Iran, Iraq, Turkey, Syria, Lebanon, Jordan, Israel, Saudi Arabia, Yemen, Oman, UAE, Qatar, Bahrain and Kuwait is called:", options: ["South Asia", "West Asia", "Central Asia", "None of them"], correctOptionIndex: 1, explanation: "This region is known as West Asia, and is often referred to as the Middle East.", source_page: 33 },
-                { question: "Kazakhstan, Kyrgyzstan, Tajikistan, Turkmenistan and Uzbekistan are commonly called:", options: ["Southwest Asia", "Central Asia", "South Asia", "East Asia"], correctOptionIndex: 1, explanation: "These countries are collectively known as Central Asia.", source_page: 33 },
-                { question: "The region comprising Cambodia, Laos, Myanmar (Burma), Thailand, Vietnam, Malaysia, Singapore, Indonesia, Brunei, and the Philippines is called:", options: ["Southwest Asia", "East Asia", "Asia Minor", "Southeast Asia"], correctOptionIndex: 3, explanation: "This region is known as Southeast Asia.", source_page: 33 },
-                { question: "The region including Anatolia (Turkey-in-Asia) is called:", options: ["Asia Minor", "Central Asia", "Both of them", "None of them"], correctOptionIndex: 0, explanation: "Anatolia, the Asian part of Turkey, is also known as Asia Minor.", source_page: 33 },
-                { question: "By what name the countries of Central America, Mexico, and the West Indies are called?", options: ["Latin America", "Central America", "Middle America", "South America"], correctOptionIndex: 2, explanation: "This region, which connects North and South America, is called Middle America.", source_page: 34 },
-                { question: "What does mean by New World?", options: ["Americas", "Europe", "Plains of Western hemisphere", "Both of these"], correctOptionIndex: 0, explanation: "The term 'New World' is often used to describe the majority of Earth's Western Hemisphere, specifically the Americas.", source_page: 34 },
-                { question: "The countries Algeria, Egypt, Libya, Morocco, Sudan, Tunisia and Western Sahara are located in:", options: ["South Africa", "North Africa", "East Africa", "West Africa"], correctOptionIndex: 1, explanation: "These countries are all located in the North Africa region.", source_page: 34 },
-                { question: "The term 'Scandinavia' generally includes:", options: ["Denmark, Sweden, Norway", "Finland, Iceland", "Both of these", "None of these"], correctOptionIndex: 2, explanation: "Scandinavia traditionally refers to Denmark, Norway, and Sweden. In a broader sense, it also includes Finland and Iceland.", source_page: 34 },
-                { question: "Which continents are located in the region of 'Old World'?", options: ["Europe, Asia, Africa, Australia", "Europe, Asia, Africa", "Europe, Asia, Australia", "Africa, Australia, Asia"], correctOptionIndex: 1, explanation: "The 'Old World' refers to Afro-Eurasia (Africa, Europe, and Asia), regarded collectively as the part of the world known to Europeans before contact with the Americas.", source_page: 34 },
-                { question: "Which of the following countries is regarded below the sea level?", options: ["Finland", "Holland (Netherlands)", "Switzerland", "Sweden"], correctOptionIndex: 1, explanation: "A significant portion of the Netherlands (often called Holland) is located below sea level, protected by dikes.", source_page: 34 },
-                { question: "Suez Canal links the following seas:", options: ["Black Sea and Aegean Sea", "Persian Gulf with Arabian Sea", "Red Sea with the Mediterranean", "Mediterranean Sea with Adriatic Sea"], correctOptionIndex: 2, explanation: "The Suez Canal connects the Mediterranean Sea to the Red Sea.", source_page: 34 },
-                { question: "Why is Black Sea so-called?", options: ["The water has poison so that, there is no life", "A large number of black rock in the water", "The water of Sea is black", "None of the above"], correctOptionIndex: 1, explanation: "One theory is that the name comes from the color of the deep water and the presence of black sludge on its floor.", source_page: 34 },
-                { question: "Dead Sea is located in:", options: ["Israel and Jordan", "Iran and Jordan", "Turkey and Jordan", "None of the above"], correctOptionIndex: 0, explanation: "The Dead Sea is a salt lake bordered by Jordan to the east and Israel and the West Bank to the west.", source_page: 34 },
-                { question: "The region comprising Afghanistan, Iran, Iraq, Turkey, Syria, Lebanon, Jordan, Israel, Saudi Arabia, Yemen, Oman, etc. is called:", options: ["Middle East", "South Asia", "Far East", "Central Asia"], correctOptionIndex: 0, explanation: "This region is commonly known as the Middle East.", source_page: 34 },
-                { question: "The countries of Central America with Mexico and West Indies are called:", options: ["Latin America", "Middle America", "South America", "None of these"], correctOptionIndex: 1, explanation: "This specific grouping of countries is referred to as Middle America.", source_page: 34 },
-                { question: "The region comprising the countries of South America, Central America, Mexico and West Indies is called?", options: ["Latin America", "South America", "Central America", "None of these"], correctOptionIndex: 0, explanation: "Latin America broadly refers to the parts of the Americas where Romance languages (Spanish, Portuguese, French) are spoken.", source_page: 33 },
-                { question: "Baltic States, constituents of former USSR comprise of:", options: ["Estonia, Latvia and Armenia", "Estonia, Latvia and Lithuania", "Estonia, Latvia and Georgia", "Georgia, Latvia and Lithuania"], correctOptionIndex: 1, explanation: "The Baltic states are the three sovereign states in Northern Europe on the eastern coast of the Baltic Sea: Estonia, Latvia, and Lithuania.", source_page: 33 },
-                { question: "'Benelux' is a union of which three countries?", options: ["Belgium, Netherlands and Luxembourg", "Britain, Netherlands and Luxembourg", "Britain, Norway and Luxembourg", "None of them"], correctOptionIndex: 0, explanation: "Benelux is a politico-economic union and formal international intergovernmental cooperation of three neighboring states in western Europe: Belgium, the Netherlands, and Luxembourg.", source_page: 33 },
-                { question: "By what term, the region that includes Europe, Asia and Africa are called?", options: ["South Hemisphere", "Northern Hemisphere", "Western Hemisphere", "Eastern Hemisphere"], correctOptionIndex: 3, explanation: "Europe, Asia, and Africa are primarily located in the Eastern Hemisphere.", source_page: 33 },
-                { question: "Which coastline is shared by the Gulf States?", options: ["Atlantic", "Persian Gulf", "Pacific", "Arabian Gulf"], correctOptionIndex: 3, explanation: "The Arab states of the Persian Gulf (Bahrain, Kuwait, Iraq, Oman, Qatar, Saudi Arabia and the UAE) border the body of water they refer to as the Arabian Gulf.", source_page: 33 },
-                { question: "The term Balkans refers to the region between:", options: ["Adriatic Sea and Black Sea", "Aegean Sea and Black Sea", "Adriatic Sea and Aegean Sea", "All of them"], correctOptionIndex: 3, explanation: "The Balkan Peninsula is bordered by the Adriatic Sea to the northwest, the Ionian Sea to the southwest, the Aegean Sea to the south, the Turkish Straits to the east, and the Black Sea to the northeast.", source_page: 33 },
-                { question: "Which countries are called Scandinavian countries?", options: ["Norway, Sweden, Denmark", "Norway, Sweden, Belgium", "Norway, Sweden, Netherlands", "Belgium, Sweden, Denmark"], correctOptionIndex: 0, explanation: "The term Scandinavia in local usage covers the three kingdoms of Denmark, Norway, and Sweden.", source_page: 34 },
-                { question: "The countries Mozambique, Namibia, South Africa, Zambia and Zimbabwe are in:", options: ["South Africa", "North Africa", "Southern Africa", "West Africa"], correctOptionIndex: 2, explanation: "These countries are all located in the Southern Africa region.", source_page: 34 },
-                { question: "One degree of longitude on the equator is equal to a distance of:", options: ["111 km", "88 km", "65 km", "112 km"], correctOptionIndex: 0, explanation: "At the equator, one degree of longitude is approximately 111.32 kilometers.", source_page: 34 },
-                { question: "Archipelago is a:", options: ["Group of islands", "Group of seas", "Group of rivers", "Group of army"], correctOptionIndex: 0, explanation: "An archipelago is a chain, cluster or collection of islands.", source_page: 34 },
-                { question: "The term 'Horn of Africa' includes:", options: ["Ethiopia, Eritrea, Somalia, Djibouti", "Ethiopia, Eritrea, Sudan, Kenya", "Somalia, Djibouti, Kenya, Sudan", "None of them"], correctOptionIndex: 0, explanation: "The Horn of Africa denotes the region containing the countries of Djibouti, Eritrea, Ethiopia, and Somalia.", source_page: 35 },
-                { question: "The 'Caucasus' region is located between:", options: ["Black Sea and Caspian Sea", "Black Sea and Red Sea", "Caspian Sea and Aral Sea", "None of them"], correctOptionIndex: 0, explanation: "The Caucasus is a region located at the border of Europe and Asia, situated between the Black Sea and the Caspian Sea.", source_page: 35 },
+                // --- General Knowledge: Countries, Capitals, Currency & Area (Pages 36-39) - 40 Qs ---
+                { question: "What is the capital of Algeria?", options: ["Algiers", "Oran", "Constantine", "Annaba"], correctOptionIndex: 0, explanation: "The capital and largest city of Algeria is Algiers.", source_page: 36 },
+                { question: "The currency of Angola is:", options: ["Kwanza", "CFA Franc", "Dollar", "Rand"], correctOptionIndex: 0, explanation: "The official currency of Angola is the Kwanza.", source_page: 36 },
+                { question: "What is the capital of Cameroon?", options: ["Douala", "Yaoundé", "Garoua", "Bamenda"], correctOptionIndex: 1, explanation: "Yaoundé is the capital city of Cameroon.", source_page: 36 },
+                { question: "The currency of Egypt is:", options: ["Dinar", "Dirham", "Egyptian Pound", "Rial"], correctOptionIndex: 2, explanation: "The currency of Egypt is the Egyptian Pound.", source_page: 36 },
+                { question: "What is the capital of Ghana?", options: ["Kumasi", "Accra", "Tamale", "Takoradi"], correctOptionIndex: 1, explanation: "Accra is the capital of Ghana.", source_page: 36 },
+                { question: "The currency of Kenya is:", options: ["Shilling", "Franc", "Rand", "Naira"], correctOptionIndex: 0, explanation: "The currency of Kenya is the Kenyan Shilling.", source_page: 36 },
+                { question: "What is the capital of Libya?", options: ["Benghazi", "Misrata", "Tripoli", "Tarhuna"], correctOptionIndex: 2, explanation: "Tripoli is the capital city of Libya.", source_page: 36 },
+                { question: "The currency of Nigeria is:", options: ["Cedi", "Leone", "Naira", "CFA Franc"], correctOptionIndex: 2, explanation: "The Naira is the currency of Nigeria.", source_page: 36 },
+                { question: "What is the capital of Somalia?", options: ["Hargeisa", "Mogadishu", "Kismayo", "Bosaso"], correctOptionIndex: 1, explanation: "Mogadishu is the capital city of Somalia.", source_page: 36 },
+                { question: "The currency of South Africa is:", options: ["Pula", "Kwacha", "Rand", "Shilling"], correctOptionIndex: 2, explanation: "The Rand is the official currency of South Africa.", source_page: 36 },
+                { question: "What is the capital of Sudan?", options: ["Omdurman", "Port Sudan", "Kassala", "Khartoum"], correctOptionIndex: 3, explanation: "Khartoum is the capital of Sudan.", source_page: 36 },
+                { question: "The currency of Zimbabwe is:", options: ["US Dollar", "Rand", "Pula", "Kwacha"], correctOptionIndex: 0, explanation: "Zimbabwe uses multiple currencies, with the US Dollar being one of the primary ones for transactions.", source_page: 37 },
+                { question: "What is the capital of Armenia?", options: ["Gyumri", "Yerevan", "Vanadzor", "Kapan"], correctOptionIndex: 1, explanation: "Yerevan is the capital of Armenia.", source_page: 37 },
+                { question: "The currency of China is:", options: ["Yen", "Won", "Yuan (Renminbi)", "Baht"], correctOptionIndex: 2, explanation: "The Renminbi is the official currency of China, with the Yuan being the basic unit.", source_page: 37 },
+                { question: "What is the capital of Indonesia?", options: ["Surabaya", "Bandung", "Medan", "Jakarta"], correctOptionIndex: 3, explanation: "Jakarta is the capital of Indonesia.", source_page: 37 },
+                { question: "The currency of Iraq is:", options: ["Dinar", "Rial", "Lira", "Pound"], correctOptionIndex: 0, explanation: "The Iraqi Dinar is the currency of Iraq.", source_page: 37 },
+                { question: "What is the capital of Israel?", options: ["Tel Aviv", "Haifa", "Jerusalem", "Rishon LeZion"], correctOptionIndex: 2, explanation: "Israel maintains its capital in Jerusalem, though it is disputed.", source_page: 37 },
+                { question: "The currency of Japan is:", options: ["Yuan", "Yen", "Won", "Dollar"], correctOptionIndex: 1, explanation: "The Yen is the official currency of Japan.", source_page: 37 },
+                { question: "What is the capital of Malaysia?", options: ["George Town", "Ipoh", "Kuala Lumpur", "Johor Bahru"], correctOptionIndex: 2, explanation: "Kuala Lumpur is the capital of Malaysia.", source_page: 37 },
+                { question: "The currency of Philippines is:", options: ["Rupee", "Peso", "Baht", "Ringgit"], correctOptionIndex: 1, explanation: "The Philippine Peso is the official currency.", source_page: 37 },
+                { question: "What is the capital of Qatar?", options: ["Al Rayyan", "Doha", "Al Wakrah", "Umm Salal"], correctOptionIndex: 1, explanation: "Doha is the capital city of Qatar.", source_page: 37 },
+                { question: "The currency of Syria is:", options: ["Pound", "Dinar", "Rial", "Lira"], correctOptionIndex: 0, explanation: "The Syrian Pound is the currency of Syria.", source_page: 37 },
+                { question: "What is the capital of Thailand?", options: ["Chiang Mai", "Nonthaburi", "Pattaya", "Bangkok"], correctOptionIndex: 3, explanation: "Bangkok is the capital of Thailand.", source_page: 37 },
+                { question: "The currency of United Arab Emirates is:", options: ["Riyal", "Dinar", "Dirham", "Pound"], correctOptionIndex: 2, explanation: "The UAE Dirham is the currency of the United Arab Emirates.", source_page: 37 },
+                { question: "What is the capital of Austria?", options: ["Graz", "Linz", "Vienna", "Salzburg"], correctOptionIndex: 2, explanation: "Vienna is the capital of Austria.", source_page: 38 },
+                { question: "The currency of Denmark is:", options: ["Euro", "Krone", "Franc", "Markka"], correctOptionIndex: 1, explanation: "The Danish Krone is the currency of Denmark.", source_page: 38 },
+                { question: "What is the capital of Greece?", options: ["Thessaloniki", "Patras", "Heraklion", "Athens"], correctOptionIndex: 3, explanation: "Athens is the capital of Greece.", source_page: 38 },
+                { question: "The currency of Norway is:", options: ["Krona", "Krone", "Euro", "Franc"], correctOptionIndex: 1, explanation: "The Norwegian Krone is the currency of Norway.", source_page: 38 },
+                { question: "What is the capital of Poland?", options: ["Kraków", "Warsaw", "Łódź", "Wrocław"], correctOptionIndex: 1, explanation: "Warsaw is the capital of Poland.", source_page: 38 },
+                { question: "The currency of Russia is:", options: ["Manat", "Hryvnia", "Ruble", "Lari"], correctOptionIndex: 2, explanation: "The Russian Ruble is the currency of Russia.", source_page: 38 },
+                { question: "What is the capital of Spain?", options: ["Barcelona", "Valencia", "Seville", "Madrid"], correctOptionIndex: 3, explanation: "Madrid is the capital of Spain.", source_page: 38 },
+                { question: "The currency of Sweden is:", options: ["Krona", "Krone", "Euro", "Franc"], correctOptionIndex: 0, explanation: "The Swedish Krona is the currency of Sweden.", source_page: 38 },
+                { question: "What is the capital of Ukraine?", options: ["Kharkiv", "Odessa", "Kyiv", "Dnipro"], correctOptionIndex: 2, explanation: "Kyiv is the capital of Ukraine.", source_page: 38 },
+                { question: "What is the capital of Cuba?", options: ["Havana", "Santiago de Cuba", "Camagüey", "Holguín"], correctOptionIndex: 0, explanation: "Havana is the capital city of Cuba.", source_page: 39 },
+                { question: "The currency of Mexico is:", options: ["Dollar", "Peso", "Real", "Quetzal"], correctOptionIndex: 1, explanation: "The Mexican Peso is the currency of Mexico.", source_page: 39 },
+                { question: "What is the capital of Argentina?", options: ["Córdoba", "Rosario", "Buenos Aires", "Mendoza"], correctOptionIndex: 2, explanation: "Buenos Aires is the capital of Argentina.", source_page: 39 },
+                { question: "The currency of Brazil is:", options: ["Peso", "Guaraní", "Boliviano", "Real"], correctOptionIndex: 3, explanation: "The Brazilian Real is the currency of Brazil.", source_page: 39 },
+                { question: "What is the capital of Chile?", options: ["Valparaíso", "Santiago", "Concepción", "Antofagasta"], correctOptionIndex: 1, explanation: "Santiago is the capital of Chile.", source_page: 39 },
+                { question: "The currency of New Zealand is:", options: ["Australian Dollar", "Fijian Dollar", "NZ Dollar", "US Dollar"], correctOptionIndex: 2, explanation: "The New Zealand Dollar is the official currency.", source_page: 39 },
+                { question: "What is the capital of Venezuela?", options: ["Maracaibo", "Valencia", "Caracas", "Barquisimeto"], correctOptionIndex: 2, explanation: "Caracas is the capital of Venezuela.", source_page: 39 },
 
-                // --- GK: Countries: Capitals, Currency & Area (Pages 36-39) - 20 Qs ---
-                { question: "What is the capital of Afghanistan?", options: ["Herat", "Kandahar", "Kabul", "Mazar-i-Sharif"], correctOptionIndex: 2, explanation: "The capital city of Afghanistan is Kabul.", source_page: 37 },
-                { question: "The currency of Bangladesh is:", options: ["Rupee", "Taka", "Kyat", "Ngultrum"], correctOptionIndex: 1, explanation: "The official currency of Bangladesh is the Taka.", source_page: 37 },
-                { question: "What is the capital of Egypt?", options: ["Alexandria", "Cairo", "Giza", "Suez"], correctOptionIndex: 1, explanation: "Cairo is the capital and largest city of Egypt.", source_page: 36 },
-                { question: "The currency of Iran is:", options: ["Rial", "Dinar", "Dirham", "Lira"], correctOptionIndex: 0, explanation: "The official currency of Iran is the Rial.", source_page: 37 },
-                { question: "What is the capital of Japan?", options: ["Kyoto", "Osaka", "Tokyo", "Sapporo"], correctOptionIndex: 2, explanation: "Tokyo is the capital and most populous prefecture of Japan.", source_page: 37 },
-                { question: "The currency of Malaysia is:", options: ["Rupiah", "Baht", "Ringgit", "Peso"], correctOptionIndex: 2, explanation: "The currency of Malaysia is the Malaysian Ringgit.", source_page: 37 },
-                { question: "What is the capital of Saudi Arabia?", options: ["Jeddah", "Mecca", "Medina", "Riyadh"], correctOptionIndex: 3, explanation: "Riyadh is the capital city of Saudi Arabia.", source_page: 37 },
-                { question: "The currency of Turkey is:", options: ["Euro", "Lira", "Manat", "Som"], correctOptionIndex: 1, explanation: "The Turkish Lira is the official currency of Turkey.", source_page: 37 },
-                { question: "What is the capital of Germany?", options: ["Munich", "Hamburg", "Frankfurt", "Berlin"], correctOptionIndex: 3, explanation: "Berlin is the capital and largest city of Germany.", source_page: 38 },
-                { question: "The currency of the United Kingdom is:", options: ["Euro", "Franc", "Pound Sterling", "Mark"], correctOptionIndex: 2, explanation: "The official currency of the United Kingdom is the Pound Sterling.", source_page: 38 },
-                { question: "What is the capital of Canada?", options: ["Toronto", "Montreal", "Vancouver", "Ottawa"], correctOptionIndex: 3, explanation: "Ottawa is the capital city of Canada.", source_page: 39 },
-                { question: "The currency of the United States of America is:", options: ["Peso", "Dollar", "Euro", "Pound"], correctOptionIndex: 1, explanation: "The United States Dollar is the official currency of the USA.", source_page: 39 },
-                { question: "What is the capital of Australia?", options: ["Sydney", "Melbourne", "Canberra", "Perth"], correctOptionIndex: 2, explanation: "Canberra is the capital city of Australia.", source_page: 39 },
-                { question: "The currency of China is:", options: ["Yen", "Won", "Yuan", "Dollar"], correctOptionIndex: 2, explanation: "The Renminbi is the official currency of China, and the Yuan is its basic unit.", source_page: 37 },
-                { question: "What is the capital of Brazil?", options: ["Rio de Janeiro", "São Paulo", "Salvador", "Brasília"], correctOptionIndex: 3, explanation: "Brasília is the federal capital of Brazil.", source_page: 39 },
-                { question: "The currency of Russia is:", options: ["Ruble", "Hryvnia", "Złoty", "Forint"], correctOptionIndex: 0, explanation: "The Russian Ruble is the official currency of the Russian Federation.", source_page: 38 },
-                { question: "What is the capital of South Africa?", options: ["Johannesburg", "Cape Town", "Durban", "Pretoria"], correctOptionIndex: 3, explanation: "South Africa has three capital cities: Pretoria (executive), Bloemfontein (judicial), and Cape Town (legislative). Pretoria is listed as the capital in the book.", source_page: 36 },
-                { question: "The currency of Switzerland is:", options: ["Euro", "Franc", "Krone", "Pound"], correctOptionIndex: 1, explanation: "The Swiss Franc is the official currency of Switzerland.", source_page: 38 },
-                { question: "What is the capital of Italy?", options: ["Milan", "Naples", "Rome", "Turin"], correctOptionIndex: 2, explanation: "Rome is the capital city of Italy.", source_page: 38 },
-                { question: "The currency of India is:", options: ["Taka", "Rupee", "Rupiah", "Ringgit"], correctOptionIndex: 1, explanation: "The Indian Rupee is the official currency of India.", source_page: 37 },
+                // --- Mathematics: Chain Rules (Pages 523-524) - 20 Qs ---
+                { question: "If 15 toys cost Rs 234, what do 35 toys cost?", options: ["Rs. 546", "Rs. 550", "Rs. 560", "Rs. 572"], correctOptionIndex: 0, explanation: "Let the required cost be Rs. x. This is a direct proportion. (15/234) = (35/x). 15x = 35 * 234. x = (35 * 234) / 15 = 546.", source_page: 523 },
+                { question: "If 36 men can do a piece of work in 25 hours, in how many hours will 15 men do it?", options: ["50", "60", "75", "45"], correctOptionIndex: 1, explanation: "Let the required hours be x. This is an indirect proportion. (36 * 25) = (15 * x). 900 = 15x. x = 900 / 15 = 60.", source_page: 523 },
+                { question: "If the wages of 6 men for 15 days be Rs 2100, then find the wages of 9 men for 12 days.", options: ["Rs. 2520", "Rs. 2400", "Rs. 2100", "Rs. 2650"], correctOptionIndex: 0, explanation: "Use the formula (M1*D1)/W1 = (M2*D2)/W2. (6 * 15) / 2100 = (9 * 12) / W2. 90 / 2100 = 108 / W2. W2 = (108 * 2100) / 90 = 2520.", source_page: 523 },
+                { question: "If 20 men can build a wall 56 metres long in 6 days, what length of a similar wall can be built by 35 men in 3 days?", options: ["49 metres", "56 metres", "42 metres", "50 metres"], correctOptionIndex: 0, explanation: "Use the formula (M1*D1)/W1 = (M2*D2)/W2. (20 * 6) / 56 = (35 * 3) / W2. 120 / 56 = 105 / W2. W2 = (105 * 56) / 120 = 49.", source_page: 523 },
+                { question: "If 15 men, working 9 hours a day, can reap a field in 16 days, in how many days will 18 men reap the field, working 8 hours a day?", options: ["10 days", "12 days", "15 days", "18 days"], correctOptionIndex: 2, explanation: "Use the formula M1*D1*H1 = M2*D2*H2. 15 * 16 * 9 = 18 * D2 * 8. 2160 = 144 * D2. D2 = 2160 / 144 = 15.", source_page: 523 },
+                { question: "If a quarter kg of potato costs 60 paise, how many paise will 200 gm cost?", options: ["48 paise", "45 paise", "50 paise", "40 paise"], correctOptionIndex: 0, explanation: "A quarter kg is 250 gm. This is a direct proportion. (250 / 60) = (200 / x). 250x = 200 * 60. x = 12000 / 250 = 48.", source_page: 524 },
+                { question: "If 18 binders bind 900 books in 10 days, how many binders will be required to bind 660 books in 12 days?", options: ["11 binders", "12 binders", "10 binders", "13 binders"], correctOptionIndex: 0, explanation: "Use the formula (M1*D1)/W1 = (M2*D2)/W2. (18 * 10) / 900 = (M2 * 12) / 660. 180 / 900 = 12*M2 / 660. 0.2 = 12*M2 / 660. M2 = (0.2 * 660) / 12 = 11.", source_page: 524 },
+                { question: "A fort had provision of food for 150 men for 45 days. After 10 days, 25 men left the fort. The number of days for which the remaining food will last, is:", options: ["35 days", "40 days", "42 days", "45 days"], correctOptionIndex: 2, explanation: "After 10 days, remaining food is for 150 men for (45-10) = 35 days. Now, men are 150-25 = 125. Let days be x. 150 * 35 = 125 * x. x = (150 * 35) / 125 = 42.", source_page: 524 },
+                { question: "A contractor undertook to do a certain piece of work in 9 days. He employed certain number of men, but 6 of them being absent from the very first day, the rest could finish the work in 15 days. The number of men originally employed were:", options: ["10", "12", "15", "18"], correctOptionIndex: 2, explanation: "Let original men be x. Total work is x * 9. Also, total work is (x-6) * 15. So, 9x = 15(x-6). 9x = 15x - 90. 6x = 90. x = 15.", source_page: 524 },
+                { question: "An industrial loom weaves 0.128 metres of cloth every second. Approximately, how many seconds will it take for the loom to weave 25 metres of cloth?", options: ["180", "195", "200", "210"], correctOptionIndex: 1, explanation: "Time = Total Length / Rate = 25 / 0.128 = 195.3125. Approximately 195 seconds.", source_page: 524 },
+                { question: "If 8 men can reap 80 hectares in 24 days, how many hectares can 36 men reap in 30 days?", options: ["350", "400", "425", "450"], correctOptionIndex: 3, explanation: "Use (M1*D1)/W1 = (M2*D2)/W2. (8 * 24) / 80 = (36 * 30) / W2. 192 / 80 = 1080 / W2. 2.4 = 1080 / W2. W2 = 1080 / 2.4 = 450.", source_page: 524 },
+                { question: "If a man walks 20 km in 5 hours, how long would he take to walk 32 km?", options: ["7 hours", "8 hours", "9 hours", "10 hours"], correctOptionIndex: 1, explanation: "Speed = Distance/Time = 20/5 = 4 km/hr. Time = Distance/Speed = 32/4 = 8 hours.", source_page: 523 },
+                { question: "If 5 workers can build a house in 20 days, how many days would it take 10 workers to build the same house?", options: ["5 days", "10 days", "15 days", "40 days"], correctOptionIndex: 1, explanation: "This is an indirect proportion. 5 workers * 20 days = 100 worker-days. 100 worker-days / 10 workers = 10 days.", source_page: 523 },
+                { question: "A car travels 180 km on 15 litres of petrol. How far can it travel on 25 litres?", options: ["250 km", "280 km", "300 km", "320 km"], correctOptionIndex: 2, explanation: "This is a direct proportion. Mileage = 180 km / 15 litres = 12 km/litre. Distance = 12 km/litre * 25 litres = 300 km.", source_page: 523 },
+                { question: "If 3 pumps can empty a tank in 2 days working 8 hours a day, how many hours a day must 4 pumps work to empty the tank in 1 day?", options: ["10 hours", "12 hours", "14 hours", "16 hours"], correctOptionIndex: 1, explanation: "Total work = 3 pumps * 2 days * 8 hours/day = 48 pump-hours. To do this in 1 day with 4 pumps: 48 / (4 pumps * 1 day) = 12 hours/day.", source_page: 523 },
+                { question: "A garrison of 500 men had provisions for 27 days. After 3 days a reinforcement of 300 men arrived. For how many more days will the remaining provisions last?", options: ["15 days", "16 days", "18 days", "20 days"], correctOptionIndex: 0, explanation: "After 3 days, provisions for 500 men for 24 days remain. Total men now = 500 + 300 = 800. Let days be x. 500 * 24 = 800 * x. x = (500 * 24) / 800 = 15 days.", source_page: 524 },
+                { question: "If the cost of 12 dozen bananas is Rs. 360, what is the cost of 7 bananas?", options: ["Rs. 17.50", "Rs. 18.50", "Rs. 20.00", "Rs. 21.00"], correctOptionIndex: 0, explanation: "12 dozen = 144 bananas. Cost per banana = 360 / 144 = Rs. 2.50. Cost of 7 bananas = 7 * 2.50 = Rs. 17.50.", source_page: 523 },
+                { question: "A wheel that has 6 cogs is meshed with a larger wheel of 14 cogs. When the smaller wheel has made 21 revolutions, then the number of revolutions made by the larger wheel is:", options: ["9", "12", "15", "49"], correctOptionIndex: 0, explanation: "This is an indirect proportion. 6 cogs * 21 revs = 14 cogs * x revs. 126 = 14x. x = 126 / 14 = 9 revolutions.", source_page: 524 },
+                { question: "If 9 engines consume 24 metric tonnes of coal, when each is working 8 hours a day, how much coal will be required for 8 engines, each running 13 hours a day, it being given that 3 engines of former type consume as much as 4 engines of latter type?", options: ["22 metric tonnes", "24 metric tonnes", "26 metric tonnes", "28 metric tonnes"], correctOptionIndex: 2, explanation: "This is a complex chain rule. Let E1 be former, E2 be latter. 3 E1 = 4 E2 => E1 = 4/3 E2. (9E1*8)/24 = (8E2*13)/x. (9*(4/3)E2*8)/24 = (8E2*13)/x. (12E2*8)/24 = (104E2)/x. 96/24 = 104/x. 4 = 104/x. x = 26.", source_page: 524 },
+                { question: "If 4 typists can type a manuscript in 6 days, how many days will it take 3 typists to do the same job?", options: ["6 days", "8 days", "9 days", "10 days"], correctOptionIndex: 1, explanation: "Indirect proportion. Total work = 4 typists * 6 days = 24 typist-days. Time for 3 typists = 24 / 3 = 8 days.", source_page: 523 },
 
-                // --- Math: Partnership (Pages 521-522) - 10 Qs ---
-                { question: "A, B and C started a business by investing Rs. 1,20,000, Rs. 1,35,000 and Rs. 1,50,000 respectively. Find the share of A, out of an annual profit of Rs. 56,700.", options: ["Rs. 16800", "Rs. 18900", "Rs. 21000", "Rs. 15800"], correctOptionIndex: 0, explanation: "Ratio of investments = 120:135:150 = 8:9:10. Sum = 27. A's share = (8/27) * 56700 = Rs. 16800.", source_page: 521 },
-                { question: "A, B, C enter into partnership. A invests 3 times as much as B invests and B invests two-third of what C invests. At the end of the year, the profit earned is Rs. 6600. What is the share of A?", options: ["Rs. 3600", "Rs. 1800", "Rs. 1200", "Rs. 1000"], correctOptionIndex: 0, explanation: "Let C=x. B=(2/3)x. A=3*(2/3)x=2x. Ratio A:B:C = 2x : (2/3)x : x = 6:2:3. Sum=11. A's share = (6/11)*6600 = Rs. 3600.", source_page: 521 },
-                { question: "A, B, C subscribe Rs. 50,000 for a business. A subscribes Rs. 4000 more than B and B Rs. 5000 more than C. Out of a total profit of Rs. 35,000, B receives:", options: ["Rs. 8400", "Rs. 11900", "Rs. 13600", "Rs. 14700"], correctOptionIndex: 1, explanation: "Let C=x. B=x+5000. A=x+9000. 3x+14000=50000 => x=12000. Investments are A=21000, B=17000, C=12000. Ratio=21:17:12. Sum=50. B's share = (17/50)*35000 = Rs. 11900.", source_page: 521 },
-                { question: "A and B entered into partnership with capitals in the ratio 4 : 5. After 3 months, A withdrew 1/4 of his capital and B withdrew 1/5 of his capital. The gain at the end of 10 months was Rs. 760. B's share in this profit is:", options: ["Rs. 330", "Rs. 360", "Rs. 380", "Rs. 430"], correctOptionIndex: 3, explanation: "Let capitals be 4x, 5x. A's equivalent capital = (4x*3)+(3x*7) = 33x. B's equivalent capital = (5x*3)+(4x*7) = 43x. Ratio=33:43. Sum=76. B's share = (43/76)*760 = Rs. 430.", source_page: 522 },
-                { question: "A, B, C start a business each investing Rs. 20,000. After 5 months A withdrew Rs. 5000, B withdrew Rs. 4000 and C invests Rs. 6000 more. At the end of the year, a total profit of Rs. 69,900 was recorded. Find the share of C.", options: ["Rs. 20500", "Rs. 21200", "Rs. 28200", "Rs. 29100"], correctOptionIndex: 2, explanation: "Ratio of equivalent capitals A:B:C = [(20k*5)+(15k*7)] : [(20k*5)+(16k*7)] : [(20k*5)+(26k*7)] = 205:212:282. Sum=699. C's share = (282/699)*69900 = Rs. 28200.", source_page: 522 },
-                { question: "A and B invest in a business in the ratio 3 : 2. If 5% of the total profit goes to charity and A's share is Rs. 855, find B's share.", options: ["Rs. 570", "Rs. 600", "Rs. 630", "Rs. 550"], correctOptionIndex: 0, explanation: "Let the distributable profit be P. A's share = (3/5)P = 855 => P = 1425. B's share = (2/5)P = (2/5)*1425 = Rs. 570.", source_page: 522 },
-                { question: "A and B are partners sharing profits in the ratio 3:2. They admit C as a partner and the new ratio becomes 2:1:1. What is the sacrificing ratio of A and B?", options: ["1:2", "2:1", "4:1", "1:4"], correctOptionIndex: 3, explanation: "A's sacrifice = Old - New = 3/5 - 2/4 = (12-10)/20 = 2/20. B's sacrifice = 2/5 - 1/4 = (8-5)/20 = 3/20. Wait, calculation error. New ratio sum is 4. A's sacrifice = 3/5 - 2/4 = 2/20. B's sacrifice = 2/5 - 1/4 = 3/20. Ratio of sacrifice = 2:3. Let's re-read the book. It seems there's a simpler way. Let's assume the book's logic. A's new share is 2/4=1/2. B's new share is 1/4. A's sacrifice = 3/5 - 1/2 = 1/10. B's sacrifice = 2/5 - 1/4 = 3/20. Ratio = 1/10 : 3/20 = 2:3. The options are still not matching. Let's try another problem. The book might have errors.", source_page: 522 },
-                { question: "A began a business with Rs. 85,000. He was joined afterwards by B with Rs. 42,500. For how much period does B join, if the profits at the end of the year are divided in the ratio of 3:1?", options: ["4 months", "5 months", "6 months", "8 months"], correctOptionIndex: 3, explanation: "Let B join for x months. Ratio of investments = (85000*12) : (42500*x) = 3:1. 1020000 / (42500x) = 3/1. 1020000 = 127500x. x = 1020000/127500 = 8 months.", source_page: 522 },
-                { question: "A and B start a business. A invests Rs. 600 for 9 months and B invests some money for 6 months. If B gets Rs. 46 out of a total profit of Rs. 98, find the capital of B.", options: ["Rs. 780", "Rs. 800", "Rs. 820", "Rs. 840"], correctOptionIndex: 0, explanation: "Total profit=98, B's profit=46, so A's profit=52. Ratio of profits A:B = 52:46 = 26:23. Let B's capital be x. Ratio of investments = (600*9) : (x*6) = 5400 : 6x. So, 5400 / 6x = 26/23. 5400 * 23 = 26 * 6x. 124200 = 156x. x = 124200 / 156 = 796. This is not in options. Let's recheck the profit. 98-46=52. Ratio is 52:46. Calculation is correct. There must be a typo in the book's question or options. Let's assume A's profit is 69 and B's is 46. No, total is 98. Let's re-examine the book's likely answer. If B's capital is 780, then 5400:(780*6) = 5400:4680 = 540:468 = 45:39 = 15:13. This is not 26:23. The question in the book is flawed.", source_page: 522 },
-                { question: "A, B and C enter into a partnership and their shares are in the ratio 1/2 : 1/3 : 1/4. After 2 months, A withdraws half of his capital and after 10 more months, a profit of Rs. 378 is divided among them. What is B's share?", options: ["Rs. 129", "Rs. 144", "Rs. 156", "Rs. 168"], correctOptionIndex: 1, explanation: "Initial ratio = 1/2:1/3:1/4 = 6:4:3. Let capitals be 6x, 4x, 3x. A's equivalent capital = (6x*2)+(3x*10) = 42x. B's capital = (4x*12) = 48x. C's capital = (3x*12) = 36x. Ratio=42:48:36 = 7:8:6. Sum=21. B's share = (8/21)*378 = 8*18 = Rs. 144.", source_page: 522 },
-
-                // --- Math: Chain Rules (Pages 523-524) - 10 Qs ---
-                { question: "If 15 toys cost Rs 234, what do 35 toys cost?", options: ["Rs. 546", "Rs. 550", "Rs. 560", "Rs. 572"], correctOptionIndex: 0, explanation: "Let the required cost be Rs. x. More toys, more cost (Direct Proportion). 15:35 :: 234:x. 15x = 35*234. x = (35*234)/15 = 7*78 = 546.", source_page: 523 },
-                { question: "If 36 men can do a piece of work in 25 hours, in how many hours will 15 men do it?", options: ["50", "55", "60", "65"], correctOptionIndex: 2, explanation: "Let the required number of hours be x. Less men, more hours (Indirect Proportion). 15:36 :: 25:x. 15x = 36*25. x = (36*25)/15 = 12*5 = 60.", source_page: 523 },
-                { question: "If the wages of 6 men for 15 days be Rs 2100, then find the wages of 9 men for 12 days.", options: ["Rs. 2520", "Rs. 2600", "Rs. 2750", "Rs. 2800"], correctOptionIndex: 0, explanation: "Let the required wages be Rs. x. More men, more wages (Direct). Less days, less wages (Direct). Men 6:9 :: 2100:x and Days 15:12 :: 2100:x. So, (6*15) : (9*12) :: 2100:x. 90x = 108*2100. x = (108*2100)/90 = 108*23.33. Let's use chain rule: (M1*D1)/W1 = (M2*D2)/W2. (6*15)/2100 = (9*12)/x. 90/2100 = 108/x. x = (108*2100)/90 = 108*70/3 = 36*70 = 2520.", source_page: 523 },
-                { question: "If 20 men can build a wall 56 metres long in 6 days, what length of a similar wall can be built by 35 men in 3 days?", options: ["49 metres", "52 metres", "55 metres", "58 metres"], correctOptionIndex: 0, explanation: "(M1*D1)/W1 = (M2*D2)/W2. (20*6)/56 = (35*3)/x. 120/56 = 105/x. x = (105*56)/120 = (105*7)/15 = 7*7 = 49 metres.", source_page: 523 },
-                { question: "If 15 men, working 9 hours a day, can reap a field in 16 days, in how many days will 18 men reap the field, working 8 hours a day?", options: ["12", "15", "18", "20"], correctOptionIndex: 1, explanation: "M1*D1*H1 = M2*D2*H2. 15*16*9 = 18*D2*8. D2 = (15*16*9)/(18*8) = (15*2*9)/18 = 15 days.", source_page: 523 },
-                { question: "If a quarter kg of potato costs 60 paise, how many paise will 200 gm cost?", options: ["48 paise", "52 paise", "56 paise", "60 paise"], correctOptionIndex: 0, explanation: "Quarter kg = 250 gm. Let cost be x. 250:200 :: 60:x. 250x = 200*60. x = (200*60)/250 = (20*60)/25 = 4*12 = 48 paise.", source_page: 524 },
-                { question: "If 18 binders bind 900 books in 10 days, how many binders will be required to bind 660 books in 12 days?", options: ["11", "13", "15", "17"], correctOptionIndex: 0, explanation: "(M1*D1)/W1 = (M2*D2)/W2. (18*10)/900 = (M2*12)/660. 180/900 = 12*M2/660. 1/5 = M2/55. M2 = 11.", source_page: 524 },
-                { question: "A fort had provision of food for 150 men for 45 days. After 10 days, 25 men left the fort. The number of days for which the remaining food will last, is:", options: ["29", "37", "42", "54"], correctOptionIndex: 2, explanation: "After 10 days, for 150 men, food would last for 35 days. Now, men are 125. Let days be x. 150*35 = 125*x. x = (150*35)/125 = (6*35)/5 = 6*7 = 42 days.", source_page: 524 },
-                { question: "A contractor undertook to do a certain piece of work in 9 days. He employed certain number of men, but 6 of them being absent from the very first day, the rest could finish the work in 15 days. The number of men originally employed were:", options: ["12", "15", "18", "24"], correctOptionIndex: 1, explanation: "Let original men be x. x*9 = (x-6)*15. 9x = 15x - 90. 6x = 90. x = 15.", source_page: 524 },
-                { question: "An industrial loom weaves 0.128 metres of cloth every second. Approximately, how many seconds will it take for the loom to weave 25 metres of cloth?", options: ["178", "195", "204", "212"], correctOptionIndex: 1, explanation: "Time = Total length / Speed = 25 / 0.128 = 195.3125 seconds. Approximately 195 seconds.", source_page: 524 },
-
-                // --- Urdu: Prose, Novels, etc. (Urdu Sec. Pages 15-22) - 30 Qs ---
-                { question: "'مرثیہ' کی صنف بنیادی طور پر کس موضوع کے لیے وقف ہے؟", options: ["شادی بیاہ کی رسومات", "جنگ کی داستان", "کسی کی موت پر غم کا اظہار", "بادشاہ کی تعریف"], correctOptionIndex: 2, explanation: "مرثیہ ایسی نظم کو کہتے ہیں جو کسی شخص کی موت پر اظہارِ افسوس کے لیے لکھی جائے، خصوصاً شہدائے کربلا کے حوالے سے۔", source_page: "Urdu Sec. 15" },
-                { question: "کربلا کے واقعات کو شاعری میں بیان کرنے والی صنف کیا کہلاتی ہے؟", options: ["قصیدہ", "غزل", "مثنوی", "مرثیہ"], correctOptionIndex: 3, explanation: "وہ مرثیہ جس میں امام حسینؑ اور دیگر شہدائے کربلا کے مصائب اور شہادت کا ذکر ہو، اسے خصوصی اہمیت حاصل ہے۔", source_page: "Urdu Sec. 15" },
-                { question: "اردو مرثیہ نگاری کے دو سب سے بڑے نام کون سے ہیں؟", options: ["میر و سودا", "غالب و اقبال", "انیس و دبیر", "حالی و شبلی"], correctOptionIndex: 2, explanation: "لکھنؤ کے میر انیس اور مرزا دبیر کو اردو مرثیہ گوئی کے آسمان پر دو چمکتے ستاروں کی حیثیت حاصل ہے۔", source_page: "Urdu Sec. 15" },
-                { question: "لفظ 'مرثیہ' کس عربی لفظ سے نکلا ہے؟", options: ["رثا", "رحم", "مرتبہ", "رسم"], correctOptionIndex: 0, explanation: "لفظ 'مرثیہ' عربی لفظ 'رثا' سے مشتق ہے جس کے معنی میت پر رونے اور اس کی خوبیاں بیان کرنے کے ہیں۔", source_page: "Urdu Sec. 15" },
-                { question: "سفر نامہ کیا ہے؟", options: ["ایک خیالی داستان", "سفر کے حالات اور مشاہدات کا بیان", "ایک تاریخی کتاب", "ایک مذہبی تحریر"], correctOptionIndex: 1, explanation: "سفرنامہ وہ تحریر ہے جس میں کوئی لکھنے والا اپنے سفر کے حالات، واقعات اور مشاہدات کو قلمبند کرتا ہے۔", source_page: "Urdu Sec. 16" },
-                { question: "اردو کا پہلا باقاعدہ سفرنامہ نگار کسے کہا جاتا ہے؟", options: ["سرسید احمد خان", "محمد حسین آزاد", "یوسف خان کمبل پوش", "شبلی نعمانی"], correctOptionIndex: 2, explanation: "یوسف خان کمبل پوش کو اردو کا پہلا باقاعدہ سفرنامہ نگار مانا جاتا ہے جنہوں نے اپنا سفرِ انگلستان 'عجائبات فرنگ' کے نام سے لکھا۔", source_page: "Urdu Sec. 16" },
-                { question: "سرسید احمد خان کا 'مسافرانِ لندن' کس قسم کی تحریر ہے؟", options: ["ناول", "ڈرامہ", "سفرنامہ", "خودنوشت"], correctOptionIndex: 2, explanation: "'مسافرانِ لندن' سرسید احمد خان کا تحریر کردہ سفرنامہ ہے جو ان کے سفرِ انگلستان کی روداد ہے۔", source_page: "Urdu Sec. 16" },
-                { question: "'سفرنامہ ابن بطوطہ' کا اردو ترجمہ کس نے کیا؟", options: ["مولوی عبد الحق", "محمد حسین آزاد", "عبد الحلیم شرر", "چراغ علی"], correctOptionIndex: 2, explanation: "مشہور سیاح ابن بطوطہ کے سفرنامے کا اردو ترجمہ عبد الحلیم شرر نے کیا۔", source_page: "Urdu Sec. 16" },
-                { question: "مرزا غالب کا اصل نام کیا تھا؟", options: ["نجم الدولہ", "دبیر الملک", "اسد اللہ خان", "محمد ابراہیم"], correctOptionIndex: 2, explanation: "مرزا غالب کا اصل نام اسد اللہ خان تھا اور وہ 'غالب' تخلص کرتے تھے۔ انہیں نجم الدولہ اور دبیر الملک کے خطابات بھی ملے۔", source_page: "Urdu Sec. 18" },
-                { question: "غالب کے خطوط کے مجموعے کا نام کیا ہے؟", options: ["غبارِ خاطر", "اردوئے معلیٰ", "نقشِ فریادی", "یادگارِ غالب"], correctOptionIndex: 1, explanation: "غالب کے خطوط کے دو مجموعے 'عودِ ہندی' اور 'اردوئے معلیٰ' بہت مشہور ہیں۔", source_page: "Urdu Sec. 18" },
-                { question: "الطاف حسین حالی نے کس مشہور شخصیت کی سوانح حیات 'حیاتِ جاوید' کے نام سے لکھی؟", options: ["غالب", "میر", "سرسید احمد خان", "اقبال"], correctOptionIndex: 2, explanation: "الطاف حسین حالی نے سرسید احمد خان کی زندگی پر 'حیاتِ جاوید' کے عنوان سے ایک جامع سوانح عمری لکھی۔", source_page: "Urdu Sec. 17" },
-                { question: "علامہ شبلی نعمانی کی تصنیف 'شعر العجم' کا موضوع کیا ہے؟", options: ["اردو شاعری کی تاریخ", "فارسی شاعری کی تاریخ اور تنقید", "عربی شاعری کا جائزہ", "سفر کے حالات"], correctOptionIndex: 1, explanation: "کتاب کے مطابق، شبلی کی 'شعر العجم' فارسی شاعری کی مبسوط تاریخ ہے۔", source_page: "Urdu Sec. 17" },
-                { question: "اردو کا پہلا ناول کسے سمجھا جاتا ہے؟", options: ["امراؤ جان ادا", "فسانہ آزاد", "مراۃ العروس", "فردوس بریں"], correctOptionIndex: 2, explanation: "ڈپٹی نذیر احمد کے ناول 'مراۃ العروس' کو اردو کا پہلا ناول تسلیم کیا جاتا ہے۔", source_page: "Urdu Sec. 19" },
-                { question: "'امراؤ جان ادا' کس کا مشہور ناول ہے؟", options: ["پریم چند", "مرزا ہادی رسوا", "عبدالحلیم شرر", "نذیر احمد"], correctOptionIndex: 1, explanation: "یہ مشہور ناول مرزا محمد ہادی رسوا کی تخلیق ہے جو لکھنوی تہذیب کی عکاسی کرتا ہے۔", source_page: "Urdu Sec. 19" },
-                { question: "عبدالحلیم شرر کے ناولوں کا بنیادی موضوع کیا ہوتا تھا؟", options: ["سماجی اصلاح", "تاریخی اسلامی واقعات", "دیہاتی زندگی", "رومانی کہانیاں"], correctOptionIndex: 1, explanation: "عبدالحلیم شرر نے اپنے ناولوں میں شاندار ماضی، خصوصاً اسلامی تاریخ، کو موضوع بنایا۔", source_page: "Urdu Sec. 19" },
-                { question: "پریم چند کے ناول 'میدانِ عمل' کا مرکزی خیال کیا ہے؟", options: ["کسانوں اور مزدوروں کے مسائل", "شہری زندگی کی الجھنیں", "تاریخی جنگیں", "عشق و محبت"], correctOptionIndex: 0, explanation: "'میدانِ عمل' میں پریم چند نے ہندوستانی کسانوں کی بے بسی اور زمینداروں کے استحصال کو بیان کیا ہے۔", source_page: "Urdu Sec. 20" },
-                { question: "'آنگن' کس خاتون ناول نگار کی تصنیف ہے؟", options: ["عصمت چغتائی", "قرۃ العین حیدر", "خدیجہ مستور", "جمیلہ ہاشمی"], correctOptionIndex: 2, explanation: "'آنگن' خدیجہ مستور کا شاہکار ناول ہے جس میں تحریکِ آزادی کے پس منظر میں ایک خاندان کی کہانی بیان کی گئی ہے۔", source_page: "Urdu Sec. 20" },
-                { question: "قرۃ العین حیدر کے مشہور ناول کا نام کیا ہے جس میں کئی نسلوں کی کہانی بیان کی گئی ہے؟", options: ["اد उदास نسلیں", "آگ کا دریا", "خدا کی بستی", "راجہ گدھ"], correctOptionIndex: 1, explanation: "'آگ کا دریا' قرۃ العین حیدر کا سب سے مشہور ناول ہے جو ڈھائی ہزار سال کی تاریخ پر محیط ہے۔", source_page: "Urdu Sec. 20" },
-                { question: "'سوانح' کس قسم کی تحریر کو کہتے ہیں؟", options: ["اپنی زندگی کے حالات", "کسی دوسرے شخص کی زندگی کے حالات", "سفر کی کہانی", "خیالی قصہ"], correctOptionIndex: 1, explanation: "سوانح یا سوانح حیات وہ تحریر ہے جس میں کسی دوسرے شخص کی زندگی کے حالات تفصیل سے لکھے جائیں۔", source_page: "Urdu Sec. 21" },
-                { question: "الطاف حسین حالی کی لکھی ہوئی 'یادگارِ غالب' کس نوعیت کی کتاب ہے؟", options: ["ناول", "سفرنامہ", "سوانح اور تنقید", "شاعری کا مجموعہ"], correctOptionIndex: 2, explanation: "'یادگارِ غالب' میں حالی نے مرزا غالب کی زندگی کے حالات اور ان کی شاعری پر تنقیدی تبصرہ کیا ہے۔", source_page: "Urdu Sec. 21" },
-                { question: "شبلی نعمانی نے 'سیرت النبی' کے علاوہ کس مشہور شخصیت پر سوانحی کتاب لکھی؟", options: ["الفاروق", "المامون", "الغزالی", "یہ تمام"], correctOptionIndex: 3, explanation: "شبلی نعمانی نے متعدد اسلامی شخصیات پر سوانحی کتابیں لکھیں جن میں الفاروق (حضرت عمرؓ پر)، المامون، اور الغزالی شامل ہیں۔", source_page: "Urdu Sec. 21" },
-                { question: "وہ سوانح جو کوئی شخص خود اپنی زندگی کے بارے میں لکھے، کیا کہلاتی ہے؟", options: ["آپ بیتی / خودنوشت", " جگ بیتی", "سفرنامہ", "رپورتاژ"], correctOptionIndex: 0, explanation: "ایسی تحریر کو آپ بیتی یا خودنوشت سوانح عمری (Autobiography) کہتے ہیں۔", source_page: "Urdu Sec. 21" },
-                { question: "ناول 'خدا کی بستی' کے مصنف کون ہیں؟", options: ["شوکت صدیقی", "عبداللہ حسین", "انتظار حسین", "ممتاز مفتی"], correctOptionIndex: 0, explanation: "'خدا کی بستی' شوکت صدیقی کا مشہور ناول ہے جو شہری غریب طبقے کی زندگی کی عکاسی کرتا ہے۔", source_page: "Urdu Sec. 20" },
-                { question: "ڈپٹی نذیر احمد نے اپنے ناول کس مقصد کے تحت لکھے؟", options: ["تفریح طبع", "تاریخی شعور بیدار کرنا", "لڑکیوں کی تعلیم و تربیت اور اصلاح", "انگریزی تہذیب کی مخالفت"], correctOptionIndex: 2, explanation: "ڈپٹی نذیر احمد کے ناولوں کا بنیادی مقصد مسلم گھرانوں کی بچیوں کی اخلاقی اور معاشرتی اصلاح تھا۔", source_page: "Urdu Sec. 19" },
-                { question: "'فسانہ مبتلا' کس کا ناول ہے؟", options: ["پریم چند", "نذیر احمد", "مرزا ہادی رسوا", "رتن ناتھ سرشار"], correctOptionIndex: 1, explanation: "'فسانہ مبتلا' ڈپٹی نذیر احمد کا ایک اور اصلاحی ناول ہے۔", source_page: "Urdu Sec. 19" },
-                { question: "'حیات سعدی' کس نے تصنیف کی؟", options: ["شبلی نعمانی", "سرسید احمد خان", "الطاف حسین حالی", "محمد حسین آزاد"], correctOptionIndex: 2, explanation: "'حیات سعدی' الطاف حسین حالی کی تصنیف ہے جو فارسی کے عظیم شاعر شیخ سعدی کی سوانح حیات ہے۔", source_page: "Urdu Sec. 21" },
-                { question: "ناول 'توبتہ النصوح' کا مرکزی کردار کون ہے؟", options: ["کلیم", "نصوح", "ظاہردار بیگ", "مرزا ظاہر"], correctOptionIndex: 1, explanation: "اس ناول کا مرکزی کردار نصوح ہے جو بیماری کے بعد اپنی اور اپنے خاندان کی اصلاح کا بیڑا اٹھاتا ہے۔", source_page: "Urdu Sec. 19" },
-                { question: "اردو میں تاریخی ناول نگاری کا بانی کسے کہا جاتا ہے؟", options: ["نسیم حجازی", "پریم چند", "عبدالحلیم شرر", "صادق حسین سردھنوی"], correctOptionIndex: 2, explanation: "عبدالحلیم شرر کو اردو میں تاریخی ناول نگاری کی بنیاد رکھنے والا ادیب مانا جاتا ہے۔", source_page: "Urdu Sec. 19" },
-                { question: "عصمت چغتائی کا مشہور ناول کونسا ہے؟", options: ["آنگن", "ٹیڑھی لکیر", "اداس نسلیں", "بستی"], correctOptionIndex: 1, explanation: "'ٹیڑھی لکیر' عصمت چغتائی کا مشہور ترین ناول ہے جو ایک لڑکی کی باغیانہ زندگی کی کہانی پر مشتمل ہے۔", source_page: "Urdu Sec. 20" },
-                { question: "مولانا ابوالکلام آزاد کی خودنوشت کا نام کیا ہے؟", options: ["شہاب نامہ", "غبارِ خاطر", "کاروانِ خیال", "میری کہانی"], correctOptionIndex: 1, explanation: "کتاب کے مطابق، 'غبارِ خاطر' مولانا آزاد کے خطوط کا مجموعہ ہے جو ان کی قید کے دوران لکھے گئے اور خودنوشت کے زمرے میں آتے ہیں۔", source_page: "Urdu Sec. 22" }
+                // --- Urdu: Novels & Biographies (Urdu Section Pages 19-22) - 40 Qs ---
+                { question: "اردو کا پہلا ناول نگار کسے تسلیم کیا جاتا ہے؟", options: ["مرزا ہادی رسوا", "ڈپٹی نذیر احمد", "عبدالحلیم شرر", "پریم چند"], correctOptionIndex: 1, explanation: "ڈپٹی نذیر احمد کو ان کے اصلاحی اور معاشرتی ناولوں کی وجہ سے اردو کا پہلا ناول نگار سمجھا جاتا ہے۔ ان کا ناول 'مراۃ العروس' پہلا اردو ناول مانا جاتا ہے۔", source_page: "Urdu Sec. 19" },
+                { question: "ناول 'مراۃ العروس' کا بنیادی مقصد کیا تھا؟", options: ["تاریخی واقعات بیان کرنا", "لڑکیوں کی تعلیم و تربیت اور اصلاح", "سیاسی شعور بیدار کرنا", "رومانی داستان سنانا"], correctOptionIndex: 1, explanation: "ڈپٹی نذیر احمد نے 'مراۃ العروس' خاص طور پر اپنی بیٹیوں کی تعلیم و تربیت اور اخلاقی اصلاح کے لیے لکھا تھا۔", source_page: "Urdu Sec. 19" },
+                { question: "ناول 'توبتہ النصوح' کے مصنف کون ہیں؟", options: ["رتن ناتھ سرشار", "پریم چند", "نذیر احمد", "عبدالحلیم شرر"], correctOptionIndex: 2, explanation: "'توبتہ النصوح' ڈپٹی نذیر احمد کا ایک اور مشہور اصلاحی ناول ہے جس کا مرکزی کردار نصوح ہے۔", source_page: "Urdu Sec. 19" },
+                { question: "اردو میں تاریخی ناول نگاری کی بنیاد کس نے رکھی؟", options: ["نسیم حجازی", "عبدالحلیم شرر", "صادق سردھنوی", "علی عباس حسینی"], correctOptionIndex: 1, explanation: "عبدالحلیم شرر نے اردو ادب میں تاریخی ناول نگاری کو متعارف کرایا اور اسلامی تاریخ کے شاندار واقعات کو اپنے ناولوں کا موضوع بنایا۔", source_page: "Urdu Sec. 19" },
+                { question: "ناول 'فردوس بریں' کس کی تخلیق ہے؟", options: ["مرزا ہادی رسوا", "پریم چند", "عبدالحلیم شرر", "نذیر احمد"], correctOptionIndex: 2, explanation: "'فردوس بریں' عبدالحلیم شرر کا شاہکار تاریخی ناول ہے جو حسن بن صباح اور اس کی جنت کے موضوع پر لکھا گیا ہے۔", source_page: "Urdu Sec. 19" },
+                { question: "لکھنوی تہذیب اور طوائف کی زندگی پر مبنی مشہور ناول 'امراؤ جان ادا' کس نے لکھا؟", options: ["مرزا ہادی رسوا", "شوکت صدیقی", "عصمت چغتائی", "رتن ناتھ سرشار"], correctOptionIndex: 0, explanation: "'امراؤ جان ادا' مرزا محمد ہادی رسوا کا لازوال ناول ہے جو لکھنؤ کی زوال آمادہ تہذیب کی بہترین عکاسی کرتا ہے۔", source_page: "Urdu Sec. 19" },
+                { question: "پریم چند کے ناولوں کا بنیادی موضوع کیا ہے؟", options: ["شہری زندگی کے مسائل", "تاریخ اسلام", "ہندوستان کی دیہاتی زندگی اور کسانوں کے مسائل", "امراء کی زندگی"], correctOptionIndex: 2, explanation: "پریم چند نے اپنے ناولوں میں ہندوستان کے دیہات، کسانوں، مزدوروں اور غریب طبقے کے مسائل کو حقیقت پسندی سے بیان کیا ہے۔", source_page: "Urdu Sec. 20" },
+                { question: "ناول 'گئودان' کس کا شاہکار سمجھا جاتا ہے؟", options: ["کرشن چندر", "سعادت حسن منٹو", "راجندر سنگھ بیدی", "پریم چند"], correctOptionIndex: 3, explanation: "'گئودان' پریم چند کا آخری اور سب سے اہم ناول ہے، جسے ہندوستانی دیہی زندگی کا مہاکاویہ کہا جاتا ہے۔", source_page: "Urdu Sec. 20" },
+                { question: "ناول 'آنگن' کی مصنفہ کون ہیں؟", options: ["عصمت چغتائی", "قرۃ العین حیدر", "خدیجہ مستور", "جمیلہ ہاشمی"], correctOptionIndex: 2, explanation: "'آنگن' خدیجہ مستور کا مشہور ناول ہے جس میں تحریک پاکستان کے پس منظر میں ایک مسلم خاندان کے عروج و زوال کو دکھایا گیا ہے۔", source_page: "Urdu Sec. 20" },
+                { question: "قرۃ العین حیدر کے اس ناول کا نام کیا ہے جو وقت کے فلسفے اور تاریخ کے وسیع کینوس پر لکھا گیا ہے؟", options: ["آخر شب کے ہم سفر", "آگ کا دریا", "کار جہاں دراز ہے", "گردش رنگ چمن"], correctOptionIndex: 1, explanation: "'آگ کا دریا' قرۃ العین حیدر کا شاہکار ناول ہے جو ڈھائی ہزار سال کی ہندوستانی تاریخ اور تہذیب پر محیط ہے۔", source_page: "Urdu Sec. 20" },
+                { question: "ناول 'خدا کی بستی' کس نے لکھا؟", options: ["شوکت صدیقی", "عبداللہ حسین", "انتظار حسین", "ممتاز مفتی"], correctOptionIndex: 0, explanation: "'خدا کی بستی' شوکت صدیقی کا مشہور ناول ہے جو کراچی کی کچی آبادیوں میں پنپنے والے جرائم اور سماجی مسائل کی عکاسی کرتا ہے۔", source_page: "Urdu Sec. 20" },
+                { question: "ناول 'اداس نسلیں' کا تعلق کس موضوع سے ہے؟", options: ["تقسیم ہند اور اس کے اثرات", "مغلیہ دور کا زوال", "صنعتی انقلاب", "دیہاتی زندگی"], correctOptionIndex: 0, explanation: "عبداللہ حسین کا ناول 'اداس نسلیں' برطانوی ہندوستان کے آخری دور سے لے کر قیام پاکستان تک کے واقعات اور اس نسل کی کہانی بیان کرتا ہے جو اس دور سے گزری۔", source_page: "Urdu Sec. 20" },
+                { question: "'سوانح' یا 'بایوگرافی' سے کیا مراد ہے؟", options: ["اپنی زندگی کی کہانی", "کسی دوسرے شخص کی زندگی کے مفصل حالات", "سفر کی روداد", "خیالی قصہ"], correctOptionIndex: 1, explanation: "سوانح یا بایوگرافی وہ نثری صنف ہے جس میں کسی شخص کی زندگی کے حالات، واقعات اور کارناموں کو تفصیل سے بیان کیا جاتا ہے۔", source_page: "Urdu Sec. 21" },
+                { question: "الطاف حسین حالی نے 'حیات جاوید' کس کی سوانح حیات لکھی؟", options: ["مرزا غالب", "شیخ سعدی", "سرسید احمد خان", "علامہ اقبال"], correctOptionIndex: 2, explanation: "'حیات جاوید' مولانا الطاف حسین حالی کی تصنیف ہے جو سرسید احمد خان کی زندگی اور ان کے کارناموں پر مبنی ایک جامع سوانح ہے۔", source_page: "Urdu Sec. 21" },
+                { question: "شبلی نعمانی کی تصنیف 'الفاروق' کس شخصیت کی سوانح ہے؟", options: ["حضرت ابوبکر صدیقؓ", "حضرت عمر فاروقؓ", "حضرت عثمان غنیؓ", "حضرت علیؓ"], correctOptionIndex: 1, explanation: "'الفاروق' علامہ شبلی نعمانی کی مشہور کتاب ہے جو دوسرے خلیفہ راشد حضرت عمر فاروقؓ کی زندگی، فتوحات اور نظام حکومت پر مبنی ہے۔", source_page: "Urdu Sec. 21" },
+                { question: "وہ سوانح جو کوئی شخص اپنی زندگی کے بارے میں خود لکھے، کیا کہلاتی ہے؟", options: ["آپ بیتی / خودنوشت", "جگ بیتی", "سفرنامہ", "رپورتاژ"], correctOptionIndex: 0, explanation: "جب کوئی مصنف اپنی زندگی کے حالات خود قلمبند کرے تو اسے آپ بیتی یا خودنوشت (Autobiography) کہا جاتا ہے۔", source_page: "Urdu Sec. 21" },
+                { question: "جوش ملیح آبادی کی خودنوشت کا نام کیا ہے؟", options: ["شہاب نامہ", "یادوں کی برات", "کاروان خیال", "اسیر کی ڈائری"], correctOptionIndex: 1, explanation: "'یادوں کی برات' جوش ملیح آبادی کی مشہور آپ بیتی ہے، جو اپنے بے باک انداز بیان کی وجہ سے مشہور ہے۔", source_page: "Urdu Sec. 22" },
+                { question: "قدرت اللہ شہاب کی آپ بیتی کا کیا نام ہے؟", options: ["شہاب نامہ", "غبار خاطر", "ورود مسعود", "سرگزشت"], correctOptionIndex: 0, explanation: "'شہاب نامہ' قدرت اللہ شہاب کی انتہائی مقبول خودنوشت ہے جس میں انہوں نے اپنی سرکاری ملازمت اور روحانی تجربات کو بیان کیا ہے۔", source_page: "Urdu Sec. 22" },
+                { question: "مولانا ابوالکلام آزاد کے خطوط کا مجموعہ جو ان کی خودنوشت کے زمرے میں آتا ہے، کون سا ہے؟", options: ["کاروان خیال", "نقش فریادی", "غبارِ خاطر", "مکاتیب آزاد"], correctOptionIndex: 2, explanation: "'غبارِ خاطر' مولانا آزاد کے ان خطوط کا مجموعہ ہے جو انہوں نے قلعہ احمد نگر میں قید کے دوران لکھے اور یہ ان کی شخصیت اور افکار کا آئینہ دار ہے۔", source_page: "Urdu Sec. 22" },
+                { question: "مشتاق احمد یوسفی کی کتاب 'زرگزشت' کس صنف سے تعلق رکھتی ہے؟", options: ["ناول", "سفرنامہ", "آپ بیتی", "افسانہ"], correctOptionIndex: 2, explanation: "'زرگزشت' مشتاق احمد یوسفی کی خودنوشت سوانح ہے جو ان کے بینکاری کے دور کے تجربات پر مبنی ہے اور اپنے مخصوص طنزیہ اور مزاحیہ انداز میں لکھی گئی ہے۔", source_page: "Urdu Sec. 22" },
+                { question: "'حیات سعدی' کس کی تصنیف ہے؟", options: ["شبلی نعمانی", "الطاف حسین حالی", "سرسید احمد خان", "محمد حسین آزاد"], correctOptionIndex: 1, explanation: "'حیات سعدی' الطاف حسین حالی نے لکھی ہے جو فارسی کے عظیم شاعر شیخ سعدی کی سوانح حیات ہے۔", source_page: "Urdu Sec. 21" },
+                { question: "علامہ شبلی نے 'سیرت النبی' کے علاوہ کس عباسی خلیفہ پر سوانحی کتاب لکھی؟", options: ["ہارون الرشید", "المامون", "المعتصم باللہ", "المنصور"], correctOptionIndex: 1, explanation: "علامہ شبلی نعمانی نے عباسی خلیفہ مامون الرشید کی زندگی اور اس کے علمی کارناموں پر 'المامون' کے عنوان سے کتاب لکھی۔", source_page: "Urdu Sec. 21" },
+                { question: "ناول 'ابن الوقت' کس کا لکھا ہوا ہے؟", options: ["پریم چند", "نذیر احمد", "رتن ناتھ سرشار", "مرزا رسوا"], correctOptionIndex: 1, explanation: "'ابن الوقت' ڈپٹی نذیر احمد کا ناول ہے جس میں مغربی تہذیب کی نقالی کرنے والے ایک کردار کو موضوع بنایا گیا ہے۔", source_page: "Urdu Sec. 19" },
+                { question: "رتن ناتھ سرشار کا سب سے مشہور ناول کون سا ہے؟", options: ["جام سرشار", "فسانہ آزاد", "سیر کہسار", "کامنی"], correctOptionIndex: 1, explanation: "'فسانہ آزاد' پنڈت رتن ناتھ سرشار کا سب سے مشہور اور ضخیم ناول ہے جو اودھ اخبار میں قسط وار چھپتا رہا۔", source_page: "Urdu Sec. 19" },
+                { question: "ناول 'فسانہ آزاد' کا مرکزی کردار کون ہے؟", options: ["خوجی", "آزاد", "ہمایوں فر", "چھوٹا چیلا"], correctOptionIndex: 1, explanation: "اس ناول کا مرکزی کردار 'آزاد' ہے، جبکہ 'خوجی' اس کا سب سے دلچسپ اور مزاحیہ ضمنی کردار ہے۔", source_page: "Urdu Sec. 19" },
+                { question: "ناول 'میدان عمل' کس کی تخلیق ہے؟", options: ["عزیز احمد", "قرۃ العین حیدر", "پریم چند", "عصمت چغتائی"], correctOptionIndex: 2, explanation: "'میدان عمل' پریم چند کا ایک اہم سیاسی اور سماجی ناول ہے جس میں انہوں نے ہندوستانی معاشرے کے مختلف مسائل کو پیش کیا ہے۔", source_page: "Urdu Sec. 20" },
+                { question: "عصمت چغتائی کا کون سا ناول بہت متنازعہ رہا؟", options: ["ضدی", "ٹیڑھی لکیر", "معصومہ", "سودائی"], correctOptionIndex: 1, explanation: "'ٹیڑھی لکیر' اپنے باغیانہ موضوعات اور بے باک انداز کی وجہ سے کافی مشہور اور متنازعہ رہا۔", source_page: "Urdu Sec. 20" },
+                { question: "ناول 'راجہ گدھ' کی مصنفہ کون ہیں؟", options: ["بانو قدسیہ", "خدیجہ مستور", "الطاف فاطمہ", "جمیلہ ہاشمی"], correctOptionIndex: 0, explanation: "'راجہ گدھ' بانو قدسیہ کا مشہور ترین ناول ہے جو حرام و حلال کے فلسفے اور نفسیاتی موضوعات پر مبنی ہے۔", source_page: "Urdu Sec. 20" },
+                { question: "'یادگار غالب' کس نوعیت کی کتاب ہے؟", options: ["ناول", "شاعری کا مجموعہ", "غالب کی سوانح اور ان کے کلام پر تبصرہ", "سفرنامہ"], correctOptionIndex: 2, explanation: "الطاف حسین حالی کی کتاب 'یادگار غالب' مرزا غالب کی سوانح حیات اور ان کی شاعری کی تفہیم و تنقید پر مشتمل ایک اہم تصنیف ہے۔", source_page: "Urdu Sec. 21" },
+                { question: "ڈپٹی نذیر احمد کے ناولوں کی زبان کیسی ہے؟", options: ["خالص ادبی اور مشکل", "دہلی کی ٹکسالی اور محاوراتی زبان", "لکھنؤ کی شاعری والی زبان", "دیہاتی اور سادہ"], correctOptionIndex: 1, explanation: "نذیر احمد کے ناولوں کی زبان دہلی کی ٹکسالی زبان ہے، جس میں محاورات اور روزمرہ کا خوبصورت استعمال ملتا ہے۔", source_page: "Urdu Sec. 19" },
+                { question: "عبدالحلیم شرر کے ناولوں کا بنیادی مقصد کیا تھا؟", options: ["مسلمانوں میں اپنی شاندار تاریخ کا شعور بیدار کرنا", "انگریزی تہذیب کی حمایت کرنا", "صرف تفریح فراہم کرنا", "سماجی برائیوں کی نشاندہی"], correctOptionIndex: 0, explanation: "شرر نے اپنے تاریخی ناولوں کے ذریعے مسلمانوں کو ان کے تابناک ماضی کی یاد دلا کر ان میں خود اعتمادی اور قومی جذبہ پیدا کرنے کی کوشش کی۔", source_page: "Urdu Sec. 19" },
+                { question: "احسان دانش کی خودنوشت کا نام کیا ہے؟", options: ["جہان دانش", "یادوں کی برات", "شہاب نامہ", "اپنی تلاش میں"], correctOptionIndex: 0, explanation: "'جہان دانش' شاعر مزدور احسان دانش کی آپ بیتی ہے جس میں انہوں نے اپنی زندگی کی جدوجہد کو بیان کیا ہے۔", source_page: "Urdu Sec. 22" },
+                { question: "بیگم اختر ریاض الدین کی کتاب 'سات سمندر پار' کس صنف سے تعلق رکھتی ہے؟", options: ["ناول", "آپ بیتی", "سفرنامہ", "رپورتاژ"], correctOptionIndex: 2, explanation: "'سات سمندر پار' بیگم اختر ریاض الدین کا مشہور سفرنامہ ہے جسے آدم جی ادبی انعام بھی ملا۔", source_page: "Urdu Sec. 22" },
+                { question: "ناول 'علی پور کا ایلی' کس کا لکھا ہوا ہے؟", options: ["شوکت صدیقی", "ممتاز مفتی", "انتظار حسین", "عبداللہ حسین"], correctOptionIndex: 1, explanation: "'علی پور کا ایلی' ممتاز مفتی کا ضخیم اور مشہور ناول ہے جو نفسیاتی اور خودنوشتی انداز کا حامل ہے۔", source_page: "Urdu Sec. 20" },
+                { question: "الطاف حسین حالی نے کس فارسی شاعر کی سوانح لکھی؟", options: ["حافظ شیرازی", "فردوسی", "شیخ سعدی", "عمر خیام"], correctOptionIndex: 2, explanation: "حالی نے فارسی کے عظیم شاعر اور اخلاقی مصلح شیخ سعدی شیرازی کی سوانح 'حیات سعدی' کے نام سے لکھی۔", source_page: "Urdu Sec. 21" },
+                { question: "شبلی نعمانی نے کس عظیم اسلامی مفکر اور فلسفی کی سوانح لکھی؟", options: ["ابن رشد", "امام غزالی", "ابن سینا", "الکندی"], correctOptionIndex: 1, explanation: "علامہ شبلی نے 'الغزالی' کے عنوان سے حجتہ الاسلام امام محمد غزالی کی زندگی اور ان کے علمی و فکری کارناموں پر کتاب لکھی۔", source_page: "Urdu Sec. 21" },
+                { question: "فیض احمد فیض کی خودنوشتی تحریروں کا مجموعہ کس نام سے شائع ہوا؟", options: ["صلیبیں مرے دریچے میں", "مہ و سال آشنائی", "دست تہ سنگ", "زنداں نامہ"], correctOptionIndex: 1, explanation: "'مہ و سال آشنائی' فیض احمد فیض کی خودنوشتی نوعیت کی تحریروں اور انٹرویوز پر مشتمل کتاب ہے۔", source_page: "Urdu Sec. 22" },
+                { question: "پطرس بخاری کی کتاب 'پطرس کے مضامین' کی بنیادی صنف کیا ہے؟", options: ["ناول", "سفرنامہ", "طنز و مزاح", "آپ بیتی"], correctOptionIndex: 2, explanation: "اگرچہ یہ آپ بیتی نہیں ہے، لیکن اس کا تعلق سوانحی ادب سے جوڑا جاتا ہے کیونکہ اس کے مضامین ان کی زندگی کے تجربات کی عکاسی کرتے ہیں اور یہ طنز و مزاح کا شاہکار ہے۔", source_page: "Urdu Sec. 22" },
+                { question: "ناول 'بستی' کے مصنف کون ہیں؟", options: ["انتظار حسین", "عبداللہ حسین", "شوکت صدیقی", "بانو قدسیہ"], correctOptionIndex: 0, explanation: "'بستی' انتظار حسین کا مشہور ناول ہے جو سقوط ڈھاکہ کے المیے اور ہجرت کے تجربے کو علامتی انداز میں بیان کرتا ہے۔", source_page: "Urdu Sec. 20" },
+                { question: "ڈپٹی نذیر احمد کے کس ناول کا کردار 'کلیم' ہے؟", options: ["مراۃ العروس", "بنات النعش", "توبتہ النصوح", "ابن الوقت"], correctOptionIndex: 2, explanation: "کلیم، جو پڑھائی سے بھاگتا ہے اور بری صحبت میں پڑ جاتا ہے، ناول 'توبتہ النصوح' کا ایک اہم کردار ہے اور وہ نصوح کا بیٹا ہے۔", source_page: "Urdu Sec. 19" }
             ];
 
-            // Final shuffle to ensure randomness
-            shuffleArray(allQuestions);
+            // Shuffle the entire question bank using the date as a seed
+            shuffleArrayWithSeed(allQuestions, dateSeed);
             quizQuestions = allQuestions; // Use all 100 questions
 
+            // Select a random special question after shuffling
             if (quizQuestions.length > 0) {
-                specialQuestionIndex = Math.floor(Math.random() * quizQuestions.length);
+                let rng = new Math.seedrandom(dateSeed + '-special');
+                specialQuestionIndex = Math.floor(rng() * quizQuestions.length);
                 quizQuestions[specialQuestionIndex].special = true;
             }
         }
@@ -696,7 +713,7 @@
             const dateParts = CURRENT_DATE_STR.split(' ');
             const monthName = dateParts[0].toUpperCase();
             const day = parseInt(dateParts[1].replace(',', ''));
-            document.getElementById('loginId').value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 03JUL
+            document.getElementById('loginId').value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 04JUL
             
             initializeQuiz();
             updateLiveDate();
