@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS MPT Daily Quiz - July 4, 2025</title>
+    <title>CSS MPT Daily Quiz - July 5, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -14,7 +14,7 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: #F8F9FA; /* Very light gray */
-            color: #2C3E50; /* Main text color */
+            color: #333; /* Darker text for better contrast */
             margin: 0;
             padding: 0;
             display: flex;
@@ -38,16 +38,16 @@
         }
 
         .top-bar .date-display {
-            color: #6D6875;
+            color: #555;
             font-size: 0.9rem;
             font-weight: 600;
-            display: flex; /* Added for icon */
-            align-items: center; /* Added for icon */
-            gap: 0.5rem; /* Added for icon */
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .top-bar .whatsapp-link {
-            color: #6D6875;
+            color: #555;
             text-decoration: none;
             font-size: 0.9rem;
             display: flex;
@@ -68,7 +68,7 @@
             font-family: 'Roboto', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
-            color: #2C3E50;
+            color: #2c3e50;
             margin-bottom: 1rem;
         }
 
@@ -86,7 +86,7 @@
         .progress-bar {
             height: 100%;
             width: 0%;
-            background: linear-gradient(to right, #4682B4, #5F9EA0); /* SteelBlue to CadetBlue */
+            background: linear-gradient(to right, #DA70D6, #BA55D3); /* Orchid to MediumOrchid */
             border-radius: 5px;
             transition: width 0.3s ease-in-out;
         }
@@ -107,9 +107,9 @@
             font-weight: bold;
         }
 
-        /* Card Styling (Login, Candidate, Quiz, Results Pages) */
+        /* Card Styling */
         .card {
-            background-color: #FAF0E6; /* Linen */
+            background-color: #FFF0F5; /* LavenderBlush */
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             padding: 1.5rem;
@@ -121,7 +121,7 @@
 
         /* Button Styling */
         .button-gradient {
-            background-image: linear-gradient(to right, #B0C4DE, #ADD8E6); /* LightSteelBlue to LightBlue */
+            background-image: linear-gradient(to right, #D8BFD8, #DDA0DD); /* Thistle to Plum */
             color: #2C3E50;
             font-weight: bold;
             padding: 0.75rem 1.5rem;
@@ -137,11 +137,6 @@
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        .button-gradient:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
         /* Option Button Styling */
         .option-button {
             background-color: #ffffff;
@@ -152,8 +147,7 @@
             cursor: pointer;
             transition: all 0.2s ease;
             margin-bottom: 0.75rem;
-            color: #2C3E50;
-            font-weight: normal;
+            color: #333;
         }
         
         .option-button:hover:not(.selected) {
@@ -162,8 +156,8 @@
         }
 
         .option-button.selected {
-            border-color: #4682B4;
-            background-color: #f0f8ff; /* AliceBlue */
+            border-color: #BA55D3;
+            background-color: #E6E6FA; /* Lavender */
             font-weight: bold;
         }
 
@@ -187,40 +181,20 @@
 
         /* Explanation Section */
         .explanation {
-            background-color: #E0FFFF; /* LightCyan */
-            border-left: 5px solid #4682B4; /* SteelBlue */
+            background-color: #F5F5F5; /* WhiteSmoke */
+            border-left: 5px solid #DA70D6; /* Orchid */
             padding: 1rem;
             margin-top: 1rem;
             border-radius: 8px;
-            color: #2C3E50;
+            color: #333;
             font-size: 0.9rem;
             display: none; /* Hidden by default */
         }
 
-        /* Timer and Question Progress Display */
-        .timer-display, .question-progress {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #2C3E50;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
         /* Responsive Adjustments */
         @media (max-width: 768px) {
-            .top-bar {
-                flex-direction: column;
-                gap: 0.5rem;
-                padding: 0.5rem;
-                align-items: flex-start;
-            }
-            .top-bar .date-display { order: 1; font-size: 0.8rem; align-self: flex-start; }
-            .top-bar .whatsapp-link { order: 2; font-size: 0.8rem; align-self: flex-end; }
             .quiz-title { font-size: 1.5rem; }
-            .banner-logo { max-width: 150px; }
-            .card { margin: 0.75rem auto; padding: 1rem; }
-            .button-gradient { padding: 0.6rem 1.2rem; font-size: 0.9rem; }
-            .option-button { padding: 0.6rem 0.8rem; font-size: 0.9rem; }
+            .card { padding: 1rem; }
         }
 
         /* Keyframe Animations */
@@ -281,11 +255,11 @@
             <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
             <div class="mb-4">
                 <label for="loginId" class="block text-sm font-medium text-gray-700 mb-1">ID:</label>
-                <input type="text" id="loginId" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="">
+                <input type="text" id="loginId" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500" value="">
             </div>
             <div class="mb-6">
                 <label for="loginPassword" class="block text-sm font-medium text-gray-700 mb-1">Password:</label>
-                <input type="password" id="loginPassword" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="free">
+                <input type="password" id="loginPassword" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500" value="free">
             </div>
             <p id="loginError" class="text-red-500 text-sm mb-4 hidden">Invalid ID or Password</p>
             <button id="loginBtn" class="button-gradient w-full">Login</button>
@@ -295,15 +269,15 @@
             <h2 class="text-xl font-bold mb-4 text-center">Candidate Information</h2>
             <div class="mb-6">
                 <label for="candidateName" class="block text-sm font-medium text-gray-700 mb-1">Enter Full Name:</label>
-                <input type="text" id="candidateName" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" placeholder="Your Full Name">
+                <input type="text" id="candidateName" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500" placeholder="Your Full Name">
             </div>
             <p id="nameError" class="text-red-500 text-sm mb-4 hidden">Please enter your full name.</p>
             <button id="startQuizBtn" class="button-gradient w-full">Start Quiz</button>
         </div>
 
         <div id="quizPage" class="card hidden">
-            <div class="timer-display" id="timerDisplay"></div>
-            <div class="question-progress" id="questionProgress"></div>
+            <div class="timer-display text-lg font-bold text-gray-700 mb-4 text-center" id="timerDisplay"></div>
+            <div class="question-progress text-center text-sm text-gray-500 mb-4" id="questionProgress"></div>
             <h2 class="text-lg font-semibold mb-4" id="questionText"></h2>
             <div id="optionsContainer" class="flex flex-col gap-3 mb-6"></div>
             <div class="flex justify-between">
@@ -328,7 +302,7 @@
 
     <script>
         // Set the current date for display and logic
-        const CURRENT_DATE_STR = "July 4, 2025";
+        const CURRENT_DATE_STR = "July 5, 2025";
         const CURRENT_DATE = new Date(CURRENT_DATE_STR);
 
         // Function to update the live date display
@@ -410,7 +384,6 @@
                 quizCard.classList.add('special-question');
             }
             
-            // Shuffle options for the current question using a consistent seed
             const optionSeed = `${CURRENT_DATE_STR}-${currentQuestionIndex}`;
             const shuffledOptions = [...question.options];
             shuffleArrayWithSeed(shuffledOptions, optionSeed);
@@ -419,22 +392,11 @@
                 const button = document.createElement('button');
                 button.classList.add('option-button', 'w-full');
                 button.innerHTML = option;
-                // Store the original index to identify the correct answer regardless of shuffle order
                 button.dataset.originalOptionIndex = question.options.indexOf(option);
                 button.onclick = () => selectOption(parseInt(button.dataset.originalOptionIndex));
-
-                const userAnswer = userAnswers[currentQuestionIndex];
-                if (userAnswer && userAnswer.selectedOptionIndex === parseInt(button.dataset.originalOptionIndex)) {
-                    button.classList.add('selected');
-                    button.classList.add(userAnswer.isCorrect ? 'correct' : 'incorrect');
-                    // Disable all buttons if this question has been answered
-                    Array.from(optionsContainer.children).forEach(optBtn => optBtn.disabled = true);
-                    document.getElementById('explanationDiv').style.display = 'block';
-                }
                 optionsContainer.appendChild(button);
             });
 
-            // Re-disable and show correct answer if navigating back to an answered question
             const userAnswer = userAnswers[currentQuestionIndex];
             if (userAnswer && userAnswer.selectedOptionIndex !== undefined) {
                  Array.from(optionsContainer.children).forEach((button) => {
@@ -448,7 +410,6 @@
                     }
                 });
             }
-
 
             const explanationDiv = document.getElementById('explanationDiv');
             explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
@@ -479,7 +440,6 @@
                 if (btnOriginalIndex === selectedOptionOriginalIndex) {
                     button.classList.add('selected', isCorrect ? 'correct' : 'incorrect');
                 }
-                // Always show the correct answer
                 if (btnOriginalIndex === question.correctOptionIndex) {
                     button.classList.add('correct');
                 }
@@ -488,7 +448,7 @@
             document.getElementById('explanationDiv').style.display = 'block';
             document.getElementById('nextBtn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
         }
-
+        
         function nextQuestion() {
             if (currentQuestionIndex < quizQuestions.length - 1) {
                 currentQuestionIndex++;
@@ -550,7 +510,7 @@
         document.getElementById('loginBtn').addEventListener('click', () => {
             const id = document.getElementById('loginId').value.toUpperCase();
             const password = document.getElementById('loginPassword').value;
-            if (id === '04JULY' && password === 'free') {
+            if (id === '05JULY' && password === 'free') {
                 document.getElementById('loginError').classList.add('hidden');
                 showPage('candidateNamePage');
             } else {
@@ -584,123 +544,121 @@
         // --- Quiz Initialization ---
         function initializeQuiz() {
             quizQuestions.length = 0;
-            const dateSeed = CURRENT_DATE_STR; // Use string seed for seedrandom
+            const dateSeed = CURRENT_DATE_STR;
             
             const allQuestions = [
-                // === July 4th Syllabus Quiz (100 MCQs) ===
+                // === July 5th Syllabus Quiz (100 MCQs) ===
 
-                // --- General Knowledge: Countries, Capitals, Currency & Area (Pages 36-39) - 40 Qs ---
-                { question: "What is the capital of Algeria?", options: ["Algiers", "Oran", "Constantine", "Annaba"], correctOptionIndex: 0, explanation: "The capital and largest city of Algeria is Algiers.", source_page: 36 },
-                { question: "The currency of Angola is:", options: ["Kwanza", "CFA Franc", "Dollar", "Rand"], correctOptionIndex: 0, explanation: "The official currency of Angola is the Kwanza.", source_page: 36 },
-                { question: "What is the capital of Cameroon?", options: ["Douala", "Yaoundé", "Garoua", "Bamenda"], correctOptionIndex: 1, explanation: "Yaoundé is the capital city of Cameroon.", source_page: 36 },
-                { question: "The currency of Egypt is:", options: ["Dinar", "Dirham", "Egyptian Pound", "Rial"], correctOptionIndex: 2, explanation: "The currency of Egypt is the Egyptian Pound.", source_page: 36 },
-                { question: "What is the capital of Ghana?", options: ["Kumasi", "Accra", "Tamale", "Takoradi"], correctOptionIndex: 1, explanation: "Accra is the capital of Ghana.", source_page: 36 },
-                { question: "The currency of Kenya is:", options: ["Shilling", "Franc", "Rand", "Naira"], correctOptionIndex: 0, explanation: "The currency of Kenya is the Kenyan Shilling.", source_page: 36 },
-                { question: "What is the capital of Libya?", options: ["Benghazi", "Misrata", "Tripoli", "Tarhuna"], correctOptionIndex: 2, explanation: "Tripoli is the capital city of Libya.", source_page: 36 },
-                { question: "The currency of Nigeria is:", options: ["Cedi", "Leone", "Naira", "CFA Franc"], correctOptionIndex: 2, explanation: "The Naira is the currency of Nigeria.", source_page: 36 },
-                { question: "What is the capital of Somalia?", options: ["Hargeisa", "Mogadishu", "Kismayo", "Bosaso"], correctOptionIndex: 1, explanation: "Mogadishu is the capital city of Somalia.", source_page: 36 },
-                { question: "The currency of South Africa is:", options: ["Pula", "Kwacha", "Rand", "Shilling"], correctOptionIndex: 2, explanation: "The Rand is the official currency of South Africa.", source_page: 36 },
-                { question: "What is the capital of Sudan?", options: ["Omdurman", "Port Sudan", "Kassala", "Khartoum"], correctOptionIndex: 3, explanation: "Khartoum is the capital of Sudan.", source_page: 36 },
-                { question: "The currency of Zimbabwe is:", options: ["US Dollar", "Rand", "Pula", "Kwacha"], correctOptionIndex: 0, explanation: "Zimbabwe uses multiple currencies, with the US Dollar being one of the primary ones for transactions.", source_page: 37 },
-                { question: "What is the capital of Armenia?", options: ["Gyumri", "Yerevan", "Vanadzor", "Kapan"], correctOptionIndex: 1, explanation: "Yerevan is the capital of Armenia.", source_page: 37 },
-                { question: "The currency of China is:", options: ["Yen", "Won", "Yuan (Renminbi)", "Baht"], correctOptionIndex: 2, explanation: "The Renminbi is the official currency of China, with the Yuan being the basic unit.", source_page: 37 },
-                { question: "What is the capital of Indonesia?", options: ["Surabaya", "Bandung", "Medan", "Jakarta"], correctOptionIndex: 3, explanation: "Jakarta is the capital of Indonesia.", source_page: 37 },
-                { question: "The currency of Iraq is:", options: ["Dinar", "Rial", "Lira", "Pound"], correctOptionIndex: 0, explanation: "The Iraqi Dinar is the currency of Iraq.", source_page: 37 },
-                { question: "What is the capital of Israel?", options: ["Tel Aviv", "Haifa", "Jerusalem", "Rishon LeZion"], correctOptionIndex: 2, explanation: "Israel maintains its capital in Jerusalem, though it is disputed.", source_page: 37 },
-                { question: "The currency of Japan is:", options: ["Yuan", "Yen", "Won", "Dollar"], correctOptionIndex: 1, explanation: "The Yen is the official currency of Japan.", source_page: 37 },
-                { question: "What is the capital of Malaysia?", options: ["George Town", "Ipoh", "Kuala Lumpur", "Johor Bahru"], correctOptionIndex: 2, explanation: "Kuala Lumpur is the capital of Malaysia.", source_page: 37 },
-                { question: "The currency of Philippines is:", options: ["Rupee", "Peso", "Baht", "Ringgit"], correctOptionIndex: 1, explanation: "The Philippine Peso is the official currency.", source_page: 37 },
-                { question: "What is the capital of Qatar?", options: ["Al Rayyan", "Doha", "Al Wakrah", "Umm Salal"], correctOptionIndex: 1, explanation: "Doha is the capital city of Qatar.", source_page: 37 },
-                { question: "The currency of Syria is:", options: ["Pound", "Dinar", "Rial", "Lira"], correctOptionIndex: 0, explanation: "The Syrian Pound is the currency of Syria.", source_page: 37 },
-                { question: "What is the capital of Thailand?", options: ["Chiang Mai", "Nonthaburi", "Pattaya", "Bangkok"], correctOptionIndex: 3, explanation: "Bangkok is the capital of Thailand.", source_page: 37 },
-                { question: "The currency of United Arab Emirates is:", options: ["Riyal", "Dinar", "Dirham", "Pound"], correctOptionIndex: 2, explanation: "The UAE Dirham is the currency of the United Arab Emirates.", source_page: 37 },
-                { question: "What is the capital of Austria?", options: ["Graz", "Linz", "Vienna", "Salzburg"], correctOptionIndex: 2, explanation: "Vienna is the capital of Austria.", source_page: 38 },
-                { question: "The currency of Denmark is:", options: ["Euro", "Krone", "Franc", "Markka"], correctOptionIndex: 1, explanation: "The Danish Krone is the currency of Denmark.", source_page: 38 },
-                { question: "What is the capital of Greece?", options: ["Thessaloniki", "Patras", "Heraklion", "Athens"], correctOptionIndex: 3, explanation: "Athens is the capital of Greece.", source_page: 38 },
-                { question: "The currency of Norway is:", options: ["Krona", "Krone", "Euro", "Franc"], correctOptionIndex: 1, explanation: "The Norwegian Krone is the currency of Norway.", source_page: 38 },
-                { question: "What is the capital of Poland?", options: ["Kraków", "Warsaw", "Łódź", "Wrocław"], correctOptionIndex: 1, explanation: "Warsaw is the capital of Poland.", source_page: 38 },
-                { question: "The currency of Russia is:", options: ["Manat", "Hryvnia", "Ruble", "Lari"], correctOptionIndex: 2, explanation: "The Russian Ruble is the currency of Russia.", source_page: 38 },
-                { question: "What is the capital of Spain?", options: ["Barcelona", "Valencia", "Seville", "Madrid"], correctOptionIndex: 3, explanation: "Madrid is the capital of Spain.", source_page: 38 },
-                { question: "The currency of Sweden is:", options: ["Krona", "Krone", "Euro", "Franc"], correctOptionIndex: 0, explanation: "The Swedish Krona is the currency of Sweden.", source_page: 38 },
-                { question: "What is the capital of Ukraine?", options: ["Kharkiv", "Odessa", "Kyiv", "Dnipro"], correctOptionIndex: 2, explanation: "Kyiv is the capital of Ukraine.", source_page: 38 },
-                { question: "What is the capital of Cuba?", options: ["Havana", "Santiago de Cuba", "Camagüey", "Holguín"], correctOptionIndex: 0, explanation: "Havana is the capital city of Cuba.", source_page: 39 },
-                { question: "The currency of Mexico is:", options: ["Dollar", "Peso", "Real", "Quetzal"], correctOptionIndex: 1, explanation: "The Mexican Peso is the currency of Mexico.", source_page: 39 },
-                { question: "What is the capital of Argentina?", options: ["Córdoba", "Rosario", "Buenos Aires", "Mendoza"], correctOptionIndex: 2, explanation: "Buenos Aires is the capital of Argentina.", source_page: 39 },
-                { question: "The currency of Brazil is:", options: ["Peso", "Guaraní", "Boliviano", "Real"], correctOptionIndex: 3, explanation: "The Brazilian Real is the currency of Brazil.", source_page: 39 },
-                { question: "What is the capital of Chile?", options: ["Valparaíso", "Santiago", "Concepción", "Antofagasta"], correctOptionIndex: 1, explanation: "Santiago is the capital of Chile.", source_page: 39 },
-                { question: "The currency of New Zealand is:", options: ["Australian Dollar", "Fijian Dollar", "NZ Dollar", "US Dollar"], correctOptionIndex: 2, explanation: "The New Zealand Dollar is the official currency.", source_page: 39 },
-                { question: "What is the capital of Venezuela?", options: ["Maracaibo", "Valencia", "Caracas", "Barquisimeto"], correctOptionIndex: 2, explanation: "Caracas is the capital of Venezuela.", source_page: 39 },
+                // --- General Knowledge: Changed Names of Places (Pages 40-42) - 35 Qs ---
+                { question: "What is the new name of 'Khyber Pakhtoonkhawa'?", options: ["NWFP", "FATA", "PATA", "None of these"], correctOptionIndex: 3, explanation: "Khyber Pakhtoonkhawa is the new name; its old name was NWFP (North-West Frontier Province).", source_page: 40 },
+                { question: "'Acre' is the old name of:", options: ["Tel Aviv", "Akko", "Jerusalem", "Haifa"], correctOptionIndex: 1, explanation: "Acre is the old name of the city of Akko in Israel.", source_page: 40 },
+                { question: "Ankara (Turkey) is the new name of which city?", options: ["Angora", "Smyrna", "Constantinople", "Adrianople"], correctOptionIndex: 0, explanation: "Ankara, the capital of Turkey, was formerly known as Angora.", source_page: 40 },
+                { question: "'Abyssinia' is the new name of:", options: ["Eritrea", "Djibouti", "Ethiopia", "Somalia"], correctOptionIndex: 2, explanation: "Ethiopia was formerly known as Abyssinia.", source_page: 40 },
+                { question: "The old name of 'Bannu' (City of Pakistan) is:", options: ["Edwardesabad", "Dhanna", "Bannu", "All of these"], correctOptionIndex: 0, explanation: "The old name of Bannu was Edwardesabad.", source_page: 40 },
+                { question: "What was the old name of Mumbai?", options: ["Bombay", "Salsette", "Maim", "All of these"], correctOptionIndex: 0, explanation: "Mumbai was officially known as Bombay until 1995.", source_page: 40 },
+                { question: "What is the new name of 'Ceylon'?", options: ["Maldives", "Sri Lanka", "Mauritius", "Seychelles"], correctOptionIndex: 1, explanation: "Sri Lanka was known as Ceylon until 1972.", source_page: 40 },
+                { question: "The new name of 'Dutch Guiana' is:", options: ["Guyana", "Surinam", "French Guiana", "None of these"], correctOptionIndex: 1, explanation: "The new name of Dutch Guiana is Surinam.", source_page: 40 },
+                { question: "The new name of East Pakistan is:", options: ["Bangladesh", "Bengal", "Assam", "None of these"], correctOptionIndex: 0, explanation: "East Pakistan became the independent nation of Bangladesh in 1971.", source_page: 40 },
+                { question: "Beijing is the new name of:", options: ["Peking", "Nanking", "Canton", "Formosa"], correctOptionIndex: 0, explanation: "Beijing was formerly romanized as Peking.", source_page: 40 },
+                { question: "'Bismark's old name is:", options: ["Archipelago", "Holland", "New Britain", "Got a note"], correctOptionIndex: 0, explanation: "Bismarck Archipelago's old name is New Britain Archipelago.", source_page: 40 },
+                { question: "Netherlands is the new name of:", options: ["Holland", "East Germany", "Belgium", "Austrasia"], correctOptionIndex: 0, explanation: "Holland is the common name for the Netherlands.", source_page: 40 },
+                { question: "The new name of the 'Kampuchea' is:", options: ["Cambodia", "Rhodesia", "Indochina", "Laos"], correctOptionIndex: 0, explanation: "Kampuchea is the Khmer name for Cambodia. The country's name was changed to Kampuchea and then back to Cambodia.", source_page: 40 },
+                { question: "What is the new name of Leningrad (Russia)?", options: ["Moscow", "St. Petersburg", "Stalingrad", "Red Square"], correctOptionIndex: 1, explanation: "Leningrad's name was reverted to St. Petersburg in 1991.", source_page: 40 },
+                { question: "New name of the Lyallpur is:", options: ["Faisalabad", "Nankana Sahib", "Multan", "Abbotabad"], correctOptionIndex: 0, explanation: "Lyallpur was renamed Faisalabad in 1979 in honor of King Faisal of Saudi Arabia.", source_page: 40 },
+                { question: "New name of the Malagasy is:", options: ["Madagascar", "Malaya", "Malaysia", "Mespotsia"], correctOptionIndex: 0, explanation: "Malagasy Republic is now known as Madagascar.", source_page: 40 },
+                { "question": "The old name of Sahiwal is:", "options": ["Lyallpur", "Montgomery", "Lawrencepur", "Campbellpur"], "correctOptionIndex": 1, "explanation": "The old name of Sahiwal city in Pakistan was Montgomery.", "source_page": 40 },
+                { question: "Myanmar is the new name of:", options: ["Burma", "Siam", "Ceylon", "Cambodia"], correctOptionIndex: 0, explanation: "The country of Burma was renamed Myanmar in 1989.", source_page: 40 },
+                { question: "Beijing is the new name of which city?", options: ["Taiwan", "Shanghai", "Peking", "Red Square"], correctOptionIndex: 2, explanation: "Beijing is the new name for the city formerly known as Peking.", source_page: 40 },
+                { question: "Formosa is the old name of:", options: ["Taiwan", "Thailand", "Vietnam", "Burma"], correctOptionIndex: 0, explanation: "Taiwan was formerly known to Europeans as Formosa.", source_page: 41 },
+                { question: "Rhodesia is now called:", options: ["Zaire", "Zimbabwe", "Namibia", "Tanzania"], correctOptionIndex: 1, explanation: "The unrecognized state of Rhodesia was reconstituted as the independent Republic of Zimbabwe in 1980.", source_page: 41 },
+                { question: "'Siam' is the old name of:", options: ["Surinam", "Thailand", "Taiwan", "Bangkok"], correctOptionIndex: 1, explanation: "Thailand was known as Siam until 1939.", source_page: 41 },
+                { question: "The old name of Libya is:", options: ["Tripoli", "Benghazi", "Cyrenaica", "Tripolitania and Cyrenaica"], correctOptionIndex: 0, explanation: "Libya was historically known as Tripoli or Tripolitania.", source_page: 41 },
+                { question: "What is the old name of Harare (Zimbabwe)?", options: ["Salisbury", "Fort Victoria", "Umtali", "Gwelo"], correctOptionIndex: 0, explanation: "Harare, the capital of Zimbabwe, was known as Salisbury until 1982.", source_page: 41 },
+                { question: "'Guangzhou' (China) is the new name of:", options: ["Canton", "Peking", "Anglo", "Sinking"], correctOptionIndex: 0, explanation: "Guangzhou is the new name for the city historically known as Canton.", source_page: 41 },
+                { question: "What is the new name of 'Peiping' (City of China)?", options: ["Beijing", "Shanghai", "Nanjing", "Tianjin"], correctOptionIndex: 0, explanation: "The city was known as Peiping from 1928 to 1949, and was renamed Beijing.", source_page: 41 },
+                { question: "What is the new name of Madras?", options: ["Chennai", "Bombay", "Calcutta", "Smila"], correctOptionIndex: 0, explanation: "The city of Madras was officially renamed Chennai in 1996.", source_page: 41 },
+                { question: "What is the old name of 'Iran'?", options: ["Persia", "Mesopotamia", "Anatolia", "Abyssinia"], correctOptionIndex: 0, explanation: "Iran was known as Persia until 1935.", source_page: 41 },
+                { question: "What is the new name of 'Mesopotamia'?", options: ["Iraq", "Syria", "Jordan", "Kuwait"], correctOptionIndex: 0, explanation: "The ancient region of Mesopotamia is largely correspondent with modern Iraq.", source_page: 40 },
+                { "question": "What is the old name of Jakarta (Indonesia)?", "options": ["Batavia", "Sunda Kelapa", "Jayakarta", "All of the above"], "correctOptionIndex": 0, "explanation": "During the Dutch colonial era, Jakarta was known as Batavia.", "source_page": 41 },
+                { "question": "The old name of 'Ghana' is:", "options": ["Gold Coast", "Ivory Coast", "Slave Coast", "Pepper Coast"], "correctOptionIndex": 0, "explanation": "The modern country of Ghana is named after the ancient Ghana Empire, but its colonial name was the Gold Coast.", "source_page": 42 },
+                { "question": "What is the old name of 'Benin'?", "options": ["Dahomey", "Togo", "Upper Volta", "French Sudan"], "correctOptionIndex": 0, "explanation": "The Republic of Benin was known as Dahomey until 1975.", "source_page": 42 },
+                { "question": "The old name of 'Tanzania' is:", "options": ["Tanganyika and Zanzibar", "Ruanda-Urundi", "Nyasaland", "Bechuanaland"], "correctOptionIndex": 0, "explanation": "Tanzania was formed by the union of Tanganyika and Zanzibar in 1964.", "source_page": 42 },
+                { "question": "What is the old name of 'Zambia'?", "options": ["Northern Rhodesia", "Southern Rhodesia", "Nyasaland", "Basutoland"], "correctOptionIndex": 0, "explanation": "Zambia was known as Northern Rhodesia before its independence in 1964.", "source_page": 41 },
+                { "question": "The old name of 'Malawi' is:", "options": ["Nyasaland", "Basutoland", "Bechuanaland", "Swaziland"], "correctOptionIndex": 0, "explanation": "Malawi was formerly the British protectorate of Nyasaland.", "source_page": 41 },
 
-                // --- Mathematics: Chain Rules (Pages 523-524) - 20 Qs ---
-                { question: "If 15 toys cost Rs 234, what do 35 toys cost?", options: ["Rs. 546", "Rs. 550", "Rs. 560", "Rs. 572"], correctOptionIndex: 0, explanation: "Let the required cost be Rs. x. This is a direct proportion. (15/234) = (35/x). 15x = 35 * 234. x = (35 * 234) / 15 = 546.", source_page: 523 },
-                { question: "If 36 men can do a piece of work in 25 hours, in how many hours will 15 men do it?", options: ["50", "60", "75", "45"], correctOptionIndex: 1, explanation: "Let the required hours be x. This is an indirect proportion. (36 * 25) = (15 * x). 900 = 15x. x = 900 / 15 = 60.", source_page: 523 },
-                { question: "If the wages of 6 men for 15 days be Rs 2100, then find the wages of 9 men for 12 days.", options: ["Rs. 2520", "Rs. 2400", "Rs. 2100", "Rs. 2650"], correctOptionIndex: 0, explanation: "Use the formula (M1*D1)/W1 = (M2*D2)/W2. (6 * 15) / 2100 = (9 * 12) / W2. 90 / 2100 = 108 / W2. W2 = (108 * 2100) / 90 = 2520.", source_page: 523 },
-                { question: "If 20 men can build a wall 56 metres long in 6 days, what length of a similar wall can be built by 35 men in 3 days?", options: ["49 metres", "56 metres", "42 metres", "50 metres"], correctOptionIndex: 0, explanation: "Use the formula (M1*D1)/W1 = (M2*D2)/W2. (20 * 6) / 56 = (35 * 3) / W2. 120 / 56 = 105 / W2. W2 = (105 * 56) / 120 = 49.", source_page: 523 },
-                { question: "If 15 men, working 9 hours a day, can reap a field in 16 days, in how many days will 18 men reap the field, working 8 hours a day?", options: ["10 days", "12 days", "15 days", "18 days"], correctOptionIndex: 2, explanation: "Use the formula M1*D1*H1 = M2*D2*H2. 15 * 16 * 9 = 18 * D2 * 8. 2160 = 144 * D2. D2 = 2160 / 144 = 15.", source_page: 523 },
-                { question: "If a quarter kg of potato costs 60 paise, how many paise will 200 gm cost?", options: ["48 paise", "45 paise", "50 paise", "40 paise"], correctOptionIndex: 0, explanation: "A quarter kg is 250 gm. This is a direct proportion. (250 / 60) = (200 / x). 250x = 200 * 60. x = 12000 / 250 = 48.", source_page: 524 },
-                { question: "If 18 binders bind 900 books in 10 days, how many binders will be required to bind 660 books in 12 days?", options: ["11 binders", "12 binders", "10 binders", "13 binders"], correctOptionIndex: 0, explanation: "Use the formula (M1*D1)/W1 = (M2*D2)/W2. (18 * 10) / 900 = (M2 * 12) / 660. 180 / 900 = 12*M2 / 660. 0.2 = 12*M2 / 660. M2 = (0.2 * 660) / 12 = 11.", source_page: 524 },
-                { question: "A fort had provision of food for 150 men for 45 days. After 10 days, 25 men left the fort. The number of days for which the remaining food will last, is:", options: ["35 days", "40 days", "42 days", "45 days"], correctOptionIndex: 2, explanation: "After 10 days, remaining food is for 150 men for (45-10) = 35 days. Now, men are 150-25 = 125. Let days be x. 150 * 35 = 125 * x. x = (150 * 35) / 125 = 42.", source_page: 524 },
-                { question: "A contractor undertook to do a certain piece of work in 9 days. He employed certain number of men, but 6 of them being absent from the very first day, the rest could finish the work in 15 days. The number of men originally employed were:", options: ["10", "12", "15", "18"], correctOptionIndex: 2, explanation: "Let original men be x. Total work is x * 9. Also, total work is (x-6) * 15. So, 9x = 15(x-6). 9x = 15x - 90. 6x = 90. x = 15.", source_page: 524 },
-                { question: "An industrial loom weaves 0.128 metres of cloth every second. Approximately, how many seconds will it take for the loom to weave 25 metres of cloth?", options: ["180", "195", "200", "210"], correctOptionIndex: 1, explanation: "Time = Total Length / Rate = 25 / 0.128 = 195.3125. Approximately 195 seconds.", source_page: 524 },
-                { question: "If 8 men can reap 80 hectares in 24 days, how many hectares can 36 men reap in 30 days?", options: ["350", "400", "425", "450"], correctOptionIndex: 3, explanation: "Use (M1*D1)/W1 = (M2*D2)/W2. (8 * 24) / 80 = (36 * 30) / W2. 192 / 80 = 1080 / W2. 2.4 = 1080 / W2. W2 = 1080 / 2.4 = 450.", source_page: 524 },
-                { question: "If a man walks 20 km in 5 hours, how long would he take to walk 32 km?", options: ["7 hours", "8 hours", "9 hours", "10 hours"], correctOptionIndex: 1, explanation: "Speed = Distance/Time = 20/5 = 4 km/hr. Time = Distance/Speed = 32/4 = 8 hours.", source_page: 523 },
-                { question: "If 5 workers can build a house in 20 days, how many days would it take 10 workers to build the same house?", options: ["5 days", "10 days", "15 days", "40 days"], correctOptionIndex: 1, explanation: "This is an indirect proportion. 5 workers * 20 days = 100 worker-days. 100 worker-days / 10 workers = 10 days.", source_page: 523 },
-                { question: "A car travels 180 km on 15 litres of petrol. How far can it travel on 25 litres?", options: ["250 km", "280 km", "300 km", "320 km"], correctOptionIndex: 2, explanation: "This is a direct proportion. Mileage = 180 km / 15 litres = 12 km/litre. Distance = 12 km/litre * 25 litres = 300 km.", source_page: 523 },
-                { question: "If 3 pumps can empty a tank in 2 days working 8 hours a day, how many hours a day must 4 pumps work to empty the tank in 1 day?", options: ["10 hours", "12 hours", "14 hours", "16 hours"], correctOptionIndex: 1, explanation: "Total work = 3 pumps * 2 days * 8 hours/day = 48 pump-hours. To do this in 1 day with 4 pumps: 48 / (4 pumps * 1 day) = 12 hours/day.", source_page: 523 },
-                { question: "A garrison of 500 men had provisions for 27 days. After 3 days a reinforcement of 300 men arrived. For how many more days will the remaining provisions last?", options: ["15 days", "16 days", "18 days", "20 days"], correctOptionIndex: 0, explanation: "After 3 days, provisions for 500 men for 24 days remain. Total men now = 500 + 300 = 800. Let days be x. 500 * 24 = 800 * x. x = (500 * 24) / 800 = 15 days.", source_page: 524 },
-                { question: "If the cost of 12 dozen bananas is Rs. 360, what is the cost of 7 bananas?", options: ["Rs. 17.50", "Rs. 18.50", "Rs. 20.00", "Rs. 21.00"], correctOptionIndex: 0, explanation: "12 dozen = 144 bananas. Cost per banana = 360 / 144 = Rs. 2.50. Cost of 7 bananas = 7 * 2.50 = Rs. 17.50.", source_page: 523 },
-                { question: "A wheel that has 6 cogs is meshed with a larger wheel of 14 cogs. When the smaller wheel has made 21 revolutions, then the number of revolutions made by the larger wheel is:", options: ["9", "12", "15", "49"], correctOptionIndex: 0, explanation: "This is an indirect proportion. 6 cogs * 21 revs = 14 cogs * x revs. 126 = 14x. x = 126 / 14 = 9 revolutions.", source_page: 524 },
-                { question: "If 9 engines consume 24 metric tonnes of coal, when each is working 8 hours a day, how much coal will be required for 8 engines, each running 13 hours a day, it being given that 3 engines of former type consume as much as 4 engines of latter type?", options: ["22 metric tonnes", "24 metric tonnes", "26 metric tonnes", "28 metric tonnes"], correctOptionIndex: 2, explanation: "This is a complex chain rule. Let E1 be former, E2 be latter. 3 E1 = 4 E2 => E1 = 4/3 E2. (9E1*8)/24 = (8E2*13)/x. (9*(4/3)E2*8)/24 = (8E2*13)/x. (12E2*8)/24 = (104E2)/x. 96/24 = 104/x. 4 = 104/x. x = 26.", source_page: 524 },
-                { question: "If 4 typists can type a manuscript in 6 days, how many days will it take 3 typists to do the same job?", options: ["6 days", "8 days", "9 days", "10 days"], correctOptionIndex: 1, explanation: "Indirect proportion. Total work = 4 typists * 6 days = 24 typist-days. Time for 3 typists = 24 / 3 = 8 days.", source_page: 523 },
+                // --- English: Punctuation (Pages 436-440) - 35 Qs ---
+                { question: "Which punctuation mark is used to end a declarative sentence?", options: ["Question Mark (?)", "Exclamation Mark (!)", "Period (.)", "Comma (,)"], correctOptionIndex: 2, explanation: "A period (or full stop) is used to mark the end of a sentence that is a statement.", source_page: 436 },
+                { question: "What is the primary function of a comma (,) ?", options: ["To end a sentence", "To indicate a question", "To separate elements within a sentence", "To show strong emotion"], correctOptionIndex: 2, explanation: "Commas are used to separate ideas or elements within a sentence, such as items in a list, introductory phrases, or independent clauses joined by a conjunction.", source_page: 436 },
+                { question: "Which punctuation mark is used to join two independent clauses without a coordinating conjunction?", options: ["Comma (,)", "Semicolon (;)", "Colon (:)", "Dash (-)"], correctOptionIndex: 1, explanation: "A semicolon can be used to connect two closely related independent clauses. For example: 'I have a big test tomorrow; I can't go out tonight.'", source_page: 437 },
+                { question: "A colon (:) is used for which of the following purposes?", options: ["To introduce a list, quotation, or explanation", "To separate two independent clauses", "To show possession", "To end a question"], correctOptionIndex: 0, explanation: "A colon is used to introduce something that follows, such as a list of items, a quotation, or a further explanation. Example: 'You have two choices: finish the work today or tomorrow.'", source_page: 437 },
+                { question: "Which sentence is correctly punctuated?", options: ["She bought apples, oranges and bananas.", "She bought apples, oranges, and bananas.", "She bought, apples, oranges, and bananas.", "She bought apples oranges and bananas."], correctOptionIndex: 1, explanation: "The sentence uses the Oxford (or serial) comma before the conjunction 'and' in a list of three or more items, which is a common and clear style.", source_page: 436 },
+                { question: "The apostrophe (') has two main uses. What are they?", options: ["To show possession and to indicate omissions/contractions", "To start a list and to end a sentence", "To separate clauses and to show emphasis", "To create compound words and to indicate a pause"], correctOptionIndex: 0, explanation: "The apostrophe is used to form possessives (e.g., 'the boy's book') and to show the omission of letters in contractions (e.g., 'don't' for 'do not').", source_page: 438 },
+                { question: "Choose the correct sentence:", options: ["Its a beautiful day outside.", "It's a beautiful day outside.", "Its' a beautiful day outside.", "It is a beautifuls day outside."], correctOptionIndex: 1, explanation: "'It's' is the contraction for 'it is'. 'Its' is the possessive form. The sentence means 'It is a beautiful day'.", source_page: 438 },
+                { question: "Quotation marks ( \" \" ) are used to:", options: ["End a sentence", "Show possession", "Enclose a direct quotation or title of a short work", "Separate items in a list"], correctOptionIndex: 2, explanation: "Quotation marks are used to set off the exact words of a speaker or a title of a short story, poem, or article.", source_page: 438 },
+                { question: "A hyphen (-) is typically used to:", options: ["Connect two independent clauses", "Join words to form a compound adjective before a noun", "Introduce a list", "End a sentence with emphasis"], correctOptionIndex: 1, explanation: "A hyphen is used to join words, such as in 'well-being' or a compound modifier like 'state-of-the-art' when it comes before a noun.", source_page: 439 },
+                { question: "Which punctuation mark should be used at the end of this sentence: 'What a wonderful surprise'", options: ["Period (.)", "Question Mark (?)", "Exclamation Mark (!)", "Semicolon (;)"], correctOptionIndex: 2, explanation: "An exclamation mark is used to express strong feeling or excitement.", source_page: 438 },
+                { question: "In the sentence, 'The car, a red convertible, sped down the road,' the phrase 'a red convertible' is a(n):", options: ["Independent clause", "Appositive", "Prepositional phrase", "Subordinate clause"], correctOptionIndex: 1, explanation: "An appositive is a noun or noun phrase that renames another noun right beside it. It is usually set off by commas.", source_page: 436 },
+                { question: "Choose the correctly punctuated sentence:", options: ["However I will be there on time.", "However, I will be there on time.", "However; I will be there on time.", "However: I will be there on time."], correctOptionIndex: 1, explanation: "Introductory words like 'However' should be followed by a comma.", source_page: 436 },
+                { question: "Which punctuation is used to enclose information that is explanatory but not essential to the meaning of the sentence?", options: ["Parentheses ( )", "Brackets [ ]", "Quotation Marks \" \"", "Hyphens - -"], correctOptionIndex: 0, explanation: "Parentheses are used to insert supplemental information or an aside. For example: 'He finally answered (after taking five minutes to think) that he did not understand.'", source_page: 439 },
+                { question: "A question mark (?) is used at the end of a(n):", options: ["Declarative sentence", "Imperative sentence", "Exclamatory sentence", "Interrogative sentence"], correctOptionIndex: 3, explanation: "A question mark is used to indicate a direct question (an interrogative sentence).", source_page: 437 },
+                { question: "Which sentence correctly uses a semicolon?", options: ["I like pizza; but my brother likes burgers.", "The sky is blue; the grass is green.", "She went to the store; and bought milk.", "He ran; and jumped."], correctOptionIndex: 1, explanation: "A semicolon correctly joins two closely related independent clauses ('The sky is blue' and 'the grass is green').", source_page: 437 },
+                { question: "The possessive form of 'children' is:", options: ["childrens'", "childrens", "child's", "children's"], correctOptionIndex: 3, explanation: "For plural nouns that do not end in -s, the possessive is formed by adding an apostrophe and s.", source_page: 438 },
+                { question: "Which of these is NOT a primary use of a comma?", options: ["Separating items in a series", "Setting off introductory elements", "Joining two complete sentences without a conjunction", "Setting off non-essential clauses"], correctOptionIndex: 2, explanation: "Using only a comma to join two complete sentences creates a 'comma splice' error. A semicolon, period, or comma with a conjunction should be used instead.", source_page: 440 },
+                { question: "Choose the correctly punctuated sentence for a title:", options: ["I read the article, A History of Punctuation.", "I read the article \"A History of Punctuation.\"", "I read the article 'A History of Punctuation.'", "I read the article (A History of Punctuation)."], correctOptionIndex: 1, explanation: "Titles of shorter works like articles, short stories, and poems are enclosed in quotation marks.", source_page: 438 },
+                { question: "What does an ellipsis (...) indicate?", options: ["An error in the text", "The omission of words from a quoted passage", "A very strong pause", "The end of a question"], correctOptionIndex: 1, explanation: "An ellipsis is used to show that some material has been omitted from a direct quotation.", source_page: 440 },
+                { question: "Which sentence uses a colon correctly?", options: ["I need: eggs, milk, and bread.", "The following are my favorite colors: blue, green, and red.", "She loves: to read.", "He went to: the park."], correctOptionIndex: 1, explanation: "A colon is used correctly to introduce a list after a complete independent clause.", source_page: 437 },
+                { question: "Brackets [ ] are used to:", options: ["Show a strong pause", "Enclose a direct quote", "Add clarifying information or an editorial comment within a quote", "Form a compound word"], correctOptionIndex: 2, explanation: "Brackets are used to insert words into a quote to clarify meaning. For example: 'She said, \"He [the police officer] is on his way.\"'", source_page: 439 },
+                { question: "The sentence 'Go clean your room' is an example of what kind of sentence?", options: ["Declarative", "Interrogative", "Imperative", "Exclamatory"], correctOptionIndex: 2, explanation: "An imperative sentence gives a command or makes a request. It usually ends with a period but can end with an exclamation mark.", source_page: 436 },
+                { question: "Which punctuation mark is used to separate the day from the year in a date?", options: ["Semicolon (;)", "Colon (:)", "Comma (,)", "Period (.)"], correctOptionIndex: 2, explanation: "A comma is used to separate the day from the year. Example: July 5, 2025.", source_page: 436 },
+                { question: "Which sentence is punctuated correctly?", options: ["The womens' restroom is on the left.", "The women's restroom is on the left.", "The womens restroom is on the left.", "The woman's restroom is on the left."], correctOptionIndex: 1, explanation: "'Women' is a plural noun that doesn't end in 's'. The possessive is formed by adding 's.", source_page: 438 },
+                { question: "A dash (—) can be used to:", options: ["Replace a comma for a less formal pause", "Set off and emphasize a concluding phrase", "Indicate a sudden break in thought", "All of the above"], correctOptionIndex: 3, explanation: "The em dash is a versatile punctuation mark used for emphasis, to set off parenthetical information, or to indicate a break in thought.", source_page: 439 },
+                { question: "In 'He is a well known author,' where should a hyphen be placed?", options: ["well-known", "author-is", "is-a", "No hyphen needed"], correctOptionIndex: 0, explanation: "When a compound modifier like 'well known' comes before a noun ('author'), it should be hyphenated.", source_page: 439 },
+                { question: "Which of the following requires a question mark?", options: ["I wonder who is coming to the party", "She asked if I was going", "Who is coming to the party", "Tell me who is coming to the party"], correctOptionIndex: 2, explanation: "This is a direct question and must end with a question mark. The others are indirect questions embedded in statements.", source_page: 437 },
+                { question: "The period in 'Dr. Smith' is used to indicate:", options: ["The end of a sentence", "A pause", "An abbreviation", "Possession"], correctOptionIndex: 2, explanation: "Periods are used in abbreviations, such as Dr. for Doctor or Mr. for Mister.", source_page: 436 },
+                { question: "Which sentence uses an apostrophe correctly for a contraction?", options: ["Whose going to the store?", "Who's going to the store?", "Whos' going to the store?", "Whos going to the store?"], correctOptionIndex: 1, explanation: "'Who's' is the contraction for 'who is'. 'Whose' is possessive.", source_page: 438 },
+                { "question": "When do you use a comma before a coordinating conjunction (for, and, nor, but, or, yet, so)?", "options": ["Always", "Never", "Only when it joins two independent clauses", "Only when it joins two words"], "correctOptionIndex": 2, "explanation": "A comma should be placed before a coordinating conjunction that connects two independent clauses. Example: 'I wanted to go, but I was too tired.'", "source_page": 436 },
+                { "question": "Which sentence is correct?", "options": ["The dog wagged it's tail.", "The dog wagged its tail.", "The dog wagged its' tail.", "The dog wagged it's' tail."], "correctOptionIndex": 1, "explanation": "'Its' is the possessive pronoun. 'It's' is the contraction for 'it is'. The tail belongs to the dog, so the possessive 'its' is correct.", "source_page": 438 },
+                { "question": "Which punctuation is needed in this sentence: 'After a long and tiring day he went to bed.'", "options": ["A comma after 'day'", "A comma after 'long'", "A comma after 'tiring'", "No comma needed"], "correctOptionIndex": 0, "explanation": "A comma should be used to set off a long introductory phrase from the main clause. 'After a long and tiring day' is the introductory phrase.", "source_page": 436 },
+                { "question": "Which sentence correctly uses quotation marks?", "options": ["'Help' she cried, 'I'm falling!'", "\"Help,\" she cried, \"I'm falling!\"", "(Help,) she cried, (I'm falling!)", "Help, she cried, I'm falling!"], "correctOptionIndex": 1, "explanation": "Direct speech must be enclosed in quotation marks. Punctuation like commas that are part of the sentence structure but not the quote go inside the marks if they precede the attribution.", "source_page": 438 },
+                { "question": "What is the function of the semicolon in 'The participants were: Ali, from Karachi; Sara, from Lahore; and Ahmed, from Islamabad.'?", "options": ["To join independent clauses", "To separate items in a list when the items themselves contain commas", "To introduce the list", "To show an error"], "correctOptionIndex": 1, "explanation": "When items in a series contain internal commas, semicolons are used to separate the items to avoid confusion.", "source_page": 437 },
+                { "question": "The possessive form of 'James' is:", "options": ["James's", "James'", "Both are acceptable", "Jameses"], "correctOptionIndex": 2, "explanation": "For singular nouns ending in -s, you can add either an apostrophe and an s (James's) or just an apostrophe (James'). Both are considered correct, though styles may vary.", "source_page": 438 },
 
-                // --- Urdu: Novels & Biographies (Urdu Section Pages 19-22) - 40 Qs ---
-                { question: "اردو کا پہلا ناول نگار کسے تسلیم کیا جاتا ہے؟", options: ["مرزا ہادی رسوا", "ڈپٹی نذیر احمد", "عبدالحلیم شرر", "پریم چند"], correctOptionIndex: 1, explanation: "ڈپٹی نذیر احمد کو ان کے اصلاحی اور معاشرتی ناولوں کی وجہ سے اردو کا پہلا ناول نگار سمجھا جاتا ہے۔ ان کا ناول 'مراۃ العروس' پہلا اردو ناول مانا جاتا ہے۔", source_page: "Urdu Sec. 19" },
-                { question: "ناول 'مراۃ العروس' کا بنیادی مقصد کیا تھا؟", options: ["تاریخی واقعات بیان کرنا", "لڑکیوں کی تعلیم و تربیت اور اصلاح", "سیاسی شعور بیدار کرنا", "رومانی داستان سنانا"], correctOptionIndex: 1, explanation: "ڈپٹی نذیر احمد نے 'مراۃ العروس' خاص طور پر اپنی بیٹیوں کی تعلیم و تربیت اور اخلاقی اصلاح کے لیے لکھا تھا۔", source_page: "Urdu Sec. 19" },
-                { question: "ناول 'توبتہ النصوح' کے مصنف کون ہیں؟", options: ["رتن ناتھ سرشار", "پریم چند", "نذیر احمد", "عبدالحلیم شرر"], correctOptionIndex: 2, explanation: "'توبتہ النصوح' ڈپٹی نذیر احمد کا ایک اور مشہور اصلاحی ناول ہے جس کا مرکزی کردار نصوح ہے۔", source_page: "Urdu Sec. 19" },
-                { question: "اردو میں تاریخی ناول نگاری کی بنیاد کس نے رکھی؟", options: ["نسیم حجازی", "عبدالحلیم شرر", "صادق سردھنوی", "علی عباس حسینی"], correctOptionIndex: 1, explanation: "عبدالحلیم شرر نے اردو ادب میں تاریخی ناول نگاری کو متعارف کرایا اور اسلامی تاریخ کے شاندار واقعات کو اپنے ناولوں کا موضوع بنایا۔", source_page: "Urdu Sec. 19" },
-                { question: "ناول 'فردوس بریں' کس کی تخلیق ہے؟", options: ["مرزا ہادی رسوا", "پریم چند", "عبدالحلیم شرر", "نذیر احمد"], correctOptionIndex: 2, explanation: "'فردوس بریں' عبدالحلیم شرر کا شاہکار تاریخی ناول ہے جو حسن بن صباح اور اس کی جنت کے موضوع پر لکھا گیا ہے۔", source_page: "Urdu Sec. 19" },
-                { question: "لکھنوی تہذیب اور طوائف کی زندگی پر مبنی مشہور ناول 'امراؤ جان ادا' کس نے لکھا؟", options: ["مرزا ہادی رسوا", "شوکت صدیقی", "عصمت چغتائی", "رتن ناتھ سرشار"], correctOptionIndex: 0, explanation: "'امراؤ جان ادا' مرزا محمد ہادی رسوا کا لازوال ناول ہے جو لکھنؤ کی زوال آمادہ تہذیب کی بہترین عکاسی کرتا ہے۔", source_page: "Urdu Sec. 19" },
-                { question: "پریم چند کے ناولوں کا بنیادی موضوع کیا ہے؟", options: ["شہری زندگی کے مسائل", "تاریخ اسلام", "ہندوستان کی دیہاتی زندگی اور کسانوں کے مسائل", "امراء کی زندگی"], correctOptionIndex: 2, explanation: "پریم چند نے اپنے ناولوں میں ہندوستان کے دیہات، کسانوں، مزدوروں اور غریب طبقے کے مسائل کو حقیقت پسندی سے بیان کیا ہے۔", source_page: "Urdu Sec. 20" },
-                { question: "ناول 'گئودان' کس کا شاہکار سمجھا جاتا ہے؟", options: ["کرشن چندر", "سعادت حسن منٹو", "راجندر سنگھ بیدی", "پریم چند"], correctOptionIndex: 3, explanation: "'گئودان' پریم چند کا آخری اور سب سے اہم ناول ہے، جسے ہندوستانی دیہی زندگی کا مہاکاویہ کہا جاتا ہے۔", source_page: "Urdu Sec. 20" },
-                { question: "ناول 'آنگن' کی مصنفہ کون ہیں؟", options: ["عصمت چغتائی", "قرۃ العین حیدر", "خدیجہ مستور", "جمیلہ ہاشمی"], correctOptionIndex: 2, explanation: "'آنگن' خدیجہ مستور کا مشہور ناول ہے جس میں تحریک پاکستان کے پس منظر میں ایک مسلم خاندان کے عروج و زوال کو دکھایا گیا ہے۔", source_page: "Urdu Sec. 20" },
-                { question: "قرۃ العین حیدر کے اس ناول کا نام کیا ہے جو وقت کے فلسفے اور تاریخ کے وسیع کینوس پر لکھا گیا ہے؟", options: ["آخر شب کے ہم سفر", "آگ کا دریا", "کار جہاں دراز ہے", "گردش رنگ چمن"], correctOptionIndex: 1, explanation: "'آگ کا دریا' قرۃ العین حیدر کا شاہکار ناول ہے جو ڈھائی ہزار سال کی ہندوستانی تاریخ اور تہذیب پر محیط ہے۔", source_page: "Urdu Sec. 20" },
-                { question: "ناول 'خدا کی بستی' کس نے لکھا؟", options: ["شوکت صدیقی", "عبداللہ حسین", "انتظار حسین", "ممتاز مفتی"], correctOptionIndex: 0, explanation: "'خدا کی بستی' شوکت صدیقی کا مشہور ناول ہے جو کراچی کی کچی آبادیوں میں پنپنے والے جرائم اور سماجی مسائل کی عکاسی کرتا ہے۔", source_page: "Urdu Sec. 20" },
-                { question: "ناول 'اداس نسلیں' کا تعلق کس موضوع سے ہے؟", options: ["تقسیم ہند اور اس کے اثرات", "مغلیہ دور کا زوال", "صنعتی انقلاب", "دیہاتی زندگی"], correctOptionIndex: 0, explanation: "عبداللہ حسین کا ناول 'اداس نسلیں' برطانوی ہندوستان کے آخری دور سے لے کر قیام پاکستان تک کے واقعات اور اس نسل کی کہانی بیان کرتا ہے جو اس دور سے گزری۔", source_page: "Urdu Sec. 20" },
-                { question: "'سوانح' یا 'بایوگرافی' سے کیا مراد ہے؟", options: ["اپنی زندگی کی کہانی", "کسی دوسرے شخص کی زندگی کے مفصل حالات", "سفر کی روداد", "خیالی قصہ"], correctOptionIndex: 1, explanation: "سوانح یا بایوگرافی وہ نثری صنف ہے جس میں کسی شخص کی زندگی کے حالات، واقعات اور کارناموں کو تفصیل سے بیان کیا جاتا ہے۔", source_page: "Urdu Sec. 21" },
-                { question: "الطاف حسین حالی نے 'حیات جاوید' کس کی سوانح حیات لکھی؟", options: ["مرزا غالب", "شیخ سعدی", "سرسید احمد خان", "علامہ اقبال"], correctOptionIndex: 2, explanation: "'حیات جاوید' مولانا الطاف حسین حالی کی تصنیف ہے جو سرسید احمد خان کی زندگی اور ان کے کارناموں پر مبنی ایک جامع سوانح ہے۔", source_page: "Urdu Sec. 21" },
-                { question: "شبلی نعمانی کی تصنیف 'الفاروق' کس شخصیت کی سوانح ہے؟", options: ["حضرت ابوبکر صدیقؓ", "حضرت عمر فاروقؓ", "حضرت عثمان غنیؓ", "حضرت علیؓ"], correctOptionIndex: 1, explanation: "'الفاروق' علامہ شبلی نعمانی کی مشہور کتاب ہے جو دوسرے خلیفہ راشد حضرت عمر فاروقؓ کی زندگی، فتوحات اور نظام حکومت پر مبنی ہے۔", source_page: "Urdu Sec. 21" },
-                { question: "وہ سوانح جو کوئی شخص اپنی زندگی کے بارے میں خود لکھے، کیا کہلاتی ہے؟", options: ["آپ بیتی / خودنوشت", "جگ بیتی", "سفرنامہ", "رپورتاژ"], correctOptionIndex: 0, explanation: "جب کوئی مصنف اپنی زندگی کے حالات خود قلمبند کرے تو اسے آپ بیتی یا خودنوشت (Autobiography) کہا جاتا ہے۔", source_page: "Urdu Sec. 21" },
-                { question: "جوش ملیح آبادی کی خودنوشت کا نام کیا ہے؟", options: ["شہاب نامہ", "یادوں کی برات", "کاروان خیال", "اسیر کی ڈائری"], correctOptionIndex: 1, explanation: "'یادوں کی برات' جوش ملیح آبادی کی مشہور آپ بیتی ہے، جو اپنے بے باک انداز بیان کی وجہ سے مشہور ہے۔", source_page: "Urdu Sec. 22" },
-                { question: "قدرت اللہ شہاب کی آپ بیتی کا کیا نام ہے؟", options: ["شہاب نامہ", "غبار خاطر", "ورود مسعود", "سرگزشت"], correctOptionIndex: 0, explanation: "'شہاب نامہ' قدرت اللہ شہاب کی انتہائی مقبول خودنوشت ہے جس میں انہوں نے اپنی سرکاری ملازمت اور روحانی تجربات کو بیان کیا ہے۔", source_page: "Urdu Sec. 22" },
-                { question: "مولانا ابوالکلام آزاد کے خطوط کا مجموعہ جو ان کی خودنوشت کے زمرے میں آتا ہے، کون سا ہے؟", options: ["کاروان خیال", "نقش فریادی", "غبارِ خاطر", "مکاتیب آزاد"], correctOptionIndex: 2, explanation: "'غبارِ خاطر' مولانا آزاد کے ان خطوط کا مجموعہ ہے جو انہوں نے قلعہ احمد نگر میں قید کے دوران لکھے اور یہ ان کی شخصیت اور افکار کا آئینہ دار ہے۔", source_page: "Urdu Sec. 22" },
-                { question: "مشتاق احمد یوسفی کی کتاب 'زرگزشت' کس صنف سے تعلق رکھتی ہے؟", options: ["ناول", "سفرنامہ", "آپ بیتی", "افسانہ"], correctOptionIndex: 2, explanation: "'زرگزشت' مشتاق احمد یوسفی کی خودنوشت سوانح ہے جو ان کے بینکاری کے دور کے تجربات پر مبنی ہے اور اپنے مخصوص طنزیہ اور مزاحیہ انداز میں لکھی گئی ہے۔", source_page: "Urdu Sec. 22" },
-                { question: "'حیات سعدی' کس کی تصنیف ہے؟", options: ["شبلی نعمانی", "الطاف حسین حالی", "سرسید احمد خان", "محمد حسین آزاد"], correctOptionIndex: 1, explanation: "'حیات سعدی' الطاف حسین حالی نے لکھی ہے جو فارسی کے عظیم شاعر شیخ سعدی کی سوانح حیات ہے۔", source_page: "Urdu Sec. 21" },
-                { question: "علامہ شبلی نے 'سیرت النبی' کے علاوہ کس عباسی خلیفہ پر سوانحی کتاب لکھی؟", options: ["ہارون الرشید", "المامون", "المعتصم باللہ", "المنصور"], correctOptionIndex: 1, explanation: "علامہ شبلی نعمانی نے عباسی خلیفہ مامون الرشید کی زندگی اور اس کے علمی کارناموں پر 'المامون' کے عنوان سے کتاب لکھی۔", source_page: "Urdu Sec. 21" },
-                { question: "ناول 'ابن الوقت' کس کا لکھا ہوا ہے؟", options: ["پریم چند", "نذیر احمد", "رتن ناتھ سرشار", "مرزا رسوا"], correctOptionIndex: 1, explanation: "'ابن الوقت' ڈپٹی نذیر احمد کا ناول ہے جس میں مغربی تہذیب کی نقالی کرنے والے ایک کردار کو موضوع بنایا گیا ہے۔", source_page: "Urdu Sec. 19" },
-                { question: "رتن ناتھ سرشار کا سب سے مشہور ناول کون سا ہے؟", options: ["جام سرشار", "فسانہ آزاد", "سیر کہسار", "کامنی"], correctOptionIndex: 1, explanation: "'فسانہ آزاد' پنڈت رتن ناتھ سرشار کا سب سے مشہور اور ضخیم ناول ہے جو اودھ اخبار میں قسط وار چھپتا رہا۔", source_page: "Urdu Sec. 19" },
-                { question: "ناول 'فسانہ آزاد' کا مرکزی کردار کون ہے؟", options: ["خوجی", "آزاد", "ہمایوں فر", "چھوٹا چیلا"], correctOptionIndex: 1, explanation: "اس ناول کا مرکزی کردار 'آزاد' ہے، جبکہ 'خوجی' اس کا سب سے دلچسپ اور مزاحیہ ضمنی کردار ہے۔", source_page: "Urdu Sec. 19" },
-                { question: "ناول 'میدان عمل' کس کی تخلیق ہے؟", options: ["عزیز احمد", "قرۃ العین حیدر", "پریم چند", "عصمت چغتائی"], correctOptionIndex: 2, explanation: "'میدان عمل' پریم چند کا ایک اہم سیاسی اور سماجی ناول ہے جس میں انہوں نے ہندوستانی معاشرے کے مختلف مسائل کو پیش کیا ہے۔", source_page: "Urdu Sec. 20" },
-                { question: "عصمت چغتائی کا کون سا ناول بہت متنازعہ رہا؟", options: ["ضدی", "ٹیڑھی لکیر", "معصومہ", "سودائی"], correctOptionIndex: 1, explanation: "'ٹیڑھی لکیر' اپنے باغیانہ موضوعات اور بے باک انداز کی وجہ سے کافی مشہور اور متنازعہ رہا۔", source_page: "Urdu Sec. 20" },
-                { question: "ناول 'راجہ گدھ' کی مصنفہ کون ہیں؟", options: ["بانو قدسیہ", "خدیجہ مستور", "الطاف فاطمہ", "جمیلہ ہاشمی"], correctOptionIndex: 0, explanation: "'راجہ گدھ' بانو قدسیہ کا مشہور ترین ناول ہے جو حرام و حلال کے فلسفے اور نفسیاتی موضوعات پر مبنی ہے۔", source_page: "Urdu Sec. 20" },
-                { question: "'یادگار غالب' کس نوعیت کی کتاب ہے؟", options: ["ناول", "شاعری کا مجموعہ", "غالب کی سوانح اور ان کے کلام پر تبصرہ", "سفرنامہ"], correctOptionIndex: 2, explanation: "الطاف حسین حالی کی کتاب 'یادگار غالب' مرزا غالب کی سوانح حیات اور ان کی شاعری کی تفہیم و تنقید پر مشتمل ایک اہم تصنیف ہے۔", source_page: "Urdu Sec. 21" },
-                { question: "ڈپٹی نذیر احمد کے ناولوں کی زبان کیسی ہے؟", options: ["خالص ادبی اور مشکل", "دہلی کی ٹکسالی اور محاوراتی زبان", "لکھنؤ کی شاعری والی زبان", "دیہاتی اور سادہ"], correctOptionIndex: 1, explanation: "نذیر احمد کے ناولوں کی زبان دہلی کی ٹکسالی زبان ہے، جس میں محاورات اور روزمرہ کا خوبصورت استعمال ملتا ہے۔", source_page: "Urdu Sec. 19" },
-                { question: "عبدالحلیم شرر کے ناولوں کا بنیادی مقصد کیا تھا؟", options: ["مسلمانوں میں اپنی شاندار تاریخ کا شعور بیدار کرنا", "انگریزی تہذیب کی حمایت کرنا", "صرف تفریح فراہم کرنا", "سماجی برائیوں کی نشاندہی"], correctOptionIndex: 0, explanation: "شرر نے اپنے تاریخی ناولوں کے ذریعے مسلمانوں کو ان کے تابناک ماضی کی یاد دلا کر ان میں خود اعتمادی اور قومی جذبہ پیدا کرنے کی کوشش کی۔", source_page: "Urdu Sec. 19" },
-                { question: "احسان دانش کی خودنوشت کا نام کیا ہے؟", options: ["جہان دانش", "یادوں کی برات", "شہاب نامہ", "اپنی تلاش میں"], correctOptionIndex: 0, explanation: "'جہان دانش' شاعر مزدور احسان دانش کی آپ بیتی ہے جس میں انہوں نے اپنی زندگی کی جدوجہد کو بیان کیا ہے۔", source_page: "Urdu Sec. 22" },
-                { question: "بیگم اختر ریاض الدین کی کتاب 'سات سمندر پار' کس صنف سے تعلق رکھتی ہے؟", options: ["ناول", "آپ بیتی", "سفرنامہ", "رپورتاژ"], correctOptionIndex: 2, explanation: "'سات سمندر پار' بیگم اختر ریاض الدین کا مشہور سفرنامہ ہے جسے آدم جی ادبی انعام بھی ملا۔", source_page: "Urdu Sec. 22" },
-                { question: "ناول 'علی پور کا ایلی' کس کا لکھا ہوا ہے؟", options: ["شوکت صدیقی", "ممتاز مفتی", "انتظار حسین", "عبداللہ حسین"], correctOptionIndex: 1, explanation: "'علی پور کا ایلی' ممتاز مفتی کا ضخیم اور مشہور ناول ہے جو نفسیاتی اور خودنوشتی انداز کا حامل ہے۔", source_page: "Urdu Sec. 20" },
-                { question: "الطاف حسین حالی نے کس فارسی شاعر کی سوانح لکھی؟", options: ["حافظ شیرازی", "فردوسی", "شیخ سعدی", "عمر خیام"], correctOptionIndex: 2, explanation: "حالی نے فارسی کے عظیم شاعر اور اخلاقی مصلح شیخ سعدی شیرازی کی سوانح 'حیات سعدی' کے نام سے لکھی۔", source_page: "Urdu Sec. 21" },
-                { question: "شبلی نعمانی نے کس عظیم اسلامی مفکر اور فلسفی کی سوانح لکھی؟", options: ["ابن رشد", "امام غزالی", "ابن سینا", "الکندی"], correctOptionIndex: 1, explanation: "علامہ شبلی نے 'الغزالی' کے عنوان سے حجتہ الاسلام امام محمد غزالی کی زندگی اور ان کے علمی و فکری کارناموں پر کتاب لکھی۔", source_page: "Urdu Sec. 21" },
-                { question: "فیض احمد فیض کی خودنوشتی تحریروں کا مجموعہ کس نام سے شائع ہوا؟", options: ["صلیبیں مرے دریچے میں", "مہ و سال آشنائی", "دست تہ سنگ", "زنداں نامہ"], correctOptionIndex: 1, explanation: "'مہ و سال آشنائی' فیض احمد فیض کی خودنوشتی نوعیت کی تحریروں اور انٹرویوز پر مشتمل کتاب ہے۔", source_page: "Urdu Sec. 22" },
-                { question: "پطرس بخاری کی کتاب 'پطرس کے مضامین' کی بنیادی صنف کیا ہے؟", options: ["ناول", "سفرنامہ", "طنز و مزاح", "آپ بیتی"], correctOptionIndex: 2, explanation: "اگرچہ یہ آپ بیتی نہیں ہے، لیکن اس کا تعلق سوانحی ادب سے جوڑا جاتا ہے کیونکہ اس کے مضامین ان کی زندگی کے تجربات کی عکاسی کرتے ہیں اور یہ طنز و مزاح کا شاہکار ہے۔", source_page: "Urdu Sec. 22" },
-                { question: "ناول 'بستی' کے مصنف کون ہیں؟", options: ["انتظار حسین", "عبداللہ حسین", "شوکت صدیقی", "بانو قدسیہ"], correctOptionIndex: 0, explanation: "'بستی' انتظار حسین کا مشہور ناول ہے جو سقوط ڈھاکہ کے المیے اور ہجرت کے تجربے کو علامتی انداز میں بیان کرتا ہے۔", source_page: "Urdu Sec. 20" },
-                { question: "ڈپٹی نذیر احمد کے کس ناول کا کردار 'کلیم' ہے؟", options: ["مراۃ العروس", "بنات النعش", "توبتہ النصوح", "ابن الوقت"], correctOptionIndex: 2, explanation: "کلیم، جو پڑھائی سے بھاگتا ہے اور بری صحبت میں پڑ جاتا ہے، ناول 'توبتہ النصوح' کا ایک اہم کردار ہے اور وہ نصوح کا بیٹا ہے۔", source_page: "Urdu Sec. 19" }
+                // --- Islamic Studies: Life of Prophet (PBUH) - Birth to Prophethood (Urdu/IS Section, Pages 8-10) - 30 Qs ---
+                { question: "حضرت محمد صلی اللہ علیہ وآلہ وسلم کی ولادت کس سال ہوئی؟", options: ["571 عیسوی (عام الفیل)", "570 عیسوی", "572 عیسوی", "569 عیسوی"], correctOptionIndex: 0, explanation: "آپؐ کی ولادت باسعادت مشہور روایت کے مطابق عام الفیل یعنی 571 عیسوی میں ہوئی۔", source_page: "Urdu/IS Sec. 8" },
+                { question: "آپؐ کے والد کا نام کیا تھا اور ان کا انتقال کب ہوا؟", options: ["حضرت عبدالمطلب، آپؐ کی پیدائش کے بعد", "حضرت عبداللہ، آپؐ کی پیدائش سے پہلے", "حضرت ابوطالب، آپؐ کی جوانی میں", "حضرت حمزہ، جنگ احد میں"], correctOptionIndex: 1, explanation: "آپؐ کے والد کا نام حضرت عبداللہ تھا اور ان کا انتقال آپؐ کی ولادت سے چند ماہ قبل ہی ہو گیا تھا۔", source_page: "Urdu/IS Sec. 8" },
+                { question: "آپؐ کی والدہ کا نام کیا تھا اور ان کا انتقال کب ہوا جب آپؐ کی عمر چھ سال تھی؟", options: ["حضرت حلیمہ سعدیہ", "حضرت آمنہ", "حضرت فاطمہ بنت اسد", "حضرت صفیہ"], correctOptionIndex: 1, explanation: "آپؐ کی والدہ کا نام حضرت آمنہ تھا۔ ان کا انتقال ابواء کے مقام پر ہوا جب آپؐ چھ برس کے تھے۔", source_page: "Urdu/IS Sec. 8" },
+                { question: "والدہ کے انتقال کے بعد آپؐ کی پرورش کی ذمہ داری کس نے اٹھائی؟", options: ["دادا حضرت عبدالمطلب", "چچا حضرت ابوطالب", "چچا حضرت حمزہ", "ورقہ بن نوفل"], correctOptionIndex: 0, explanation: "حضرت آمنہ کے انتقال کے بعد آپؐ کے دادا حضرت عبدالمطلب نے آپؐ کو اپنی کفالت میں لے لیا۔", source_page: "Urdu/IS Sec. 8" },
+                { question: "حضرت عبدالمطلب کے انتقال کے بعد کس نے آپؐ کی پرورش کی؟", options: ["حضرت عباس", "حضرت ابولہب", "حضرت ابوطالب", "حضرت زبیر"], correctOptionIndex: 2, explanation: "جب آپؐ آٹھ سال کے تھے تو آپؐ کے دادا کا بھی انتقال ہوگیا، جس کے بعد آپؐ کے شفیق چچا حضرت ابوطالب نے آپؐ کی پرورش کی۔", source_page: "Urdu/IS Sec. 8" },
+                { question: "مکہ کے رواج کے مطابق آپؐ کو بچپن میں دودھ پلانے کے لیے کس قبیلے کی خاتون کے سپرد کیا گیا؟", options: ["قبیلہ قریش", "قبیلہ بنو ہاشم", "قبیلہ بنو سعد", "قبیلہ خزاعہ"], correctOptionIndex: 2, explanation: "اہل مکہ کے دستور کے مطابق، آپؐ کو دودھ پلانے اور تربیت کے لیے قبیلہ بنو سعد کی خاتون حضرت حلیمہ سعدیہ کے سپرد کیا گیا۔", source_page: "Urdu/IS Sec. 9" },
+                { question: "واقعہ 'شق صدر' (سینہ چاک کرنا) کس عمر میں پیش آیا؟", options: ["دو سال کی عمر میں", "چار سال کی عمر میں", "سات سال کی عمر میں", "بارہ سال کی عمر میں"], correctOptionIndex: 1, explanation: "مشہور روایت کے مطابق، واقعہ شق صدر اس وقت پیش آیا جب آپؐ حضرت حلیمہ کے پاس تھے اور آپؐ کی عمر مبارک چار یا پانچ سال تھی۔", source_page: "Urdu/IS Sec. 9" },
+                { question: "آپؐ نے بارہ سال کی عمر میں اپنے چچا حضرت ابوطالب کے ساتھ کس ملک کا تجارتی سفر کیا؟", options: ["یمن", "عراق", "مصر", "شام (سیریا)"], correctOptionIndex: 3, explanation: "بارہ سال کی عمر میں آپؐ نے اپنے چچا حضرت ابوطالب کے ہمراہ شام کے پہلے تجارتی سفر میں شرکت فرمائی۔", source_page: "Urdu/IS Sec. 9" },
+                { question: "شام کے سفر کے دوران کس عیسائی راہب نے آپؐ میں نبوت کی نشانیاں دیکھ کر آپؐ کے نبی ہونے کی پیش گوئی کی؟", options: ["نسطورا", "ورقہ بن نوفل", "بحیرا", "سلمان فارسی"], correctOptionIndex: 2, explanation: "بصریٰ کے مقام پر بحیرا نامی عیسائی راہب نے آپؐ کو پہچان لیا اور ابوطالب کو آپؐ کے بارے میں بتایا اور یہودیوں سے حفاظت کی تاکید کی۔", source_page: "Urdu/IS Sec. 9" },
+                { question: "جوانی میں آپؐ نے کن دو قبائل کے درمیان ہونے والی 'حرب فجار' (خونریز جنگ) میں حصہ لیا؟", options: ["قریش اور بنو ہاشم", "قریش و کنانہ اور قیس و عیلان", "اوس اور خزرج", "بنو قینقاع اور قریش"], correctOptionIndex: 1, explanation: "آپؐ نے حرب فجار میں حصہ لیا جو قریش اور ان کے حلیف بنو کنانہ کا قبیلہ قیس اور اس کے حلیفوں کے خلاف لڑی گئی تھی۔", source_page: "Urdu/IS Sec. 9" },
+                { question: "'حلف الفضول' نامی معاہدے کا مقصد کیا تھا؟", options: ["تجارت کو فروغ دینا", "مظلوموں کی مدد کرنا اور امن قائم کرنا", "قریش کے قبائل کو متحد کرنا", "کعبہ کی تعمیر نو کرنا"], correctOptionIndex: 1, explanation: "یہ معاہدہ مکہ کے چند سرداروں نے کیا تھا جس کا مقصد شہر میں امن و امان قائم کرنا، مسافروں کی حفاظت کرنا اور مظلوموں کی مدد کرنا تھا۔ آپؐ بھی اس میں شریک ہوئے۔", source_page: "Urdu/IS Sec. 9" },
+                { question: "آپؐ کو جوانی میں اپنی سچائی اور امانتداری کی وجہ سے کیا لقب ملا؟", options: ["ابوالقاسم", "رسول اللہ", "صادق اور امین", "خاتم النبیین"], correctOptionIndex: 2, explanation: "آپؐ کی غیر معمولی سچائی، دیانتداری اور پاکیزہ اخلاق کی وجہ سے تمام اہل مکہ آپؐ کو 'صادق' (سچا) اور 'امین' (امانتدار) کہہ کر پکارتے تھے۔", source_page: "Urdu/IS Sec. 10" },
+                { question: "حضرت خدیجہؓ نے آپؐ کی دیانتداری سے متاثر ہو کر اپنا تجارتی سامان دے کر کس ملک بھیجا؟", options: ["یمن", "عراق", "شام", "مصر"], correctOptionIndex: 2, explanation: "حضرت خدیجہؓ نے آپؐ کی شہرت سن کر اپنا مال تجارت دے کر اپنے غلام میسرہ کے ساتھ شام بھیجا۔", source_page: "Urdu/IS Sec. 10" },
+                { question: "حضرت خدیجہؓ کے ساتھ نکاح کے وقت آپؐ کی عمر کتنی تھی؟", options: ["25 سال", "30 سال", "35 سال", "40 سال"], correctOptionIndex: 0, explanation: "حضرت خدیجہؓ کے ساتھ نکاح کے وقت آپؐ کی عمر مبارک 25 سال تھی۔", source_page: "Urdu/IS Sec. 10" },
+                { question: "نکاح کے وقت حضرت خدیجہؓ کی عمر کتنی تھی؟", options: ["25 سال", "30 سال", "35 سال", "40 سال"], correctOptionIndex: 3, explanation: "نکاح کے وقت حضرت خدیجہؓ کی عمر 40 سال تھی۔ وہ مکہ کی ایک معزز اور مالدار خاتون تھیں۔", source_page: "Urdu/IS Sec. 10" },
+                { question: "کعبہ کی تعمیر نو کے وقت 'حجر اسود' کو اس کی جگہ پر رکھنے کا تنازعہ کس نے حل فرمایا؟", options: ["حضرت ابوطالب", "ورقہ بن نوفل", "حضرت محمد صلی اللہ علیہ وآلہ وسلم", "ابوجہل"], correctOptionIndex: 2, explanation: "جب قبائل میں حجر اسود نصب کرنے پر شدید جھگڑا ہوا تو آپؐ نے اپنی حکمت سے اسے حل فرمایا، اپنی چادر پر پتھر رکھ کر سب سرداروں سے اٹھوایا اور خود اسے دیوار میں نصب کیا۔", source_page: "Urdu/IS Sec. 10" },
+                { question: "نبوت سے پہلے آپؐ عبادت کے لیے کس غار میں تشریف لے جاتے تھے؟", options: ["غار ثور", "غار حرا", "غار احد", "غار خیف"], correctOptionIndex: 1, explanation: "آپؐ اکثر مکہ سے چند میل کے فاصلے پر جبل نور پر واقع غار حرا میں کئی کئی دن عبادت اور غور و فکر کے لیے قیام فرماتے۔", source_page: "Urdu/IS Sec. 10" },
+                { question: "آپؐ کے دادا حضرت عبدالمطلب کا تعلق قریش کی کس شاخ سے تھا؟", options: ["بنو امیہ", "بنو مخزوم", "بنو ہاشم", "بنو عدی"], correctOptionIndex: 2, explanation: "حضرت عبدالمطلب اور خود آپؐ کا تعلق قریش کے معزز ترین قبیلے بنو ہاشم سے تھا۔", source_page: "Urdu/IS Sec. 8" },
+                { question: "حضرت محمدؐ کے نام کا مطلب کیا ہے؟", options: ["جس کی بہت تعریف کی جائے", "ہدایت دینے والا", "خبردار کرنے والا", "اللہ کا دوست"], correctOptionIndex: 0, explanation: "محمد نام کا مطلب ہے 'وہ ذات جس کی بار بار اور بہت زیادہ تعریف کی گئی ہو'۔ یہ نام آپؐ کے دادا نے رکھا۔", source_page: "Urdu/IS Sec. 8" },
+                { question: "آپؐ کی پرورش کرنے والی لونڈی کا کیا نام تھا جو آپ کو والد سے ورثے میں ملی تھیں؟", options: ["حضرت ثوبیہ", "حضرت ام ایمن", "حضرت ماریہ", "حضرت ریحانہ"], correctOptionIndex: 1, explanation: "حضرت ام ایمن (برکہ) آپؐ کے والد کی لونڈی تھیں جنہوں نے آپؐ کی والدہ کے انتقال کے بعد آپؐ کی دیکھ بھال کی۔", source_page: "Urdu/IS Sec. 8" },
+                { question: "حضرت حلیمہ سعدیہ کا تعلق کس قبیلے سے تھا؟", options: ["بنو ہوازن", "بنو ثقیف", "بنو کنانہ", "بنو اسد"], correctOptionIndex: 0, explanation: "حضرت حلیمہ سعدیہ کا تعلق قبیلہ بنو سعد بن بکر سے تھا جو قبیلہ ہوازن کی ایک شاخ تھی۔", source_page: "Urdu/IS Sec. 9" },
+                { "question": "حضرت خدیجہؓ کے جس غلام کے ساتھ آپؐ نے شام کا سفر کیا، اس کا نام کیا تھا؟", "options": ["زید", "بلال", "میسرہ", "خباب"], "correctOptionIndex": 2, "explanation": "حضرت خدیجہؓ نے اپنے غلام میسرہ کو آپؐ کے ساتھ تجارتی سفر پر روانہ کیا تھا تاکہ وہ آپؐ کے معاملات اور اخلاق کا مشاہدہ کرے۔", "source_page": "Urdu/IS Sec. 10" },
+                { "question": "آپؐ نے حضرت خدیجہؓ کی طرف سے تجارت کرتے ہوئے کتنا نفع کمایا؟", "options": ["معمول کے مطابق", "معمول سے کم", "دوگنا نفع", "کوئی نفع نہیں"], "correctOptionIndex": 2, "explanation": "آپؐ کی سچائی، امانت اور بہترین کاروباری حکمت عملی کی بدولت اس سفر میں حضرت خدیجہؓ کو پہلے کے مقابلے میں دوگنا نفع ہوا۔", "source_page": "Urdu/IS Sec. 10" },
+                { "question": "حضرت خدیجہؓ نے آپؐ کو نکاح کا پیغام کس کے ذریعے بھجوایا؟", "options": ["اپنے والد خویلد کے ذریعے", "اپنے چچا عمرو بن اسد کے ذریعے", "اپنی سہیلی نفیسہ بنت منیہ کے ذریعے", "اپنے غلام میسرہ کے ذریعے"], "correctOptionIndex": 2, "explanation": "حضرت خدیجہؓ نے اپنی سہیلی نفیسہ بنت منیہ کے ذریعے آپؐ تک نکاح کا پیغام پہنچایا تھا۔", "source_page": "Urdu/IS Sec. 10" },
+                { "question": "کعبہ کی تعمیر نو کے وقت آپؐ کی عمر مبارک کتنی تھی؟", "options": ["25 سال", "30 سال", "35 سال", "40 سال"], "correctOptionIndex": 2, "explanation": "جب قریش نے کعبہ کی از سر نو تعمیر کی اور حجر اسود رکھنے کا تنازعہ پیدا ہوا، اس وقت آپؐ کی عمر 35 برس تھی۔", "source_page": "Urdu/IS Sec. 10" },
+                { "question": "عام الفیل کا واقعہ کیا تھا جس سال آپؐ کی ولادت ہوئی؟", "options": ["کعبہ کی تعمیر نو", "ابرہہ کا کعبہ پر حملہ", "قحط سالی", "ایک بڑی تجارتی کامیابی"], "correctOptionIndex": 1, "explanation": "عام الفیل (ہاتھی والا سال) اس سال کو کہتے ہیں جب یمن کے بادشاہ ابرہہ نے ہاتھیوں کی فوج لے کر کعبہ کو ڈھانے کی کوشش کی اور اللہ نے ابابیل پرندوں کے ذریعے اسے تباہ کر دیا۔", "source_page": "Urdu/IS Sec. 8" },
+                { "question": "آپؐ کی والدہ حضرت آمنہ کا انتقال کس جگہ ہوا؟", "options": ["مکہ", "مدینہ", "طائف", "ابواء"], "correctOptionIndex": 3, "explanation": "حضرت آمنہ جب آپؐ کو لے کر مدینہ میں اپنے میکے سے واپس آرہی تھیں تو راستے میں ابواء نامی مقام پر ان کا انتقال ہوا۔", "source_page": "Urdu/IS Sec. 8" },
+                { "question": "آپؐ کے چچا حضرت ابوطالب کا پیشہ کیا تھا؟", "options": ["کاشتکاری", "تجارت", "لوہاری", "شاعری"], "correctOptionIndex": 1, "explanation": "حضرت ابوطالب ایک تاجر تھے اور آپؐ نے بھی بچپن اور جوانی میں ان کے ساتھ تجارت میں حصہ لیا۔", "source_page": "Urdu/IS Sec. 9" },
+                { "question": "حضرت خدیجہؓ کو ان کی پاکدامنی اور مرتبے کی وجہ سے کیا لقب دیا جاتا تھا؟", "options": ["صدیقہ", "طاہرہ", "زہرا", "خاتون جنت"], "correctOptionIndex": 1, "explanation": "حضرت خدیجہؓ کو زمانہ جاہلیت میں بھی ان کی پاکیزگی اور بلند کردار کی وجہ سے 'طاہرہ' (پاکباز) کے لقب سے یاد کیا جاتا تھا۔", "source_page": "Urdu/IS Sec. 10" },
+                { "question": "آپؐ کے والد حضرت عبداللہ کس مقصد سے سفر پر گئے تھے جہاں ان کا انتقال ہوا؟", "options": ["حج کے لیے", "عمرہ کے لیے", "تجارت کے لیے", "رشتہ داروں سے ملنے"], "correctOptionIndex": 2, "explanation": "حضرت عبداللہ تجارت کی غرض سے شام گئے تھے اور واپسی پر مدینہ میں بیمار ہو کر وفات پا گئے۔", "source_page": "Urdu/IS Sec. 8" }
             ];
 
-            // Shuffle the entire question bank using the date as a seed
             shuffleArrayWithSeed(allQuestions, dateSeed);
-            quizQuestions = allQuestions; // Use all 100 questions
+            quizQuestions = allQuestions;
 
-            // Select a random special question after shuffling
             if (quizQuestions.length > 0) {
                 let rng = new Math.seedrandom(dateSeed + '-special');
                 specialQuestionIndex = Math.floor(rng() * quizQuestions.length);
@@ -713,7 +671,7 @@
             const dateParts = CURRENT_DATE_STR.split(' ');
             const monthName = dateParts[0].toUpperCase();
             const day = parseInt(dateParts[1].replace(',', ''));
-            document.getElementById('loginId').value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 04JUL
+            document.getElementById('loginId').value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 05JUL
             
             initializeQuiz();
             updateLiveDate();
