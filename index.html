@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS MPT Daily Quiz - July 7, 2025</title>
+    <title>CSS MPT Daily Quiz - July 8, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -13,8 +13,8 @@
         /* Base Body Styling */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F0F8FF; /* AliceBlue */
-            color: #000080; /* Navy */
+            background-color: #FDF5E6; /* Old Lace */
+            color: #8B4513; /* SaddleBrown */
             margin: 0;
             padding: 0;
             display: flex;
@@ -68,7 +68,7 @@
             font-family: 'Roboto', sans-serif;
             font-size: 1.8rem;
             font-weight: 700;
-            color: #000080; /* Navy */
+            color: #8B4513; /* SaddleBrown */
             margin-bottom: 1rem;
         }
 
@@ -86,7 +86,7 @@
         .progress-bar {
             height: 100%;
             width: 0%;
-            background: linear-gradient(to right, #00BFFF, #1E90FF); /* DeepSkyBlue to DodgerBlue */
+            background: linear-gradient(to right, #D2B48C, #CD853F); /* Tan to Peru */
             border-radius: 5px;
             transition: width 0.3s ease-in-out;
         }
@@ -109,7 +109,7 @@
 
         /* Card Styling */
         .card {
-            background-color: #F0F8FF; /* AliceBlue */
+            background-color: #FAF0E6; /* Linen */
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             padding: 1.5rem;
@@ -121,8 +121,8 @@
 
         /* Button Styling */
         .button-gradient {
-            background-image: linear-gradient(to right, #87CEFA, #ADD8E6); /* LightSkyBlue to LightBlue */
-            color: #000080; /* Navy */
+            background-image: linear-gradient(to right, #F4A460, #D2B48C); /* SandyBrown to Tan */
+            color: #4B2E2E;
             font-weight: bold;
             padding: 0.75rem 1.5rem;
             border-radius: 8px;
@@ -132,9 +132,15 @@
             border: none;
         }
 
-        .button-gradient:hover {
+        .button-gradient:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .button-gradient:disabled {
+            background-image: linear-gradient(to right, #cccccc, #999999);
+            cursor: not-allowed;
+            opacity: 0.7;
         }
 
         /* Option Button Styling */
@@ -147,7 +153,7 @@
             cursor: pointer;
             transition: all 0.2s ease;
             margin-bottom: 0.75rem;
-            color: #000080;
+            color: #8B4513;
         }
         
         .option-button:hover:not(.selected) {
@@ -156,21 +162,9 @@
         }
 
         .option-button.selected {
-            border-color: #1E90FF; /* DodgerBlue */
-            background-color: #E6E6FA; /* Lavender */
+            border-color: #CD853F; /* Peru */
+            background-color: #FFF8DC; /* Cornsilk */
             font-weight: bold;
-        }
-
-        .option-button.correct {
-            background-color: #90EE90; /* LightGreen */
-            border-color: #2E8B57; /* SeaGreen */
-            animation: pulse-green 0.5s ease-out forwards;
-        }
-
-        .option-button.incorrect {
-            background-color: #F08080; /* LightCoral */
-            border-color: #CD5C5C; /* IndianRed */
-            animation: shake-red 0.5s ease-out forwards;
         }
 
         /* Special Question Highlight */
@@ -179,49 +173,28 @@
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
         }
 
-        /* Explanation Section */
-        .explanation {
-            background-color: #E0FFFF; /* LightCyan */
-            border-left: 5px solid #00BFFF; /* DeepSkyBlue */
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 8px;
-            color: #000080;
-            font-size: 0.9rem;
-            display: none; /* Hidden by default */
-        }
-
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .quiz-title { font-size: 1.5rem; }
             .card { padding: 1rem; }
-        }
-
-        /* Keyframe Animations */
-        @keyframes pulse-green {
-            0% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(144, 238, 144, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0); }
-        }
-
-        @keyframes shake-red {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
         }
     </style>
 </head>
 <body>
 
     <script>
-        // Disable right-click, copy/paste, and developer tools for security
+        // --- Anti-Cheating Measures ---
+        // Disable right-click context menu
         document.addEventListener('contextmenu', event => event.preventDefault());
+        
+        // Disable common developer tool shortcuts (Ctrl+Shift+I, J, C, U) and F12
         document.addEventListener('keydown', e => {
-            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase())) || (e.ctrlKey && e.key.toUpperCase() === 'U')) {
                 e.preventDefault();
             }
-            if (e.key === 'F12') { e.preventDefault(); }
         });
+
+        // Disable copy and paste events
         document.addEventListener('copy', event => event.preventDefault());
         document.addEventListener('paste', event => event.preventDefault());
     </script>
@@ -240,7 +213,7 @@
         <div class="progress-bar-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
-        <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Banner Logo" class="banner-logo mx-auto">
+        <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Banner Logo" class="banner-logo mx-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x100/FDF5E6/8B4513?text=Logo';">
         <div class="credits">
             DAWNDIGEST
             <br>
@@ -253,13 +226,14 @@
     <main class="flex-grow flex items-center justify-center p-4">
         <div id="loginPage" class="card">
             <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
+            <div id="attemptMessage" class="text-center text-red-600 font-bold mb-4 hidden"></div>
             <div class="mb-4">
                 <label for="loginId" class="block text-sm font-medium text-gray-700 mb-1">ID:</label>
-                <input type="text" id="loginId" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="">
+                <input type="text" id="loginId" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700" value="">
             </div>
             <div class="mb-6">
                 <label for="loginPassword" class="block text-sm font-medium text-gray-700 mb-1">Password:</label>
-                <input type="password" id="loginPassword" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" value="free">
+                <input type="password" id="loginPassword" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700" value="free">
             </div>
             <p id="loginError" class="text-red-500 text-sm mb-4 hidden">Invalid ID or Password</p>
             <button id="loginBtn" class="button-gradient w-full">Login</button>
@@ -269,14 +243,14 @@
             <h2 class="text-xl font-bold mb-4 text-center">Candidate Information</h2>
             <div class="mb-6">
                 <label for="candidateName" class="block text-sm font-medium text-gray-700 mb-1">Enter Full Name:</label>
-                <input type="text" id="candidateName" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" placeholder="Your Full Name">
+                <input type="text" id="candidateName" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700" placeholder="Your Full Name">
             </div>
             <p id="nameError" class="text-red-500 text-sm mb-4 hidden">Please enter your full name.</p>
             <button id="startQuizBtn" class="button-gradient w-full">Start Quiz</button>
         </div>
 
         <div id="quizPage" class="card hidden">
-            <div class="timer-display text-lg font-bold text-gray-700 mb-4 text-center" id="timerDisplay"></div>
+            <div class="timer-display text-lg font-bold text-red-600 mb-4 text-center" id="timerDisplay"></div>
             <div class="question-progress text-center text-sm text-gray-500 mb-4" id="questionProgress"></div>
             <h2 class="text-lg font-semibold mb-4" id="questionText"></h2>
             <div id="optionsContainer" class="flex flex-col gap-3 mb-6"></div>
@@ -285,40 +259,33 @@
                 <button id="nextBtn" class="button-gradient px-6 py-2">Next</button>
                 <button id="submitQuizBtn" class="button-gradient px-6 py-2 hidden">Submit Quiz</button>
             </div>
-            <div id="explanationDiv" class="explanation"></div>
         </div>
 
         <div id="resultsPage" class="card hidden">
-            <h2 class="text-xl font-bold mb-4 text-center">Quiz Results</h2>
+            <h2 class="text-xl font-bold mb-4 text-center">Quiz Submitted Successfully</h2>
+            <p class="text-center mb-4">Your results have been recorded.</p>
             <p class="mb-2"><strong>Candidate Name:</strong> <span id="resultCandidateName"></span></p>
             <p class="mb-2"><strong>Date of Quiz:</strong> <span id="resultDate"></span></p>
             <p class="mb-2"><strong>Score:</strong> <span id="resultScore"></span> / 200</p>
             <p class="mb-2"><strong>Correct Answers:</strong> <span id="resultCorrect"></span></p>
             <p class="mb-2"><strong>Incorrect Answers:</strong> <span id="resultIncorrect"></span></p>
             <p class="mb-4"><strong>Time Taken:</strong> <span id="resultTimeTaken"></span></p>
-            <button id="restartQuizBtn" class="button-gradient w-full">Restart Quiz</button>
+            <p class="text-center mt-6 font-semibold text-gray-700">You may now close this window.</p>
         </div>
     </main>
 
     <script>
-        // Set the current date for display and logic
-        const CURRENT_DATE_STR = "July 7, 2025";
-        const CURRENT_DATE = new Date(CURRENT_DATE_STR);
+        // --- Quiz Configuration ---
+        const CURRENT_DATE_STR = "July 8, 2025";
+        const QUIZ_DURATION_MINUTES = 25; 
+        const QUIZ_ID = `quiz_attempt_${CURRENT_DATE_STR.replace(/, /g, '_')}`;
 
-        // Function to update the live date display
-        function updateLiveDate() {
-            document.getElementById('currentDateText').textContent = CURRENT_DATE_STR;
-            document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
-            document.getElementById('quizTitle').textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR}`;
-        }
-
-        // Quiz Data Structure
-        let quizQuestions = []; // Will be populated by initializeQuiz
+        // --- Global State Variables ---
+        let quizQuestions = [];
         let currentQuestionIndex = 0;
         let userAnswers = [];
         let quizStartTime;
         let timerInterval;
-        const QUIZ_DURATION_MINUTES = 100; 
         let specialQuestionIndex = -1;
 
         // --- Helper Functions ---
@@ -331,7 +298,7 @@
         }
 
         function generateUniqueId() {
-            return 'quiz_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            return 'quiz_submission_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
         }
 
         function formatTime(totalSeconds) {
@@ -341,9 +308,10 @@
         }
 
         function updateProgressBar() {
-            const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+            const answeredQuestions = userAnswers.filter(a => a !== null).length;
+            const progress = (answeredQuestions / quizQuestions.length) * 100;
             document.getElementById('progressBar').style.width = `${progress}%`;
-            document.getElementById('questionProgress').textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length} – ${Math.round(progress)}% Complete`;
+            document.getElementById('questionProgress').textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length}`;
         }
 
         function showPage(pageId) {
@@ -355,21 +323,22 @@
 
         function startTimer() {
             quizStartTime = Date.now();
-            let timeLeft = QUIZ_DURATION_MINUTES * 60;
+            const quizEndTime = quizStartTime + QUIZ_DURATION_MINUTES * 60 * 1000;
 
-            function updateTimerDisplay() {
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                document.getElementById('timerDisplay').textContent = `Time Left: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            timerInterval = setInterval(() => {
+                const now = Date.now();
+                const timeLeft = Math.round((quizEndTime - now) / 1000);
+
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    submitQuiz(true);
+                    document.getElementById('timerDisplay').textContent = "Time's Up!";
+                    submitQuiz(true); // Auto-submit
                 } else {
-                    timeLeft--;
+                    const minutes = Math.floor(timeLeft / 60);
+                    const seconds = timeLeft % 60;
+                    document.getElementById('timerDisplay').textContent = `Time Left: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 }
-            }
-            updateTimerDisplay();
-            timerInterval = setInterval(updateTimerDisplay, 1000);
+            }, 1000);
         }
 
         function renderQuestion() {
@@ -379,74 +348,45 @@
             optionsContainer.innerHTML = '';
 
             const quizCard = document.getElementById('quizPage');
-            quizCard.classList.remove('special-question');
-            if (question.special) {
-                quizCard.classList.add('special-question');
-            }
+            quizCard.classList.toggle('special-question', !!question.special);
             
-            const optionSeed = `${CURRENT_DATE_STR}-${currentQuestionIndex}`;
-            const shuffledOptions = [...question.options];
-            shuffleArrayWithSeed(shuffledOptions, optionSeed);
-
-            shuffledOptions.forEach((option) => {
+            // Options are shuffled once during initialization and stored.
+            // This ensures options remain in the same order when navigating back and forth.
+            question.shuffledOptions.forEach((option) => {
                 const button = document.createElement('button');
                 button.classList.add('option-button', 'w-full');
-                button.innerHTML = option;
-                button.dataset.originalOptionIndex = question.options.indexOf(option);
-                button.onclick = () => selectOption(parseInt(button.dataset.originalOptionIndex));
+                button.innerHTML = option.text;
+                button.onclick = () => selectOption(option.originalIndex);
                 optionsContainer.appendChild(button);
             });
 
             const userAnswer = userAnswers[currentQuestionIndex];
             if (userAnswer && userAnswer.selectedOptionIndex !== undefined) {
-                 Array.from(optionsContainer.children).forEach((button) => {
-                    button.disabled = true;
-                    const btnOriginalIndex = parseInt(button.dataset.originalOptionIndex);
-                    if (btnOriginalIndex === userAnswer.selectedOptionIndex) {
-                        button.classList.add('selected', userAnswer.isCorrect ? 'correct' : 'incorrect');
-                    }
-                    if (!userAnswer.isCorrect && btnOriginalIndex === question.correctOptionIndex) {
-                         button.classList.add('correct');
+                 Array.from(optionsContainer.children).forEach((button, index) => {
+                    if (question.shuffledOptions[index].originalIndex === userAnswer.selectedOptionIndex) {
+                        button.classList.add('selected');
                     }
                 });
             }
 
-            const explanationDiv = document.getElementById('explanationDiv');
-            explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
-            explanationDiv.style.display = (userAnswer && userAnswer.selectedOptionIndex !== undefined) ? 'block' : 'none';
-
             document.getElementById('prevBtn').classList.toggle('hidden', currentQuestionIndex === 0);
-            document.getElementById('nextBtn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1 || (userAnswer && userAnswer.selectedOptionIndex !== undefined));
+            document.getElementById('nextBtn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
             document.getElementById('submitQuizBtn').classList.toggle('hidden', currentQuestionIndex !== quizQuestions.length - 1);
 
             updateProgressBar();
         }
 
         function selectOption(selectedOptionOriginalIndex) {
-            if (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].selectedOptionIndex !== undefined) return;
-
             const question = quizQuestions[currentQuestionIndex];
-            const isCorrect = (selectedOptionOriginalIndex === question.correctOptionIndex);
             userAnswers[currentQuestionIndex] = {
                 questionIndex: currentQuestionIndex,
                 selectedOptionIndex: selectedOptionOriginalIndex,
-                isCorrect: isCorrect
+                isCorrect: (selectedOptionOriginalIndex === question.correctOptionIndex)
             };
-
-            const optionsContainer = document.getElementById('optionsContainer');
-            Array.from(optionsContainer.children).forEach((button) => {
-                button.disabled = true;
-                const btnOriginalIndex = parseInt(button.dataset.originalOptionIndex);
-                if (btnOriginalIndex === selectedOptionOriginalIndex) {
-                    button.classList.add('selected', isCorrect ? 'correct' : 'incorrect');
-                }
-                if (btnOriginalIndex === question.correctOptionIndex) {
-                    button.classList.add('correct');
-                }
-            });
-
-            document.getElementById('explanationDiv').style.display = 'block';
-            document.getElementById('nextBtn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
+            
+            // Visually update the selection
+            renderQuestion();
+            updateProgressBar();
         }
         
         function nextQuestion() {
@@ -464,18 +404,20 @@
         }
 
         function submitQuiz(isAutoSubmit = false) {
+            // Prevent multiple submissions
+            if (localStorage.getItem(QUIZ_ID) === 'completed') return;
+            
             clearInterval(timerInterval);
             const endTime = Date.now();
             const timeTakenSeconds = Math.round((endTime - quizStartTime) / 1000);
 
             let correctCount = 0;
-            let incorrectCount = 0;
             userAnswers.forEach(answer => {
-                if (answer && answer.selectedOptionIndex !== undefined) {
-                    if (answer.isCorrect) correctCount++;
-                    else incorrectCount++;
+                if (answer && answer.isCorrect) {
+                    correctCount++;
                 }
             });
+            const incorrectCount = userAnswers.filter(a => a !== null).length - correctCount;
 
             const score = (correctCount * 2) - incorrectCount;
             const candidateName = document.getElementById('candidateName').value;
@@ -488,7 +430,11 @@
             document.getElementById('resultTimeTaken').textContent = formatTime(timeTakenSeconds);
             
             showPage('resultsPage');
+            
+            // Set completion flag in localStorage
+            localStorage.setItem(QUIZ_ID, 'completed');
 
+            // Submit data to Formspree
             const formData = new FormData();
             formData.append('Candidate Name', candidateName);
             formData.append('Date of Quiz', CURRENT_DATE_STR);
@@ -497,20 +443,24 @@
             formData.append('Incorrect Answers', incorrectCount);
             formData.append('Time Taken', formatTime(timeTakenSeconds));
             formData.append('Quiz ID', generateUniqueId());
+            if (isAutoSubmit) {
+                formData.append('Submission Type', 'Auto-submitted (Time Expired)');
+            }
 
             fetch('https://formspree.io/f/xwpvddea', {
                 method: 'POST',
                 body: formData,
                 headers: { 'Accept': 'application/json' }
-            }).then(response => console.log(response.ok ? 'Results submitted.' : 'Submission failed.'))
-              .catch(error => console.error('Submission error:', error));
+            }).then(response => {
+                if (!response.ok) console.error('Formspree submission failed.');
+            }).catch(error => console.error('Formspree submission error:', error));
         }
 
         // --- Event Listeners ---
         document.getElementById('loginBtn').addEventListener('click', () => {
             const id = document.getElementById('loginId').value.toUpperCase();
             const password = document.getElementById('loginPassword').value;
-            if (id === '07JULY' && password === 'free') {
+            if (id === '08JULY' && password === 'free') {
                 document.getElementById('loginError').classList.add('hidden');
                 showPage('candidateNamePage');
             } else {
@@ -535,110 +485,125 @@
         document.getElementById('nextBtn').addEventListener('click', nextQuestion);
         document.getElementById('prevBtn').addEventListener('click', prevQuestion);
         document.getElementById('submitQuizBtn').addEventListener('click', () => submitQuiz(false));
-        document.getElementById('restartQuizBtn').addEventListener('click', () => {
-            clearInterval(timerInterval);
-            initializeQuiz();
-            showPage('loginPage');
-        });
 
         // --- Quiz Initialization ---
         function initializeQuiz() {
-            quizQuestions.length = 0;
             const dateSeed = CURRENT_DATE_STR;
             
             const allQuestions = [
-                // === July 7th Syllabus Quiz (100 MCQs) ===
+                // NOTE: 'explanation' keys have been removed for security.
+                // --- General Knowledge: Names of Parliaments (Pages 50-52) - 40 Qs ---
+                { question: "What is the name of Afghanistan's parliament?", options: ["Loya Jirga", "Wolesi Jirga", "Shora", "None of these"], correctOptionIndex: 2, source_page: 50 },
+                { question: "The parliament of which country is known as 'The Knesset'?", options: ["Egypt", "Israel", "Syria", "Lebanon"], correctOptionIndex: 1, source_page: 50 },
+                { question: "The parliament of which country is called 'National People's Assembly'?", options: ["Nigeria", "China", "Ghana", "Hong Kong"], correctOptionIndex: 1, source_page: 50 },
+                { question: "What is the name of the lower house of Argentina's parliament (National Congress)?", options: ["Senate", "Chamber of Deputies", "National Assembly", "People's Assembly"], correctOptionIndex: 1, source_page: 50 },
+                { question: "Australia's parliament is called 'Federal Parliament'. What are its two houses called?", options: ["Senate and House of Representatives", "Senate and National Assembly", "Council of States and House of Commons", "None of these"], correctOptionIndex: 0, source_page: 50 },
+                { question: "To which country 'Sabor' belongs?", options: ["Russia", "Croatia", "Jordan", "Palestine"], correctOptionIndex: 1, source_page: 50 },
+                { question: "The parliament of which country is called 'Folketing'?", options: ["France", "Denmark", "Italy", "Germany"], correctOptionIndex: 1, source_page: 50 },
+                { question: "What is the name of Egypt's parliament?", options: ["Majlis", "Shora", "People's Assembly", "House of Representatives"], correctOptionIndex: 3, source_page: 50 },
+                { question: "What is the name of Germany's parliament?", options: ["Bundestag and Bundesrat", "Reichstag", "Volkskammer", "Diet"], correctOptionIndex: 0, source_page: 51 },
+                { question: "The parliament of Iran is known as:", options: ["Majlis", "Shora", "Knesset", "Sabor"], correctOptionIndex: 0, source_page: 51 },
+                { question: "What is the name of Japan's parliament?", options: ["Diet", "House of Councillors and House of Representatives", "Both of them", "None of them"], correctOptionIndex: 2, source_page: 51 },
+                { question: "The parliament of which country is called 'Storting'?", options: ["Sweden", "Norway", "Finland", "Denmark"], correctOptionIndex: 1, source_page: 51 },
+                { question: "What is the name of Pakistan's parliament?", options: ["Majlis-e-Shoora", "National Assembly and Senate", "Both of them", "None of them"], correctOptionIndex: 2, source_page: 51 },
+                { question: "The parliament of Spain is known as:", options: ["Cortes Generales", "Senate", "Congress of Deputies", "All of the above"], correctOptionIndex: 0, source_page: 52 },
+                { question: "What is the name of USA's parliament?", options: ["Congress", "Senate and House of Representatives", "Both of them", "None of them"], correctOptionIndex: 2, source_page: 52 },
+                { question: "What is the name of the lower house of the UK parliament?", options: ["House of Lords", "House of Commons", "Senate", "National Assembly"], correctOptionIndex: 1, source_page: 52 },
+                { question: "The parliament of which country is known as 'Duma'?", options: ["Russia", "Poland", "Hungary", "Ukraine"], correctOptionIndex: 0, source_page: 52 },
+                { question: "What is the parliament of Bangladesh called?", options: ["Jatiya Sangsad", "Loya Jirga", "People's Council", "Union Council"], correctOptionIndex: 0, source_page: 50 },
+                { question: "The parliament of Canada consists of the Senate and which other house?", options: ["House of Commons", "House of Representatives", "National Assembly", "Small House"], correctOptionIndex: 0, source_page: 50 },
+                { question: "What is the name of China's parliament?", options: ["Council of China", "National People's Congress", "State Council", "People's Congress"], correctOptionIndex: 1, source_page: 50 },
+                { question: "The 'Eduskunta' is the parliament of which country?", options: ["Sweden", "Finland", "Estonia", "Latvia"], correctOptionIndex: 1, source_page: 51 },
+                { question: "The parliament of India is known as 'Sansad'. What is its upper house called?", options: ["Lok Sabha", "Rajya Sabha", "Vidhan Sabha", "None of these"], correctOptionIndex: 1, source_page: 51 },
+                { question: "The parliament of Ireland's lower house is known as:", options: ["Dáil Éireann", "Seanad Éireann", "Oireachtas", "Ceann Comhairle"], correctOptionIndex: 0, source_page: 51 },
+                { question: "What is the name of the parliament of Nepal?", options: ["Panchayat", "Rashtriya Panchayat", "Federal Parliament", "National Assembly"], correctOptionIndex: 2, source_page: 51 },
+                { question: "The parliament of the Netherlands is called:", options: ["States General", "First Chamber", "Second Chamber", "All of the above"], correctOptionIndex: 0, source_page: 51 },
+                { question: "What is the name of Poland's parliament?", options: ["Sejm", "Senat", "National Assembly", "Both a and b"], correctOptionIndex: 3, source_page: 51 },
+                { question: "The parliament of which country is called 'Riksdag'?", options: ["South Africa", "Sweden", "Jordan", "Taiwan"], correctOptionIndex: 1, source_page: 52 },
+                { question: "What is the name of Switzerland's parliament?", options: ["Federal Assembly", "National Council", "Council of States", "All of the above"], correctOptionIndex: 3, source_page: 52 },
+                { question: "The parliament of Turkey is called:", options: ["Grand National Assembly", "Sultan's Council", "Majlis", "None of them"], correctOptionIndex: 0, source_page: 52 },
+                { question: "What is the name of the parliament of Uzbekistan?", options: ["Oliy Majlis", "Supreme Assembly", "Both of them", "None of them"], correctOptionIndex: 2, source_page: 52 },
+                { question: "The parliament of which country is called 'Althing'?", options: ["Ireland", "Iceland", "Denmark", "Norway"], correctOptionIndex: 1, source_page: 50 },
+                { question: "The parliament of which country has an upper house called 'Senate' and a lower house called 'Chamber of Deputies'?", options: ["Czech Republic", "Italy", "Both of them", "None of them"], correctOptionIndex: 2, source_page: 50 },
+                { question: "The lower house of Malaysia's parliament is known as:", options: ["Dewan Rakyat", "Dewan Negara", "Majlis", "None of them"], correctOptionIndex: 0, source_page: 51 },
+                { question: "The parliament of Russia is called the Federal Assembly. What is its upper house?", options: ["Federation Council", "State Duma", "Supreme Soviet", "None of them"], correctOptionIndex: 0, source_page: 52 },
+                { question: "The parliament of South Korea is known as:", options: ["National Assembly", "State Council", "Supreme People's Assembly", "None of them"], correctOptionIndex: 0, source_page: 51 },
+                { question: "What is the name of Taiwan's parliament?", options: ["Legislative Yuan", "Control Yuan", "National Assembly", "None of them"], correctOptionIndex: 0, source_page: 52 },
+                { question: "The parliament of Denmark is called:", options: ["Folketing", "Storting", "Riksdag", "Althing"], correctOptionIndex: 0, source_page: 50 },
+                { "question": "The parliament of Libya is called:", "options": ["General People's Congress", "House of Representatives", "National Transitional Council", "None of them"], "correctOptionIndex": 1, "source_page": 51 },
+                { "question": "The upper house of the parliament of France is known as:", "options": ["National Assembly", "Sénat (Senate)", "Congress", "Chamber of Deputies"], "correctOptionIndex": 1, "source_page": 51 },
+                { "question": "The parliament of which country is called the 'Majlis Al-Umma'?", "options": ["Saudi Arabia", "Qatar", "Kuwait", "Bahrain"], "correctOptionIndex": 2, "source_page": 51 },
 
-                // --- General Knowledge: Cities Associated with Industries (Pages 47-49) - 35 Qs ---
-                { question: "For which industry is Ahmedabad (India) famous?", options: ["Cotton Fibre", "Textiles", "Paper", "Dairy Products"], correctOptionIndex: 1, explanation: "Ahmedabad is a major hub for the textile industry in India.", source_page: 47 },
-                { question: "The city of Sheffield (England) is associated with which industry?", options: ["Cutlery", "Glass", "Pottery", "Steel"], correctOptionIndex: 0, explanation: "Sheffield is historically famous for its cutlery production.", source_page: 47 },
-                { question: "Name the city of Thailand associated with the industry of Rice?", options: ["Pattani", "Phuket", "Bangkok", "Chiang Mai"], correctOptionIndex: 2, explanation: "Bangkok is a major center for Thailand's rice industry.", source_page: 47 },
-                { question: "The city of Belfast is known for what industry?", options: ["Ship Building", "Paper", "Iron", "Textile"], correctOptionIndex: 0, explanation: "Belfast, Northern Ireland, is famous for its shipbuilding industry, where the Titanic was built.", source_page: 47 },
-                { question: "The city of Dhaka (Bangladesh) is associated with which paper industry?", options: ["Jute", "Onion/Coriander", "Phitkigram", "None of these"], correctOptionIndex: 0, explanation: "Dhaka is associated with the jute paper industry.", source_page: 47 },
-                { question: "Which city of America is associated with the industry of agricultural implements, grain and meat packing?", options: ["Washington D.C.", "New York", "California", "Chicago"], correctOptionIndex: 3, explanation: "Chicago has historically been a major center for agricultural implements, grain, and meat packing industries.", source_page: 47 },
-                { question: "USA's Detroit city is linked with the industry of:", options: ["Software", "Automobiles", "Cosmetics", "Dairy"], correctOptionIndex: 1, explanation: "Detroit is famously known as the 'Motor City' for being the center of the U.S. automobile industry.", source_page: 47 },
-                { question: "The city of Hollywood (USA) is associated with:", options: ["Film industry", "Mill industry", "Textile industry", "Timber industry"], correctOptionIndex: 0, explanation: "Hollywood, a neighborhood in Los Angeles, is synonymous with the American film industry.", source_page: 48 },
-                { question: "Which city of USA is famous for tobacco industry?", options: ["New York", "Detroit", "Georgia", "Richmond"], correctOptionIndex: 3, explanation: "Richmond, Virginia, is a major center for the tobacco industry in the USA.", source_page: 48 },
-                { question: "Which city of Germany is associated with the dairy produce?", options: ["Munich", "Berlin", "Cologne", "Paris"], correctOptionIndex: 0, explanation: "Munich in Germany is associated with the dairy produce industry.", source_page: 48 },
-                { question: "Which city of Pakistan is linked with Cement and Ammunition industry?", options: ["Wah", "Gujrat", "Lahore", "Sialkot"], correctOptionIndex: 0, explanation: "Wah Cantonment in Pakistan is a major center for cement and ammunition production.", source_page: 48 },
-                { question: "Pakistan's city Wazirabad is known for the industry of:", options: ["Sugar", "Textile", "Cutlery", "Dairy"], correctOptionIndex: 2, explanation: "Wazirabad in Pakistan is famous for its cutlery industry.", source_page: 48 },
-                { question: "The 'Silicon Valley' of USA is famous for:", options: ["Computer manufacturing and designing", "Automobiles", "Textiles", "None of these"], correctOptionIndex: 0, explanation: "Silicon Valley in California is a global center for high technology, innovation, and computer manufacturing.", source_page: 49 },
-                { question: "Which city of Bangladesh is associated with Paper industry?", options: ["Dhaka", "Chittagong", "Phitkigram", "None of them"], correctOptionIndex: 1, explanation: "Chittagong in Bangladesh is associated with the paper industry.", source_page: 47 },
-                { question: "The industry 'Dairy produce' is associated with:", options: ["Argentina", "Sudan", "Brazil", "Denmark"], correctOptionIndex: 3, explanation: "Denmark is famous for its dairy produce industry.", source_page: 47 },
-                { question: "Which city is associated with 'Machinery and textiles'?", options: ["Glasgow", "Pakistan", "China", "India"], correctOptionIndex: 0, explanation: "Glasgow, Scotland, is associated with machinery and textiles.", source_page: 47 },
-                { question: "Pakistan's city Gujranwala is known for the industry of:", options: ["Iron Sales", "Utensils, fan and utensils", "Both of them", "None of them"], correctOptionIndex: 2, explanation: "Gujranwala is known for both iron sales and the manufacturing of fans and utensils.", source_page: 47 },
-                { question: "Which industry is associated with Cuba's city Havana?", options: ["Sugar", "Cotton", "Tobacco and cigars", "None of them"], correctOptionIndex: 2, explanation: "Havana, Cuba, is famous for its tobacco and cigar industry.", source_page: 47 },
-                { question: "Which city of India is known for 'Lock Industry'?", options: ["Aligarh", "The Chinese", "Not a city", "Both a & b"], correctOptionIndex: 0, explanation: "Aligarh in India is famous for its lock industry.", source_page: 47 },
-                { question: "Which city of France is known for the industry of perfumes?", options: ["Paris", "Cannes", "Nice", "Marseille"], correctOptionIndex: 0, explanation: "Paris, France, is world-renowned for its perfume industry.", source_page: 48 },
-                { question: "The city of Milan in Italy is famous for:", options: ["Silk", "Cotton", "Wool", "All of these"], correctOptionIndex: 0, explanation: "Milan is a fashion capital and is particularly famous for its silk industry.", source_page: 48 },
-                { question: "Which city of Germany is associated with the industry of toys?", options: ["Nuremberg", "Frankfurt", "Stuttgart", "Berlin"], correctOptionIndex: 0, explanation: "Nuremberg in Germany is famous for its toy industry.", source_page: 48 },
-                { question: "Which city of Kashmir is famous for the industry of woolen shawls?", options: ["Jammu", "Srinagar", "Mirpur", "Labor"], correctOptionIndex: 1, explanation: "Srinagar in Kashmir is famous for its woolen shawls.", source_page: 48 },
-                { question: "The city of Murano (Italy) is associated with which industry?", options: ["Venice", "Milan", "Glass manufacturing", "None of them"], correctOptionIndex: 2, explanation: "Murano, an island near Venice, is world-famous for its glass manufacturing.", source_page: 48 },
-                { question: "The city of Vienna (Austria) is associated with the industry of Glass manufacturing?", options: ["Paris", "Belgium", "Cologne", "Vienna"], correctOptionIndex: 3, explanation: "Vienna, Austria, is also known for its glass manufacturing industry.", source_page: 48 },
-                { question: "Which statement is true?", options: ["Cape Kennedy of USA is famous for rocket launching", "Detroit of USA is famous for car manufacturing", "Both of these", "None of these"], correctOptionIndex: 2, explanation: "Both statements are true: Cape Kennedy is a rocket launching site, and Detroit is famous for car manufacturing.", source_page: 49 },
-                { question: "Which city is famous for the 'Eiffel Tower'?", options: ["London", "Paris", "New York", "Rome"], correctOptionIndex: 1, explanation: "The Eiffel Tower is located in Paris, France.", source_page: 49 },
-                { question: "Which city is known as the 'Motor City'?", options: ["Detroit", "Los Angeles", "Chicago", "New York"], correctOptionIndex: 0, explanation: "Detroit, USA, is famously nicknamed the 'Motor City' due to its history as the center of the American automobile industry.", source_page: 47 },
-                { "question": "The city of Lyons in France is known for the industry of:", "options": ["Perfumes", "Textiles", "Silk", "Wine"], "correctOptionIndex": 2, "explanation": "Lyons (Lyon) in France has a long history as a major center for silk production.", "source_page": 48 },
-                { "question": "Which city in Pakistan is famous for sports goods and surgical goods?", "options": ["Lahore", "Sialkot", "Kasur", "Faisalabad"], "correctOptionIndex": 1, "explanation": "Sialkot, Pakistan, is world-renowned for manufacturing high-quality sports goods and surgical instruments.", "source_page": 48 },
-                { "question": "The city of Plzen in the Czech Republic is famous for:", "options": ["Glass", "Beer", "Automobiles", "Textiles"], "correctOptionIndex": 1, "explanation": "Plzen (Pilsen) is famous for being the birthplace of the Pilsner style of beer.", "source_page": 48 },
-                { "question": "Which city in England is famous for the manufacture of woolen goods?", "options": ["Leeds", "Manchester", "Liverpool", "Birmingham"], "correctOptionIndex": 0, "explanation": "Leeds in England is historically a major center for the woolen goods industry.", "source_page": 48 },
-                { "question": "The city of Solingen in Germany is famous for:", "options": ["Cars", "Cutlery", "Toys", "Chemicals"], "correctOptionIndex": 1, "explanation": "Solingen in Germany is known as the 'City of Blades', famous for manufacturing high-quality knives, scissors, and razors.", "source_page": 48 },
-                { "question": "Which city in Switzerland is known for watch-making?", "options": ["Geneva", "Zurich", "Bern", "Basel"], "correctOptionIndex": 0, "explanation": "Geneva is a major center of the Swiss watch-making industry.", "source_page": 48 },
-                { "question": "Which city is known as the 'Manchester of Pakistan'?", "options": ["Lahore", "Karachi", "Faisalabad", "Sialkot"], "correctOptionIndex": 2, "explanation": "Faisalabad is known as the 'Manchester of Pakistan' due to its extensive textile industry, similar to Manchester in the UK.", "source_page": 49 },
+                // --- Mathematics: Races and Games of Skills (Page 529) & Stock and Shares (Page 530) - 20 Qs ---
+                { question: "In a 100 m race, A covers the distance in 36 seconds and B in 45 seconds. In this race A beats B by:", options: ["20 m", "25 m", "22.5 m", "9 m"], correctOptionIndex: 0, source_page: 529 },
+                { question: "In a 500 m race, the ratio of the speeds of two contestants A and B is 3:4. A has a start of 140 m. Then, A wins by:", options: ["60 m", "40 m", "20 m", "10 m"], correctOptionIndex: 2, source_page: 529 },
+                { question: "In a 100 m race, A can beat B by 25 m and B can beat C by 4 m. In the same race, A can beat C by:", options: ["21 m", "26 m", "28 m", "29 m"], correctOptionIndex: 2, source_page: 529 },
+                { question: "A can run 1 km in 3 min, 10 sec and B can cover the same distance in 3 min, 20 sec. By what distance can A beat B?", options: ["25 m", "50 m", "75 m", "100 m"], correctOptionIndex: 1, source_page: 529 },
+                { question: "What is it called when a race or contest ends in a tie?", options: ["Draw", "Dead heat", "Photo finish", "Equal run"], correctOptionIndex: 1, source_page: 529 },
+                { question: "In a game of 100 points, A can give B 20 points and C 28 points. Then, B can give C:", options: ["8 points", "10 points", "12 points", "14 points"], correctOptionIndex: 1, source_page: 529 },
+                { question: "The regular payment made by a company to its shareholders out of its profits is called:", options: ["Stock", "Share", "Dividend", "Debenture"], correctOptionIndex: 2, source_page: 530 },
+                { question: "The value of a share or stock printed on the share certificate is called its:", options: ["Market Value", "Face Value", "Book Value", "Par Value"], correctOptionIndex: 1, source_page: 530 },
+                { question: "If a Rs. 100 stock is quoted at a premium of Rs. 20, what is its market value?", options: ["Rs. 80", "Rs. 100", "Rs. 120", "Rs. 20"], correctOptionIndex: 2, source_page: 530 },
+                { question: "A man buys Rs. 20 shares paying 9% dividend. The man wants to have an interest of 12% on his money. The market value of each share is:", options: ["Rs. 12", "Rs. 15", "Rs. 18", "Rs. 21"], correctOptionIndex: 1, source_page: 530 },
+                { question: "In a 200m race, A beats B by 35 m or 7 seconds. A's time over the course is:", options: ["40 sec", "47 sec", "33 sec", "30 sec"], correctOptionIndex: 2, source_page: 529 },
+                { question: "A can give B a start of 10m in a 100m race. B can give C a start of 10m in a 100m race. What start can A give C?", options: ["19m", "20m", "21m", "18m"], correctOptionIndex: 0, source_page: 529 },
+                { question: "The total money required to run a company is called:", options: ["Capital stock", "Share", "Dividend", "Fund"], correctOptionIndex: 0, source_page: 530 },
+                { question: "When the market value of a stock is less than its face value, it is said to be:", options: ["At par", "At a premium", "At a discount", "Below value"], correctOptionIndex: 2, source_page: 530 },
+                { question: "Find the cost of 96 shares of Rs. 10 each at a discount of Rs. 1.25, when brokerage is 1/4 per share.", options: ["Rs. 960", "Rs. 840", "Rs. 864", "Rs. 816"], correctOptionIndex: 2, source_page: 530 },
+                { "question": "In a race of 1 km, A beats B by 100 m. B beats C by 100 m. By how much does A beat C in the same race?", "options": ["190 m", "200 m", "210 m", "180 m"], "correctOptionIndex": 0, "source_page": 529 },
+                { "question": "The person who owns the stock or shares of a company is called:", "options": ["A broker", "A director", "A stockholder or shareholder", "A debenture holder"], "correctOptionIndex": 2, "source_page": 530 },
+                { "question": "If a Rs. 100 stock is sold for Rs. 98, it is said to be sold:", "options": ["At par", "At a premium of 2", "At a discount of 2", "At a brokerage of 2"], "correctOptionIndex": 2, "source_page": 530 },
+                { "question": "A runs 1 3/4 times as fast as B. If A gives B a start of 84 m, how far must the winning post be so that A and B might reach it at the same time?", "options": ["196 m", "200 m", "180 m", "192 m"], "correctOptionIndex": 0, "source_page": 529 },
+                { "question": "What is the annual income from Rs. 5000 of 6% stock at 120?", "options": ["Rs. 250", "Rs. 300", "Rs. 360", "Rs. 200"], "correctOptionIndex": 0, "source_page": 530 },
 
-                // --- English: Punctuation (Pages 446-453) - 40 Qs ---
-                { "question": "Which of the following is a run-on sentence?", "options": ["He ran to the store he bought milk.", "He ran to the store, and he bought milk.", "He ran to the store. He bought milk.", "After running to the store, he bought milk."], "correctOptionIndex": 0, "explanation": "A run-on sentence (specifically, a fused sentence) occurs when two independent clauses are joined with no punctuation. 'He ran to the store' and 'he bought milk' are both complete sentences.", "source_page": 446 },
-                { "question": "Choose the correctly punctuated sentence:", "options": ["The dog, a golden retriever, is very friendly.", "The dog a golden retriever is very friendly.", "The dog: a golden retriever, is very friendly.", "The dog-a golden retriever-is very friendly."], "correctOptionIndex": 0, "explanation": "The phrase 'a golden retriever' is an appositive that provides extra information about 'the dog'. It should be set off by commas.", "source_page": 446 },
-                { "question": "What punctuation is missing in 'I like to eat apples bananas and oranges'?", "options": ["A period at the end", "Commas to separate the items in the list", "A semicolon after 'eat'", "Quotation marks around the fruits"], "correctOptionIndex": 1, "explanation": "Commas are needed to separate items in a series or list. The sentence should be: 'I like to eat apples, bananas, and oranges.'", "source_page": 447 },
-                { "question": "Which sentence correctly uses a semicolon?", "options": ["I have a lot to do today; cleaning, laundry, and shopping.", "I have a lot to do today: cleaning, laundry, and shopping.", "I have a lot to do today; and I am tired.", "I have a lot to do today; because I have guests coming."], "correctOptionIndex": 1, "explanation": "A colon is the correct punctuation to introduce a list that follows an independent clause. A semicolon is used to connect two related independent clauses.", "source_page": 448 },
-                { "question": "What is the correct possessive form for 'the two countries' agreement'?", "options": ["the two countries agreement", "the two country's agreement", "the two countries' agreement", "the two countrie's agreement"], "correctOptionIndex": 2, "explanation": "'Countries' is a plural noun ending in 's'. To make it possessive, you add only an apostrophe after the 's'.", "source_page": 449 },
-                { "question": "Which sentence is correctly punctuated?", "options": ["She asked, 'What time is it.'", "She asked, 'What time is it'?", "She asked, \"What time is it?\"", "She asked, What time is it?."], "correctOptionIndex": 2, "explanation": "A direct question within a sentence should be enclosed in quotation marks, and the question mark goes inside the closing quotation mark because the quote itself is a question.", "source_page": 450 },
-                { "question": "A hyphen should be used in which of the following examples?", "options": ["a well respected leader", "a leader who is well respected", "a beautiful, sunny day", "a quickly moving train"], "correctOptionIndex": 0, "explanation": "A hyphen is used to form a compound adjective ('well-respected') when it comes before the noun it modifies ('leader').", "source_page": 451 },
-                { "question": "The punctuation mark '(...)' is called:", "options": ["A colon", "A semicolon", "An ellipsis", "Parentheses"], "correctOptionIndex": 2, "explanation": "The three dots (...) are called an ellipsis and are used to indicate an omission of words from a text.", "source_page": 452 },
-                { "question": "Which sentence is correct?", "options": ["The team celebrated it's victory.", "The team celebrated its victory.", "The team celebrated its' victory.", "The team celebrated its's victory."], "correctOptionIndex": 1, "explanation": "'Its' is the possessive pronoun. 'It's' is a contraction for 'it is'. The victory belongs to the team, so the possessive 'its' is correct.", "source_page": 449 },
-                { "question": "What is the function of the commas in 'My friend, who has a red car, is coming over.'?", "options": ["To separate items in a list", "To set off an introductory phrase", "To set off a non-essential (non-restrictive) clause", "To join two independent clauses"], "correctOptionIndex": 2, "explanation": "The clause 'who has a red car' is non-essential; it provides extra information but is not needed to identify the friend. Therefore, it is set off by commas.", "source_page": 448 },
-                { "question": "Choose the correct punctuation:", "options": ["The package will arrive on Monday July 8.", "The package will arrive on Monday, July, 8.", "The package will arrive on Monday, July 8.", "The package will arrive on Monday; July 8."], "correctOptionIndex": 2, "explanation": "A comma is used to separate the day of the week from the month, and the day of the month from the year (if included).", "source_page": 447 },
-                { "question": "Which sentence uses a colon correctly?", "options": ["He had one goal in life: to become a doctor.", "He wanted: to become a doctor.", "His goal was: to become a doctor.", "To become a doctor: was his goal."], "correctOptionIndex": 0, "explanation": "A colon is used correctly after an independent clause ('He had one goal in life') to introduce an explanation or amplification.", "source_page": 448 },
-                { "question": "What is the correct punctuation for the end of an imperative sentence that shows strong emotion?", "options": ["A period (.)", "A question mark (?)", "An exclamation mark (!)", "A semicolon (;)"], "correctOptionIndex": 2, "explanation": "An imperative sentence (a command) that is said with strong emotion should end with an exclamation mark. Example: 'Stop that immediately!'", "source_page": 446 },
-                { "question": "Which sentence is punctuated correctly?", "options": ["However, you must finish your work first.", "However you must finish your work first.", "However; you must finish your work first.", "However-you must finish your work first."], "correctOptionIndex": 0, "explanation": "An introductory adverb like 'However' should be followed by a comma.", "source_page": 447 },
-                { "question": "The possessive form of 'men' is:", "options": ["mens'", "mens", "men's", "men'es"], "correctOptionIndex": 2, "explanation": "'Men' is an irregular plural noun that does not end in 's'. The possessive is formed by adding an apostrophe and an 's'.", "source_page": 449 },
-                { "question": "What is the error in 'She is good at sports for example tennis and basketball.'?", "options": ["Missing comma", "Missing semicolon", "Missing colon", "Both B and C could be correct"], "correctOptionIndex": 3, "explanation": "The phrase 'for example' should be set off by punctuation. A semicolon or a colon could be used before it, and a comma after it. E.g., '...sports; for example, tennis...' or '...sports, for example, tennis...'. A colon is also strong: '...sports: for example, tennis...'", "source_page": 448 },
-                { "question": "Which sentence uses parentheses correctly?", "options": ["He gave me a gift (it was a book) for my birthday.", "He gave me a gift, it was a book, for my birthday.", "He gave me a gift (it was a book,) for my birthday.", "He gave me a gift (it was a book), for my birthday."], "correctOptionIndex": 0, "explanation": "Parentheses are used to enclose information that is an aside or supplement to the main sentence. The enclosed material is a complete sentence, but it is part of the larger sentence.", "source_page": 453 },
-                { "question": "Which of the following should be in quotation marks?", "options": ["The name of a book", "The title of a poem", "The name of a movie", "The name of a magazine"], "correctOptionIndex": 1, "explanation": "Titles of shorter works like poems, short stories, articles, and songs are enclosed in quotation marks. Titles of longer works like books and movies are typically italicized.", "source_page": 450 },
-                { "question": "Choose the correct sentence:", "options": ["Whose car is that?", "Who's car is that?", "Whose car is that'.", "Who's car is that'?"], "correctOptionIndex": 0, "explanation": "'Whose' is the possessive pronoun used to ask about ownership. 'Who's' is a contraction for 'who is'.", "source_page": 449 },
-                { "question": "What punctuation is needed? 'The ingredients are flour sugar and eggs.'", "options": ["Commas", "Semicolons", "A colon before the list", "Both A and C"], "correctOptionIndex": 3, "explanation": "A colon should introduce the list after the independent clause 'The ingredients are', and commas should separate the items in the list. 'The ingredients are: flour, sugar, and eggs.'", "source_page": 447 },
-                { "question": "Which sentence is correctly punctuated?", "options": ["The guests, who arrived late, missed the speech.", "The guests who arrived late missed the speech.", "The guests who arrived late, missed the speech.", "The guests, who arrived late missed the speech."], "correctOptionIndex": 1, "explanation": "This is a restrictive (essential) clause. It specifies *which* guests missed the speech (only the ones who arrived late). Therefore, it should not be set off by commas.", "source_page": 448 },
-                { "question": "The possessive of 'it' is:", "options": ["it's", "its'", "its", "it'es"], "correctOptionIndex": 2, "explanation": "The possessive pronoun 'its' has no apostrophe. 'It's' is the contraction for 'it is'.", "source_page": 449 },
-                { "question": "Which punctuation mark can be used to join two independent clauses?", "options": ["Comma", "Semicolon", "Apostrophe", "Hyphen"], "correctOptionIndex": 1, "explanation": "A semicolon is used to connect two closely related independent clauses without a coordinating conjunction.", "source_page": 448 },
-                { "question": "What is the correct punctuation? 'He was a first rate student.'", "options": ["first-rate", "first, rate", "first—rate", "No change needed"], "correctOptionIndex": 0, "explanation": "The compound adjective 'first-rate' comes before the noun 'student' and should be hyphenated.", "source_page": 451 },
-                { "question": "Which sentence is correct?", "options": ["\"I'm tired,\" she said.", "I'm tired, \"she said.\"", "\"I'm tired\", she said.", "\"I'm tired, she said.\""], "correctOptionIndex": 0, "explanation": "The comma separating the quote from the attribution ('she said') goes inside the quotation mark.", "source_page": 450 },
-                { "question": "The main purpose of a period is to:", "options": ["Show excitement", "End a declarative or imperative sentence", "Ask a question", "Separate items in a list"], "correctOptionIndex": 1, "explanation": "A period, or full stop, is primarily used to mark the end of a statement (declarative sentence) or a mild command (imperative sentence).", "source_page": 446 },
-                { "question": "Which of the following is NOT a coordinating conjunction (FANBOYS)?", "options": ["For", "And", "Because", "But"], "correctOptionIndex": 2, "explanation": "The coordinating conjunctions are For, And, Nor, But, Or, Yet, So. 'Because' is a subordinating conjunction.", "source_page": 446 },
-                { "question": "What is wrong with: 'The cat sat on the mat it was sleepy.'", "options": ["Comma splice", "Fused sentence", "Sentence fragment", "Nothing is wrong"], "correctOptionIndex": 1, "explanation": "This is a fused sentence, a type of run-on sentence where two independent clauses are joined with no punctuation at all.", "source_page": 446 },
-                { "question": "Which punctuation is used for an abrupt change in thought?", "options": ["Comma", "Semicolon", "Em dash", "Hyphen"], "correctOptionIndex": 2, "explanation": "The em dash (—) is used to indicate an abrupt change of thought or to add emphasis to a concluding phrase.", "source_page": 451 },
-                { "question": "What is the correct way to write the plural of 'attorney'?", "options": ["attornies", "attorneys", "attorney's", "attorneies"], "correctOptionIndex": 1, "explanation": "For nouns ending in a vowel followed by 'y', the plural is formed by simply adding 's'.", "source_page": 449 },
-
-                // --- General Abilities: Boats and Streams (Pages 527-528) - 25 Qs ---
-                { question: "A man can row upstream at 7 kmph and downstream at 10 kmph. Find man's rate in still water and the rate of current.", options: ["8.5 kmph, 1.5 kmph", "9 kmph, 1 kmph", "8 kmph, 2 kmph", "7.5 kmph, 2.5 kmph"], correctOptionIndex: 0, explanation: "Rate in still water = 1/2 (10 + 7) = 8.5 kmph. Rate of current = 1/2 (10 - 7) = 1.5 kmph.", source_page: 527 },
-                { question: "A man takes 3 hours 45 minutes to row a boat 15 km downstream of a river and 2 hours 30 minutes to cover a distance of 5 km upstream. Find the speed of the river current in km/hr.", options: ["0.5 kmph", "1 kmph", "1.5 kmph", "2 kmph"], correctOptionIndex: 1, explanation: "Downstream speed = 15 / 3.75 = 4 kmph. Upstream speed = 5 / 2.5 = 2 kmph. Speed of current = 1/2 (4 - 2) = 1 kmph.", source_page: 527 },
-                { question: "A man can row 18 kmph in still water. It takes him thrice as long to row up as to row down the river. Find the rate of stream.", options: ["6 kmph", "8 kmph", "9 kmph", "10 kmph"], correctOptionIndex: 2, explanation: "Let man's speed be x, stream's speed be y. x=18. Time_up = 3 * Time_down. D/(18-y) = 3 * D/(18+y). 18+y = 3(18-y). 18+y = 54-3y. 4y = 36. y = 9 kmph.", source_page: 527 },
-                { question: "A man can row 7 1/2 kmph in still water. If in a river running at 1.5 kmph, it takes him 50 minutes to row to a place and back, how far off is the place?", options: ["3 km", "4 km", "5 km", "6 km"], correctOptionIndex: 0, explanation: "Downstream speed = 7.5+1.5 = 9. Upstream speed = 7.5-1.5 = 6. Let distance be D. Total time = D/9 + D/6 = 50/60 hrs. (2D+3D)/18 = 5/6. 5D/18 = 5/6. D = 3 km.", source_page: 528 },
-                { question: "A boat running downstream covers a distance of 16 km in 2 hours while for covering the same distance upstream, it takes 4 hours. What is the speed of the boat in still water?", options: ["4 kmph", "6 kmph", "8 kmph", "Data inadequate"], correctOptionIndex: 1, explanation: "Downstream speed = 16/2 = 8 kmph. Upstream speed = 16/4 = 4 kmph. Speed in still water = 1/2 (8 + 4) = 6 kmph.", source_page: 527 },
-                { question: "The speed of a boat in still water is 15 km/hr and the rate of current is 3.5 km/hr. The distance travelled downstream in 12 minutes is:", options: ["3.1 km", "3.7 km", "4.2 km", "4.5 km"], correctOptionIndex: 1, explanation: "Downstream speed = 15 + 3.5 = 18.5 km/hr. Distance = Speed * Time = 18.5 * (12/60) = 18.5 * 0.2 = 3.7 km.", source_page: 528 },
-                { question: "A boat takes 90 minutes less to travel 36 miles downstream than to travel the same distance upstream. If the speed of the boat in still water is 10 mph, the speed of the stream is:", options: ["2 mph", "2.5 mph", "3 mph", "4 mph"], correctOptionIndex: 0, explanation: "Let stream speed be s. 36/(10-s) - 36/(10+s) = 90/60 = 1.5. 36(10+s - (10-s)) = 1.5(100-s^2). 36(2s) = 1.5(100-s^2). 72s = 150 - 1.5s^2. 1.5s^2 + 72s - 150 = 0. s^2 + 48s - 100 = 0. (s+50)(s-2)=0. s = 2 mph.", source_page: 528 },
-                { question: "A boat running upstream takes 8 hours 48 minutes to cover a certain distance, while it takes 4 hours to cover the same distance running downstream. What is the ratio between the speed of the boat and speed of the water current respectively?", options: ["2:1", "3:2", "8:3", "Cannot be determined"], correctOptionIndex: 2, explanation: "Let boat speed be x, stream speed be y. D/(x-y) = 8.8 hrs. D/(x+y) = 4 hrs. (x+y)/(x-y) = 8.8/4 = 2.2. x+y = 2.2x - 2.2y. 3.2y = 1.2x. x/y = 3.2/1.2 = 32/12 = 8/3. Ratio is 8:3.", source_page: 527 },
-                { question: "A man rows to a place 48 km distant and back in 14 hours. He finds that he can row 4 km with the stream in the same time as 3 km against the stream. The rate of the stream is:", options: ["1 km/hr", "1.5 km/hr", "2 km/hr", "2.5 km/hr"], correctOptionIndex: 0, explanation: "4/(u+v) = 3/(u-v) => 4u-4v = 3u+3v => u=7v. Also 48/(u+v) + 48/(u-v) = 14. 48/(8v) + 48/(6v) = 14. 6/v + 8/v = 14. 14/v = 14. v = 1 km/hr.", source_page: 528 },
-                { question: "Speed of a boat in standing water is 9 kmph and the speed of the stream is 1.5 kmph. A man rows to a place at a distance of 105 km and comes back to the starting point. The total time taken by him is:", options: ["16 hours", "18 hours", "20 hours", "24 hours"], correctOptionIndex: 3, explanation: "Downstream speed = 9+1.5=10.5. Upstream speed = 9-1.5=7.5. Total time = 105/10.5 + 105/7.5 = 10 + 14 = 24 hours.", source_page: 527 },
-                { question: "A boat covers a certain distance downstream in 1 hour, while it comes back in 1 1/2 hours. If the speed of the stream be 3 kmph, what is the speed of the boat in still water?", options: ["12 kmph", "13 kmph", "14 kmph", "15 kmph"], correctOptionIndex: 3, explanation: "Let boat speed be u. D = (u+3)*1. D = (u-3)*1.5. So, u+3 = 1.5u - 4.5. 0.5u = 7.5. u = 15 kmph.", source_page: 527 },
-                { question: "A man can row at 5 kmph in still water. If the velocity of current is 1 kmph and it takes him 1 hour to row to a place and come back, how far is the place?", options: ["2.4 km", "2.5 km", "3 km", "3.6 km"], correctOptionIndex: 0, explanation: "Downstream speed = 6. Upstream speed = 4. Let distance be D. D/6 + D/4 = 1. (2D+3D)/12 = 1. 5D = 12. D = 2.4 km.", source_page: 527 },
-                { question: "A boatman goes 2 km against the current of the stream in 1 hour and goes 1 km along the current in 10 minutes. How long will it take to go 5 km in stationary water?", options: ["40 min", "1 hr", "1 hr 15 min", "1 hr 30 min"], correctOptionIndex: 2, explanation: "Upstream speed = 2 km/hr. Downstream speed = 1 km / (10/60 hr) = 6 km/hr. Speed in still water = 1/2 (6+2) = 4 km/hr. Time to go 5 km = 5/4 hrs = 1.25 hrs = 1 hr 15 min.", source_page: 527 },
-                { question: "If a boat goes 7 km upstream in 42 minutes and the speed of the stream is 3 kmph, then the speed of the boat in still water is:", options: ["4.2 kmph", "9 kmph", "13 kmph", "21 kmph"], correctOptionIndex: 2, explanation: "Upstream speed = 7 km / 0.7 hr = 10 kmph. Upstream speed = Boat speed - Stream speed. 10 = u - 3. u = 13 kmph.", source_page: 528 },
-                { question: "A man's speed with the current is 15 km/hr and the speed of the current is 2.5 km/hr. The man's speed against the current is:", options: ["8.5 km/hr", "9 km/hr", "10 km/hr", "12.5 km/hr"], correctOptionIndex: 2, "explanation": "Downstream speed (u+v) = 15. Stream speed (v) = 2.5. So, boat speed (u) = 15 - 2.5 = 12.5 km/hr. Upstream speed (u-v) = 12.5 - 2.5 = 10 km/hr.", "source_page": 528 }
+                // --- Islamic Studies: Prophethood to Migration (Urdu/IS Section, Pages 11-13) - 40 Qs ---
+                { question: "آپ صلی اللہ علیہ وآلہ وسلم پر پہلی وحی کس غار میں نازل ہوئی؟", options: ["غار ثور", "غار حرا", "غار احد", "غار خیف"], correctOptionIndex: 1, source_page: "Urdu/IS Sec. 11" },
+                { question: "پہلی وحی کون سی سورت کی آیات پر مشتمل تھی؟", options: ["سورۃ الفاتحہ", "سورۃ البقرہ", "سورۃ العلق", "سورۃ المدثر"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 11" },
+                { question: "وحی لانے والے فرشتے کا کیا نام ہے؟", options: ["حضرت میکائیلؑ", "حضرت اسرافیلؑ", "حضرت جبرائیلؑ", "حضرت عزرائیلؑ"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 11" },
+                { question: "پہلی وحی کے نزول کے بعد آپؐ کو تسلی دینے والی اور سب سے پہلے اسلام قبول کرنے والی شخصیت کون تھیں؟", options: ["حضرت ابوطالب", "ورقہ بن نوفل", "حضرت خدیجہؓ", "حضرت ابوبکرؓ"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 11" },
+                { question: "حضرت خدیجہؓ آپؐ کو کس عالم کے پاس لے گئیں جنہوں نے آپؐ کے نبی ہونے کی تصدیق کی؟", options: ["بحیرا راہب", "نسطورا راہب", "ورقہ بن نوفل", "سلمان فارسی"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 11" },
+                { question: "مردوں میں سب سے پہلے اسلام کس نے قبول کیا؟", options: ["حضرت علیؓ", "حضرت ابوبکر صدیقؓ", "حضرت زید بن حارثہؓ", "حضرت عثمانؓ"], correctOptionIndex: 1, source_page: "Urdu/IS Sec. 11" },
+                { question: "بچوں میں سب سے پہلے اسلام قبول کرنے کی سعادت کسے حاصل ہوئی؟", options: ["حضرت عبداللہ بن عمرؓ", "حضرت انس بن مالکؓ", "حضرت علیؓ", "حضرت زید بن حارثہؓ"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 11" },
+                { question: "غلاموں میں سب سے پہلے کون اسلام لایا؟", options: ["حضرت بلالؓ", "حضرت زید بن حارثہؓ", "حضرت خبابؓ", "حضرت عمار بن یاسرؓ"], correctOptionIndex: 1, source_page: "Urdu/IS Sec. 11" },
+                { question: "اسلام کی خفیہ تبلیغ کا دور کتنے عرصے تک جاری رہا؟", options: ["ایک سال", "دو سال", "تین سال", "پانچ سال"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 12" },
+                { question: "خفیہ تبلیغ کے دور میں مسلمانوں کا مرکز کیا تھا؟", options: ["خانہ کعبہ", "غار حرا", "دار ارقم", "حضرت ابوطالب کا گھر"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 12" },
+                { question: "آپؐ نے اعلانیہ تبلیغ کا آغاز کس پہاڑی سے کیا؟", options: ["کوہ طور", "کوہ جودی", "کوہ صفا", "کوہ مروہ"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 12" },
+                { question: "اعلانیہ دعوت کے آغاز پر آپؐ کی سب سے شدید مخالفت کس نے کی؟", options: ["ابوجہل", "ابوسفیان", "ابولہب", "امیہ بن خلف"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 12" },
+                { question: "کفار مکہ نے مسلمانوں پر ظلم و ستم کا آغاز کیوں کیا؟", options: ["مسلمانوں کی بڑھتی ہوئی تعداد سے خوفزدہ ہو کر", "بت پرستی کی مخالفت کی وجہ سے", "اسلام کے مساوات کے پیغام کی وجہ سے", "مذکورہ بالا تمام وجوہات"], correctOptionIndex: 3, source_page: "Urdu/IS Sec. 12" },
+                { question: "حضرت بلالؓ کو اسلام قبول کرنے پر کون اذیت دیتا تھا؟", options: ["ابوجہل", "امیہ بن خلف", "ابولہب", "عتبہ بن ربیعہ"], correctOptionIndex: 1, source_page: "Urdu/IS Sec. 12" },
+                { question: "اسلام کی پہلی شہید خاتون کون تھیں؟", options: ["حضرت سمیہؓ", "حضرت فاطمہؓ", "حضرت زینبؓ", "حضرت رقیہؓ"], correctOptionIndex: 0, source_page: "Urdu/IS Sec. 12" },
+                { question: "مسلمانوں پر ظلم و ستم بڑھنے کے بعد آپؐ نے انہیں کس ملک کی طرف ہجرت کا حکم دیا؟", options: ["شام", "یمن", "حبشہ (ایتھوپیا)", "مصر"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 13" },
+                { question: "حبشہ کی طرف پہلی ہجرت کب ہوئی؟", options: ["نبوت کے تیسرے سال", "نبوت کے پانچویں سال", "نبوت کے ساتویں سال", "نبوت کے دسویں سال"], correctOptionIndex: 1, source_page: "Urdu/IS Sec. 13" },
+                { question: "ہجرت حبشہ اول میں کتنے لوگ شامل تھے؟", options: ["10 مرد اور 4 خواتین", "11 مرد اور 4 خواتین", "12 مرد اور 5 خواتین", "15 مرد اور 5 خواتین"], correctOptionIndex: 1, source_page: "Urdu/IS Sec. 13" },
+                { question: "حبشہ کے بادشاہ کا کیا نام تھا جس نے مسلمانوں کو پناہ دی؟", options: ["ہرقل", "کسریٰ", "نجاشی (نیگس)", "مقوقس"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 13" },
+                { "question": "قریش نے کس کو سفیر بنا کر نجاشی کے دربار میں بھیجا تاکہ وہ مسلمانوں کو واپس لے آئیں؟", "options": ["ابوسفیان اور خالد بن ولید", "عمرو بن العاص اور عبداللہ بن ابی ربیعہ", "ابوجہل اور عتبہ بن ربیعہ", "ابولہب اور عقبہ بن ابی معیط"], "correctOptionIndex": 1, "source_page": "Urdu/IS Sec. 13" },
+                { "question": "نجاشی کے دربار میں مسلمانوں کی طرف سے کس نے تقریر کی؟", "options": ["حضرت عثمان بن عفانؓ", "حضرت جعفر بن ابی طالبؓ", "حضرت عبدالرحمن بن عوفؓ", "حضرت زبیر بن عوامؓ"], "correctOptionIndex": 1, "source_page": "Urdu/IS Sec. 13" },
+                { "question": "حضرت جعفرؓ نے نجاشی کے دربار میں قرآن کی کون سی سورت کی آیات تلاوت کیں؟", "options": ["سورۃ البقرہ", "سورۃ آل عمران", "سورۃ مریم", "سورۃ یوسف"], "correctOptionIndex": 2, "source_page": "Urdu/IS Sec. 13" },
+                { "question": "حضرت ابوبکر صدیقؓ کی تبلیغ سے کون سی بڑی شخصیات اسلام لائیں؟", "options": ["حضرت عثمان، حضرت زبیر، حضرت عبدالرحمن بن عوف", "حضرت سعد بن ابی وقاص، حضرت طلحہ بن عبیداللہ", "مذکورہ بالا تمام", "صرف حضرت عثمان"], "correctOptionIndex": 2, "source_page": "Urdu/IS Sec. 11" },
+                { "question": "دوسری وحی کون سی سورت کی آیات تھیں؟", "options": ["سورۃ العلق", "سورۃ القلم", "سورۃ المزمل", "سورۃ المدثر"], "correctOptionIndex": 3, "source_page": "Urdu/IS Sec. 11" },
+                { "question": "کفار مکہ آپؐ کو (نعوذ باللہ) کیا کہہ کر پکارتے تھے؟", "options": ["شاعر", "کاہن (جادوگر)", "مجنون (دیوانہ)", "مذکورہ بالا تمام"], "correctOptionIndex": 3, "source_page": "Urdu/IS Sec. 12" },
+                { "question": "حضرت عثمان بن عفانؓ کے ساتھ ان کی کون سی زوجہ نے حبشہ ہجرت کی؟", "options": ["حضرت ام کلثومؓ", "حضرت رقیہؓ", "حضرت فاطمہؓ", "حضرت زینبؓ"], "correctOptionIndex": 1, "source_page": "Urdu/IS Sec. 13" },
+                { "question": "کفار نے کس صحابی کو اتنا مارا کہ وہ بے ہوش ہوگئے اور انہیں مردہ سمجھ کر چھوڑ دیا گیا؟", "options": ["حضرت خباب بن ارتؓ", "حضرت ابوبکر صدیقؓ", "حضرت مصعب بن عمیرؓ", "حضرت یاسرؓ"], "correctOptionIndex": 1, "source_page": "Urdu/IS Sec. 12" },
+                { "question": "دوسری ہجرت حبشہ میں کتنے لوگ شامل تھے؟", "options": ["تقریباً 50", "تقریباً 70", "تقریباً 83 مرد اور 18 خواتین", "تقریباً 100 سے زائد"], "correctOptionIndex": 2, "source_page": "Urdu/IS Sec. 13" },
+                { "question": "اللہ تعالیٰ نے آپؐ کو اعلانیہ تبلیغ کا حکم کس آیت میں دیا؟", "options": ["'اور اپنے قریبی رشتہ داروں کو ڈرائیے'", "'پس آپ کو جو حکم دیا جاتا ہے اسے کھول کر سنا دیجئے'", "'آپ اپنے رب کی راہ کی طرف حکمت سے بلائیے'", "مذکورہ بالا تمام"], "correctOptionIndex": 1, "source_page": "Urdu/IS Sec. 12" },
+                { "question": "ابتدائی مسلمانوں میں زیادہ تر کون لوگ شامل تھے؟", "options": ["صرف امیر اور سردار", "صرف غریب اور غلام", "غریب، غلام اور چند معزز نوجوان", "صرف نوجوان"], "correctOptionIndex": 2, "source_page": "Urdu/IS Sec. 12" }
             ];
 
+            // Shuffle all questions once for the day
             shuffleArrayWithSeed(allQuestions, dateSeed);
+            
+            // For each question, map options to an object and shuffle them
+            // This ensures options are shuffled per question but remain consistent during navigation
+            allQuestions.forEach((q, index) => {
+                const optionSeed = `${dateSeed}-${index}`;
+                const mappedOptions = q.options.map((opt, i) => ({ text: opt, originalIndex: i }));
+                shuffleArrayWithSeed(mappedOptions, optionSeed);
+                q.shuffledOptions = mappedOptions;
+            });
+
             quizQuestions = allQuestions;
 
+            // Assign a special question for the day
             if (quizQuestions.length > 0) {
                 let rng = new Math.seedrandom(dateSeed + '-special');
                 specialQuestionIndex = Math.floor(rng() * quizQuestions.length);
@@ -648,16 +613,32 @@
 
         // --- Initial Setup on DOM Load ---
         document.addEventListener('DOMContentLoaded', () => {
+            // Check if the quiz has already been attempted
+            if (localStorage.getItem(QUIZ_ID) === 'completed') {
+                const loginBtn = document.getElementById('loginBtn');
+                const attemptMsg = document.getElementById('attemptMessage');
+                const loginIdInput = document.getElementById('loginId');
+                const loginPasswordInput = document.getElementById('loginPassword');
+
+                attemptMsg.textContent = "You have already completed this quiz. It can only be attempted once.";
+                attemptMsg.classList.remove('hidden');
+                loginBtn.disabled = true;
+                loginIdInput.disabled = true;
+                loginPasswordInput.disabled = true;
+            }
+
+            // Set up date displays and login ID
             const dateParts = CURRENT_DATE_STR.split(' ');
             const monthName = dateParts[0].toUpperCase();
             const day = parseInt(dateParts[1].replace(',', ''));
-            document.getElementById('loginId').value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 07JUL
+            document.getElementById('loginId').value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`;
+            
+            document.getElementById('currentDateText').textContent = CURRENT_DATE_STR;
+            document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
+            document.getElementById('quizTitle').textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR}`;
             
             initializeQuiz();
-            updateLiveDate();
         });
-
-        window.addEventListener('resize', updateLiveDate);
     </script>
 </body>
 </html>
