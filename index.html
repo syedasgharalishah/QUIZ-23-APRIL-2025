@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS MPT Daily Quiz - July 8, 2025</title>
+    <title>CSS MPT Daily Quiz - July 9, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -132,15 +132,9 @@
             border: none;
         }
 
-        .button-gradient:hover:not(:disabled) {
+        .button-gradient:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        
-        .button-gradient:disabled {
-            background-image: linear-gradient(to right, #cccccc, #999999);
-            cursor: not-allowed;
-            opacity: 0.7;
         }
 
         /* Option Button Styling */
@@ -167,10 +161,34 @@
             font-weight: bold;
         }
 
+        .option-button.correct {
+            background-color: #90EE90; /* LightGreen */
+            border-color: #2E8B57; /* SeaGreen */
+            animation: pulse-green 0.5s ease-out forwards;
+        }
+
+        .option-button.incorrect {
+            background-color: #F08080; /* LightCoral */
+            border-color: #CD5C5C; /* IndianRed */
+            animation: shake-red 0.5s ease-out forwards;
+        }
+
         /* Special Question Highlight */
         .special-question {
             border: 3px solid #FFD700; /* Gold border */
             box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Explanation Section */
+        .explanation {
+            background-color: #FFF5EE; /* SeaShell */
+            border-left: 5px solid #D2B48C; /* Tan */
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 8px;
+            color: #8B4513;
+            font-size: 0.9rem;
+            display: none; /* Hidden by default */
         }
 
         /* Responsive Adjustments */
@@ -178,23 +196,32 @@
             .quiz-title { font-size: 1.5rem; }
             .card { padding: 1rem; }
         }
+
+        /* Keyframe Animations */
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(144, 238, 144, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0); }
+        }
+
+        @keyframes shake-red {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
     </style>
 </head>
 <body>
 
     <script>
-        // --- Anti-Cheating Measures ---
-        // Disable right-click context menu
+        // Disable right-click, copy/paste, and developer tools for security
         document.addEventListener('contextmenu', event => event.preventDefault());
-        
-        // Disable common developer tool shortcuts (Ctrl+Shift+I, J, C, U) and F12
         document.addEventListener('keydown', e => {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase())) || (e.ctrlKey && e.key.toUpperCase() === 'U')) {
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
                 e.preventDefault();
             }
+            if (e.key === 'F12') { e.preventDefault(); }
         });
-
-        // Disable copy and paste events
         document.addEventListener('copy', event => event.preventDefault());
         document.addEventListener('paste', event => event.preventDefault());
     </script>
@@ -213,7 +240,7 @@
         <div class="progress-bar-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
-        <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Banner Logo" class="banner-logo mx-auto" onerror="this.onerror=null;this.src='https://placehold.co/200x100/FDF5E6/8B4513?text=Logo';">
+        <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Banner Logo" class="banner-logo mx-auto">
         <div class="credits">
             DAWNDIGEST
             <br>
@@ -226,7 +253,6 @@
     <main class="flex-grow flex items-center justify-center p-4">
         <div id="loginPage" class="card">
             <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
-            <div id="attemptMessage" class="text-center text-red-600 font-bold mb-4 hidden"></div>
             <div class="mb-4">
                 <label for="loginId" class="block text-sm font-medium text-gray-700 mb-1">ID:</label>
                 <input type="text" id="loginId" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700" value="">
@@ -250,7 +276,7 @@
         </div>
 
         <div id="quizPage" class="card hidden">
-            <div class="timer-display text-lg font-bold text-red-600 mb-4 text-center" id="timerDisplay"></div>
+            <div class="timer-display text-lg font-bold text-gray-700 mb-4 text-center" id="timerDisplay"></div>
             <div class="question-progress text-center text-sm text-gray-500 mb-4" id="questionProgress"></div>
             <h2 class="text-lg font-semibold mb-4" id="questionText"></h2>
             <div id="optionsContainer" class="flex flex-col gap-3 mb-6"></div>
@@ -259,33 +285,41 @@
                 <button id="nextBtn" class="button-gradient px-6 py-2">Next</button>
                 <button id="submitQuizBtn" class="button-gradient px-6 py-2 hidden">Submit Quiz</button>
             </div>
+            <div id="explanationDiv" class="explanation"></div>
         </div>
 
         <div id="resultsPage" class="card hidden">
-            <h2 class="text-xl font-bold mb-4 text-center">Quiz Submitted Successfully</h2>
-            <p class="text-center mb-4">Your results have been recorded.</p>
+            <h2 class="text-xl font-bold mb-4 text-center">Quiz Results</h2>
             <p class="mb-2"><strong>Candidate Name:</strong> <span id="resultCandidateName"></span></p>
             <p class="mb-2"><strong>Date of Quiz:</strong> <span id="resultDate"></span></p>
             <p class="mb-2"><strong>Score:</strong> <span id="resultScore"></span> / 200</p>
             <p class="mb-2"><strong>Correct Answers:</strong> <span id="resultCorrect"></span></p>
             <p class="mb-2"><strong>Incorrect Answers:</strong> <span id="resultIncorrect"></span></p>
             <p class="mb-4"><strong>Time Taken:</strong> <span id="resultTimeTaken"></span></p>
-            <p class="text-center mt-6 font-semibold text-gray-700">You may now close this window.</p>
+            <button id="restartQuizBtn" class="button-gradient w-full">Restart Quiz</button>
         </div>
     </main>
 
     <script>
-        // --- Quiz Configuration ---
-        const CURRENT_DATE_STR = "July 8, 2025";
-        const QUIZ_DURATION_MINUTES = 25; 
-        const QUIZ_ID = `quiz_attempt_${CURRENT_DATE_STR.replace(/, /g, '_')}`;
+        // Set the current date for display and logic
+        const CURRENT_DATE_STR = "July 9, 2025";
+        const CURRENT_DATE = new Date(CURRENT_DATE_STR);
 
-        // --- Global State Variables ---
-        let quizQuestions = [];
+        // Function to update the live date display
+        function updateLiveDate() {
+            document.getElementById('currentDateText').textContent = CURRENT_DATE_STR;
+            document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
+            document.getElementById('quizTitle').textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR}`;
+        }
+
+        // Quiz Data Structure
+        let quizQuestions = []; // Will be populated by initializeQuiz
         let currentQuestionIndex = 0;
         let userAnswers = [];
         let quizStartTime;
         let timerInterval;
+        const QUIZ_DURATION_MINUTES = 100;
+        const TOTAL_QUESTIONS = 100;
         let specialQuestionIndex = -1;
 
         // --- Helper Functions ---
@@ -298,7 +332,7 @@
         }
 
         function generateUniqueId() {
-            return 'quiz_submission_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            return 'quiz_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
         }
 
         function formatTime(totalSeconds) {
@@ -308,10 +342,9 @@
         }
 
         function updateProgressBar() {
-            const answeredQuestions = userAnswers.filter(a => a !== null).length;
-            const progress = (answeredQuestions / quizQuestions.length) * 100;
+            const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
             document.getElementById('progressBar').style.width = `${progress}%`;
-            document.getElementById('questionProgress').textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length}`;
+            document.getElementById('questionProgress').textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length} – ${Math.round(progress)}% Complete`;
         }
 
         function showPage(pageId) {
@@ -323,22 +356,21 @@
 
         function startTimer() {
             quizStartTime = Date.now();
-            const quizEndTime = quizStartTime + QUIZ_DURATION_MINUTES * 60 * 1000;
+            let timeLeft = QUIZ_DURATION_MINUTES * 60;
 
-            timerInterval = setInterval(() => {
-                const now = Date.now();
-                const timeLeft = Math.round((quizEndTime - now) / 1000);
-
+            function updateTimerDisplay() {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                document.getElementById('timerDisplay').textContent = `Time Left: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 if (timeLeft <= 0) {
                     clearInterval(timerInterval);
-                    document.getElementById('timerDisplay').textContent = "Time's Up!";
-                    submitQuiz(true); // Auto-submit
+                    submitQuiz(true);
                 } else {
-                    const minutes = Math.floor(timeLeft / 60);
-                    const seconds = timeLeft % 60;
-                    document.getElementById('timerDisplay').textContent = `Time Left: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    timeLeft--;
                 }
-            }, 1000);
+            }
+            updateTimerDisplay();
+            timerInterval = setInterval(updateTimerDisplay, 1000);
         }
 
         function renderQuestion() {
@@ -348,45 +380,74 @@
             optionsContainer.innerHTML = '';
 
             const quizCard = document.getElementById('quizPage');
-            quizCard.classList.toggle('special-question', !!question.special);
+            quizCard.classList.remove('special-question');
+            if (question.special) {
+                quizCard.classList.add('special-question');
+            }
             
-            // Options are shuffled once during initialization and stored.
-            // This ensures options remain in the same order when navigating back and forth.
-            question.shuffledOptions.forEach((option) => {
+            const optionSeed = `${CURRENT_DATE_STR}-${currentQuestionIndex}`;
+            const shuffledOptions = [...question.options];
+            shuffleArrayWithSeed(shuffledOptions, optionSeed);
+
+            shuffledOptions.forEach((option) => {
                 const button = document.createElement('button');
                 button.classList.add('option-button', 'w-full');
-                button.innerHTML = option.text;
-                button.onclick = () => selectOption(option.originalIndex);
+                button.innerHTML = option;
+                button.dataset.originalOptionIndex = question.options.indexOf(option);
+                button.onclick = () => selectOption(parseInt(button.dataset.originalOptionIndex));
                 optionsContainer.appendChild(button);
             });
 
             const userAnswer = userAnswers[currentQuestionIndex];
             if (userAnswer && userAnswer.selectedOptionIndex !== undefined) {
-                 Array.from(optionsContainer.children).forEach((button, index) => {
-                    if (question.shuffledOptions[index].originalIndex === userAnswer.selectedOptionIndex) {
-                        button.classList.add('selected');
+                 Array.from(optionsContainer.children).forEach((button) => {
+                    button.disabled = true;
+                    const btnOriginalIndex = parseInt(button.dataset.originalOptionIndex);
+                    if (btnOriginalIndex === userAnswer.selectedOptionIndex) {
+                        button.classList.add('selected', userAnswer.isCorrect ? 'correct' : 'incorrect');
+                    }
+                    if (!userAnswer.isCorrect && btnOriginalIndex === question.correctOptionIndex) {
+                         button.classList.add('correct');
                     }
                 });
             }
 
-            document.getElementById('prevBtn').classList.toggle('hidden', currentQuestionIndex === 0);
-            document.getElementById('nextBtn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
-            document.getElementById('submitQuizBtn').classList.toggle('hidden', currentQuestionIndex !== quizQuestions.length - 1);
+            const explanationDiv = document.getElementById('explanationDiv');
+            explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
+            explanationDiv.style.display = (userAnswer && userAnswer.selectedOptionIndex !== undefined) ? 'block' : 'none';
 
-            updateProgressBar();
+            document.getElementById('prevBtn').classList.toggle('hidden', currentQuestionIndex === 0);
+            const showNextButton = currentQuestionIndex < quizQuestions.length - 1 && (userAnswer && userAnswer.selectedOptionIndex !== undefined);
+            document.getElementById('nextBtn').classList.toggle('hidden', !showNextButton);
+            document.getElementById('submitQuizBtn').classList.toggle('hidden', currentQuestionIndex !== quizQuestions.length - 1);
         }
 
         function selectOption(selectedOptionOriginalIndex) {
+            if (userAnswers[currentQuestionIndex] && userAnswers[currentQuestionIndex].selectedOptionIndex !== undefined) return;
+
             const question = quizQuestions[currentQuestionIndex];
+            const isCorrect = (selectedOptionOriginalIndex === question.correctOptionIndex);
             userAnswers[currentQuestionIndex] = {
                 questionIndex: currentQuestionIndex,
                 selectedOptionIndex: selectedOptionOriginalIndex,
-                isCorrect: (selectedOptionOriginalIndex === question.correctOptionIndex)
+                isCorrect: isCorrect
             };
-            
-            // Visually update the selection
-            renderQuestion();
-            updateProgressBar();
+
+            const optionsContainer = document.getElementById('optionsContainer');
+            Array.from(optionsContainer.children).forEach((button) => {
+                button.disabled = true;
+                const btnOriginalIndex = parseInt(button.dataset.originalOptionIndex);
+                if (btnOriginalIndex === selectedOptionOriginalIndex) {
+                    button.classList.add('selected', isCorrect ? 'correct' : 'incorrect');
+                }
+                if (btnOriginalIndex === question.correctOptionIndex) {
+                    button.classList.add('correct');
+                }
+            });
+
+            document.getElementById('explanationDiv').style.display = 'block';
+            const showNextButton = currentQuestionIndex < quizQuestions.length - 1;
+            document.getElementById('nextBtn').classList.toggle('hidden', !showNextButton);
         }
         
         function nextQuestion() {
@@ -404,20 +465,18 @@
         }
 
         function submitQuiz(isAutoSubmit = false) {
-            // Prevent multiple submissions
-            if (localStorage.getItem(QUIZ_ID) === 'completed') return;
-            
             clearInterval(timerInterval);
             const endTime = Date.now();
             const timeTakenSeconds = Math.round((endTime - quizStartTime) / 1000);
 
             let correctCount = 0;
+            let incorrectCount = 0;
             userAnswers.forEach(answer => {
-                if (answer && answer.isCorrect) {
-                    correctCount++;
+                if (answer && answer.selectedOptionIndex !== undefined) {
+                    if (answer.isCorrect) correctCount++;
+                    else incorrectCount++;
                 }
             });
-            const incorrectCount = userAnswers.filter(a => a !== null).length - correctCount;
 
             const score = (correctCount * 2) - incorrectCount;
             const candidateName = document.getElementById('candidateName').value;
@@ -430,11 +489,7 @@
             document.getElementById('resultTimeTaken').textContent = formatTime(timeTakenSeconds);
             
             showPage('resultsPage');
-            
-            // Set completion flag in localStorage
-            localStorage.setItem(QUIZ_ID, 'completed');
 
-            // Submit data to Formspree
             const formData = new FormData();
             formData.append('Candidate Name', candidateName);
             formData.append('Date of Quiz', CURRENT_DATE_STR);
@@ -443,24 +498,20 @@
             formData.append('Incorrect Answers', incorrectCount);
             formData.append('Time Taken', formatTime(timeTakenSeconds));
             formData.append('Quiz ID', generateUniqueId());
-            if (isAutoSubmit) {
-                formData.append('Submission Type', 'Auto-submitted (Time Expired)');
-            }
 
             fetch('https://formspree.io/f/xwpvddea', {
                 method: 'POST',
                 body: formData,
                 headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (!response.ok) console.error('Formspree submission failed.');
-            }).catch(error => console.error('Formspree submission error:', error));
+            }).then(response => console.log(response.ok ? 'Results submitted.' : 'Submission failed.'))
+              .catch(error => console.error('Submission error:', error));
         }
 
         // --- Event Listeners ---
         document.getElementById('loginBtn').addEventListener('click', () => {
             const id = document.getElementById('loginId').value.toUpperCase();
             const password = document.getElementById('loginPassword').value;
-            if (id === '08JULY' && password === 'free') {
+            if (id === '09JULY' && password === 'free') {
                 document.getElementById('loginError').classList.add('hidden');
                 showPage('candidateNamePage');
             } else {
@@ -485,125 +536,116 @@
         document.getElementById('nextBtn').addEventListener('click', nextQuestion);
         document.getElementById('prevBtn').addEventListener('click', prevQuestion);
         document.getElementById('submitQuizBtn').addEventListener('click', () => submitQuiz(false));
+        document.getElementById('restartQuizBtn').addEventListener('click', () => {
+            clearInterval(timerInterval);
+            initializeQuiz();
+            showPage('loginPage');
+        });
 
         // --- Quiz Initialization ---
         function initializeQuiz() {
+            quizQuestions.length = 0;
             const dateSeed = CURRENT_DATE_STR;
             
             const allQuestions = [
-                // NOTE: 'explanation' keys have been removed for security.
-                // --- General Knowledge: Names of Parliaments (Pages 50-52) - 40 Qs ---
-                { question: "What is the name of Afghanistan's parliament?", options: ["Loya Jirga", "Wolesi Jirga", "Shora", "None of these"], correctOptionIndex: 2, source_page: 50 },
-                { question: "The parliament of which country is known as 'The Knesset'?", options: ["Egypt", "Israel", "Syria", "Lebanon"], correctOptionIndex: 1, source_page: 50 },
-                { question: "The parliament of which country is called 'National People's Assembly'?", options: ["Nigeria", "China", "Ghana", "Hong Kong"], correctOptionIndex: 1, source_page: 50 },
-                { question: "What is the name of the lower house of Argentina's parliament (National Congress)?", options: ["Senate", "Chamber of Deputies", "National Assembly", "People's Assembly"], correctOptionIndex: 1, source_page: 50 },
-                { question: "Australia's parliament is called 'Federal Parliament'. What are its two houses called?", options: ["Senate and House of Representatives", "Senate and National Assembly", "Council of States and House of Commons", "None of these"], correctOptionIndex: 0, source_page: 50 },
-                { question: "To which country 'Sabor' belongs?", options: ["Russia", "Croatia", "Jordan", "Palestine"], correctOptionIndex: 1, source_page: 50 },
-                { question: "The parliament of which country is called 'Folketing'?", options: ["France", "Denmark", "Italy", "Germany"], correctOptionIndex: 1, source_page: 50 },
-                { question: "What is the name of Egypt's parliament?", options: ["Majlis", "Shora", "People's Assembly", "House of Representatives"], correctOptionIndex: 3, source_page: 50 },
-                { question: "What is the name of Germany's parliament?", options: ["Bundestag and Bundesrat", "Reichstag", "Volkskammer", "Diet"], correctOptionIndex: 0, source_page: 51 },
-                { question: "The parliament of Iran is known as:", options: ["Majlis", "Shora", "Knesset", "Sabor"], correctOptionIndex: 0, source_page: 51 },
-                { question: "What is the name of Japan's parliament?", options: ["Diet", "House of Councillors and House of Representatives", "Both of them", "None of them"], correctOptionIndex: 2, source_page: 51 },
-                { question: "The parliament of which country is called 'Storting'?", options: ["Sweden", "Norway", "Finland", "Denmark"], correctOptionIndex: 1, source_page: 51 },
-                { question: "What is the name of Pakistan's parliament?", options: ["Majlis-e-Shoora", "National Assembly and Senate", "Both of them", "None of them"], correctOptionIndex: 2, source_page: 51 },
-                { question: "The parliament of Spain is known as:", options: ["Cortes Generales", "Senate", "Congress of Deputies", "All of the above"], correctOptionIndex: 0, source_page: 52 },
-                { question: "What is the name of USA's parliament?", options: ["Congress", "Senate and House of Representatives", "Both of them", "None of them"], correctOptionIndex: 2, source_page: 52 },
-                { question: "What is the name of the lower house of the UK parliament?", options: ["House of Lords", "House of Commons", "Senate", "National Assembly"], correctOptionIndex: 1, source_page: 52 },
-                { question: "The parliament of which country is known as 'Duma'?", options: ["Russia", "Poland", "Hungary", "Ukraine"], correctOptionIndex: 0, source_page: 52 },
-                { question: "What is the parliament of Bangladesh called?", options: ["Jatiya Sangsad", "Loya Jirga", "People's Council", "Union Council"], correctOptionIndex: 0, source_page: 50 },
-                { question: "The parliament of Canada consists of the Senate and which other house?", options: ["House of Commons", "House of Representatives", "National Assembly", "Small House"], correctOptionIndex: 0, source_page: 50 },
-                { question: "What is the name of China's parliament?", options: ["Council of China", "National People's Congress", "State Council", "People's Congress"], correctOptionIndex: 1, source_page: 50 },
-                { question: "The 'Eduskunta' is the parliament of which country?", options: ["Sweden", "Finland", "Estonia", "Latvia"], correctOptionIndex: 1, source_page: 51 },
-                { question: "The parliament of India is known as 'Sansad'. What is its upper house called?", options: ["Lok Sabha", "Rajya Sabha", "Vidhan Sabha", "None of these"], correctOptionIndex: 1, source_page: 51 },
-                { question: "The parliament of Ireland's lower house is known as:", options: ["Dáil Éireann", "Seanad Éireann", "Oireachtas", "Ceann Comhairle"], correctOptionIndex: 0, source_page: 51 },
-                { question: "What is the name of the parliament of Nepal?", options: ["Panchayat", "Rashtriya Panchayat", "Federal Parliament", "National Assembly"], correctOptionIndex: 2, source_page: 51 },
-                { question: "The parliament of the Netherlands is called:", options: ["States General", "First Chamber", "Second Chamber", "All of the above"], correctOptionIndex: 0, source_page: 51 },
-                { question: "What is the name of Poland's parliament?", options: ["Sejm", "Senat", "National Assembly", "Both a and b"], correctOptionIndex: 3, source_page: 51 },
-                { question: "The parliament of which country is called 'Riksdag'?", options: ["South Africa", "Sweden", "Jordan", "Taiwan"], correctOptionIndex: 1, source_page: 52 },
-                { question: "What is the name of Switzerland's parliament?", options: ["Federal Assembly", "National Council", "Council of States", "All of the above"], correctOptionIndex: 3, source_page: 52 },
-                { question: "The parliament of Turkey is called:", options: ["Grand National Assembly", "Sultan's Council", "Majlis", "None of them"], correctOptionIndex: 0, source_page: 52 },
-                { question: "What is the name of the parliament of Uzbekistan?", options: ["Oliy Majlis", "Supreme Assembly", "Both of them", "None of them"], correctOptionIndex: 2, source_page: 52 },
-                { question: "The parliament of which country is called 'Althing'?", options: ["Ireland", "Iceland", "Denmark", "Norway"], correctOptionIndex: 1, source_page: 50 },
-                { question: "The parliament of which country has an upper house called 'Senate' and a lower house called 'Chamber of Deputies'?", options: ["Czech Republic", "Italy", "Both of them", "None of them"], correctOptionIndex: 2, source_page: 50 },
-                { question: "The lower house of Malaysia's parliament is known as:", options: ["Dewan Rakyat", "Dewan Negara", "Majlis", "None of them"], correctOptionIndex: 0, source_page: 51 },
-                { question: "The parliament of Russia is called the Federal Assembly. What is its upper house?", options: ["Federation Council", "State Duma", "Supreme Soviet", "None of them"], correctOptionIndex: 0, source_page: 52 },
-                { question: "The parliament of South Korea is known as:", options: ["National Assembly", "State Council", "Supreme People's Assembly", "None of them"], correctOptionIndex: 0, source_page: 51 },
-                { question: "What is the name of Taiwan's parliament?", options: ["Legislative Yuan", "Control Yuan", "National Assembly", "None of them"], correctOptionIndex: 0, source_page: 52 },
-                { question: "The parliament of Denmark is called:", options: ["Folketing", "Storting", "Riksdag", "Althing"], correctOptionIndex: 0, source_page: 50 },
-                { "question": "The parliament of Libya is called:", "options": ["General People's Congress", "House of Representatives", "National Transitional Council", "None of them"], "correctOptionIndex": 1, "source_page": 51 },
-                { "question": "The upper house of the parliament of France is known as:", "options": ["National Assembly", "Sénat (Senate)", "Congress", "Chamber of Deputies"], "correctOptionIndex": 1, "source_page": 51 },
-                { "question": "The parliament of which country is called the 'Majlis Al-Umma'?", "options": ["Saudi Arabia", "Qatar", "Kuwait", "Bahrain"], "correctOptionIndex": 2, "source_page": 51 },
+                // === July 9th Syllabus Review Quiz (100 MCQs from Week 2) ===
 
-                // --- Mathematics: Races and Games of Skills (Page 529) & Stock and Shares (Page 530) - 20 Qs ---
-                { question: "In a 100 m race, A covers the distance in 36 seconds and B in 45 seconds. In this race A beats B by:", options: ["20 m", "25 m", "22.5 m", "9 m"], correctOptionIndex: 0, source_page: 529 },
-                { question: "In a 500 m race, the ratio of the speeds of two contestants A and B is 3:4. A has a start of 140 m. Then, A wins by:", options: ["60 m", "40 m", "20 m", "10 m"], correctOptionIndex: 2, source_page: 529 },
-                { question: "In a 100 m race, A can beat B by 25 m and B can beat C by 4 m. In the same race, A can beat C by:", options: ["21 m", "26 m", "28 m", "29 m"], correctOptionIndex: 2, source_page: 529 },
-                { question: "A can run 1 km in 3 min, 10 sec and B can cover the same distance in 3 min, 20 sec. By what distance can A beat B?", options: ["25 m", "50 m", "75 m", "100 m"], correctOptionIndex: 1, source_page: 529 },
-                { question: "What is it called when a race or contest ends in a tie?", options: ["Draw", "Dead heat", "Photo finish", "Equal run"], correctOptionIndex: 1, source_page: 529 },
-                { question: "In a game of 100 points, A can give B 20 points and C 28 points. Then, B can give C:", options: ["8 points", "10 points", "12 points", "14 points"], correctOptionIndex: 1, source_page: 529 },
-                { question: "The regular payment made by a company to its shareholders out of its profits is called:", options: ["Stock", "Share", "Dividend", "Debenture"], correctOptionIndex: 2, source_page: 530 },
-                { question: "The value of a share or stock printed on the share certificate is called its:", options: ["Market Value", "Face Value", "Book Value", "Par Value"], correctOptionIndex: 1, source_page: 530 },
-                { question: "If a Rs. 100 stock is quoted at a premium of Rs. 20, what is its market value?", options: ["Rs. 80", "Rs. 100", "Rs. 120", "Rs. 20"], correctOptionIndex: 2, source_page: 530 },
-                { question: "A man buys Rs. 20 shares paying 9% dividend. The man wants to have an interest of 12% on his money. The market value of each share is:", options: ["Rs. 12", "Rs. 15", "Rs. 18", "Rs. 21"], correctOptionIndex: 1, source_page: 530 },
-                { question: "In a 200m race, A beats B by 35 m or 7 seconds. A's time over the course is:", options: ["40 sec", "47 sec", "33 sec", "30 sec"], correctOptionIndex: 2, source_page: 529 },
-                { question: "A can give B a start of 10m in a 100m race. B can give C a start of 10m in a 100m race. What start can A give C?", options: ["19m", "20m", "21m", "18m"], correctOptionIndex: 0, source_page: 529 },
-                { question: "The total money required to run a company is called:", options: ["Capital stock", "Share", "Dividend", "Fund"], correctOptionIndex: 0, source_page: 530 },
-                { question: "When the market value of a stock is less than its face value, it is said to be:", options: ["At par", "At a premium", "At a discount", "Below value"], correctOptionIndex: 2, source_page: 530 },
-                { question: "Find the cost of 96 shares of Rs. 10 each at a discount of Rs. 1.25, when brokerage is 1/4 per share.", options: ["Rs. 960", "Rs. 840", "Rs. 864", "Rs. 816"], correctOptionIndex: 2, source_page: 530 },
-                { "question": "In a race of 1 km, A beats B by 100 m. B beats C by 100 m. By how much does A beat C in the same race?", "options": ["190 m", "200 m", "210 m", "180 m"], "correctOptionIndex": 0, "source_page": 529 },
-                { "question": "The person who owns the stock or shares of a company is called:", "options": ["A broker", "A director", "A stockholder or shareholder", "A debenture holder"], "correctOptionIndex": 2, "source_page": 530 },
-                { "question": "If a Rs. 100 stock is sold for Rs. 98, it is said to be sold:", "options": ["At par", "At a premium of 2", "At a discount of 2", "At a brokerage of 2"], "correctOptionIndex": 2, "source_page": 530 },
-                { "question": "A runs 1 3/4 times as fast as B. If A gives B a start of 84 m, how far must the winning post be so that A and B might reach it at the same time?", "options": ["196 m", "200 m", "180 m", "192 m"], "correctOptionIndex": 0, "source_page": 529 },
-                { "question": "What is the annual income from Rs. 5000 of 6% stock at 120?", "options": ["Rs. 250", "Rs. 300", "Rs. 360", "Rs. 200"], "correctOptionIndex": 0, "source_page": 530 },
+                // --- General Knowledge (Pages 33-52) ---
+                { question: "Which city is known as the 'City of Canals'?", options: ["Venice", "Amsterdam", "Hamburg", "Stockholm"], correctOptionIndex: 0, explanation: "Venice, Italy, is famous for its intricate network of canals, bridges, and gondolas.", source_page: 33 },
+                { question: "What is the capital of Australia?", options: ["Sydney", "Melbourne", "Canberra", "Perth"], correctOptionIndex: 2, explanation: "Canberra is the capital city of Australia, chosen in 1908 as a compromise between rivals Sydney and Melbourne.", source_page: 36 },
+                { question: "What is the currency of Japan?", options: ["Yuan", "Won", "Yen", "Baht"], correctOptionIndex: 2, explanation: "The official currency of Japan is the Yen (JPY).", source_page: 37 },
+                { question: "The old name of which city was 'Constantinople'?", options: ["Ankara", "Istanbul", "Athens", "Rome"], correctOptionIndex: 1, explanation: "Istanbul, the largest city in Turkey, was formerly known as Constantinople.", source_page: 40 },
+                { question: "Who is known as the 'Maid of Orleans'?", options: ["Marie Antoinette", "Queen Elizabeth I", "Joan of Arc", "Catherine the Great"], correctOptionIndex: 2, explanation: "Joan of Arc, a French heroine, is nicknamed 'The Maid of Orleans' for her role in lifting the siege of the city in 1429.", source_page: 43 },
+                { question: "Sheffield in England is famous for which industry?", options: ["Textiles", "Cutlery", "Shipbuilding", "Automobiles"], correctOptionIndex: 1, explanation: "Sheffield is historically renowned for its cutlery and steel production.", source_page: 47 },
+                { question: "What is the name of the parliament of Israel?", options: ["Shora", "Duma", "Knesset", "Diet"], correctOptionIndex: 2, explanation: "The Knesset is the unicameral legislature of Israel.", source_page: 50 },
+                { question: "What is the parliament of Russia called?", options: ["Federal Assembly", "Supreme Soviet", "Congress", "Majlis"], correctOptionIndex: 0, explanation: "The parliament of Russia is the Federal Assembly, which consists of the State Duma and the Federation Council.", source_page: 52 },
+                { question: "The 'Forbidden City' is located in which country?", options: ["Japan", "Thailand", "China", "Vietnam"], correctOptionIndex: 2, explanation: "The Forbidden City is a palace complex in central Beijing, China.", source_page: 33 },
+                { question: "What is the capital of Canada?", options: ["Toronto", "Montreal", "Vancouver", "Ottawa"], correctOptionIndex: 3, explanation: "Ottawa is the capital city of Canada.", source_page: 36 },
+                { question: "The currency 'Rial' is used in which country?", options: ["Saudi Arabia", "Iran", "Iraq", "UAE"], correctOptionIndex: 1, explanation: "The Iranian Rial is the currency of Iran.", source_page: 37 },
+                { question: "What was the former name of Zimbabwe?", options: ["Rhodesia", "Gold Coast", "Nyasaland", "Bechuanaland"], correctOptionIndex: 0, explanation: "Zimbabwe was formerly known as Rhodesia.", source_page: 41 },
+                { question: "Who was known as the 'Fuehrer'?", options: ["Benito Mussolini", "Joseph Stalin", "Adolf Hitler", "Francisco Franco"], correctOptionIndex: 2, explanation: "Adolf Hitler was the leader (Führer) of the Nazi Party in Germany.", source_page: 44 },
+                { question: "Detroit, USA is associated with which industry?", options: ["Film", "Fashion", "Automobiles", "Electronics"], correctOptionIndex: 2, explanation: "Detroit is famously known as the 'Motor City' due to its history as a global center of the automotive industry.", source_page: 48 },
+                { question: "The parliament of Japan is known as the:", options: ["Diet", "Congress", "Storting", "Folketing"], correctOptionIndex: 0, explanation: "The National Diet is Japan's bicameral legislature.", source_page: 51 },
+                { question: "The 'Land of the Rising Sun' is a nickname for which country?", options: ["China", "South Korea", "Japan", "Philippines"], correctOptionIndex: 2, explanation: "Japan is often called the 'Land of the Rising Sun' because its name in Japanese characters means 'sun-origin'.", source_page: 34 },
+                { question: "What is the capital and currency of Brazil?", options: ["Rio de Janeiro, Peso", "Sao Paulo, Escudo", "Brasilia, Real", "Buenos Aires, Dollar"], correctOptionIndex: 2, explanation: "The capital of Brazil is Brasilia, and its currency is the Real.", source_page: 36 },
+                { question: "The former name of Thailand was:", options: ["Burma", "Siam", "Formosa", "Ceylon"], correctOptionIndex: 1, explanation: "Thailand was officially known as Siam until 1939.", source_page: 41 },
+                { question: "Who is called the 'Lady with the Lamp'?", options: ["Mother Teresa", "Florence Nightingale", "Marie Curie", "Sarojini Naidu"], correctOptionIndex: 1, explanation: "Florence Nightingale, the founder of modern nursing, was called 'The Lady with the Lamp' for her habit of making rounds at night to tend to wounded soldiers.", source_page: 44 },
+                { question: "The city of Hollywood is famous for:", options: ["Stock Exchange", "Film Industry", "Diamond Cutting", "Textile Industry"], correctOptionIndex: 1, explanation: "Hollywood, a neighborhood in Los Angeles, California, is a metonym for the U.S. film industry.", source_page: 49 },
+                { question: "The 'Cortes Generales' is the parliament of which country?", options: ["Portugal", "Spain", "Mexico", "Argentina"], correctOptionIndex: 1, explanation: "The Cortes Generales is the bicameral legislature of Spain.", source_page: 52 },
+                { question: "Which country is known as the 'Land of Maple Leaf'?", options: ["USA", "Canada", "Finland", "Switzerland"], correctOptionIndex: 1, explanation: "Canada is known as the 'Land of the Maple Leaf' due to the prominence of the maple tree and its leaf as a national symbol.", source_page: 34 },
+                { question: "What is the currency of Russia?", options: ["Ruble", "Euro", "Lira", "Zloty"], correctOptionIndex: 0, explanation: "The official currency of the Russian Federation is the Ruble.", source_page: 38 },
+                { question: "What is the new name of Persia?", options: ["Iraq", "Syria", "Jordan", "Iran"], correctOptionIndex: 3, explanation: "The country of Persia officially changed its name to Iran in 1935.", source_page: 40 },
+                { question: "Who is known as the 'Man of Blood and Iron'?", options: ["Napoleon Bonaparte", "Otto von Bismarck", "Winston Churchill", "George Washington"], correctOptionIndex: 1, explanation: "Otto von Bismarck, the first Chancellor of Germany, was known as the 'Man of Blood and Iron' for his policy of unifying Germany through military strength.", source_page: 45 },
+                { question: "The city of Mecca is famous for what?", options: ["Oil Production", "Religious Significance for Muslims", "Financial Center", "Historical Ruins"], correctOptionIndex: 1, explanation: "Mecca (Makkah) in Saudi Arabia is the holiest city in Islam, as it is the site of the Kaaba and the direction of Muslim prayer.", source_page: 49 },
+                { question: "The parliament of Turkey is called the:", options: ["Majlis", "Knesset", "Grand National Assembly", "Sabor"], correctOptionIndex: 2, explanation: "The legislature of the Republic of Turkey is the Grand National Assembly of Turkey.", source_page: 52 },
+                
+                // --- Mathematics / General Abilities (Pages 521-530) ---
+                { question: "A and B invest in a business in the ratio 3 : 2. If 5% of the total profit goes to charity and A's share is Rs. 855, the total profit is:", options: ["Rs. 1425", "Rs. 1500", "Rs. 1537.50", "Rs. 1576"], correctOptionIndex: 1, explanation: "Let total profit be P. Profit to be distributed = 0.95P. A's share = (3/5) * 0.95P = 855. So, 0.57P = 855. P = 855 / 0.57 = Rs. 1500.", source_page: 521 },
+                { question: "If 15 men, working 9 hours a day, can reap a field in 16 days, in how many days will 18 men reap the field, working 8 hours a day?", options: ["12 days", "15 days", "18 days", "10 days"], correctOptionIndex: 1, explanation: "Let the number of days be x. More men, less days. More hours, less days. (18/15) * (8/9) * x = 16. (4/3) * x = 16. x = (16*3)/4 = 15 days.", source_page: 523 },
+                { question: "A tap can fill a tank in 6 hours. After half the tank is filled, three more similar taps are opened. What is the total time taken to fill the tank completely?", options: ["3 hrs 15 min", "3 hrs 45 min", "4 hrs", "4 hrs 15 min"], correctOptionIndex: 1, explanation: "Time to fill half tank = 3 hours. Remaining half to be filled by 4 taps. Time for 1 tap to fill half tank = 3 hrs. Time for 4 taps = 3/4 hrs = 45 min. Total time = 3 hrs + 45 min.", source_page: 525 },
+                { question: "A boat can travel with a speed of 13 km/hr in still water. If the speed of the stream is 4 km/hr, find the time taken by the boat to go 68 km downstream.", options: ["4 hours", "5 hours", "3 hours", "2 hours"], correctOptionIndex: 0, explanation: "Downstream speed = Speed of boat + Speed of stream = 13 + 4 = 17 km/hr. Time = Distance / Speed = 68 / 17 = 4 hours.", source_page: 527 },
+                { question: "In a 100 m race, A beats B by 10 m and C by 13 m. In a race of 180 m, B will beat C by:", options: ["5.4 m", "4.5 m", "5 m", "6 m"], correctOptionIndex: 3, explanation: "A runs 100, B runs 90, C runs 87. When B runs 90m, C runs 87m. B beats C by 3m in a 90m race. In a 180m race, B will beat C by (3/90)*180 = 6m.", source_page: 529 },
+                { question: "A stock of Rs. 100 is bought for Rs. 110. What is the premium?", options: ["Rs. 10", "Rs. 100", "Rs. 110", "Rs. 210"], correctOptionIndex: 0, explanation: "Premium is the amount paid over the face value. Market Value = Rs. 110, Face Value = Rs. 100. Premium = 110 - 100 = Rs. 10.", source_page: 530 },
+                { question: "A, B, C started a business by investing Rs. 1,20,000, Rs. 1,35,000 and Rs. 1,50,000 respectively. Find the share of C, out of an annual profit of Rs. 56,700.", options: ["Rs. 16,800", "Rs. 18,900", "Rs. 21,000", "Rs. 19,000"], correctOptionIndex: 2, explanation: "Ratio of investments = 120:135:150 = 8:9:10. Total ratio = 27. C's share = (10/27) * 56700 = Rs. 21,000.", source_page: 522 },
+                { question: "39 persons can repair a road in 12 days, working 5 hours a day. In how many days will 30 persons, working 6 hours a day, complete the work?", options: ["10", "13", "14", "15"], correctOptionIndex: 1, explanation: "Let days be x. (30/39) * (6/5) * x = 12. (36/39) * x = 12. x = (12 * 39) / 36 = 13 days.", source_page: 524 },
+                { question: "Two pipes A and B can fill a tank in 20 and 30 minutes respectively. If both the pipes are used together, then how long will it take to fill the tank?", options: ["12 min", "15 min", "25 min", "50 min"], correctOptionIndex: 0, explanation: "A's 1 min work = 1/20. B's 1 min work = 1/30. (A+B)'s 1 min work = 1/20 + 1/30 = 5/60 = 1/12. Time taken = 12 minutes.", source_page: 526 },
+                { question: "A man's speed with the current is 15 km/hr and the speed of the current is 2.5 km/hr. The man's speed against the current is:", options: ["8.5 km/hr", "9 km/hr", "10 km/hr", "12.5 km/hr"], correctOptionIndex: 2, explanation: "Speed in still water = 15 - 2.5 = 12.5 km/hr. Speed against current = 12.5 - 2.5 = 10 km/hr.", source_page: 528 },
+                { question: "In a game of 80 points; A can give B 5 points and C 15 points. Then how many points B can give C in a game of 60?", options: ["10 points", "8 points", "16 points", "12 points"], correctOptionIndex: 1, explanation: "A scores 80, B scores 75, C scores 65. When B scores 75, C scores 65. B gives C 10 points in a 75 point game. In a 60 point game, B can give C (10/75)*60 = 8 points.", source_page: 529 },
+                { question: "Find the cost of Rs. 10,000 of 8% stock at 4% premium.", options: ["Rs. 10,400", "Rs. 10,800", "Rs. 9,600", "Rs. 8,000"], correctOptionIndex: 0, explanation: "Cost of Rs. 100 stock = 100 + 4 = Rs. 104. Cost of Rs. 10,000 stock = (104/100) * 10000 = Rs. 10,400.", source_page: 530 },
 
-                // --- Islamic Studies: Prophethood to Migration (Urdu/IS Section, Pages 11-13) - 40 Qs ---
-                { question: "آپ صلی اللہ علیہ وآلہ وسلم پر پہلی وحی کس غار میں نازل ہوئی؟", options: ["غار ثور", "غار حرا", "غار احد", "غار خیف"], correctOptionIndex: 1, source_page: "Urdu/IS Sec. 11" },
-                { question: "پہلی وحی کون سی سورت کی آیات پر مشتمل تھی؟", options: ["سورۃ الفاتحہ", "سورۃ البقرہ", "سورۃ العلق", "سورۃ المدثر"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 11" },
-                { question: "وحی لانے والے فرشتے کا کیا نام ہے؟", options: ["حضرت میکائیلؑ", "حضرت اسرافیلؑ", "حضرت جبرائیلؑ", "حضرت عزرائیلؑ"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 11" },
-                { question: "پہلی وحی کے نزول کے بعد آپؐ کو تسلی دینے والی اور سب سے پہلے اسلام قبول کرنے والی شخصیت کون تھیں؟", options: ["حضرت ابوطالب", "ورقہ بن نوفل", "حضرت خدیجہؓ", "حضرت ابوبکرؓ"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 11" },
-                { question: "حضرت خدیجہؓ آپؐ کو کس عالم کے پاس لے گئیں جنہوں نے آپؐ کے نبی ہونے کی تصدیق کی؟", options: ["بحیرا راہب", "نسطورا راہب", "ورقہ بن نوفل", "سلمان فارسی"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 11" },
-                { question: "مردوں میں سب سے پہلے اسلام کس نے قبول کیا؟", options: ["حضرت علیؓ", "حضرت ابوبکر صدیقؓ", "حضرت زید بن حارثہؓ", "حضرت عثمانؓ"], correctOptionIndex: 1, source_page: "Urdu/IS Sec. 11" },
-                { question: "بچوں میں سب سے پہلے اسلام قبول کرنے کی سعادت کسے حاصل ہوئی؟", options: ["حضرت عبداللہ بن عمرؓ", "حضرت انس بن مالکؓ", "حضرت علیؓ", "حضرت زید بن حارثہؓ"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 11" },
-                { question: "غلاموں میں سب سے پہلے کون اسلام لایا؟", options: ["حضرت بلالؓ", "حضرت زید بن حارثہؓ", "حضرت خبابؓ", "حضرت عمار بن یاسرؓ"], correctOptionIndex: 1, source_page: "Urdu/IS Sec. 11" },
-                { question: "اسلام کی خفیہ تبلیغ کا دور کتنے عرصے تک جاری رہا؟", options: ["ایک سال", "دو سال", "تین سال", "پانچ سال"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 12" },
-                { question: "خفیہ تبلیغ کے دور میں مسلمانوں کا مرکز کیا تھا؟", options: ["خانہ کعبہ", "غار حرا", "دار ارقم", "حضرت ابوطالب کا گھر"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 12" },
-                { question: "آپؐ نے اعلانیہ تبلیغ کا آغاز کس پہاڑی سے کیا؟", options: ["کوہ طور", "کوہ جودی", "کوہ صفا", "کوہ مروہ"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 12" },
-                { question: "اعلانیہ دعوت کے آغاز پر آپؐ کی سب سے شدید مخالفت کس نے کی؟", options: ["ابوجہل", "ابوسفیان", "ابولہب", "امیہ بن خلف"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 12" },
-                { question: "کفار مکہ نے مسلمانوں پر ظلم و ستم کا آغاز کیوں کیا؟", options: ["مسلمانوں کی بڑھتی ہوئی تعداد سے خوفزدہ ہو کر", "بت پرستی کی مخالفت کی وجہ سے", "اسلام کے مساوات کے پیغام کی وجہ سے", "مذکورہ بالا تمام وجوہات"], correctOptionIndex: 3, source_page: "Urdu/IS Sec. 12" },
-                { question: "حضرت بلالؓ کو اسلام قبول کرنے پر کون اذیت دیتا تھا؟", options: ["ابوجہل", "امیہ بن خلف", "ابولہب", "عتبہ بن ربیعہ"], correctOptionIndex: 1, source_page: "Urdu/IS Sec. 12" },
-                { question: "اسلام کی پہلی شہید خاتون کون تھیں؟", options: ["حضرت سمیہؓ", "حضرت فاطمہؓ", "حضرت زینبؓ", "حضرت رقیہؓ"], correctOptionIndex: 0, source_page: "Urdu/IS Sec. 12" },
-                { question: "مسلمانوں پر ظلم و ستم بڑھنے کے بعد آپؐ نے انہیں کس ملک کی طرف ہجرت کا حکم دیا؟", options: ["شام", "یمن", "حبشہ (ایتھوپیا)", "مصر"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 13" },
-                { question: "حبشہ کی طرف پہلی ہجرت کب ہوئی؟", options: ["نبوت کے تیسرے سال", "نبوت کے پانچویں سال", "نبوت کے ساتویں سال", "نبوت کے دسویں سال"], correctOptionIndex: 1, source_page: "Urdu/IS Sec. 13" },
-                { question: "ہجرت حبشہ اول میں کتنے لوگ شامل تھے؟", options: ["10 مرد اور 4 خواتین", "11 مرد اور 4 خواتین", "12 مرد اور 5 خواتین", "15 مرد اور 5 خواتین"], correctOptionIndex: 1, source_page: "Urdu/IS Sec. 13" },
-                { question: "حبشہ کے بادشاہ کا کیا نام تھا جس نے مسلمانوں کو پناہ دی؟", options: ["ہرقل", "کسریٰ", "نجاشی (نیگس)", "مقوقس"], correctOptionIndex: 2, source_page: "Urdu/IS Sec. 13" },
-                { "question": "قریش نے کس کو سفیر بنا کر نجاشی کے دربار میں بھیجا تاکہ وہ مسلمانوں کو واپس لے آئیں؟", "options": ["ابوسفیان اور خالد بن ولید", "عمرو بن العاص اور عبداللہ بن ابی ربیعہ", "ابوجہل اور عتبہ بن ربیعہ", "ابولہب اور عقبہ بن ابی معیط"], "correctOptionIndex": 1, "source_page": "Urdu/IS Sec. 13" },
-                { "question": "نجاشی کے دربار میں مسلمانوں کی طرف سے کس نے تقریر کی؟", "options": ["حضرت عثمان بن عفانؓ", "حضرت جعفر بن ابی طالبؓ", "حضرت عبدالرحمن بن عوفؓ", "حضرت زبیر بن عوامؓ"], "correctOptionIndex": 1, "source_page": "Urdu/IS Sec. 13" },
-                { "question": "حضرت جعفرؓ نے نجاشی کے دربار میں قرآن کی کون سی سورت کی آیات تلاوت کیں؟", "options": ["سورۃ البقرہ", "سورۃ آل عمران", "سورۃ مریم", "سورۃ یوسف"], "correctOptionIndex": 2, "source_page": "Urdu/IS Sec. 13" },
-                { "question": "حضرت ابوبکر صدیقؓ کی تبلیغ سے کون سی بڑی شخصیات اسلام لائیں؟", "options": ["حضرت عثمان، حضرت زبیر، حضرت عبدالرحمن بن عوف", "حضرت سعد بن ابی وقاص، حضرت طلحہ بن عبیداللہ", "مذکورہ بالا تمام", "صرف حضرت عثمان"], "correctOptionIndex": 2, "source_page": "Urdu/IS Sec. 11" },
-                { "question": "دوسری وحی کون سی سورت کی آیات تھیں؟", "options": ["سورۃ العلق", "سورۃ القلم", "سورۃ المزمل", "سورۃ المدثر"], "correctOptionIndex": 3, "source_page": "Urdu/IS Sec. 11" },
-                { "question": "کفار مکہ آپؐ کو (نعوذ باللہ) کیا کہہ کر پکارتے تھے؟", "options": ["شاعر", "کاہن (جادوگر)", "مجنون (دیوانہ)", "مذکورہ بالا تمام"], "correctOptionIndex": 3, "source_page": "Urdu/IS Sec. 12" },
-                { "question": "حضرت عثمان بن عفانؓ کے ساتھ ان کی کون سی زوجہ نے حبشہ ہجرت کی؟", "options": ["حضرت ام کلثومؓ", "حضرت رقیہؓ", "حضرت فاطمہؓ", "حضرت زینبؓ"], "correctOptionIndex": 1, "source_page": "Urdu/IS Sec. 13" },
-                { "question": "کفار نے کس صحابی کو اتنا مارا کہ وہ بے ہوش ہوگئے اور انہیں مردہ سمجھ کر چھوڑ دیا گیا؟", "options": ["حضرت خباب بن ارتؓ", "حضرت ابوبکر صدیقؓ", "حضرت مصعب بن عمیرؓ", "حضرت یاسرؓ"], "correctOptionIndex": 1, "source_page": "Urdu/IS Sec. 12" },
-                { "question": "دوسری ہجرت حبشہ میں کتنے لوگ شامل تھے؟", "options": ["تقریباً 50", "تقریباً 70", "تقریباً 83 مرد اور 18 خواتین", "تقریباً 100 سے زائد"], "correctOptionIndex": 2, "source_page": "Urdu/IS Sec. 13" },
-                { "question": "اللہ تعالیٰ نے آپؐ کو اعلانیہ تبلیغ کا حکم کس آیت میں دیا؟", "options": ["'اور اپنے قریبی رشتہ داروں کو ڈرائیے'", "'پس آپ کو جو حکم دیا جاتا ہے اسے کھول کر سنا دیجئے'", "'آپ اپنے رب کی راہ کی طرف حکمت سے بلائیے'", "مذکورہ بالا تمام"], "correctOptionIndex": 1, "source_page": "Urdu/IS Sec. 12" },
-                { "question": "ابتدائی مسلمانوں میں زیادہ تر کون لوگ شامل تھے؟", "options": ["صرف امیر اور سردار", "صرف غریب اور غلام", "غریب، غلام اور چند معزز نوجوان", "صرف نوجوان"], "correctOptionIndex": 2, "source_page": "Urdu/IS Sec. 12" }
+                // --- English (Pages 436-453) ---
+                { question: "Choose the correctly punctuated sentence.", options: ["Lets eat Grandma.", "Let's eat, Grandma.", "Lets eat, Grandma.", "Let's eat Grandma."], correctOptionIndex: 1, explanation: "The comma after 'eat' separates the vocative 'Grandma' from the rest of the sentence. The apostrophe in 'Let's' indicates the contraction of 'Let us'.", source_page: 436 },
+                { question: "Which punctuation mark is used to show possession?", options: ["Comma", "Period", "Apostrophe", "Semicolon"], correctOptionIndex: 2, explanation: "An apostrophe followed by an 's' (or just an apostrophe for plural nouns ending in 's') is used to indicate possession (e.g., 'the dog's bone').", source_page: 437 },
+                { question: "Identify the sentence with the correct use of a colon.", options: ["You have two choices: finish the work today or lose the contract.", "You have two choices, finish the work today or lose the contract.", "You have two choices; finish the work today or lose the contract.", "You have two choices-finish the work today or lose the contract."], correctOptionIndex: 0, explanation: "A colon is correctly used to introduce a list, explanation, or example that follows an independent clause.", source_page: 441 },
+                { question: "What does a semicolon (;) do?", options: ["Joins two closely related independent clauses.", "Ends a sentence.", "Indicates a pause.", "Shows possession."], correctOptionIndex: 0, explanation: "A semicolon can link two independent clauses that are closely related in thought, without using a coordinating conjunction.", source_page: 442 },
+                { question: "Which sentence uses quotation marks correctly?", options: ["He said, 'I am going to the store.'", "He said, I am going to the store.", "He said, \"I am going to the store\"", "He said \"I am going to the store.\""], correctOptionIndex: 0, explanation: "Direct speech is enclosed in quotation marks, and the punctuation (period) goes inside the closing quotation mark.", source_page: 446 },
+                { question: "The abbreviation 'e.g.' stands for:", options: ["for example", "that is", "and so on", "in other words"], correctOptionIndex: 0, explanation: "'e.g.' is an abbreviation for the Latin phrase 'exempli gratia', which means 'for example'.", source_page: 450 },
+                { question: "A hyphen (-) is used to:", options: ["Separate items in a list.", "Join words to form a compound adjective.", "End a declarative sentence.", "Show a long pause."], correctOptionIndex: 1, explanation: "Hyphens are used to connect words, such as in compound adjectives like 'well-known author'.", source_page: 438 },
+                { question: "Choose the sentence with correct capitalization.", options: ["i live in Paris.", "I live in paris.", "I live in Paris.", "i live in paris."], correctOptionIndex: 2, explanation: "The pronoun 'I' is always capitalized, and proper nouns like the city 'Paris' must also be capitalized.", source_page: 439 },
+                { question: "Parentheses ( ) are used to:", options: ["Enclose extra, non-essential information.", "Show that words have been omitted.", "Indicate a question.", "Connect two sentences."], correctOptionIndex: 0, explanation: "Parentheses are used to insert supplemental information or an aside into a sentence.", source_page: 448 },
+                { question: "An exclamation mark (!) is used to express:", options: ["A question", "A neutral statement", "Strong feeling or emotion", "Possession"], correctOptionIndex: 2, explanation: "An exclamation mark is used at the end of a sentence to convey strong emotions like surprise, excitement, or anger.", source_page: 440 },
+                { question: "Which punctuation is needed? The package contained several items books pens and notebooks.", options: ["A colon after 'items'", "A semicolon after 'items'", "A comma after 'items'", "No punctuation needed"], correctOptionIndex: 0, explanation: "A colon is used to introduce a list of items following an independent clause.", source_page: 441 },
+                { question: "Which sentence is correct?", options: ["Its a beautiful day outside.", "It's a beautiful day outside.", "Its' a beautiful day outside.", "It is a beautifuls day outside."], correctOptionIndex: 1, explanation: "'It's' is the contraction for 'it is'. 'Its' is a possessive pronoun.", source_page: 437 },
+                { question: "What is the primary purpose of punctuation?", options: ["To make writing look pretty", "To add length to a text", "To clarify meaning and structure", "To show off grammar skills"], correctOptionIndex: 2, explanation: "Punctuation's main role is to provide structure to sentences and clarify the intended meaning for the reader.", source_page: 436 },
+
+                // --- Urdu (Urdu Section Pages 15-22) ---
+                { question: "اردو کا پہلا افسانہ نگار کسے تسلیم کیا جاتا ہے؟", options: ["سعادت حسن منٹو", "پریم چند", "غلام عباس", "راجندر سنگھ بیدی"], correctOptionIndex: 1, explanation: "منشی پریم چند کو اردو کے اولین اور اہم ترین افسانہ نگاروں میں شمار کیا جاتا ہے۔", source_page: "Urdu Sec. 15" },
+                { question: "افسانہ 'کفن' کس کا تحریر کردہ ہے؟", options: ["کرشن چندر", "عصمت چغتائی", "سعادت حسن منٹو", "پریم چند"], correctOptionIndex: 3, explanation: "'کفن' پریم چند کا ایک شاہکار افسانہ ہے جو غربت اور انسانی نفسیات کی عکاسی کرتا ہے۔", source_page: "Urdu Sec. 16" },
+                { question: "ناول 'امراؤ جان ادا' کے مصنف کون ہیں؟", options: ["ڈپٹی نذیر احمد", "مرزا ہادی رسوا", "عبدالحلیم شرر", "رتن ناتھ سرشار"], correctOptionIndex: 1, explanation: "ناول 'امراؤ جان ادا' مرزا محمد ہادی رسوا کا سب سے مشہور ناول ہے جو 1899 میں شائع ہوا۔", source_page: "Urdu Sec. 19" },
+                { question: "اردو کا پہلا ناول نگار کسے کہا جاتا ہے؟", options: ["مرزا ہادی رسوا", "پریم چند", "ڈپٹی نذیر احمد", "عبدالحلیم شرر"], correctOptionIndex: 2, explanation: "ڈپٹی نذیر احمد کو اردو کا پہلا ناول نگار مانا جاتا ہے۔ ان کا ناول 'مراۃ العروس' 1869 میں شائع ہوا۔", source_page: "Urdu Sec. 19" },
+                { question: "سوانح حیات 'حیات جاوید' کس نے لکھی؟", options: ["شبلی نعمانی", "الطاف حسین حالی", "سرسید احمد خان", "مولوی عبدالحق"], correctOptionIndex: 1, explanation: "'حیات جاوید' الطاف حسین حالی نے اپنے استاد سرسید احمد خان کی زندگی پر لکھی ہے۔", source_page: "Urdu Sec. 21" },
+                { question: "افسانوی مجموعہ 'ٹھنڈا گوشت' کس کی تصنیف ہے؟", options: ["سعادت حسن منٹو", "راجندر سنگھ بیدی", "کرشن چندر", "احمد ندیم قاسمی"], correctOptionIndex: 0, explanation: "'ٹھنڈا گوشت' سعادت حسن منٹو کے افسانوں کا مجموعہ ہے جو تقسیم ہند کے فسادات کے پس منظر میں لکھا گیا۔", source_page: "Urdu Sec. 17" },
+                { question: "ناول 'آگ کا دریا' کی مصنفہ کون ہیں؟", options: ["عصمت چغتائی", "بانو قدسیہ", "قرۃ العین حیدر", "جمیلہ ہاشمی"], correctOptionIndex: 2, explanation: "'آگ کا دریا' قرۃ العین حیدر کا شاہکار ناول ہے جو اردو ادب میں ایک سنگ میل کی حیثیت رکھتا ہے۔", source_page: "Urdu Sec. 20" },
+                { question: "شبلی نعمانی کی لکھی ہوئی سوانح 'الفاروق' کس شخصیت کے بارے میں ہے؟", options: ["حضرت ابوبکر صدیقؓ", "حضرت عمر فاروقؓ", "حضرت عثمان غنیؓ", "حضرت علی المرتضیٰؓ"], correctOptionIndex: 1, explanation: "علامہ شبلی نعمانی نے 'الفاروق' میں دوسرے خلیفہ راشد حضرت عمر فاروقؓ کی سوانح حیات اور کارناموں کو بیان کیا ہے۔", source_page: "Urdu Sec. 22" },
+                { question: "ناول 'خدا کی بستی' کے خالق کون ہیں؟", options: ["شوکت صدیقی", "عبداللہ حسین", "انتظار حسین", "مستنصر حسین تارڑ"], correctOptionIndex: 0, explanation: "'خدا کی بستی' شوکت صدیقی کا مشہور ناول ہے جو شہری زندگی کے مسائل کی عکاسی کرتا ہے۔", source_page: "Urdu Sec. 20" },
+                { question: "سرسید احمد خان کی سوانح حیات کا نام کیا ہے؟", options: ["یادگار غالب", "حیات سعدی", "حیات جاوید", "سیرت النبی"], correctOptionIndex: 2, explanation: "سرسید احمد خان کی سوانح عمری کا نام 'حیات جاوید' ہے جسے مولانا الطاف حسین حالی نے تحریر کیا۔", source_page: "Urdu Sec. 21" },
+                { question: "افسانہ 'آنندی' کس نے لکھا؟", options: ["غلام عباس", "انتظار حسین", "اشفاق احمد", "منٹو"], correctOptionIndex: 0, explanation: "'آنندی' غلام عباس کا ایک مشہور علامتی افسانہ ہے جو معاشرتی منافقت پر طنز کرتا ہے۔", source_page: "Urdu Sec. 18" },
+                { question: "الطاف حسین حالی کی تصنیف 'یادگار غالب' کیا ہے؟", options: ["ناول", "سوانح عمری", "افسانہ", "شاعری کا مجموعہ"], correctOptionIndex: 1, explanation: "'یادگار غالب' مرزا غالب کی سوانح عمری ہے جسے الطاف حسین حالی نے لکھا، اور اسے اردو کی پہلی باقاعدہ سوانح مانا جاتا ہے۔", source_page: "Urdu Sec. 22" },
+
+                // --- Islamic Studies (Urdu/IS Section Pages 8-13) ---
+                { question: "آپ صلی اللہ علیہ وآلہ وسلم کی پیدائش کس سال ہوئی؟", options: ["571 عیسوی", "570 عیسوی", "572 عیسوی", "569 عیسوی"], correctOptionIndex: 0, explanation: "آپؐ کی ولادت باسعادت ربیع الاول کے مہینے میں عام الفیل کے واقعے کے 50-55 دن بعد 571 عیسوی میں ہوئی۔", source_page: "Urdu/IS Sec. 8" },
+                { question: "آپؐ کے والد کا نام کیا تھا؟", options: ["عبدالمطلب", "ابوطالب", "عبداللہ", "حمزہ"], correctOptionIndex: 2, explanation: "آپؐ کے والد کا نام حضرت عبداللہ بن عبدالمطلب تھا، جن کا انتقال آپؐ کی ولادت سے پہلے ہی ہوگیا تھا۔", source_page: "Urdu/IS Sec. 8" },
+                { question: "آپؐ کی والدہ کا نام کیا تھا؟", options: ["حضرت حلیمہؓ", "حضرت آمنہؓ", "حضرت فاطمہ بنت اسدؓ", "حضرت ثوبیہؓ"], correctOptionIndex: 1, explanation: "آپؐ کی والدہ ماجدہ کا نام حضرت آمنہ بنت وہب تھا۔", source_page: "Urdu/IS Sec. 8" },
+                { question: "بچپن میں آپؐ کی پرورش کس دایہ نے کی؟", options: ["حضرت ثوبیہؓ", "حضرت ام ایمنؓ", "حضرت حلیمہ سعدیہؓ", "حضرت فاطمہ بنت اسدؓ"], correctOptionIndex: 2, explanation: "عرب کے رواج کے مطابق، آپؐ کو قبیلہ بنو سعد کی دایہ حضرت حلیمہ سعدیہؓ کے سپرد کیا گیا جنہوں نے آپؐ کی پرورش کی۔", source_page: "Urdu/IS Sec. 9" },
+                { question: "شق صدر (سینہ چاک کرنے) کا واقعہ کس عمر میں پیش آیا؟", options: ["2 سال کی عمر میں", "4 سال کی عمر میں", "6 سال کی عمر میں", "10 سال کی عمر میں"], correctOptionIndex: 1, explanation: "شق صدر کا پہلا واقعہ 4 سال کی عمر میں پیش آیا جب آپؐ حضرت حلیمہ سعدیہؓ کے پاس تھے۔", source_page: "Urdu/IS Sec. 9" },
+                { question: "آپؐ کی والدہ کا انتقال کب ہوا؟", options: ["جب آپ 4 سال کے تھے", "جب آپ 6 سال کے تھے", "جب آپ 8 سال کے تھے", "جب آپ 12 سال کے تھے"], correctOptionIndex: 1, explanation: "جب آپؐ کی عمر 6 سال تھی تو آپؐ کی والدہ حضرت آمنہؓ کا انتقال ابواء کے مقام پر ہوا۔", source_page: "Urdu/IS Sec. 9" },
+                { question: "والدہ کے انتقال کے بعد آپؐ کی کفالت کس نے کی؟", options: ["چچا ابوطالب", "دادا عبدالمطلب", "چچا حمزہؓ", "چچا عباسؓ"], correctOptionIndex: 1, explanation: "والدہ کے بعد آپؐ کے دادا عبدالمطلب نے آپؐ کی کفالت کی ذمہ داری سنبھالی۔", source_page: "Urdu/IS Sec. 9" },
+                { question: "جوانی میں آپؐ کو کس لقب سے پکارا جاتا تھا؟", options: ["الامین (امانت دار)", "الصادق (سچا)", "دونوں", "ان میں سے کوئی نہیں"], correctOptionIndex: 2, explanation: "آپؐ اپنی سچائی اور امانتداری کی وجہ سے مکہ میں الصادق اور الامین کے القابات سے مشہور تھے۔", source_page: "Urdu/IS Sec. 10" },
+                { question: "آپؐ پر پہلی وحی کس غار میں نازل ہوئی؟", options: ["غار ثور", "غار حرا", "غار احد", "غار خیف"], correctOptionIndex: 1, explanation: "پہلی وحی جبل نور پر واقع غار حرا میں نازل ہوئی، جہاں آپؐ عبادت کے لیے تشریف لے جاتے تھے۔", source_page: "Urdu/IS Sec. 11" },
+                { question: "پہلی وحی کون سی سورت کی آیات پر مشتمل تھی؟", options: ["سورۃ الفاتحہ", "سورۃ البقرہ", "سورۃ العلق", "سورۃ المدثر"], correctOptionIndex: 2, explanation: "پہلی وحی سورۃ العلق کی ابتدائی پانچ آیات تھیں جو 'اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ' سے شروع ہوتی ہیں۔", source_page: "Urdu/IS Sec. 11" },
+                { question: "مردوں میں سب سے پہلے اسلام کس نے قبول کیا؟", options: ["حضرت علیؓ", "حضرت ابوبکر صدیقؓ", "حضرت زید بن حارثہؓ", "حضرت عثمانؓ"], correctOptionIndex: 1, explanation: "آزاد مردوں میں سب سے پہلے آپؐ کے گہرے دوست حضرت ابوبکر صدیقؓ نے اسلام قبول کیا۔", source_page: "Urdu/IS Sec. 11" },
+                { question: "اسلام کی خفیہ تبلیغ کا دور کتنے عرصے تک جاری رہا؟", options: ["ایک سال", "دو سال", "تین سال", "پانچ سال"], correctOptionIndex: 2, explanation: "نبوت کے ابتدائی تین سال تک آپؐ نے خفیہ طور پر اسلام کی دعوت دی اور صرف قابل اعتماد لوگوں کو ہی اسلام کی طرف بلایا۔", source_page: "Urdu/IS Sec. 12" },
+                { question: "مسلمانوں نے پہلی ہجرت کس ملک کی طرف کی؟", options: ["شام", "یمن", "حبشہ (ایتھوپیا)", "مصر"], correctOptionIndex: 2, explanation: "جب قریش کے مظالم حد سے بڑھ گئے تو آپؐ نے مسلمانوں کو حبشہ کی طرف ہجرت کی اجازت دی کیونکہ وہاں کا بادشاہ (نجاشی) عادل تھا۔", source_page: "Urdu/IS Sec. 13" },
+                { question: "ہجرت حبشہ اول میں مسلمانوں کے قائد کون تھے؟", options: ["حضرت جعفر بن ابی طالبؓ", "حضرت ابوبکر صدیقؓ", "حضرت عثمان بن عفانؓ", "حضرت زبیر بن عوامؓ"], correctOptionIndex: 2, explanation: "پہلی ہجرت حبشہ کے قافلے کے قائد حضرت عثمان بن عفانؓ تھے۔ ان کے ہمراہ ان کی زوجہ حضرت رقیہؓ بھی تھیں۔", source_page: "Urdu/IS Sec. 13" },
+                { question: "نجاشی کے دربار میں مسلمانوں کی نمائندگی کس نے کی؟", options: ["حضرت عثمان بن عفانؓ", "حضرت جعفر بن ابی طالبؓ", "حضرت عبدالرحمن بن عوفؓ", "حضرت عمرو بن العاصؓ"], correctOptionIndex: 1, explanation: "حضرت جعفر بن ابی طالبؓ نے نجاشی کے دربار میں اسلام کا تعارف پیش کیا اور سورۃ مریم کی تلاوت کی، جس سے بادشاہ بہت متاثر ہوا۔", source_page: "Urdu/IS Sec. 13" },
+                { question: "حرب فجار (ایک مشہور جنگ) کے وقت آپؐ کی عمر کتنی تھی؟", options: ["15 سال", "20 سال", "25 سال", "30 سال"], correctOptionIndex: 0, explanation: "جنگ فجار کے دوران آپؐ کی عمر مبارک 15 سال تھی اور آپؐ اپنے چچاؤں کو تیر پکڑاتے تھے۔", source_page: "Urdu/IS Sec. 10" },
+                { question: "خفیہ تبلیغ کے دور میں مسلمانوں کا مرکز کیا تھا؟", options: ["خانہ کعبہ", "غار حرا", "دار ارقم", "شعب ابی طالب"], correctOptionIndex: 2, explanation: "خفیہ دعوت کے دور میں کوہ صفا پر واقع 'دار ارقم' (ارقم کا گھر) مسلمانوں کی تبلیغ اور اجتماعات کا مرکز تھا۔", source_page: "Urdu/IS Sec. 12" },
+                { question: "اسلام کی پہلی شہید خاتون کون تھیں؟", options: ["حضرت سمیہؓ", "حضرت خنساءؓ", "حضرت ام عمارہؓ", "حضرت فاطمہؓ"], correctOptionIndex: 0, explanation: "حضرت سمیہؓ، جو حضرت عمار بن یاسرؓ کی والدہ تھیں، کو ابوجہل نے نیزہ مار کر شہید کر دیا تھا۔ وہ اسلام کی پہلی شہید ہیں۔", source_page: "Urdu/IS Sec. 12" }
             ];
 
-            // Shuffle all questions once for the day
             shuffleArrayWithSeed(allQuestions, dateSeed);
-            
-            // For each question, map options to an object and shuffle them
-            // This ensures options are shuffled per question but remain consistent during navigation
-            allQuestions.forEach((q, index) => {
-                const optionSeed = `${dateSeed}-${index}`;
-                const mappedOptions = q.options.map((opt, i) => ({ text: opt, originalIndex: i }));
-                shuffleArrayWithSeed(mappedOptions, optionSeed);
-                q.shuffledOptions = mappedOptions;
-            });
+            quizQuestions = allQuestions.slice(0, TOTAL_QUESTIONS);
 
-            quizQuestions = allQuestions;
-
-            // Assign a special question for the day
             if (quizQuestions.length > 0) {
                 let rng = new Math.seedrandom(dateSeed + '-special');
                 specialQuestionIndex = Math.floor(rng() * quizQuestions.length);
@@ -613,32 +655,18 @@
 
         // --- Initial Setup on DOM Load ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Check if the quiz has already been attempted
-            if (localStorage.getItem(QUIZ_ID) === 'completed') {
-                const loginBtn = document.getElementById('loginBtn');
-                const attemptMsg = document.getElementById('attemptMessage');
-                const loginIdInput = document.getElementById('loginId');
-                const loginPasswordInput = document.getElementById('loginPassword');
-
-                attemptMsg.textContent = "You have already completed this quiz. It can only be attempted once.";
-                attemptMsg.classList.remove('hidden');
-                loginBtn.disabled = true;
-                loginIdInput.disabled = true;
-                loginPasswordInput.disabled = true;
-            }
-
-            // Set up date displays and login ID
             const dateParts = CURRENT_DATE_STR.split(' ');
             const monthName = dateParts[0].toUpperCase();
             const day = parseInt(dateParts[1].replace(',', ''));
-            document.getElementById('loginId').value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`;
-            
-            document.getElementById('currentDateText').textContent = CURRENT_DATE_STR;
-            document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
-            document.getElementById('quizTitle').textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR}`;
+            document.getElementById('loginId').value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 09JUL
             
             initializeQuiz();
+            updateLiveDate();
+            // Hide next button initially
+            document.getElementById('nextBtn').classList.add('hidden');
         });
+
+        window.addEventListener('resize', updateLiveDate);
     </script>
 </body>
 </html>
