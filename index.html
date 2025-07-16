@@ -273,13 +273,14 @@
         // --- Firebase Configuration and Initialization ---
         // IMPORTANT: Replace these placeholder values with your actual Firebase project configuration.
         // You can find these in your Firebase project settings -> Project settings -> General -> Your apps -> Firebase SDK snippet (Config).
+        // If deploying to GitHub Pages or a similar static host, these values MUST be filled in.
         const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-            apiKey: "YOUR_FIREBASE_API_KEY", 
-            authDomain: "YOUR_FIREBASE_AUTH_DOMAIN", 
-            projectId: "YOUR_FIREBASE_PROJECT_ID", 
-            storageBucket: "YOUR_FIREBASE_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_FIREBASE_MESSAGING_SENDER_ID",
-            appId: "YOUR_FIREBASE_APP_ID"
+            apiKey: "YOUR_FIREBASE_API_KEY", // e.g., "AIzaSyC_YourActualApiKeyHere"
+            authDomain: "YOUR_FIREBASE_AUTH_DOMAIN", // e.g., "your-project-id.firebaseapp.com"
+            projectId: "YOUR_FIREBASE_PROJECT_ID", // e.g., "your-project-id"
+            storageBucket: "YOUR_FIREBASE_STORAGE_BUCKET", // e.g., "your-project-id.appspot.com"
+            messagingSenderId: "YOUR_FIREBASE_MESSAGING_SENDER_ID", // e.g., "1234567890"
+            appId: "YOUR_FIREBASE_APP_ID" // e.g., "1:1234567890:web:abcdef1234567890abcdef"
         };
         
         let app, auth, db;
@@ -302,14 +303,17 @@
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 userId = user.uid;
+                console.log("User authenticated. User ID:", userId);
             } else {
                 try {
                     // Fallback for __initial_auth_token if not in Canvas environment
                     const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
                     if (initialAuthToken) {
                         await signInWithCustomToken(auth, initialAuthToken);
+                        console.log("Signed in with custom token.");
                     } else {
                         await signInAnonymously(auth);
+                        console.log("Signed in anonymously.");
                     }
                 } catch (error) {
                     console.error("Error during sign-in:", error);
@@ -517,11 +521,13 @@
             if (db) { // Use the initialized 'db' from the module scope
                 try {
                     const resultsCollectionPath = `/artifacts/${appId}/public/data/quiz_results`;
+                    console.log("Attempting to save result to Firestore path:", resultsCollectionPath);
                     const newResultRef = doc(collection(db, resultsCollectionPath)); 
                     await setDoc(newResultRef, resultData);
-                    console.log("Result saved to Firestore.");
+                    console.log("Result saved to Firestore successfully with ID:", newResultRef.id);
                 } catch (error) {
-                    console.error("Error writing document to Firestore: ", error);
+                    console.error("Error writing document to Firestore:", error);
+                    // Provide a more specific error message to the user if needed
                 }
             } else {
                  console.error("Firestore database (db) not initialized. Result not saved.");
@@ -531,8 +537,8 @@
         // --- Admin Panel Functions ---
         async function fetchAndDisplayResults() {
             if (!db) {
-                console.error("Firestore database not initialized for admin panel.");
-                document.getElementById('resultsContainer').innerHTML = '<p class="text-red-500 text-center">Firebase not configured. Cannot load results.</p>';
+                console.error("Firestore database not initialized for admin panel. Cannot fetch results.");
+                document.getElementById('resultsContainer').innerHTML = '<p class="text-red-500 text-center">Firebase not configured or initialized. Cannot load results.</p>';
                 return;
             }
             
@@ -540,6 +546,7 @@
             resultsContainer.innerHTML = '<p class="text-center">Loading results...</p>';
 
             const resultsCollectionPath = `/artifacts/${appId}/public/data/quiz_results`;
+            console.log("Attempting to fetch results from Firestore path:", resultsCollectionPath);
             const q = query(collection(db, resultsCollectionPath));
 
             // Unsubscribe from previous listener if exists
@@ -560,9 +567,10 @@
                 });
 
                 renderResults(results);
+                console.log("Successfully fetched and rendered", results.length, "results.");
             }, (error) => {
-                console.error("Error fetching results for admin panel: ", error);
-                resultsContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load results. Check console for details.</p>';
+                console.error("Error fetching results for admin panel:", error);
+                resultsContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load results. Please check Firebase permissions and console for details.</p>';
             });
         }
 
@@ -645,17 +653,16 @@
         async function deleteResult(docId) {
             if (!db || !appId) {
                 console.error("Firestore database or appId not available for deletion.");
-                // A custom message box could be implemented here if needed, instead of alert.
                 return;
             }
             
             const docPath = `/artifacts/${appId}/public/data/quiz_results/${docId}`;
+            console.log("Attempting to delete document from Firestore path:", docPath);
             try {
                 await deleteDoc(doc(db, docPath));
                 console.log("Result removed successfully.");
             } catch (error) {
-                console.error("Error removing result: ", error);
-                // A custom message box could be implemented here if needed, instead of alert.
+                console.error("Error removing result:", error);
             }
         }
 
@@ -764,7 +771,7 @@
             const monthName = dateParts[0].toUpperCase().substring(0,3);
             const day = parseInt(dateParts[1].replace(',', ''));
             const loginIdInput = document.getElementById('loginId');
-            if(loginIdInput) loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName}`; // e.g., 16JULY
+            if(loginIdInput) loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName}`; // e.g., 16JUL
 
             // Update date displays
             document.getElementById('currentDateText').textContent = CURRENT_DATE_STR;
