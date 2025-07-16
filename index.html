@@ -265,65 +265,8 @@
 </head>
 <body>
     
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, collection, onSnapshot, deleteDoc, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        
-        // --- Firebase Configuration and Initialization ---
-        // IMPORTANT: Replace these placeholder values with your actual Firebase project configuration.
-        // You can find these in your Firebase project settings -> Project settings -> General -> Your apps -> Firebase SDK snippet (Config).
-        // If deploying to GitHub Pages or a similar static host, these values MUST be filled in.
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
-            apiKey: "YOUR_FIREBASE_API_KEY", // e.g., "AIzaSyC_YourActualApiKeyHere"
-            authDomain: "YOUR_FIREBASE_AUTH_DOMAIN", // e.g., "your-project-id.firebaseapp.com"
-            projectId: "YOUR_FIREBASE_PROJECT_ID", // e.g., "your-project-id"
-            storageBucket: "YOUR_FIREBASE_STORAGE_BUCKET", // e.g., "your-project-id.appspot.com"
-            messagingSenderId: "YOUR_FIREBASE_MESSAGING_SENDER_ID", // e.g., "1234567890"
-            appId: "YOUR_FIREBASE_APP_ID" // e.g., "1:1234567890:web:abcdef1234567890abcdef"
-        };
-        
-        let app, auth, db;
-        let userId;
-        let unsubscribeResultsListener = null; // To manage real-time listener
-
-        // Initialize Firebase
-        try {
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-            console.log("Firebase initialized successfully for quiz.");
-        } catch (e) {
-            console.error("Error initializing Firebase:", e);
-            // Display a user-friendly message if Firebase initialization fails
-            document.body.innerHTML = '<div class="text-red-500 text-center p-8">Error initializing the application. Please check the console and ensure Firebase configuration is correct.</div>';
-        }
-
-        // Handle Authentication
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                userId = user.uid;
-                console.log("User authenticated. User ID:", userId);
-            } else {
-                try {
-                    // Fallback for __initial_auth_token if not in Canvas environment
-                    const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-                    if (initialAuthToken) {
-                        await signInWithCustomToken(auth, initialAuthToken);
-                        console.log("Signed in with custom token.");
-                    } else {
-                        await signInAnonymously(auth);
-                        console.log("Signed in anonymously.");
-                    }
-                } catch (error) {
-                    console.error("Error during sign-in:", error);
-                }
-            }
-        });
-
+    <script>
         // --- Global State ---
-        // Fallback for __app_id if not in Canvas environment
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app-id'; // Use a default ID for non-Canvas environments
         const CURRENT_DATE_STR = "July 16, 2025";
         let quizQuestions = [];
         let currentQuestionIndex = 0;
@@ -351,9 +294,14 @@
         }
 
         function updateProgressBar() {
-            const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
-            document.getElementById('progressBar').style.width = `${progress}%`;
-            document.getElementById('questionProgress').textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length} – ${Math.round(progress)}% Complete`;
+            const progressBar = document.getElementById('progressBar');
+            const questionProgress = document.getElementById('questionProgress');
+
+            if (progressBar && questionProgress) {
+                const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+                progressBar.style.width = `${progress}%`;
+                questionProgress.textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length} – ${Math.round(progress)}% Complete`;
+            }
         }
 
         function showPage(pageId) {
@@ -392,12 +340,23 @@
         }
 
         function renderQuestion() {
-            const question = quizQuestions[currentQuestionIndex];
-            document.getElementById('questionText').innerHTML = question.question;
+            const questionText = document.getElementById('questionText');
             const optionsContainer = document.getElementById('optionsContainer');
+            const quizCard = document.getElementById('quizPage');
+            const explanationDiv = document.getElementById('explanationDiv');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitQuizBtn = document.getElementById('submitQuizBtn');
+
+            if (!questionText || !optionsContainer || !quizCard || !explanationDiv || !prevBtn || !nextBtn || !submitQuizBtn) {
+                console.error("One or more quiz UI elements are missing.");
+                return;
+            }
+
+            const question = quizQuestions[currentQuestionIndex];
+            questionText.innerHTML = question.question;
             optionsContainer.innerHTML = '';
 
-            const quizCard = document.getElementById('quizPage');
             quizCard.classList.remove('special-question');
             if (question.special) {
                 quizCard.classList.add('special-question');
@@ -432,13 +391,12 @@
                 });
             }
 
-            const explanationDiv = document.getElementById('explanationDiv');
             explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
             explanationDiv.style.display = (userAnswer && userAnswer.selectedOptionIndex !== undefined) ? 'block' : 'none';
 
-            document.getElementById('prevBtn').classList.toggle('hidden', currentQuestionIndex === 0);
-            document.getElementById('nextBtn').classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
-            document.getElementById('submitQuizBtn').classList.remove('hidden'); // Always visible
+            prevBtn.classList.toggle('hidden', currentQuestionIndex === 0);
+            nextBtn.classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
+            submitQuizBtn.classList.remove('hidden'); // Always visible
             updateProgressBar();
         }
 
@@ -493,19 +451,30 @@
             });
 
             const score = (correctCount * 2) - incorrectCount;
-            const candidateName = document.getElementById('candidateName').value;
+            const candidateNameInput = document.getElementById('candidateName');
+            const candidateName = candidateNameInput ? candidateNameInput.value : 'N/A';
 
-            document.getElementById('resultCandidateName').textContent = candidateName;
-            document.getElementById('resultDate').textContent = CURRENT_DATE_STR;
-            document.getElementById('resultScore').textContent = `${score}`;
-            document.getElementById('resultCorrect').textContent = `${correctCount}`;
-            document.getElementById('resultIncorrect').textContent = `${incorrectCount}`;
-            document.getElementById('resultAttempted').textContent = `${attemptedCount} / ${TOTAL_QUESTIONS}`;
-            document.getElementById('resultTimeTaken').textContent = formatTime(timeTakenSeconds);
+
+            const resultCandidateName = document.getElementById('resultCandidateName');
+            const resultDate = document.getElementById('resultDate');
+            const resultScore = document.getElementById('resultScore');
+            const resultCorrect = document.getElementById('resultCorrect');
+            const resultIncorrect = document.getElementById('resultIncorrect');
+            const resultAttempted = document.getElementById('resultAttempted');
+            const resultTimeTaken = document.getElementById('resultTimeTaken');
+
+            if (resultCandidateName) resultCandidateName.textContent = candidateName;
+            if (resultDate) resultDate.textContent = CURRENT_DATE_STR;
+            if (resultScore) resultScore.textContent = `${score}`;
+            if (resultCorrect) resultCorrect.textContent = `${correctCount}`;
+            if (resultIncorrect) resultIncorrect.textContent = `${incorrectCount}`;
+            if (resultAttempted) resultAttempted.textContent = `${attemptedCount} / ${TOTAL_QUESTIONS}`;
+            if (resultTimeTaken) resultTimeTaken.textContent = formatTime(timeTakenSeconds);
             
             showPage('resultsPage');
 
             const resultData = {
+                id: Date.now().toString(), // Simple unique ID for localStorage
                 candidateName: candidateName,
                 quizDate: CURRENT_DATE_STR,
                 score: score,
@@ -515,67 +484,43 @@
                 timeTaken: formatTime(timeTakenSeconds),
                 timeTakenSeconds: timeTakenSeconds,
                 submittedAt: new Date().toISOString(),
-                userId: userId // Include userId for potential future use or admin filtering
+                userId: 'local_user_' + Math.random().toString(36).substring(2, 10) // Mock user ID for local storage
             };
             
-            if (db) { // Use the initialized 'db' from the module scope
-                try {
-                    const resultsCollectionPath = `/artifacts/${appId}/public/data/quiz_results`;
-                    console.log("Attempting to save result to Firestore path:", resultsCollectionPath);
-                    const newResultRef = doc(collection(db, resultsCollectionPath)); 
-                    await setDoc(newResultRef, resultData);
-                    console.log("Result saved to Firestore successfully with ID:", newResultRef.id);
-                } catch (error) {
-                    console.error("Error writing document to Firestore:", error);
-                    // Provide a more specific error message to the user if needed
-                }
-            } else {
-                 console.error("Firestore database (db) not initialized. Result not saved.");
-            }
+            // Save to localStorage
+            let results = JSON.parse(localStorage.getItem('quiz_results') || '[]');
+            results.push(resultData);
+            localStorage.setItem('quiz_results', JSON.stringify(results));
+            console.log("Result saved to localStorage:", resultData);
         }
 
         // --- Admin Panel Functions ---
-        async function fetchAndDisplayResults() {
-            if (!db) {
-                console.error("Firestore database not initialized for admin panel. Cannot fetch results.");
-                document.getElementById('resultsContainer').innerHTML = '<p class="text-red-500 text-center">Firebase not configured or initialized. Cannot load results.</p>';
+        function fetchAndDisplayResults() {
+            const resultsContainer = document.getElementById('resultsContainer');
+            if (!resultsContainer) {
+                console.error("Results container element not found.");
                 return;
             }
-            
-            const resultsContainer = document.getElementById('resultsContainer');
             resultsContainer.innerHTML = '<p class="text-center">Loading results...</p>';
 
-            const resultsCollectionPath = `/artifacts/${appId}/public/data/quiz_results`;
-            console.log("Attempting to fetch results from Firestore path:", resultsCollectionPath);
-            const q = query(collection(db, resultsCollectionPath));
+            // Retrieve from localStorage
+            let results = JSON.parse(localStorage.getItem('quiz_results') || '[]');
+            console.log("Fetched results from localStorage:", results);
 
-            // Unsubscribe from previous listener if exists
-            if (unsubscribeResultsListener) {
-                unsubscribeResultsListener();
-            }
-
-            unsubscribeResultsListener = onSnapshot(q, (querySnapshot) => {
-                const results = [];
-                querySnapshot.forEach((doc) => {
-                    results.push({ id: doc.id, ...doc.data() });
-                });
-
-                // Sort by score (desc) then time taken (asc)
-                results.sort((a, b) => {
-                    if (b.score !== a.score) return b.score - a.score;
-                    return a.timeTakenSeconds - b.timeTakenSeconds;
-                });
-
-                renderResults(results);
-                console.log("Successfully fetched and rendered", results.length, "results.");
-            }, (error) => {
-                console.error("Error fetching results for admin panel:", error);
-                resultsContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load results. Please check Firebase permissions and console for details.</p>';
+            // Sort by score (desc) then time taken (asc)
+            results.sort((a, b) => {
+                if (b.score !== a.score) return b.score - a.score;
+                return a.timeTakenSeconds - b.timeTakenSeconds;
             });
+
+            renderResults(results);
+            console.log("Successfully rendered", results.length, "results.");
         }
 
         function renderResults(results) {
             const resultsContainer = document.getElementById('resultsContainer');
+            if (!resultsContainer) return; // Defensive check
+
             if (results.length === 0) {
                 resultsContainer.innerHTML = '<p class="text-center text-gray-500">No results submitted yet.</p>';
                 return;
@@ -588,7 +533,7 @@
                             <tr>
                                 <th class="py-3 px-4 text-left">Rank</th>
                                 <th class="py-3 px-4 text-left">Candidate Name</th>
-                                <th class="py-3 px-4 text-left">User ID</th> <!-- New column for userId -->
+                                <th class="py-3 px-4 text-left">User ID</th>
                                 <th class="py-3 px-4 text-left">Score</th>
                                 <th class="py-3 px-4 text-left">Correct</th>
                                 <th class="py-3 px-4 text-left">Incorrect</th>
@@ -603,13 +548,15 @@
             `;
             
             const tableBody = document.getElementById('resultsTableBody');
+            if (!tableBody) return; // Defensive check
+
             results.forEach((result, index) => {
                 const row = document.createElement('tr');
                 row.className = 'border-b border-gray-200 hover:bg-gray-100';
                 row.innerHTML = `
                     <td class="py-3 px-4 font-bold">${index + 1}</td>
                     <td class="py-3 px-4">${result.candidateName || 'N/A'}</td>
-                    <td class="py-3 px-4 text-sm break-all">${result.userId || 'N/A'}</td> <!-- Display userId -->
+                    <td class="py-3 px-4 text-sm break-all">${result.userId || 'N/A'}</td>
                     <td class="py-3 px-4 font-semibold">${result.score}</td>
                     <td class="py-3 px-4 text-green-600">${result.correctCount}</td>
                     <td class="py-3 px-4 text-red-600">${result.incorrectCount}</td>
@@ -628,46 +575,33 @@
         let confirmActionId = null;
 
         function showConfirmModal(docId) {
-            confirmActionId = docId;
-            document.getElementById('confirmModal').classList.remove('hidden');
-            confirmActionCallback = () => deleteResult(docId); // Set the callback
+            const confirmModal = document.getElementById('confirmModal');
+            if (confirmModal) {
+                confirmActionId = docId;
+                confirmModal.classList.remove('hidden');
+                confirmActionCallback = () => deleteResult(docId); // Set the callback
+            }
         }
 
         function hideConfirmModal() {
-            document.getElementById('confirmModal').classList.add('hidden');
-            confirmActionCallback = null;
-            confirmActionId = null;
-        }
-
-        document.getElementById('confirmDeleteBtn').addEventListener('click', () => {
-            if (confirmActionCallback) {
-                confirmActionCallback();
-            }
-            hideConfirmModal();
-        });
-
-        document.getElementById('cancelDeleteBtn').addEventListener('click', () => {
-            hideConfirmModal();
-        });
-
-        async function deleteResult(docId) {
-            if (!db || !appId) {
-                console.error("Firestore database or appId not available for deletion.");
-                return;
-            }
-            
-            const docPath = `/artifacts/${appId}/public/data/quiz_results/${docId}`;
-            console.log("Attempting to delete document from Firestore path:", docPath);
-            try {
-                await deleteDoc(doc(db, docPath));
-                console.log("Result removed successfully.");
-            } catch (error) {
-                console.error("Error removing result:", error);
+            const confirmModal = document.getElementById('confirmModal');
+            if (confirmModal) {
+                confirmModal.classList.add('hidden');
+                confirmActionCallback = null;
+                confirmActionId = null;
             }
         }
 
         // Make functions globally accessible for onclick attributes in HTML
         window.showConfirmModal = showConfirmModal;
+
+        function deleteResult(docId) {
+            let results = JSON.parse(localStorage.getItem('quiz_results') || '[]');
+            const updatedResults = results.filter(result => result.id !== docId);
+            localStorage.setItem('quiz_results', JSON.stringify(updatedResults));
+            console.log("Result removed from localStorage:", docId);
+            fetchAndDisplayResults(); // Re-render results after deletion
+        }
 
 
         // --- Quiz Initialization ---
@@ -774,59 +708,93 @@
             if(loginIdInput) loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName}`; // e.g., 16JUL
 
             // Update date displays
-            document.getElementById('currentDateText').textContent = CURRENT_DATE_STR;
-            document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
-            document.getElementById('quizTitle').textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR} (Week 3 Review)`;
+            const currentDateText = document.getElementById('currentDateText');
+            const updatedDate = document.getElementById('updatedDate');
+            const quizTitle = document.getElementById('quizTitle');
 
-            document.getElementById('loginBtn').addEventListener('click', () => {
-                const id = document.getElementById('loginId').value;
-                const password = document.getElementById('loginPassword').value;
-                const loginError = document.getElementById('loginError');
+            if (currentDateText) currentDateText.textContent = CURRENT_DATE_STR;
+            if (updatedDate) updatedDate.textContent = CURRENT_DATE_STR;
+            if (quizTitle) quizTitle.textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR} (Week 3 Review)`;
 
-                if (id === 'syedasgharalishah' && password === 'admin') {
-                    loginError.classList.add('hidden');
-                    showPage('adminPage');
-                    fetchAndDisplayResults(); // Fetch results when admin logs in
-                    return;
+            const loginBtn = document.getElementById('loginBtn');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', () => {
+                    const id = document.getElementById('loginId').value;
+                    const password = document.getElementById('loginPassword').value;
+                    const loginError = document.getElementById('loginError');
+
+                    if (id === 'syedasgharalishah' && password === 'admin') {
+                        if (loginError) loginError.classList.add('hidden');
+                        showPage('adminPage');
+                        fetchAndDisplayResults(); // Fetch results when admin logs in
+                        return;
+                    }
+
+                    const expectedId = `${day.toString().padStart(2,'0')}${monthName}`;
+                    if (id.toUpperCase() === expectedId && password === 'free') {
+                        if (loginError) loginError.classList.add('hidden');
+                        showPage('candidateNamePage');
+                    } else {
+                        if (loginError) loginError.classList.remove('hidden');
+                    }
+                });
+            }
+
+            const startQuizBtn = document.getElementById('startQuizBtn');
+            if (startQuizBtn) {
+                startQuizBtn.addEventListener('click', () => {
+                    const candidateNameInput = document.getElementById('candidateName');
+                    const nameError = document.getElementById('nameError');
+                    const candidateName = candidateNameInput ? candidateNameInput.value.trim() : '';
+
+                    if (candidateName) {
+                        if (nameError) nameError.classList.add('hidden');
+                        initializeQuiz(); // Re-initialize quiz for a fresh start
+                        startTimer();
+                        renderQuestion();
+                        showPage('quizPage');
+                    } else {
+                        if (nameError) nameError.classList.remove('hidden');
+                    }
+                });
+            }
+
+            const nextBtn = document.getElementById('nextBtn');
+            if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
+            
+            const prevBtn = document.getElementById('prevBtn');
+            if (prevBtn) prevBtn.addEventListener('click', prevQuestion);
+            
+            const submitQuizBtn = document.getElementById('submitQuizBtn');
+            if (submitQuizBtn) submitQuizBtn.addEventListener('click', () => submitQuiz(false));
+            
+            const restartQuizBtn = document.getElementById('restartQuizBtn');
+            if (restartQuizBtn) {
+                restartQuizBtn.addEventListener('click', () => {
+                    clearInterval(timerInterval);
+                    initializeQuiz();
+                    showPage('loginPage');
+                });
+            }
+
+            const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+            if (adminLogoutBtn) {
+                adminLogoutBtn.addEventListener('click', () => {
+                    showPage('loginPage');
+                });
+            }
+
+            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+            if (confirmDeleteBtn) confirmDeleteBtn.addEventListener('click', () => {
+                if (confirmActionCallback) {
+                    confirmActionCallback();
                 }
-
-                const expectedId = `${day.toString().padStart(2,'0')}${monthName}`;
-                if (id.toUpperCase() === expectedId && password === 'free') {
-                    loginError.classList.add('hidden');
-                    showPage('candidateNamePage');
-                } else {
-                    loginError.classList.remove('hidden');
-                }
+                hideConfirmModal();
             });
 
-            document.getElementById('startQuizBtn').addEventListener('click', () => {
-                const candidateName = document.getElementById('candidateName').value.trim();
-                if (candidateName) {
-                    document.getElementById('nameError').classList.add('hidden');
-                    initializeQuiz(); // Re-initialize quiz for a fresh start
-                    startTimer();
-                    renderQuestion();
-                    showPage('quizPage');
-                } else {
-                    document.getElementById('nameError').classList.remove('hidden');
-                }
-            });
-
-            document.getElementById('nextBtn').addEventListener('click', nextQuestion);
-            document.getElementById('prevBtn').addEventListener('click', prevQuestion);
-            document.getElementById('submitQuizBtn').addEventListener('click', () => submitQuiz(false));
-            document.getElementById('restartQuizBtn').addEventListener('click', () => {
-                clearInterval(timerInterval);
-                initializeQuiz();
-                showPage('loginPage');
-            });
-
-            document.getElementById('adminLogoutBtn').addEventListener('click', () => {
-                if (unsubscribeResultsListener) {
-                    unsubscribeResultsListener(); // Stop listening to real-time updates
-                    unsubscribeResultsListener = null;
-                }
-                showPage('loginPage');
+            const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+            if (cancelDeleteBtn) cancelDeleteBtn.addEventListener('click', () => {
+                hideConfirmModal();
             });
             
             initializeQuiz(); // Initial call to set up questions on page load
