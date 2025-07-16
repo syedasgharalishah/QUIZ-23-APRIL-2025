@@ -228,6 +228,39 @@
             10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
             20%, 40%, 60%, 80% { transform: translateX(5px); }
         }
+
+        /* Custom Confirmation Modal */
+        .modal {
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -238,7 +271,16 @@
         import { getFirestore, doc, setDoc, collection, onSnapshot, deleteDoc, query } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         
         // --- Firebase Configuration and Initialization ---
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        // IMPORTANT: Replace these placeholder values with your actual Firebase project configuration.
+        // You can find these in your Firebase project settings -> Project settings -> General -> Your apps -> Firebase SDK snippet (Config).
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            apiKey: "YOUR_FIREBASE_API_KEY", 
+            authDomain: "YOUR_FIREBASE_AUTH_DOMAIN", 
+            projectId: "YOUR_FIREBASE_PROJECT_ID", 
+            storageBucket: "YOUR_FIREBASE_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_FIREBASE_MESSAGING_SENDER_ID",
+            appId: "YOUR_FIREBASE_APP_ID"
+        };
         
         let app, auth, db;
         let userId;
@@ -252,7 +294,8 @@
             console.log("Firebase initialized successfully for quiz.");
         } catch (e) {
             console.error("Error initializing Firebase:", e);
-            document.body.innerHTML = '<div class="text-red-500 text-center p-8">Error initializing the application. Please check the console.</div>';
+            // Display a user-friendly message if Firebase initialization fails
+            document.body.innerHTML = '<div class="text-red-500 text-center p-8">Error initializing the application. Please check the console and ensure Firebase configuration is correct.</div>';
         }
 
         // Handle Authentication
@@ -261,8 +304,10 @@
                 userId = user.uid;
             } else {
                 try {
-                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                        await signInWithCustomToken(auth, __initial_auth_token);
+                    // Fallback for __initial_auth_token if not in Canvas environment
+                    const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+                    if (initialAuthToken) {
+                        await signInWithCustomToken(auth, initialAuthToken);
                     } else {
                         await signInAnonymously(auth);
                     }
@@ -273,7 +318,8 @@
         });
 
         // --- Global State ---
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
+        // Fallback for __app_id if not in Canvas environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app-id'; // Use a default ID for non-Canvas environments
         const CURRENT_DATE_STR = "July 16, 2025";
         let quizQuestions = [];
         let currentQuestionIndex = 0;
@@ -312,7 +358,7 @@
                 document.getElementById('candidateNamePage'),
                 document.getElementById('quizPage'),
                 document.getElementById('resultsPage'),
-                document.getElementById('adminPage') // Include admin page
+                document.getElementById('adminPage')
             ];
             pages.forEach(page => {
                 if (page) page.classList.add('hidden');
@@ -478,7 +524,7 @@
                     console.error("Error writing document to Firestore: ", error);
                 }
             } else {
-                 console.error("Firestore database (db) not initialized.");
+                 console.error("Firestore database (db) not initialized. Result not saved.");
             }
         }
 
@@ -486,6 +532,7 @@
         async function fetchAndDisplayResults() {
             if (!db) {
                 console.error("Firestore database not initialized for admin panel.");
+                document.getElementById('resultsContainer').innerHTML = '<p class="text-red-500 text-center">Firebase not configured. Cannot load results.</p>';
                 return;
             }
             
@@ -515,7 +562,7 @@
                 renderResults(results);
             }, (error) => {
                 console.error("Error fetching results for admin panel: ", error);
-                resultsContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load results.</p>';
+                resultsContainer.innerHTML = '<p class="text-red-500 text-center">Failed to load results. Check console for details.</p>';
             });
         }
 
@@ -561,20 +608,44 @@
                     <td class="py-3 px-4">${result.timeTaken}</td>
                     <td class="py-3 px-4">${result.quizDate}</td>
                     <td class="py-3 px-4">
-                        <button onclick="deleteResult('${result.id}')" class="button-gradient button-danger text-xs px-3 py-1">Remove</button>
+                        <button onclick="showConfirmModal('${result.id}')" class="button-gradient button-danger text-xs px-3 py-1">Remove</button>
                     </td>
                 `;
                 tableBody.appendChild(row);
             });
         }
 
-        async function deleteResult(docId) {
-            // Use a custom modal or confirmation instead of alert/confirm
-            if (!confirm('Are you sure you want to remove this result?')) {
-                return;
+        // Custom confirmation modal logic
+        let confirmActionCallback = null;
+        let confirmActionId = null;
+
+        function showConfirmModal(docId) {
+            confirmActionId = docId;
+            document.getElementById('confirmModal').classList.remove('hidden');
+            confirmActionCallback = () => deleteResult(docId); // Set the callback
+        }
+
+        function hideConfirmModal() {
+            document.getElementById('confirmModal').classList.add('hidden');
+            confirmActionCallback = null;
+            confirmActionId = null;
+        }
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', () => {
+            if (confirmActionCallback) {
+                confirmActionCallback();
             }
+            hideConfirmModal();
+        });
+
+        document.getElementById('cancelDeleteBtn').addEventListener('click', () => {
+            hideConfirmModal();
+        });
+
+        async function deleteResult(docId) {
             if (!db || !appId) {
                 console.error("Firestore database or appId not available for deletion.");
+                // A custom message box could be implemented here if needed, instead of alert.
                 return;
             }
             
@@ -584,13 +655,13 @@
                 console.log("Result removed successfully.");
             } catch (error) {
                 console.error("Error removing result: ", error);
-                // Use a custom message box instead of alert
-                alert("Failed to remove result. Check console for details.");
+                // A custom message box could be implemented here if needed, instead of alert.
             }
         }
 
-        // Make deleteResult globally accessible for onclick in renderResults
-        window.deleteResult = deleteResult;
+        // Make functions globally accessible for onclick attributes in HTML
+        window.showConfirmModal = showConfirmModal;
+
 
         // --- Quiz Initialization ---
         function initializeQuiz() {
@@ -854,5 +925,16 @@
             <button id="adminLogoutBtn" class="button-gradient w-full max-w-xs mx-auto block">Logout</button>
         </div>
     </main>
+
+    <!-- Custom Confirmation Modal HTML -->
+    <div id="confirmModal" class="modal hidden">
+        <div class="modal-content">
+            <p class="text-lg font-semibold mb-4">Are you sure you want to remove this result?</p>
+            <div class="modal-buttons">
+                <button id="confirmDeleteBtn" class="button-gradient button-danger px-4 py-2">Yes, Remove</button>
+                <button id="cancelDeleteBtn" class="button-gradient px-4 py-2">Cancel</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
