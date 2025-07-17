@@ -228,7 +228,22 @@
         import { getFirestore, doc, setDoc, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         
         // --- Firebase Configuration and Initialization ---
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        // This configuration is automatically provided in the original environment.
+        // When deploying elsewhere (e.g., GitHub Pages), this will use the placeholder.
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : {
+                // --- IMPORTANT ---
+                // This is a placeholder configuration.
+                // To deploy this on GitHub Pages or your own server,
+                // you MUST replace these values with your own Firebase project's web app configuration.
+                apiKey: "YOUR_API_KEY_HERE",
+                authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+                projectId: "YOUR_PROJECT_ID",
+                storageBucket: "YOUR_PROJECT_ID.appspot.com",
+                messagingSenderId: "YOUR_SENDER_ID",
+                appId: "YOUR_APP_ID"
+            };
         
         let app, auth, db;
         let userId;
@@ -241,7 +256,7 @@
             console.log("Firebase initialized successfully for quiz.");
         } catch (e) {
             console.error("Error initializing Firebase:", e);
-            document.body.innerHTML = '<div class="text-red-500 text-center p-8">Error initializing the application. Please check the console.</div>';
+            document.body.innerHTML = '<div class="text-red-500 text-center p-8">Error initializing the application. Please check the console for details. This might be due to missing Firebase configuration.</div>';
         }
 
         // Handle Authentication
@@ -696,18 +711,18 @@
                 // General Abilities: Volume and Surface Area (pp. 541-543) - 25 Questions
                 { "question": "Find the volume of a cuboid 16 m long, 14 m broad and 7 m high.", "options": ["1568 cu. m", "1658 cu. m", "1586 cu. m", "1685 cu. m"], "correctOptionIndex": 0, "explanation": "Volume of a cuboid = Length x Breadth x Height = 16 * 14 * 7 = 1568 cubic meters.", "source_page": 541 },
                 { "question": "What is the surface area of a cube with a side of 6 cm?", "options": ["36 sq. cm", "180 sq. cm", "216 sq. cm", "150 sq. cm"], "correctOptionIndex": 2, "explanation": "Surface area of a cube = 6 * (side)^2 = 6 * 6^2 = 6 * 36 = 216 sq. cm.", "source_page": 541 },
-                { "question": "The diagonal of a cube is 12 cm. Find its volume.", "options": ["144 cu. cm", "192√3 cu. cm", "576 cu. cm", "384√3 cu. cm"], "correctOptionIndex": 3, "explanation": "Diagonal of a cube = √3 * side. 12 = √3 * side => side = 12/√3 = 4√3. Volume = (side)^3 = (4√3)^3 = 64 * 3√3 = 192√3 cu. cm. Rechecking the example. The book says Volume = (Diagonal/√3)^3. So (12)^3 / (√3)^3 = 1728 / 3√3 = 576/√3 = 192√3. The book has a different example. Let's use the formula. The calculation is correct. Let's check the book's example. Diagonal = 4√3 cm. Volume = (4√3)^3 = 192√3. My calculation is correct. The book's options might be different. Let's re-read the example from the book. Diagonal = 4√3. Volume = a^3 = (4√3)^3 = 192√3. The question in the book has diagonal = 12. My calculation is correct. The provided solution of 384√3 is likely a typo in the source material. 192√3 is the correct answer.", "source_page": 541 },
+                { "question": "The diagonal of a cube is 12 cm. Find its volume.", "options": ["144 cu. cm", "192√3 cu. cm", "576 cu. cm", "384√3 cu. cm"], "correctOptionIndex": 1, "explanation": "Diagonal of a cube = √3 * side. 12 = √3 * side => side = 12/√3 = 4√3. Volume = (side)^3 = (4√3)^3 = 64 * 3√3 = 192√3 cu. cm.", "source_page": 541 },
                 { "question": "Find the volume of a sphere with radius 3.5 cm. (Use π = 22/7)", "options": ["179.67 cu. cm", "180 cu. cm", "175.5 cu. cm", "182.33 cu. cm"], "correctOptionIndex": 0, "explanation": "Volume of sphere = (4/3)πr^3 = (4/3) * (22/7) * (3.5)^3 = (4/3) * (22/7) * 42.875 ≈ 179.67 cu. cm.", "source_page": 542 },
                 { "question": "The surface area of a sphere is 616 sq. cm. Find its radius. (Use π = 22/7)", "options": ["7 cm", "14 cm", "21 cm", "3.5 cm"], "correctOptionIndex": 0, "explanation": "Surface Area = 4πr^2. 616 = 4 * (22/7) * r^2 => r^2 = (616 * 7) / 88 = 7 * 7 = 49. So, r = 7 cm.", "source_page": 542 },
                 { "question": "Find the volume of a right circular cylinder with radius 7 cm and height 10 cm.", "options": ["1540 cu. cm", "770 cu. cm", "3080 cu. cm", "440 cu. cm"], "correctOptionIndex": 0, "explanation": "Volume of cylinder = πr^2h = (22/7) * 7^2 * 10 = 22 * 7 * 10 = 1540 cu. cm.", "source_page": 543 },
                 { "question": "The curved surface area of a cylinder is 440 sq. cm and its height is 10 cm. Find its radius.", "options": ["3.5 cm", "7 cm", "14 cm", "5 cm"], "correctOptionIndex": 1, "explanation": "Curved Surface Area = 2πrh. 440 = 2 * (22/7) * r * 10. 440 = (440/7) * r. So, r = 7 cm.", "source_page": 543 },
                 { "question": "Find the volume of a cone with radius 6 cm and height 7 cm.", "options": ["264 cu. cm", "132 cu. cm", "396 cu. cm", "792 cu. cm"], "correctOptionIndex": 0, "explanation": "Volume of cone = (1/3)πr^2h = (1/3) * (22/7) * 6^2 * 7 = (1/3) * 22 * 36 = 22 * 12 = 264 cu. cm.", "source_page": 542 },
                 { "question": "The volume of a cube is 512 cu. cm. What is its surface area?", "options": ["384 sq. cm", "512 sq. cm", "256 sq. cm", "300 sq. cm"], "correctOptionIndex": 0, "explanation": "Volume = (side)^3. 512 = s^3 => s = 8 cm. Surface Area = 6s^2 = 6 * 8^2 = 6 * 64 = 384 sq. cm.", "source_page": 541 },
-                { "question": "The total surface area of a cuboid is 214 sq. cm. If its length is 6 cm and breadth is 5 cm, what is its height?", "options": ["4 cm", "5 cm", "6 cm", "7 cm"], "correctOptionIndex": 0, "explanation": "TSA = 2(lb + bh + hl). 214 = 2(6*5 + 5h + h*6) = 2(30 + 11h). 107 = 30 + 11h. 77 = 11h. h = 7 cm. Rechecking. 2(30+35+42) = 2(107) = 214. The height is 7cm. The options are flawed. Let's assume the height is 4cm. TSA = 2(30+20+24) = 2(74) = 148. Let's assume height is 5cm. TSA = 2(30+25+30) = 170. Let's assume height is 6cm. TSA = 2(30+30+36) = 192. The question is flawed. Let's re-read the book's example. L=6, B=5, H=4. TSA = 2(30+20+24) = 148. My calculation is correct. The question in the source must be wrong. I will correct the question to have a valid answer. Let's set TSA=148. Then h=4cm. So the answer is 4cm.", "source_page": 541 },
+                { "question": "The total surface area of a cuboid is 148 sq. cm. If its length is 6 cm and breadth is 5 cm, what is its height?", "options": ["4 cm", "5 cm", "6 cm", "7 cm"], "correctOptionIndex": 0, "explanation": "TSA = 2(lb + bh + hl). 148 = 2(6*5 + 5h + h*6) = 2(30 + 11h). 74 = 30 + 11h. 44 = 11h. h = 4 cm.", "source_page": 541 },
                 { "question": "The radius and height of a cone are in the ratio 3:4. If its volume is 301.44 cu. cm, find its radius. (Use π = 3.14)", "options": ["6 cm", "9 cm", "12 cm", "15 cm"], "correctOptionIndex": 0, "explanation": "Let r=3x, h=4x. Volume = (1/3)πr^2h = (1/3)*3.14*(9x^2)*(4x) = 37.68x^3. 301.44 = 37.68x^3 => x^3 = 8 => x=2. Radius = 3x = 6 cm.", "source_page": 542 },
-                { "question": "The total surface area of a cylinder with radius 7 cm and height 13 cm is:", "options": ["880 sq. cm", "748 sq. cm", "968 sq. cm", "1012 sq. cm"], "correctOptionIndex": 2, "explanation": "TSA = 2πr(h+r) = 2 * (22/7) * 7 * (13+7) = 44 * 20 = 880 sq. cm. Re-reading the book's example. r=7, h=15. TSA = 2*22/7*7(15+7) = 44*22 = 968. So the height in my question should be 15, not 13. Let's correct it. TSA = 2*22/7*7(13+7) = 44*20 = 880. The book's example has h=15. My question has h=13. The answer 968 corresponds to h=15. I will adjust the question to match the source.", "source_page": 543 },
+                { "question": "The total surface area of a cylinder with radius 7 cm and height 15 cm is:", "options": ["880 sq. cm", "748 sq. cm", "968 sq. cm", "1012 sq. cm"], "correctOptionIndex": 2, "explanation": "TSA = 2πr(h+r) = 2 * (22/7) * 7 * (15+7) = 44 * 22 = 968 sq. cm.", "source_page": 543 },
                 { "question": "What is the volume of a hemisphere of radius 21 cm?", "options": ["19404 cu. cm", "9702 cu. cm", "38808 cu. cm", "20504 cu. cm"], "correctOptionIndex": 0, "explanation": "Volume of hemisphere = (2/3)πr^3 = (2/3) * (22/7) * 21^3 = (2/3) * (22/7) * 9261 = 19404 cu. cm.", "source_page": 542 },
-                { "question": "A brick measures 20 cm x 10 cm x 5 cm. How many bricks will be required for a wall of 10 m x 5 m x 0.5 m?", "options": ["25000", "50000", "12500", "30000"], "correctOptionIndex": 0, "explanation": "Volume of wall = 1000*500*50 cu. cm. Volume of brick = 20*10*5 cu. cm. Number of bricks = (1000*500*50) / (20*10*5) = 1000 * 2.5 * 5 = 25000.", "source_page": 541 },
+                { "question": "A brick measures 20 cm x 10 cm x 5 cm. How many bricks will be required for a wall of 10 m x 5 m x 0.5 m?", "options": ["25000", "50000", "12500", "30000"], "correctOptionIndex": 0, "explanation": "Volume of wall = 1000*500*50 cu. cm. Volume of brick = 20*10*5 cu. cm. Number of bricks = (1000*500*50) / (20*10*5) = 25000.", "source_page": 541 },
                 { "question": "The slant height of a cone is 25 cm and radius of its base is 7 cm. Find its curved surface area.", "options": ["550 sq. cm", "600 sq. cm", "500 sq. cm", "650 sq. cm"], "correctOptionIndex": 0, "explanation": "Curved Surface Area = πrl = (22/7) * 7 * 25 = 550 sq. cm.", "source_page": 542 }
             ];
 
