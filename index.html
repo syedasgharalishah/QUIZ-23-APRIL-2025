@@ -3,913 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS MPT Daily Quiz - July 16, 2025 (Week 3 Review)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Include seedrandom.js for consistent daily question shuffling -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
+    <title>CONFIDENTIAL CSS ESSAY EVALUATION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Base Body Styling */
+        :root {
+            --primary-color: #002D62; /* A deep, authoritative blue */
+            --secondary-color: #F4F7F6; /* A very light grey for backgrounds */
+            --text-color: #212121; /* A dark grey for text */
+            --accent-color: #B00020; /* A strong red for critical issues */
+            --border-color: #DEE2E6;
+        }
+
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FDF5E6; /* Old Lace */
-            color: #8B4513; /* SaddleBrown */
+            font-family: 'Lato', sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background-color: var(--secondary-color);
             margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
+            padding: 20px;
         }
 
-        /* Top Bar Styling */
-        .top-bar {
+        .report-container {
+            max-width: 1000px;
+            margin: 30px auto;
             background-color: #ffffff;
-            border-bottom: 1px solid #e0e0e0;
-            padding: 0.75rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 40px 50px;
         }
 
-        .top-bar .date-display {
-            color: #555;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .top-bar .whatsapp-link {
-            color: #555;
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* Header Section Styling */
-        .header-section {
-            background-color: #ffffff;
-            padding: 1.5rem 1rem;
+        .report-header {
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            margin-bottom: 1rem;
-        }
-
-        .quiz-title {
-            font-family: 'Roboto', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #8B4513; /* SaddleBrown */
-            margin-bottom: 1rem;
-        }
-
-        /* Progress Bar Styling */
-        .progress-bar-container {
-            width: 80%;
-            max-width: 600px;
-            height: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            margin: 1rem auto;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(to right, #D2B48C, #CD853F); /* Tan to Peru */
-            border-radius: 5px;
-            transition: width 0.3s ease-in-out;
-        }
-
-        /* Banner Image and Credits */
-        .banner-logo {
-            max-width: 200px;
-            height: auto;
-            border-radius: 8px;
-            margin-top: 1rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .credits {
-            font-size: 0.85rem;
-            color: #2C3E50;
-            margin-top: 0.5rem;
-            font-weight: bold;
-        }
-
-        /* Card Styling */
-        .card {
-            background-color: #FAF0E6; /* Linen */
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 1.5rem;
-            margin: 1rem auto;
-            max-width: 700px;
-            width: 90%;
-            box-sizing: border-box;
-        }
-        
-        /* Admin Panel Card Specific Styling */
-        #adminPage.card {
-            max-width: 900px; /* Wider for table */
-        }
-
-        /* Button Styling */
-        .button-gradient {
-            background-image: linear-gradient(to right, #F4A460, #D2B48C); /* SandyBrown to Tan */
-            color: #4B2E2E;
-            font-weight: bold;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            cursor: pointer;
-            border: none;
-        }
-
-        .button-gradient:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        
-        .submit-button {
-             background-image: linear-gradient(to right, #4CAF50, #8BC34A);
-             color: white;
-        }
-        
-        .submit-button:hover {
-            box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
-        }
-
-        .button-danger {
-            background-image: linear-gradient(to right, #e53e3e, #c53030);
-            color: white;
-        }
-
-        /* Option Button Styling */
-        .option-button {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-bottom: 0.75rem;
-            color: #8B4513;
-        }
-        
-        .option-button:hover:not(.selected) {
-            transform: scale(1.02);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-        }
-
-        .option-button.selected {
-            border-color: #CD853F; /* Peru */
-            background-color: #FFF8DC; /* Cornsilk */
-            font-weight: bold;
-        }
-
-        .option-button.correct {
-            background-color: #90EE90; /* LightGreen */
-            border-color: #2E8B57; /* SeaGreen */
-            animation: pulse-green 0.5s ease-out forwards;
-        }
-
-        .option-button.incorrect {
-            background-color: #F08080; /* LightCoral */
-            border-color: #CD5C5C; /* IndianRed */
-            animation: shake-red 0.5s ease-out forwards;
-        }
-
-        /* Special Question Highlight */
-        .special-question {
-            border: 3px solid #FFD700; /* Gold border */
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-        }
-
-        /* Explanation Section */
-        .explanation {
-            background-color: #FFF5EE; /* SeaShell */
-            border-left: 5px solid #D2B48C; /* Tan */
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 8px;
-            color: #8B4513;
-            font-size: 0.9rem;
-            display: none; /* Hidden by default */
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .quiz-title { font-size: 1.5rem; }
-            .card { padding: 1rem; }
-        }
-
-        /* Keyframe Animations */
-        @keyframes pulse-green {
-            0% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(144, 238, 144, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0); }
-        }
-
-        @keyframes shake-red {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-
-        /* Custom Confirmation Modal */
-        .modal {
-            position: fixed;
-            z-index: 10000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
+            border-bottom: 5px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 80%;
-            max-width: 400px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        .header-logo {
+            font-family: 'Merriweather', serif;
+            font-weight: 900;
+            font-size: 48px;
+            color: var(--primary-color);
+            border: 4px solid var(--primary-color);
+            padding: 5px 15px;
+            margin-right: 20px;
+            line-height: 1;
         }
 
-        .modal-buttons {
-            display: flex;
-            justify-content: space-around;
+        .header-text h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 28px;
+            color: var(--primary-color);
+            margin: 0;
+            font-weight: 900;
+            letter-spacing: 1px;
+        }
+
+        .header-text p {
+            font-size: 16px;
+            color: #495057;
+            margin: 5px 0 0 0;
+            font-weight: 700;
+        }
+
+        .section-title {
+            font-family: 'Merriweather', serif;
+            font-size: 24px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 8px;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .student-essay {
+            background-color: #f8f9fa;
+            border-left: 6px solid var(--primary-color);
+            padding: 20px;
+            margin-bottom: 25px;
+            font-style: italic;
+            font-family: 'Merriweather', serif;
+        }
+        .student-essay ol, .student-essay ul {
+            padding-left: 25px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
             margin-top: 20px;
         }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            font-family: 'Merriweather', serif;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .analysis-text {
+            font-weight: normal;
+        }
+
+        .recommendation {
+            color: #155724;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .weakness {
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .critical-flaw-section {
+            border: 3px solid var(--accent-color);
+            background-color: #FEEBEE;
+            padding: 25px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        .critical-flaw-section .section-title {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+            margin-top: 0;
+            font-size: 26px;
+            text-align: center;
+        }
+        .critical-flaw-section p {
+            font-size: 18px;
+            text-align: center;
+            line-height: 1.8;
+        }
+        .critical-flaw-section strong {
+            font-weight: 700;
+            font-family: 'Merriweather', serif;
+        }
+
+        .blueprint-section {
+            margin-top: 40px;
+            background-color: #EAF2F8;
+            padding: 30px;
+            border-left: 6px solid #2874A6;
+        }
+        .blueprint-section h3 {
+            font-family: 'Merriweather', serif;
+            color: #1A5276;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        .blueprint-section pre {
+            background-color: #ffffff;
+            padding: 15px;
+            border: 1px dashed #ccc;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+        
+        .final-verdict {
+            background-color: #fefefe;
+            border-top: 4px solid var(--primary-color);
+            padding: 25px;
+            margin-top: 40px;
+        }
+        .final-verdict h3 {
+            color: var(--primary-color);
+            margin-top: 0;
+            font-family: 'Merriweather', serif;
+        }
+        .final-verdict ol {
+            padding-left: 20px;
+        }
+        .final-verdict li {
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
     </style>
 </head>
 <body>
-    
-    <script>
-        // --- Global State ---
-        const CURRENT_DATE_STR = "July 16, 2025";
-        let quizQuestions = [];
-        let currentQuestionIndex = 0;
-        let userAnswers = [];
-        let quizStartTime;
-        let timerInterval;
-        const QUIZ_DURATION_MINUTES = 100;
-        const TOTAL_QUESTIONS = 100;
-        let specialQuestionIndex = -1;
-        let quizSubmitted = false;
 
-        // --- Helper Functions ---
-        function shuffleArrayWithSeed(array, seed) {
-            let rng = new Math.seedrandom(seed);
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(rng() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
+    <div class="report-container">
 
-        function formatTime(totalSeconds) {
-            const minutes = Math.floor(totalSeconds / 60);
-            const seconds = totalSeconds % 60;
-            return `${minutes} minutes ${seconds} seconds`;
-        }
+        <div class="report-header">
+            <div class="header-logo">SASA</div>
+            <div class="header-text">
+                <h1>CONFIDENTIAL CSS ESSAY EVALUATION</h1>
+                <p>PREPARED BY: SYED ASGHAR ALI SHAH | CONTACT: 03265762698</p>
+            </div>
+        </div>
 
-        function updateProgressBar() {
-            const progressBar = document.getElementById('progressBar');
-            const questionProgress = document.getElementById('questionProgress');
+        <h2 class="section-title">1. Executive Summary</h2>
+        <p>This report presents a meticulous evaluation of a CSS aspirant's essay on "Money Laundering." The candidate demonstrates a satisfactory foundational knowledge of the topic, including its definition, processes, and general impacts. However, the submission fundamentally fails to meet the rigorous analytical and structural standards required for the CSS examination. The essay reads as a descriptive summary rather than a persuasive, thesis-driven argument. This evaluation identifies the core weaknesses, pinpoints the single most critical flaw that guarantees failure, and provides a detailed, actionable blueprint for constructing a high-scoring essay.</p>
 
-            if (progressBar && questionProgress) {
-                const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
-                progressBar.style.width = `${progress}%`;
-                questionProgress.textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length} – ${Math.round(progress)}% Complete`;
-            }
-        }
+        <h2 class="section-title">2. Candidate's Submission (Transcribed)</h2>
+        <div class="student-essay">
+            <p><strong>Outline:</strong></p>
+            <ul>
+                <li>Introduction</li>
+                <li>Money Laundering as a major [crime]</li>
+                <li>How it is Conducted By the Criminals</li>
+                <li>Impacts of Money Laundering</li>
+                <li>Solutions to overcome</li>
+                <li>Conclusion</li>
+            </ul>
+            <p><strong>Introduction:</strong></p>
+            <p>Money Laundering refers to the process of transferring or converting property derived from Criminal activity, making it appear Legally obtained. Under Section 3, Anti-Money Laundering Act 2010 (AMLA) it includes knowingly acquiring, using or transferring proceeds of crime. The objective is to integrate the dirty money into the Legitimate economy so it used freely.</p>
+            <p><strong>Body Sections (Summary of Content):</strong></p>
+            <ul>
+                <li><strong>As a Major Crime:</strong> Enables criminals (drug traffickers, terrorists) and threatens financial integrity.</li>
+                <li><strong>How it is Conducted:</strong> Explained through three stages: Placement (depositing cash), Layering (complex transactions), and Integration (reintroducing money into the economy).</li>
+                <li><strong>Impacts:</strong> Weakens economy, increases crime, reduces government revenue, encourages illegal businesses.</li>
+                <li><strong>Solutions:</strong> Strict laws, KYC policies, monitoring, international cooperation, technology, and punishment.</li>
+            </ul>
+            <p><strong>Conclusion:</strong></p>
+            <p>Money Laundering is a threat to national security and the global economy. In Pakistan, despite the AMLA 2010, challenges like enforcement gaps, the informal economy, and weak oversight persist. Pakistan must enhance capacity and align with FATF standards to combat this menace.</p>
+        </div>
 
-        function showPage(pageId) {
-            const pages = [
-                document.getElementById('loginPage'),
-                document.getElementById('candidateNamePage'),
-                document.getElementById('quizPage'),
-                document.getElementById('resultsPage'),
-                document.getElementById('adminPage')
-            ];
-            pages.forEach(page => {
-                if (page) page.classList.add('hidden');
-            });
-            const pageToShow = document.getElementById(pageId);
-            if(pageToShow) pageToShow.classList.remove('hidden');
-        }
+        <div class="critical-flaw-section">
+            <h2 class="section-title">THE CRITICAL FAILURE POINT</h2>
+            <p>Before proceeding, it is imperative to highlight the single most catastrophic error in this essay: <strong>The entire submission lacks a central argument (a thesis statement) and a logical structure to support it.</strong> The outline is a mere topic list, and the essay is a collection of disconnected facts. An essay without a thesis-driven structure is like a building without a foundation. It will collapse under scrutiny and is an automatic failure in the CSS exam. This is not a minor issue; it is the core reason for rejection.</p>
+        </div>
 
-        function startTimer() {
-            quizStartTime = Date.now();
-            let timeLeft = QUIZ_DURATION_MINUTES * 60;
-            const timerDisplay = document.getElementById('timerDisplay');
-
-            function updateTimerDisplay() {
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                if(timerDisplay) timerDisplay.textContent = `Time Left: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    if (!quizSubmitted) submitQuiz(true);
-                } else {
-                    timeLeft--;
-                }
-            }
-            updateTimerDisplay();
-            timerInterval = setInterval(updateTimerDisplay, 1000);
-        }
-
-        function renderQuestion() {
-            const questionText = document.getElementById('questionText');
-            const optionsContainer = document.getElementById('optionsContainer');
-            const quizCard = document.getElementById('quizPage');
-            const explanationDiv = document.getElementById('explanationDiv');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const submitQuizBtn = document.getElementById('submitQuizBtn');
-
-            if (!questionText || !optionsContainer || !quizCard || !explanationDiv || !prevBtn || !nextBtn || !submitQuizBtn) {
-                console.error("One or more quiz UI elements are missing.");
-                return;
-            }
-
-            const question = quizQuestions[currentQuestionIndex];
-            questionText.innerHTML = question.question;
-            optionsContainer.innerHTML = '';
-
-            quizCard.classList.remove('special-question');
-            if (question.special) {
-                quizCard.classList.add('special-question');
-            }
-            
-            const optionSeed = `${CURRENT_DATE_STR}-${currentQuestionIndex}`;
-            const shuffledOptions = [...question.options];
-            shuffleArrayWithSeed(shuffledOptions, optionSeed);
-
-            shuffledOptions.forEach((option, shuffledIndex) => {
-                const button = document.createElement('button');
-                button.classList.add('option-button', 'w-full');
-                button.innerHTML = option;
-                // Store the original index of the option
-                button.dataset.originalOptionIndex = question.options.indexOf(option);
-                button.onclick = () => selectOption(parseInt(button.dataset.originalOptionIndex));
-                optionsContainer.appendChild(button);
-            });
-
-            const userAnswer = userAnswers[currentQuestionIndex];
-            if (userAnswer && userAnswer.selectedOptionIndex !== undefined) {
-                 Array.from(optionsContainer.children).forEach((button) => {
-                    button.disabled = true; // Disable all options if already answered
-                    const btnOriginalIndex = parseInt(button.dataset.originalOptionIndex);
-                    if (btnOriginalIndex === userAnswer.selectedOptionIndex) {
-                        button.classList.add('selected', userAnswer.isCorrect ? 'correct' : 'incorrect');
-                    }
-                    // If the user's answer was incorrect, also highlight the correct answer
-                    if (!userAnswer.isCorrect && btnOriginalIndex === question.correctOptionIndex) {
-                         button.classList.add('correct');
-                    }
-                });
-            }
-
-            explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
-            explanationDiv.style.display = (userAnswer && userAnswer.selectedOptionIndex !== undefined) ? 'block' : 'none';
-
-            prevBtn.classList.toggle('hidden', currentQuestionIndex === 0);
-            nextBtn.classList.toggle('hidden', currentQuestionIndex === quizQuestions.length - 1);
-            submitQuizBtn.classList.remove('hidden'); // Always visible
-            updateProgressBar();
-        }
-
-        function selectOption(selectedOptionOriginalIndex) {
-            // Prevent changing answer if already selected
-            if (userAnswers[currentQuestionIndex] !== null && userAnswers[currentQuestionIndex].selectedOptionIndex !== undefined) {
-                return;
-            }
-
-            const question = quizQuestions[currentQuestionIndex];
-            const isCorrect = (selectedOptionOriginalIndex === question.correctOptionIndex);
-            userAnswers[currentQuestionIndex] = {
-                questionIndex: currentQuestionIndex,
-                selectedOptionIndex: selectedOptionOriginalIndex,
-                isCorrect: isCorrect
-            };
-            
-            renderQuestion(); // Re-render to show selection and explanation
-        }
+        <h2 class="section-title">3. Detailed Analytical Breakdown</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Core Essay Component</th>
+                    <th>Analysis of Candidate's Performance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>The Outline: The Essay's Blueprint</strong><br><span class="analysis-text">The outline must be a hierarchical map of your argument, written in complete sentences, and anchored by a clear thesis statement.</span></td>
+                    <td><span class="weakness">FATAL FLAW:</span> <span class="analysis-text">The provided outline is a simplistic table of contents, not an architectural plan. It lacks full sentences, sub-points, and most critically, a thesis statement. This guarantees a disorganized, descriptive, and non-argumentative essay. It tells the examiner you have no argument to make.</span><br><span class="recommendation">Recommendation:</span> <span class="analysis-text">The outline must be your entire argument in skeletal form. Every point must be a complete sentence that contributes to proving your central thesis.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>The Introduction: The First Impression</strong><br><span class="analysis-text">A powerful introduction must grab the reader's attention, frame the debate, and present a clear, confident, and argumentative thesis statement.</span></td>
+                    <td><span class="weakness">WEAK & NON-ARGUMENTATIVE:</span> <span class="analysis-text">The introduction is a dry, dictionary-style definition. It fails to engage the reader or establish a stance. It answers "What is money laundering?" but a CSS essay must answer "What is your argument about money laundering in the context of Pakistan?" There is no thesis.</span><br><span class="recommendation">Recommendation:</span> <span class="analysis-text">Develop a powerful opening hook and a strong thesis. The thesis is the soul of your essay and must be the last sentence of your introduction.</span></td>
+                </tr>
+                <tr>
+                    <td><strong>Argumentation & Analysis: The Core of the Essay</strong><br><span class="analysis-text">The body paragraphs must be analytical, not descriptive. Each must present a point, provide evidence, and then analyze its significance (the "So what?" factor).</span></td>
+                    <td><span class="weakness">ABSENCE OF ANALYSIS:</span> <span class="analysis-text">The essay describes the stages of money laundering (Placement, Layering, Integration) but fails to analyze them. For instance, it doesn't analyze *why* these methods are so difficult to police in Pakistan's specific economic context or how they exploit loopholes in our system. It lists impacts without connecting them to specific case studies or data from Pakistan.</span><br><span class="recommendation">Recommendation:</span> <span class="analysis-text">For every fact presented, you must provide analysis. Connect the 'how' of money laundering to the 'why' of Pakistan's vulnerability.</span></td>
+                </tr>
+                 <tr>
+                    <td><strong>Language, Expression & Accuracy</strong><br><span class="analysis-text">The language must be formal, precise, and free from errors. Credibility is destroyed by basic mistakes.</span></td>
+                    <td><span class="weakness">POOR EXECUTION:</span> <span class="analysis-text">The essay is marred by numerous spelling and grammatical errors ("Laindering," "caneating," "conside," "wraken," "plained"). These errors signal a lack of proficiency and distract the examiner, severely damaging the essay's credibility.</span><br><span class="recommendation">Recommendation:</span> <span class="analysis-text">Rigorous proofreading is mandatory. Dedicate at least 15-20 minutes to hunt for and eliminate these basic errors. An error-free script is the minimum expectation.</span></td>
+                </tr>
+            </tbody>
+        </table>
         
-        function nextQuestion() {
-            if (currentQuestionIndex < quizQuestions.length - 1) {
-                currentQuestionIndex++;
-                renderQuestion();
-            }
-        }
+        <div class="blueprint-section">
+            <h2 class="section-title">4. The Blueprint: How This Essay SHOULD Have Been Written</h2>
+            <p>To move from failure to success, you must internalize the structure of a high-scoring essay. Here is a blueprint for how your essay on Money Laundering should have been architected.</p>
 
-        function prevQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                renderQuestion();
-            }
-        }
-
-        async function submitQuiz(isAutoSubmit = false) {
-            if(quizSubmitted) return; // Prevent multiple submissions
-            quizSubmitted = true;
-
-            clearInterval(timerInterval);
-            const endTime = Date.now();
-            const timeTakenSeconds = Math.round((endTime - quizStartTime) / 1000);
-
-            let correctCount = 0;
-            let incorrectCount = 0;
-            let attemptedCount = 0;
-            userAnswers.forEach(answer => {
-                if (answer && answer.selectedOptionIndex !== undefined) {
-                    attemptedCount++;
-                    if (answer.isCorrect) correctCount++;
-                    else incorrectCount++;
-                }
-            });
-
-            const score = (correctCount * 2) - incorrectCount;
-            const candidateNameInput = document.getElementById('candidateName');
-            const candidateName = candidateNameInput ? candidateNameInput.value : 'N/A';
-
-
-            const resultCandidateName = document.getElementById('resultCandidateName');
-            const resultDate = document.getElementById('resultDate');
-            const resultScore = document.getElementById('resultScore');
-            const resultCorrect = document.getElementById('resultCorrect');
-            const resultIncorrect = document.getElementById('resultIncorrect');
-            const resultAttempted = document.getElementById('resultAttempted');
-            const resultTimeTaken = document.getElementById('resultTimeTaken');
-
-            if (resultCandidateName) resultCandidateName.textContent = candidateName;
-            if (resultDate) resultDate.textContent = CURRENT_DATE_STR;
-            if (resultScore) resultScore.textContent = `${score}`;
-            if (resultCorrect) resultCorrect.textContent = `${correctCount}`;
-            if (resultIncorrect) resultIncorrect.textContent = `${incorrectCount}`;
-            if (resultAttempted) resultAttempted.textContent = `${attemptedCount} / ${TOTAL_QUESTIONS}`;
-            if (resultTimeTaken) resultTimeTaken.textContent = formatTime(timeTakenSeconds);
+            <h3>Step 1: The Thesis Statement (Your Central Argument)</h3>
+            <p>First, you must decide on your argument. A strong thesis for this topic could be:</p>
+            <pre>While Pakistan has established a legal framework to combat money laundering, its deep-rooted informal economy, coupled with the sophisticated evolution of digital financial channels, renders these efforts insufficient, posing an existential threat to national security and economic sovereignty that demands a revolutionary overhaul of regulatory enforcement and financial transparency.</pre>
             
-            showPage('resultsPage');
+            <h3>Step 2: The Architectural Outline (Based on the Thesis)</h3>
+            <p>This outline is a complete argument in itself. Notice how every point is a full sentence that supports the thesis.</p>
+            <pre>
+Thesis Statement: While Pakistan has established a legal framework to combat money laundering, its deep-rooted informal economy, coupled with the sophisticated evolution of digital financial channels, renders these efforts insufficient, posing an existential threat to national security and economic sovereignty that demands a revolutionary overhaul of regulatory enforcement and financial transparency.
 
-            const resultData = {
-                id: Date.now().toString(), // Simple unique ID for localStorage
-                candidateName: candidateName,
-                quizDate: CURRENT_DATE_STR,
-                score: score,
-                correctCount: correctCount,
-                incorrectCount: incorrectCount,
-                attemptedCount: attemptedCount,
-                timeTaken: formatTime(timeTakenSeconds),
-                timeTakenSeconds: timeTakenSeconds,
-                submittedAt: new Date().toISOString(),
-                userId: 'local_user_' + Math.random().toString(36).substring(2, 10) // Mock user ID for local storage
-            };
+1.  Introduction
+
+2.  The Illusion of Progress: Pakistan's Legislative Efforts Against Money Laundering
+    a. Enactment of the Anti-Money Laundering Act (AMLA) 2010 as a foundational step.
+    b. Establishment of Financial Monitoring Units (FMUs) to meet international standards (FATF).
+
+3.  The Achilles' Heel: How Pakistan's Vast Informal Economy Cripples Enforcement
+    a. The untaxed and undocumented nature of key sectors (real estate, retail) provides fertile ground for placement.
+    b. The prevalence of traditional, non-bank-based value transfer systems (Hawala/Hundi) that bypass regulatory oversight.
+
+4.  The New Frontier of Crime: Digital Sophistication Outpacing Regulation
+    a. The rise of cryptocurrencies as a tool for anonymous, cross-border layering.
+    b. Exploitation of loosely regulated online payment gateways and e-commerce platforms for integration.
+
+5.  The Dire Consequences of Inaction: A Threat to National Security and Sovereignty
+    a. The direct link between money laundering and the financing of terrorism, undermining national security.
+    b. The erosion of economic sovereignty and policy effectiveness due to the growth of a parallel black economy.
+
+6.  A Roadmap for an Effective Overhaul: Beyond Legislative Patchwork
+    a. Aggressive documentation of the economy, focusing on real estate and wholesale trade.
+    b. Investing in advanced technological capacity for financial intelligence agencies to track digital transactions.
+    c. Fostering unwavering political will to prosecute high-profile financial crimes, breaking the cycle of impunity.
+
+7.  Conclusion
+            </pre>
+
+            <h3>Step 3: A High-Impact Introduction (Following the Blueprint)</h3>
+            <pre>
+In the global financial arena, few threats loom as large or as insidiously as money laundering, a sophisticated process that breathes life into criminal enterprises and terrorist networks. For Pakistan, a nation perennially in the crosshairs of economic instability and security challenges, this threat is not merely theoretical but a clear and present danger. Despite progress in the form of legislative actions like the Anti-Money Laundering Act of 2010 and a strenuous journey off the FATF grey list, a dangerous gap persists between policy on paper and reality on the ground. This chasm is where the true battle lies, fought in the undocumented alleyways of the informal market and the anonymous corridors of cyberspace. Therefore, while Pakistan has established a legal framework to combat money laundering, its deep-rooted informal economy, coupled with the sophisticated evolution of digital financial channels, renders these efforts insufficient, posing an existential threat to national security and economic sovereignty that demands a revolutionary overhaul of regulatory enforcement and financial transparency.
+            </pre>
             
-            // Save to localStorage
-            let results = JSON.parse(localStorage.getItem('quiz_results') || '[]');
-            results.push(resultData);
-            localStorage.setItem('quiz_results', JSON.stringify(results));
-            console.log("Result saved to localStorage:", resultData);
-        }
-
-        // --- Admin Panel Functions ---
-        function fetchAndDisplayResults() {
-            const resultsContainer = document.getElementById('resultsContainer');
-            if (!resultsContainer) {
-                console.error("Results container element not found.");
-                return;
-            }
-            resultsContainer.innerHTML = '<p class="text-center">Loading results...</p>';
-
-            // Retrieve from localStorage
-            let results = JSON.parse(localStorage.getItem('quiz_results') || '[]');
-            console.log("Fetched results from localStorage:", results);
-
-            // Sort by score (desc) then time taken (asc)
-            results.sort((a, b) => {
-                if (b.score !== a.score) return b.score - a.score;
-                return a.timeTakenSeconds - b.timeTakenSeconds;
-            });
-
-            renderResults(results);
-            console.log("Successfully rendered", results.length, "results.");
-        }
-
-        function renderResults(results) {
-            const resultsContainer = document.getElementById('resultsContainer');
-            if (!resultsContainer) return; // Defensive check
-
-            if (results.length === 0) {
-                resultsContainer.innerHTML = '<p class="text-center text-gray-500">No results submitted yet.</p>';
-                return;
-            }
-
-            resultsContainer.innerHTML = `
-                <div class="overflow-x-auto">
-                    <table class="min-w-full bg-white rounded-lg shadow">
-                        <thead class="bg-yellow-800 text-white">
-                            <tr>
-                                <th class="py-3 px-4 text-left">Rank</th>
-                                <th class="py-3 px-4 text-left">Candidate Name</th>
-                                <th class="py-3 px-4 text-left">User ID</th>
-                                <th class="py-3 px-4 text-left">Score</th>
-                                <th class="py-3 px-4 text-left">Correct</th>
-                                <th class="py-3 px-4 text-left">Incorrect</th>
-                                <th class="py-3 px-4 text-left">Time Taken</th>
-                                <th class="py-3 px-4 text-left">Date</th>
-                                <th class="py-3 px-4 text-left">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="resultsTableBody"></tbody>
-                    </table>
-                </div>
-            `;
-            
-            const tableBody = document.getElementById('resultsTableBody');
-            if (!tableBody) return; // Defensive check
-
-            results.forEach((result, index) => {
-                const row = document.createElement('tr');
-                row.className = 'border-b border-gray-200 hover:bg-gray-100';
-                row.innerHTML = `
-                    <td class="py-3 px-4 font-bold">${index + 1}</td>
-                    <td class="py-3 px-4">${result.candidateName || 'N/A'}</td>
-                    <td class="py-3 px-4 text-sm break-all">${result.userId || 'N/A'}</td>
-                    <td class="py-3 px-4 font-semibold">${result.score}</td>
-                    <td class="py-3 px-4 text-green-600">${result.correctCount}</td>
-                    <td class="py-3 px-4 text-red-600">${result.incorrectCount}</td>
-                    <td class="py-3 px-4">${result.timeTaken}</td>
-                    <td class="py-3 px-4">${result.quizDate}</td>
-                    <td class="py-3 px-4">
-                        <button onclick="showConfirmModal('${result.id}')" class="button-gradient button-danger text-xs px-3 py-1">Remove</button>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-
-        // Custom confirmation modal logic
-        let confirmActionCallback = null;
-        let confirmActionId = null;
-
-        function showConfirmModal(docId) {
-            const confirmModal = document.getElementById('confirmModal');
-            if (confirmModal) {
-                confirmActionId = docId;
-                confirmModal.classList.remove('hidden');
-                confirmActionCallback = () => deleteResult(docId); // Set the callback
-            }
-        }
-
-        function hideConfirmModal() {
-            const confirmModal = document.getElementById('confirmModal');
-            if (confirmModal) {
-                confirmModal.classList.add('hidden');
-                confirmActionCallback = null;
-                confirmActionId = null;
-            }
-        }
-
-        // Make functions globally accessible for onclick attributes in HTML
-        window.showConfirmModal = showConfirmModal;
-
-        function deleteResult(docId) {
-            let results = JSON.parse(localStorage.getItem('quiz_results') || '[]');
-            const updatedResults = results.filter(result => result.id !== docId);
-            localStorage.setItem('quiz_results', JSON.stringify(updatedResults));
-            console.log("Result removed from localStorage:", docId);
-            fetchAndDisplayResults(); // Re-render results after deletion
-        }
-
-
-        // --- Quiz Initialization ---
-        function initializeQuiz() {
-            quizQuestions.length = 0; // Clear previous questions
-            userAnswers = new Array(TOTAL_QUESTIONS).fill(null); // Reset user answers
-            currentQuestionIndex = 0; // Reset question index
-            quizSubmitted = false; // Reset submission flag
-
-            const dateSeed = CURRENT_DATE_STR;
-            
-            const allQuestions = [
-                // === July 16th Syllabus Quiz (Week 3 Review - 100 MCQs) ===
-
-                // GK - Airlines, Airports, Places (pp. 53-59)
-                { "question": "Qantas is the flag carrier airline of which country?", "options": ["New Zealand", "Australia", "South Africa", "Canada"], "correctOptionIndex": 1, "explanation": "Qantas is the flag carrier of Australia.", "source_page": 54 },
-                { "question": "Where is the 'Pentagon', the headquarters of the US Department of Defense, located?", "options": ["Arlington, Virginia", "Washington D.C.", "Maryland", "New York"], "correctOptionIndex": 0, "explanation": "The Pentagon is located in Arlington County, Virginia.", "source_page": 53 },
-                { "question": "Charles de Gaulle Airport is the primary international airport for which European capital?", "options": ["Madrid", "Rome", "Berlin", "Paris"], "correctOptionIndex": 3, "explanation": "Charles de Gaulle Airport is the largest international airport in France, serving Paris.", "source_page": 57 },
-                { "question": "Aeroflot is the national airline of which country?", "options": ["Poland", "Hungary", "Russia", "Ukraine"], "correctOptionIndex": 2, "explanation": "Aeroflot is the flag carrier and largest airline of the Russian Federation.", "source_page": 58 },
-                { "question": "Dum Dum Airport is the former name of the international airport in which Indian city?", "options": ["Mumbai", "Delhi", "Kolkata", "Chennai"], "correctOptionIndex": 2, "explanation": "Netaji Subhas Chandra Bose International Airport in Kolkata was formerly known as Dum Dum Airport.", "source_page": 59 },
-                
-                // GK - News Agencies (pp. 60-61)
-                { "question": "AFP (Agence France-Presse) is the news agency of which country?", "options": ["Germany", "France", "Spain", "Belgium"], "correctOptionIndex": 1, "explanation": "Agence France-Presse (AFP) is a leading global news agency headquartered in Paris, France.", "source_page": 60 },
-                { "question": "Bernama is the official news agency of which country?", "options": ["Indonesia", "Thailand", "Malaysia", "Singapore"], "correctOptionIndex": 2, "explanation": "Bernama is the national news agency of Malaysia.", "source_page": 60 },
-                { "question": "Reuters is a major international news agency headquartered in which city?", "options": ["New York", "Paris", "London", "Toronto"], "correctOptionIndex": 2, "explanation": "Reuters is an international news organization headquartered in London, United Kingdom.", "source_page": 61 },
-                
-                // GK - Nobel Prize (pp. 62-66)
-                { "question": "Who was the first Muslim to receive a Nobel Prize?", "options": ["Yasser Arafat", "Anwar Sadat", "Dr. Abdus Salam", "Naguib Mahfouz"], "correctOptionIndex": 1, "explanation": "Anwar Sadat, the President of Egypt, was the first Muslim to win a Nobel Prize, receiving the Peace Prize in 1978.", "source_page": 63 },
-                { "question": "Who is the youngest person to ever receive a Nobel Prize?", "options": ["Malala Yousafzai", "Lawrence Bragg", "Nadia Murad", "Tsung-Dao Lee"], "correctOptionIndex": 0, "explanation": "Malala Yousafzai of Pakistan is the youngest Nobel laureate, receiving the Peace Prize in 2014 at the age of 17.", "source_page": 63 },
-                { "question": "In which city is the Nobel Peace Prize awarded?", "options": ["Stockholm, Sweden", "Oslo, Norway", "Copenhagen, Denmark", "Helsinki, Finland"], "correctOptionIndex": 1, "explanation": "The Nobel Peace Prize is awarded in Oslo, Norway.", "source_page": 62 },
-                
-                // GK - Awards & Borders (pp. 67-69)
-                { "question": "What is the highest military award of Pakistan?", "options": ["Sitara-e-Jurat", "Hilal-e-Jurat", "Nishan-e-Haider", "Tamgha-e-Jurat"], "correctOptionIndex": 2, "explanation": "The Nishan-e-Haider is the highest military gallantry award of Pakistan.", "source_page": 67 },
-                { "question": "The Radcliffe Line demarcates the border between:", "options": ["India and China", "Pakistan and Afghanistan", "India and Pakistan", "India and Bangladesh"], "correctOptionIndex": 2, "explanation": "The Radcliffe Line became the border between India and Pakistan upon the partition of India in 1947.", "source_page": 68 },
-                { "question": "The '38th Parallel' forms the border between which two countries?", "options": ["North and South Vietnam", "East and West Germany", "North and South Korea", "USA and Canada"], "correctOptionIndex": 2, "explanation": "The 38th parallel north formed the border between North and South Korea.", "source_page": 69 },
-                
-                // GK - Important Days & Personalities (pp. 70-78)
-                { "question": "International Women's Day is celebrated on which date?", "options": ["February 14", "March 8", "April 1", "May 10"], "correctOptionIndex": 1, "explanation": "International Women's Day is a global day celebrating the achievements of women, observed on March 8th.", "source_page": 70 },
-                { "question": "When is United Nations Day celebrated?", "options": ["September 24", "October 24", "November 24", "December 24"], "correctOptionIndex": 1, "explanation": "United Nations Day, on October 24th, marks the anniversary of the UN Charter entering into force.", "source_page": 72 },
-                { "question": "Who is known as the 'Iron Lady' of the United Kingdom?", "options": ["Queen Elizabeth II", "Theresa May", "Margaret Thatcher", "Diana, Princess of Wales"], "correctOptionIndex": 2, "explanation": "Margaret Thatcher was nicknamed the 'Iron Lady' for her uncompromising leadership style.", "source_page": 74 },
-                { "question": "Who was the first man to walk on the moon?", "options": ["Buzz Aldrin", "Michael Collins", "Yuri Gagarin", "Neil Armstrong"], "correctOptionIndex": 3, "explanation": "Neil Armstrong was the first person to walk on the Moon during the Apollo 11 mission in 1969.", "source_page": 76 },
-                { "question": "Who is credited with the invention of the telephone?", "options": ["Thomas Edison", "Guglielmo Marconi", "Alexander Graham Bell", "Nikola Tesla"], "correctOptionIndex": 2, "explanation": "Alexander Graham Bell is widely credited with patenting the first practical telephone.", "source_page": 78 },
-                
-                // English - Direct/Indirect & Active/Passive (pp. 454-471)
-                { "question": "Change to indirect speech: She said, 'My father will come tomorrow.'", "options": ["She said that her father will come the next day.", "She said that her father would come tomorrow.", "She said that her father would come the next day.", "She told that her father would come the next day."], "correctOptionIndex": 2, "explanation": "'Will' changes to 'would', 'my' to 'her', and 'tomorrow' to 'the next day'.", "source_page": 455 },
-                { "question": "Change to passive voice: 'The cat killed the mouse.'", "options": ["The mouse was killed by the cat.", "The mouse is killed by the cat.", "The cat was killed by the mouse.", "The mouse had been killed by the cat."], "correctOptionIndex": 0, "explanation": "The object becomes the subject, and the verb changes to past tense passive.", "source_page": 464 },
-                { "question": "Change to active voice: 'A letter was written by him.'", "options": ["He is writing a letter.", "He has written a letter.", "He wrote a letter.", "He writes a letter."], "correctOptionIndex": 2, "explanation": "The object 'him' becomes the subject 'He'. The verb 'was written' changes to the simple past 'wrote'.", "source_page": 464 },
-                { "question": "Change to passive voice: 'Who taught you English?'", "options": ["By whom were you taught English?", "By whom was you taught English?", "By whom are you taught English?", "English was taught to you by who?"], "correctOptionIndex": 0, "explanation": "Questions with 'Who' change to 'By whom' in the passive voice.", "source_page": 466 },
-                { "question": "Change to passive voice: 'Open the door.'", "options": ["The door should be opened.", "Let the door be opened.", "You are ordered to open the door.", "All of the above are correct"], "correctOptionIndex": 3, "explanation": "Imperative sentences can be changed to passive voice in several ways.", "source_page": 467 },
-                { "question": "Change to active voice: 'The work had been finished by them.'", "options": ["They finished the work.", "They were finishing the work.", "They have finished the work.", "They had finished the work."], "correctOptionIndex": 3, "explanation": "The past perfect passive 'had been finished' changes to the past perfect active 'had finished'.", "source_page": 465 },
-                { "question": "Change to indirect speech: 'Don't make a noise,' he said.", "options": ["He told them not to make a noise.", "He forbade them to make a noise.", "He asked them don't make a noise.", "Both A and B are correct"], "correctOptionIndex": 3, "explanation": "A negative command can be reported using 'told...not to' or 'forbade...to'.", "source_page": 457 },
-                { "question": "Change to active voice: 'By whom was this jug broken?'", "options": ["Who broke this jug?", "Who has broken this jug?", "Who was breaking this jug?", "Who did break this jug?"], "correctOptionIndex": 0, "explanation": "'By whom' in passive becomes 'Who' in active. 'was...broken' becomes 'broke'.", "source_page": 466 },
-                { "question": "Change to passive voice: 'We must listen to his words.'", "options": ["His words must be listened to by us.", "His words must be listened by us.", "His words should be listened to by us.", "His words are to be listened to by us."], "correctOptionIndex": 0, "explanation": "When a verb is followed by a preposition, the preposition must be retained in the passive voice.", "source_page": 467 },
-                { "question": "Change to active voice: 'The city was destroyed by an earthquake.'", "options": ["An earthquake destroyed the city.", "An earthquake was destroying the city.", "An earthquake has destroyed the city.", "An earthquake had destroyed the city."], "correctOptionIndex": 0, "explanation": "Simple past passive ('was destroyed') changes to simple past active ('destroyed').", "source_page": 468 },
-                
-                // GA/Maths - Discounts, Clocks, Decimals, Area (pp. 531-540)
-                { "question": "What is the Present Worth (P.W.) of Rs. 132 due in 2 years at 5% simple interest per annum?", "options": ["Rs. 110", "Rs. 115", "Rs. 120", "Rs. 122"], "correctOptionIndex": 2, "explanation": "P.W. = Amount / (1 + (R*T)/100) = 132 / (1 + (5*2)/100) = 132 / 1.1 = Rs. 120.", "source_page": 531 },
-                { "question": "The Present Worth of a sum due sometime hence is Rs. 576 and the Banker's Gain is Rs. 9. The True Discount is:", "options": ["Rs. 72", "Rs. 81", "Rs. 60", "Rs. 54"], "correctOptionIndex": 0, "explanation": "Banker's Gain (B.G.) = (T.D.)^2 / P.W. => 9 = (T.D.)^2 / 576 => T.D. = sqrt(5184) = 72.", "source_page": 533 },
-                { "question": "What is the angle between the minute hand and the hour hand of a clock at 3:40?", "options": ["120°", "130°", "140°", "150°"], "correctOptionIndex": 1, "explanation": "Angle = |(11/2)*40 - 30*3| = |220 - 90| = 130 degrees.", "source_page": 534 },
-                { "question": "How many times are the hands of a clock at a right angle in a day?", "options": ["22", "24", "44", "48"], "correctOptionIndex": 2, "explanation": "The hands are at a right angle 44 times in 24 hours.", "source_page": 535 },
-                { "question": "Convert 0.75 into a vulgar fraction.", "options": ["75/10", "3/4", "7/5", "5/4"], "correctOptionIndex": 1, "explanation": "0.75 = 75/100 = 3/4.", "source_page": 536 },
-                { "question": "Evaluate: 0.2 x 0.02 x 0.002", "options": ["0.000008", "0.00008", "0.0008", "0.008"], "correctOptionIndex": 0, "explanation": "2x2x2=8. Total decimal places = 1+2+3=6. So, 0.000008.", "source_page": 537 },
-                { "question": "The area of a square is 256 sq. cm. Find the length of its side.", "options": ["14 cm", "16 cm", "18 cm", "20 cm"], "correctOptionIndex": 1, "explanation": "Side = sqrt(Area) = sqrt(256) = 16 cm.", "source_page": 538 },
-                { "question": "The area of a circle is 154 sq. cm. What is its circumference? (Use π = 22/7)", "options": ["22 cm", "44 cm", "66 cm", "88 cm"], "correctOptionIndex": 1, "explanation": "Area = πr^2 => 154 = (22/7)r^2 => r=7. Circumference = 2πr = 44 cm.", "source_page": 540 },
-                
-                // Urdu & Islamic Studies (Urdu/IS Section pp. 14-30)
-                { "question": "مواخات مدینہ سے کیا مراد ہے؟", "options": ["یہودیوں سے معاہدہ", "انصار و مہاجرین میں بھائی چارے کا رشتہ", "مکہ پر حملے کی تیاری", "مدینہ کا نام بدلنا"], "correctOptionIndex": 1, "explanation": "مواخات سے مراد وہ بھائی چارے کا رشتہ ہے جو آپؐ نے مہاجرین اور انصار کے درمیان قائم فرمایا تھا۔", "source_page": "Urdu/IS Sec. 14" },
-                { "question": "غزوہ بدر کس ہجری میں پیش آیا؟", "options": ["1 ہجری", "2 ہجری", "3 ہجری", "5 ہجری"], "correctOptionIndex": 1, "explanation": "غزوہ بدر 17 رمضان المبارک 2 ہجری کو لڑی گئی۔", "source_page": "Urdu/IS Sec. 15" },
-                { "question": "غزوہ احد میں آپؐ کے کس چچا کو بے دردی سے شہید کیا گیا؟", "options": ["حضرت عباسؓ", "حضرت حمزہؓ", "حضرت ابوطالب", "حضرت عبداللہؓ"], "correctOptionIndex": 1, "explanation": "آپؐ کے چچا حضرت حمزہ بن عبدالمطلبؓ کو وحشی بن حرب نے شہید کیا۔", "source_page": "Urdu/IS Sec. 16" },
-                { "question": "ایمان کا سب سے پہلا اور بنیادی جزو کیا ہے؟", "options": ["رسالت پر ایمان", "آخرت پر ایمان", "اللہ پر ایمان (توحید)", "کتابوں پر ایمان"], "correctOptionIndex": 2, "explanation": "ایمان کی بنیاد توحید ہے، یعنی اس بات پر یقین رکھنا کہ اللہ ایک ہے۔", "source_page": "Urdu/IS Sec. 17" },
-                { "question": "چار مشہور آسمانی کتابیں کون سی ہیں؟", "options": ["قرآن، بائبل، گیتا، وید", "زبور، تورات، انجیل، قرآن", "قرآن، حدیث، فقہ، تاریخ", "انجیل، رامائن، مہابھارت، قرآن"], "correctOptionIndex": 1, "explanation": "چار مشہور آسمانی کتابیں: تورات، زبور، انجیل، اور قرآن مجید ہیں۔", "source_page": "Urdu/IS Sec. 18" },
-                { "question": "ختم نبوت کا کیا عقیدہ ہے؟", "options": ["نبیوں کا سلسلہ جاری ہے", "حضرت محمدؐ اللہ کے آخری نبی ہیں اور آپ کے بعد کوئی نبی نہیں آئے گا", "ہر قوم میں ایک نبی آئے گا", "نبی صرف بنی اسرائیل میں آئے"], "correctOptionIndex": 1, "explanation": "ختم نبوت کا مطلب ہے کہ نبوت کا سلسلہ حضرت محمدؐ پر ختم ہو گیا ہے۔", "source_page": "Urdu/IS Sec. 18" },
-                { "question": "وہ نظم جس میں کسی کی موت پر غم کا اظہار کیا جائے، کیا کہلاتی ہے؟", "options": ["قصیدہ", "غزل", "مرثیہ", "مثنوی"], "correctOptionIndex": 2, "explanation": "مرثیہ اس نظم کو کہتے ہیں جس میں کسی شخص کی وفات پر رنج و غم کا اظہار کیا جاتا ہے۔", "source_page": "Urdu Sec. 23" },
-                { "question": "اردو کے پہلے باقاعدہ نقاد (critic) کون مانے جاتے ہیں؟", "options": ["شبلی نعمانی", "محمد حسین آزاد", "الطاف حسین حالی", "امداد امام اثر"], "correctOptionIndex": 2, "explanation": "مولانا الطاف حسین حالی کو 'مقدمہ شعر و شاعری' کی وجہ سے اردو کا پہلا باقاعدہ نقاد تسلیم کیا جاتا ہے۔", "source_page": "Urdu Sec. 24" },
-                { "question": "کتاب 'شکوہ' اور 'جواب شکوہ' کس کی تخلیق ہیں؟", "options": ["مرزا غالب", "الطاف حسین حالی", "علامہ اقبال", "فیض احمد فیض"], "correctOptionIndex": 2, "explanation": "'شکوہ' اور 'جوابِ شکوہ' علامہ محمد اقبال کی مشہور نظمیں ہیں۔", "source_page": "Urdu Sec. 27" },
-                { "question": "ناول 'راجہ گدھ' کس نے لکھا ہے؟", "options": ["اشفاق احمد", "بانو قدسیہ", "عبداللہ حسین", "شوکت صدیقی"], "correctOptionIndex": 1, "explanation": "'راجہ گدھ' بانو قدسیہ کا ایک مشہور ناول ہے۔", "source_page": "Urdu Sec. 28" },
-                { "question": "اردو ادب میں 'بابائے اردو' کسے کہا جاتا ہے؟", "options": ["میر تقی میر", "ولی دکنی", "مولوی عبدالحق", "مرزا غالب"], "correctOptionIndex": 2, "explanation": "مولوی عبدالحق کو اردو زبان کے لیے ان کی خدمات کی وجہ سے 'بابائے اردو' کا لقب دیا گیا ہے۔", "source_page": "Urdu Sec. 30" }
-            ];
-
-            // Fill up to 100 questions by duplicating and slightly modifying existing ones if needed
-            let finalQuestions = [];
-            while(finalQuestions.length < TOTAL_QUESTIONS) {
-                finalQuestions.push(...allQuestions);
-            }
-            finalQuestions = finalQuestions.slice(0, TOTAL_QUESTIONS);
-
-            shuffleArrayWithSeed(finalQuestions, dateSeed);
-            quizQuestions = finalQuestions;
-
-            if (quizQuestions.length > 0) {
-                let rng = new Math.seedrandom(dateSeed + '-special');
-                specialQuestionIndex = Math.floor(rng() * quizQuestions.length);
-                quizQuestions[specialQuestionIndex].special = true;
-            }
-        }
-
-        // --- Event Listeners ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // Set the login ID based on the current date
-            const dateParts = CURRENT_DATE_STR.split(' ');
-            const monthName = dateParts[0].toUpperCase().substring(0,3);
-            const day = parseInt(dateParts[1].replace(',', ''));
-            const loginIdInput = document.getElementById('loginId');
-            if(loginIdInput) loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName}`; // e.g., 16JUL
-
-            // Update date displays
-            const currentDateText = document.getElementById('currentDateText');
-            const updatedDate = document.getElementById('updatedDate');
-            const quizTitle = document.getElementById('quizTitle');
-
-            if (currentDateText) currentDateText.textContent = CURRENT_DATE_STR;
-            if (updatedDate) updatedDate.textContent = CURRENT_DATE_STR;
-            if (quizTitle) quizTitle.textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR} (Week 3 Review)`;
-
-            const loginBtn = document.getElementById('loginBtn');
-            if (loginBtn) {
-                loginBtn.addEventListener('click', () => {
-                    const id = document.getElementById('loginId').value;
-                    const password = document.getElementById('loginPassword').value;
-                    const loginError = document.getElementById('loginError');
-
-                    if (id === 'syedasgharalishah' && password === 'admin') {
-                        if (loginError) loginError.classList.add('hidden');
-                        showPage('adminPage');
-                        fetchAndDisplayResults(); // Fetch results when admin logs in
-                        return;
-                    }
-
-                    const expectedId = `${day.toString().padStart(2,'0')}${monthName}`;
-                    if (id.toUpperCase() === expectedId && password === 'free') {
-                        if (loginError) loginError.classList.add('hidden');
-                        showPage('candidateNamePage');
-                    } else {
-                        if (loginError) loginError.classList.remove('hidden');
-                    }
-                });
-            }
-
-            const startQuizBtn = document.getElementById('startQuizBtn');
-            if (startQuizBtn) {
-                startQuizBtn.addEventListener('click', () => {
-                    const candidateNameInput = document.getElementById('candidateName');
-                    const nameError = document.getElementById('nameError');
-                    const candidateName = candidateNameInput ? candidateNameInput.value.trim() : '';
-
-                    if (candidateName) {
-                        if (nameError) nameError.classList.add('hidden');
-                        initializeQuiz(); // Re-initialize quiz for a fresh start
-                        startTimer();
-                        renderQuestion();
-                        showPage('quizPage');
-                    } else {
-                        if (nameError) nameError.classList.remove('hidden');
-                    }
-                });
-            }
-
-            const nextBtn = document.getElementById('nextBtn');
-            if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
-            
-            const prevBtn = document.getElementById('prevBtn');
-            if (prevBtn) prevBtn.addEventListener('click', prevQuestion);
-            
-            const submitQuizBtn = document.getElementById('submitQuizBtn');
-            if (submitQuizBtn) submitQuizBtn.addEventListener('click', () => submitQuiz(false));
-            
-            const restartQuizBtn = document.getElementById('restartQuizBtn');
-            if (restartQuizBtn) {
-                restartQuizBtn.addEventListener('click', () => {
-                    clearInterval(timerInterval);
-                    initializeQuiz();
-                    showPage('loginPage');
-                });
-            }
-
-            const adminLogoutBtn = document.getElementById('adminLogoutBtn');
-            if (adminLogoutBtn) {
-                adminLogoutBtn.addEventListener('click', () => {
-                    showPage('loginPage');
-                });
-            }
-
-            const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-            if (confirmDeleteBtn) confirmDeleteBtn.addEventListener('click', () => {
-                if (confirmActionCallback) {
-                    confirmActionCallback();
-                }
-                hideConfirmModal();
-            });
-
-            const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
-            if (cancelDeleteBtn) cancelDeleteBtn.addEventListener('click', () => {
-                hideConfirmModal();
-            });
-            
-            initializeQuiz(); // Initial call to set up questions on page load
-        });
-    </script>
-
-    <script>
-        // Disable right-click, copy/paste, and developer tools for security
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.addEventListener('keydown', e => {
-            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
-                e.preventDefault();
-            }
-            if (e.key === 'F12') { e.preventDefault(); }
-        });
-        document.addEventListener('copy', event => event.preventDefault());
-        document.addEventListener('paste', event => event.preventDefault());
-    </script>
-
-    <div class="top-bar">
-        <div class="date-display" id="liveDate">
-            <i class="fas fa-calendar-alt"></i> <span id="currentDateText"></span>
+            <h3>Step 4: An Analytical Body Paragraph (Example from the Outline)</h3>
+            <p>This paragraph corresponds to point #3 from the outline. Notice the Topic Sentence, Evidence, Analysis, and Link (TEAL model).</p>
+            <pre>
+(Topic Sentence) The primary obstacle undermining Pakistan's fight against financial crime is the sheer scale of its Achilles' heel: a vast and deeply entrenched informal economy. (Evidence) Sectors such as real estate and retail trade, which contribute significantly to the GDP, operate largely outside the documented financial system, relying on cash transactions that leave no paper trail for authorities to follow. This environment provides the perfect ecosystem for the 'placement' stage of money laundering, where illicit cash can be absorbed into the economy with minimal risk of detection. (Analysis - The "So what?") The significance of this is profound; it means that even the most stringent banking regulations are rendered impotent when billions of rupees can be laundered through the purchase of property or goods without ever entering a bank account. This systemic vulnerability creates a paradox where the state attempts to police the formal financial sector while a parallel, unregulated economy thrives and serves as a safe haven for criminal proceeds. (Link) Consequently, until this structural flaw is addressed, the digital evolution of financial crime presents an even more daunting challenge.
+            </pre>
         </div>
-        <a href="https://chat.whatsapp.com/your-whatsapp-community-link" target="_blank" class="whatsapp-link">
-            <i class="fab fa-whatsapp"></i> Join WhatsApp Community
-        </a>
+
+        <div class="final-verdict">
+            <h2 class="section-title">5. Final Verdict & Action Plan</h2>
+            <h3>Overall Assessment</h3>
+            <p>The candidate possesses the necessary knowledge of the topic but lacks the fundamental skills of essay architecture required for CSS. The current approach is descriptive and will not pass. The potential for success is present, but it requires a complete deconstruction of current habits and a disciplined reconstruction based on the principles of argumentative writing.</p>
+            
+            <h3>Mandatory Action Plan:</h3>
+            <ol>
+                <li><strong>Cease Writing Full Essays Immediately:</strong> Your immediate focus must be on the foundational skills. Do not write another full essay until you have mastered the outline.</li>
+                <li><strong>Master the Architectural Outline:</strong> For the next two weeks, your only task is to create detailed, sentence-based outlines for various past paper topics. Each outline must be built around a strong, argumentative thesis statement, as demonstrated above.</li>
+                <li><strong>Practice the T.E.A.L. Paragraph Model:</strong> Write individual, standalone paragraphs on different topics using the Topic Sentence, Evidence, Analysis, and Link structure. This will build your analytical muscle.</li>
+                <li><strong>Adopt the "Policy Analyst" Mindset:</strong> You are not a student summarizing a topic; you are an analyst presenting a persuasive argument to a superior. Every sentence must serve your argument.</li>
+            </ol>
+            <p>Success in the CSS essay is not about how much you know, but how well you can structure what you know into a compelling argument. By following this blueprint with discipline, you can transform your approach and meet the standard required for success.</p>
+        </div>
+
     </div>
 
-    <div class="header-section">
-        <h1 class="quiz-title" id="quizTitle"></h1>
-        <div class="progress-bar-container">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-        <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Banner Logo" class="banner-logo mx-auto">
-        <div class="credits">
-            DAWNDIGEST
-            <br>
-            PREPARED BY: SYED ASGHAR ALI SHAH Contact: 03265762698
-            <br>
-            Updated on: <span id="updatedDate"></span>
-        </div>
-    </div>
-
-    <main class="flex-grow flex items-center justify-center p-4">
-        <div id="loginPage" class="card">
-            <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
-            <div class="mb-4">
-                <label for="loginId" class="block text-sm font-medium text-gray-700 mb-1">ID:</label>
-                <input type="text" id="loginId" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700" value="">
-            </div>
-            <div class="mb-6">
-                <label for="loginPassword" class="block text-sm font-medium text-gray-700 mb-1">Password:</label>
-                <input type="password" id="loginPassword" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700" value="free">
-            </div>
-            <p id="loginError" class="text-red-500 text-sm mb-4 hidden">Invalid ID or Password</p>
-            <button id="loginBtn" class="button-gradient w-full">Login</button>
-        </div>
-
-        <div id="candidateNamePage" class="card hidden">
-            <h2 class="text-xl font-bold mb-4 text-center">Candidate Information</h2>
-            <div class="mb-6">
-                <label for="candidateName" class="block text-sm font-medium text-gray-700 mb-1">Enter Full Name:</label>
-                <input type="text" id="candidateName" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700" placeholder="Your Full Name">
-            </div>
-            <p id="nameError" class="text-red-500 text-sm mb-4 hidden">Please enter your full name.</p>
-            <button id="startQuizBtn" class="button-gradient w-full">Start Quiz</button>
-        </div>
-
-        <div id="quizPage" class="card hidden">
-            <div class="timer-display text-lg font-bold text-gray-700 mb-4 text-center" id="timerDisplay"></div>
-            <div class="question-progress text-center text-sm text-gray-500 mb-4" id="questionProgress"></div>
-            <h2 class="text-lg font-semibold mb-4" id="questionText"></h2>
-            <div id="optionsContainer" class="flex flex-col gap-3 mb-6"></div>
-            <div class="flex justify-between items-center">
-                <button id="prevBtn" class="button-gradient px-6 py-2">Previous</button>
-                <button id="submitQuizBtn" class="button-gradient submit-button px-6 py-2">Submit</button>
-                <button id="nextBtn" class="button-gradient px-6 py-2">Next</button>
-            </div>
-            <div id="explanationDiv" class="explanation"></div>
-        </div>
-
-        <div id="resultsPage" class="card hidden">
-            <h2 class="text-xl font-bold mb-4 text-center">Quiz Results</h2>
-            <p class="mb-2"><strong>Candidate Name:</strong> <span id="resultCandidateName"></span></p>
-            <p class="mb-2"><strong>Date of Quiz:</strong> <span id="resultDate"></span></p>
-            <p class="mb-2"><strong>Score:</strong> <span id="resultScore"></span> / 200</p>
-            <p class="mb-2"><strong>Correct Answers:</strong> <span id="resultCorrect"></span></p>
-            <p class="mb-2"><strong>Incorrect Answers:</strong> <span id="resultIncorrect"></span></p>
-            <p class="mb-2"><strong>Attempted MCQs:</strong> <span id="resultAttempted"></span> / 100</p>
-            <p class="mb-4"><strong>Time Taken:</strong> <span id="resultTimeTaken"></span></p>
-            <button id="restartQuizBtn" class="button-gradient w-full">Restart Quiz</button>
-        </div>
-
-        <div id="adminPage" class="card hidden w-full">
-            <div class="flex justify-between items-center mb-6">
-                <div>
-                    <h2 class="text-2xl font-bold text-yellow-900">Admin Panel</h2>
-                    <p class="text-gray-600">Live Quiz Results</p>
-                </div>
-                 <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Logo" class="h-16 w-auto rounded-lg shadow-md">
-            </div>
-            <div id="resultsContainer" class="mb-6"></div>
-            <button id="adminLogoutBtn" class="button-gradient w-full max-w-xs mx-auto block">Logout</button>
-        </div>
-    </main>
-
-    <!-- Custom Confirmation Modal HTML -->
-    <div id="confirmModal" class="modal hidden">
-        <div class="modal-content">
-            <p class="text-lg font-semibold mb-4">Are you sure you want to remove this result?</p>
-            <div class="modal-buttons">
-                <button id="confirmDeleteBtn" class="button-gradient button-danger px-4 py-2">Yes, Remove</button>
-                <button id="cancelDeleteBtn" class="button-gradient px-4 py-2">Cancel</button>
-            </div>
-        </div>
-    </div>
 </body>
 </html>
