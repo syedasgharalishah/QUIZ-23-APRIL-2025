@@ -234,15 +234,13 @@
             ? JSON.parse(__firebase_config) 
             : {
                 // --- IMPORTANT ---
-                // This is a placeholder configuration.
-                // To deploy this on GitHub Pages or your own server,
-                // you MUST replace these values with your own Firebase project's web app configuration.
-                apiKey: "YOUR_API_KEY_HERE",
-                authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-                projectId: "YOUR_PROJECT_ID",
-                storageBucket: "YOUR_PROJECT_ID.appspot.com",
-                messagingSenderId: "YOUR_SENDER_ID",
-                appId: "YOUR_APP_ID"
+                // This is your actual Firebase project configuration.
+                apiKey: "AIzaSyALjJrKf6acGhdEYlsKO-gCpBJHw6UbKTs",
+                authDomain: "css-quiz-results.firebaseapp.com",
+                projectId: "css-quiz-results",
+                storageBucket: "css-quiz-results.firebasestorage.app",
+                messagingSenderId: "1077285247585",
+                appId: "1:1077285247585:web:47e010dd8fa288b9fa2820"
             };
         
         let app, auth, db;
@@ -281,16 +279,16 @@
     </script>
 
     <script>
-        // Disable right-click, copy/paste, and developer tools for security
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.addEventListener('keydown', e => {
-            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
-                e.preventDefault();
-            }
-            if (e.key === 'F12') { e.preventDefault(); }
-        });
-        document.addEventListener('copy', event => event.preventDefault());
-        document.addEventListener('paste', event => event.preventDefault());
+        // --- IMPORTANT: Removed security lines for debugging. Add them back for production! ---
+        // document.addEventListener('contextmenu', event => event.preventDefault());
+        // document.addEventListener('keydown', e => {
+        //     if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
+        //         e.preventDefault();
+        //     }
+        //     if (e.key === 'F12') { e.preventDefault(); }
+        // });
+        // document.addEventListener('copy', event => event.preventDefault());
+        // document.addEventListener('paste', event => event.preventDefault());
     </script>
 
     <div class="top-bar">
@@ -568,7 +566,8 @@
             const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
             if (window.db) {
                 try {
-                    const { doc, collection, setDoc } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
+                    // Ensure doc and collection are imported correctly if not already in the module scope
+                    // They are already imported in the module script block above, so no need to re-import here.
                     const resultsCollectionPath = `/artifacts/${appId}/public/data/quiz_results`;
                     const newResultRef = doc(collection(window.db, resultsCollectionPath)); 
                     await setDoc(newResultRef, resultData);
@@ -586,7 +585,9 @@
             document.getElementById('loginBtn').addEventListener('click', () => {
                 const id = document.getElementById('loginId').value;
                 const password = document.getElementById('loginPassword').value;
+                // Admin login is handled in admin.html, this is for student login
                 if (id === 'syedasgharalishah' && password === 'admin') {
+                    // You might want to remove this alert or redirect to admin.html
                     alert('Admin login is not handled in this file. Please use the admin panel file.');
                     return;
                 }
