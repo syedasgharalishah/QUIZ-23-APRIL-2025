@@ -231,12 +231,12 @@
         const firebaseConfig = typeof __firebase_config !== 'undefined' 
             ? JSON.parse(__firebase_config) 
             : {
-                apiKey: "YOUR_API_KEY_HERE",
-                authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-                projectId: "YOUR_PROJECT_ID",
-                storageBucket: "YOUR_PROJECT_ID.appspot.com",
-                messagingSenderId: "YOUR_SENDER_ID",
-                appId: "YOUR_APP_ID"
+                apiKey: "AIzaSyALjJrKf6acGhdEYlsKO-gCpBJHw6UbKTs",
+                authDomain: "css-quiz-results.firebaseapp.com",
+                projectId: "css-quiz-results",
+                storageBucket: "css-quiz-results.appspot.com",
+                messagingSenderId: "1077285247585",
+                appId: "1:1077285247585:web:47e010dd8fa288b9fa2820"
             };
         
         let app, auth, db;
@@ -795,7 +795,7 @@
                         alert('Admin login is not handled in this file. Please use the admin panel file.');
                         return;
                     }
-                    if (id.toUpperCase() === '18JULY' && password === 'free') {
+                    if (id.toUpperCase() === '19JULY' && password === 'free') {
                         if (loginError) loginError.classList.add('hidden');
                         showPage('candidateNamePage');
                     } else {
@@ -854,7 +854,7 @@
                 const dateParts = CURRENT_DATE_STR.split(' ');
                 const monthName = dateParts[0].toUpperCase();
                 const day = parseInt(dateParts[1].replace(',', ''));
-                loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 18JUL
+                loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 19JUL
             }
         });
     </script>
