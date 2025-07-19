@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS MPT Daily Quiz - July 18, 2025</title>
+    <title>CSS MPT Daily Quiz - July 19, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -221,6 +221,72 @@
     </style>
 </head>
 <body>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        // --- Firebase Configuration and Initialization ---
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : {
+                apiKey: "YOUR_API_KEY_HERE",
+                authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+                projectId: "YOUR_PROJECT_ID",
+                storageBucket: "YOUR_PROJECT_ID.appspot.com",
+                messagingSenderId: "YOUR_SENDER_ID",
+                appId: "YOUR_APP_ID"
+            };
+        
+        let app, auth, db;
+        let userId;
+
+        // Initialize Firebase
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            console.log("Firebase initialized successfully for quiz.");
+        } catch (e) {
+            console.error("Error initializing Firebase:", e);
+            document.body.innerHTML = '<div class="text-red-500 text-center p-8">Error initializing the application. Please check the console for details. This might be due to missing Firebase configuration.</div>';
+        }
+
+        // Handle Authentication
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                userId = user.uid;
+            } else {
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (error) {
+                    console.error("Error during sign-in:", error);
+                }
+            }
+        });
+
+        // Make db instance globally available for the submitQuiz function
+        window.db = db;
+    </script>
+
+    <script>
+        // Disable right-click, copy/paste, and developer tools for security
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
+                e.preventDefault();
+            }
+            if (e.key === 'F12') { e.preventDefault(); }
+        });
+        document.addEventListener('copy', event => event.preventDefault());
+        document.addEventListener('paste', event => event.preventDefault());
+    </script>
+
     <div class="top-bar">
         <div class="date-display" id="liveDate">
             <i class="fas fa-calendar-alt"></i> <span id="currentDateText"></span>
@@ -296,61 +362,17 @@
         </div>
     </main>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        
-        // --- Firebase Configuration and Initialization ---
-        // This configuration is automatically provided in the original environment.
-        // When deploying elsewhere (e.g., GitHub Pages), this will use the placeholder.
-        const firebaseConfig = typeof __firebase_config !== 'undefined' 
-            ? JSON.parse(__firebase_config) 
-            : {
-                // --- IMPORTANT ---
-                // This is your actual Firebase project configuration.
-                apiKey: "AIzaSyALjJrKf6acGhdEYlsKO-gCpBJHw6UbKTs",
-                authDomain: "css-quiz-results.firebaseapp.com",
-                projectId: "css-quiz-results",
-                storageBucket: "css-quiz-results.firebasestorage.app",
-                messagingSenderId: "1077285247585",
-                appId: "1:1077285247585:web:47e010dd8fa288b9fa2820"
-            };
-        
-        let app, auth, db;
-        let userId;
-
-        // Initialize Firebase
-        try {
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-            console.log("Firebase initialized successfully for quiz.");
-        } catch (e) {
-            console.error("Error initializing Firebase:", e);
-            document.body.innerHTML = '<div class="text-red-500 text-center p-8">Error initializing the application. Please check the console for details. This might be due to missing Firebase configuration.</div>';
-        }
-
-        // Handle Authentication
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                userId = user.uid;
-            } else {
-                try {
-                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                } catch (error) {
-                    console.error("Error during sign-in:", error);
-                }
-            }
-        });
-
+    <script>
         // Set the current date for display and logic
-        const CURRENT_DATE_STR = "July 18, 2025";
+        const CURRENT_DATE_STR = "July 19, 2025";
         const CURRENT_DATE = new Date(CURRENT_DATE_STR);
+
+        // Function to update the live date display
+        function updateLiveDate() {
+            document.getElementById('currentDateText').textContent = CURRENT_DATE_STR;
+            document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
+            document.getElementById('quizTitle').textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR}`;
+        }
 
         // Quiz Data Structure
         let quizQuestions = []; // Will be populated by initializeQuiz
@@ -383,13 +405,9 @@
         }
 
         function updateProgressBar() {
-            const progressBar = document.getElementById('progressBar');
-            const questionProgress = document.getElementById('questionProgress');
-            if (progressBar && questionProgress) {
-                const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
-                progressBar.style.width = `${progress}%`;
-                questionProgress.textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length} – ${Math.round(progress)}% Complete`;
-            }
+            const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('questionProgress').textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length} – ${Math.round(progress)}% Complete`;
         }
 
         function showPage(pageId) {
@@ -423,40 +441,31 @@
 
         function renderQuestion() {
             const question = quizQuestions[currentQuestionIndex];
-            const questionText = document.getElementById('questionText');
+            document.getElementById('questionText').innerHTML = question.question;
             const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+
             const quizCard = document.getElementById('quizPage');
-            const explanationDiv = document.getElementById('explanationDiv');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-
-            if (questionText) questionText.innerHTML = question.question;
-            if (optionsContainer) optionsContainer.innerHTML = '';
-
-            if (quizCard) {
-                quizCard.classList.remove('special-question');
-                if (question.special) {
-                    quizCard.classList.add('special-question');
-                }
+            quizCard.classList.remove('special-question');
+            if (question.special) {
+                quizCard.classList.add('special-question');
             }
             
             const optionSeed = `${CURRENT_DATE_STR}-${currentQuestionIndex}`;
             const shuffledOptions = [...question.options];
             shuffleArrayWithSeed(shuffledOptions, optionSeed);
 
-            if (optionsContainer) {
-                shuffledOptions.forEach((option) => {
-                    const button = document.createElement('button');
-                    button.classList.add('option-button', 'w-full');
-                    button.innerHTML = option;
-                    button.dataset.originalOptionIndex = question.options.indexOf(option);
-                    button.onclick = () => selectOption(parseInt(button.dataset.originalOptionIndex));
-                    optionsContainer.appendChild(button);
-                });
-            }
+            shuffledOptions.forEach((option) => {
+                const button = document.createElement('button');
+                button.classList.add('option-button', 'w-full');
+                button.innerHTML = option;
+                button.dataset.originalOptionIndex = question.options.indexOf(option);
+                button.onclick = () => selectOption(parseInt(button.dataset.originalOptionIndex));
+                optionsContainer.appendChild(button);
+            });
 
             const userAnswer = userAnswers[currentQuestionIndex];
-            if (userAnswer && userAnswer.selectedOptionIndex !== undefined && optionsContainer) {
+            if (userAnswer && userAnswer.selectedOptionIndex !== undefined) {
                  Array.from(optionsContainer.children).forEach((button, index) => {
                     button.disabled = true;
                     const btnOriginalIndex = question.options.indexOf(shuffledOptions[index]);
@@ -469,14 +478,13 @@
                 });
             }
 
-            if (explanationDiv) {
-                explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
-                explanationDiv.style.display = (userAnswer && userAnswer.selectedOptionIndex !== undefined) ? 'block' : 'none';
-            }
+            const explanationDiv = document.getElementById('explanationDiv');
+            explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
+            explanationDiv.style.display = (userAnswer && userAnswer.selectedOptionIndex !== undefined) ? 'block' : 'none';
 
-            if (prevBtn) prevBtn.classList.toggle('hidden', currentQuestionIndex === 0);
+            document.getElementById('prevBtn').classList.toggle('hidden', currentQuestionIndex === 0);
             const showNextButton = currentQuestionIndex < quizQuestions.length - 1;
-            if (nextBtn) nextBtn.classList.toggle('hidden', !showNextButton);
+            document.getElementById('nextBtn').classList.toggle('hidden', !showNextButton);
         }
 
         function selectOption(selectedOptionOriginalIndex) {
@@ -527,24 +535,15 @@
             });
 
             const score = (correctCount * 2) - incorrectCount;
-            const candidateNameInput = document.getElementById('candidateName');
-            const candidateName = candidateNameInput ? candidateNameInput.value : 'Unknown Candidate'; // Added null check
+            const candidateName = document.getElementById('candidateName').value;
 
-            const resultCandidateName = document.getElementById('resultCandidateName');
-            const resultDate = document.getElementById('resultDate');
-            const resultScore = document.getElementById('resultScore');
-            const resultCorrect = document.getElementById('resultCorrect');
-            const resultIncorrect = document.getElementById('resultIncorrect');
-            const resultAttempted = document.getElementById('resultAttempted');
-            const resultTimeTaken = document.getElementById('resultTimeTaken');
-
-            if (resultCandidateName) resultCandidateName.textContent = candidateName;
-            if (resultDate) resultDate.textContent = CURRENT_DATE_STR;
-            if (resultScore) resultScore.textContent = `${score}`;
-            if (resultCorrect) resultCorrect.textContent = `${correctCount}`;
-            if (resultIncorrect) resultIncorrect.textContent = `${incorrectCount}`;
-            if (resultAttempted) resultAttempted.textContent = `${attemptedCount} / ${TOTAL_QUESTIONS}`;
-            if (resultTimeTaken) resultTimeTaken.textContent = formatTime(timeTakenSeconds);
+            document.getElementById('resultCandidateName').textContent = candidateName;
+            document.getElementById('resultDate').textContent = CURRENT_DATE_STR;
+            document.getElementById('resultScore').textContent = `${score}`;
+            document.getElementById('resultCorrect').textContent = `${correctCount}`;
+            document.getElementById('resultIncorrect').textContent = `${incorrectCount}`;
+            document.getElementById('resultAttempted').textContent = `${attemptedCount} / ${TOTAL_QUESTIONS}`;
+            document.getElementById('resultTimeTaken').textContent = formatTime(timeTakenSeconds);
             
             showPage('resultsPage');
 
@@ -561,30 +560,99 @@
             };
             
             const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
-            if (db) { // Use db directly as it's now in the same scope
+            if (window.db) {
                 try {
+                    const { doc, collection, setDoc } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
                     const resultsCollectionPath = `/artifacts/${appId}/public/data/quiz_results`;
-                    const newResultRef = doc(collection(db, resultsCollectionPath)); 
+                    const newResultRef = doc(collection(window.db, resultsCollectionPath)); 
                     await setDoc(newResultRef, resultData);
                     console.log("Result saved to Firestore.");
                 } catch (error) {
                     console.error("Error writing document to Firestore: ", error);
                 }
             } else {
-                 console.error("Firestore database (db) not initialized.");
+                 console.error("Firestore database (db) not initialized on window object.");
             }
         }
 
-        // --- UI Update Functions ---
-        function updateLiveDate() {
-            const currentDateText = document.getElementById('currentDateText');
-            const updatedDate = document.getElementById('updatedDate');
-            const quizTitle = document.getElementById('quizTitle');
+        // --- Event Listeners ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginBtn = document.getElementById('loginBtn');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', () => {
+                    const loginIdInput = document.getElementById('loginId');
+                    const loginPasswordInput = document.getElementById('loginPassword');
+                    const loginError = document.getElementById('loginError');
 
-            if (currentDateText) currentDateText.textContent = CURRENT_DATE_STR;
-            if (updatedDate) updatedDate.textContent = CURRENT_DATE_STR;
-            if (quizTitle) quizTitle.textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR}`;
-        }
+                    const id = loginIdInput ? loginIdInput.value : '';
+                    const password = loginPasswordInput ? loginPasswordInput.value : '';
+                    
+                    if (id === 'syedasgharalishah' && password === 'admin') {
+                        alert('Admin login is not handled in this file. Please use the admin panel file.');
+                        return;
+                    }
+                    if (id.toUpperCase() === '19JULY' && password === 'free') {
+                        if (loginError) loginError.classList.add('hidden');
+                        showPage('candidateNamePage');
+                    } else {
+                        if (loginError) loginError.classList.remove('hidden');
+                    }
+                });
+            }
+
+            const startQuizBtn = document.getElementById('startQuizBtn');
+            if (startQuizBtn) {
+                startQuizBtn.addEventListener('click', () => {
+                    const candidateNameInput = document.getElementById('candidateName');
+                    const nameError = document.getElementById('nameError');
+                    const candidateName = candidateNameInput ? candidateNameInput.value.trim() : '';
+                    
+                    if (candidateName) {
+                        if (nameError) nameError.classList.add('hidden');
+                        userAnswers = new Array(quizQuestions.length).fill(null);
+                        currentQuestionIndex = 0;
+                        quizSubmitted = false;
+                        startTimer();
+                        renderQuestion();
+                        showPage('quizPage');
+                    } else {
+                        if (nameError) nameError.classList.remove('hidden');
+                    }
+                });
+            }
+
+            const nextBtn = document.getElementById('nextBtn');
+            if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
+            
+            const prevBtn = document.getElementById('prevBtn');
+            if (prevBtn) prevBtn.addEventListener('click', prevQuestion);
+            
+            const submitQuizBtn = document.getElementById('submitQuizBtn');
+            if (submitQuizBtn) submitQuizBtn.addEventListener('click', () => submitQuiz(false));
+            
+            const restartQuizBtn = document.getElementById('restartQuizBtn');
+            if (restartQuizBtn) {
+                restartQuizBtn.addEventListener('click', () => {
+                    clearInterval(timerInterval);
+                    initializeQuiz();
+                    showPage('loginPage');
+                });
+            }
+            
+            // Initial setup calls
+            initializeQuiz();
+            updateLiveDate();
+            showPage('loginPage'); 
+
+            // Handle initial loginId display
+            const loginIdInput = document.getElementById('loginId');
+            if(loginIdInput) {
+                const dateParts = CURRENT_DATE_STR.split(' ');
+                const monthName = dateParts[0].toUpperCase();
+                const day = parseInt(dateParts[1].replace(',', ''));
+                loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 19JUL
+            }
+        });
 
         // --- Quiz Initialization ---
         function initializeQuiz() {
@@ -592,98 +660,113 @@
             const dateSeed = CURRENT_DATE_STR;
             
             const allQuestions = [
-                // === July 18th Syllabus Quiz (100 MCQs) ===
+                // === July 19th Syllabus Quiz (100 MCQs) ===
 
-                // General Knowledge: Books & Literature (pp. 86-87) & Organizations (pp. 88-92) - 40 Questions
-                { "question": "Who wrote 'The Old Man and the Sea'?", "options": ["William Faulkner", "John Steinbeck", "Ernest Hemingway", "F. Scott Fitzgerald"], "correctOptionIndex": 2, "explanation": "'The Old Man and the Sea' is a short novel written by the American author Ernest Hemingway in 1951.", "source_page": 87 },
-                { "question": "Who is the author of the Harry Potter series?", "options": ["J.R.R. Tolkien", "C.S. Lewis", "George R.R. Martin", "J.K. Rowling"], "correctOptionIndex": 3, "explanation": "The Harry Potter series of fantasy novels was written by British author J. K. Rowling.", "source_page": 86 },
-                { "question": "Where is the headquarters of the United Nations (UN) located?", "options": ["Geneva", "Vienna", "The Hague", "New York"], "correctOptionIndex": 3, "explanation": "The headquarters of the United Nations is in New York City.", "source_page": 88 },
-                { "question": "When was the World Health Organization (WHO) established?", "options": ["1945", "1948", "1950", "1952"], "correctOptionIndex": 1, "explanation": "The World Health Organization (WHO) was established on 7 April 1948.", "source_page": 88 },
-                { "question": "Which of the following is NOT a principal organ of the United Nations?", "options": ["General Assembly", "Security Council", "International Monetary Fund", "International Court of Justice"], "correctOptionIndex": 2, "explanation": "The International Monetary Fund (IMF) is a specialized agency of the UN, but not one of its six principal organs.", "source_page": 88 },
-                { "question": "Where is the headquarters of the International Court of Justice (ICJ) located?", "options": ["Geneva, Switzerland", "New York, USA", "Brussels, Belgium", "The Hague, Netherlands"], "correctOptionIndex": 3, "explanation": "The International Court of Justice, the principal judicial organ of the UN, is seated at the Peace Palace in The Hague, Netherlands.", "source_page": 88 },
-                { "question": "NATO stands for:", "options": ["North Atlantic Trade Organization", "North American Treaty Organization", "North Atlantic Treaty Organization", "North Asian Treaty Organization"], "correctOptionIndex": 2, "explanation": "NATO stands for the North Atlantic Treaty Organization.", "source_page": 90 },
-                { "question": "Which of these countries is a permanent member of the UN Security Council?", "options": ["Germany", "Japan", "India", "France"], "correctOptionIndex": 3, "explanation": "The five permanent members of the UN Security Council are China, France, Russia, the United Kingdom, and the United States.", "source_page": 88 },
-                { "question": "Where is the headquarters of SAARC (South Asian Association for Regional Cooperation) located?", "options": ["Dhaka, Bangladesh", "New Delhi, India", "Colombo, Sri Lanka", "Kathmandu, Nepal"], "correctOptionIndex": 3, "explanation": "The secretariat of SAARC is based in Kathmandu, Nepal.", "source_page": 91 },
-                { "question": "OPEC is an organization of:", "options": ["Oil Producing and Exporting Countries", "Organization of Petroleum Exporting Companies", "Organization of Petroleum Exporting Countries", "Oil and Petroleum Exporting Countries"], "correctOptionIndex": 2, "explanation": "OPEC stands for the Organization of the Petroleum Exporting Countries.", "source_page": 91 },
-                { "question": "Who wrote 'The Diary of a Young Girl'?", "options": ["Virginia Woolf", "Sylvia Plath", "Anne Frank", "Simone de Beauvoir"], "correctOptionIndex": 2, "explanation": "'The Diary of a Young Girl', also known as The Diary of Anne Frank, is a book of the writings from the Dutch-language diary kept by Anne Frank while she was in hiding for two years with her family during the Nazi occupation of the Netherlands.", "source_page": 86 },
-                { "question": "Who is the author of '1984'?", "options": ["Aldous Huxley", "George Orwell", "Ray Bradbury", "Philip K. Dick"], "correctOptionIndex": 1, "explanation": "'Nineteen Eighty-Four' is a dystopian novel by English novelist George Orwell.", "source_page": 87 },
-                { "question": "Where is the headquarters of UNESCO located?", "options": ["London", "Rome", "Geneva", "Paris"], "correctOptionIndex": 3, "explanation": "The headquarters of the United Nations Educational, Scientific and Cultural Organization (UNESCO) is located in Paris, France.", "source_page": 89 },
-                { "question": "Which organization is known as the 'World Bank'?", "options": ["IMF", "IBRD", "IDA", "IFC"], "correctOptionIndex": 1, "explanation": "The International Bank for Reconstruction and Development (IBRD) is the main institution of the World Bank Group.", "source_page": 89 },
-                { "question": "Where is the headquarters of the European Union (EU) located?", "options": ["Paris, France", "Berlin, Germany", "Brussels, Belgium", "Rome, Italy"], "correctOptionIndex": 2, "explanation": "The de facto capital of the European Union is Brussels, Belgium, which hosts the official seats of the European Commission, Council of the European Union, and European Council.", "source_page": 90 },
-                { "question": "Amnesty International is an organization associated with:", "options": ["Environmental Protection", "Human Rights", "Economic Development", "Animal Welfare"], "correctOptionIndex": 1, "explanation": "Amnesty International is a global non-governmental organization focused on human rights.", "source_page": 92 },
-                { "question": "Who wrote 'Long Walk to Freedom'?", "options": ["Martin Luther King Jr.", "Desmond Tutu", "Nelson Mandela", "Barack Obama"], "correctOptionIndex": 2, "explanation": "'Long Walk to Freedom' is an autobiography written by South African President Nelson Mandela.", "source_page": 87 },
-                { "question": "Who is the author of 'The Lord of the Rings'?", "options": ["C.S. Lewis", "J.K. Rowling", "George R.R. Martin", "J.R.R. Tolkien"], "correctOptionIndex": 3, "explanation": "'The Lord of the Rings' is an epic high-fantasy novel by the English author and scholar J. R. R. Tolkien.", "source_page": 87 },
-                { "question": "The headquarters of the Food and Agriculture Organization (FAO) is in:", "options": ["Geneva", "Paris", "Rome", "New York"], "correctOptionIndex": 2, "explanation": "The headquarters of the Food and Agriculture Organization of the United Nations is located in Rome, Italy.", "source_page": 89 },
-                { "question": "Which of the following is a member of the G-7?", "options": ["Russia", "China", "India", "Canada"], "correctOptionIndex": 3, "explanation": "The G7 (Group of Seven) is an intergovernmental organization consisting of Canada, France, Germany, Italy, Japan, the United Kingdom, and the United States.", "source_page": 92 },
-                { "question": "Where is the headquarters of the Association of Southeast Asian Nations (ASEAN) located?", "options": ["Singapore", "Bangkok, Thailand", "Hanoi, Vietnam", "Jakarta, Indonesia"], "correctOptionIndex": 3, "explanation": "The ASEAN Secretariat is located in Jakarta, Indonesia.", "source_page": 90 },
-                { "question": "The book 'Das Kapital' was written by:", "options": ["Adam Smith", "John Maynard Keynes", "Karl Marx", "David Ricardo"], "correctOptionIndex": 2, "explanation": "'Das Kapital' is a foundational theoretical text in communist philosophy by Karl Marx.", "source_page": 86 },
-                { "question": "Who wrote the play 'Romeo and Juliet'?", "options": ["Christopher Marlowe", "Ben Jonson", "William Shakespeare", "John Webster"], "correctOptionIndex": 2, "explanation": "'Romeo and Juliet' is a tragedy written by William Shakespeare early in his career.", "source_page": 87 },
-                { "question": "Where is the headquarters of the International Labour Organization (ILO) located?", "options": ["Paris, France", "Geneva, Switzerland", "Vienna, Austria", "New York, USA"], "correctOptionIndex": 1, "explanation": "The International Labour Organization (ILO) is a United Nations agency whose mandate is to advance social and economic justice through setting international labour standards. Its headquarters is in Geneva, Switzerland.", "source_page": 89 },
-                { "question": "The term of a non-permanent member of the UN Security Council is:", "options": ["1 year", "2 years", "3 years", "5 years"], "correctOptionIndex": 1, "explanation": "The UN Security Council has 10 non-permanent members, elected by the General Assembly for two-year terms.", "source_page": 88 },
-                { "question": "Where is the headquarters of the World Trade Organization (WTO) located?", "options": ["Washington D.C.", "London", "Geneva", "Paris"], "correctOptionIndex": 2, "explanation": "The headquarters of the World Trade Organization is located in Geneva, Switzerland.", "source_page": 90 },
-                { "question": "The book 'The Wealth of Nations' was written by:", "options": ["John Stuart Mill", "Adam Smith", "David Ricardo", "Karl Marx"], "correctOptionIndex": 1, "explanation": "'The Wealth of Nations' is the magnum opus of the Scottish economist and moral philosopher Adam Smith.", "source_page": 87 },
-                { "question": "Who is the author of 'To Kill a Mockingbird'?", "options": ["Harper Lee", "Margaret Atwood", "Toni Morrison", "Alice Walker"], "correctOptionIndex": 0, "explanation": "'To Kill a Mockingbird' is a novel by the American author Harper Lee.", "source_page": 87 },
-                { "question": "The headquarters of UNICEF is in:", "options": ["Geneva", "Paris", "Rome", "New York"], "correctOptionIndex": 3, "explanation": "The headquarters of the United Nations Children's Fund (UNICEF) is in New York City.", "source_page": 89 },
-                { "question": "Which of the following countries is NOT a member of SAARC?", "options": ["Bhutan", "Maldives", "Myanmar", "Nepal"], "correctOptionIndex": 2, "explanation": "The member states of SAARC are Afghanistan, Bangladesh, Bhutan, India, the Maldives, Nepal, Pakistan, and Sri Lanka. Myanmar is not a member.", "source_page": 91 },
-                { "question": "Where is the headquarters of the Arab League located?", "options": ["Riyadh, Saudi Arabia", "Cairo, Egypt", "Amman, Jordan", "Damascus, Syria"], "correctOptionIndex": 1, "explanation": "The headquarters of the Arab League is located in Cairo, Egypt.", "source_page": 92 },
-                { "question": "Who wrote 'The Great Gatsby'?", "options": ["Ernest Hemingway", "William Faulkner", "F. Scott Fitzgerald", "John Steinbeck"], "correctOptionIndex": 2, "explanation": "'The Great Gatsby' is a 1925 novel by American writer F. Scott Fitzgerald.", "source_page": 86 },
-                { "question": "Who is the author of 'The Canterbury Tales'?", "options": ["John Milton", "Geoffrey Chaucer", "Edmund Spenser", "William Langland"], "correctOptionIndex": 1, "explanation": "'The Canterbury Tales' is a collection of 24 stories that runs to over 17,000 lines written in Middle English by Geoffrey Chaucer.", "source_page": 86 },
-                { "question": "Where is the headquarters of the International Atomic Energy Agency (IAEA) located?", "options": ["Geneva, Switzerland", "Vienna, Austria", "Brussels, Belgium", "The Hague, Netherlands"], "correctOptionIndex": 1, "explanation": "The headquarters of the International Atomic Energy Agency (IAEA) is located in Vienna, Austria.", "source_page": 89 },
-                { "question": "The Commonwealth of Nations is an organization of former colonies of which empire?", "options": ["French Empire", "Spanish Empire", "Portuguese Empire", "British Empire"], "correctOptionIndex": 3, "explanation": "The Commonwealth is a political association of 56 member states, the vast majority of which are former territories of the British Empire.", "source_page": 92 },
+                // General Knowledge: The United Nations (pp. 93-96) & The World Records (pp. 97-105) - 40 Questions
+                { "question": "In which year was the United Nations founded?", "options": ["1919", "1939", "1945", "1950"], "correctOptionIndex": 2, "explanation": "The United Nations was founded on October 24, 1945, after the end of World War II.", "source_page": 93 },
+                { "question": "How many member states does the UN currently have?", "options": ["153", "183", "193", "203"], "correctOptionIndex": 2, "explanation": "As of recent data, the United Nations has 193 member states.", "source_page": 93 },
+                { "question": "Which is the most powerful organ of the United Nations?", "options": ["General Assembly", "Security Council", "Economic and Social Council", "Secretariat"], "correctOptionIndex": 1, "explanation": "The Security Council is the most powerful organ, with the primary responsibility for maintaining international peace and security.", "source_page": 93 },
+                { "question": "How many permanent members are there in the UN Security Council?", "options": ["3", "5", "7", "10"], "correctOptionIndex": 1, "explanation": "There are five permanent members: China, France, Russia, the United Kingdom, and the United States.", "source_page": 94 },
+                { "question": "The power of a permanent member of the Security Council to reject a resolution is called:", "options": ["Veto Power", "Majority Vote", "Consensus", "Abstention"], "correctOptionIndex": 0, "explanation": "The ability of any of the five permanent members to prevent the adoption of a substantive resolution is known as the veto power.", "source_page": 94 },
+                { "question": "What is the term of the UN Secretary-General?", "options": ["4 years", "5 years", "6 years", "7 years"], "correctOptionIndex": 1, "explanation": "The Secretary-General is appointed for a five-year term, which is renewable.", "source_page": 95 },
+                { "question": "Which is the tallest building in the world?", "options": ["Shanghai Tower", "Abraj Al-Bait Clock Tower", "Burj Khalifa", "Ping An Finance Centre"], "correctOptionIndex": 2, "explanation": "The Burj Khalifa in Dubai, UAE, is the tallest building in the world.", "source_page": 97 },
+                { "question": "Which is the largest desert in the world?", "options": ["Arabian Desert", "Gobi Desert", "Sahara Desert", "Antarctic Polar Desert"], "correctOptionIndex": 3, "explanation": "By the definition of a desert (low precipitation), the Antarctic Polar Desert is the largest in the world.", "source_page": 98 },
+                { "question": "Which is the longest river in the world?", "options": ["Amazon River", "Nile River", "Yangtze River", "Mississippi River"], "correctOptionIndex": 1, "explanation": "The Nile River in Africa is traditionally considered the longest river in the world.", "source_page": 99 },
+                { "question": "Which is the largest ocean in the world?", "options": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"], "correctOptionIndex": 3, "explanation": "The Pacific Ocean is the largest and deepest of the world's five oceans.", "source_page": 100 },
+                { "question": "Which country has the largest population in the world?", "options": ["India", "United States", "Indonesia", "China"], "correctOptionIndex": 0, "explanation": "As of recent estimates, India has surpassed China to become the world's most populous country.", "source_page": 101 },
+                { "question": "Which is the highest mountain peak in the world?", "options": ["K2", "Kangchenjunga", "Mount Everest", "Lhotse"], "correctOptionIndex": 2, "explanation": "Mount Everest, located in the Himalayas, is the Earth's highest mountain above sea level.", "source_page": 102 },
+                { "question": "Which is the largest island in the world?", "options": ["New Guinea", "Borneo", "Madagascar", "Greenland"], "correctOptionIndex": 3, "explanation": "Greenland is the world's largest island.", "source_page": 103 },
+                { "question": "Which is the largest country by area in the world?", "options": ["Canada", "China", "USA", "Russia"], "correctOptionIndex": 3, "explanation": "Russia is the largest country in the world by land area.", "source_page": 104 },
+                { "question": "Which is the world's largest living structure?", "options": ["The Amazon Rainforest", "The Great Barrier Reef", "The Redwood National Park", "The Serengeti"], "correctOptionIndex": 1, "explanation": "The Great Barrier Reef off the coast of Australia is the world's largest single structure made by living organisms.", "source_page": 105 },
+                { "question": "What are the official languages of the United Nations?", "options": ["English, French, Spanish", "English, French, Russian, Chinese, Spanish, Arabic", "English, French, German, Russian, Chinese", "English and French only"], "correctOptionIndex": 1, "explanation": "The six official languages of the UN are Arabic, Chinese, English, French, Russian, and Spanish.", "source_page": 96 },
+                { "question": "The UN flag is of which color?", "options": ["White", "Blue", "Green", "Red"], "correctOptionIndex": 1, "explanation": "The flag of the United Nations is light blue in color.", "source_page": 96 },
+                { "question": "Which is the highest waterfall in the world?", "options": ["Niagara Falls", "Victoria Falls", "Iguazu Falls", "Angel Falls"], "correctOptionIndex": 3, "explanation": "Angel Falls in Venezuela is the world's tallest uninterrupted waterfall.", "source_page": 97 },
+                { "question": "Which is the largest lake (by surface area) in the world?", "options": ["Lake Superior", "Caspian Sea", "Lake Victoria", "Lake Huron"], "correctOptionIndex": 1, "explanation": "The Caspian Sea is the world's largest inland body of water, often described as the world's largest lake.", "source_page": 98 },
+                { "question": "Which is the longest wall in the world?", "options": ["Hadrian's Wall", "Great Wall of China", "Berlin Wall", "Walls of Constantinople"], "correctOptionIndex": 1, "explanation": "The Great Wall of China is the longest wall in the world.", "source_page": 99 },
+                { "question": "Which is the largest continent by area?", "options": ["Africa", "North America", "Asia", "Europe"], "correctOptionIndex": 2, "explanation": "Asia is the world's largest and most populous continent.", "source_page": 100 },
+                { "question": "Which is the most spoken language in the world?", "options": ["Spanish", "Mandarin Chinese", "English", "Hindi"], "correctOptionIndex": 2, "explanation": "English is the most spoken language worldwide, considering both native and non-native speakers.", "source_page": 101 },
+                { "question": "Which is the highest active volcano in the world?", "options": ["Mount Fuji", "Mount Kilimanjaro", "Ojos del Salado", "Mount Etna"], "correctOptionIndex": 2, "explanation": "Ojos del Salado on the Argentina–Chile border is the highest active volcano in the world.", "source_page": 102 },
+                { "question": "Which is the largest peninsula in the world?", "options": ["Indian Peninsula", "Arabian Peninsula", "Iberian Peninsula", "Scandinavian Peninsula"], "correctOptionIndex": 1, "explanation": "The Arabian Peninsula is the world's largest peninsula.", "source_page": 103 },
+                { "question": "Which is the world's largest democratic country?", "options": ["USA", "Indonesia", "Brazil", "India"], "correctOptionIndex": 3, "explanation": "India is the world's largest democracy by population.", "source_page": 104 },
+                { "question": "Which is the largest bird in the world?", "options": ["Emu", "Ostrich", "Albatross", "Condor"], "correctOptionIndex": 1, "explanation": "The common ostrich is the largest living bird species.", "source_page": 105 },
+                { "question": "The General Assembly of the UN meets regularly once a year in which month?", "options": ["January", "March", "June", "September"], "correctOptionIndex": 3, "explanation": "The regular session of the UN General Assembly usually begins each year in September.", "source_page": 93 },
+                { "question": "Which country is the newest member of the United Nations?", "options": ["East Timor", "Montenegro", "South Sudan", "Switzerland"], "correctOptionIndex": 2, "explanation": "South Sudan became the 193rd member state of the United Nations in 2011.", "source_page": 93 },
+                { "question": "Which is the largest dam in the world?", "options": ["Hoover Dam", "Three Gorges Dam", "Itaipu Dam", "Tarbela Dam"], "correctOptionIndex": 1, "explanation": "The Three Gorges Dam in China is the world's largest power station in terms of installed capacity.", "source_page": 97 },
+                { "question": "Which is the deepest lake in the world?", "options": ["Lake Tanganyika", "Caspian Sea", "Lake Baikal", "Lake Superior"], "correctOptionIndex": 2, "explanation": "Lake Baikal in Siberia, Russia, is the world's deepest and oldest lake.", "source_page": 98 },
+                { "question": "Which is the longest railway platform in the world?", "options": ["Gorakhpur, India", "Kollam Junction, India", "Kharagpur, India", "Hubballi, India"], "correctOptionIndex": 3, "explanation": "Shree Siddharoodha Swamiji Hubballi Junction in India has the longest railway platform in the world.", "source_page": 99 },
+                { "question": "Which is the smallest continent by area?", "options": ["Europe", "South America", "Antarctica", "Australia"], "correctOptionIndex": 3, "explanation": "Australia is the smallest of the world's continents.", "source_page": 100 },
+                { "question": "Which country has the highest life expectancy?", "options": ["Japan", "Switzerland", "Singapore", "Hong Kong"], "correctOptionIndex": 3, "explanation": "Hong Kong often tops the list for the highest life expectancy in the world.", "source_page": 101 },
+                { "question": "Which is the highest plateau in the world?", "options": ["Deccan Plateau", "Tibetan Plateau", "Colorado Plateau", "Andean Plateau"], "correctOptionIndex": 1, "explanation": "The Tibetan Plateau is the world's highest and largest plateau.", "source_page": 102 },
+                { "question": "Which is the largest bay in the world?", "options": ["Hudson Bay", "Bay of Bengal", "Gulf of Mexico", "Bay of Biscay"], "correctOptionIndex": 1, "explanation": "The Bay of Bengal is the largest bay in the world.", "source_page": 103 },
+                { "question": "Which is the smallest country in the world?", "options": ["Monaco", "Nauru", "Tuvalu", "Vatican City"], "correctOptionIndex": 3, "explanation": "Vatican City is the smallest independent state in the world by both area and population.", "source_page": 104 },
+                { "question": "Which is the fastest animal on land?", "options": ["Lion", "Pronghorn", "Cheetah", "Wildebeest"], "correctOptionIndex": 2, "explanation": "The cheetah is the fastest land animal.", "source_page": 105 },
+                { "question": "Who is the chief administrative officer of the UN?", "options": ["President of the General Assembly", "President of the Security Council", "Secretary-General", "Chief Justice of the ICJ"], "correctOptionIndex": 2, "explanation": "The Secretary-General is the chief administrative officer of the United Nations.", "source_page": 95 },
+                { "question": "Which is the largest epic poem in the world?", "options": ["The Iliad", "The Odyssey", "The Mahabharata", "The Aeneid"], "correctOptionIndex": 2, "explanation": "The Mahabharata is the longest epic poem known and has been described as 'the longest poem ever written'.", "source_page": 97 },
+                { "question": "Which is the largest saltwater lake in the world?", "options": ["Great Salt Lake", "Caspian Sea", "Aral Sea", "Lake Van"], "correctOptionIndex": 1, "explanation": "The Caspian Sea is the world's largest saltwater lake.", "source_page": 98 },
 
-                // English: Synonyms (pp. 479-485) - 35 Questions
-                { "question": "Choose the synonym for IMPEDE.", "options": ["Facilitate", "Advance", "Obstruct", "Assist"], "correctOptionIndex": 2, "explanation": "To impede means to delay or prevent (someone or something) by obstructing them; to hinder.", "source_page": 479 },
-                { "question": "Choose the synonym for JUBILANT.", "options": ["Sorrowful", "Depressed", "Rejoicing", "Gloomy"], "correctOptionIndex": 2, "explanation": "Jubilant means feeling or expressing great happiness and triumph.", "source_page": 480 },
-                { "question": "Choose the synonym for LETHARGY.", "options": ["Vigor", "Energy", "Sluggishness", "Alertness"], "correctOptionIndex": 2, "explanation": "Lethargy is a lack of energy and enthusiasm; sluggishness.", "source_page": 481 },
-                { "question": "Choose the synonym for MITIGATE.", "options": ["Aggravate", "Worsen", "Alleviate", "Intensify"], "correctOptionIndex": 2, "explanation": "To mitigate means to make (something bad) less severe, serious, or painful; to alleviate.", "source_page": 482 },
-                { "question": "Choose the synonym for NOVICE.", "options": ["Expert", "Veteran", "Beginner", "Master"], "correctOptionIndex": 2, "explanation": "A novice is a person new to or inexperienced in a field or situation; a beginner.", "source_page": 483 },
-                { "question": "Choose the synonym for OBSCURE.", "options": ["Clear", "Obvious", "Uncertain", "Explicit"], "correctOptionIndex": 2, "explanation": "Obscure means not discovered or known about; uncertain.", "source_page": 484 },
-                { "question": "Choose the synonym for PALPABLE.", "options": ["Intangible", "Imperceptible", "Tangible", "Unclear"], "correctOptionIndex": 2, "explanation": "Palpable means able to be touched or felt; tangible.", "source_page": 485 },
-                { "question": "Choose the synonym for INGENIOUS.", "options": ["Unimaginative", "Dull", "Clever", "Clumsy"], "correctOptionIndex": 2, "explanation": "Ingenious means (of a person) clever, original, and inventive.", "source_page": 479 },
-                { "question": "Choose the synonym for JADED.", "options": ["Fresh", "Enthusiastic", "Wearied", "Excited"], "correctOptionIndex": 2, "explanation": "Jaded means tired, bored, or lacking enthusiasm, typically after having had too much of something.", "source_page": 480 },
-                { "question": "Choose the synonym for LACONIC.", "options": ["Verbose", "Wordy", "Concise", "Talkative"], "correctOptionIndex": 2, "explanation": "Laconic means (of a person, speech, or style of writing) using very few words; concise.", "source_page": 481 },
-                { "question": "Choose the synonym for MALIGNANT.", "options": ["Benign", "Harmless", "Spiteful", "Kind"], "correctOptionIndex": 2, "explanation": "Malignant means malevolent or spiteful.", "source_page": 482 },
-                { "question": "Choose the synonym for NEBULOUS.", "options": ["Clear", "Precise", "Vague", "Definite"], "correctOptionIndex": 2, "explanation": "Nebulous means in the form of a cloud or haze; hazy, unclear, or vague.", "source_page": 483 },
-                { "question": "Choose the synonym for OBSTINATE.", "options": ["Compliant", "Flexible", "Stubborn", "Agreeable"], "correctOptionIndex": 2, "explanation": "Obstinate means stubbornly refusing to change one's opinion or chosen course of action, despite attempts to persuade one to do so.", "source_page": 484 },
-                { "question": "Choose the synonym for PERILOUS.", "options": ["Safe", "Secure", "Hazardous", "Harmless"], "correctOptionIndex": 2, "explanation": "Perilous means full of danger or risk; hazardous.", "source_page": 485 },
-                { "question": "Choose the synonym for INSIPID.", "options": ["Flavorful", "Exciting", "Dull", "Interesting"], "correctOptionIndex": 2, "explanation": "Insipid means lacking flavor; weak or tasteless. It can also mean lacking vigor or interest.", "source_page": 479 },
-                { "question": "Choose the synonym for JOCUND.", "options": ["Miserable", "Gloomy", "Cheerful", "Sad"], "correctOptionIndex": 2, "explanation": "Jocund means cheerful and lighthearted.", "source_page": 480 },
-                { "question": "Choose the synonym for LURID.", "options": ["Mild", "Subtle", "Sensational", "Pleasant"], "correctOptionIndex": 2, "explanation": "Lurid means presented in vividly shocking or sensational terms.", "source_page": 481 },
-                { "question": "Choose the synonym for MYRIAD.", "options": ["Few", "Limited", "Countless", "Single"], "correctOptionIndex": 2, "explanation": "Myriad means a countless or extremely great number.", "source_page": 482 },
-                { "question": "Choose the synonym for NEFARIOUS.", "options": ["Good", "Honorable", "Wicked", "Righteous"], "correctOptionIndex": 2, "explanation": "Nefarious means (typically of an action or activity) wicked or criminal.", "source_page": 483 },
-                { "question": "Choose the synonym for ONEROUS.", "options": ["Easy", "Simple", "Burdensome", "Light"], "correctOptionIndex": 2, "explanation": "Onerous means (of a task, duty, or responsibility) involving an amount of effort and difficulty that is oppressively burdensome.", "source_page": 484 },
-                { "question": "Choose the synonym for PLACID.", "options": ["Agitated", "Turbulent", "Calm", "Stormy"], "correctOptionIndex": 2, "explanation": "Placid means not easily upset or excited; calm and peaceful.", "source_page": 485 },
-                { "question": "Choose the synonym for INTREPID.", "options": ["Cowardly", "Timid", "Fearless", "Afraid"], "correctOptionIndex": 2, "explanation": "Intrepid means fearless; adventurous (often used for rhetorical or humorous effect).", "source_page": 479 },
-                { "question": "Choose the synonym for JETTISON.", "options": ["Keep", "Retain", "Discard", "Accept"], "correctOptionIndex": 2, "explanation": "To jettison means to abandon or discard (someone or something that is no longer wanted).", "source_page": 480 },
-                { "question": "Choose the synonym for LIMPID.", "options": ["Murky", "Cloudy", "Clear", "Opaque"], "correctOptionIndex": 2, "explanation": "Limpid means (of a liquid) free of anything that darkens; completely clear and transparent.", "source_page": 481 },
-                { "question": "Choose the synonym for METICULOUS.", "options": ["Careless", "Sloppy", "Thorough", "Hasty"], "correctOptionIndex": 2, "explanation": "Meticulous means showing great attention to detail; very careful and precise.", "source_page": 482 },
-                { "question": "Choose the synonym for NEGLIGENT.", "options": ["Careful", "Conscientious", "Careless", "Attentive"], "correctOptionIndex": 2, "explanation": "Negligent means failing to take proper care in doing something; careless.", "source_page": 483 },
-                { "question": "Choose the synonym for OPAQUE.", "options": ["Transparent", "Clear", "Cloudy", "Translucent"], "correctOptionIndex": 2, "explanation": "Opaque means not able to be seen through; not transparent. Cloudy is a good synonym.", "source_page": 484 },
-                { "question": "Choose the synonym for PRECARIOUS.", "options": ["Stable", "Secure", "Uncertain", "Safe"], "correctOptionIndex": 2, "explanation": "Precarious means not securely held or in position; dangerously likely to fall or collapse; uncertain.", "source_page": 485 },
-                { "question": "Choose the synonym for INVINCIBLE.", "options": ["Vulnerable", "Beatable", "Unconquerable", "Weak"], "correctOptionIndex": 2, "explanation": "Invincible means too powerful to be defeated or overcome.", "source_page": 479 },
-                { "question": "Choose the synonym for JUBILEE.", "options": ["Mourning", "Sorrow", "Celebration", "Grief"], "correctOptionIndex": 2, "explanation": "A jubilee is a special anniversary of an event, especially one celebrating twenty-five or fifty years of a reign or activity; a celebration.", "source_page": 480 },
-                { "question": "Choose the synonym for LUCID.", "options": ["Confusing", "Vague", "Clear", "Ambiguous"], "correctOptionIndex": 2, "explanation": "Lucid means expressed clearly; easy to understand.", "source_page": 481 },
-                { "question": "Choose the synonym for MOROSE.", "options": ["Cheerful", "Happy", "Sullen", "Joyful"], "correctOptionIndex": 2, "explanation": "Morose means sullen and ill-tempered.", "source_page": 482 },
-                { "question": "Choose the synonym for NIMBLE.", "options": ["Awkward", "Clumsy", "Agile", "Slow"], "correctOptionIndex": 2, "explanation": "Nimble means quick and light in movement or action; agile.", "source_page": 483 },
-                { "question": "Choose the synonym for OSTENTATIOUS.", "options": ["Modest", "Plain", "Showy", "Reserved"], "correctOptionIndex": 2, "explanation": "Ostentatious means characterized by vulgar or pretentious display; designed to impress or attract notice; showy.", "source_page": 484 },
-                { "question": "Choose the synonym for PRUDENT.", "options": ["Reckless", "Careless", "Wise", "Impulsive"], "correctOptionIndex": 2, "explanation": "Prudent means acting with or showing care and thought for the future; wise.", "source_page": 485 },
+                // English: Synonyms (pp. 486-493) - 35 Questions
+                { "question": "Choose the synonym for QUIBBLE.", "options": ["Agree", "Accept", "Criticize", "Praise"], "correctOptionIndex": 2, "explanation": "To quibble is to argue or raise objections about a trivial matter; to criticize.", "source_page": 486 },
+                { "question": "Choose the synonym for RECTIFY.", "options": ["Worsen", "Damage", "Correct", "Spoil"], "correctOptionIndex": 2, "explanation": "To rectify means to put right; to correct.", "source_page": 487 },
+                { "question": "Choose the synonym for SAGACIOUS.", "options": ["Foolish", "Stupid", "Wise", "Ignorant"], "correctOptionIndex": 2, "explanation": "Sagacious means having or showing keen mental discernment and good judgment; wise.", "source_page": 488 },
+                { "question": "Choose the synonym for TANGIBLE.", "options": ["Abstract", "Intangible", "Concrete", "Unreal"], "correctOptionIndex": 2, "explanation": "Tangible means perceptible by touch; concrete.", "source_page": 489 },
+                { "question": "Choose the synonym for UBIQUITOUS.", "options": ["Rare", "Scarce", "Omnipresent", "Limited"], "correctOptionIndex": 2, "explanation": "Ubiquitous means present, appearing, or found everywhere; omnipresent.", "source_page": 490 },
+                { "question": "Choose the synonym for VALIANT.", "options": ["Cowardly", "Timid", "Brave", "Fearful"], "correctOptionIndex": 2, "explanation": "Valiant means possessing or showing courage or determination; brave.", "source_page": 491 },
+                { "question": "Choose the synonym for WANE.", "options": ["Increase", "Grow", "Diminish", "Expand"], "correctOptionIndex": 2, "explanation": "To wane means to decrease in vigor, power, or extent; become weaker.", "source_page": 492 },
+                { "question": "Choose the synonym for YIELD.", "options": ["Resist", "Withstand", "Surrender", "Defy"], "correctOptionIndex": 2, "explanation": "To yield means to give way to arguments, demands, or pressure; to surrender.", "source_page": 493 },
+                { "question": "Choose the synonym for QUELL.", "options": ["Incite", "Encourage", "Suppress", "Provoke"], "correctOptionIndex": 2, "explanation": "To quell is to put an end to (a rebellion or other disorder), typically by the use of force; to suppress.", "source_page": 486 },
+                { "question": "Choose the synonym for ROBUST.", "options": ["Weak", "Frail", "Sturdy", "Delicate"], "correctOptionIndex": 2, "explanation": "Robust means strong and healthy; vigorous.", "source_page": 487 },
+                { "question": "Choose the synonym for SCANTY.", "options": ["Abundant", "Plentiful", "Meager", "Copious"], "correctOptionIndex": 2, "explanation": "Scanty means small or insufficient in quantity or amount; meager.", "source_page": 488 },
+                { "question": "Choose the synonym for TEDIOUS.", "options": ["Exciting", "Interesting", "Dull", "Lively"], "correctOptionIndex": 2, "explanation": "Tedious means too long, slow, or dull; tiresome or monotonous.", "source_page": 489 },
+                { "question": "Choose the synonym for UNCOUTH.", "options": ["Refined", "Cultured", "Awkward", "Polite"], "correctOptionIndex": 2, "explanation": "Uncouth means (of a person or their appearance or behavior) lacking good manners, refinement, or grace; awkward.", "source_page": 490 },
+                { "question": "Choose the synonym for VENERATE.", "options": ["Despise", "Scorn", "Revere", "Dislike"], "correctOptionIndex": 2, "explanation": "To venerate is to regard with great respect; to revere.", "source_page": 491 },
+                { "question": "Choose the synonym for WARY.", "options": ["Trusting", "Careless", "Cautious", "Reckless"], "correctOptionIndex": 2, "explanation": "Wary means feeling or showing caution about possible dangers or problems.", "source_page": 492 },
+                { "question": "Choose the synonym for YELL.", "options": ["Whisper", "Mutter", "Shout", "Murmur"], "correctOptionIndex": 2, "explanation": "To yell is to give a loud, sharp cry; to shout.", "source_page": 493 },
+                { "question": "Choose the synonym for QUERULOUS.", "options": ["Contented", "Complaining", "Cheerful", "Satisfied"], "correctOptionIndex": 1, "explanation": "Querulous means complaining in a petulant or whining manner.", "source_page": 486 },
+                { "question": "Choose the synonym for REMORSE.", "options": ["Satisfaction", "Regret", "Joy", "Indifference"], "correctOptionIndex": 1, "explanation": "Remorse is deep regret or guilt for a wrong committed.", "source_page": 487 },
+                { "question": "Choose the synonym for SERENE.", "options": ["Agitated", "Turbulent", "Calm", "Noisy"], "correctOptionIndex": 2, "explanation": "Serene means calm, peaceful, and untroubled; tranquil.", "source_page": 488 },
+                { "question": "Choose the synonym for THRIVE.", "options": ["Fail", "Decline", "Flourish", "Wither"], "correctOptionIndex": 2, "explanation": "To thrive means to prosper; be fortunate or successful; to flourish.", "source_page": 489 },
+                { "question": "Choose the synonym for URBANE.", "options": ["Rude", "Unsophisticated", "Suave", "Clumsy"], "correctOptionIndex": 2, "explanation": "Urbane means (of a person, especially a man) suave, courteous, and refined in manner.", "source_page": 490 },
+                { "question": "Choose the synonym for VIVACIOUS.", "options": ["Dull", "Lifeless", "Lively", "Lethargic"], "correctOptionIndex": 2, "explanation": "Vivacious means (especially of a woman) attractively lively and animated.", "source_page": 491 },
+                { "question": "Choose the synonym for WHIMSICAL.", "options": ["Serious", "Practical", "Playful", "Sober"], "correctOptionIndex": 2, "explanation": "Whimsical means playfully quaint or fanciful, especially in an appealing and amusing way.", "source_page": 492 },
+                { "question": "Choose the synonym for YEARN.", "options": ["Despise", "Dislike", "Crave", "Reject"], "correctOptionIndex": 2, "explanation": "To yearn is to have an intense feeling of longing for something, typically something that one has lost or been separated from.", "source_page": 493 },
+                { "question": "Choose the synonym for QUIET.", "options": ["Loud", "Noisy", "Silent", "Chaotic"], "correctOptionIndex": 2, "explanation": "Quiet means making little or no noise; silent.", "source_page": 486 },
+                { "question": "Choose the synonym for RUTHLESS.", "options": ["Merciful", "Compassionate", "Merciless", "Kind"], "correctOptionIndex": 2, "explanation": "Ruthless means having or showing no pity or compassion for others.", "source_page": 487 },
+                { "question": "Choose the synonym for STERN.", "options": ["Lenient", "Mild", "Strict", "Gentle"], "correctOptionIndex": 2, "explanation": "Stern means (of a person or their manner) serious and unrelenting, especially in the assertion of authority and exercise of discipline.", "source_page": 488 },
+                { "question": "Choose the synonym for TIMID.", "options": ["Brave", "Bold", "Shy", "Confident"], "correctOptionIndex": 2, "explanation": "Timid means showing a lack of courage or confidence; easily frightened.", "source_page": 489 },
+                { "question": "Choose the synonym for USURP.", "options": ["Inherit", "Abdicate", "Seize", "Relinquish"], "correctOptionIndex": 2, "explanation": "To usurp is to take (a position of power or importance) illegally or by force.", "source_page": 490 },
+                { "question": "Choose the synonym for VEX.", "options": ["Soothe", "Please", "Annoy", "Calm"], "correctOptionIndex": 2, "explanation": "To vex means to make (someone) feel annoyed, frustrated, or worried, especially with trivial matters.", "source_page": 491 },
+                { "question": "Choose the synonym for WILY.", "options": ["Honest", "Naive", "Crafty", "Frank"], "correctOptionIndex": 2, "explanation": "Wily means skilled at gaining an advantage, especially deceitfully; crafty.", "source_page": 492 },
+                { "question": "Choose the synonym for YOKE.", "options": ["Liberate", "Release", "Unite", "Separate"], "correctOptionIndex": 2, "explanation": "A yoke is a wooden crosspiece that is fastened over the necks of two animals and attached to the plow or cart that they are to pull; it symbolizes a bond or union.", "source_page": 493 },
+                { "question": "Choose the synonym for RASH.", "options": ["Cautious", "Careful", "Reckless", "Prudent"], "correctOptionIndex": 2, "explanation": "Rash means displaying or proceeding from a lack of careful consideration of the possible consequences of an action; reckless.", "source_page": 487 },
+                { "question": "Choose the synonym for SUCCINCT.", "options": ["Lengthy", "Verbose", "Concise", "Expanded"], "correctOptionIndex": 2, "explanation": "Succinct means (especially of something written or spoken) briefly and clearly expressed; concise.", "source_page": 488 },
+                { "question": "Choose the synonym for TRANQUIL.", "options": ["Agitated", "Peaceful", "Noisy", "Turbulent"], "correctOptionIndex": 1, "explanation": "Tranquil means free from disturbance; calm.", "source_page": 489 },
 
-                // General Abilities: Probability (pp. 544-545) - 25 Questions
-                { "question": "What is the probability of getting a head when a coin is tossed once?", "options": ["0", "1/2", "1", "1/4"], "correctOptionIndex": 1, "explanation": "There are two possible outcomes (Head, Tail). The number of favorable outcomes (Head) is 1. So, P(Head) = 1/2.", "source_page": 544 },
-                { "question": "In a single throw of a die, what is the probability of getting a number greater than 4?", "options": ["1/6", "1/3", "1/2", "2/3"], "correctOptionIndex": 1, "explanation": "Total outcomes = {1,2,3,4,5,6}. Favorable outcomes (greater than 4) = {5,6}. Number of favorable outcomes = 2. Probability = 2/6 = 1/3.", "source_page": 544 },
-                { "question": "A bag contains 6 red and 4 blue balls. What is the probability of drawing a blue ball?", "options": ["3/5", "2/5", "1/2", "1/5"], "correctOptionIndex": 1, "explanation": "Total balls = 6 + 4 = 10. Number of blue balls = 4. Probability = (Favorable outcomes) / (Total outcomes) = 4/10 = 2/5.", "source_page": 544 },
-                { "question": "Two coins are tossed. What is the probability of getting at least one head?", "options": ["1/4", "1/2", "3/4", "1"], "correctOptionIndex": 2, "explanation": "Possible outcomes are {HH, HT, TH, TT}. Favorable outcomes (at least one head) are {HH, HT, TH}. Probability = 3/4.", "source_page": 545 },
-                { "question": "A card is drawn from a pack of 52 cards. What is the probability of getting a king?", "options": ["1/13", "1/26", "1/52", "4/13"], "correctOptionIndex": 0, "explanation": "There are 4 kings in a pack of 52 cards. Probability = 4/52 = 1/13.", "source_page": 545 },
-                { "question": "If an event is impossible, its probability is:", "options": ["1", "0", "0.5", "Undefined"], "correctOptionIndex": 1, "explanation": "The probability of an impossible event is 0.", "source_page": 544 },
-                { "question": "If an event is certain to happen, its probability is:", "options": ["0", "0.5", "1", "Greater than 1"], "correctOptionIndex": 2, "explanation": "The probability of a certain event is 1.", "source_page": 544 },
-                { "question": "In a throw of two dice, what is the probability of getting a sum of 9?", "options": ["1/6", "1/8", "1/9", "1/12"], "correctOptionIndex": 2, "explanation": "Total outcomes = 36. Favorable outcomes for a sum of 9 are {(3,6), (4,5), (5,4), (6,3)}. Number of favorable outcomes = 4. Probability = 4/36 = 1/9.", "source_page": 545 },
-                { "question": "A box contains 5 green, 4 yellow and 3 white balls. One ball is drawn at random. What is the probability that it is not green?", "options": ["5/12", "7/12", "1/2", "3/4"], "correctOptionIndex": 1, "explanation": "Total balls = 5+4+3=12. Number of balls that are not green = 4+3=7. Probability = 7/12.", "source_page": 544 },
-                { "question": "From a pack of 52 cards, one card is drawn at random. What is the probability that it is an ace or a king?", "options": ["1/13", "2/13", "3/13", "4/13"], "correctOptionIndex": 1, "explanation": "There are 4 aces and 4 kings. Total favorable outcomes = 4+4=8. Probability = 8/52 = 2/13.", "source_page": 545 },
-                { "question": "The probability of an event is P(E). The probability of the event not happening is:", "options": ["1 + P(E)", "1 - P(E)", "P(E) - 1", "1 / P(E)"], "correctOptionIndex": 1, "explanation": "The sum of the probabilities of an event happening and not happening is always 1. So, P(not E) = 1 - P(E).", "source_page": 544 },
-                { "question": "What is the probability of getting an even number when a die is thrown?", "options": ["1/6", "1/3", "1/2", "2/3"], "correctOptionIndex": 2, "explanation": "Total outcomes = 6. Favorable outcomes (even numbers) = {2, 4, 6}. Number of favorable outcomes = 3. Probability = 3/6 = 1/2.", "source_page": 544 },
-                { "question": "Two dice are thrown simultaneously. What is the probability of getting a doublet (same number on both dice)?", "options": ["1/6", "1/36", "1/12", "1/18"], "correctOptionIndex": 0, "explanation": "Total outcomes = 36. Favorable outcomes (doublets) = {(1,1), (2,2), (3,3), (4,4), (5,5), (6,6)}. Number of favorable outcomes = 6. Probability = 6/36 = 1/6.", "source_page": 545 },
-                { "question": "A bag contains 3 red, 5 yellow and 4 green balls. If one ball is drawn at random, what is the probability that it is either red or green?", "options": ["1/4", "1/3", "5/12", "7/12"], "correctOptionIndex": 3, "explanation": "Total balls = 3+5+4=12. Favorable outcomes (red or green) = 3+4=7. Probability = 7/12.", "source_page": 544 },
-                { "question": "A card is drawn from a pack of 52 cards. Find the probability that the card drawn is a spade.", "options": ["1/2", "1/3", "1/4", "1/13"], "correctOptionIndex": 2, "explanation": "There are 13 spade cards in a pack of 52. Probability = 13/52 = 1/4.", "source_page": 545 }
+                // Islamic Studies: Pillars of Islam (Urdu/IS Section, pp. 20-23) - 25 Questions
+                { "question": "اسلام کے کتنے بنیادی ارکان ہیں؟", "options": ["تین", "چار", "پانچ", "چھ"], "correctOptionIndex": 2, "explanation": "اسلام کی بنیاد پانچ ارکان پر ہے: کلمہ شہادت، نماز، روزہ، زکوٰۃ، اور حج۔", "source_page": "Urdu/IS Sec. 20" },
+                { "question": "اسلام کا پہلا رکن کون سا ہے؟", "options": ["نماز", "روزہ", "کلمہ شہادت", "زکوٰۃ"], "correctOptionIndex": 2, "explanation": "اسلام کا پہلا اور سب سے اہم رکن کلمہ شہادت ہے، یعنی اس بات کی گواہی دینا کہ اللہ کے سوا کوئی معبود نہیں اور حضرت محمدؐ اللہ کے رسول ہیں۔", "source_page": "Urdu/IS Sec. 20" },
+                { "question": "دن میں کتنی نمازیں فرض ہیں؟", "options": ["تین", "چار", "پانچ", "چھ"], "correctOptionIndex": 2, "explanation": "ہر مسلمان عاقل و بالغ مرد و عورت پر دن میں پانچ وقت کی نماز فرض ہے: فجر، ظہر، عصر، مغرب، اور عشاء۔", "source_page": "Urdu/IS Sec. 20" },
+                { "question": "نماز کے لیے سب سے پہلی شرط کیا ہے؟", "options": ["وقت کی پابندی", "پاکیزگی (طہارت)", "قبلہ رخ ہونا", "نیت کرنا"], "correctOptionIndex": 1, "explanation": "نماز کی صحت کے لیے سب سے پہلی اور بنیادی شرط طہارت ہے، یعنی جسم، لباس اور جگہ کا پاک ہونا۔", "source_page": "Urdu/IS Sec. 20" },
+                { "question": "کس اسلامی مہینے میں روزے فرض ہیں؟", "options": ["رجب", "شعبان", "رمضان", "محرم"], "correctOptionIndex": 2, "explanation": "رمضان المبارک کے مہینے میں تمام مسلمانوں پر روزے رکھنا فرض ہے۔", "source_page": "Urdu/IS Sec. 21" },
+                { "question": "روزے کا بنیادی مقصد کیا ہے؟", "options": ["بھوکا رہنا", "وزن کم کرنا", "تقویٰ کا حصول", "صحت بہتر بنانا"], "correctOptionIndex": 2, "explanation": "قرآن کے مطابق روزے کا بنیادی مقصد پرہیزگاری اور اللہ کا خوف یعنی تقویٰ پیدا کرنا ہے۔", "source_page": "Urdu/IS Sec. 21" },
+                { "question": "زکوٰۃ کا لغوی معنی کیا ہے؟", "options": ["بڑھنا اور پاک ہونا", "کم کرنا", "خرچ کرنا", "جمع کرنا"], "correctOptionIndex": 0, "explanation": "زکوٰۃ کے لغوی معنی پاکیزگی اور بڑھوتری کے ہیں۔ یہ مال کو پاک کرتی ہے اور اس میں برکت کا سبب بنتی ہے۔", "source_page": "Urdu/IS Sec. 22" },
+                { "question": "زکوٰۃ کس پر فرض ہوتی ہے؟", "options": ["ہر مسلمان پر", "صرف امیر مردوں پر", "صاحب نصاب مسلمان پر", "صرف کسانوں پر"], "correctOptionIndex": 2, "explanation": "زکوٰۃ ہر اس مسلمان پر فرض ہے جو صاحب نصاب ہو، یعنی اس کے پاس ایک خاص مقدار میں مال (ساڑھے سات تولہ سونا یا ساڑھے باون تولہ چاندی یا اس کے برابر رقم) ایک سال تک موجود رہے۔", "source_page": "Urdu/IS Sec. 22" },
+                { "question": "زکوٰۃ کی شرح کیا ہے؟", "options": ["1.5%", "2.5%", "5%", "10%"], "correctOptionIndex": 1, "explanation": "سال بھر کی بچت پر زکوٰۃ کی شرح اڑھائی فیصد (2.5%) ہے۔", "source_page": "Urdu/IS Sec. 22" },
+                { "question": "اسلام کا پانچواں رکن کون سا ہے؟", "options": ["نماز", "روزہ", "زکوٰۃ", "حج"], "correctOptionIndex": 3, "explanation": "اسلام کا پانچواں رکن حج ہے، جو صاحب استطاعت مسلمان پر زندگی میں ایک بار فرض ہے۔", "source_page": "Urdu/IS Sec. 23" },
+                { "question": "حج کس مہینے میں ادا کیا جاتا ہے؟", "options": ["رمضان", "شوال", "ذوالقعدہ", "ذوالحجہ"], "correctOptionIndex": 3, "explanation": "حج کے مخصوص ایام ذوالحجہ کے مہینے میں ہوتے ہیں، جن میں 8 سے 12 ذوالحجہ تک مخصوص مناسک ادا کیے جاتے ہیں۔", "source_page": "Urdu/IS Sec. 23" },
+                { "question": "کلمہ شہادت کے کتنے حصے ہیں؟", "options": ["ایک", "دو", "تین", "چار"], "correctOptionIndex": 1, "explanation": "کلمہ شہادت کے دو حصے ہیں: پہلا حصہ اللہ کی وحدانیت کا اقرار (لا الہ الا اللہ) اور دوسرا حصہ حضرت محمدؐ کی رسالت کا اقرار (محمد رسول اللہ)۔", "source_page": "Urdu/IS Sec. 20" },
+                { "question": "نماز کو دین میں کیا حیثیت حاصل ہے؟", "options": ["دین کا ستون", "مومن کی معراج", "جنت کی کنجی", "مذکورہ بالا تمام"], "correctOptionIndex": 3, "explanation": "احادیث میں نماز کو دین کا ستون، مومن کی معراج اور جنت کی کنجی قرار دیا گیا ہے۔", "source_page": "Urdu/IS Sec. 20" },
+                { "question": "روزے کو عربی میں کیا کہتے ہیں؟", "options": ["صلوٰۃ", "صوم", "زکوٰۃ", "حج"], "correctOptionIndex": 1, "explanation": "روزے کے لیے عربی زبان میں 'صوم' کا لفظ استعمال ہوتا ہے، جس کا مطلب 'رک جانا' ہے۔", "source_page": "Urdu/IS Sec. 21" },
+                { "question": "زکوٰۃ کے مصارف (جن لوگوں کو زکوٰۃ دی جا سکتی ہے) کا ذکر کس سورت میں ہے؟", "options": ["سورۃ البقرہ", "سورۃ آل عمران", "سورۃ التوبہ", "سورۃ المائدہ"], "correctOptionIndex": 2, "explanation": "زکوٰۃ کے آٹھ مصارف کا تفصیلی ذکر قرآن مجید کی سورۃ التوبہ (آیت 60) میں آیا ہے۔", "source_page": "Urdu/IS Sec. 22" },
+                { "question": "حج کے دوران حاجی جو مخصوص لباس پہنتے ہیں اسے کیا کہتے ہیں؟", "options": ["عبایا", "جبہ", "احرام", "چادر"], "correctOptionIndex": 2, "explanation": "حج یا عمرہ کی نیت سے پہنے جانے والے بغیر سلے دو کپڑوں کو احرام کہا جاتا ہے۔", "source_page": "Urdu/IS Sec. 23" },
+                { "question": "کون سی عبادت بدنی اور مالی دونوں ہے؟", "options": ["نماز", "روزہ", "زکوٰۃ", "حج"], "correctOptionIndex": 3, "explanation": "حج ایک ایسی عبادت ہے جس میں مالی استطاعت (سفر کے اخراجات) اور بدنی طاقت دونوں کی ضرورت ہوتی ہے۔", "source_page": "Urdu/IS Sec. 23" },
+                { "question": "نماز میں قبلہ کی طرف رخ کرنا کیا کہلاتا ہے؟", "options": ["قیام", "رکوع", "استقبال قبلہ", "سجدہ"], "correctOptionIndex": 2, "explanation": "نماز کی شرائط میں سے ایک شرط استقبال قبلہ ہے، یعنی نماز ادا کرتے وقت خانہ کعبہ کی طرف منہ کرنا۔", "source_page": "Urdu/IS Sec. 20" },
+                { "question": "روزہ کب سے کب تک رکھا جاتا ہے؟", "options": ["طلوع آفتاب سے غروب آفتاب تک", "صبح صادق سے غروب آفتاب تک", "فجر کی اذان سے مغرب کی اذان تک", "دن کے بارہ گھنٹے"], "correctOptionIndex": 1, "explanation": "روزے کا وقت صبح صادق (فجر کا وقت شروع ہونے) سے لے کر غروب آفتاب (مغرب کا وقت شروع ہونے) تک ہوتا ہے۔", "source_page": "Urdu/IS Sec. 21" },
+                { "question": "عشر کس قسم کی زکوٰۃ ہے؟", "options": ["سونے پر", "جانوروں پر", "تجارت کے مال پر", "زرعی پیداوار پر"], "correctOptionIndex": 3, "explanation": "عشر زرعی پیداوار پر لگنے والی زکوٰۃ کو کہتے ہیں، جس کی شرح پیداوار کا دسواں یا بیسواں حصہ ہوتی ہے۔", "source_page": "Urdu/IS Sec. 22" },
+                { "question": "طواف کس کے گرد کیا جاتا ہے؟", "options": ["مسجد نبوی", "کوہ صفا", "خانہ کعبہ", "میدان عرفات"], "correctOptionIndex": 2, "explanation": "طواف حج اور عمرہ کا ایک اہم رکن ہے جس میں حاجی خانہ کعبہ کے گرد سات چکر لگاتے ہیں۔", "source_page": "Urdu/IS Sec. 23" },
+                { "question": "نماز قائم کرنے کا حکم قرآن میں کتنی بار آیا ہے؟", "options": ["تقریباً 100 بار", "تقریباً 300 بار", "تقریباً 500 بار", "تقریباً 700 بار"], "correctOptionIndex": 3, "explanation": "قرآن مجید میں نماز قائم کرنے کا حکم تقریباً 700 مرتبہ آیا ہے، جو اس کی اہمیت کو ظاہر کرتا ہے۔", "source_page": "Urdu/IS Sec. 20" },
+                { "question": "روزے کو کس چیز سے تشبیہ دی گئی ہے؟", "options": ["ڈھال", "تلوار", "روشنی", "خزانہ"], "correctOptionIndex": 0, "explanation": "حدیث میں روزے کو گناہوں اور جہنم کی آگ سے بچانے والی ڈھال قرار دیا گیا ہے۔", "source_page": "Urdu/IS Sec. 21" },
+                { "question": "زکوٰۃ ادا نہ کرنے والوں کے بارے میں قرآن میں کیا وعید ہے؟", "options": ["مال کم ہو جائے گا", "سخت عذاب کی وعید", "کاروبار میں نقصان ہوگا", "معاشرے میں عزت کم ہوگی"], "correctOptionIndex": 1, "explanation": "قرآن و حدیث میں زکوٰۃ ادا نہ کرنے والوں کے لیے سخت عذاب کی وعیدیں آئی ہیں۔", "source_page": "Urdu/IS Sec. 22" },
+                { "question": "حج کا سب سے بڑا رکن کون سا ہے؟", "options": ["طواف", "سعی", "وقوف عرفہ", "قربانی"], "correctOptionIndex": 2, "explanation": "وقوف عرفہ (9 ذوالحجہ کو عرفات کے میدان میں ٹھہرنا) حج کا سب سے بڑا اور لازمی رکن ہے، جس کے بغیر حج ادا نہیں ہوتا۔", "source_page": "Urdu/IS Sec. 23" }
             ];
             
             shuffleArrayWithSeed(allQuestions, dateSeed);
@@ -708,9 +791,7 @@
                     const id = loginIdInput ? loginIdInput.value : '';
                     const password = loginPasswordInput ? loginPasswordInput.value : '';
                     
-                    // Admin login is handled in admin.html, this is for student login
                     if (id === 'syedasgharalishah' && password === 'admin') {
-                        // You might want to remove this alert or redirect to admin.html
                         alert('Admin login is not handled in this file. Please use the admin panel file.');
                         return;
                     }
@@ -765,7 +846,7 @@
             // Initial setup calls
             initializeQuiz();
             updateLiveDate();
-            showPage('loginPage'); // <--- ADDED THIS LINE to show the login page initially
+            showPage('loginPage'); 
 
             // Handle initial loginId display
             const loginIdInput = document.getElementById('loginId');
@@ -773,12 +854,8 @@
                 const dateParts = CURRENT_DATE_STR.split(' ');
                 const monthName = dateParts[0].toUpperCase();
                 const day = parseInt(dateParts[1].replace(',', ''));
-                loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 17JUL
+                loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 18JUL
             }
-
-            // Ensure next button is hidden initially if it exists
-            const initialNextBtn = document.getElementById('nextBtn');
-            if(initialNextBtn) initialNextBtn.classList.add('hidden');
         });
     </script>
 </body>
