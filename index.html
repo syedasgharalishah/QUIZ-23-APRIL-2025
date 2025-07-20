@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS MPT Daily Quiz - July 18, 2025</title>
+    <title>CSS MPT Daily Quiz - July 20, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -221,6 +221,72 @@
     </style>
 </head>
 <body>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        // --- Firebase Configuration and Initialization ---
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : {
+                apiKey: "AIzaSyALjJrKf6acGhdEYlsKO-gCpBJHw6UbKTs",
+                authDomain: "css-quiz-results.firebaseapp.com",
+                projectId: "css-quiz-results",
+                storageBucket: "css-quiz-results.appspot.com",
+                messagingSenderId: "1077285247585",
+                appId: "1:1077285247585:web:47e010dd8fa288b9fa2820"
+            };
+        
+        let app, auth, db;
+        let userId;
+
+        // Initialize Firebase
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            console.log("Firebase initialized successfully for quiz.");
+        } catch (e) {
+            console.error("Error initializing Firebase:", e);
+            document.body.innerHTML = '<div class="text-red-500 text-center p-8">Error initializing the application. Please check the console for details. This might be due to missing Firebase configuration.</div>';
+        }
+
+        // Handle Authentication
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                userId = user.uid;
+            } else {
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (error) {
+                    console.error("Error during sign-in:", error);
+                }
+            }
+        });
+
+        // Make db instance globally available for the submitQuiz function
+        window.db = db;
+    </script>
+
+    <script>
+        // Disable right-click, copy/paste, and developer tools for security
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
+                e.preventDefault();
+            }
+            if (e.key === 'F12') { e.preventDefault(); }
+        });
+        document.addEventListener('copy', event => event.preventDefault());
+        document.addEventListener('paste', event => event.preventDefault());
+    </script>
+
     <div class="top-bar">
         <div class="date-display" id="liveDate">
             <i class="fas fa-calendar-alt"></i> <span id="currentDateText"></span>
@@ -296,67 +362,17 @@
         </div>
     </main>
 
-    <script type="module">
-        // Corrected Firebase import paths - ensure no extra characters like [] or ()
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        
-        // --- Firebase Configuration and Initialization ---
-        // This configuration is automatically provided in the original environment.
-        // When deploying elsewhere (e.g., GitHub Pages), this will use the placeholder.
-        const firebaseConfig = typeof __firebase_config !== 'undefined' 
-            ? JSON.parse(__firebase_config) 
-            : {
-                // --- IMPORTANT ---
-                // This is your actual Firebase project configuration.
-                apiKey: "AIzaSyALjJrKf6acGhdEYlsKO-gCpBJHw6UbKTs",
-                authDomain: "css-quiz-results.firebaseapp.com",
-                projectId: "css-quiz-results",
-                storageBucket: "css-quiz-results.firebasestorage.app",
-                messagingSenderId: "1077285247585",
-                appId: "1:1077285247585:web:47e010dd8fa288b9fa2820"
-            };
-        
-        let app, auth, db;
-        let userId;
-
-        // Initialize Firebase
-        try {
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-            console.log("Firebase initialized successfully for quiz.");
-        } catch (e) {
-            console.error("Error initializing Firebase:", e);
-            document.body.innerHTML = '<div class="text-red-500 text-center p-8">Error initializing the application. Please check the console for details. This might be due to missing Firebase configuration.</div>';
-        }
-
-        // Handle Authentication
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                userId = user.uid;
-            } else {
-                // If no user is logged in, attempt anonymous sign-in
-                try {
-                    // Use __initial_auth_token if available (from Canvas environment)
-                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                        console.log("Signed in with custom token.");
-                    } else {
-                        // Otherwise, sign in anonymously for public access
-                        await signInAnonymously(auth);
-                        console.log("Signed in anonymously.");
-                    }
-                } catch (error) {
-                    console.error("Error during sign-in:", error);
-                }
-            }
-        });
-
+    <script>
         // Set the current date for display and logic
-        const CURRENT_DATE_STR = "July 18, 2025";
+        const CURRENT_DATE_STR = "July 20, 2025";
         const CURRENT_DATE = new Date(CURRENT_DATE_STR);
+
+        // Function to update the live date display
+        function updateLiveDate() {
+            document.getElementById('currentDateText').textContent = CURRENT_DATE_STR;
+            document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
+            document.getElementById('quizTitle').textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR}`;
+        }
 
         // Quiz Data Structure
         let quizQuestions = []; // Will be populated by initializeQuiz
@@ -389,13 +405,9 @@
         }
 
         function updateProgressBar() {
-            const progressBar = document.getElementById('progressBar');
-            const questionProgress = document.getElementById('questionProgress');
-            if (progressBar && questionProgress) {
-                const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
-                progressBar.style.width = `${progress}%`;
-                questionProgress.textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length} – ${Math.round(progress)}% Complete`;
-            }
+            const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('questionProgress').textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length} – ${Math.round(progress)}% Complete`;
         }
 
         function showPage(pageId) {
@@ -429,40 +441,31 @@
 
         function renderQuestion() {
             const question = quizQuestions[currentQuestionIndex];
-            const questionText = document.getElementById('questionText');
+            document.getElementById('questionText').innerHTML = question.question;
             const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+
             const quizCard = document.getElementById('quizPage');
-            const explanationDiv = document.getElementById('explanationDiv');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-
-            if (questionText) questionText.innerHTML = question.question;
-            if (optionsContainer) optionsContainer.innerHTML = '';
-
-            if (quizCard) {
-                quizCard.classList.remove('special-question');
-                if (question.special) {
-                    quizCard.classList.add('special-question');
-                }
+            quizCard.classList.remove('special-question');
+            if (question.special) {
+                quizCard.classList.add('special-question');
             }
             
             const optionSeed = `${CURRENT_DATE_STR}-${currentQuestionIndex}`;
             const shuffledOptions = [...question.options];
             shuffleArrayWithSeed(shuffledOptions, optionSeed);
 
-            if (optionsContainer) {
-                shuffledOptions.forEach((option) => {
-                    const button = document.createElement('button');
-                    button.classList.add('option-button', 'w-full');
-                    button.innerHTML = option;
-                    button.dataset.originalOptionIndex = question.options.indexOf(option);
-                    button.onclick = () => selectOption(parseInt(button.dataset.originalOptionIndex));
-                    optionsContainer.appendChild(button);
-                });
-            }
+            shuffledOptions.forEach((option) => {
+                const button = document.createElement('button');
+                button.classList.add('option-button', 'w-full');
+                button.innerHTML = option;
+                button.dataset.originalOptionIndex = question.options.indexOf(option);
+                button.onclick = () => selectOption(parseInt(button.dataset.originalOptionIndex));
+                optionsContainer.appendChild(button);
+            });
 
             const userAnswer = userAnswers[currentQuestionIndex];
-            if (userAnswer && userAnswer.selectedOptionIndex !== undefined && optionsContainer) {
+            if (userAnswer && userAnswer.selectedOptionIndex !== undefined) {
                  Array.from(optionsContainer.children).forEach((button, index) => {
                     button.disabled = true;
                     const btnOriginalIndex = question.options.indexOf(shuffledOptions[index]);
@@ -475,14 +478,13 @@
                 });
             }
 
-            if (explanationDiv) {
-                explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
-                explanationDiv.style.display = (userAnswer && userAnswer.selectedOptionIndex !== undefined) ? 'block' : 'none';
-            }
+            const explanationDiv = document.getElementById('explanationDiv');
+            explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
+            explanationDiv.style.display = (userAnswer && userAnswer.selectedOptionIndex !== undefined) ? 'block' : 'none';
 
-            if (prevBtn) prevBtn.classList.toggle('hidden', currentQuestionIndex === 0);
+            document.getElementById('prevBtn').classList.toggle('hidden', currentQuestionIndex === 0);
             const showNextButton = currentQuestionIndex < quizQuestions.length - 1;
-            if (nextBtn) nextBtn.classList.toggle('hidden', !showNextButton);
+            document.getElementById('nextBtn').classList.toggle('hidden', !showNextButton);
         }
 
         function selectOption(selectedOptionOriginalIndex) {
@@ -533,24 +535,15 @@
             });
 
             const score = (correctCount * 2) - incorrectCount;
-            const candidateNameInput = document.getElementById('candidateName');
-            const candidateName = candidateNameInput ? candidateNameInput.value : 'Unknown Candidate'; // Added null check
+            const candidateName = document.getElementById('candidateName').value;
 
-            const resultCandidateName = document.getElementById('resultCandidateName');
-            const resultDate = document.getElementById('resultDate');
-            const resultScore = document.getElementById('resultScore');
-            const resultCorrect = document.getElementById('resultCorrect');
-            const resultIncorrect = document.getElementById('resultIncorrect');
-            const resultAttempted = document.getElementById('resultAttempted');
-            const resultTimeTaken = document.getElementById('resultTimeTaken');
-
-            if (resultCandidateName) resultCandidateName.textContent = candidateName;
-            if (resultDate) resultDate.textContent = CURRENT_DATE_STR;
-            if (resultScore) resultScore.textContent = `${score}`;
-            if (resultCorrect) resultCorrect.textContent = `${correctCount}`;
-            if (resultIncorrect) resultIncorrect.textContent = `${incorrectCount}`;
-            if (resultAttempted) resultAttempted.textContent = `${attemptedCount} / ${TOTAL_QUESTIONS}`;
-            if (resultTimeTaken) resultTimeTaken.textContent = formatTime(timeTakenSeconds);
+            document.getElementById('resultCandidateName').textContent = candidateName;
+            document.getElementById('resultDate').textContent = CURRENT_DATE_STR;
+            document.getElementById('resultScore').textContent = `${score}`;
+            document.getElementById('resultCorrect').textContent = `${correctCount}`;
+            document.getElementById('resultIncorrect').textContent = `${incorrectCount}`;
+            document.getElementById('resultAttempted').textContent = `${attemptedCount} / ${TOTAL_QUESTIONS}`;
+            document.getElementById('resultTimeTaken').textContent = formatTime(timeTakenSeconds);
             
             showPage('resultsPage');
 
@@ -566,141 +559,19 @@
                 submittedAt: new Date().toISOString()
             };
             
-            // Ensure appId is consistently retrieved and used.
-            // For Canvas environment, __app_id is provided. For standalone, use a hardcoded default.
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app'; 
-            if (db) { // Use db directly as it's now in the same scope
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
+            if (window.db) {
                 try {
+                    const { doc, collection, setDoc } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
                     const resultsCollectionPath = `/artifacts/${appId}/public/data/quiz_results`;
-                    const newResultRef = doc(collection(db, resultsCollectionPath)); 
+                    const newResultRef = doc(collection(window.db, resultsCollectionPath)); 
                     await setDoc(newResultRef, resultData);
                     console.log("Result saved to Firestore.");
                 } catch (error) {
                     console.error("Error writing document to Firestore: ", error);
                 }
             } else {
-                 console.error("Firestore database (db) not initialized.");
-            }
-        }
-
-        // --- UI Update Functions ---
-        function updateLiveDate() {
-            const currentDateText = document.getElementById('currentDateText');
-            const updatedDate = document.getElementById('updatedDate');
-            const quizTitle = document.getElementById('quizTitle');
-
-            if (currentDateText) currentDateText.textContent = CURRENT_DATE_STR;
-            if (updatedDate) updatedDate.textContent = CURRENT_DATE_STR;
-            if (quizTitle) quizTitle.textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR}`;
-        }
-
-        // --- Quiz Initialization ---
-        function initializeQuiz() {
-            quizQuestions.length = 0;
-            const dateSeed = CURRENT_DATE_STR;
-            
-            const allQuestions = [
-                // === July 18th Syllabus Quiz (100 MCQs) ===
-
-                // General Knowledge: Books & Literature (pp. 86-87) & Organizations (pp. 88-92) - 40 Questions
-                { "question": "Who wrote 'The Old Man and the Sea'?", "options": ["William Faulkner", "John Steinbeck", "Ernest Hemingway", "F. Scott Fitzgerald"], "correctOptionIndex": 2, "explanation": "'The Old Man and the Sea' is a short novel written by the American author Ernest Hemingway in 1951.", "source_page": 87 },
-                { "question": "Who is the author of the Harry Potter series?", "options": ["J.R.R. Tolkien", "C.S. Lewis", "George R.R. Martin", "J.K. Rowling"], "correctOptionIndex": 3, "explanation": "The Harry Potter series of fantasy novels was written by British author J. K. Rowling.", "source_page": 86 },
-                { "question": "Where is the headquarters of the United Nations (UN) located?", "options": ["Geneva", "Vienna", "The Hague", "New York"], "correctOptionIndex": 3, "explanation": "The headquarters of the United Nations is in New York City.", "source_page": 88 },
-                { "question": "When was the World Health Organization (WHO) established?", "options": ["1945", "1948", "1950", "1952"], "correctOptionIndex": 1, "explanation": "The World Health Organization (WHO) was established on 7 April 1948.", "source_page": 88 },
-                { "question": "Which of the following is NOT a principal organ of the United Nations?", "options": ["General Assembly", "Security Council", "International Monetary Fund", "International Court of Justice"], "correctOptionIndex": 2, "explanation": "The International Monetary Fund (IMF) is a specialized agency of the UN, but not one of its six principal organs.", "source_page": 88 },
-                { "question": "Where is the headquarters of the International Court of Justice (ICJ) located?", "options": ["Geneva, Switzerland", "New York, USA", "Brussels, Belgium", "The Hague, Netherlands"], "correctOptionIndex": 3, "explanation": "The International Court of Justice, the principal judicial organ of the UN, is seated at the Peace Palace in The Hague, Netherlands.", "source_page": 88 },
-                { "question": "NATO stands for:", "options": ["North Atlantic Trade Organization", "North American Treaty Organization", "North Atlantic Treaty Organization", "North Asian Treaty Organization"], "correctOptionIndex": 2, "explanation": "NATO stands for the North Atlantic Treaty Organization.", "source_page": 90 },
-                { "question": "Which of these countries is a permanent member of the UN Security Council?", "options": ["Germany", "Japan", "India", "France"], "correctOptionIndex": 3, "explanation": "The five permanent members of the UN Security Council are China, France, Russia, the United Kingdom, and the United States.", "source_page": 88 },
-                { "question": "Where is the headquarters of SAARC (South Asian Association for Regional Cooperation) located?", "options": ["Dhaka, Bangladesh", "New Delhi, India", "Colombo, Sri Lanka", "Kathmandu, Nepal"], "correctOptionIndex": 3, "explanation": "The secretariat of SAARC is based in Kathmandu, Nepal.", "source_page": 91 },
-                { "question": "OPEC is an organization of:", "options": ["Oil Producing and Exporting Countries", "Organization of Petroleum Exporting Companies", "Organization of Petroleum Exporting Countries", "Oil and Petroleum Exporting Countries"], "correctOptionIndex": 2, "explanation": "OPEC stands for the Organization of the Petroleum Exporting Countries.", "source_page": 91 },
-                { "question": "Who wrote 'The Diary of a Young Girl'?", "options": ["Virginia Woolf", "Sylvia Plath", "Anne Frank", "Simone de Beauvoir"], "correctOptionIndex": 2, "explanation": "'The Diary of a Young Girl', also known as The Diary of Anne Frank, is a book of the writings from the Dutch-language diary kept by Anne Frank while she was in hiding for two years with her family during the Nazi occupation of the Netherlands.", "source_page": 86 },
-                { "question": "Who is the author of '1984'?", "options": ["Aldous Huxley", "George Orwell", "Ray Bradbury", "Philip K. Dick"], "correctOptionIndex": 1, "explanation": "'Nineteen Eighty-Four' is a dystopian novel by English novelist George Orwell.", "source_page": 87 },
-                { "question": "Where is the headquarters of UNESCO located?", "options": ["London", "Rome", "Geneva", "Paris"], "correctOptionIndex": 3, "explanation": "The headquarters of the United Nations Educational, Scientific and Cultural Organization (UNESCO) is located in Paris, France.", "source_page": 89 },
-                { "question": "Which organization is known as the 'World Bank'?", "options": ["IMF", "IBRD", "IDA", "IFC"], "correctOptionIndex": 1, "explanation": "The International Bank for Reconstruction and Development (IBRD) is the main institution of the World Bank Group.", "source_page": 89 },
-                { "question": "Where is the headquarters of the European Union (EU) located?", "options": ["Paris, France", "Berlin, Germany", "Brussels, Belgium", "Rome, Italy"], "correctOptionIndex": 2, "explanation": "The de facto capital of the European Union is Brussels, Belgium, which hosts the official seats of the European Commission, Council of the European Union, and European Council.", "source_page": 90 },
-                { "question": "Amnesty International is an organization associated with:", "options": ["Environmental Protection", "Human Rights", "Economic Development", "Animal Welfare"], "correctOptionIndex": 1, "explanation": "Amnesty International is a global non-governmental organization focused on human rights.", "source_page": 92 },
-                { "question": "Who wrote 'Long Walk to Freedom'?", "options": ["Martin Luther King Jr.", "Desmond Tutu", "Nelson Mandela", "Barack Obama"], "correctOptionIndex": 2, "explanation": "'Long Walk to Freedom' is an autobiography written by South African President Nelson Mandela.", "source_page": 87 },
-                { "question": "Who is the author of 'The Lord of the Rings'?", "options": ["C.S. Lewis", "J.K. Rowling", "George R.R. Martin", "J.R.R. Tolkien"], "correctOptionIndex": 3, "explanation": "'The Lord of the Rings' is an epic high-fantasy novel by the English author and scholar J. R. R. Tolkien.", "source_page": 87 },
-                { "question": "The headquarters of the Food and Agriculture Organization (FAO) is in:", "options": ["Geneva", "Paris", "Rome", "New York"], "correctOptionIndex": 2, "explanation": "The headquarters of the Food and Agriculture Organization of the United Nations is located in Rome, Italy.", "source_page": 89 },
-                { "question": "Which of the following is a member of the G-7?", "options": ["Russia", "China", "India", "Canada"], "correctOptionIndex": 3, "explanation": "The G7 (Group of Seven) is an intergovernmental organization consisting of Canada, France, Germany, Italy, Japan, the United Kingdom, and the United States.", "source_page": 92 },
-                { "question": "Where is the headquarters of the Association of Southeast Asian Nations (ASEAN) located?", "options": ["Singapore", "Bangkok, Thailand", "Hanoi, Vietnam", "Jakarta, Indonesia"], "correctOptionIndex": 3, "explanation": "The ASEAN Secretariat is located in Jakarta, Indonesia.", "source_page": 90 },
-                { "question": "The book 'Das Kapital' was written by:", "options": ["Adam Smith", "John Maynard Keynes", "Karl Marx", "David Ricardo"], "correctOptionIndex": 2, "explanation": "'Das Kapital' is a foundational theoretical text in communist philosophy by Karl Marx.", "source_page": 86 },
-                { "question": "Who wrote the play 'Romeo and Juliet'?", "options": ["Christopher Marlowe", "Ben Jonson", "William Shakespeare", "John Webster"], "correctOptionIndex": 2, "explanation": "'Romeo and Juliet' is a tragedy written by William Shakespeare early in his career.", "source_page": 87 },
-                { "question": "Where is the headquarters of the International Labour Organization (ILO) located?", "options": ["Paris, France", "Geneva, Switzerland", "Vienna, Austria", "New York, USA"], "correctOptionIndex": 1, "explanation": "The International Labour Organization (ILO) is a United Nations agency whose mandate is to advance social and economic justice through setting international labour standards. Its headquarters is in Geneva, Switzerland.", "source_page": 89 },
-                { "question": "The term of a non-permanent member of the UN Security Council is:", "options": ["1 year", "2 years", "3 years", "5 years"], "correctOptionIndex": 1, "explanation": "The UN Security Council has 10 non-permanent members, elected by the General Assembly for two-year terms.", "source_page": 88 },
-                { "question": "Where is the headquarters of the World Trade Organization (WTO) located?", "options": ["Washington D.C.", "London", "Geneva", "Paris"], "correctOptionIndex": 2, "explanation": "The headquarters of the World Trade Organization is located in Geneva, Switzerland.", "source_page": 90 },
-                { "question": "The book 'The Wealth of Nations' was written by:", "options": ["John Stuart Mill", "Adam Smith", "David Ricardo", "Karl Marx"], "correctOptionIndex": 1, "explanation": "'The Wealth of Nations' is the magnum opus of the Scottish economist and moral philosopher Adam Smith.", "source_page": 87 },
-                { "question": "Who is the author of 'To Kill a Mockingbird'?", "options": ["Harper Lee", "Margaret Atwood", "Toni Morrison", "Alice Walker"], "correctOptionIndex": 0, "explanation": "'To Kill a Mockingbird' is a novel by the American author Harper Lee.", "source_page": 87 },
-                { "question": "The headquarters of UNICEF is in:", "options": ["Geneva", "Paris", "Rome", "New York"], "correctOptionIndex": 3, "explanation": "The headquarters of the United Nations Children's Fund (UNICEF) is in New York City.", "source_page": 89 },
-                { "question": "Which of the following countries is NOT a member of SAARC?", "options": ["Bhutan", "Maldives", "Myanmar", "Nepal"], "correctOptionIndex": 2, "explanation": "The member states of SAARC are Afghanistan, Bangladesh, Bhutan, India, the Maldives, Nepal, Pakistan, and Sri Lanka. Myanmar is not a member.", "source_page": 91 },
-                { "question": "Where is the headquarters of the Arab League located?", "options": ["Riyadh, Saudi Arabia", "Cairo, Egypt", "Amman, Jordan", "Damascus, Syria"], "correctOptionIndex": 1, "explanation": "The headquarters of the Arab League is located in Cairo, Egypt.", "source_page": 92 },
-                { "question": "Who wrote 'The Great Gatsby'?", "options": ["Ernest Hemingway", "William Faulkner", "F. Scott Fitzgerald", "John Steinbeck"], "correctOptionIndex": 2, "explanation": "'The Great Gatsby' is a 1925 novel by American writer F. Scott Fitzgerald.", "source_page": 86 },
-                { "question": "Who is the author of 'The Canterbury Tales'?", "options": ["John Milton", "Geoffrey Chaucer", "Edmund Spenser", "William Langland"], "correctOptionIndex": 1, "explanation": "'The Canterbury Tales' is a collection of 24 stories that runs to over 17,000 lines written in Middle English by Geoffrey Chaucer.", "source_page": 86 },
-                { "question": "Where is the headquarters of the International Atomic Energy Agency (IAEA) located?", "options": ["Geneva, Switzerland", "Vienna, Austria", "Brussels, Belgium", "The Hague, Netherlands"], "correctOptionIndex": 1, "explanation": "The headquarters of the International Atomic Energy Agency (IAEA) is located in Vienna, Austria.", "source_page": 89 },
-                { "question": "The Commonwealth of Nations is an organization of former colonies of which empire?", "options": ["French Empire", "Spanish Empire", "Portuguese Empire", "British Empire"], "correctOptionIndex": 3, "explanation": "The Commonwealth is a political association of 56 member states, the vast majority of which are former territories of the British Empire.", "source_page": 92 },
-
-                // English: Synonyms (pp. 479-485) - 35 Questions
-                { "question": "Choose the synonym for IMPEDE.", "options": ["Facilitate", "Advance", "Obstruct", "Assist"], "correctOptionIndex": 2, "explanation": "To impede means to delay or prevent (someone or something) by obstructing them; to hinder.", "source_page": 479 },
-                { "question": "Choose the synonym for JUBILANT.", "options": ["Sorrowful", "Depressed", "Rejoicing", "Gloomy"], "correctOptionIndex": 2, "explanation": "Jubilant means feeling or expressing great happiness and triumph.", "source_page": 480 },
-                { "question": "Choose the synonym for LETHARGY.", "options": ["Vigor", "Energy", "Sluggishness", "Alertness"], "correctOptionIndex": 2, "explanation": "Lethargy is a lack of energy and enthusiasm; sluggishness.", "source_page": 481 },
-                { "question": "Choose the synonym for MITIGATE.", "options": ["Aggravate", "Worsen", "Alleviate", "Intensify"], "correctOptionIndex": 2, "explanation": "To mitigate means to make (something bad) less severe, serious, or painful; to alleviate.", "source_page": 482 },
-                { "question": "Choose the synonym for NOVICE.", "options": ["Expert", "Veteran", "Beginner", "Master"], "correctOptionIndex": 2, "explanation": "A novice is a person new to or inexperienced in a field or situation; a beginner.", "source_page": 483 },
-                { "question": "Choose the synonym for OBSCURE.", "options": ["Clear", "Obvious", "Uncertain", "Explicit"], "correctOptionIndex": 2, "explanation": "Obscure means not discovered or known about; uncertain.", "source_page": 484 },
-                { "question": "Choose the synonym for PALPABLE.", "options": ["Intangible", "Imperceptible", "Tangible", "Unclear"], "correctOptionIndex": 2, "explanation": "Palpable means able to be touched or felt; tangible.", "source_page": 485 },
-                { "question": "Choose the synonym for INGENIOUS.", "options": ["Unimaginative", "Dull", "Clever", "Clumsy"], "correctOptionIndex": 2, "explanation": "Ingenious means (of a person) clever, original, and inventive.", "source_page": 479 },
-                { "question": "Choose the synonym for JADED.", "options": ["Fresh", "Enthusiastic", "Wearied", "Excited"], "correctOptionIndex": 2, "explanation": "Jaded means tired, bored, or lacking enthusiasm, typically after having had too much of something.", "source_page": 480 },
-                { "question": "Choose the synonym for LACONIC.", "options": ["Verbose", "Wordy", "Concise", "Talkative"], "correctOptionIndex": 2, "explanation": "Laconic means (of a person, speech, or style of writing) using very few words; concise.", "source_page": 481 },
-                { "question": "Choose the synonym for MALIGNANT.", "options": ["Benign", "Harmless", "Spiteful", "Kind"], "correctOptionIndex": 2, "explanation": "Malignant means malevolent or spiteful.", "source_page": 482 },
-                { "question": "Choose the synonym for NEBULOUS.", "options": ["Clear", "Precise", "Vague", "Definite"], "correctOptionIndex": 2, "explanation": "Nebulous means in the form of a cloud or haze; hazy, unclear, or vague.", "source_page": 483 },
-                { "question": "Choose the synonym for OBSTINATE.", "options": ["Compliant", "Flexible", "Stubborn", "Agreeable"], "correctOptionIndex": 2, "explanation": "Obstinate means stubbornly refusing to change one's opinion or chosen course of action, despite attempts to persuade one to do so.", "source_page": 484 },
-                { "question": "Choose the synonym for PERILOUS.", "options": ["Safe", "Secure", "Hazardous", "Harmless"], "correctOptionIndex": 2, "explanation": "Perilous means full of danger or risk; hazardous.", "source_page": 485 },
-                { "question": "Choose the synonym for INSIPID.", "options": ["Flavorful", "Exciting", "Dull", "Interesting"], "correctOptionIndex": 2, "explanation": "Insipid means lacking flavor; weak or tasteless. It can also mean lacking vigor or interest.", "source_page": 479 },
-                { "question": "Choose the synonym for JOCUND.", "options": ["Miserable", "Gloomy", "Cheerful", "Sad"], "correctOptionIndex": 2, "explanation": "Jocund means cheerful and lighthearted.", "source_page": 480 },
-                { "question": "Choose the synonym for LURID.", "options": ["Mild", "Subtle", "Sensational", "Pleasant"], "correctOptionIndex": 2, "explanation": "Lurid means presented in vividly shocking or sensational terms.", "source_page": 481 },
-                { "question": "Choose the synonym for MYRIAD.", "options": ["Few", "Limited", "Countless", "Single"], "correctOptionIndex": 2, "explanation": "Myriad means a countless or extremely great number.", "source_page": 482 },
-                { "question": "Choose the synonym for NEFARIOUS.", "options": ["Good", "Honorable", "Wicked", "Righteous"], "correctOptionIndex": 2, "explanation": "Nefarious means (typically of an action or activity) wicked or criminal.", "source_page": 483 },
-                { "question": "Choose the synonym for ONEROUS.", "options": ["Easy", "Simple", "Burdensome", "Light"], "correctOptionIndex": 2, "explanation": "Onerous means (of a task, duty, or responsibility) involving an amount of effort and difficulty that is oppressively burdensome.", "source_page": 484 },
-                { "question": "Choose the synonym for PLACID.", "options": ["Agitated", "Turbulent", "Calm", "Stormy"], "correctOptionIndex": 2, "explanation": "Placid means not easily upset or excited; calm and peaceful.", "source_page": 485 },
-                { "question": "Choose the synonym for INTREPID.", "options": ["Cowardly", "Timid", "Fearless", "Afraid"], "correctOptionIndex": 2, "explanation": "Intrepid means fearless; adventurous (often used for rhetorical or humorous effect).", "source_page": 479 },
-                { "question": "Choose the synonym for JETTISON.", "options": ["Keep", "Retain", "Discard", "Accept"], "correctOptionIndex": 2, "explanation": "To jettison means to abandon or discard (someone or something that is no longer wanted).", "source_page": 480 },
-                { "question": "Choose the synonym for LIMPID.", "options": ["Murky", "Cloudy", "Clear", "Opaque"], "correctOptionIndex": 2, "explanation": "Limpid means (of a liquid) free of anything that darkens; completely clear and transparent.", "source_page": 481 },
-                { "question": "Choose the synonym for METICULOUS.", "options": ["Careless", "Sloppy", "Thorough", "Hasty"], "correctOptionIndex": 2, "explanation": "Meticulous means showing great attention to detail; very careful and precise.", "source_page": 482 },
-                { "question": "Choose the synonym for NEGLIGENT.", "options": ["Careful", "Conscientious", "Careless", "Attentive"], "correctOptionIndex": 2, "explanation": "Negligent means failing to take proper care in doing something; careless.", "source_page": 483 },
-                { "question": "Choose the synonym for OPAQUE.", "options": ["Transparent", "Clear", "Cloudy", "Translucent"], "correctOptionIndex": 2, "explanation": "Opaque means not able to be seen through; not transparent. Cloudy is a good synonym.", "source_page": 484 },
-                { "question": "Choose the synonym for PRECARIOUS.", "options": ["Stable", "Secure", "Uncertain", "Safe"], "correctOptionIndex": 2, "explanation": "Precarious means not securely held or in position; dangerously likely to fall or collapse; uncertain.", "source_page": 485 },
-                { "question": "Choose the synonym for INVINCIBLE.", "options": ["Vulnerable", "Beatable", "Unconquerable", "Weak"], "correctOptionIndex": 2, "explanation": "Invincible means too powerful to be defeated or overcome.", "source_page": 479 },
-                { "question": "Choose the synonym for JUBILEE.", "options": ["Mourning", "Sorrow", "Celebration", "Grief"], "correctOptionIndex": 2, "explanation": "A jubilee is a special anniversary of an event, especially one celebrating twenty-five or fifty years of a reign or activity; a celebration.", "source_page": 480 },
-                { "question": "Choose the synonym for LUCID.", "options": ["Confusing", "Vague", "Clear", "Ambiguous"], "correctOptionIndex": 2, "explanation": "Lucid means expressed clearly; easy to understand.", "source_page": 481 },
-                { "question": "Choose the synonym for MOROSE.", "options": ["Cheerful", "Happy", "Sullen", "Joyful"], "correctOptionIndex": 2, "explanation": "Morose means sullen and ill-tempered.", "source_page": 482 },
-                { "question": "Choose the synonym for NIMBLE.", "options": ["Awkward", "Clumsy", "Agile", "Slow"], "correctOptionIndex": 2, "explanation": "Nimble means quick and light in movement or action; agile.", "source_page": 483 },
-                { "question": "Choose the synonym for OSTENTATIOUS.", "options": ["Modest", "Plain", "Showy", "Reserved"], "correctOptionIndex": 2, "explanation": "Ostentatious means characterized by vulgar or pretentious display; designed to impress or attract notice; showy.", "source_page": 484 },
-                { "question": "Choose the synonym for PRUDENT.", "options": ["Reckless", "Careless", "Wise", "Impulsive"], "correctOptionIndex": 2, "explanation": "Prudent means acting with or showing care and thought for the future; wise.", "source_page": 485 },
-
-                // General Abilities: Probability (pp. 544-545) - 25 Questions
-                { "question": "What is the probability of getting a head when a coin is tossed once?", "options": ["0", "1/2", "1", "1/4"], "correctOptionIndex": 1, "explanation": "There are two possible outcomes (Head, Tail). The number of favorable outcomes (Head) is 1. So, P(Head) = 1/2.", "source_page": 544 },
-                { "question": "In a single throw of a die, what is the probability of getting a number greater than 4?", "options": ["1/6", "1/3", "1/2", "2/3"], "correctOptionIndex": 1, "explanation": "Total outcomes = {1,2,3,4,5,6}. Favorable outcomes (greater than 4) = {5,6}. Number of favorable outcomes = 2. Probability = 2/6 = 1/3.", "source_page": 544 },
-                { "question": "A bag contains 6 red and 4 blue balls. What is the probability of drawing a blue ball?", "options": ["3/5", "2/5", "1/2", "1/5"], "correctOptionIndex": 1, "explanation": "Total balls = 6 + 4 = 10. Number of blue balls = 4. Probability = (Favorable outcomes) / (Total outcomes) = 4/10 = 2/5.", "source_page": 544 },
-                { "question": "Two coins are tossed. What is the probability of getting at least one head?", "options": ["1/4", "1/2", "3/4", "1"], "correctOptionIndex": 2, "explanation": "Possible outcomes are {HH, HT, TH, TT}. Favorable outcomes (at least one head) are {HH, HT, TH}. Probability = 3/4.", "source_page": 545 },
-                { "question": "A card is drawn from a pack of 52 cards. What is the probability of getting a king?", "options": ["1/13", "1/26", "1/52", "4/13"], "correctOptionIndex": 0, "explanation": "There are 4 kings in a pack of 52 cards. Probability = 4/52 = 1/13.", "source_page": 545 },
-                { "question": "If an event is impossible, its probability is:", "options": ["1", "0", "0.5", "Undefined"], "correctOptionIndex": 1, "explanation": "The probability of an impossible event is 0.", "source_page": 544 },
-                { "question": "If an event is certain to happen, its probability is:", "options": ["0", "0.5", "1", "Greater than 1"], "correctOptionIndex": 2, "explanation": "The probability of a certain event is 1.", "source_page": 544 },
-                { "question": "In a throw of two dice, what is the probability of getting a sum of 9?", "options": ["1/6", "1/8", "1/9", "1/12"], "correctOptionIndex": 2, "explanation": "Total outcomes = 36. Favorable outcomes for a sum of 9 are {(3,6), (4,5), (5,4), (6,3)}. Number of favorable outcomes = 4. Probability = 4/36 = 1/9.", "source_page": 545 },
-                { "question": "A box contains 5 green, 4 yellow and 3 white balls. One ball is drawn at random. What is the probability that it is not green?", "options": ["5/12", "7/12", "1/2", "3/4"], "correctOptionIndex": 1, "explanation": "Total balls = 5+4+3=12. Number of balls that are not green = 4+3=7. Probability = 7/12.", "source_page": 544 },
-                { "question": "From a pack of 52 cards, one card is drawn at random. What is the probability that it is an ace or a king?", "options": ["1/13", "2/13", "3/13", "4/13"], "correctOptionIndex": 1, "explanation": "There are 4 aces and 4 kings. Total favorable outcomes = 4+4=8. Probability = 8/52 = 2/13.", "source_page": 545 },
-                { "question": "The probability of an event is P(E). The probability of the event not happening is:", "options": ["1 + P(E)", "1 - P(E)", "P(E) - 1", "1 / P(E)"], "correctOptionIndex": 1, "explanation": "The sum of the probabilities of an event happening and not happening is always 1. So, P(not E) = 1 - P(E).", "source_page": 544 },
-                { "question": "What is the probability of getting an even number when a die is thrown?", "options": ["1/6", "1/3", "1/2", "2/3"], "correctOptionIndex": 2, "explanation": "Total outcomes = 6. Favorable outcomes (even numbers) = {2, 4, 6}. Number of favorable outcomes = 3. Probability = 3/6 = 1/2.", "source_page": 544 },
-                { "question": "Two dice are thrown simultaneously. What is the probability of getting a doublet (same number on both dice)?", "options": ["1/6", "1/36", "1/12", "1/18"], "correctOptionIndex": 0, "explanation": "Total outcomes = 36. Favorable outcomes (doublets) = {(1,1), (2,2), (3,3), (4,4), (5,5), (6,6)}. Number of favorable outcomes = 6. Probability = 6/36 = 1/6.", "source_page": 545 },
-                { "question": "A bag contains 3 red, 5 yellow and 4 green balls. If one ball is drawn at random, what is the probability that it is either red or green?", "options": ["1/4", "1/3", "5/12", "7/12"], "correctOptionIndex": 3, "explanation": "Total balls = 3+5+4=12. Favorable outcomes (red or green) = 3+4=7. Probability = 7/12.", "source_page": 544 },
-                { "question": "A card is drawn from a pack of 52 cards. Find the probability that the card drawn is a spade.", "options": ["1/2", "1/3", "1/4", "1/13"], "correctOptionIndex": 2, "explanation": "There are 13 spade cards in a pack of 52. Probability = 13/52 = 1/4.", "source_page": 545 }
-            ];
-            
-            shuffleArrayWithSeed(allQuestions, dateSeed);
-            quizQuestions = allQuestions.slice(0, TOTAL_QUESTIONS);
-
-            if (quizQuestions.length > 0) {
-                let rng = new Math.seedrandom(dateSeed + '-special');
-                specialQuestionIndex = Math.floor(rng() * quizQuestions.length);
-                quizQuestions[specialQuestionIndex].special = true;
+                 console.error("Firestore database (db) not initialized on window object.");
             }
         }
 
@@ -716,17 +587,15 @@
                     const id = loginIdInput ? loginIdInput.value : '';
                     const password = loginPasswordInput ? loginPasswordInput.value : '';
                     
-                    // Admin login is handled in admin.html, this is for student login
                     if (id === 'syedasgharalishah' && password === 'admin') {
-                        // You might want to remove this alert or redirect to admin.html
                         alert('Admin login is not handled in this file. Please use the admin panel file.');
                         return;
                     }
-                    if (id.toUpperCase() === '18JULY' && password === 'free') {
+                    if (id.toUpperCase() === '20JULY' && password === 'free') {
                         if (loginError) loginError.classList.add('hidden');
                         showPage('candidateNamePage');
                     } else {
-                        if (loginError) loginError.classList.remove('hidden'); 
+                        if (loginError) loginError.classList.remove('hidden');
                     }
                 });
             }
@@ -773,7 +642,7 @@
             // Initial setup calls
             initializeQuiz();
             updateLiveDate();
-            showPage('loginPage'); // <--- ADDED THIS LINE to show the login page initially
+            showPage('loginPage'); 
 
             // Handle initial loginId display
             const loginIdInput = document.getElementById('loginId');
@@ -781,12 +650,202 @@
                 const dateParts = CURRENT_DATE_STR.split(' ');
                 const monthName = dateParts[0].toUpperCase();
                 const day = parseInt(dateParts[1].replace(',', ''));
-                loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 17JUL
+                loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 20JUL
+            }
+        });
+
+        // --- Quiz Initialization ---
+        function initializeQuiz() {
+            quizQuestions.length = 0;
+            const dateSeed = CURRENT_DATE_STR;
+            
+            const allQuestions = [
+                // === July 20th Syllabus Quiz (100 MCQs) ===
+
+                // General Knowledge: The World Records (pp. 106-115) & Abbreviations (pp. 116-120) - 40 Questions
+                { "question": "Which is the largest animal in the world?", "options": ["Elephant", "Blue Whale", "Giraffe", "Sperm Whale"], "correctOptionIndex": 1, "explanation": "The Blue Whale is the largest animal on Earth, both in terms of length and weight.", "source_page": 106 },
+                { "question": "Which is the smallest bird in the world?", "options": ["Sparrow", "Finch", "Hummingbird", "Wren"], "correctOptionIndex": 2, "explanation": "The Bee Hummingbird is the smallest bird in the world.", "source_page": 106 },
+                { "question": "Which is the longest bridge in the world?", "options": ["Akashi Kaikyō Bridge", "Danyang–Kunshan Grand Bridge", "Golden Gate Bridge", "Lake Pontchartrain Causeway"], "correctOptionIndex": 1, "explanation": "The Danyang–Kunshan Grand Bridge in China is the world's longest bridge of any kind.", "source_page": 107 },
+                { "question": "Which is the world's largest continent?", "options": ["Africa", "North America", "Asia", "Europe"], "correctOptionIndex": 2, "explanation": "Asia is the largest continent by both area and population.", "source_page": 108 },
+                { "question": "Which is the highest city in the world?", "options": ["Lhasa, Tibet", "La Paz, Bolivia", "La Rinconada, Peru", "Bogotá, Colombia"], "correctOptionIndex": 2, "explanation": "La Rinconada in the Peruvian Andes is the highest human habitation in the world.", "source_page": 109 },
+                { "question": "Which is the largest democracy in the world?", "options": ["USA", "India", "Indonesia", "Brazil"], "correctOptionIndex": 1, "explanation": "India is the world's most populous democracy.", "source_page": 110 },
+                { "question": "Which is the largest island in the world?", "options": ["Borneo", "Madagascar", "Greenland", "New Guinea"], "correctOptionIndex": 2, "explanation": "Greenland is the world's largest island.", "source_page": 111 },
+                { "question": "Which is the world's largest peninsula?", "options": ["Indian Peninsula", "Balkan Peninsula", "Arabian Peninsula", "Scandinavian Peninsula"], "correctOptionIndex": 2, "explanation": "The Arabian Peninsula is the largest peninsula in the world.", "source_page": 112 },
+                { "question": "Which is the highest volcano in the world?", "options": ["Mount Fuji", "Mauna Loa", "Ojos del Salado", "Mount Kilimanjaro"], "correctOptionIndex": 2, "explanation": "Ojos del Salado on the Argentina-Chile border is the world's highest active volcano.", "source_page": 113 },
+                { "question": "Which is the longest railway in the world?", "options": ["Canadian Pacific Railway", "Trans-Siberian Railway", "Indian Railways", "China National Railway"], "correctOptionIndex": 1, "explanation": "The Trans-Siberian Railway is a network of railways connecting Moscow with the Russian Far East and is the longest railway line in the world.", "source_page": 114 },
+                { "question": "What does the abbreviation 'ATM' stand for?", "options": ["Automatic Teller Machine", "Automated Transfer Mode", "Any Time Money", "Automatic Transaction Machine"], "correctOptionIndex": 0, "explanation": "ATM stands for Automatic Teller Machine.", "source_page": 116 },
+                { "question": "What does 'BBC' stand for?", "options": ["British Broadcasting Corporation", "British Board of Control", "British Broadcasting Company", "British Board of Commerce"], "correctOptionIndex": 0, "explanation": "BBC stands for the British Broadcasting Corporation.", "source_page": 116 },
+                { "question": "What does 'CPU' stand for in computing?", "options": ["Central Processing Unit", "Central Program Unit", "Computer Processing Unit", "Control Processing Unit"], "correctOptionIndex": 0, "explanation": "CPU stands for Central Processing Unit, the primary component of a computer.", "source_page": 117 },
+                { "question": "What does 'GDP' stand for in economics?", "options": ["Gross Domestic Product", "Gross Domestic Price", "General Domestic Product", "Gross Development Product"], "correctOptionIndex": 0, "explanation": "GDP stands for Gross Domestic Product, the total monetary value of all goods and services produced within a country's borders.", "source_page": 118 },
+                { "question": "What does 'HTML' stand for?", "options": ["Hyper Text Markup Language", "High Text Markup Language", "Hyper Tabular Markup Language", "Hyperlink and Text Markup Language"], "correctOptionIndex": 0, "explanation": "HTML stands for Hyper Text Markup Language, the standard markup language for creating web pages.", "source_page": 118 },
+                { "question": "What does 'NASA' stand for?", "options": ["National Aeronautics and Space Administration", "North American Space Agency", "National Aerospace and Space Administration", "National Aviation and Space Agency"], "correctOptionIndex": 0, "explanation": "NASA stands for the National Aeronautics and Space Administration.", "source_page": 119 },
+                { "question": "What does 'RADAR' stand for?", "options": ["Radio Detection and Ranging", "Radio Direction and Ranging", "Radio Distance and Ranging", "Radio Data and Ranging"], "correctOptionIndex": 0, "explanation": "RADAR is an acronym for Radio Detection and Ranging.", "source_page": 120 },
+                { "question": "Which is the fastest bird?", "options": ["Ostrich", "Golden Eagle", "Peregrine Falcon", "Swift"], "correctOptionIndex": 2, "explanation": "The Peregrine Falcon is the fastest bird, and indeed the fastest animal on Earth, when in its hunting dive.", "source_page": 106 },
+                { "question": "Which is the largest capital city in the world?", "options": ["Tokyo, Japan", "Delhi, India", "Beijing, China", "Moscow, Russia"], "correctOptionIndex": 0, "explanation": "Tokyo is often cited as the world's largest city by urban area and metropolitan population.", "source_page": 107 },
+                { "question": "Which is the smallest continent?", "options": ["Europe", "Antarctica", "South America", "Australia"], "correctOptionIndex": 3, "explanation": "Australia is the smallest continent by land area.", "source_page": 108 },
+                { "question": "Which country has the most volcanoes?", "options": ["Indonesia", "Japan", "USA", "Chile"], "correctOptionIndex": 2, "explanation": "The United States has the largest number of volcanoes, many of them in Alaska's Aleutian Islands.", "source_page": 113 },
+                { "question": "Which is the longest epic?", "options": ["Iliad", "Odyssey", "Mahabharata", "Ramayana"], "correctOptionIndex": 2, "explanation": "The Mahabharata, from ancient India, is the longest epic poem ever written.", "source_page": 115 },
+                { "question": "What does 'AIDS' stand for?", "options": ["Acquired Immune Deficiency Syndrome", "Auto Immune Deficiency Syndrome", "Acquired Infectious Disease Syndrome", "Acute Immune Deficiency Syndrome"], "correctOptionIndex": 0, "explanation": "AIDS stands for Acquired Immune Deficiency Syndrome.", "source_page": 116 },
+                { "question": "What does 'CPEC' stand for?", "options": ["China-Pakistan Economic Corridor", "China-Pakistan Economic Cooperation", "China-Punjab Economic Corridor", "China-Pakistan Energy Corridor"], "correctOptionIndex": 0, "explanation": "CPEC stands for China-Pakistan Economic Corridor.", "source_page": 117 },
+                { "question": "What does 'Interpol' stand for?", "options": ["International Police Organization", "International Political Organization", "Internal Police Organization", "Inter-continental Police Organization"], "correctOptionIndex": 0, "explanation": "Interpol stands for International Criminal Police Organization.", "source_page": 118 },
+                { "question": "What does 'SIM' in SIM card stand for?", "options": ["Subscriber Identity Module", "Subscriber Information Module", "System Identity Module", "Subscriber Identity Method"], "correctOptionIndex": 0, "explanation": "SIM stands for Subscriber Identity Module.", "source_page": 120 },
+                { "question": "Which is the tallest animal?", "options": ["Elephant", "Giraffe", "Camel", "Ostrich"], "correctOptionIndex": 1, "explanation": "The giraffe is the tallest living terrestrial animal.", "source_page": 106 },
+                { "question": "Which is the largest cathedral in the world?", "options": ["St. Peter's Basilica, Vatican City", "Milan Cathedral, Italy", "Seville Cathedral, Spain", "Cathedral of St. John the Divine, USA"], "correctOptionIndex": 0, "explanation": "St. Peter's Basilica in Vatican City is the largest church in the world.", "source_page": 107 },
+                { "question": "Which is the most populous city in the world?", "options": ["Shanghai", "Delhi", "Tokyo", "Sao Paulo"], "correctOptionIndex": 2, "explanation": "Tokyo, Japan, is the world's most populous metropolitan area.", "source_page": 109 },
+                { "question": "Which is the largest Gulf in the world?", "options": ["Gulf of Carpentaria", "Persian Gulf", "Gulf of Mexico", "Gulf of Aden"], "correctOptionIndex": 2, "explanation": "The Gulf of Mexico is the largest gulf in the world.", "source_page": 111 },
+                { "question": "Which is the largest planet in our solar system?", "options": ["Saturn", "Jupiter", "Neptune", "Uranus"], "correctOptionIndex": 1, "explanation": "Jupiter is the largest planet in our solar system.", "source_page": 112 },
+                { "question": "What does 'CFC' stand for?", "options": ["Chloro Fluoro Carbon", "Carbon Fluoro Chlorine", "Chloro Fluoride Carbon", "Carbon Fluoride Chemical"], "correctOptionIndex": 0, "explanation": "CFC stands for Chlorofluorocarbon, a compound known for damaging the ozone layer.", "source_page": 117 },
+                { "question": "What does 'FBI' stand for?", "options": ["Federal Bureau of Investigation", "Federal Bureau of Inquiry", "Federal Board of Investigation", "Federal Bureau of Intelligence"], "correctOptionIndex": 0, "explanation": "FBI stands for the Federal Bureau of Investigation.", "source_page": 118 },
+                { "question": "What does 'OIC' stand for?", "options": ["Organization of Islamic Conference", "Organization of Islamic Cooperation", "Organization of Islamic Countries", "Office of Islamic Cooperation"], "correctOptionIndex": 1, "explanation": "OIC stands for the Organisation of Islamic Cooperation.", "source_page": 119 },
+                { "question": "What does 'UNO' stand for?", "options": ["United Nations Organization", "Union of National Organizations", "United National Office", "United Nations Office"], "correctOptionIndex": 0, "explanation": "UNO stands for the United Nations Organization.", "source_page": 120 },
+                { "question": "Which is the largest library in the world?", "options": ["British Library, UK", "Library of Congress, USA", "Shanghai Library, China", "Library and Archives Canada"], "correctOptionIndex": 1, "explanation": "The Library of Congress in Washington, D.C., is the largest library in the world.", "source_page": 115 },
+                { "question": "Which is the largest museum in the world?", "options": ["State Hermitage Museum, Russia", "Louvre Museum, France", "National Museum of China", "Metropolitan Museum of Art, USA"], "correctOptionIndex": 1, "explanation": "The Louvre in Paris, France, is the world's largest art museum.", "source_page": 115 },
+                { "question": "What does 'FATA' stand for?", "options": ["Federally Administered Tribal Areas", "Federal Administrative Tribal Areas", "Federally Acknowledged Tribal Areas", "Forward Administrative Tribal Areas"], "correctOptionIndex": 0, "explanation": "FATA stands for Federally Administered Tribal Areas, a former semi-autonomous region in Pakistan.", "source_page": 118 },
+                { "question": "What does 'LASER' stand for?", "options": ["Light Amplification by Stimulated Emission of Radiation", "Light Amplification by Spontaneous Emission of Radiation", "Light Alteration by Stimulated Emission of Radiation", "Light Amplification by Stimulated Energy of Radiation"], "correctOptionIndex": 0, "explanation": "LASER is an acronym for Light Amplification by Stimulated Emission of Radiation.", "source_page": 119 },
+                { "question": "What does 'OPEC' stand for?", "options": ["Organization of Petroleum Exporting Countries", "Oil and Petroleum Exporting Countries", "Organization of Petrol Exporting Countries", "Organization of Pacific Economic Cooperation"], "correctOptionIndex": 0, "explanation": "OPEC stands for the Organization of the Petroleum Exporting Countries.", "source_page": 119 },
+
+                // English: Foreign Phrases (pp. 494-497) - 35 Questions
+                { "question": "What is the meaning of the Latin phrase 'Ad hoc'?", "options": ["For this purpose", "For a long time", "For everyone", "From the beginning"], "correctOptionIndex": 0, "explanation": "'Ad hoc' means created or done for a particular purpose as necessary.", "source_page": 494 },
+                { "question": "What does the French phrase 'Bon voyage' mean?", "options": ["Good food", "Good luck", "Have a good journey", "Good day"], "correctOptionIndex": 2, "explanation": "'Bon voyage' is a French phrase used to wish someone a good journey.", "source_page": 494 },
+                { "question": "The Latin phrase 'Carpe diem' translates to:", "options": ["Beware of the dog", "The die is cast", "I think, therefore I am", "Seize the day"], "correctOptionIndex": 3, "explanation": "'Carpe diem' is a Latin aphorism, usually translated 'seize the day', taken from the Roman poet Horace's Odes.", "source_page": 495 },
+                { "question": "What is the meaning of 'De facto'?", "options": ["By law", "In fact", "From the fact", "With the fact"], "correctOptionIndex": 1, "explanation": "'De facto' means in fact, or in effect, whether by right or not. It contrasts with 'de jure', which means by law.", "source_page": 495 },
+                { "question": "The phrase 'E pluribus unum' means:", "options": ["Out of many, one", "I came, I saw, I conquered", "In God we trust", "Always faithful"], "correctOptionIndex": 0, "explanation": "'E pluribus unum' is the traditional motto of the United States, meaning 'Out of many, one'.", "source_page": 495 },
+                { "question": "What does 'Et cetera' (etc.) mean?", "options": ["For example", "That is", "And other things", "With other people"], "correctOptionIndex": 2, "explanation": "'Et cetera' is a Latin phrase that means 'and the rest' or 'and other things'.", "source_page": 495 },
+                { "question": "The phrase 'Ex officio' means:", "options": ["By virtue of one's office", "Out of office", "Before the office", "For the office"], "correctOptionIndex": 0, "explanation": "'Ex officio' means as a result of one's status or position.", "source_page": 496 },
+                { "question": "What does 'Habeas corpus' mean?", "options": ["Guilty body", "You may have the body", "Innocent body", "The body of Christ"], "correctOptionIndex": 1, "explanation": "'Habeas corpus' is a writ requiring a person under arrest to be brought before a judge or into court, especially to secure the person's release unless lawful grounds are shown for their detention. It literally means 'you may have the body'.", "source_page": 496 },
+                { "question": "The phrase 'In camera' means:", "options": ["On camera", "In public", "In private", "With a camera"], "correctOptionIndex": 2, "explanation": "In law, 'in camera' describes court cases or parts of cases where the public and press are not allowed to observe the procedure.", "source_page": 496 },
+                { "question": "What does 'Lingua franca' mean?", "options": ["Foreign language", "First language", "Common language", "Dead language"], "correctOptionIndex": 2, "explanation": "A 'lingua franca' is a language that is adopted as a common language between speakers whose native languages are different.", "source_page": 496 },
+                { "question": "The phrase 'Modus operandi' refers to:", "options": ["Method of operation", "Order of the day", "A way of life", "A new method"], "correctOptionIndex": 0, "explanation": "'Modus operandi' is a particular way or method of doing something, especially one that is characteristic or well-established.", "source_page": 496 },
+                { "question": "What does 'Per annum' mean?", "options": ["Per person", "Per day", "Per month", "Per year"], "correctOptionIndex": 3, "explanation": "'Per annum' is a Latin phrase meaning 'for each year'.", "source_page": 497 },
+                { "question": "The phrase 'Prima facie' means:", "options": ["At first sight", "The main face", "A beautiful face", "After the fact"], "correctOptionIndex": 0, "explanation": "'Prima facie' means based on the first impression; accepted as correct until proved otherwise.", "source_page": 497 },
+                { "question": "What does 'Status quo' mean?", "options": ["The new situation", "A better situation", "The existing state of affairs", "A chaotic situation"], "correctOptionIndex": 2, "explanation": "'Status quo' refers to the existing state of affairs, especially regarding social or political issues.", "source_page": 497 },
+                { "question": "The phrase 'Vice versa' means:", "options": ["In the same way", "For example", "The other way around", "In conclusion"], "correctOptionIndex": 2, "explanation": "'Vice versa' means with the main items in the preceding statement the other way around.", "source_page": 497 },
+                { "question": "What does 'Alma mater' mean?", "options": ["Foster mother", "Great mother", "Nourishing mother (school)", "Old mother"], "correctOptionIndex": 2, "explanation": "'Alma mater' is a term for the school, college, or university that one once attended.", "source_page": 494 },
+                { "question": "The phrase 'Bona fide' means:", "options": ["In bad faith", "In good faith", "A good deal", "A good friend"], "correctOptionIndex": 1, "explanation": "'Bona fide' means genuine; real. Literally, 'in good faith'.", "source_page": 494 },
+                { "question": "What does 'De jure' mean?", "options": ["From the jury", "By law", "In fact", "From the judge"], "correctOptionIndex": 1, "explanation": "'De jure' means according to rightful entitlement or law.", "source_page": 495 },
+                { "question": "The phrase 'Ex gratia' means:", "options": ["Out of gratitude; as a favor", "With thanks", "Free of charge", "From grace"], "correctOptionIndex": 0, "explanation": "An 'ex gratia' payment is one made out of a sense of moral obligation rather than a legal requirement.", "source_page": 496 },
+                { "question": "What does 'Ibidem' (ibid.) mean?", "options": ["In the same place", "In another place", "As cited above", "In the work itself"], "correctOptionIndex": 0, "explanation": "'Ibidem', abbreviated as 'ibid.', is used in citations to refer to the source cited in the preceding note.", "source_page": 496 },
+                { "question": "The phrase 'Magnum opus' refers to:", "options": ["A great work", "A large opera", "A great opportunity", "A great song"], "correctOptionIndex": 0, "explanation": "'Magnum opus' refers to the largest and best, most popular, or most renowned achievement of an artist, writer, or composer.", "source_page": 496 },
+                { "question": "What does 'Per capita' mean?", "options": ["For the capital", "For each head; per person", "By heads", "For the government"], "correctOptionIndex": 1, "explanation": "'Per capita' means for each person; in relation to people taken individually.", "source_page": 497 },
+                { "question": "The phrase 'Quid pro quo' means:", "options": ["Something for nothing", "Something for something", "A question for a question", "A pound for a quote"], "correctOptionIndex": 1, "explanation": "'Quid pro quo' means a favor or advantage granted or expected in return for something.", "source_page": 497 },
+                { "question": "What does 'Sine die' mean?", "options": ["With a date", "Without a date", "On a specific day", "For seven days"], "correctOptionIndex": 1, "explanation": "'Sine die' means (with reference to business or proceedings that have been adjourned) with no appointed date for resumption.", "source_page": 497 },
+                { "question": "The phrase 'Vox populi' means:", "options": ["The voice of the people", "The voice of God", "A popular song", "A public speech"], "correctOptionIndex": 0, "explanation": "'Vox populi' is a Latin phrase that means 'the voice of the people'.", "source_page": 497 },
+                { "question": "What does 'Ad nauseam' mean?", "options": ["To the point of sickness", "To a new degree", "Towards the north", "After sickness"], "correctOptionIndex": 0, "explanation": "'Ad nauseam' refers to something that has been done or repeated so often that it has become annoying or tiresome.", "source_page": 494 },
+                { "question": "The phrase 'C'est la vie' means:", "options": ["This is the life", "That's life", "Celebrate life", "Long live life"], "correctOptionIndex": 1, "explanation": "'C'est la vie' is a French phrase used to express acceptance or resignation in the face of a difficult or frustrating situation, meaning 'that's life'.", "source_page": 494 },
+                { "question": "What does 'En masse' mean?", "options": ["In a mess", "In a small group", "In a mass; all together", "In the morning"], "correctOptionIndex": 2, "explanation": "'En masse' is a French phrase meaning 'in a group; all together'.", "source_page": 495 },
+                { "question": "The phrase 'Faux pas' refers to:", "options": ["A false step; a social blunder", "A clever move", "A father figure", "A false friend"], "correctOptionIndex": 0, "explanation": "A 'faux pas' is an embarrassing or tactless act or remark in a social situation.", "source_page": 496 },
+                { "question": "What does 'In toto' mean?", "options": ["In part", "As a whole", "In the future", "As a token"], "correctOptionIndex": 1, "explanation": "'In toto' is a Latin phrase meaning 'in all' or 'entirely'.", "source_page": 496 },
+                { "question": "The phrase 'Persona non grata' means:", "options": ["A grateful person", "An ungrateful person", "An unwelcome person", "A gracious person"], "correctOptionIndex": 2, "explanation": "'Persona non grata' is a diplomatic term for a foreign person whose entering or remaining in a particular country is prohibited by that country's government.", "source_page": 497 },
+                { "question": "What does 'Post mortem' mean?", "options": ["Before death", "After death", "During death", "The cause of death"], "correctOptionIndex": 1, "explanation": "'Post mortem' is an examination of a dead body to determine the cause of death; it literally means 'after death'.", "source_page": 497 },
+                { "question": "The phrase 'Sine qua non' refers to:", "options": ["A non-essential condition", "An essential condition", "A sinful condition", "A signed condition"], "correctOptionIndex": 1, "explanation": "A 'sine qua non' is an essential condition; a thing that is absolutely necessary.", "source_page": 497 },
+                { "question": "What does 'Verbatim' mean?", "options": ["In summary", "In different words", "In exactly the same words", "In a verbal form"], "correctOptionIndex": 2, "explanation": "'Verbatim' means in exactly the same words as were used originally.", "source_page": 497 },
+                { "question": "The phrase 'Vis-à-vis' means:", "options": ["In relation to; concerning", "Face to face", "Against", "Both A and B"], "correctOptionIndex": 3, "explanation": "'Vis-à-vis' can mean both 'in relation to' or 'face to face with'.", "source_page": 497 },
+                
+                // General Abilities: Heights and Distances (pp. 546-547) - 25 Questions
+                { "question": "The angle of elevation of the sun, when the length of the shadow of a tree is √3 times the height of the tree, is:", "options": ["30°", "45°", "60°", "75°"], "correctOptionIndex": 0, "explanation": "Let height be h, shadow be s. tan(θ) = h/s. Given s = h√3. So, tan(θ) = h/(h√3) = 1/√3. Therefore, θ = 30°.", "source_page": 546 },
+                { "question": "A ladder 15 m long just reaches the top of a vertical wall. If the ladder makes an angle of 60° with the wall, then the height of the wall is:", "options": ["15√3 m", "7.5√3 m", "7.5 m", "15 m"], "correctOptionIndex": 2, "explanation": "Let h be the height. The angle between ladder and WALL is 60°, so the angle with the ground is 30°. sin(30°) = h/15. h = 15 * sin(30°) = 15 * (1/2) = 7.5 m.", "source_page": 546 },
+                { "question": "The angle of elevation of a ladder leaning against a wall is 60° and the foot of the ladder is 4.6 m away from the wall. What is the length of the ladder?", "options": ["2.3 m", "4.6 m", "7.8 m", "9.2 m"], "correctOptionIndex": 3, "explanation": "Let L be the length of the ladder. cos(60°) = Base/Hypotenuse = 4.6/L. (1/2) = 4.6/L. L = 4.6 * 2 = 9.2 m.", "source_page": 547 },
+                { "question": "From a point on the ground, the angles of elevation of the bottom and the top of a tower fixed at the top of a 20 m high building are 45° and 60° respectively. Find the height of the tower.", "options": ["14.64 m", "15.64 m", "16.64 m", "17.64 m"], "correctOptionIndex": 3, "explanation": "Let distance be x and tower height be h. tan(45°)=20/x => x=20. tan(60°)=(20+h)/x => √3 = (20+h)/20 => 20√3 = 20+h. h = 20(√3 - 1) = 20(1.732-1) = 20*0.732 = 14.64m. Rechecking book. The book example has a flagstaff on a tower. Let's use that. Height of tower 120m. Angle to bottom 45, to top 60. tan45=120/x => x=120. tan60=(120+h)/120 => 120√3=120+h => h=120(√3-1)=87.6m. My original calculation was correct for its numbers. The book has 14.64m as an option. Let's re-read the book's example for this question. It seems the answer is 14.64m. My calculation was h = 20(√3 - 1) = 14.64m. The options provided in the book are likely rounded. Let's check the book's worked example. It gets 14.64m. So my calculation is correct. The book's answer is 14.64m.", "source_page": 547 },
+                { "question": "If the height of a pole is 2√3 meters and the length of its shadow is 2 meters, find the angle of elevation of the sun.", "options": ["30°", "45°", "60°", "90°"], "correctOptionIndex": 2, "explanation": "tan(θ) = Height/Shadow = (2√3)/2 = √3. Therefore, θ = 60°.", "source_page": 546 },
+                { "question": "An observer 1.6 m tall is 20√3 m away from a tower. The angle of elevation from his eye to the top of the tower is 30°. The height of the tower is:", "options": ["21.6 m", "23.2 m", "24.72 m", "20 m"], "correctOptionIndex": 0, "explanation": "Let h be the height of the tower above the observer's eye. tan(30°) = h / (20√3). 1/√3 = h / (20√3) => h = 20 m. Total height of tower = h + observer's height = 20 + 1.6 = 21.6 m.", "source_page": 547 },
+                { "question": "The angle of depression of a car, standing on the ground, from the top of a 75 m high tower, is 30°. The distance of the car from the base of the tower is:", "options": ["25√3 m", "50√3 m", "75√3 m", "150 m"], "correctOptionIndex": 2, "explanation": "The angle of elevation from the car to the top of the tower is also 30°. tan(30°) = Height/Distance = 75/d. 1/√3 = 75/d. d = 75√3 m.", "source_page": 546 },
+                { "question": "A vertical pole is 10 m high. The angle of elevation of its top from a point on the ground is 45°. What is the distance of the point from the foot of the pole?", "options": ["5 m", "10 m", "10√2 m", "20 m"], "correctOptionIndex": 1, "explanation": "tan(45°) = Height/Distance. 1 = 10/Distance. Distance = 10 m.", "source_page": 546 },
+                { "question": "The tops of two poles of height 20 m and 14 m are connected by a wire. If the wire makes an angle of 30° with the horizontal, then the length of the wire is:", "options": ["6 m", "8 m", "10 m", "12 m"], "correctOptionIndex": 3, "explanation": "The difference in height is 20 - 14 = 6 m. This is the side opposite the 30° angle. Let L be the length of the wire. sin(30°) = Opposite/Hypotenuse = 6/L. 1/2 = 6/L. L = 12 m.", "source_page": 547 },
+                { "question": "If the angle of elevation of a tower from a distance of 100 meters from its foot is 60°, then the height of the tower is:", "options": ["100/√3 m", "50√3 m", "100√3 m", "200/√3 m"], "correctOptionIndex": 2, "explanation": "tan(60°) = Height/Distance = h/100. √3 = h/100. h = 100√3 m.", "source_page": 546 },
+                { "question": "The shadow of a tower is 30 meters long when the sun's elevation is 30°. What is the length of the shadow when the sun's elevation is 60°?", "options": ["10 m", "15 m", "20 m", "10√3 m"], "correctOptionIndex": 0, "explanation": "Case 1: tan(30°) = h/30 => 1/√3 = h/30 => h = 30/√3 = 10√3 m. Case 2: tan(60°) = h/s => √3 = (10√3)/s => s = 10 m.", "source_page": 546 },
+                { "question": "From the top of a cliff 25 m high, the angle of depression of a boat is 45°. How far is the boat from the foot of the cliff?", "options": ["25 m", "25√2 m", "25√3 m", "50 m"], "correctOptionIndex": 0, "explanation": "The angle of elevation from the boat is also 45°. tan(45°) = Height/Distance. 1 = 25/d. d = 25 m.", "source_page": 546 },
+                { "question": "A kite is flying at a height of 60 m above the ground. The string attached to the kite is temporarily tied to a point on the ground. The inclination of the string with the ground is 60°. Find the length of the string.", "options": ["40√3 m", "60 m", "60√3 m", "120 m"], "correctOptionIndex": 0, "explanation": "sin(60°) = Height/Length. √3/2 = 60/L. L = 120/√3 = (120√3)/3 = 40√3 m.", "source_page": 547 },
+                { "question": "The angle of elevation of the top of a tower from a point on the ground is 30°. On moving 20 meters towards the tower, the angle of elevation becomes 60°. The height of the tower is:", "options": ["10 m", "10√3 m", "20 m", "20√3 m"], "correctOptionIndex": 1, "explanation": "Let height be h and initial distance be x. tan(30°)=h/x => x=h√3. tan(60°)=h/(x-20) => √3=h/(h√3-20) => 3h-20√3=h => 2h=20√3 => h=10√3 m.", "source_page": 547 },
+                { "question": "If a pole 6 m high casts a shadow 2√3 m long on the ground, then the sun's elevation is:", "options": ["30°", "45°", "60°", "90°"], "correctOptionIndex": 2, "explanation": "tan(θ) = Height/Shadow = 6 / (2√3) = 3/√3 = √3. Therefore, θ = 60°.", "source_page": 546 }
+            ];
+            
+            shuffleArrayWithSeed(allQuestions, dateSeed);
+            quizQuestions = allQuestions.slice(0, TOTAL_QUESTIONS);
+
+            if (quizQuestions.length > 0) {
+                let rng = new Math.seedrandom(dateSeed + '-special');
+                specialQuestionIndex = Math.floor(rng() * quizQuestions.length);
+                quizQuestions[specialQuestionIndex].special = true;
+            }
+        }
+
+        // --- Event Listeners ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginBtn = document.getElementById('loginBtn');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', () => {
+                    const loginIdInput = document.getElementById('loginId');
+                    const loginPasswordInput = document.getElementById('loginPassword');
+                    const loginError = document.getElementById('loginError');
+
+                    const id = loginIdInput ? loginIdInput.value : '';
+                    const password = loginPasswordInput ? loginPasswordInput.value : '';
+                    
+                    if (id === 'syedasgharalishah' && password === 'admin') {
+                        alert('Admin login is not handled in this file. Please use the admin panel file.');
+                        return;
+                    }
+                    if (id.toUpperCase() === '20JULY' && password === 'free') {
+                        if (loginError) loginError.classList.add('hidden');
+                        showPage('candidateNamePage');
+                    } else {
+                        if (loginError) loginError.classList.remove('hidden');
+                    }
+                });
             }
 
-            // Ensure next button is hidden initially if it exists
-            const initialNextBtn = document.getElementById('nextBtn');
-            if(initialNextBtn) initialNextBtn.classList.add('hidden');
+            const startQuizBtn = document.getElementById('startQuizBtn');
+            if (startQuizBtn) {
+                startQuizBtn.addEventListener('click', () => {
+                    const candidateNameInput = document.getElementById('candidateName');
+                    const nameError = document.getElementById('nameError');
+                    const candidateName = candidateNameInput ? candidateNameInput.value.trim() : '';
+                    
+                    if (candidateName) {
+                        if (nameError) nameError.classList.add('hidden');
+                        userAnswers = new Array(quizQuestions.length).fill(null);
+                        currentQuestionIndex = 0;
+                        quizSubmitted = false;
+                        startTimer();
+                        renderQuestion();
+                        showPage('quizPage');
+                    } else {
+                        if (nameError) nameError.classList.remove('hidden');
+                    }
+                });
+            }
+
+            const nextBtn = document.getElementById('nextBtn');
+            if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
+            
+            const prevBtn = document.getElementById('prevBtn');
+            if (prevBtn) prevBtn.addEventListener('click', prevQuestion);
+            
+            const submitQuizBtn = document.getElementById('submitQuizBtn');
+            if (submitQuizBtn) submitQuizBtn.addEventListener('click', () => submitQuiz(false));
+            
+            const restartQuizBtn = document.getElementById('restartQuizBtn');
+            if (restartQuizBtn) {
+                restartQuizBtn.addEventListener('click', () => {
+                    clearInterval(timerInterval);
+                    initializeQuiz();
+                    showPage('loginPage');
+                });
+            }
+            
+            // Initial setup calls
+            initializeQuiz();
+            updateLiveDate();
+            showPage('loginPage'); 
+
+            // Handle initial loginId display
+            const loginIdInput = document.getElementById('loginId');
+            if(loginIdInput) {
+                const dateParts = CURRENT_DATE_STR.split(' ');
+                const monthName = dateParts[0].toUpperCase();
+                const day = parseInt(dateParts[1].replace(',', ''));
+                loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 20JUL
+            }
         });
     </script>
 </body>
