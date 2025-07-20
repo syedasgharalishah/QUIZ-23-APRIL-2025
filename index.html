@@ -311,13 +311,14 @@
                 apiKey: "AIzaSyALjJrKf6acGhdEYlsKO-gCpBJHw6UbKTs",
                 authDomain: "css-quiz-results.firebaseapp.com",
                 projectId: "css-quiz-results",
-                storageBucket: "css-quiz-results.appspot.com",
+                storageBucket: "css-quiz-results.appspot.com", // Keeping this consistent with your provided index.html
                 messagingSenderId: "1077285247585",
                 appId: "1:1077285247585:web:47e010dd8fa288b9fa2820"
             };
         
         let app, auth, db;
         let userId;
+        let isFirebaseReady = false; // Flag to indicate Firebase is ready
 
         // Initialize Firebase
         try {
@@ -334,6 +335,8 @@
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 userId = user.uid;
+                isFirebaseReady = true; // Set flag when user is authenticated
+                console.log("User authenticated, Firebase ready for operations.");
             } else {
                 try {
                     if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
@@ -347,7 +350,7 @@
             }
         });
 
-        // --- Security Enhancements (Moved to module for better scope) ---
+        // --- Security Enhancements ---
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('keydown', e => {
             if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
@@ -556,13 +559,20 @@
             };
             
             const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
-            // Ensure db is initialized before attempting to write
+            
+            // Wait for Firebase to be ready before attempting to write
+            if (!isFirebaseReady) {
+                console.warn("Firebase not ready for submission. Retrying in 1 second...");
+                setTimeout(() => submitQuiz(isAutoSubmit), 1000); // Retry after a short delay
+                return;
+            }
+
             if (db) { 
                 try {
                     const resultsCollectionPath = `/artifacts/${appId}/public/data/quiz_results`;
                     const newResultRef = doc(collection(db, resultsCollectionPath)); 
                     await setDoc(newResultRef, resultData);
-                    console.log("Result saved to Firestore.");
+                    console.log("Result saved to Firestore successfully.");
                 } catch (error) {
                     console.error("Error writing document to Firestore: ", error);
                 }
@@ -584,7 +594,11 @@
                     const password = loginPasswordInput ? loginPasswordInput.value : '';
                     
                     if (id === 'syedasgharalishah' && password === 'admin') {
-                        alert('Admin login is not handled in this file. Please use the admin panel file.');
+                        // Using a simple message box instead of alert()
+                        // You might want to redirect to admin.html here if you want
+                        const messageBox = document.createElement('div');
+                        messageBox.innerHTML = '<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 10000; text-align: center;">Admin login is not handled in this file. Please use the admin panel file.<br><button onclick="this.parentNode.parentNode.remove()" style="margin-top: 10px; padding: 8px 16px; background-color: #CD853F; color: white; border: none; border-radius: 4px; cursor: pointer;">OK</button></div>';
+                        document.body.appendChild(messageBox);
                         return;
                     }
                     if (id.toUpperCase() === '20JULY' && password === 'free') {
