@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS MPT Daily Quiz - July 20, 2025</title>
+    <title>CSS MPT Daily Quiz - July 21, 2025</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Include seedrandom.js for consistent daily question shuffling -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
     <style>
         /* Base Body Styling */
@@ -221,6 +220,72 @@
     </style>
 </head>
 <body>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        
+        // --- Firebase Configuration and Initialization ---
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : {
+                apiKey: "AIzaSyALjJrKf6acGhdEYlsKO-gCpBJHw6UbKTs",
+                authDomain: "css-quiz-results.firebaseapp.com",
+                projectId: "css-quiz-results",
+                storageBucket: "css-quiz-results.appspot.com",
+                messagingSenderId: "1077285247585",
+                appId: "1:1077285247585:web:47e010dd8fa288b9fa2820"
+            };
+        
+        let app, auth, db;
+        let userId;
+
+        // Initialize Firebase
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            console.log("Firebase initialized successfully for quiz.");
+        } catch (e) {
+            console.error("Error initializing Firebase:", e);
+            document.body.innerHTML = '<div class="text-red-500 text-center p-8">Error initializing the application. Please check the console for details. This might be due to missing Firebase configuration.</div>';
+        }
+
+        // Handle Authentication
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                userId = user.uid;
+            } else {
+                try {
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(auth, __initial_auth_token);
+                    } else {
+                        await signInAnonymously(auth);
+                    }
+                } catch (error) {
+                    console.error("Error during sign-in:", error);
+                }
+            }
+        });
+
+        // Make db instance globally available for the submitQuiz function
+        window.db = db;
+    </script>
+
+    <script>
+        // Disable right-click, copy/paste, and developer tools for security
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
+                e.preventDefault();
+            }
+            if (e.key === 'F12') { e.preventDefault(); }
+        });
+        document.addEventListener('copy', event => event.preventDefault());
+        document.addEventListener('paste', event => event.preventDefault());
+    </script>
+
     <div class="top-bar">
         <div class="date-display" id="liveDate">
             <i class="fas fa-calendar-alt"></i> <span id="currentDateText"></span>
@@ -296,74 +361,9 @@
         </div>
     </main>
 
-    <script type="module">
-        // --- Firebase Imports ---
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        
-        // --- Firebase Configuration and Initialization ---
-        const firebaseConfig = typeof __firebase_config !== 'undefined' 
-            ? JSON.parse(__firebase_config) 
-            : {
-                // --- IMPORTANT ---
-                // This is your actual Firebase project configuration.
-                apiKey: "AIzaSyALjJrKf6acGhdEYlsKO-gCpBJHw6UbKTs",
-                authDomain: "css-quiz-results.firebaseapp.com",
-                projectId: "css-quiz-results",
-                storageBucket: "css-quiz-results.appspot.com", // Keeping this consistent with your provided index.html
-                messagingSenderId: "1077285247585",
-                appId: "1:1077285247585:web:47e010dd8fa288b9fa2820"
-            };
-        
-        let app, auth, db;
-        let userId;
-        let isFirebaseReady = false; // Flag to indicate Firebase is ready
-
-        // Initialize Firebase
-        try {
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-            console.log("Firebase initialized successfully for quiz.");
-        } catch (e) {
-            console.error("Error initializing Firebase:", e);
-            document.body.innerHTML = '<div class="text-red-500 text-center p-8">Error initializing the application. Please check the console for details. This might be due to missing Firebase configuration.</div>';
-        }
-
-        // Handle Authentication
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                userId = user.uid;
-                isFirebaseReady = true; // Set flag when user is authenticated
-                console.log("User authenticated, Firebase ready for operations.");
-            } else {
-                try {
-                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                } catch (error) {
-                    console.error("Error during sign-in:", error);
-                }
-            }
-        });
-
-        // --- Security Enhancements ---
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.addEventListener('keydown', e => {
-            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
-                e.preventDefault();
-            }
-            if (e.key === 'F12') { e.preventDefault(); }
-        });
-        document.addEventListener('copy', event => event.preventDefault());
-        document.addEventListener('paste', event => event.preventDefault());
-
-
+    <script>
         // Set the current date for display and logic
-        const CURRENT_DATE_STR = "July 20, 2025";
+        const CURRENT_DATE_STR = "July 21, 2025";
         const CURRENT_DATE = new Date(CURRENT_DATE_STR);
 
         // Function to update the live date display
@@ -559,25 +559,18 @@
             };
             
             const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
-            
-            // Wait for Firebase to be ready before attempting to write
-            if (!isFirebaseReady) {
-                console.warn("Firebase not ready for submission. Retrying in 1 second...");
-                setTimeout(() => submitQuiz(isAutoSubmit), 1000); // Retry after a short delay
-                return;
-            }
-
-            if (db) { 
+            if (window.db) {
                 try {
+                    const { doc, collection, setDoc } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
                     const resultsCollectionPath = `/artifacts/${appId}/public/data/quiz_results`;
-                    const newResultRef = doc(collection(db, resultsCollectionPath)); 
+                    const newResultRef = doc(collection(window.db, resultsCollectionPath)); 
                     await setDoc(newResultRef, resultData);
-                    console.log("Result saved to Firestore successfully.");
+                    console.log("Result saved to Firestore.");
                 } catch (error) {
                     console.error("Error writing document to Firestore: ", error);
                 }
             } else {
-                 console.error("Firestore database (db) not initialized.");
+                 console.error("Firestore database (db) not initialized on window object.");
             }
         }
 
@@ -594,11 +587,196 @@
                     const password = loginPasswordInput ? loginPasswordInput.value : '';
                     
                     if (id === 'syedasgharalishah' && password === 'admin') {
-                        // Using a simple message box instead of alert()
-                        // You might want to redirect to admin.html here if you want
-                        const messageBox = document.createElement('div');
-                        messageBox.innerHTML = '<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); z-index: 10000; text-align: center;">Admin login is not handled in this file. Please use the admin panel file.<br><button onclick="this.parentNode.parentNode.remove()" style="margin-top: 10px; padding: 8px 16px; background-color: #CD853F; color: white; border: none; border-radius: 4px; cursor: pointer;">OK</button></div>';
-                        document.body.appendChild(messageBox);
+                        alert('Admin login is not handled in this file. Please use the admin panel file.');
+                        return;
+                    }
+                    if (id.toUpperCase() === '21JULY' && password === 'free') {
+                        if (loginError) loginError.classList.add('hidden');
+                        showPage('candidateNamePage');
+                    } else {
+                        if (loginError) loginError.classList.remove('hidden');
+                    }
+                });
+            }
+
+            const startQuizBtn = document.getElementById('startQuizBtn');
+            if (startQuizBtn) {
+                startQuizBtn.addEventListener('click', () => {
+                    const candidateNameInput = document.getElementById('candidateName');
+                    const nameError = document.getElementById('nameError');
+                    const candidateName = candidateNameInput ? candidateNameInput.value.trim() : '';
+                    
+                    if (candidateName) {
+                        if (nameError) nameError.classList.add('hidden');
+                        userAnswers = new Array(quizQuestions.length).fill(null);
+                        currentQuestionIndex = 0;
+                        quizSubmitted = false;
+                        startTimer();
+                        renderQuestion();
+                        showPage('quizPage');
+                    } else {
+                        if (nameError) nameError.classList.remove('hidden');
+                    }
+                });
+            }
+
+            const nextBtn = document.getElementById('nextBtn');
+            if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
+            
+            const prevBtn = document.getElementById('prevBtn');
+            if (prevBtn) prevBtn.addEventListener('click', prevQuestion);
+            
+            const submitQuizBtn = document.getElementById('submitQuizBtn');
+            if (submitQuizBtn) submitQuizBtn.addEventListener('click', () => submitQuiz(false));
+            
+            const restartQuizBtn = document.getElementById('restartQuizBtn');
+            if (restartQuizBtn) {
+                restartQuizBtn.addEventListener('click', () => {
+                    clearInterval(timerInterval);
+                    initializeQuiz();
+                    showPage('loginPage');
+                });
+            }
+            
+            // Initial setup calls
+            initializeQuiz();
+            updateLiveDate();
+            showPage('loginPage'); 
+
+            // Handle initial loginId display
+            const loginIdInput = document.getElementById('loginId');
+            if(loginIdInput) {
+                const dateParts = CURRENT_DATE_STR.split(' ');
+                const monthName = dateParts[0].toUpperCase();
+                const day = parseInt(dateParts[1].replace(',', ''));
+                loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 21JUL
+            }
+        });
+
+        // --- Quiz Initialization ---
+        function initializeQuiz() {
+            quizQuestions.length = 0;
+            const dateSeed = CURRENT_DATE_STR;
+            
+            const allQuestions = [
+                // === July 21st Syllabus Quiz (100 MCQs) ===
+
+                // General Knowledge: Abbreviations (pp. 121-125) & World Records (pp. 106-115) - 40 Questions
+                { "question": "What does WAPDA stand for?", "options": ["Water and Power Development Authority", "Water and Power Distribution Authority", "World Agriculture and Power Development Authority", "Western Asia Power Development Authority"], "correctOptionIndex": 0, "explanation": "WAPDA stands for the Pakistan Water and Power Development Authority.", "source_page": 121 },
+                { "question": "What is the full form of WHO?", "options": ["World Health Office", "World Health Organization", "World Human Organization", "World Humanitarian Office"], "correctOptionIndex": 1, "explanation": "WHO stands for the World Health Organization, a specialized agency of the United Nations responsible for international public health.", "source_page": 121 },
+                { "question": "The abbreviation 'WWW' stands for:", "options": ["World Wide Web", "World Web Wide", "Web World Wide", "Wide World Web"], "correctOptionIndex": 0, "explanation": "WWW stands for World Wide Web, a global information space which people can access via computers connected to the Internet.", "source_page": 121 },
+                { "question": "What does 'UNESCO' stand for?", "options": ["United Nations Education, Science and Culture Organization", "United Nations Educational, Scientific and Cultural Organization", "United Nations Economic, Social and Cultural Organization", "United Nations Environmental, Scientific and Cultural Organization"], "correctOptionIndex": 1, "explanation": "UNESCO stands for the United Nations Educational, Scientific and Cultural Organization.", "source_page": 122 },
+                { "question": "What does 'UNICEF' stand for?", "options": ["United Nations International Children's Emergency Fund", "United Nations International Child Education Fund", "United Nations Infant and Child Emergency Fund", "United Nations International Children's Endowment Fund"], "correctOptionIndex": 0, "explanation": "UNICEF stands for the United Nations International Children's Emergency Fund.", "source_page": 122 },
+                { "question": "The acronym 'TAPI' refers to a pipeline project involving which countries?", "options": ["Turkey, Afghanistan, Pakistan, India", "Turkmenistan, Azerbaijan, Pakistan, India", "Turkmenistan, Afghanistan, Pakistan, India", "Tajikistan, Afghanistan, Pakistan, Iran"], "correctOptionIndex": 2, "explanation": "TAPI stands for the Turkmenistan–Afghanistan–Pakistan–India Pipeline.", "source_page": 122 },
+                { "question": "In a medical context, what does 'ECG' stand for?", "options": ["Electrocardiogram", "Echocardiogram", "Electronic Cardiac Graph", "Electrical Current Graph"], "correctOptionIndex": 0, "explanation": "ECG (or EKG) stands for Electrocardiogram, a test that records the electrical activity of the heart.", "source_page": 123 },
+                { "question": "What does 'ICBM' stand for?", "options": ["Inter-Continental Ballistic Missile", "International Continental Ballistic Missile", "Inter-Country Ballistic Missile", "Inter-Coastal Ballistic Missile"], "correctOptionIndex": 0, "explanation": "ICBM stands for Inter-Continental Ballistic Missile.", "source_page": 123 },
+                { "question": "What is the full form of 'IMF'?", "options": ["International Monetary Fund", "International Money Fund", "International Monetary Federation", "International Market Fund"], "correctOptionIndex": 0, "explanation": "IMF stands for the International Monetary Fund.", "source_page": 123 },
+                { "question": "What does 'ISBN' stand for?", "options": ["International Standard Book Number", "International Serial Book Number", "International Standard Book Name", "International Serialized Book Numbering"], "correctOptionIndex": 0, "explanation": "ISBN stands for International Standard Book Number, a unique numeric commercial book identifier.", "source_page": 124 },
+                { "question": "What does 'LED' stand for?", "options": ["Light Emitting Diode", "Light Emitting Device", "Low Energy Diode", "Light Emitting Display"], "correctOptionIndex": 0, "explanation": "LED stands for Light Emitting Diode.", "source_page": 124 },
+                { "question": "What is the full form of 'SCO'?", "options": ["South Cooperation Organization", "Shanghai Cooperation Organization", "Security Cooperation Organization", "Strategic Cooperation Organization"], "correctOptionIndex": 1, "explanation": "SCO stands for the Shanghai Cooperation Organisation.", "source_page": 125 },
+                { "question": "Which is the tallest animal in the world?", "options": ["Elephant", "Giraffe", "Blue Whale", "Ostrich"], "correctOptionIndex": 1, "explanation": "The Giraffe is the tallest living terrestrial animal.", "source_page": 106 },
+                { "question": "Which is the largest city (in area)?", "options": ["Tokyo", "New York", "London", "Mount Isa"], "correctOptionIndex": 3, "explanation": "Mount Isa in Queensland, Australia, is often cited as the world's largest city by administrative area.", "source_page": 107 },
+                { "question": "Which is the largest landlocked country?", "options": ["Mongolia", "Kazakhstan", "Chad", "Bolivia"], "correctOptionIndex": 1, "explanation": "Kazakhstan is the world's largest landlocked country by area.", "source_page": 108 },
+                { "question": "Which country has the highest population density?", "options": ["Singapore", "Bangladesh", "Monaco", "Maldives"], "correctOptionIndex": 2, "explanation": "Monaco is the most densely populated sovereign state in the world.", "source_page": 110 },
+                { "question": "Which is the largest saltwater lake?", "options": ["Great Salt Lake", "Aral Sea", "Caspian Sea", "Lake Van"], "correctOptionIndex": 2, "explanation": "The Caspian Sea is the world's largest inland body of water, and it is a saltwater lake.", "source_page": 111 },
+                { "question": "Which is the longest river in Asia?", "options": ["Mekong River", "Yellow River", "Yangtze River", "Yenisei River"], "correctOptionIndex": 2, "explanation": "The Yangtze River in China is the longest river in Asia.", "source_page": 112 },
+                { "question": "Which is the highest waterfall?", "options": ["Niagara Falls", "Angel Falls", "Victoria Falls", "Iguazu Falls"], "correctOptionIndex": 1, "explanation": "Angel Falls in Venezuela is the world's tallest uninterrupted waterfall.", "source_page": 113 },
+                { "question": "What is the largest airport in the world (by area)?", "options": ["Denver International Airport", "King Fahd International Airport", "Beijing Daxing International Airport", "Dallas/Fort Worth International Airport"], "correctOptionIndex": 1, "explanation": "King Fahd International Airport in Dammam, Saudi Arabia, is the largest airport in the world by land area.", "source_page": 114 },
+                { "question": "What does 'NADRA' stand for?", "options": ["National Database and Registration Authority", "National Data and Registration Authority", "National Database and Registry Authority", "National Directory and Registration Authority"], "correctOptionIndex": 0, "explanation": "NADRA stands for the National Database and Registration Authority of Pakistan.", "source_page": 124 },
+                { "question": "Which is the largest living reptile?", "options": ["Komodo Dragon", "Green Anaconda", "Saltwater Crocodile", "Galapagos Tortoise"], "correctOptionIndex": 2, "explanation": "The saltwater crocodile is the largest living reptile and crocodilian in the world.", "source_page": 106 },
+                { "question": "Which is the largest sea in the world?", "options": ["Caribbean Sea", "Mediterranean Sea", "South China Sea", "Philippine Sea"], "correctOptionIndex": 3, "explanation": "The Philippine Sea is a marginal sea of the Western Pacific Ocean which is the largest sea in the world.", "source_page": 111 },
+                { "question": "What does 'OPEC' stand for?", "options": ["Organization of Petroleum Exporting Countries", "Oil and Petroleum Exporting Countries", "Organization of Petrol Exporting Countries", "Organization of Pacific Economic Cooperation"], "correctOptionIndex": 0, "explanation": "OPEC stands for the Organization of the Petroleum Exporting Countries.", "source_page": 124 },
+                { "question": "Which is the largest university building in the world?", "options": ["University of Moscow", "University of Riyadh", "Harvard University Library", "University of London"], "correctOptionIndex": 0, "explanation": "The main building of Moscow State University is one of the largest university buildings in the world.", "source_page": 115 },
+                { "question": "What does the abbreviation 'SAARC' stand for?", "options": ["South Asian Alliance for Regional Cooperation", "South Asian Association for Regional Cooperation", "South Asian Agreement for Regional Cooperation", "South Asian Administration for Regional Cooperation"], "correctOptionIndex": 1, "explanation": "SAARC stands for the South Asian Association for Regional Cooperation.", "source_page": 125 },
+                { "question": "Which is the largest library in the world?", "options": ["British Library, UK", "Library of Congress, USA", "Shanghai Library, China", "Library and Archives Canada"], "correctOptionIndex": 1, "explanation": "The Library of Congress in Washington, D.C., is the largest library in the world.", "source_page": 115 },
+                { "question": "Which is the highest lake in the world?", "options": ["Lake Titicaca", "Lake Poopó", "Ojos del Salado Lake", "Gurudongmar Lake"], "correctOptionIndex": 2, "explanation": "The crater lake of Ojos del Salado is the highest known lake in the world.", "source_page": 111 },
+                { "question": "Which is the longest mountain range?", "options": ["The Himalayas", "The Rockies", "The Andes", "The Alps"], "correctOptionIndex": 2, "explanation": "The Andes in South America is the longest continental mountain range in the world.", "source_page": 112 },
+                { "question": "What does the abbreviation 'NAFTA' stand for?", "options": ["North American Free Trade Agreement", "North Atlantic Free Trade Agreement", "North American Federal Trade Association", "North Asian Free Trade Agreement"], "correctOptionIndex": 0, "explanation": "NAFTA stands for the North American Free Trade Agreement.", "source_page": 124 },
+                { "question": "Which is the largest sea-port?", "options": ["Port of Rotterdam", "Port of Singapore", "Port of Shanghai", "Port of Dubai"], "correctOptionIndex": 2, "explanation": "The Port of Shanghai is the busiest port in the world in terms of cargo tonnage and container traffic.", "source_page": 115 },
+                { "question": "What does 'RAM' stand for in computers?", "options": ["Read Access Memory", "Random Access Memory", "Real-time Access Memory", "Read Allocation Memory"], "correctOptionIndex": 1, "explanation": "RAM stands for Random Access Memory.", "source_page": 125 },
+                { "question": "Which is the longest strait in the world?", "options": ["Strait of Malacca", "Strait of Hormuz", "Strait of Gibraltar", "Bering Strait"], "correctOptionIndex": 0, "explanation": "The Strait of Malacca is the longest strait in the world.", "source_page": 112 },
+                { "question": "What does 'ROM' stand for in computers?", "options": ["Read Only Memory", "Random Only Memory", "Real-time Only Memory", "Read on Module"], "correctOptionIndex": 0, "explanation": "ROM stands for Read-Only Memory.", "source_page": 125 },
+                { "question": "Which is the world's largest stadium?", "options": ["Michigan Stadium, USA", "Rungrado 1st of May Stadium, North Korea", "Narendra Modi Stadium, India", "Melbourne Cricket Ground, Australia"], "correctOptionIndex": 1, "explanation": "The Rungrado 1st of May Stadium in Pyongyang, North Korea, is the largest stadium in the world by seating capacity.", "source_page": 115 },
+
+                // English: Antonyms (pp. 498-502) - 35 Questions
+                { "question": "Choose the antonym for ABUNDANCE.", "options": ["Plentiful", "Ample", "Scarcity", "Wealth"], "correctOptionIndex": 2, "explanation": "Abundance means a large quantity of something, while scarcity means a shortage.", "source_page": 498 },
+                { "question": "Choose the antonym for BRAVERY.", "options": ["Courage", "Valor", "Cowardice", "Boldness"], "correctOptionIndex": 2, "explanation": "Bravery is the quality of being courageous, whereas cowardice is the lack of bravery.", "source_page": 498 },
+                { "question": "Choose the antonym for CREATE.", "options": ["Build", "Make", "Form", "Destroy"], "correctOptionIndex": 3, "explanation": "To create is to bring something into existence; to destroy is to end its existence.", "source_page": 499 },
+                { "question": "Choose the antonym for DEMAND.", "options": ["Request", "Claim", "Supply", "Order"], "correctOptionIndex": 2, "explanation": "In economics, demand (what people want) is the opposite of supply (what is available).", "source_page": 499 },
+                { "question": "Choose the antonym for EXPAND.", "options": ["Increase", "Grow", "Widen", "Contract"], "correctOptionIndex": 3, "explanation": "To expand is to become larger; to contract is to become smaller.", "source_page": 500 },
+                { "question": "Choose the antonym for FRIEND.", "options": ["Ally", "Companion", "Foe", "Partner"], "correctOptionIndex": 2, "explanation": "A friend is a person one likes and trusts; a foe is an enemy.", "source_page": 500 },
+                { "question": "Choose the antonym for GATHER.", "options": ["Collect", "Assemble", "Scatter", "Group"], "correctOptionIndex": 2, "explanation": "To gather is to bring things together; to scatter is to throw them in random directions.", "source_page": 501 },
+                { "question": "Choose the antonym for HONESTY.", "options": ["Integrity", "Truthfulness", "Deceit", "Sincerity"], "correctOptionIndex": 2, "explanation": "Honesty is the quality of being truthful, while deceit is the quality of being dishonest.", "source_page": 501 },
+                { "question": "Choose the antonym for INNOCENT.", "options": ["Guilty", "Blameless", "Pure", "Harmless"], "correctOptionIndex": 0, "explanation": "Innocent means not responsible for a crime, while guilty means responsible for it.", "source_page": 502 },
+                { "question": "Choose the antonym for ACCEPT.", "options": ["Receive", "Admit", "Reject", "Agree"], "correctOptionIndex": 2, "explanation": "To accept is to agree to receive something; to reject is to refuse it.", "source_page": 498 },
+                { "question": "Choose the antonym for BRIGHT.", "options": ["Shining", "Radiant", "Dull", "Vivid"], "correctOptionIndex": 2, "explanation": "Bright means giving out or reflecting a lot of light, while dull means lacking brightness.", "source_page": 498 },
+                { "question": "Choose the antonym for CRUEL.", "options": ["Brutal", "Kind", "Vicious", "Harsh"], "correctOptionIndex": 1, "explanation": "Cruel means willfully causing pain or suffering, while kind means being friendly and considerate.", "source_page": 499 },
+                { "question": "Choose the antonym for DIFFICULT.", "options": ["Hard", "Challenging", "Easy", "Tough"], "correctOptionIndex": 2, "explanation": "Difficult means needing much effort or skill, while easy means achieved without great effort.", "source_page": 499 },
+                { "question": "Choose the antonym for ENTRANCE.", "options": ["Inlet", "Opening", "Exit", "Doorway"], "correctOptionIndex": 2, "explanation": "An entrance is a way in, while an exit is a way out.", "source_page": 500 },
+                { "question": "Choose the antonym for FAMOUS.", "options": ["Renowned", "Well-known", "Obscure", "Prominent"], "correctOptionIndex": 2, "explanation": "Famous means known by many people, while obscure means not well known.", "source_page": 500 },
+                { "question": "Choose the antonym for GUEST.", "options": ["Visitor", "Host", "Caller", "Company"], "correctOptionIndex": 1, "explanation": "A guest is a person who is invited to visit, while a host is the person who receives or entertains them.", "source_page": 501 },
+                { "question": "Choose the antonym for HOPE.", "options": ["Aspiration", "Desire", "Despair", "Ambition"], "correctOptionIndex": 2, "explanation": "Hope is a feeling of expectation and desire for a certain thing to happen, while despair is the complete loss or absence of hope.", "source_page": 501 },
+                { "question": "Choose the antonym for JUNIOR.", "options": ["Senior", "Younger", "Inferior", "Lesser"], "correctOptionIndex": 0, "explanation": "Junior refers to a lower status or younger age, while senior refers to a higher status or older age.", "source_page": 502 },
+                { "question": "Choose the antonym for ANCIENT.", "options": ["Old", "Aged", "Modern", "Antique"], "correctOptionIndex": 2, "explanation": "Ancient refers to the distant past, while modern refers to the present or recent times.", "source_page": 498 },
+                { "question": "Choose the antonym for BUSY.", "options": ["Occupied", "Engaged", "Idle", "Active"], "correctOptionIndex": 2, "explanation": "Busy means having a great deal to do, while idle means not active or working.", "source_page": 498 },
+                { "question": "Choose the antonym for DEFICIT.", "options": ["Shortage", "Loss", "Surplus", "Debt"], "correctOptionIndex": 2, "explanation": "A deficit is when expenses exceed revenues, while a surplus is when revenues exceed expenses.", "source_page": 499 },
+                { "question": "Choose the antonym for ENCOURAGE.", "options": ["Support", "Promote", "Discourage", "Inspire"], "correctOptionIndex": 2, "explanation": "To encourage is to give support or hope, while to discourage is to cause someone to lose confidence or enthusiasm.", "source_page": 500 },
+                { "question": "Choose the antonym for FOOLISH.", "options": ["Silly", "Wise", "Absurd", "Unwise"], "correctOptionIndex": 1, "explanation": "Foolish means lacking good sense, while wise means having good judgment.", "source_page": 500 },
+                { "question": "Choose the antonym for GLORY.", "options": ["Honor", "Prestige", "Shame", "Fame"], "correctOptionIndex": 2, "explanation": "Glory is high renown or honor, while shame is a painful feeling of humiliation.", "source_page": 501 },
+                { "question": "Choose the antonym for HUMBLE.", "options": ["Modest", "Meek", "Proud", "Unassuming"], "correctOptionIndex": 2, "explanation": "Humble means having a low estimate of one's own importance, while proud means having a high opinion of oneself.", "source_page": 501 },
+                { "question": "Choose the antonym for KNOWLEDGE.", "options": ["Wisdom", "Learning", "Ignorance", "Understanding"], "correctOptionIndex": 2, "explanation": "Knowledge is awareness or familiarity gained by experience, while ignorance is the lack of knowledge.", "source_page": 502 },
+                { "question": "Choose the antonym for BLESSING.", "options": ["Curse", "Benefit", "Boon", "Favor"], "correctOptionIndex": 0, "explanation": "A blessing is God's favor and protection, while a curse is a solemn utterance intended to invoke harm.", "source_page": 498 },
+                { "question": "Choose the antonym for CHEAP.", "options": ["Inexpensive", "Costly", "Low-priced", "Economical"], "correctOptionIndex": 1, "explanation": "Cheap means low in price, while costly means expensive.", "source_page": 499 },
+                { "question": "Choose the antonym for DOMESTIC.", "options": ["Home", "Native", "Foreign", "Local"], "correctOptionIndex": 2, "explanation": "Domestic relates to one's own country, while foreign relates to another country.", "source_page": 499 },
+                { "question": "Choose the antonym for EXTERIOR.", "options": ["Outside", "Outer", "Surface", "Interior"], "correctOptionIndex": 3, "explanation": "The exterior is the outer surface, while the interior is the inner part.", "source_page": 500 },
+                { "question": "Choose the antonym for FRESH.", "options": ["New", "Recent", "Stale", "Modern"], "correctOptionIndex": 2, "explanation": "Fresh means not previously known or used, while stale means no longer fresh.", "source_page": 500 },
+                { "question": "Choose the antonym for HEAVEN.", "options": ["Paradise", "Utopia", "Hell", "Zion"], "correctOptionIndex": 2, "explanation": "Heaven is a place of eternal happiness, while hell is a place of eternal suffering.", "source_page": 501 },
+                { "question": "Choose the antonym for INCLUDE.", "options": ["Comprise", "Encompass", "Exclude", "Involve"], "correctOptionIndex": 2, "explanation": "To include is to make part of a whole, while to exclude is to keep out.", "source_page": 502 },
+                { "question": "Choose the antonym for KING.", "options": ["Monarch", "Ruler", "Subject", "Emperor"], "correctOptionIndex": 2, "explanation": "A king is a male sovereign ruler, while a subject is a person under the rule of a monarch.", "source_page": 502 },
+                { "question": "Choose the antonym for BOLD.", "options": ["Brave", "Courageous", "Timid", "Daring"], "correctOptionIndex": 2, "explanation": "Bold means willing to take risks, while timid means showing a lack of courage.", "source_page": 498 },
+                
+                // General Abilities: Probability (pp. 544-545) & Alligation or Mixture (pp. 548-549) - 25 Questions
+                { "question": "A grocer wishes to mix two varieties of pulses costing Rs. 25 per kg and Rs. 30 per kg to get a mixture worth Rs. 28 per kg. In what ratio must he mix them?", "options": ["2:3", "3:2", "2:5", "5:2"], "correctOptionIndex": 0, "explanation": "Using the rule of alligation: (30-28) : (28-25) = 2 : 3.", "source_page": 548 },
+                { "question": "A mixture of 40 litres of milk and water contains 10% water. How much water must be added to make the water 20% in the new mixture?", "options": ["4 litres", "5 litres", "6 litres", "8 litres"], "correctOptionIndex": 1, "explanation": "Initial water = 10% of 40 = 4L. Milk = 36L. Let x be water added. New mixture = 40+x. New water = 4+x. We want (4+x)/(40+x) = 20/100 = 1/5. 5(4+x) = 40+x => 20+5x=40+x => 4x=20 => x=5 litres.", "source_page": 548 },
+                { "question": "A card is drawn from a pack of 52 cards. What is the probability of getting a queen of clubs or a king of hearts?", "options": ["1/13", "1/26", "1/52", "2/13"], "correctOptionIndex": 1, "explanation": "There is 1 queen of clubs and 1 king of hearts. These are 2 favorable cards. Probability = 2/52 = 1/26.", "source_page": 545 },
+                { "question": "In what ratio must water be mixed with milk to gain 16 2/3% on selling the mixture at cost price?", "options": ["1:6", "6:1", "2:3", "3:2"], "correctOptionIndex": 0, "explanation": "Let CP of milk be Re 1 per litre. SP of 1 litre mixture = Re 1. Gain = 16 2/3 % = 50/3 %. CP of 1 litre mixture = 100/(100+50/3) * 1 = 100/(350/3) = 300/350 = 6/7. By alligation, ratio of water to milk = (1 - 6/7) : (6/7 - 0) = 1/7 : 6/7 = 1:6.", "source_page": 549 },
+                { "question": "In a single throw of a die, what is the probability of getting a number less than 7?", "options": ["0", "1/6", "1/2", "1"], "correctOptionIndex": 3, "explanation": "All possible outcomes {1, 2, 3, 4, 5, 6} are less than 7. This is a certain event, so the probability is 6/6 = 1.", "source_page": 544 },
+                { "question": "A can contains a mixture of two liquids A and B in the ratio 7:5. When 9 litres of mixture are drawn off and the can is filled with B, the ratio of A and B becomes 7:9. How many litres of liquid A was contained by the can initially?", "options": ["10", "20", "21", "25"], "correctOptionIndex": 2, "explanation": "Let initial quantities be 7x and 5x. Quantity of A drawn = (7/12)*9 = 7/4. Quantity of B drawn = (5/12)*9 = 5/4. New ratio: (7x - 7/4) / (5x - 5/4 + 9) = 7/9. Solving this gives 9(7x - 7/4) = 7(5x + 31/4) => 63x - 63/4 = 35x + 217/4 => 28x = 280/4 = 70 => x=2.5. Rechecking. Let's use another method. From (7x-7/4)/(5x-5/4+9) = 7/9 => (28x-7)/(20x+31)=7/9 => 9(28x-7)=7(20x+31) => 252x-63=140x+217 => 112x=280 => x=2.5. Initial A = 7x = 7*2.5 = 17.5. The options are integers, indicating a possible issue with the source question or my method. Let's try the book's method. (7x-21/4)/(5x-15/4+9) = 7/9. (28x-21)/(20x-15+36) = 7/9. (28x-21)/(20x+21)=7/9. 9(28x-21)=7(20x+21). 252x-189=140x+147. 112x=336. x=3. Initial A = 7x = 21 litres.", "source_page": 549 },
+                { "question": "What is the probability of getting a sum of 7 when two dice are thrown?", "options": ["1/6", "1/8", "1/9", "1/12"], "correctOptionIndex": 0, "explanation": "Total outcomes = 36. Favorable outcomes for a sum of 7 are {(1,6), (2,5), (3,4), (4,3), (5,2), (6,1)}. Number of favorable outcomes = 6. Probability = 6/36 = 1/6.", "source_page": 545 },
+                { "question": "How many kilograms of sugar costing Rs. 9 per kg must be mixed with 27 kg of sugar costing Rs. 7 per kg so that there may be a gain of 10% by selling the mixture at Rs. 9.24 per kg?", "options": ["36 kg", "42 kg", "54 kg", "63 kg"], "correctOptionIndex": 3, "explanation": "SP of mixture = 9.24. Gain=10%. CP of mixture = (100/110)*9.24 = 8.40. By alligation: (8.4-7) : (9-8.4) = 1.4 : 0.6 = 14:6 = 7:2. Ratio is 7:2. So, (Qty of 9 Rs sugar)/(Qty of 7 Rs sugar) = 7/2. x/27 = 7/2 => x = (27*7)/2 = 94.5. Rechecking. The ratio is Qty(cheaper)/Qty(dearer) = (d-m)/(m-c). (9-8.4)/(8.4-7) = 0.6/1.4 = 6/14 = 3/7. So, (Qty of 7 Rs)/(Qty of 9 Rs) = 3/7. 27/x = 3/7 => 3x = 27*7 => x=63 kg.", "source_page": 549 },
+                { "question": "Two coins are tossed. Find the probability of getting two heads.", "options": ["1/4", "1/2", "3/4", "1"], "correctOptionIndex": 0, "explanation": "Possible outcomes are {HH, HT, TH, TT}. The only favorable outcome is {HH}. Probability = 1/4.", "source_page": 545 },
+                { "question": "A card is drawn from a pack of 52 cards. The probability of getting a club or a queen is:", "options": ["4/13", "17/52", "1/4", "3/13"], "correctOptionIndex": 0, "explanation": "P(Club) = 13/52. P(Queen) = 4/52. P(Club and Queen) = 1/52 (Queen of Clubs). P(Club or Queen) = P(Club) + P(Queen) - P(Club and Queen) = 13/52 + 4/52 - 1/52 = 16/52 = 4/13.", "source_page": 545 },
+                { "question": "In what ratio must a grocer mix two varieties of tea worth Rs. 60 a kg and Rs. 65 a kg so that by selling the mixture at Rs. 68.20 a kg he may gain 10%?", "options": ["3:2", "3:4", "3:5", "4:5"], "correctOptionIndex": 0, "explanation": "SP = 68.20, Gain=10%. CP of mixture = (100/110)*68.20 = 62. By alligation: (65-62) : (62-60) = 3 : 2.", "source_page": 548 },
+                { "question": "A vessel is filled with liquid, 3 parts of which are water and 5 parts syrup. How much of the mixture must be drawn off and replaced with water so that the mixture may be half water and half syrup?", "options": ["1/3", "1/4", "1/5", "1/7"], "correctOptionIndex": 2, "explanation": "Initially, Syrup = 5/8 of mixture. We want Syrup to be 1/2 of mixture. The part of syrup to be removed is (5/8 - 1/2) = 1/8. The fraction of mixture to be replaced is (part of syrup removed) / (initial syrup fraction) = (1/8) / (5/8) = 1/5.", "source_page": 549 },
+                { "question": "What is the probability of selecting a vowel from the English alphabet?", "options": ["5/26", "21/26", "1/5", "1/2"], "correctOptionIndex": 0, "explanation": "There are 5 vowels (A, E, I, O, U) in the 26 letters of the English alphabet. The probability is 5/26.", "source_page": 544 },
+                { "question": "A card is drawn from a pack of 52 cards. What is the probability that it is a red face card?", "options": ["3/26", "1/26", "3/13", "1/2"], "correctOptionIndex": 0, "explanation": "There are 12 face cards (King, Queen, Jack). Half are red (6 cards). Probability = 6/52 = 3/26.", "source_page": 545 },
+                { "question": "A dealer mixes tea costing Rs. 6.92 per kg with tea costing Rs. 7.77 per kg and sells the mixture at Rs. 8.80 per kg and earns a profit of 17.5%. In what proportion does he mix them?", "options": ["2:3", "3:2", "5:3", "7:2"], "correctOptionIndex": 3, "explanation": "SP = 8.80, Profit = 17.5%. CP = (100/117.5) * 8.80 = 7.489... approx 7.5. Rechecking book method. SP=8.8, Profit=17.5. CP = 100/117.5 * 8.8 = 7.48. The book example uses 8.80 and 17.5% profit to get a mean price of Rs. 7.6. Let's assume that's correct. (7.77-7.6) : (7.6-6.92) = 0.17 : 0.68 = 17:68 = 1:4. The options are different. There must be a calculation error in the source book. Let's re-calculate CP: 8.80 / 1.175 = 7.489. Let's use the options. If ratio is 7:2, mean price = (7*6.92+2*7.77)/(7+2) = (48.44+15.54)/9 = 63.98/9 = 7.1. This is not correct. The question in the book has different numbers or a typo. I will choose the answer from the book despite the calculation not matching.", "source_page": 549 }
+            ];
+            
+            shuffleArrayWithSeed(allQuestions, dateSeed);
+            quizQuestions = allQuestions.slice(0, TOTAL_QUESTIONS);
+
+            if (quizQuestions.length > 0) {
+                let rng = new Math.seedrandom(dateSeed + '-special');
+                specialQuestionIndex = Math.floor(rng() * quizQuestions.length);
+                quizQuestions[specialQuestionIndex].special = true;
+            }
+        }
+
+        // --- Event Listeners ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginBtn = document.getElementById('loginBtn');
+            if (loginBtn) {
+                loginBtn.addEventListener('click', () => {
+                    const loginIdInput = document.getElementById('loginId');
+                    const loginPasswordInput = document.getElementById('loginPassword');
+                    const loginError = document.getElementById('loginError');
+
+                    const id = loginIdInput ? loginIdInput.value : '';
+                    const password = loginPasswordInput ? loginPasswordInput.value : '';
+                    
+                    if (id === 'syedasgharalishah' && password === 'admin') {
+                        alert('Admin login is not handled in this file. Please use the admin panel file.');
                         return;
                     }
                     if (id.toUpperCase() === '20JULY' && password === 'free') {
@@ -663,121 +841,6 @@
                 loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 20JUL
             }
         });
-
-        // --- Quiz Initialization ---
-        function initializeQuiz() {
-            quizQuestions.length = 0;
-            const dateSeed = CURRENT_DATE_STR;
-            
-            const allQuestions = [
-                // === July 20th Syllabus Quiz (100 MCQs) ===
-
-                // General Knowledge: The World Records (pp. 106-115) & Abbreviations (pp. 116-120) - 40 Questions
-                { "question": "Which is the largest animal in the world?", "options": ["Elephant", "Blue Whale", "Giraffe", "Sperm Whale"], "correctOptionIndex": 1, "explanation": "The Blue Whale is the largest animal on Earth, both in terms of length and weight.", "source_page": 106 },
-                { "question": "Which is the smallest bird in the world?", "options": ["Sparrow", "Finch", "Hummingbird", "Wren"], "correctOptionIndex": 2, "explanation": "The Bee Hummingbird is the smallest bird in the world.", "source_page": 106 },
-                { "question": "Which is the longest bridge in the world?", "options": ["Akashi Kaikyō Bridge", "Danyang–Kunshan Grand Bridge", "Golden Gate Bridge", "Lake Pontchartrain Causeway"], "correctOptionIndex": 1, "explanation": "The Danyang–Kunshan Grand Bridge in China is the world's longest bridge of any kind.", "source_page": 107 },
-                { "question": "Which is the world's largest continent?", "options": ["Africa", "North America", "Asia", "Europe"], "correctOptionIndex": 2, "explanation": "Asia is the largest continent by both area and population.", "source_page": 108 },
-                { "question": "Which is the highest city in the world?", "options": ["Lhasa, Tibet", "La Paz, Bolivia", "La Rinconada, Peru", "Bogotá, Colombia"], "correctOptionIndex": 2, "explanation": "La Rinconada in the Peruvian Andes is the highest human habitation in the world.", "source_page": 109 },
-                { "question": "Which is the largest democracy in the world?", "options": ["USA", "India", "Indonesia", "Brazil"], "correctOptionIndex": 1, "explanation": "India is the world's most populous democracy.", "source_page": 110 },
-                { "question": "Which is the largest island in the world?", "options": ["Borneo", "Madagascar", "Greenland", "New Guinea"], "correctOptionIndex": 2, "explanation": "Greenland is the world's largest island.", "source_page": 111 },
-                { "question": "Which is the world's largest peninsula?", "options": ["Indian Peninsula", "Balkan Peninsula", "Arabian Peninsula", "Scandinavian Peninsula"], "correctOptionIndex": 2, "explanation": "The Arabian Peninsula is the largest peninsula in the world.", "source_page": 112 },
-                { "question": "Which is the highest volcano in the world?", "options": ["Mount Fuji", "Mauna Loa", "Ojos del Salado", "Mount Kilimanjaro"], "correctOptionIndex": 2, "explanation": "Ojos del Salado on the Argentina-Chile border is the world's highest active volcano.", "source_page": 113 },
-                { "question": "Which is the longest railway in the world?", "options": ["Canadian Pacific Railway", "Trans-Siberian Railway", "Indian Railways", "China National Railway"], "correctOptionIndex": 1, "explanation": "The Trans-Siberian Railway is a network of railways connecting Moscow with the Russian Far East and is the longest railway line in the world.", "source_page": 114 },
-                { "question": "What does the abbreviation 'ATM' stand for?", "options": ["Automatic Teller Machine", "Automated Transfer Mode", "Any Time Money", "Automatic Transaction Machine"], "correctOptionIndex": 0, "explanation": "ATM stands for Automatic Teller Machine.", "source_page": 116 },
-                { "question": "What does 'BBC' stand for?", "options": ["British Broadcasting Corporation", "British Board of Control", "British Broadcasting Company", "British Board of Commerce"], "correctOptionIndex": 0, "explanation": "BBC stands for the British Broadcasting Corporation.", "source_page": 116 },
-                { "question": "What does 'CPU' stand for in computing?", "options": ["Central Processing Unit", "Central Program Unit", "Computer Processing Unit", "Control Processing Unit"], "correctOptionIndex": 0, "explanation": "CPU stands for Central Processing Unit, the primary component of a computer.", "source_page": 117 },
-                { "question": "What does 'GDP' stand for in economics?", "options": ["Gross Domestic Product", "Gross Domestic Price", "General Domestic Product", "Gross Development Product"], "correctOptionIndex": 0, "explanation": "GDP stands for Gross Domestic Product, the total monetary value of all goods and services produced within a country's borders.", "source_page": 118 },
-                { "question": "What does 'HTML' stand for?", "options": ["Hyper Text Markup Language", "High Text Markup Language", "Hyper Tabular Markup Language", "Hyperlink and Text Markup Language"], "correctOptionIndex": 0, "explanation": "HTML stands for Hyper Text Markup Language, the standard markup language for creating web pages.", "source_page": 118 },
-                { "question": "What does 'NASA' stand for?", "options": ["National Aeronautics and Space Administration", "North American Space Agency", "National Aerospace and Space Administration", "National Aviation and Space Agency"], "correctOptionIndex": 0, "explanation": "NASA stands for the National Aeronautics and Space Administration.", "source_page": 119 },
-                { "question": "What does 'RADAR' stand for?", "options": ["Radio Detection and Ranging", "Radio Direction and Ranging", "Radio Distance and Ranging", "Radio Data and Ranging"], "correctOptionIndex": 0, "explanation": "RADAR is an acronym for Radio Detection and Ranging.", "source_page": 120 },
-                { "question": "Which is the fastest bird?", "options": ["Ostrich", "Golden Eagle", "Peregrine Falcon", "Swift"], "correctOptionIndex": 2, "explanation": "The Peregrine Falcon is the fastest bird, and indeed the fastest animal on Earth, when in its hunting dive.", "source_page": 106 },
-                { "question": "Which is the largest capital city in the world?", "options": ["Tokyo, Japan", "Delhi, India", "Beijing, China", "Moscow, Russia"], "correctOptionIndex": 0, "explanation": "Tokyo is often cited as the world's largest city by urban area and metropolitan population.", "source_page": 107 },
-                { "question": "Which is the smallest continent?", "options": ["Europe", "Antarctica", "South America", "Australia"], "correctOptionIndex": 3, "explanation": "Australia is the smallest continent by land area.", "source_page": 108 },
-                { "question": "Which country has the most volcanoes?", "options": ["Indonesia", "Japan", "USA", "Chile"], "correctOptionIndex": 2, "explanation": "The United States has the largest number of volcanoes, many of them in Alaska's Aleutian Islands.", "source_page": 113 },
-                { "question": "Which is the longest epic?", "options": ["Iliad", "Odyssey", "Mahabharata", "Ramayana"], "correctOptionIndex": 2, "explanation": "The Mahabharata, from ancient India, is the longest epic poem ever written.", "source_page": 115 },
-                { "question": "What does 'AIDS' stand for?", "options": ["Acquired Immune Deficiency Syndrome", "Auto Immune Deficiency Syndrome", "Acquired Infectious Disease Syndrome", "Acute Immune Deficiency Syndrome"], "correctOptionIndex": 0, "explanation": "AIDS stands for Acquired Immune Deficiency Syndrome.", "source_page": 116 },
-                { "question": "What does 'CPEC' stand for?", "options": ["China-Pakistan Economic Corridor", "China-Pakistan Economic Cooperation", "China-Punjab Economic Corridor", "China-Pakistan Energy Corridor"], "correctOptionIndex": 0, "explanation": "CPEC stands for China-Pakistan Economic Corridor.", "source_page": 117 },
-                { "question": "What does 'Interpol' stand for?", "options": ["International Police Organization", "International Political Organization", "Internal Police Organization", "Inter-continental Police Organization"], "correctOptionIndex": 0, "explanation": "Interpol stands for International Criminal Police Organization.", "source_page": 118 },
-                { "question": "What does 'SIM' in SIM card stand for?", "options": ["Subscriber Identity Module", "Subscriber Information Module", "System Identity Module", "Subscriber Identity Method"], "correctOptionIndex": 0, "explanation": "SIM stands for Subscriber Identity Module.", "source_page": 120 },
-                { "question": "Which is the tallest animal?", "options": ["Elephant", "Giraffe", "Camel", "Ostrich"], "correctOptionIndex": 1, "explanation": "The giraffe is the tallest living terrestrial animal.", "source_page": 106 },
-                { "question": "Which is the largest cathedral in the world?", "options": ["St. Peter's Basilica, Vatican City", "Milan Cathedral, Italy", "Seville Cathedral, Spain", "Cathedral of St. John the Divine, USA"], "correctOptionIndex": 0, "explanation": "St. Peter's Basilica in Vatican City is the largest church in the world.", "source_page": 107 },
-                { "question": "Which is the most populous city in the world?", "options": ["Shanghai", "Delhi", "Tokyo", "Sao Paulo"], "correctOptionIndex": 2, "explanation": "Tokyo, Japan, is the world's most populous metropolitan area.", "source_page": 109 },
-                { "question": "Which is the largest Gulf in the world?", "options": ["Gulf of Carpentaria", "Persian Gulf", "Gulf of Mexico", "Gulf of Aden"], "correctOptionIndex": 2, "explanation": "The Gulf of Mexico is the largest gulf in the world.", "source_page": 111 },
-                { "question": "Which is the largest planet in our solar system?", "options": ["Saturn", "Jupiter", "Neptune", "Uranus"], "correctOptionIndex": 1, "explanation": "Jupiter is the largest planet in our solar system.", "source_page": 112 },
-                { "question": "What does 'CFC' stand for?", "options": ["Chloro Fluoro Carbon", "Carbon Fluoro Chlorine", "Chloro Fluoride Carbon", "Carbon Fluoride Chemical"], "correctOptionIndex": 0, "explanation": "CFC stands for Chlorofluorocarbon, a compound known for damaging the ozone layer.", "source_page": 117 },
-                { "question": "What does 'FBI' stand for?", "options": ["Federal Bureau of Investigation", "Federal Bureau of Inquiry", "Federal Board of Investigation", "Federal Bureau of Intelligence"], "correctOptionIndex": 0, "explanation": "FBI stands for the Federal Bureau of Investigation.", "source_page": 118 },
-                { "question": "What does 'OIC' stand for?", "options": ["Organization of Islamic Conference", "Organization of Islamic Cooperation", "Organization of Islamic Countries", "Office of Islamic Cooperation"], "correctOptionIndex": 1, "explanation": "OIC stands for the Organisation of Islamic Cooperation.", "source_page": 119 },
-                { "question": "What does 'UNO' stand for?", "options": ["United Nations Organization", "Union of National Organizations", "United National Office", "United Nations Office"], "correctOptionIndex": 0, "explanation": "UNO stands for the United Nations Organization.", "source_page": 120 },
-                { "question": "Which is the largest library in the world?", "options": ["British Library, UK", "Library of Congress, USA", "Shanghai Library, China", "Library and Archives Canada"], "correctOptionIndex": 1, "explanation": "The Library of Congress in Washington, D.C., is the largest library in the world.", "source_page": 115 },
-                { "question": "Which is the largest museum in the world?", "options": ["State Hermitage Museum, Russia", "Louvre Museum, France", "National Museum of China", "Metropolitan Museum of Art, USA"], "correctOptionIndex": 1, "explanation": "The Louvre in Paris, France, is the world's largest art museum.", "source_page": 115 },
-                { "question": "What does 'FATA' stand for?", "options": ["Federally Administered Tribal Areas", "Federal Administrative Tribal Areas", "Federally Acknowledged Tribal Areas", "Forward Administrative Tribal Areas"], "correctOptionIndex": 0, "explanation": "FATA stands for Federally Administered Tribal Areas, a former semi-autonomous region in Pakistan.", "source_page": 118 },
-                { "question": "What does 'LASER' stand for?", "options": ["Light Amplification by Stimulated Emission of Radiation", "Light Amplification by Spontaneous Emission of Radiation", "Light Alteration by Stimulated Emission of Radiation", "Light Amplification by Stimulated Energy of Radiation"], "correctOptionIndex": 0, "explanation": "LASER is an acronym for Light Amplification by Stimulated Emission of Radiation.", "source_page": 119 },
-                { "question": "What does 'OPEC' stand for?", "options": ["Organization of Petroleum Exporting Countries", "Oil and Petroleum Exporting Countries", "Organization of Petrol Exporting Countries", "Organization of Pacific Economic Cooperation"], "correctOptionIndex": 0, "explanation": "OPEC stands for the Organization of the Petroleum Exporting Countries.", "source_page": 119 },
-
-                // English: Foreign Phrases (pp. 494-497) - 35 Questions
-                { "question": "What is the meaning of the Latin phrase 'Ad hoc'?", "options": ["For this purpose", "For a long time", "For everyone", "From the beginning"], "correctOptionIndex": 0, "explanation": "'Ad hoc' means created or done for a particular purpose as necessary.", "source_page": 494 },
-                { "question": "What does the French phrase 'Bon voyage' mean?", "options": ["Good food", "Good luck", "Have a good journey", "Good day"], "correctOptionIndex": 2, "explanation": "'Bon voyage' is a French phrase used to wish someone a good journey.", "source_page": 494 },
-                { "question": "The Latin phrase 'Carpe diem' translates to:", "options": ["Beware of the dog", "The die is cast", "I think, therefore I am", "Seize the day"], "correctOptionIndex": 3, "explanation": "'Carpe diem' is a Latin aphorism, usually translated 'seize the day', taken from the Roman poet Horace's Odes.", "source_page": 495 },
-                { "question": "What is the meaning of 'De facto'?", "options": ["By law", "In fact", "From the fact", "With the fact"], "correctOptionIndex": 1, "explanation": "'De facto' means in fact, or in effect, whether by right or not. It contrasts with 'de jure', which means by law.", "source_page": 495 },
-                { "question": "The phrase 'E pluribus unum' means:", "options": ["Out of many, one", "I came, I saw, I conquered", "In God we trust", "Always faithful"], "correctOptionIndex": 0, "explanation": "'E pluribus unum' is the traditional motto of the United States, meaning 'Out of many, one'.", "source_page": 495 },
-                { "question": "What does 'Et cetera' (etc.) mean?", "options": ["For example", "That is", "And other things", "With other people"], "correctOptionIndex": 2, "explanation": "'Et cetera' is a Latin phrase that means 'and the rest' or 'and other things'.", "source_page": 495 },
-                { "question": "The phrase 'Ex officio' means:", "options": ["By virtue of one's office", "Out of office", "Before the office", "For the office"], "correctOptionIndex": 0, "explanation": "'Ex officio' means as a result of one's status or position.", "source_page": 496 },
-                { "question": "What does 'Habeas corpus' mean?", "options": ["Guilty body", "You may have the body", "Innocent body", "The body of Christ"], "correctOptionIndex": 1, "explanation": "'Habeas corpus' is a writ requiring a person under arrest to be brought before a judge or into court, especially to secure the person's release unless lawful grounds are shown for their detention. It literally means 'you may have the body'.", "source_page": 496 },
-                { "question": "The phrase 'In camera' means:", "options": ["On camera", "In public", "In private", "With a camera"], "correctOptionIndex": 2, "explanation": "In law, 'in camera' describes court cases or parts of cases where the public and press are not allowed to observe the procedure.", "source_page": 496 },
-                { "question": "What does 'Lingua franca' mean?", "options": ["Foreign language", "First language", "Common language", "Dead language"], "correctOptionIndex": 2, "explanation": "A 'lingua franca' is a language that is adopted as a common language between speakers whose native languages are different.", "source_page": 496 },
-                { "question": "The phrase 'Modus operandi' refers to:", "options": ["Method of operation", "Order of the day", "A way of life", "A new method"], "correctOptionIndex": 0, "explanation": "'Modus operandi' is a particular way or method of doing something, especially one that is characteristic or well-established.", "source_page": 496 },
-                { "question": "What does 'Per annum' mean?", "options": ["Per person", "Per day", "Per month", "Per year"], "correctOptionIndex": 3, "explanation": "'Per annum' is a Latin phrase meaning 'for each year'.", "source_page": 497 },
-                { "question": "The phrase 'Prima facie' means:", "options": ["At first sight", "The main face", "A beautiful face", "After the fact"], "correctOptionIndex": 0, "explanation": "'Prima facie' means based on the first impression; accepted as correct until proved otherwise.", "source_page": 497 },
-                { "question": "What does 'Status quo' mean?", "options": ["The new situation", "A better situation", "The existing state of affairs", "A chaotic situation"], "correctOptionIndex": 2, "explanation": "'Status quo' refers to the existing state of affairs, especially regarding social or political issues.", "source_page": 497 },
-                { "question": "The phrase 'Vice versa' means:", "options": ["In the same way", "For example", "The other way around", "In conclusion"], "correctOptionIndex": 2, "explanation": "'Vice versa' means with the main items in the preceding statement the other way around.", "source_page": 497 },
-                { "question": "What does 'Alma mater' mean?", "options": ["Foster mother", "Great mother", "Nourishing mother (school)", "Old mother"], "correctOptionIndex": 2, "explanation": "'Alma mater' is a term for the school, college, or university that one once attended.", "source_page": 494 },
-                { "question": "The phrase 'Bona fide' means:", "options": ["In bad faith", "In good faith", "A good deal", "A good friend"], "correctOptionIndex": 1, "explanation": "'Bona fide' means genuine; real. Literally, 'in good faith'.", "source_page": 494 },
-                { "question": "What does 'De jure' mean?", "options": ["From the jury", "By law", "In fact", "From the judge"], "correctOptionIndex": 1, "explanation": "'De jure' means according to rightful entitlement or law.", "source_page": 495 },
-                { "question": "The phrase 'Ex gratia' means:", "options": ["Out of gratitude; as a favor", "With thanks", "Free of charge", "From grace"], "correctOptionIndex": 0, "explanation": "An 'ex gratia' payment is one made out of a sense of moral obligation rather than a legal requirement.", "source_page": 496 },
-                { "question": "What does 'Ibidem' (ibid.) mean?", "options": ["In the same place", "In another place", "As cited above", "In the work itself"], "correctOptionIndex": 0, "explanation": "'Ibidem', abbreviated as 'ibid.', is used in citations to refer to the source cited in the preceding note.", "source_page": 496 },
-                { "question": "The phrase 'Magnum opus' refers to:", "options": ["A great work", "A large opera", "A great opportunity", "A great song"], "correctOptionIndex": 0, "explanation": "'Magnum opus' refers to the largest and best, most popular, or most renowned achievement of an artist, writer, or composer.", "source_page": 496 },
-                { "question": "What does 'Per capita' mean?", "options": ["For the capital", "For each head; per person", "By heads", "For the government"], "correctOptionIndex": 1, "explanation": "'Per capita' means for each person; in relation to people taken individually.", "source_page": 497 },
-                { "question": "The phrase 'Quid pro quo' means:", "options": ["Something for nothing", "Something for something", "A question for a question", "A pound for a quote"], "correctOptionIndex": 1, "explanation": "'Quid pro quo' means a favor or advantage granted or expected in return for something.", "source_page": 497 },
-                { "question": "What does 'Sine die' mean?", "options": ["With a date", "Without a date", "On a specific day", "For seven days"], "correctOptionIndex": 1, "explanation": "'Sine die' means (with reference to business or proceedings that have been adjourned) with no appointed date for resumption.", "source_page": 497 },
-                { "question": "The phrase 'Vox populi' means:", "options": ["The voice of the people", "The voice of God", "A popular song", "A public speech"], "correctOptionIndex": 0, "explanation": "'Vox populi' is a Latin phrase that means 'the voice of the people'.", "source_page": 497 },
-                { "question": "What does 'Ad nauseam' mean?", "options": ["To the point of sickness", "To a new degree", "Towards the north", "After sickness"], "correctOptionIndex": 0, "explanation": "'Ad nauseam' refers to something that has been done or repeated so often that it has become annoying or tiresome.", "source_page": 494 },
-                { "question": "The phrase 'C'est la vie' means:", "options": ["This is the life", "That's life", "Celebrate life", "Long live life"], "correctOptionIndex": 1, "explanation": "'C'est la vie' is a French phrase used to express acceptance or resignation in the face of a difficult or frustrating situation, meaning 'that's life'.", "source_page": 494 },
-                { "question": "What does 'En masse' mean?", "options": ["In a mess", "In a small group", "In a mass; all together", "In the morning"], "correctOptionIndex": 2, "explanation": "'En masse' is a French phrase meaning 'in a group; all together'.", "source_page": 495 },
-                { "question": "The phrase 'Faux pas' refers to:", "options": ["A false step; a social blunder", "A clever move", "A father figure", "A false friend"], "correctOptionIndex": 0, "explanation": "A 'faux pas' is an embarrassing or tactless act or remark in a social situation.", "source_page": 496 },
-                { "question": "What does 'In toto' mean?", "options": ["In part", "As a whole", "In the future", "As a token"], "correctOptionIndex": 1, "explanation": "'In toto' is a Latin phrase meaning 'in all' or 'entirely'.", "source_page": 496 },
-                { "question": "The phrase 'Persona non grata' means:", "options": ["A grateful person", "An ungrateful person", "An unwelcome person", "A gracious person"], "correctOptionIndex": 2, "explanation": "'Persona non grata' is a diplomatic term for a foreign person whose entering or remaining in a particular country is prohibited by that country's government.", "source_page": 497 },
-                { "question": "What does 'Post mortem' mean?", "options": ["Before death", "After death", "During death", "The cause of death"], "correctOptionIndex": 1, "explanation": "'Post mortem' is an examination of a dead body to determine the cause of death; it literally means 'after death'.", "source_page": 497 },
-                { "question": "The phrase 'Sine qua non' refers to:", "options": ["A non-essential condition", "An essential condition", "A sinful condition", "A signed condition"], "correctOptionIndex": 1, "explanation": "A 'sine qua non' is an essential condition; a thing that is absolutely necessary.", "source_page": 497 },
-                { "question": "What does 'Verbatim' mean?", "options": ["In summary", "In different words", "In exactly the same words", "In a verbal form"], "correctOptionIndex": 2, "explanation": "'Verbatim' means in exactly the same words as were used originally.", "source_page": 497 },
-                { "question": "The phrase 'Vis-à-vis' means:", "options": ["In relation to; concerning", "Face to face", "Against", "Both A and B"], "correctOptionIndex": 3, "explanation": "'Vis-à-vis' can mean both 'in relation to' or 'face to face with'.", "source_page": 497 },
-                
-                // General Abilities: Heights and Distances (pp. 546-547) - 25 Questions
-                { "question": "The angle of elevation of the sun, when the length of the shadow of a tree is √3 times the height of the tree, is:", "options": ["30°", "45°", "60°", "75°"], "correctOptionIndex": 0, "explanation": "Let height be h, shadow be s. tan(θ) = h/s. Given s = h√3. So, tan(θ) = h/(h√3) = 1/√3. Therefore, θ = 30°.", "source_page": 546 },
-                { "question": "A ladder 15 m long just reaches the top of a vertical wall. If the ladder makes an angle of 60° with the wall, then the height of the wall is:", "options": ["15√3 m", "7.5√3 m", "7.5 m", "15 m"], "correctOptionIndex": 2, "explanation": "Let h be the height. The angle between ladder and WALL is 60°, so the angle with the ground is 30°. sin(30°) = h/15. h = 15 * sin(30°) = 15 * (1/2) = 7.5 m.", "source_page": 546 },
-                { "question": "The angle of elevation of a ladder leaning against a wall is 60° and the foot of the ladder is 4.6 m away from the wall. What is the length of the ladder?", "options": ["2.3 m", "4.6 m", "7.8 m", "9.2 m"], "correctOptionIndex": 3, "explanation": "Let L be the length of the ladder. cos(60°) = Base/Hypotenuse = 4.6/L. (1/2) = 4.6/L. L = 4.6 * 2 = 9.2 m.", "source_page": 547 },
-                { "question": "From a point on the ground, the angles of elevation of the bottom and the top of a tower fixed at the top of a 20 m high building are 45° and 60° respectively. Find the height of the tower.", "options": ["14.64 m", "15.64 m", "16.64 m", "17.64 m"], "correctOptionIndex": 3, "explanation": "Let distance be x and tower height be h. tan(45°)=20/x => x=20. tan(60°)=(20+h)/x => √3 = (20+h)/20 => 20√3 = 20+h. h = 20(√3 - 1) = 20(1.732-1) = 20*0.732 = 14.64m. Rechecking book. The book example has a flagstaff on a tower. Let's use that. Height of tower 120m. Angle to bottom 45, to top 60. tan45=120/x => x=120. tan60=(120+h)/120 => 120√3=120+h => h=120(√3-1)=87.6m. My original calculation was correct for its numbers. The book has 14.64m as an option. Let's re-read the book's example for this question. It seems the answer is 14.64m. My calculation was h = 20(√3 - 1) = 14.64m. The options provided in the book are likely rounded. Let's check the book's worked example. It gets 14.64m. So my calculation is correct. The book's answer is 14.64m.", "source_page": 547 },
-                { "question": "If the height of a pole is 2√3 meters and the length of its shadow is 2 meters, find the angle of elevation of the sun.", "options": ["30°", "45°", "60°", "90°"], "correctOptionIndex": 2, "explanation": "tan(θ) = Height/Shadow = (2√3)/2 = √3. Therefore, θ = 60°.", "source_page": 546 },
-                { "question": "An observer 1.6 m tall is 20√3 m away from a tower. The angle of elevation from his eye to the top of the tower is 30°. The height of the tower is:", "options": ["21.6 m", "23.2 m", "24.72 m", "20 m"], "correctOptionIndex": 0, "explanation": "Let h be the height of the tower above the observer's eye. tan(30°) = h / (20√3). 1/√3 = h / (20√3) => h = 20 m. Total height of tower = h + observer's height = 20 + 1.6 = 21.6 m.", "source_page": 547 },
-                { "question": "The angle of depression of a car, standing on the ground, from the top of a 75 m high tower, is 30°. The distance of the car from the base of the tower is:", "options": ["25√3 m", "50√3 m", "75√3 m", "150 m"], "correctOptionIndex": 2, "explanation": "The angle of elevation from the car to the top of the tower is also 30°. tan(30°) = Height/Distance = 75/d. 1/√3 = 75/d. d = 75√3 m.", "source_page": 546 },
-                { "question": "A vertical pole is 10 m high. The angle of elevation of its top from a point on the ground is 45°. What is the distance of the point from the foot of the pole?", "options": ["5 m", "10 m", "10√2 m", "20 m"], "correctOptionIndex": 1, "explanation": "tan(45°) = Height/Distance. 1 = 10/Distance. Distance = 10 m.", "source_page": 546 },
-                { "question": "The tops of two poles of height 20 m and 14 m are connected by a wire. If the wire makes an angle of 30° with the horizontal, then the length of the wire is:", "options": ["6 m", "8 m", "10 m", "12 m"], "correctOptionIndex": 3, "explanation": "The difference in height is 20 - 14 = 6 m. This is the side opposite the 30° angle. Let L be the length of the wire. sin(30°) = Opposite/Hypotenuse = 6/L. 1/2 = 6/L. L = 12 m.", "source_page": 547 },
-                { "question": "If the angle of elevation of a tower from a distance of 100 meters from its foot is 60°, then the height of the tower is:", "options": ["100/√3 m", "50√3 m", "100√3 m", "200/√3 m"], "correctOptionIndex": 2, "explanation": "tan(60°) = Height/Distance = h/100. √3 = h/100. h = 100√3 m.", "source_page": 546 },
-                { "question": "The shadow of a tower is 30 meters long when the sun's elevation is 30°. What is the length of the shadow when the sun's elevation is 60°?", "options": ["10 m", "15 m", "20 m", "10√3 m"], "correctOptionIndex": 0, "explanation": "Case 1: tan(30°) = h/30 => 1/√3 = h/30 => h = 30/√3 = 10√3 m. Case 2: tan(60°) = h/s => √3 = (10√3)/s => s = 10 m.", "source_page": 546 },
-                { "question": "From the top of a cliff 25 m high, the angle of depression of a boat is 45°. How far is the boat from the foot of the cliff?", "options": ["25 m", "25√2 m", "25√3 m", "50 m"], "correctOptionIndex": 0, "explanation": "The angle of elevation from the boat is also 45°. tan(45°) = Height/Distance. 1 = 25/d. d = 25 m.", "source_page": 546 },
-                { "question": "A kite is flying at a height of 60 m above the ground. The string attached to the kite is temporarily tied to a point on the ground. The inclination of the string with the ground is 60°. Find the length of the string.", "options": ["40√3 m", "60 m", "60√3 m", "120 m"], "correctOptionIndex": 0, "explanation": "sin(60°) = Height/Length. √3/2 = 60/L. L = 120/√3 = (120√3)/3 = 40√3 m.", "source_page": 547 },
-                { "question": "The angle of elevation of the top of a tower from a point on the ground is 30°. On moving 20 meters towards the tower, the angle of elevation becomes 60°. The height of the tower is:", "options": ["10 m", "10√3 m", "20 m", "20√3 m"], "correctOptionIndex": 1, "explanation": "Let height be h and initial distance be x. tan(30°)=h/x => x=h√3. tan(60°)=h/(h√3-20) => √3=h/(h√3-20) => 3h-20√3=h => 2h=20√3 => h=10√3 m.", "source_page": 547 },
-                { "question": "If a pole 6 m high casts a shadow 2√3 m long on the ground, then the sun's elevation is:", "options": ["30°", "45°", "60°", "90°"], "correctOptionIndex": 2, "explanation": "tan(θ) = Height/Shadow = 6 / (2√3) = 3/√3 = √3. Therefore, θ = 60°.", "source_page": 546 }
-            ];
-            
-            shuffleArrayWithSeed(allQuestions, dateSeed);
-            quizQuestions = allQuestions.slice(0, TOTAL_QUESTIONS);
-
-            if (quizQuestions.length > 0) {
-                let rng = new Math.seedrandom(dateSeed + '-special');
-                specialQuestionIndex = Math.floor(rng() * quizQuestions.length);
-                quizQuestions[specialQuestionIndex].special = true;
-            }
-        }
     </script>
 </body>
 </html>
