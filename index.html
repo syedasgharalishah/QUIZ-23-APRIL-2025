@@ -228,7 +228,7 @@
         <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md border border-[#FFF5EE] text-primary">
             <h2 class="text-3xl font-bold text-center mb-6">Quiz Results</h2>
             <p class="text-lg mb-2"><strong>Candidate Name:</strong> <span id="result-name"></span></p>
-            <p class="text-lg mb-2"><strong>Total Score:</strong> <span id="result-score"></span> / 100</p>
+            <p class="text-lg mb-2"><strong>Total Score:</strong> <span id="result-score"></span></p>
             <p class="text-lg mb-2"><strong>Time Taken:</strong> <span id="result-time"></span></p>
             <p class="text-lg mb-4"><strong>Questions Attempted:</strong> <span id="result-attempted"></span></p>
             <button id="retake-quiz-button" class="gradient-button text-white font-bold py-3 px-6 rounded-lg w-full focus:outline-none focus:shadow-outline">Retake Quiz</button>
@@ -408,7 +408,7 @@
             { "question": "The religion 'Judaism' is related to:", "options": ["Jews", "Christians", "Muslims", "None of these"], "answer": 0, "explanation": "Judaism is the ethnic religion of the Jewish people." },
             { "question": "Who gave the idea of 'Perestroika'?", "options": ["Nikita Khrushchev", "Leonid Brezhnev", "Mikhail Gorbachev", "None of these"], "answer": 2, "explanation": "Perestroika ('Restructuring') was a political movement for reformation within the Communist Party of the Soviet Union during the 1980s, widely associated with Soviet leader Mikhail Gorbachev." },
             { "question": "Who introduced the principle of the Doctrine of Lapse?", "options": ["Clive", "Cornwallis", "Hastings", "Dalhousie"], "answer": 3, "explanation": "The Doctrine of Lapse was an annexation policy applied by the British East India Company in India until 1859. The policy is most commonly associated with Lord Dalhousie." },
-            { "question": "What do you understand by 'max 56'?", "options": ["Between themselves", "On the way", "Both of these", "None of these"], "answer": 0, "explanation": "'Inter se' is a Latin phrase meaning 'among or between themselves', typically used in a legal context." }
+            { "question": "What do you understand by 'Inter se'?", "options": ["Between themselves", "On the way", "Both of these", "None of these"], "answer": 0, "explanation": "'Inter se' is a Latin phrase meaning 'among or between themselves', typically used in a legal context." }
         ];
 
         // Shuffle questions and assign "special question"
@@ -422,7 +422,12 @@
             return array;
         }
 
-        
+        function initializeQuizQuestions() {
+            // FIX: Use all available questions and shuffle them.
+            // The check for 100 questions which caused the error has been removed.
+            quizQuestions = shuffleArray([...allQuizQuestions]);
+        }
+
 
         // DOM Elements
         const loginPage = document.getElementById('login-page');
@@ -631,7 +636,8 @@
             const formattedFinalTime = `${finalMinutes.toString().padStart(2, '0')}:${finalSeconds.toString().padStart(2, '0')}`;
 
             resultNameSpan.textContent = userName;
-            resultScoreSpan.textContent = score;
+            // FIX: Display score out of the actual number of questions
+            resultScoreSpan.textContent = `${score} / ${quizQuestions.length}`;
             resultTimeSpan.textContent = formattedFinalTime;
             resultAttemptedSpan.textContent = questionsAttempted;
 
@@ -688,7 +694,8 @@
                 startTimer();
                 loadQuestion(currentQuestionIndex);
             } else {
-                nameError.classList.add('hidden');
+                // FIX: Show the name error message if name is not entered
+                nameError.classList.remove('hidden');
             }
         });
 
