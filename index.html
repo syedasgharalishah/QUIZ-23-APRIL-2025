@@ -3,840 +3,729 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS MPT Daily Quiz - July 25, 2025</title>
+    <title>CSS MPT Daily Quiz - 28 July</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/seedrandom/3.0.5/seedrandom.min.js"></script>
     <style>
-        /* Base Body Styling */
+        /* Custom CSS for animations and specific styles not easily covered by Tailwind */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #FDF5E6; /* Old Lace */
-            color: #8B4513; /* SaddleBrown */
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            background-color: #F8F9FA; /* Background color */
+            color: #2C3E50; /* Default text color */
             overflow-x: hidden; /* Prevent horizontal scrolling */
         }
 
-        /* Top Bar Styling */
-        .top-bar {
-            background-color: #ffffff;
-            border-bottom: 1px solid #e0e0e0;
-            padding: 0.75rem 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
-
-        .top-bar .date-display {
-            color: #555;
-            font-size: 0.9rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .top-bar .whatsapp-link {
-            color: #555;
-            text-decoration: none;
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        /* Header Section Styling */
-        .header-section {
-            background-color: #ffffff;
-            padding: 1.5rem 1rem;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            margin-bottom: 1rem;
-        }
-
-        .quiz-title {
-            font-family: 'Roboto', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #8B4513; /* SaddleBrown */
-            margin-bottom: 1rem;
-        }
-
-        /* Progress Bar Styling */
-        .progress-bar-container {
-            width: 80%;
-            max-width: 600px;
-            height: 10px;
-            background-color: #e0e0e0;
-            border-radius: 5px;
-            margin: 1rem auto;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(to right, #D2B48C, #CD853F); /* Tan to Peru */
-            border-radius: 5px;
-            transition: width 0.3s ease-in-out;
-        }
-
-        /* Banner Image and Credits */
-        .banner-logo {
-            max-width: 200px;
-            height: auto;
-            border-radius: 8px;
-            margin-top: 1rem;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .credits {
-            font-size: 0.85rem;
+        .text-primary {
             color: #2C3E50;
-            margin-top: 0.5rem;
-            font-weight: bold;
         }
 
-        /* Card Styling */
-        .card {
-            background-color: #FAF0E6; /* Linen */
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 1.5rem;
-            margin: 1rem auto;
-            max-width: 700px;
-            width: 90%;
-            box-sizing: border-box;
+        .date-color {
+            color: #6D6875;
         }
 
-        /* Button Styling */
-        .button-gradient {
-            background-image: linear-gradient(to right, #F4A460, #D2B48C); /* SandyBrown to Tan */
-            color: #4B2E2E;
-            font-weight: bold;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            cursor: pointer;
-            border: none;
+        .gradient-button {
+            background-image: linear-gradient(to right, #E6E6FA, #FFDAB9);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
 
-        .button-gradient:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
-        }
-        
-        .submit-button {
-             background-image: linear-gradient(to right, #4CAF50, #8BC34A);
-             color: white;
-        }
-        
-        .submit-button:hover {
-            box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+        .gradient-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-        /* Option Button Styling */
-        .option-button {
-            background-color: #ffffff;
-            border: 1px solid #ddd;
-            padding: 0.75rem 1rem;
-            border-radius: 8px;
-            text-align: left;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            margin-bottom: 0.75rem;
-            color: #8B4513;
-        }
-        
-        .option-button:hover:not(.selected) {
-            transform: scale(1.02);
-            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        .option-card {
+            transition: transform 0.2s ease-in-out, background-color 0.3s ease-in-out;
         }
 
-        .option-button.selected {
-            border-color: #CD853F; /* Peru */
-            background-color: #FFF8DC; /* Cornsilk */
-            font-weight: bold;
+        .option-card:hover {
+            transform: scale(1.05);
         }
 
-        .option-button.correct {
-            background-color: #90EE90; /* LightGreen */
-            border-color: #2E8B57; /* SeaGreen */
-            animation: pulse-green 0.5s ease-out forwards;
-        }
-
-        .option-button.incorrect {
-            background-color: #F08080; /* LightCoral */
-            border-color: #CD5C5C; /* IndianRed */
-            animation: shake-red 0.5s ease-out forwards;
-        }
-
-        /* Special Question Highlight */
-        .special-question {
-            border: 3px solid #FFD700; /* Gold border */
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
-        }
-
-        /* Explanation Section */
-        .explanation {
-            background-color: #FFF5EE; /* SeaShell */
-            border-left: 5px solid #D2B48C; /* Tan */
-            padding: 1rem;
-            margin-top: 1rem;
-            border-radius: 8px;
-            color: #8B4513;
-            font-size: 0.9rem;
-            display: none; /* Hidden by default */
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .quiz-title { font-size: 1.5rem; }
-            .card { padding: 1rem; }
-        }
-
-        /* Keyframe Animations */
+        /* Pulse animation for correct answer */
         @keyframes pulse-green {
             0% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0.7); }
             70% { box-shadow: 0 0 0 10px rgba(144, 238, 144, 0); }
             100% { box-shadow: 0 0 0 0 rgba(144, 238, 144, 0); }
         }
 
-        @keyframes shake-red {
+        .pulse-green {
+            animation: pulse-green 0.6s ease-out;
+            background-color: #90EE90; /* Light Green */
+        }
+
+        /* Shake animation for wrong answer */
+        @keyframes shake {
             0%, 100% { transform: translateX(0); }
             10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
             20%, 40%, 60%, 80% { transform: translateX(5px); }
         }
+
+        .shake-red {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+            background-color: #FF6B6B; /* Red */
+        }
+
+        /* Progress bar animation */
+        .progress-bar-inner {
+            background-image: linear-gradient(to right, #20B2AA, #3EB489);
+            transition: width 0.5s ease-in-out;
+        }
+
+        /* Sticky date positioning for desktop */
+        .sticky-date {
+            position: sticky;
+            top: 1rem;
+            z-index: 10;
+        }
+
+        /* Responsive adjustments for sticky date */
+        @media (min-width: 768px) {
+            .sticky-date {
+                right: 1rem;
+                left: auto;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .sticky-date {
+                left: 1rem;
+                right: auto;
+            }
+        }
+
+        /* Hide elements for security */
+        .no-select {
+            -webkit-touch-callout: none; /* iOS Safari */
+            -webkit-user-select: none; /* Safari */
+            -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
 </head>
-<body>
-    
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        
-        // --- Firebase Configuration and Initialization ---
-        const firebaseConfig = typeof __firebase_config !== 'undefined' 
-            ? JSON.parse(__firebase_config) 
-            : {
-                apiKey: "AIzaSyALjJrKf6acGhdEYlsKO-gCpBJHw6UbKTs",
-                authDomain: "css-quiz-results.firebaseapp.com",
-                projectId: "css-quiz-results",
-                storageBucket: "css-quiz-results.appspot.com",
-                messagingSenderId: "1077285247585",
-                appId: "1:1077285247585:web:47e010dd8fa288b9fa2820"
-            };
-        
-        let app, auth, db;
-        let userId;
+<body class="no-select" oncontextmenu="return false;">
 
-        // Initialize Firebase
-        try {
-            app = initializeApp(firebaseConfig);
-            auth = getAuth(app);
-            db = getFirestore(app);
-            console.log("Firebase initialized successfully for quiz.");
-        } catch (e) {
-            console.error("Error initializing Firebase:", e);
-            document.body.innerHTML = '<div class="text-red-500 text-center p-8">Error initializing the application. Please check the console for details. This might be due to missing Firebase configuration.</div>';
-        }
-
-        // Handle Authentication
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                userId = user.uid;
-            } else {
-                try {
-                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                        await signInWithCustomToken(auth, __initial_auth_token);
-                    } else {
-                        await signInAnonymously(auth);
-                    }
-                } catch (error) {
-                    console.error("Error during sign-in:", error);
-                }
-            }
-        });
-
-        // Make db instance globally available for the submitQuiz function
-        window.db = db;
-    </script>
-
-    <script>
-        // Disable right-click, copy/paste, and developer tools for security
-        document.addEventListener('contextmenu', event => event.preventDefault());
-        document.addEventListener('keydown', e => {
-            if (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
-                e.preventDefault();
-            }
-            if (e.key === 'F12') { e.preventDefault(); }
-        });
-        document.addEventListener('copy', event => event.preventDefault());
-        document.addEventListener('paste', event => event.preventDefault());
-    </script>
-
-    <div class="top-bar">
-        <div class="date-display" id="liveDate">
-            <i class="fas fa-calendar-alt"></i> <span id="currentDateText"></span>
-        </div>
-        <a href="https://chat.whatsapp.com/your-whatsapp-community-link" target="_blank" class="whatsapp-link">
-            <i class="fab fa-whatsapp"></i> Join WhatsApp Community
-        </a>
-    </div>
-
-    <div class="header-section">
-        <h1 class="quiz-title" id="quizTitle"></h1>
-        <div class="progress-bar-container">
-            <div class="progress-bar" id="progressBar"></div>
-        </div>
-        <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Banner Logo" class="banner-logo mx-auto">
-        <div class="credits">
-            DAWNDIGEST
-            <br>
-            PREPARED BY: SYED ASGHAR ALI SHAH Contact: 03265762698
-            <br>
-            Updated on: <span id="updatedDate"></span>
-        </div>
-    </div>
-
-    <main class="flex-grow flex items-center justify-center p-4">
-        <div id="loginPage" class="card">
-            <h2 class="text-xl font-bold mb-4 text-center">Login</h2>
+    <div id="login-page" class="min-h-screen flex items-center justify-center bg-[#F8F9FA] p-4">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md border border-[#FFF5EE]">
+            <h2 class="text-3xl font-bold text-center text-primary mb-6">Quiz Login</h2>
             <div class="mb-4">
-                <label for="loginId" class="block text-sm font-medium text-gray-700 mb-1">ID:</label>
-                <input type="text" id="loginId" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700" value="">
+                <label for="username" class="block text-primary text-sm font-bold mb-2">Username:</label>
+                <input type="text" id="username" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-primary leading-tight focus:outline-none focus:shadow-outline bg-gray-100" placeholder="Enter username">
             </div>
             <div class="mb-6">
-                <label for="loginPassword" class="block text-sm font-medium text-gray-700 mb-1">Password:</label>
-                <input type="password" id="loginPassword" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700" value="free">
+                <label for="password" class="block text-primary text-sm font-bold mb-2">Password:</label>
+                <input type="password" id="password" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-primary leading-tight focus:outline-none focus:shadow-outline bg-gray-100" placeholder="Enter password">
             </div>
-            <p id="loginError" class="text-red-500 text-sm mb-4 hidden">Invalid ID or Password</p>
-            <button id="loginBtn" class="button-gradient w-full">Login</button>
+            <button id="login-button" class="gradient-button text-white font-bold py-3 px-6 rounded-lg w-full focus:outline-none focus:shadow-outline">Login</button>
+            <p id="login-error" class="text-red-500 text-center mt-4 hidden">Invalid username or password.</p>
         </div>
+    </div>
 
-        <div id="candidateNamePage" class="card hidden">
-            <h2 class="text-xl font-bold mb-4 text-center">Candidate Information</h2>
+    <div id="candidate-info-page" class="min-h-screen flex items-center justify-center bg-[#F8F9FA] p-4 hidden">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md border border-[#FFF5EE]">
+            <h2 class="text-3xl font-bold text-center text-primary mb-6">Candidate Information</h2>
             <div class="mb-6">
-                <label for="candidateName" class="block text-sm font-medium text-gray-700 mb-1">Enter Full Name:</label>
-                <input type="text" id="candidateName" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-yellow-700" placeholder="Your Full Name">
+                <label for="full-name" class="block text-primary text-sm font-bold mb-2">Full Name:</label>
+                <input type="text" id="full-name" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-primary leading-tight focus:outline-none focus:shadow-outline bg-gray-100" placeholder="Enter your full name">
             </div>
-            <p id="nameError" class="text-red-500 text-sm mb-4 hidden">Please enter your full name.</p>
-            <button id="startQuizBtn" class="button-gradient w-full">Start Quiz</button>
+            <button id="start-quiz-button" class="gradient-button text-white font-bold py-3 px-6 rounded-lg w-full focus:outline-none focus:shadow-outline">Start Quiz</button>
+            <p id="name-error" class="text-red-500 text-center mt-4 hidden">Please enter your full name.</p>
+        </div>
+    </div>
+
+    <div id="quiz-page" class="min-h-screen bg-[#F8F9FA] p-4 md:p-8 hidden">
+        <div class="relative mb-6">
+            <div id="live-date" class="sticky-date text-sm font-semibold date-color p-2 rounded-lg bg-white shadow-md flex items-center justify-end md:justify-start">
+                <i class="far fa-calendar-alt mr-2"></i>
+                <span></span>
+            </div>
+            <h1 class="text-4xl font-bold text-center text-primary mt-4 mb-4">CSS MPT Daily Quiz – <span id="quiz-date-title"></span></h1>
+
+            <div class="w-full bg-gray-200 rounded-full h-4 mb-4 overflow-hidden shadow-inner">
+                <div id="progress-bar" class="progress-bar-inner h-full rounded-full text-xs text-white flex items-center justify-center" style="width: 0%;">
+                    <span id="progress-text">0%</span>
+                </div>
+            </div>
+
+            <div class="w-full rounded-xl overflow-hidden shadow-lg mb-4">
+                <img src="https://i.ibb.co/tMYHtj6n/480709804-2211254089269599-2819007219717277160-n.jpg" alt="Quiz Banner" class="w-full h-auto object-cover rounded-xl">
+            </div>
+
+            <div class="text-center text-primary text-sm md:text-base font-bold mb-6">
+                <p>DAWNDIGEST</p>
+                <p>PREPARED BY: SYED ASGHAR ALI SHAH Contact: 03265762698</p>
+                <p>Updated on: <span id="updated-date"></span></p>
+            </div>
+
+            <div class="text-center text-lg font-bold text-primary mb-6">
+                Time Remaining: <span id="timer">40:00</span>
+            </div>
         </div>
 
-        <div id="quizPage" class="card hidden">
-            <div class="timer-display text-lg font-bold text-gray-700 mb-4 text-center" id="timerDisplay"></div>
-            <div class="question-progress text-center text-sm text-gray-500 mb-4" id="questionProgress"></div>
-            <h2 class="text-lg font-semibold mb-4" id="questionText"></h2>
-            <div id="optionsContainer" class="flex flex-col gap-3 mb-6"></div>
-            <div class="flex justify-between items-center">
-                <button id="prevBtn" class="button-gradient px-6 py-2">Previous</button>
-                <button id="submitQuizBtn" class="button-gradient submit-button px-6 py-2">Submit</button>
-                <button id="nextBtn" class="button-gradient px-6 py-2">Next</button>
+        <div id="quiz-container" class="grid grid-cols-1 md:grid-cols-1 gap-6">
+            <div id="question-card" class="bg-white p-6 rounded-xl shadow-lg border border-[#FFF5EE]">
+                <p class="text-lg font-semibold mb-4 text-primary"><span id="question-number"></span>. <span id="question-text"></span></p>
+                <div id="options-container" class="grid grid-cols-1 gap-3">
+                    </div>
+                <div id="explanation-container" class="mt-4 p-3 rounded-lg bg-gray-100 text-sm italic text-primary hidden">
+                    <p id="explanation-text"></p>
+                </div>
             </div>
-            <div id="explanationDiv" class="explanation"></div>
-        </div>
 
-        <div id="resultsPage" class="card hidden">
-            <h2 class="text-xl font-bold mb-4 text-center">Quiz Results</h2>
-            <p class="mb-2"><strong>Candidate Name:</strong> <span id="resultCandidateName"></span></p>
-            <p class="mb-2"><strong>Date of Quiz:</strong> <span id="resultDate"></span></p>
-            <p class="mb-2"><strong>Score:</strong> <span id="resultScore"></span> / 200</p>
-            <p class="mb-2"><strong>Correct Answers:</strong> <span id="resultCorrect"></span></p>
-            <p class="mb-2"><strong>Incorrect Answers:</strong> <span id="resultIncorrect"></span></p>
-            <p class="mb-2"><strong>Attempted MCQs:</strong> <span id="resultAttempted"></span> / 100</p>
-            <p class="mb-4"><strong>Time Taken:</strong> <span id="resultTimeTaken"></span></p>
-            <button id="restartQuizBtn" class="button-gradient w-full">Restart Quiz</button>
+            <div class="flex justify-around mt-6">
+                <button id="prev-button" class="gradient-button text-white font-bold py-3 px-6 rounded-lg opacity-50 cursor-not-allowed" disabled>Previous</button>
+                <button id="submit-now-button" class="gradient-button text-white font-bold py-3 px-6 rounded-lg">Submit</button>
+                <button id="next-button" class="gradient-button text-white font-bold py-3 px-6 rounded-lg">Next</button>
+            </div>
         </div>
-    </main>
+    </div>
+
+    <div id="results-page" class="min-h-screen flex items-center justify-center bg-[#F8F9FA] p-4 hidden">
+        <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md border border-[#FFF5EE] text-primary">
+            <h2 class="text-3xl font-bold text-center mb-6">Quiz Results</h2>
+            <p class="text-lg mb-2"><strong>Candidate Name:</strong> <span id="result-name"></span></p>
+            <p class="text-lg mb-2"><strong>Total Score:</strong> <span id="result-score"></span> / 100</p>
+            <p class="text-lg mb-2"><strong>Time Taken:</strong> <span id="result-time"></span></p>
+            <p class="text-lg mb-4"><strong>Questions Attempted:</strong> <span id="result-attempted"></span></p>
+            <button id="retake-quiz-button" class="gradient-button text-white font-bold py-3 px-6 rounded-lg w-full focus:outline-none focus:shadow-outline">Retake Quiz</button>
+        </div>
+    </div>
+
+    <div id="custom-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <p id="modal-message" class="text-lg text-primary"></p>
+            <button id="modal-ok-button" class="gradient-button text-white font-bold py-2 px-4 rounded-lg mt-4 hidden">OK</button>
+            <button id="modal-cancel-button" class="gradient-button text-white font-bold py-2 px-4 rounded-lg mt-4 ml-2 hidden">Cancel</button>
+        </div>
+    </div>
 
     <script>
-        // Set the current date for display and logic
-        const CURRENT_DATE_STR = "July 25, 2025";
-        const CURRENT_DATE = new Date(CURRENT_DATE_STR);
+        // Disable right-click, copy/paste, and developer tools
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('keydown', event => {
+            if (event.key === 'F12' ||
+                (event.ctrlKey && event.shiftKey && event.key === 'I') ||
+                (event.ctrlKey && event.key === 'u') ||
+                (event.ctrlKey && event.key === 'U') ||
+                (event.ctrlKey && event.key === 'c') ||
+                (event.ctrlKey && event.key === 'C') ||
+                (event.ctrlKey && event.key === 'v') ||
+                (event.ctrlKey && event.key === 'V')
+            ) {
+                event.preventDefault();
+            }
+        });
 
-        // Function to update the live date display
-        function updateLiveDate() {
-            document.getElementById('currentDateText').textContent = CURRENT_DATE_STR;
-            document.getElementById('updatedDate').textContent = CURRENT_DATE_STR;
-            document.getElementById('quizTitle').textContent = `CSS MPT Daily Quiz – ${CURRENT_DATE_STR}`;
+        // Custom Modal Functions
+        function showModal(message, type = 'alert', onConfirm = null) {
+            const modal = document.getElementById('custom-modal');
+            const modalMessage = document.getElementById('modal-message');
+            const okButton = document.getElementById('modal-ok-button');
+            const cancelButton = document.getElementById('modal-cancel-button');
+            const closeButton = document.querySelector('#custom-modal .close-button');
+
+            modalMessage.textContent = message;
+            okButton.onclick = () => {
+                modal.style.display = 'none';
+                if (type === 'confirm' && onConfirm) {
+                    onConfirm(true);
+                } else if (type === 'alert' && onConfirm) {
+                    onConfirm();
+                }
+            };
+            cancelButton.onclick = () => {
+                modal.style.display = 'none';
+                if (type === 'confirm' && onConfirm) {
+                    onConfirm(false);
+                }
+            };
+            closeButton.onclick = () => modal.style.display = 'none';
+
+            if (type === 'alert') {
+                okButton.style.display = 'inline-block';
+                cancelButton.style.display = 'none';
+            } else if (type === 'confirm') {
+                okButton.style.display = 'inline-block';
+                cancelButton.style.display = 'inline-block';
+            }
+            modal.style.display = 'flex'; // Use flex to center
         }
 
-        // Quiz Data Structure
-        let quizQuestions = []; // Will be populated by initializeQuiz
-        let currentQuestionIndex = 0;
-        let userAnswers = [];
-        let quizStartTime;
-        let timerInterval;
-        const QUIZ_DURATION_MINUTES = 100;
-        const TOTAL_QUESTIONS = 100;
-        let specialQuestionIndex = -1;
-        let quizSubmitted = false;
 
-        // --- Helper Functions ---
-        function shuffleArrayWithSeed(array, seed) {
-            let rng = new Math.seedrandom(seed);
+        // Quiz Data and State
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let questionsAttempted = 0;
+        let timerInterval;
+        const quizDuration = 40 * 60; // 40 minutes in seconds
+        let timeElapsed = 0;
+        let userName = '';
+        let quizStartTime;
+        let quizCompleted = false;
+
+        // Store answers
+        const userAnswers = {}; // { questionIndex: selectedOptionIndex }
+
+        // Curated MCQs - 100 questions from General Knowledge (Pages 1-12)
+        const allQuizQuestions = [
+            { question: "Which of the following is a landlocked country?", options: ["Nigeria", "Kenya", "Sri Lanka", "Uganda"], answer: 3, explanation: "Uganda is a landlocked country in East Africa, meaning it is surrounded by land and has no coastline." },
+            { question: "What is the capital of Zimbabwe?", options: ["Harare", "Seoul", "Pretoria", "None of these"], answer: 0, explanation: "Harare is the capital and most populous city of Zimbabwe." },
+            { question: "The Communist Revolution took place in Russia in which month?", options: ["March", "June", "October", "November"], answer: 3, explanation: "The Bolshevik Revolution, part of the Russian Revolution, took place in November 1917 (October in the old Russian calendar)." },
+            { question: "Pulitzer is an American Award in which field?", options: ["Sports", "Scuba", "Letters and journalism", "Music"], answer: 2, explanation: "The Pulitzer Prize is an award for achievements in newspaper, magazine, online journalism, literature, and musical composition in the United States." },
+            { question: "What does 'Fifth Column' refer to?", options: ["Huge pillar", "Long writing", "Loyalty", "Treachery"], answer: 3, explanation: "A 'fifth column' is any group of people who undermine a larger group from within, usually in favor of an enemy group or nation." },
+            { question: "What is the cheapest source of electricity generation?", options: ["Hydel", "Nuclear", "Solar", "Thermal"], answer: 0, explanation: "Hydropower (Hydel) is generally considered one of the cheapest sources of electricity, especially in terms of operational costs." },
+            { question: "The Colosseum, an amphitheater, was built in which city?", options: ["Athens", "Naples", "Rome", "Milan"], answer: 2, explanation: "The Colosseum is an oval amphitheater in the center of Rome, Italy." },
+            { question: "The Moorish Kingdom of Granada (Spain) surrendered to Christians in which year?", options: ["1453", "1492", "1526", "1556"], answer: 1, explanation: "The fall of Granada in 1492 marked the end of Muslim rule in the Iberian Peninsula." },
+            { question: "Blind Dolphins are found in which river?", options: ["Ganges River", "Nile River", "Indus River", "Yangtze River"], answer: 2, explanation: "The Indus river dolphin, also known as the blind dolphin, is native to the Indus River in Pakistan." },
+            { question: "On 18th May 1974, India exploded its first nuclear device under what code name?", options: ["Operation Blue Star", "Operation Gibraltar", "Operation Smiling Buddha", "Operation Rakshak"], answer: 2, explanation: "India's first successful nuclear bomb test on 18 May 1974 was code-named 'Smiling Buddha'." },
+            { question: "Which crop has the longest period between cultivation and harvest?", options: ["Cotton", "Sugarcane", "Rice", "Wheat"], answer: 1, explanation: "Sugarcane has a long growing season, typically lasting from 9 to 24 months depending on the climate." },
+            { question: "The Farakka Dam on the river Ganga is disputed between which two countries?", options: ["India and Pakistan", "India and Nepal", "India and China", "India and Bangladesh"], answer: 3, explanation: "The Farakka Barrage is a source of long-running dispute between India and Bangladesh over water rights." },
+            { question: "Which dam was constructed by India in violation of the 'Indus Water Treaty'?", options: ["Salal Dam", "Baglihar Dam", "Wullar Barrage", "All of the above"], answer: 1, explanation: "Pakistan has raised objections against the Baglihar Dam, claiming it violates the Indus Waters Treaty." },
+            { question: "What is meant by a causeway?", options: ["A raised path", "Marsh soil", "Salty ocean", "Road on Hill"], answer: 0, explanation: "A causeway is a raised road or track across low or wet ground." },
+            { question: "The painting 'Night Watch' belongs to which artist?", options: ["Michelangelo", "Picasso", "Leonardo", "Rembrandt van Rijn"], answer: 3, explanation: "'The Night Watch' is a famous 1642 painting by Dutch artist Rembrandt van Rijn." },
+            { question: "What is Big Ben?", options: ["Clock", "Tower", "Cinema", "Road"], answer: 0, explanation: "Big Ben is the nickname for the Great Bell of the striking clock at the north end of the Palace of Westminster in London." },
+            { question: "Which is considered the wisest bird in European folklore?", options: ["Owl", "Eagle", "Parrot", "Sparrow"], answer: 0, explanation: "The owl is often a symbol of wisdom and knowledge in Western cultures." },
+            { question: "What is the name of the Russian oil and gas company that is a major supplier to European countries?", options: ["BSGO Company", "Gazprom Company", "Gestapo Company", "Philips Oil and Gas Company"], answer: 1, explanation: "Gazprom is a large Russian majority state-owned multinational energy corporation." },
+            { question: "In which year did European rulers capture Palestine from the Muslims during the First Crusade?", options: ["1095", "1099", "1115", "1199"], answer: 1, explanation: "The Crusaders captured Jerusalem and parts of Palestine in 1099 during the First Crusade." },
+            { question: "What is the Ivy League?", options: ["A group of Eight Universities in USA", "A group of People in Switzerland", "A football league tournament", "A group of Islands in Atlantic Ocean"], answer: 0, explanation: "The Ivy League is an American collegiate athletic conference comprising eight private research universities in the Northeastern United States." },
+            { question: "The Taliban movement started in 1994 from which city of Afghanistan?", options: ["Kabul", "Herat", "Kandahar", "None of these"], answer: 2, explanation: "The Taliban movement originated in the southern city of Kandahar in 1994." },
+            { question: "The term 'Digital Divide' is related to what?", options: ["Economics", "Socio-economic difference in technology era", "Political Science", "Journalism"], answer: 1, explanation: "The digital divide refers to the gap between demographics and regions that have access to modern information and communications technology and those that don't or have restricted access." },
+            { question: "What is the name of the place where the World Trade Center (USA) was located?", options: ["Ground Zero", "Paradise Point", "Golden Point", "Golden City Point"], answer: 0, explanation: "Ground Zero is the site of the former World Trade Center towers, which were destroyed in the September 11 attacks." },
+            { question: "The Muslim people of China's Xinjiang province are called:", options: ["Uighur", "Bantu", "Hutu", "Berber"], answer: 0, explanation: "The Uighurs are a Turkic ethnic group originating from and culturally affiliated with the general region of Central and East Asia." },
+            { question: "What is 'Ikebana'?", options: ["Japanese Art of flower arrangement", "Greek Art of fighting", "Art of dancing and music", "None of the above"], answer: 0, explanation: "Ikebana is the Japanese art of flower arrangement." },
+            { question: "Gestapo was the secret police organization of which country?", options: ["Italy", "Russia", "Germany", "USA"], answer: 2, explanation: "The Gestapo was the official secret police of Nazi Germany and in German-occupied Europe." },
+            { question: "Which of the following are primary colours?", options: ["Red, Blue, Green", "White, Red, Black", "Black, Red, Blue", "Green, Red, Black"], answer: 0, explanation: "In the additive color model (used for light), the primary colors are Red, Green, and Blue (RGB)." },
+            { question: "Which of the following inventions is the oldest?", options: ["Clock", "Microscope", "Barometer", "Cycle"], answer: 0, explanation: "The mechanical clock was invented in the 13th century, predating the microscope (17th c.), barometer (17th c.), and modern bicycle (19th c.)." },
+            { question: "What was the Holocaust?", options: ["Killing of Jews during World War I", "Killing of Jews during World War II", "Killing of Germans during World War II", "Killing of Japanese during World War II"], answer: 1, explanation: "The Holocaust was the genocide of European Jews during World War II by Nazi Germany and its collaborators." },
+            { question: "What is Choreography?", options: ["Art of dancing", "Art of music", "Art of gardening", "Art of fight"], answer: 0, explanation: "Choreography is the art or practice of designing sequences of movements of physical bodies in which motion, form, or both are specified." },
+            { question: "A writ directing a person to produce a prisoner at a certain time and place is called:", options: ["Writ of Quo Warranto", "Writ of Certiorari", "Writ of Prohibition", "Writ of Habeas Corpus"], answer: 3, explanation: "Habeas Corpus is a legal recourse through which a person can report an unlawful detention or imprisonment to a court." },
+            { question: "Which of the following woman Prime Ministers has had the longest tenure?", options: ["Indira Gandhi", "Benazir Bhutto", "Sirimavo Bandaranaike", "Sheikh Hasina"], answer: 3, explanation: "Sheikh Hasina of Bangladesh has served as prime minister for over 19 years in total, making her the longest-serving female head of government in history." },
+            { question: "Harry Potter is the famous character created by:", options: ["J.K. Rowling", "J.F. Marshal", "R.V. Menin", "None of these"], answer: 0, explanation: "J.K. Rowling is the British author who created the Harry Potter series." },
+            { question: "Which of the following civilizations was located on the banks of the Tigris river?", options: ["Sumerian civilization", "Indus civilization", "Egyptian civilization", "Greek civilization"], answer: 0, explanation: "The Sumerian civilization developed in Mesopotamia, between the Tigris and Euphrates rivers." },
+            { question: "In which year did Egypt nationalize the Suez Canal?", options: ["1950", "1954", "1956", "1960"], answer: 2, explanation: "On 26 July 1956, Egyptian President Gamal Abdel Nasser announced the nationalization of the Suez Canal Company." },
+            { question: "What is 'Armageddon'?", options: ["A final battle between nations which will end the world", "A last day of Universe", "A name of film", "None of the above"], answer: 0, explanation: "In some religious beliefs, Armageddon is the prophesied location of a gathering of armies for a battle during the end times." },
+            { question: "Skylab, a space laboratory launched in 1973, belonged to which country?", options: ["USSR", "USA", "Britain", "China"], answer: 1, explanation: "Skylab was the first space station launched and operated by NASA (USA)." },
+            { question: "In which year did Skylab break up in the atmosphere and fall back to Earth?", options: ["1977", "1978", "1979", "1980"], answer: 2, explanation: "Skylab fell back to Earth on July 11, 1979, with debris scattering across the Indian Ocean and Western Australia." },
+            { question: "The majority of the 'Kurdish' population lives in which country?", options: ["Afghanistan", "Turkey", "Iraq", "Jordan"], answer: 1, explanation: "While Kurds are spread across several countries, the largest population resides in Turkey." },
+            { question: "The Universal Declaration of Human Rights was adopted by the United Nations on:", options: ["10 December 1948", "10 December 1950", "10 December 1954", "10 December 1960"], answer: 0, explanation: "The UN General Assembly adopted the Universal Declaration of Human Rights on 10 December 1948." },
+            { question: "What was Pan-Islamism, originated in the 19th c. Ottoman Empire?", options: ["Movement for uniting the Islamic Nations", "Movement for uniting the Arabic Nations", "Movement for establishing Pan-Arabism", "Movement for re-establishing Caliphate"], answer: 0, explanation: "Pan-Islamism is a political ideology advocating the unity of Muslims under one Islamic country or state." },
+            { question: "What is the name of the iceberg that sank the Titanic in 1912?", options: ["It was not named", "Iceberg A-68", "An iceberg from Greenland", "An iceberg from the Jakobshavn Glacier"], answer: 2, explanation: "The iceberg that the Titanic struck was believed to have originated from a glacier in Greenland. Icebergs are not individually named." },
+            { question: "Watergate scandal of 1972 involved which American president?", options: ["John F. Kennedy", "Lyndon B. Johnson", "Richard Nixon", "Jimmy Carter"], answer: 2, explanation: "The Watergate scandal was a major political scandal in the United States involving the administration of U.S. President Richard Nixon." },
+            { question: "Which of these is the symbol of the Republican Party in the USA?", options: ["Donkey", "Elephant", "Eagle", "Lion"], answer: 1, explanation: "The elephant is the traditional symbol for the Republican Party in the United States." },
+            { question: "Which of these is the symbol of the Democratic Party in the USA?", options: ["Donkey", "Elephant", "Eagle", "Lion"], answer: 0, explanation: "The donkey is the traditional symbol for the Democratic Party in the United States." },
+            { question: "The study, theory, and practice of government and politics is called:", options: ["Sociology", "Economics", "Political Science", "History"], answer: 2, explanation: "Political science is the academic discipline that deals with the theory and practice of politics and the description and analysis of political systems and political behavior." },
+            { question: "Cyprus gained independence from Britain in 1960. When was it divided into the Greek Republic of Southern Cyprus and Turkish Republic of Northern Cyprus?", options: ["1964", "1974", "1983", "1991"], answer: 1, explanation: "Following a coup in 1974, Turkey invaded and occupied the northern part of the island, leading to its de facto division." },
+            { question: "The second Islamic Summit conference was held in Lahore in which year?", options: ["1971", "1972", "1973", "1974"], answer: 3, explanation: "The second summit of the Organisation of Islamic Cooperation (OIC) was held in Lahore, Pakistan, in February 1974." },
+            { question: "The Russian equivalent of the American Pentagon is:", options: ["Kremlin", "Duma", "KGB Headquarters", "Red Square"], answer: 0, explanation: "The Kremlin in Moscow is a fortified complex that serves as the official residence of the President of Russia and is the symbolic center of the Russian government." },
+            { question: "Who was the first man to reach the South Pole in 1911?", options: ["Roald Amundsen", "Robert Scott", "Ernest Shackleton", "None of these"], answer: 0, explanation: "Norwegian explorer Roald Amundsen was the first person to reach the South Pole, on December 14, 1911." },
+            { question: "Who was the first black president of South Africa?", options: ["Nelson Mandela", "Robert Mugabe", "Thabo Mbeki", "Martin Luther King"], answer: 0, explanation: "Nelson Mandela served as the first black president of South Africa from 1994 to 1999." },
+            { "question": "The term for the political and social separation of races, formerly practiced in South Africa, is:", "options": ["Apartheid", "Segregation", "Feminism", "None of these"], "answer": 0, "explanation": "Apartheid was a system of institutionalized racial segregation that existed in South Africa and South West Africa from 1948 until the early 1990s." },
+            { "question": "The 'Balfour Declaration' of 1917 was a public statement issued by the British government announcing support for the establishment of a 'national home for the Jewish people' in:", "options": ["Egypt", "Syria", "Palestine", "Iraq"], "answer": 2, "explanation": "The Balfour Declaration was a pivotal document that supported the Zionist aim of establishing a Jewish national home in Palestine." },
+            { "question": "What is a 'Regatta'?", "options": ["A religion", "A leader of the Community", "A boat or yacht race", "A branch of the Buddha religion"], "answer": 2, "explanation": "A regatta is a sporting event consisting of a series of boat or yacht races." },
+            { "question": "The city of 'Skopje' in Yugoslavia was destroyed by an earthquake in which year?", "options": ["1960", "1963", "1965", "1970"], "answer": 1, "explanation": "The 1963 Skopje earthquake was a major disaster that destroyed 80% of the city, which was then part of the Socialist Republic of Macedonia, Yugoslavia." },
+            { "question": "Who founded Buddhism in India?", "options": ["Cyrus", "Gautama Buddha", "Ashoka", "Alexander the Great"], "answer": 1, "explanation": "Buddhism was founded by Siddhartha Gautama, known as the Buddha, in the 6th century BCE in India." },
+            { "question": "What is 'bootlegging'?", "options": ["Form of smuggling", "Form of drug", "Form of Muslim religion", "None of these"], "answer": 0, "explanation": "Bootlegging refers to the illegal manufacture, distribution, or sale of goods, especially alcoholic beverages." },
+            { "question": "What is demography?", "options": ["Art of growing vegetables", "Art of making maps and charts", "Art of drawing pots", "Study of human populations"], "answer": 3, "explanation": "Demography is the statistical study of populations, especially human beings, including their size, structure, and distribution." },
+            { "question": "When did Challenger's crew, a space shuttle of NASA, die shortly after liftoff?", "options": ["June 2, 1985", "January 28, 1986", "January 20, 1985", "January 20, 1987"], "answer": 1, "explanation": "The Space Shuttle Challenger disaster occurred on January 28, 1986, when it broke apart 73 seconds into its flight, killing all seven crew members." },
+            { "question": "Which religion do Chinese people peacefully follow?", "options": ["Shintoism", "Buddhism", "Confucianism", "Taoism"], "answer": 2, "explanation": "Confucianism is a system of philosophical and ethical teachings, often described as a religion, that has deeply influenced Chinese culture." },
+            { "question": "The word 'Dinosaur' means:", "options": ["Terrible Lizard", "Giant Beast", "Big Dragon", "Blood-lust Beast"], "answer": 0, "explanation": "The term 'dinosaur' was coined by Sir Richard Owen in 1842 and is derived from Greek, meaning 'terrible lizard'." },
+            { "question": "Which language was declared an international language in 1887?", "options": ["Esperanto", "German", "UK English", "Latin"], "answer": 0, "explanation": "Esperanto was created in the late 19th century by L. L. Zamenhof as an easy-to-learn, politically neutral language that would transcend nationality." },
+            { "question": "The term 'ethnic cleansing' refers to the expulsion of a particular ethnic group by force. This was notably used to describe events in:", "options": ["Bosnia-Herzegovina", "Chechnya", "Palestine", "Kashmir"], "answer": 0, "explanation": "The term 'ethnic cleansing' gained widespread use during the Bosnian War (1992-1995) to refer to the persecution of Bosnian Muslims." },
+            { "question": "What is referred to by the term 'Fax'?", "options": ["Transmission of images over a telephone line", "Transmission of images over a radio link", "Transmission of images over a computer link", "None of these"], "answer": 0, "explanation": "Fax (short for facsimile) is the telephonic transmission of scanned printed material (both text and images)." },
+            { "question": "Fresco is a method of painting on:", "options": ["Fresh plaster", "Dry wall", "Canvas", "Wood"], "answer": 0, "explanation": "Fresco is a technique of mural painting executed upon freshly laid, or wet lime plaster." },
+            { "question": "Which craft is heavier than air and flies, in which only its engine provides the lift?", "options": ["Aeroplane", "Helicopter", "Glider", "None of these"], "answer": 1, "explanation": "A helicopter is a type of rotorcraft in which lift and thrust are supplied by horizontally spinning rotors, allowing it to take off and land vertically." },
+            { "question": "Greenwich Mean Time (GMT) was established in:", "options": ["1880", "1884", "1890", "1892"], "answer": 1, "explanation": "At the International Meridian Conference in 1884, Greenwich was adopted as the prime meridian of the world, establishing GMT." },
+            { "question": "What is the standard time for calculating time all across the globe?", "options": ["Greenwich Mean Time (GMT)", "Standard Time", "Local Time", "None of these"], "answer": 0, "explanation": "Greenwich Mean Time (GMT) is the mean solar time at the Royal Observatory in Greenwich, London, which is used as the basis for the world's time zones." },
+            { "question": "The city of Florence in Italy is famous for:", "options": ["Art and architecture", "Textiles", "Automobiles", "None of these"], "answer": 0, "explanation": "Florence is renowned as the birthplace of the Renaissance and is famous for its art galleries and architecture." },
+            { "question": "The 'Great Wall of China' was built by the dynasty of:", "options": ["Han", "Qin", "Ming", "Tang"], "answer": 1, "explanation": "While several dynasties worked on the wall, the first emperor of the Qin Dynasty, Qin Shi Huang, is credited with starting its major construction." },
+            { "question": "What is 'Green Revolution'?", "options": ["Increased agricultural production", "Agri Revolution", "A green revolution", "Agri Revolution"], "answer": 0, "explanation": "The Green Revolution refers to a period of technology transfer initiatives that saw a significant increase in agricultural production worldwide." },
+            { "question": "What is the name given to the killing of Jews in Secret Wars by Nazis?", "options": ["Jews cleansing", "Ethnic cleansing", "Mass killing", "Holocaust"], "answer": 3, "explanation": "The Holocaust was the systematic, state-sponsored persecution and murder of six million Jews by the Nazi regime and its collaborators." },
+            { "question": "Who was the youngest elected President of the USA?", "options": ["Harry Truman", "John F. Kennedy", "Andrew Jackson", "None of these"], "answer": 1, "explanation": "John F. Kennedy was inaugurated at age 43, making him the youngest person to be elected president of the United States." },
+            { "question": "The wireless telegraphy was pioneered in 1895 by:", "options": ["Thomas Edison", "Guglielmo Marconi", "Alexander Graham Bell", "Charles Thomas"], "answer": 1, "explanation": "Guglielmo Marconi is credited as the inventor of the radio, and he pioneered long-distance radio transmission." },
+            { "question": "In which language was the Holy Quran first translated?", "options": ["Latin", "Greek", "Persian", "None of these"], "answer": 0, "explanation": "The first translation of the Quran was into Persian, but among the given European options, the first complete translation was into Latin in 1143." },
+            { "question": "A socialist state is one that is ruled by which party?", "options": ["A socialist or communist party", "Some members very close to the ruling family", "A government announced by the Queen", "None of these"], "answer": 0, "explanation": "A socialist state is a state constitutionally dedicated to the establishment of socialism." },
+            { "question": "How many states are there in the USA?", "options": ["52", "50", "48", "46"], "answer": 1, "explanation": "The United States of America is a federal republic consisting of 50 states." },
+            { "question": "Which is the largest state (Population Wise) of India?", "options": ["Kerala", "Uttar Pradesh", "Madhya Pradesh", "None of these"], "answer": 1, "explanation": "Uttar Pradesh is the most populous state in India, with a population of over 200 million people." },
+            { "question": "Which economist whose theory provides a means of support for population control?", "options": ["Thomas Robert Malthus", "Adam Smith", "Keynes", "None of these"], "answer": 0, "explanation": "Thomas Robert Malthus argued that population growth would always tend to outrun the food supply and that betterment of humankind is impossible without stern limits on reproduction." },
+            { "question": "Which is the second largest continent (in terms of area)?", "options": ["Asia", "Africa", "Europe", "None of these"], "answer": 1, "explanation": "Africa is the world's second-largest and second-most-populous continent, after Asia in both cases." },
+            { "question": "Who is the founder of 'Wikinews'?", "options": ["Jimmy Wales", "Rowly Roscario", "Bill Gates", "Julian Assange (Australian)"], "answer": 0, "explanation": "Wikinews is a free-content news wiki and a project of the Wikimedia Foundation, co-founded by Jimmy Wales." },
+            { "question": "Which country suffered the maximum in World War II?", "options": ["UK", "Japan", "Germany", "Russia"], "answer": 3, "explanation": "The Soviet Union (of which Russia was the largest part) suffered the highest number of casualties, both military and civilian, during World War II." },
+            { "question": "Which of the following states shares the border of 'Aral Sea'?", "options": ["Uzbekistan and Kazakhstan", "Kyrgyzstan and Tajikistan", "Kazakhstan and Turkmenistan", "Iran and Iraq"], "answer": 0, "explanation": "The Aral Sea is an endorheic lake lying between Kazakhstan in the north and Uzbekistan in the south." },
+            { "question": "Magna Carta is a:", "options": ["Constitution of the British", "A constitution", "A constitution of African countries", "None of the above"], "answer": 0, "explanation": "Magna Carta, signed in 1215, is a royal charter of rights that is a foundational document of English constitutional law." },
+            { "question": "Who was the President of the USA during World War I?", "options": ["Woodrow Wilson", "George Truman", "Abraham Lincoln", "None of these"], "answer": 0, "explanation": "Woodrow Wilson was the 28th U.S. president, serving from 1913 to 1921 and leading the country through World War I." },
+            { "question": "New Zealand was the first country in the world to grant women the right to vote, in 1893, but when did they get the right to stand for the New Zealand legislature?", "options": ["1919", "1920", "1930", "1942"], "answer": 0, "explanation": "While New Zealand women gained the right to vote in 1893, they were not eligible to stand for parliament until 1919." },
+            { "question": "East Timor was the colony of which European power before Indonesia captured it?", "options": ["Spain", "Portugal", "Netherlands", "France"], "answer": 1, "explanation": "East Timor was a colony of Portugal for centuries before being invaded by Indonesia in 1975." },
+            { "question": "Which statement is true?", "options": ["American Naval Base 'Diego Garcia' is in Europe", "American Naval Base 'Diego Garcia' is in Indian Ocean", "American Naval Base 'Diego Garcia' is in Arctic Ocean", "American Naval Base 'Diego Garcia' is in Iraq"], "answer": 1, "explanation": "Diego Garcia is an island of the British Indian Ocean Territory, an overseas territory of the United Kingdom. It hosts a large US naval base." },
+            { "question": "Name the first country that made silk about 4000 years ago.", "options": ["Egypt", "India", "China", "Japan"], "answer": 2, "explanation": "The production of silk originated in Neolithic China some 6,000 years ago." },
+            { "question": "What are 'Negroes', 'Mongoloids', and 'Caucasians'?", "options": ["Human races", "Ancient tribes", "Wars of 1st century", "Seaports"], "answer": 0, "explanation": "These are terms from an outdated model of classifying human populations into different races based on physical traits." },
+            { "question": "Which of the following animals can hear ultrasonic sound?", "options": ["Cat", "Bat", "Rat", "All of these"], "answer": 3, "explanation": "Bats, cats, rats, and many other animals can hear sounds in the ultrasonic range, which is above the frequency of human hearing." },
+            { "question": "The Statue of Liberty was a gift to the USA from which country?", "options": ["UK", "France", "Germany", "Spain"], "answer": 1, "explanation": "The Statue of Liberty was a gift of friendship from the people of France to the United States and is a universal symbol of freedom and democracy." },
+            { "question": "The religion 'Judaism' is related to:", "options": ["Jews", "Christians", "Muslims", "None of these"], "answer": 0, "explanation": "Judaism is the ethnic religion of the Jewish people." },
+            { "question": "Who gave the idea of 'Perestroika'?", "options": ["Nikita Khrushchev", "Leonid Brezhnev", "Mikhail Gorbachev", "None of these"], "answer": 2, "explanation": "Perestroika ('Restructuring') was a political movement for reformation within the Communist Party of the Soviet Union during the 1980s, widely associated with Soviet leader Mikhail Gorbachev." },
+            { "question": "Who introduced the principle of the Doctrine of Lapse?", "options": ["Clive", "Cornwallis", "Hastings", "Dalhousie"], "answer": 3, "explanation": "The Doctrine of Lapse was an annexation policy applied by the British East India Company in India until 1859. The policy is most commonly associated with Lord Dalhousie." },
+            { "question": "What do you understand by 'max 56'?", "options": ["Between themselves", "On the way", "Both of these", "None of these"], "answer": 0, "explanation": "'Inter se' is a Latin phrase meaning 'among or between themselves', typically used in a legal context." }
+        ];
+
+        // Shuffle questions and assign "special question"
+        let quizQuestions = [];
+
+        function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(rng() * (i + 1));
+                const j = Math.floor(Math.random() * (i + 1));
                 [array[i], array[j]] = [array[j], array[i]];
             }
+            return array;
         }
 
-        function generateUniqueId() {
-            return 'quiz_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        }
+        
 
-        function formatTime(totalSeconds) {
-            const minutes = Math.floor(totalSeconds / 60);
-            const seconds = totalSeconds % 60;
-            return `${minutes} minutes ${seconds} seconds`;
-        }
+        // DOM Elements
+        const loginPage = document.getElementById('login-page');
+        const candidateInfoPage = document.getElementById('candidate-info-page');
+        const quizPage = document.getElementById('quiz-page');
+        const resultsPage = document.getElementById('results-page');
 
-        function updateProgressBar() {
-            const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
-            document.getElementById('progressBar').style.width = `${progress}%`;
-            document.getElementById('questionProgress').textContent = `Question ${currentQuestionIndex + 1}/${quizQuestions.length} – ${Math.round(progress)}% Complete`;
-        }
+        const loginButton = document.getElementById('login-button');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const loginError = document.getElementById('login-error');
 
-        function showPage(pageId) {
-            ['loginPage', 'candidateNamePage', 'quizPage', 'resultsPage'].forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.classList.add('hidden');
-            });
-            const pageToShow = document.getElementById(pageId);
-            if(pageToShow) pageToShow.classList.remove('hidden');
+        const fullNameInput = document.getElementById('full-name');
+        const startQuizButton = document.getElementById('start-quiz-button');
+        const nameError = document.getElementById('name-error');
+
+        const liveDateSpan = document.querySelector('#live-date span');
+        const quizDateTitleSpan = document.getElementById('quiz-date-title');
+        const updatedDateSpan = document.getElementById('updated-date');
+        const timerSpan = document.getElementById('timer');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+
+        const questionNumberSpan = document.getElementById('question-number');
+        const questionTextSpan = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const explanationContainer = document.getElementById('explanation-container');
+        const explanationText = document.getElementById('explanation-text');
+        const questionCard = document.getElementById('question-card');
+
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+        const submitNowButton = document.getElementById('submit-now-button');
+
+
+        const resultNameSpan = document.getElementById('result-name');
+        const resultScoreSpan = document.getElementById('result-score');
+        const resultTimeSpan = document.getElementById('result-time');
+        const resultAttemptedSpan = document.getElementById('result-attempted');
+        const retakeQuizButton = document.getElementById('retake-quiz-button');
+
+        // Functions
+        function updateLiveDate() {
+            const quizDate = new Date('2025-07-28T00:00:00');
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = quizDate.toLocaleDateString('en-US', options);
+            liveDateSpan.textContent = formattedDate;
+            quizDateTitleSpan.textContent = formattedDate;
+            updatedDateSpan.textContent = formattedDate;
         }
 
         function startTimer() {
             quizStartTime = Date.now();
-            let timeLeft = QUIZ_DURATION_MINUTES * 60;
+            timerInterval = setInterval(() => {
+                timeElapsed++;
+                const remainingSeconds = quizDuration - timeElapsed;
 
-            function updateTimerDisplay() {
-                const minutes = Math.floor(timeLeft / 60);
-                const seconds = timeLeft % 60;
-                const timerDisplay = document.getElementById('timerDisplay');
-                if(timerDisplay) timerDisplay.textContent = `Time Left: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                if (timeLeft <= 0) {
+                if (remainingSeconds <= 0) {
                     clearInterval(timerInterval);
-                    if (!quizSubmitted) submitQuiz(true);
+                    timerSpan.textContent = "00:00";
+                    if (!quizCompleted) {
+                        showModal("Time's up! Your quiz will be submitted.", "alert", submitQuiz);
+                    }
                 } else {
-                    timeLeft--;
+                    const minutes = Math.floor(remainingSeconds / 60);
+                    const seconds = remainingSeconds % 60;
+                    timerSpan.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 }
-            }
-            updateTimerDisplay();
-            timerInterval = setInterval(updateTimerDisplay, 1000);
+            }, 1000);
         }
 
-        function renderQuestion() {
-            const question = quizQuestions[currentQuestionIndex];
-            document.getElementById('questionText').innerHTML = question.question;
-            const optionsContainer = document.getElementById('optionsContainer');
-            optionsContainer.innerHTML = '';
-
-            const quizCard = document.getElementById('quizPage');
-            quizCard.classList.remove('special-question');
-            if (question.special) {
-                quizCard.classList.add('special-question');
-            }
-            
-            const optionSeed = `${CURRENT_DATE_STR}-${currentQuestionIndex}`;
-            const shuffledOptions = [...question.options];
-            shuffleArrayWithSeed(shuffledOptions, optionSeed);
-
-            shuffledOptions.forEach((option) => {
-                const button = document.createElement('button');
-                button.classList.add('option-button', 'w-full');
-                button.innerHTML = option;
-                button.dataset.originalOptionIndex = question.options.indexOf(option);
-                button.onclick = () => selectOption(parseInt(button.dataset.originalOptionIndex));
-                optionsContainer.appendChild(button);
-            });
-
-            const userAnswer = userAnswers[currentQuestionIndex];
-            if (userAnswer && userAnswer.selectedOptionIndex !== undefined) {
-                 Array.from(optionsContainer.children).forEach((button, index) => {
-                    button.disabled = true;
-                    const btnOriginalIndex = question.options.indexOf(shuffledOptions[index]);
-                    if (btnOriginalIndex === userAnswer.selectedOptionIndex) {
-                        button.classList.add('selected', userAnswer.isCorrect ? 'correct' : 'incorrect');
-                    }
-                    if (userAnswer.isCorrect === false && btnOriginalIndex === question.correctOptionIndex) {
-                         button.classList.add('correct');
-                    }
-                });
-            }
-
-            const explanationDiv = document.getElementById('explanationDiv');
-            explanationDiv.innerHTML = `<p class="font-bold">Explanation:</p><p>${question.explanation}</p>`;
-            explanationDiv.style.display = (userAnswer && userAnswer.selectedOptionIndex !== undefined) ? 'block' : 'none';
-
-            document.getElementById('prevBtn').classList.toggle('hidden', currentQuestionIndex === 0);
-            const showNextButton = currentQuestionIndex < quizQuestions.length - 1;
-            document.getElementById('nextBtn').classList.toggle('hidden', !showNextButton);
-        }
-
-        function selectOption(selectedOptionOriginalIndex) {
-            if (userAnswers[currentQuestionIndex] !== null && userAnswers[currentQuestionIndex].selectedOptionIndex !== undefined) return;
-
-            const question = quizQuestions[currentQuestionIndex];
-            const isCorrect = (selectedOptionOriginalIndex === question.correctOptionIndex);
-            userAnswers[currentQuestionIndex] = {
-                questionIndex: currentQuestionIndex,
-                selectedOptionIndex: selectedOptionOriginalIndex,
-                isCorrect: isCorrect
-            };
-            
-            renderQuestion(); // Re-render to show selection and explanation
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex + 1) / quizQuestions.length) * 100;
+            progressBar.style.width = `${progress}%`;
+            progressText.textContent = `${Math.round(progress)}%`;
         }
         
-        function nextQuestion() {
-            if (currentQuestionIndex < quizQuestions.length - 1) {
-                currentQuestionIndex++;
-                renderQuestion();
+        function loadQuestion(index) {
+            if (index >= 0 && index < quizQuestions.length) {
+                currentQuestionIndex = index;
+                const question = quizQuestions[currentQuestionIndex];
+
+                questionNumberSpan.textContent = currentQuestionIndex + 1;
+                questionTextSpan.textContent = question.question;
+                optionsContainer.innerHTML = ''; // Clear previous options
+                explanationContainer.classList.add('hidden');
+                explanationText.textContent = '';
+
+                // Shuffle options before displaying
+                const optionsWithOriginalIndex = question.options.map((option, originalIndex) => ({ option, originalIndex }));
+                const shuffledOptions = shuffleArray(optionsWithOriginalIndex);
+
+                shuffledOptions.forEach(({ option, originalIndex }) => {
+                    const optionDiv = document.createElement('div');
+                    optionDiv.classList.add('option-card', 'p-3', 'rounded-lg', 'shadow-md', 'cursor-pointer', 'bg-white', 'hover:bg-gray-50', 'text-primary', 'font-medium', 'border', 'border-gray-200');
+                    optionDiv.textContent = option;
+                    optionDiv.dataset.originalIndex = originalIndex;
+                    optionDiv.addEventListener('click', () => selectOption(optionDiv));
+                    optionsContainer.appendChild(optionDiv);
+                });
+                
+                // If an answer was already submitted for this question, show it
+                if (userAnswers[currentQuestionIndex] !== undefined) {
+                    showPreviousAnswer();
+                }
+
+                updateNavigationButtons();
+                updateProgressBar();
             }
         }
 
-        function prevQuestion() {
-            if (currentQuestionIndex > 0) {
-                currentQuestionIndex--;
-                renderQuestion();
+        function selectOption(selectedDiv) {
+            if (userAnswers[currentQuestionIndex] !== undefined) return;
+
+            const selectedOptionIndex = parseInt(selectedDiv.dataset.originalIndex);
+            const question = quizQuestions[currentQuestionIndex];
+            const correctAnswerIndex = question.answer;
+
+            userAnswers[currentQuestionIndex] = selectedOptionIndex;
+            questionsAttempted++;
+
+            if (selectedOptionIndex === correctAnswerIndex) {
+                score++;
+                selectedDiv.classList.add('pulse-green', 'border-green-500');
+            } else {
+                selectedDiv.classList.add('shake-red', 'border-red-500');
+                // Highlight the correct answer
+                Array.from(optionsContainer.children).forEach(child => {
+                    if (parseInt(child.dataset.originalIndex) === correctAnswerIndex) {
+                        child.classList.add('pulse-green', 'border-green-500');
+                    }
+                });
             }
+
+            explanationText.textContent = `Explanation: ${question.explanation}`;
+            explanationContainer.classList.remove('hidden');
+
+            // Disable all options
+            Array.from(optionsContainer.children).forEach(child => {
+                child.style.pointerEvents = 'none';
+            });
         }
 
-        async function submitQuiz(isAutoSubmit = false) {
-            if(quizSubmitted) return;
-            quizSubmitted = true;
+        function showPreviousAnswer() {
+            const question = quizQuestions[currentQuestionIndex];
+            const previouslySelected = userAnswers[currentQuestionIndex];
+            const correctAnswerIndex = question.answer;
 
-            clearInterval(timerInterval);
-            const endTime = Date.now();
-            const timeTakenSeconds = Math.round((endTime - quizStartTime) / 1000);
+            Array.from(optionsContainer.children).forEach(child => {
+                const childIndex = parseInt(child.dataset.originalIndex);
+                child.style.pointerEvents = 'none'; // Disable options on review
 
-            let correctCount = 0;
-            let incorrectCount = 0;
-            let attemptedCount = 0;
-            userAnswers.forEach(answer => {
-                if (answer && answer.selectedOptionIndex !== undefined) {
-                    attemptedCount++;
-                    if (answer.isCorrect) correctCount++;
-                    else incorrectCount++;
+                if (childIndex === correctAnswerIndex) {
+                    child.classList.add('pulse-green', 'border-green-500');
+                }
+                if (childIndex === previouslySelected && previouslySelected !== correctAnswerIndex) {
+                    child.classList.add('shake-red', 'border-red-500');
                 }
             });
 
-            const score = (correctCount * 2) - incorrectCount;
-            const candidateName = document.getElementById('candidateName').value;
+            explanationText.textContent = `Explanation: ${question.explanation}`;
+            explanationContainer.classList.remove('hidden');
+        }
 
-            document.getElementById('resultCandidateName').textContent = candidateName;
-            document.getElementById('resultDate').textContent = CURRENT_DATE_STR;
-            document.getElementById('resultScore').textContent = `${score}`;
-            document.getElementById('resultCorrect').textContent = `${correctCount}`;
-            document.getElementById('resultIncorrect').textContent = `${incorrectCount}`;
-            document.getElementById('resultAttempted').textContent = `${attemptedCount} / ${TOTAL_QUESTIONS}`;
-            document.getElementById('resultTimeTaken').textContent = formatTime(timeTakenSeconds);
-            
-            showPage('resultsPage');
 
-            const resultData = {
-                candidateName: candidateName,
-                quizDate: CURRENT_DATE_STR,
-                score: score,
-                correctCount: correctCount,
-                incorrectCount: incorrectCount,
-                attemptedCount: attemptedCount,
-                timeTaken: formatTime(timeTakenSeconds),
-                timeTakenSeconds: timeTakenSeconds,
-                submittedAt: new Date().toISOString()
-            };
-            
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-quiz-app';
-            if (window.db) {
-                try {
-                    const { doc, collection, setDoc } = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
-                    const resultsCollectionPath = `/artifacts/${appId}/public/data/quiz_results`;
-                    const newResultRef = doc(collection(window.db, resultsCollectionPath)); 
-                    await setDoc(newResultRef, resultData);
-                    console.log("Result saved to Firestore.");
-                } catch (error) {
-                    console.error("Error writing document to Firestore: ", error);
-                }
+        function updateNavigationButtons() {
+            prevButton.disabled = currentQuestionIndex === 0;
+            prevButton.classList.toggle('opacity-50', currentQuestionIndex === 0);
+            prevButton.classList.toggle('cursor-not-allowed', currentQuestionIndex === 0);
+            prevButton.classList.toggle('cursor-pointer', currentQuestionIndex !== 0);
+
+            if (currentQuestionIndex === quizQuestions.length - 1) {
+                nextButton.textContent = 'Submit Quiz';
             } else {
-                 console.error("Firestore database (db) not initialized on window object.");
+                nextButton.textContent = 'Next';
             }
         }
 
-        // --- Event Listeners ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginBtn = document.getElementById('loginBtn');
-            if (loginBtn) {
-                loginBtn.addEventListener('click', () => {
-                    const loginIdInput = document.getElementById('loginId');
-                    const loginPasswordInput = document.getElementById('loginPassword');
-                    const loginError = document.getElementById('loginError');
-
-                    const id = loginIdInput ? loginIdInput.value : '';
-                    const password = loginPasswordInput ? loginPasswordInput.value : '';
-                    
-                    if (id === 'syedasgharalishah' && password === 'admin') {
-                        alert('Admin login is not handled in this file. Please use the admin panel file.');
-                        return;
+        function navigateQuestions(direction) {
+            if (direction === 'next') {
+                if (currentQuestionIndex < quizQuestions.length - 1) {
+                    loadQuestion(currentQuestionIndex + 1);
+                } else {
+                    if (!quizCompleted) {
+                        showModal("Are you sure you want to submit the quiz?", "confirm", (confirmed) => {
+                            if (confirmed) {
+                                submitQuiz();
+                            }
+                        });
                     }
-                    if (id.toUpperCase() === '25JULY' && password === 'free') {
-                        if (loginError) loginError.classList.add('hidden');
-                        showPage('candidateNamePage');
-                    } else {
-                        if (loginError) loginError.classList.remove('hidden');
-                    }
-                });
-            }
-
-            const startQuizBtn = document.getElementById('startQuizBtn');
-            if (startQuizBtn) {
-                startQuizBtn.addEventListener('click', () => {
-                    const candidateNameInput = document.getElementById('candidateName');
-                    const nameError = document.getElementById('nameError');
-                    const candidateName = candidateNameInput ? candidateNameInput.value.trim() : '';
-                    
-                    if (candidateName) {
-                        if (nameError) nameError.classList.add('hidden');
-                        userAnswers = new Array(quizQuestions.length).fill(null);
-                        currentQuestionIndex = 0;
-                        quizSubmitted = false;
-                        startTimer();
-                        renderQuestion();
-                        showPage('quizPage');
-                    } else {
-                        if (nameError) nameError.classList.remove('hidden');
-                    }
-                });
-            }
-
-            const nextBtn = document.getElementById('nextBtn');
-            if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
-            
-            const prevBtn = document.getElementById('prevBtn');
-            if (prevBtn) prevBtn.addEventListener('click', prevQuestion);
-            
-            const submitQuizBtn = document.getElementById('submitQuizBtn');
-            if (submitQuizBtn) submitQuizBtn.addEventListener('click', () => submitQuiz(false));
-            
-            const restartQuizBtn = document.getElementById('restartQuizBtn');
-            if (restartQuizBtn) {
-                restartQuizBtn.addEventListener('click', () => {
-                    clearInterval(timerInterval);
-                    initializeQuiz();
-                    showPage('loginPage');
-                });
-            }
-            
-            // Initial setup calls
-            initializeQuiz();
-            updateLiveDate();
-            showPage('loginPage'); 
-
-            // Handle initial loginId display
-            const loginIdInput = document.getElementById('loginId');
-            if(loginIdInput) {
-                const dateParts = CURRENT_DATE_STR.split(' ');
-                const monthName = dateParts[0].toUpperCase();
-                const day = parseInt(dateParts[1].replace(',', ''));
-                loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 25JUL
-            }
-        });
-
-        // --- Quiz Initialization ---
-        function initializeQuiz() {
-            quizQuestions.length = 0;
-            const dateSeed = CURRENT_DATE_STR;
-            
-            const allQuestions = [
-                // === July 25th Syllabus Quiz (100 MCQs) ===
-
-                // General Knowledge, Urdu, Islamic Studies: Allama Iqbal & Grammar (Urdu Section, pp. 39-42) - 50 Questions
-                { "question": "علامہ اقبال کب پیدا ہوئے؟", "options": ["9 نومبر 1877", "11 ستمبر 1876", "14 اگست 1878", "25 دسمبر 1879"], "correctOptionIndex": 0, "explanation": "علامہ محمد اقبال 9 نومبر 1877 کو سیالکوٹ میں پیدا ہوئے۔", "source_page": "Urdu Sec. 39" },
-                { "question": "علامہ اقبال نے پی ایچ ڈی کی ڈگری کس یونیورسٹی سے حاصل کی؟", "options": ["کیمبرج یونیورسٹی", "آکسفورڈ یونیورسٹی", "میونخ یونیورسٹی، جرمنی", "لندن یونیورسٹی"], "correctOptionIndex": 2, "explanation": "علامہ اقبال نے 1907 میں میونخ یونیورسٹی، جرمنی سے فلسفہ میں پی ایچ ڈی کی ڈگری حاصل کی۔", "source_page": "Urdu Sec. 39" },
-                { "question": "علامہ اقبال کا پہلا اردو شعری مجموعہ کون سا ہے؟", "options": ["بال جبریل", "ضرب کلیم", "ارمغان حجاز", "بانگ درا"], "correctOptionIndex": 3, "explanation": "علامہ اقبال کا پہلا اردو شعری مجموعہ 'بانگ درا' ہے جو 1924 میں شائع ہوا۔", "source_page": "Urdu Sec. 39" },
-                { "question": "علامہ اقبال نے مشہور خطبہ الہ آباد کب دیا؟", "options": ["1928", "1930", "1932", "1935"], "correctOptionIndex": 1, "explanation": "علامہ اقبال نے 1930 میں مسلم لیگ کے سالانہ اجلاس (الہ آباد) کی صدارت کی اور مسلمانوں کے لیے ایک علیحدہ وطن کا تصور پیش کیا۔", "source_page": "Urdu Sec. 39" },
-                { "question": "علامہ اقبال کا مزار کہاں واقع ہے؟", "options": ["لاہور", "سیالکوٹ", "کراچی", "اسلام آباد"], "correctOptionIndex": 0, "explanation": "علامہ اقبال کا مزار لاہور میں بادشاہی مسجد کے قریب واقع ہے۔", "source_page": "Urdu Sec. 39" },
-                { "question": "کون سی کتاب علامہ اقبال کی نہیں ہے؟", "options": ["زبور عجم", "جاوید نامہ", "حیات جاوید", "پیام مشرق"], "correctOptionIndex": 2, "explanation": "'حیات جاوید' الطاف حسین حالی نے سرسید احمد خان پر لکھی ہے، جبکہ باقی تینوں کتابیں اقبال کی فارسی شاعری کے مجموعے ہیں۔", "source_page": "Urdu Sec. 39" },
-                { "question": "اسم کی کتنی اقسام ہیں؟", "options": ["دو", "تین", "چار", "پانچ"], "correctOptionIndex": 0, "explanation": "بناوٹ کے لحاظ سے اسم کی دو اقسام ہیں: اسم جامد اور اسم مشتق۔", "source_page": "Urdu Sec. 40" },
-                { "question": "وہ اسم جو نہ خود کسی سے بنا ہو اور نہ اس سے کوئی اور لفظ بنے، کیا کہلاتا ہے؟", "options": ["اسم مشتق", "اسم مصدر", "اسم جامد", "اسم صفت"], "correctOptionIndex": 2, "explanation": "اسم جامد وہ اسم ہے جو نہ خود کسی کلمے سے نکلا ہو اور نہ اس سے کوئی اور کلمہ نکلے۔ جیسے: میز، کرسی۔", "source_page": "Urdu Sec. 40" },
-                { "question": "اسم نکرہ کی پہچان کیا ہے؟", "options": ["کسی خاص چیز کا نام", "کسی عام چیز کا نام", "کسی کیفیت کا نام", "کسی کام کا نام"], "correctOptionIndex": 1, "explanation": "اسم نکرہ وہ اسم ہے جو کسی عام شخص، جگہ یا چیز کے لیے بولا جائے۔ جیسے: شہر، کتاب، آدمی۔", "source_page": "Urdu Sec. 40" },
-                { "question": "'لکھنا' سے 'لکھائی' کون سا اسم ہے؟", "options": ["اسم فاعل", "اسم مفعول", "اسم حالیہ", "اسم حاصل مصدر"], "correctOptionIndex": 3, "explanation": "'لکھائی' مصدر 'لکھنا' سے بنا ہے اور اس میں کام کا مفہوم پایا جاتا ہے لیکن زمانہ نہیں، اس لیے یہ اسم حاصل مصدر ہے۔", "source_page": "Urdu Sec. 41" },
-                { "question": "اسم معرفہ کی کتنی اقسام ہیں؟", "options": ["دو", "تین", "چار", "پانچ"], "correctOptionIndex": 2, "explanation": "اسم معرفہ کی چار اقسام ہیں: اسم علم، اسم ضمیر، اسم اشارہ، اور اسم موصول۔", "source_page": "Urdu Sec. 40" },
-                { "question": "'ابن مریم' اسم علم کی کون سی قسم ہے؟", "options": ["خطاب", "لقب", "کنیت", "عرف"], "correctOptionIndex": 2, "explanation": "کنیت وہ نام ہے جو ماں، باپ یا بیٹے کے تعلق سے پکارا جائے۔ 'ابن مریم' کا مطلب 'مریم کا بیٹا' ہے، لہٰذا یہ کنیت ہے۔", "source_page": "Urdu Sec. 41" },
-                { "question": "وہ اسم جو کسی چیز کی اچھائی یا برائی ظاہر کرے، کیا کہلاتا ہے؟", "options": ["اسم ذات", "اسم کیفیت", "اسم صفت", "اسم حالیہ"], "correctOptionIndex": 2, "explanation": "اسم صفت وہ کلمہ ہے جو کسی اسم کی حالت، اچھائی یا برائی کو ظاہر کرے۔ جیسے: نیک، ذہین، لمبا۔", "source_page": "Urdu Sec. 42" },
-                { "question": "لفظ 'شیر' کو اگر بہادری کے معنوں میں استعمال کیا جائے تو یہ کیا کہلائے گا؟", "options": ["استعارہ", "تشبیہ", "کنایہ", "مجاز مرسل"], "correctOptionIndex": 0, "explanation": "جب کوئی لفظ اپنے حقیقی معنوں کی بجائے مجازی معنوں میں اس طرح استعمال ہو کہ دونوں میں تشبیہ کا تعلق پایا جائے تو اسے استعارہ کہتے ہیں۔ جیسے بہادر آدمی کو 'شیر' کہنا۔", "source_page": "Urdu Sec. 42" },
-                { "question": "کلام میں کسی مشہور تاریخی واقعے، شخصیت یا مقام کی طرف اشارہ کرنا کیا کہلاتا ہے؟", "options": ["تلمیح", "مبالغہ", "حسن تعلیل", "صنعت تضاد"], "correctOptionIndex": 0, "explanation": "شعر یا کلام میں کسی مشہور واقعے، قصے یا شخصیت کی طرف اشارہ کرنا 'تلمیح' کہلاتا ہے۔", "source_page": "Urdu Sec. 42" },
-                { "question": "علامہ اقبال کا انتقال کب ہوا؟", "options": ["21 اپریل 1938", "14 اگست 1940", "23 مارچ 1937", "9 نومبر 1935"], "correctOptionIndex": 0, "explanation": "علامہ محمد اقبال کا انتقال 21 اپریل 1938 کو لاہور میں ہوا۔", "source_page": "Urdu Sec. 39" },
-                { "question": "اقبال کے تصور 'خودی' کا کیا مطلب ہے؟", "options": ["تکبر اور غرور", "خود شناسی اور اپنی صلاحیتوں کا ادراک", "خود غرضی", "دنیا سے لاتعلقی"], "correctOptionIndex": 1, "explanation": "اقبال کے فلسفہ خودی کا مرکزی خیال اپنی ذات اور اپنی صلاحیتوں کی پہچان ہے تاکہ انسان اپنی پوشیدہ طاقتوں کو بروئے کار لا سکے۔", "source_page": "Urdu Sec. 39" },
-                { "question": "اسم جامد کی کون سی دو قسمیں ہیں؟", "options": ["اسم نکرہ اور اسم معرفہ", "اسم ذات اور اسم صفت", "اسم فاعل اور اسم مفعول", "اسم مصدر اور اسم مشتق"], "correctOptionIndex": 0, "explanation": "اسم جامد کی دو بڑی قسمیں ہیں: اسم نکرہ (عام نام) اور اسم معرفہ (خاص نام)۔", "source_page": "Urdu Sec. 40" },
-                { "question": "'پہاڑ' اسم کی کون سی قسم ہے؟", "options": ["اسم معرفہ", "اسم نکرہ", "اسم صفت", "اسم مصدر"], "correctOptionIndex": 1, "explanation": "'پہاڑ' ایک عام نام ہے جو کسی بھی پہاڑ کے لیے بولا جا سکتا ہے، لہٰذا یہ اسم نکرہ ہے۔", "source_page": "Urdu Sec. 40" },
-                { "question": "'وہ' اور 'تم' قواعد کی رو سے کیا ہیں؟", "options": ["اسم اشارہ", "اسم موصول", "اسم ضمیر", "اسم علم"], "correctOptionIndex": 2, "explanation": "اسم ضمیر وہ کلمہ ہے جو کسی اسم کی جگہ استعمال ہو۔ 'وہ' ضمیر غائب ہے اور 'تم' ضمیر حاضر۔", "source_page": "Urdu Sec. 40" },
-                { "question": "وہ نام جو حکومت کی طرف سے کسی کو اس کی خدمات کے اعتراف میں دیا جائے، کیا کہلاتا ہے؟", "options": ["لقب", "خطاب", "عرف", "تخلص"], "correctOptionIndex": 1, "explanation": "خطاب وہ اعزازی نام ہے جو حکومت یا قوم کی طرف سے کسی شخص کو دیا جائے۔", "source_page": "Urdu Sec. 41" },
-                { "question": "شاعر اپنے نام کی جگہ جو مختصر نام شعر میں استعمال کرتا ہے، اسے کیا کہتے ہیں؟", "options": ["عرف", "کنیت", "لقب", "تخلص"], "correctOptionIndex": 3, "explanation": "تخلص وہ مختصر نام ہے جو شاعر اپنے کلام میں اپنے اصل نام کی بجائے استعمال کرتا ہے، جیسے اسد اللہ خان کا تخلص 'غالب'۔", "source_page": "Urdu Sec. 41" },
-                { "question": "وہ اسم جو کسی مصدر سے بنے اور کام کرنے والے کو ظاہر کرے، کیا کہلاتا ہے؟", "options": ["اسم مفعول", "اسم حالیہ", "اسم فاعل", "اسم معاوضہ"], "correctOptionIndex": 2, "explanation": "اسم فاعل وہ اسم ہے جو مصدر سے بنے اور کام کرنے والے (فاعل) کو ظاہر کرے۔ جیسے 'لکھنا' سے 'لکھنے والا'۔", "source_page": "Urdu Sec. 41" },
-                { "question": "'دیکھا ہوا' قواعد کی رو سے کیا ہے؟", "options": ["اسم فاعل", "اسم مفعول", "اسم صفت", "اسم حالیہ"], "correctOptionIndex": 1, "explanation": "اسم مفعول وہ اسم ہے جو اس شخص یا چیز کو ظاہر کرے جس پر کام واقع ہوا ہو۔ جیسے 'دیکھنا' سے 'دیکھا ہوا'۔", "source_page": "Urdu Sec. 41" },
-                { "question": "جب کسی چیز کو کسی خاص خوبی کی وجہ سے کسی دوسری چیز جیسا قرار دیا جائے تو اسے کیا کہتے ہیں؟", "options": ["کنایہ", "مجاز مرسل", "استعارہ", "تشبیہ"], "correctOptionIndex": 3, "explanation": "تشبیہ کے معنی ہیں 'مانند کرنا'۔ علم بیان کی اصطلاح میں جب کسی ایک چیز کو کسی مشترک صفت کی بنا پر دوسری چیز جیسا قرار دیا جائے۔", "source_page": "Urdu Sec. 42" },
-                { "question": "شعر 'رات کیا سوئے کہ باقی عمر کی نیند اڑ گئی' میں کون سی صنعت استعمال ہوئی ہے؟", "options": ["صنعت تضاد", "مبالغہ", "تلمیح", "حسن تعلیل"], "correctOptionIndex": 1, "explanation": "اس شعر میں ایک رات نہ سونے کی وجہ سے باقی ساری عمر کی نیند اڑ جانے کی بات کی گئی ہے جو کہ حقیقت میں ممکن نہیں، اس لیے یہ مبالغہ ہے۔", "source_page": "Urdu Sec. 42" },
-                { "question": "'ارمغان حجاز' علامہ اقبال کی کون سی زبان کی شاعری پر مشتمل ہے؟", "options": ["صرف اردو", "صرف فارسی", "اردو اور فارسی دونوں", "عربی اور اردو"], "correctOptionIndex": 2, "explanation": "'ارمغان حجاز' علامہ اقبال کی آخری تصنیف ہے اور یہ اردو اور فارسی دونوں زبانوں کے کلام پر مشتمل ہے۔", "source_page": "Urdu Sec. 39" },
-                { "question": "'قائد اعظم' اسم علم کی کون سی قسم ہے؟", "options": ["خطاب", "لقب", "کنیت", "عرف"], "correctOptionIndex": 1, "explanation": "لقب وہ نام ہے جو کسی خاص خوبی کی وجہ سے قوم کی طرف سے دیا جائے۔ 'قائد اعظم' محمد علی جناح کو قوم نے ان کی خدمات کی وجہ سے دیا۔", "source_page": "Urdu Sec. 41" },
-                { "question": "'مسجد قرطبہ' علامہ اقبال کے کس مجموعہ کلام میں شامل ہے؟", "options": ["بانگ درا", "بال جبریل", "ضرب کلیم", "ارمغان حجاز"], "correctOptionIndex": 1, "explanation": "علامہ اقبال کی شہرہ آفاق نظم 'مسجد قرطبہ' ان کے دوسرے اردو شعری مجموعے 'بال جبریل' میں شامل ہے۔", "source_page": "Urdu Sec. 39" },
-                { "question": "وہ اسم جو کسی اوزار یا ہتھیار کا نام ہو، کیا کہلاتا ہے؟", "options": ["اسم ظرف", "اسم آلہ", "اسم صوت", "اسم مکبر"], "correctOptionIndex": 1, "explanation": "اسم آلہ وہ اسم ہے جو کسی اوزار یا ہتھیار کا نام ظاہر کرے۔ جیسے: چھری، تلوار، قلم۔", "source_page": "Urdu Sec. 40" },
-                { "question": "'باغ' سے 'باغیچہ' اسم کی کون سی قسم ہے؟", "options": ["اسم مکبر", "اسم مصغر", "اسم ظرف", "اسم صوت"], "correctOptionIndex": 1, "explanation": "اسم مصغر وہ اسم ہے جو کسی چیز کا چھوٹا پن ظاہر کرے۔ 'باغ' سے 'باغیچہ' اس کی چھوٹی شکل ہے۔", "source_page": "Urdu Sec. 40" },
-                { "question": "وہ ضمیر جو کسی شخص، جگہ یا چیز کی طرف اشارہ کرنے کے لیے استعمال ہو، کیا کہلاتی ہے؟", "options": ["ضمیر شخصی", "ضمیر اشارہ", "ضمیر موصولہ", "ضمیر استفہام"], "correctOptionIndex": 1, "explanation": "ضمیر اشارہ وہ ضمیر ہے جو کسی کی طرف اشارہ کرنے کے لیے استعمال ہو۔ جیسے: یہ، وہ، اس، ان۔", "source_page": "Urdu Sec. 40" },
-                { "question": "شعر میں دو ایسے الفاظ لانا جو معنی میں ایک دوسرے کی ضد ہوں، کیا کہلاتا ہے؟", "options": ["صنعت تلمیح", "صنعت تضاد", "صنعت مراعاۃ النظیر", "صنعت حسن تعلیل"], "correctOptionIndex": 1, "explanation": "صنعت تضاد کا مطلب ہے کہ شعر میں دو متضاد معنی رکھنے والے الفاظ استعمال کیے جائیں، جیسے دن اور رات۔", "source_page": "Urdu Sec. 42" },
-                { "question": "علامہ اقبال کو 'سر' کا خطاب کب ملا؟", "options": ["1920", "1923", "1925", "1928"], "correctOptionIndex": 1, "explanation": "برطانوی حکومت نے علامہ اقبال کی علمی خدمات کے اعتراف میں انہیں 1923 میں 'سر' کے خطاب سے نوازا۔", "source_page": "Urdu Sec. 39" },
-                { "question": "'گڑیا' کس کا عرف ہے؟", "options": ["ایک لڑکی کا نام", "ایک کھلونا", "کسی کا پیار کا نام", "ایک قسم کی مٹھائی"], "correctOptionIndex": 2, "explanation": "عرف وہ نام ہے جو اصل نام کی جگہ پیار، نفرت یا کسی عادت کی وجہ سے مشہور ہو جائے۔ جیسے 'گڑیا' کسی بچی کا عرف ہو سکتا ہے۔", "source_page": "Urdu Sec. 41" },
-                { "question": "'پڑھتا ہوا' قواعد کی رو سے کیا ہے؟", "options": ["اسم فاعل", "اسم مفعول", "اسم حالیہ", "اسم صفت"], "correctOptionIndex": 2, "explanation": "اسم حالیہ وہ اسم ہے جو فاعل یا مفعول کی حالت کو ظاہر کرے اور مصدر سے بنے۔ جیسے 'وہ پڑھتا ہوا آیا'۔", "source_page": "Urdu Sec. 41" },
-                { "question": "جس چیز کو دوسری چیز جیسا قرار دیا جائے اسے کیا کہتے ہیں؟", "options": ["مشبہ", "مشبہ بہ", "وجہ شبہ", "غرض تشبیہ"], "correctOptionIndex": 0, "explanation": "تشبیہ میں جس چیز (شخص) کو دوسری چیز سے تشبیہ دی جاتی ہے، اسے 'مشبہ' کہتے ہیں۔", "source_page": "Urdu Sec. 42" },
-                { "question": "علامہ اقبال کا تصور 'مرد مومن' کس کی علامت ہے؟", "options": ["ایک عام مسلمان", "ایک کامل انسان", "ایک جنگجو", "ایک درویش"], "correctOptionIndex": 1, "explanation": "اقبال کا 'مرد مومن' ایک مثالی اور کامل انسان کی علامت ہے جو خودی، عشق اور فقر جیسی صفات کا حامل ہوتا ہے۔", "source_page": "Urdu Sec. 39" },
-                { "question": "'مسجد' اسم کی کونسی قسم ہے؟", "options": ["اسم ظرف مکاں", "اسم ظرف زماں", "اسم آلہ", "اسم صوت"], "correctOptionIndex": 0, "explanation": "اسم ظرف مکاں وہ اسم ہے جو کسی جگہ یا مقام کو ظاہر کرے۔ 'مسجد' ایک جگہ کا نام ہے۔", "source_page": "Urdu Sec. 40" },
-                { "question": "'جو محنت کرے گا، کامیاب ہوگا' - اس جملے میں 'جو' کیا ہے؟", "options": ["اسم اشارہ", "اسم موصول", "اسم ضمیر", "اسم استفہام"], "correctOptionIndex": 1, "explanation": "اسم موصول وہ اسم ہے کہ جب تک اس کے ساتھ ایک اور جملہ نہ ملایا جائے، اس کے معنی پوری طرح سمجھ میں نہیں آتے۔ جیسے: جو، جس، جن۔", "source_page": "Urdu Sec. 40" },
-                { "question": "'اسد اللہ خان غالب' میں 'غالب' کیا ہے؟", "options": ["خطاب", "لقب", "کنیت", "تخلص"], "correctOptionIndex": 3, "explanation": "'غالب' اسد اللہ خان کا شعری نام یعنی تخلص ہے۔", "source_page": "Urdu Sec. 41" },
-                { "question": "'دھلائی' اسم کی کون سی قسم ہے؟", "options": ["اسم حالیہ", "اسم معاوضہ", "اسم حاصل مصدر", "اسم فاعل"], "correctOptionIndex": 1, "explanation": "اسم معاوضہ وہ اسم ہے جو کسی خدمت یا محنت کے بدلے کو ظاہر کرے۔ جیسے 'دھونا' سے 'دھلائی'۔", "source_page": "Urdu Sec. 41" },
-                { "question": "جس مشترک خوبی کی وجہ سے تشبیہ دی جائے اسے کیا کہتے ہیں؟", "options": ["مشبہ", "مشبہ بہ", "وجہ شبہ", "حرف تشبیہ"], "correctOptionIndex": 2, "explanation": "وہ مشترک صفت یا خوبی جو مشبہ اور مشبہ بہ دونوں میں پائی جائے، 'وجہ شبہ' کہلاتی ہے۔", "source_page": "Urdu Sec. 42" },
-                { "question": "کسی چیز کی ایسی وجہ بیان کرنا جو حقیقی نہ ہو بلکہ شاعرانہ ہو، کیا کہلاتا ہے؟", "options": ["مبالغہ", "تلمیح", "حسن تعلیل", "استعارہ"], "correctOptionIndex": 2, "explanation": "حسن تعلیل کا مطلب ہے کسی چیز کی ایسی شاعرانہ اور لطیف وجہ بیان کرنا جو اس کی اصل وجہ نہ ہو۔", "source_page": "Urdu Sec. 42" },
-                { "question": "اقبال کی کون سی کتاب ان کے انگریزی خطبات کا مجموعہ ہے؟", "options": ["The Development of Metaphysics in Persia", "The Reconstruction of Religious Thought in Islam", "Zabur-i-Ajam", "Payam-i-Mashriq"], "correctOptionIndex": 1, "explanation": "'The Reconstruction of Religious Thought in Islam' علامہ اقبال کے ان سات انگریزی خطبات کا مجموعہ ہے جو انہوں نے مدراس، حیدرآباد اور علی گڑھ میں دیے۔", "source_page": "Urdu Sec. 39" },
-                { "question": "وہ اسم جو کسی کی بڑائی ظاہر کرے، کیا کہلاتا ہے؟", "options": ["اسم مصغر", "اسم مکبر", "اسم صفت", "اسم ذات"], "correctOptionIndex": 1, "explanation": "اسم مکبر وہ اسم ہے جو کسی چیز کا بڑا پن ظاہر کرے۔ جیسے 'بات' سے 'بتنگڑ'۔", "source_page": "Urdu Sec. 40" },
-                { "question": "اسم ضمیر کی کتنی حالتیں ہیں؟", "options": ["دو", "تین", "چار", "پانچ"], "correctOptionIndex": 1, "explanation": "اسم ضمیر کی تین حالتیں ہیں: ضمیر غائب (جو موجود نہ ہو)، ضمیر حاضر (جس سے بات کی جائے) اور ضمیر متکلم (بات کرنے والا)۔", "source_page": "Urdu Sec. 40" },
-                { "question": "'شمس العلماء' قواعد کی رو سے کیا ہے؟", "options": ["لقب", "عرف", "خطاب", "کنیت"], "correctOptionIndex": 2, "explanation": "'شمس العلماء' (عالموں کا سورج) ایک اعزازی نام ہے جو حکومت کی طرف سے دیا جاتا تھا، اس لیے یہ خطاب ہے۔", "source_page": "Urdu Sec. 41" },
-                { "question": "'روتا ہوا' کیا ہے؟", "options": ["اسم فاعل", "اسم مفعول", "اسم حالیہ", "اسم صفت"], "correctOptionIndex": 2, "explanation": "'روتا ہوا' فاعل کی حالت کو ظاہر کر رہا ہے، لہٰذا یہ اسم حالیہ ہے۔", "source_page": "Urdu Sec. 41" },
-                { "question": "'جیسا، کی مانند، صورت' یہ الفاظ کس کے لیے استعمال ہوتے ہیں؟", "options": ["استعارہ", "تلمیح", "کنایہ", "تشبیہ"], "correctOptionIndex": 3, "explanation": "یہ الفاظ 'حروف تشبیہ' کہلاتے ہیں جو مشبہ کو مشبہ بہ سے تشبیہ دینے کے لیے استعمال ہوتے ہیں۔", "source_page": "Urdu Sec. 42" },
-                { "question": "کلام میں کسی بات کو اس قدر بڑھا چڑھا کر بیان کرنا کہ وہ ناممکن لگے، کیا کہلاتا ہے؟", "options": ["مبالغہ", "تلمیح", "صنعت تضاد", "استعارہ"], "correctOptionIndex": 0, "explanation": "مبالغہ کا مطلب ہے کسی وصف کو بہت زیادہ بڑھا چڑھا کر بیان کرنا۔", "source_page": "Urdu Sec. 42" },
-
-                // English: Comprehensive Review of Vocabulary and Grammar - 50 Questions
-                { "question": "Choose the antonym for ANCIENT.", "options": ["Old", "Aged", "Modern", "Antique"], "correctOptionIndex": 2, "explanation": "Ancient refers to the distant past, while modern refers to the present or recent times.", "source_page": 498 },
-                { "question": "Choose the synonym for UBIQUITOUS.", "options": ["Rare", "Scarce", "Omnipresent", "Limited"], "correctOptionIndex": 2, "explanation": "Ubiquitous means present, appearing, or found everywhere; omnipresent.", "source_page": 490 },
-                { "question": "Change to passive voice: 'The police have caught the thief.'", "options": ["The thief was caught by the police.", "The thief has been caught by the police.", "The thief had been caught by the police.", "The thief is caught by the police."], "correctOptionIndex": 1, "explanation": "For present perfect tense, the passive form is 'has/have + been + past participle'.", "source_page": 465 },
-                { "question": "Change to indirect speech: She said, 'I do not know the boy.'", "options": ["She said that she did not know the boy.", "She said that she does not know the boy.", "She said she had not known the boy.", "She says that she did not know the boy."], "correctOptionIndex": 0, "explanation": "The simple present 'do not know' changes to the simple past 'did not know'.", "source_page": 459 },
-                { "question": "The Latin phrase 'Carpe diem' translates to:", "options": ["Beware of the dog", "The die is cast", "I think, therefore I am", "Seize the day"], "correctOptionIndex": 3, "explanation": "'Carpe diem' is a Latin aphorism, usually translated 'seize the day'.", "source_page": 495 },
-                { "question": "Choose the antonym for FRIEND.", "options": ["Ally", "Companion", "Foe", "Partner"], "correctOptionIndex": 2, "explanation": "A friend is a person one likes and trusts; a foe is an enemy.", "source_page": 500 },
-                { "question": "Choose the synonym for VALIANT.", "options": ["Cowardly", "Timid", "Brave", "Fearful"], "correctOptionIndex": 2, "explanation": "Valiant means possessing or showing courage or determination; brave.", "source_page": 491 },
-                { "question": "Change to active voice: 'The work had been finished by them.'", "options": ["They finished the work.", "They were finishing the work.", "They have finished the work.", "They had finished the work."], "correctOptionIndex": 3, "explanation": "The past perfect passive 'had been finished' changes to the past perfect active 'had finished'.", "source_page": 465 },
-                { "question": "Change to indirect speech: 'Where do you live?' asked the stranger.", "options": ["The stranger asked where I lived.", "The stranger asked where did I live.", "The stranger enquired where I was living.", "The stranger demanded where I lived."], "correctOptionIndex": 0, "explanation": "The direct question becomes a statement, and the simple present changes to the simple past.", "source_page": 461 },
-                { "question": "What is the meaning of 'De facto'?", "options": ["By law", "In fact", "From the fact", "With the fact"], "correctOptionIndex": 1, "explanation": "'De facto' means in fact, or in effect, whether by right or not. It contrasts with 'de jure', which means by law.", "source_page": 495 },
-                { "question": "Choose the antonym for CREATE.", "options": ["Build", "Make", "Form", "Destroy"], "correctOptionIndex": 3, "explanation": "To create is to bring something into existence; to destroy is to end its existence.", "source_page": 499 },
-                { "question": "Choose the synonym for GREGARIOUS.", "options": ["Shy", "Introverted", "Sociable", "Reclusive"], "correctOptionIndex": 2, "explanation": "Gregarious means fond of company; sociable.", "source_page": 477 },
-                { "question": "Change to passive voice: 'They will build a house.'", "options": ["A house will be built by them.", "A house would be built by them.", "A house is being built by them.", "A house will have been built by them."], "correctOptionIndex": 0, "explanation": "For simple future tense, the passive form is 'will be + past participle'.", "source_page": 465 },
-                { "question": "Change to indirect speech: The teacher said, 'The Earth revolves around the Sun.'", "options": ["The teacher said that the Earth revolved around the Sun.", "The teacher said that the Earth revolves around the Sun.", "The teacher told that the Earth revolves around the Sun.", "The teacher says that the Earth revolves around the Sun."], "correctOptionIndex": 1, "explanation": "When the reported speech expresses a universal truth, the tense does not change.", "source_page": 455 },
-                { "question": "The phrase 'Modus operandi' refers to:", "options": ["Method of operation", "Order of the day", "A way of life", "A new method"], "correctOptionIndex": 0, "explanation": "'Modus operandi' is a particular way or method of doing something.", "source_page": 496 },
-                { "question": "Choose the antonym for EXPAND.", "options": ["Increase", "Grow", "Widen", "Contract"], "correctOptionIndex": 3, "explanation": "To expand is to become larger; to contract is to become smaller.", "source_page": 500 },
-                { "question": "Choose the synonym for NEFARIOUS.", "options": ["Good", "Honorable", "Wicked", "Righteous"], "correctOptionIndex": 2, "explanation": "Nefarious means (typically of an action or activity) wicked or criminal.", "source_page": 483 },
-                { "question": "Change to active voice: 'The city was destroyed by an earthquake.'", "options": ["An earthquake destroyed the city.", "An earthquake was destroying the city.", "An earthquake has destroyed the city.", "An earthquake had destroyed the city."], "correctOptionIndex": 0, "explanation": "Simple past passive ('was destroyed') changes to simple past active ('destroyed').", "source_page": 468 },
-                { "question": "Change to indirect speech: He said, 'Alas! I am ruined.'", "options": ["She exclaimed with sorrow that she was ruined.", "He exclaimed that he is ruined.", "He cried that he was ruined.", "He exclaimed with sorrow that he was ruined."], "correctOptionIndex": 3, "explanation": "Exclamatory sentences with 'Alas!' are changed using 'exclaimed with sorrow/grief that...'.", "source_page": 458 },
-                { "question": "What does 'Status quo' mean?", "options": ["The new situation", "A better situation", "The existing state of affairs", "A chaotic situation"], "correctOptionIndex": 2, "explanation": "'Status quo' refers to the existing state of affairs, especially regarding social or political issues.", "source_page": 497 },
-                { "question": "Choose the antonym for GATHER.", "options": ["Collect", "Assemble", "Scatter", "Group"], "correctOptionIndex": 2, "explanation": "To gather is to bring things together; to scatter is to throw them in random directions.", "source_page": 501 },
-                { "question": "Choose the synonym for PRUDENT.", "options": ["Reckless", "Careless", "Wise", "Impulsive"], "correctOptionIndex": 2, "explanation": "Prudent means acting with or showing care and thought for the future; wise.", "source_page": 485 },
-                { "question": "Change to passive voice: 'Please help me.'", "options": ["Let me be helped.", "I should be helped.", "You are requested to help me.", "I am requesting your help."], "correctOptionIndex": 2, "explanation": "Imperative sentences starting with 'Please' are converted using 'You are requested to...'.", "source_page": 467 },
-                { "question": "Change to indirect speech: 'Don't make a noise,' he said.", "options": ["He told them not to make a noise.", "He forbade them to make a noise.", "He asked them don't make a noise.", "Both A and B are correct"], "correctOptionIndex": 3, "explanation": "A negative command can be reported using 'told...not to' or 'forbade...to'.", "source_page": 457 },
-                { "question": "What is the meaning of the Latin phrase 'Ad hoc'?", "options": ["For this purpose", "For a long time", "For everyone", "From the beginning"], "correctOptionIndex": 0, "explanation": "'Ad hoc' means created or done for a particular purpose as necessary.", "source_page": 494 }
-            ];
-            
-            // Fill up to 100 questions.
-            let finalQuestions = [];
-            while(finalQuestions.length < 100) {
-                finalQuestions.push(...allQuestions);
-            }
-            finalQuestions = finalQuestions.slice(0, TOTAL_QUESTIONS);
-
-            shuffleArrayWithSeed(finalQuestions, dateSeed);
-            quizQuestions = finalQuestions;
-
-            if (quizQuestions.length > 0) {
-                let rng = new Math.seedrandom(dateSeed + '-special');
-                specialQuestionIndex = Math.floor(rng() * quizQuestions.length);
-                quizQuestions[specialQuestionIndex].special = true;
+                }
+            } else if (direction === 'prev') {
+                if (currentQuestionIndex > 0) {
+                    loadQuestion(currentQuestionIndex - 1);
+                }
             }
         }
 
-        // --- Event Listeners ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const loginBtn = document.getElementById('loginBtn');
-            if (loginBtn) {
-                loginBtn.addEventListener('click', () => {
-                    const loginIdInput = document.getElementById('loginId');
-                    const loginPasswordInput = document.getElementById('loginPassword');
-                    const loginError = document.getElementById('loginError');
+        function submitQuiz() {
+            quizCompleted = true;
+            clearInterval(timerInterval); // Stop the timer
 
-                    const id = loginIdInput ? loginIdInput.value : '';
-                    const password = loginPasswordInput ? loginPasswordInput.value : '';
-                    
-                    if (id === 'syedasgharalishah' && password === 'admin') {
-                        alert('Admin login is not handled in this file. Please use the admin panel file.');
-                        return;
-                    }
-                    if (id.toUpperCase() === '23JULY' && password === 'free') {
-                        if (loginError) loginError.classList.add('hidden');
-                        showPage('candidateNamePage');
-                    } else {
-                        if (loginError) loginError.classList.remove('hidden');
-                    }
-                });
-            }
+            const finalTimeSeconds = timeElapsed;
+            const finalMinutes = Math.floor(finalTimeSeconds / 60);
+            const finalSeconds = finalTimeSeconds % 60;
+            const formattedFinalTime = `${finalMinutes.toString().padStart(2, '0')}:${finalSeconds.toString().padStart(2, '0')}`;
 
-            const startQuizBtn = document.getElementById('startQuizBtn');
-            if (startQuizBtn) {
-                startQuizBtn.addEventListener('click', () => {
-                    const candidateNameInput = document.getElementById('candidateName');
-                    const nameError = document.getElementById('nameError');
-                    const candidateName = candidateNameInput ? candidateNameInput.value.trim() : '';
-                    
-                    if (candidateName) {
-                        if (nameError) nameError.classList.add('hidden');
-                        userAnswers = new Array(quizQuestions.length).fill(null);
-                        currentQuestionIndex = 0;
-                        quizSubmitted = false;
-                        startTimer();
-                        renderQuestion();
-                        showPage('quizPage');
-                    } else {
-                        if (nameError) nameError.classList.remove('hidden');
-                    }
-                });
-            }
+            resultNameSpan.textContent = userName;
+            resultScoreSpan.textContent = score;
+            resultTimeSpan.textContent = formattedFinalTime;
+            resultAttemptedSpan.textContent = questionsAttempted;
 
-            const nextBtn = document.getElementById('nextBtn');
-            if (nextBtn) nextBtn.addEventListener('click', nextQuestion);
-            
-            const prevBtn = document.getElementById('prevBtn');
-            if (prevBtn) prevBtn.addEventListener('click', prevQuestion);
-            
-            const submitQuizBtn = document.getElementById('submitQuizBtn');
-            if (submitQuizBtn) submitQuizBtn.addEventListener('click', () => submitQuiz(false));
-            
-            const restartQuizBtn = document.getElementById('restartQuizBtn');
-            if (restartQuizBtn) {
-                restartQuizBtn.addEventListener('click', () => {
-                    clearInterval(timerInterval);
-                    initializeQuiz();
-                    showPage('loginPage');
-                });
-            }
-            
-            // Initial setup calls
-            initializeQuiz();
-            updateLiveDate();
-            showPage('loginPage'); 
+            quizPage.classList.add('hidden');
+            resultsPage.classList.remove('hidden');
+        }
 
-            // Handle initial loginId display
-            const loginIdInput = document.getElementById('loginId');
-            if(loginIdInput) {
-                const dateParts = CURRENT_DATE_STR.split(' ');
-                const monthName = dateParts[0].toUpperCase();
-                const day = parseInt(dateParts[1].replace(',', ''));
-                loginIdInput.value = `${day.toString().padStart(2,'0')}${monthName.substring(0,3)}`; // e.g., 23JUL
+        function resetQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            questionsAttempted = 0;
+            timeElapsed = 0;
+            userName = '';
+            quizCompleted = false;
+            Object.keys(userAnswers).forEach(key => delete userAnswers[key]);
+            clearInterval(timerInterval);
+            timerSpan.textContent = "40:00";
+            progressBar.style.width = '0%';
+            progressText.textContent = '0%';
+            loginPage.classList.remove('hidden');
+            resultsPage.classList.add('hidden');
+            candidateInfoPage.classList.add('hidden');
+            quizPage.classList.add('hidden');
+            usernameInput.value = '';
+            passwordInput.value = '';
+            fullNameInput.value = '';
+            loginError.classList.add('hidden');
+            nameError.classList.add('hidden');
+            initializeQuizQuestions();
+        }
+
+        // Event Listeners
+        loginButton.addEventListener('click', () => {
+            const username = usernameInput.value.toUpperCase();
+            const password = passwordInput.value;
+
+            // Updated login credentials for July 28
+            if (username === '28JULY' && password === 'free') {
+                loginPage.classList.add('hidden');
+                candidateInfoPage.classList.remove('hidden');
+                loginError.classList.add('hidden');
+            } else {
+                loginError.classList.remove('hidden');
             }
         });
+
+        startQuizButton.addEventListener('click', () => {
+            const enteredName = fullNameInput.value.trim();
+            if (enteredName) {
+                userName = enteredName;
+                candidateInfoPage.classList.add('hidden');
+                quizPage.classList.remove('hidden');
+                nameError.classList.add('hidden');
+                startTimer();
+                loadQuestion(currentQuestionIndex);
+            } else {
+                nameError.classList.add('hidden');
+            }
+        });
+
+        nextButton.addEventListener('click', () => navigateQuestions('next'));
+        prevButton.addEventListener('click', () => navigateQuestions('prev'));
+        
+        submitNowButton.addEventListener('click', () => {
+            if (!quizCompleted) {
+                showModal("Are you sure you want to submit the quiz?", "confirm", (confirmed) => {
+                    if (confirmed) {
+                        submitQuiz();
+                    }
+                });
+            }
+        });
+
+        retakeQuizButton.addEventListener('click', resetQuiz);
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLiveDate();
+            initializeQuizQuestions();
+        });
+
+        // Handle mobile sticky date position
+        window.addEventListener('resize', () => {
+            const liveDateElement = document.getElementById('live-date');
+            if (window.innerWidth < 768) {
+                liveDateElement.classList.remove('justify-end');
+                liveDateElement.classList.add('justify-start');
+            } else {
+                liveDateElement.classList.remove('justify-start');
+                liveDateElement.classList.add('justify-end');
+            }
+        });
+        window.dispatchEvent(new Event('resize'));
+
     </script>
 </body>
 </html>
