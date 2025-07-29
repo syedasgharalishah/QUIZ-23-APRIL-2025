@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS MPT Daily Quiz - 28 July</title>
+    <title>CSS MPT Daily Quiz - 29 July</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -160,7 +160,7 @@
                 <label for="password" class="block text-primary text-sm font-bold mb-2">Password:</label>
                 <input type="password" id="password" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-primary leading-tight focus:outline-none focus:shadow-outline bg-gray-100" placeholder="Enter password">
             </div>
-            <button id="login-button" class="gradient-button text-white font-bold py-3 px-6 rounded-lg w-full focus:outline-none focus:shadow-outline">Login</button>
+            <button id="login-button" class="gradient-button text-primary font-bold py-3 px-6 rounded-lg w-full focus:outline-none focus:shadow-outline">Login</button>
             <p id="login-error" class="text-red-500 text-center mt-4 hidden">Invalid username or password.</p>
         </div>
     </div>
@@ -172,7 +172,7 @@
                 <label for="full-name" class="block text-primary text-sm font-bold mb-2">Full Name:</label>
                 <input type="text" id="full-name" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-primary leading-tight focus:outline-none focus:shadow-outline bg-gray-100" placeholder="Enter your full name">
             </div>
-            <button id="start-quiz-button" class="gradient-button text-white font-bold py-3 px-6 rounded-lg w-full focus:outline-none focus:shadow-outline">Start Quiz</button>
+            <button id="start-quiz-button" class="gradient-button text-primary font-bold py-3 px-6 rounded-lg w-full focus:outline-none focus:shadow-outline">Start Quiz</button>
             <p id="name-error" class="text-red-500 text-center mt-4 hidden">Please enter your full name.</p>
         </div>
     </div>
@@ -217,9 +217,9 @@
             </div>
 
             <div class="flex justify-around mt-6">
-                <button id="prev-button" class="gradient-button text-white font-bold py-3 px-6 rounded-lg opacity-50 cursor-not-allowed" disabled>Previous</button>
-                <button id="submit-now-button" class="gradient-button text-white font-bold py-3 px-6 rounded-lg">Submit</button>
-                <button id="next-button" class="gradient-button text-white font-bold py-3 px-6 rounded-lg">Next</button>
+                <button id="prev-button" class="gradient-button text-primary font-bold py-3 px-6 rounded-lg opacity-50 cursor-not-allowed" disabled>Previous</button>
+                <button id="submit-now-button" class="gradient-button text-primary font-bold py-3 px-6 rounded-lg">Submit</button>
+                <button id="next-button" class="gradient-button text-primary font-bold py-3 px-6 rounded-lg">Next</button>
             </div>
         </div>
     </div>
@@ -228,10 +228,10 @@
         <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md border border-[#FFF5EE] text-primary">
             <h2 class="text-3xl font-bold text-center mb-6">Quiz Results</h2>
             <p class="text-lg mb-2"><strong>Candidate Name:</strong> <span id="result-name"></span></p>
-            <p class="text-lg mb-2"><strong>Total Score:</strong> <span id="result-score"></span></p>
+            <p class="text-lg mb-2"><strong>Total Score:</strong> <span id="result-score"></span> / 100</p>
             <p class="text-lg mb-2"><strong>Time Taken:</strong> <span id="result-time"></span></p>
             <p class="text-lg mb-4"><strong>Questions Attempted:</strong> <span id="result-attempted"></span></p>
-            <button id="retake-quiz-button" class="gradient-button text-white font-bold py-3 px-6 rounded-lg w-full focus:outline-none focus:shadow-outline">Retake Quiz</button>
+            <button id="retake-quiz-button" class="gradient-button text-primary font-bold py-3 px-6 rounded-lg w-full focus:outline-none focus:shadow-outline">Retake Quiz</button>
         </div>
     </div>
 
@@ -239,8 +239,8 @@
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <p id="modal-message" class="text-lg text-primary"></p>
-            <button id="modal-ok-button" class="gradient-button text-white font-bold py-2 px-4 rounded-lg mt-4 hidden">OK</button>
-            <button id="modal-cancel-button" class="gradient-button text-white font-bold py-2 px-4 rounded-lg mt-4 ml-2 hidden">Cancel</button>
+            <button id="modal-ok-button" class="gradient-button text-primary font-bold py-2 px-4 rounded-lg mt-4 hidden">OK</button>
+            <button id="modal-cancel-button" class="gradient-button text-primary font-bold py-2 px-4 rounded-lg mt-4 ml-2 hidden">Cancel</button>
         </div>
     </div>
 
@@ -311,104 +311,97 @@
         // Store answers
         const userAnswers = {}; // { questionIndex: selectedOptionIndex }
 
-        // Curated MCQs - 100 questions from General Knowledge (Pages 1-12)
+        // Curated MCQs - 100 questions from General Knowledge (What and Where: Pages 13-19)
         const allQuizQuestions = [
-            { question: "Which of the following is a landlocked country?", options: ["Nigeria", "Kenya", "Sri Lanka", "Uganda"], answer: 3, explanation: "Uganda is a landlocked country in East Africa, meaning it is surrounded by land and has no coastline." },
-            { question: "What is the capital of Zimbabwe?", options: ["Harare", "Seoul", "Pretoria", "None of these"], answer: 0, explanation: "Harare is the capital and most populous city of Zimbabwe." },
-            { question: "The Communist Revolution took place in Russia in which month?", options: ["March", "June", "October", "November"], answer: 3, explanation: "The Bolshevik Revolution, part of the Russian Revolution, took place in November 1917 (October in the old Russian calendar)." },
-            { question: "Pulitzer is an American Award in which field?", options: ["Sports", "Scuba", "Letters and journalism", "Music"], answer: 2, explanation: "The Pulitzer Prize is an award for achievements in newspaper, magazine, online journalism, literature, and musical composition in the United States." },
-            { question: "What does 'Fifth Column' refer to?", options: ["Huge pillar", "Long writing", "Loyalty", "Treachery"], answer: 3, explanation: "A 'fifth column' is any group of people who undermine a larger group from within, usually in favor of an enemy group or nation." },
-            { question: "What is the cheapest source of electricity generation?", options: ["Hydel", "Nuclear", "Solar", "Thermal"], answer: 0, explanation: "Hydropower (Hydel) is generally considered one of the cheapest sources of electricity, especially in terms of operational costs." },
-            { question: "The Colosseum, an amphitheater, was built in which city?", options: ["Athens", "Naples", "Rome", "Milan"], answer: 2, explanation: "The Colosseum is an oval amphitheater in the center of Rome, Italy." },
-            { question: "The Moorish Kingdom of Granada (Spain) surrendered to Christians in which year?", options: ["1453", "1492", "1526", "1556"], answer: 1, explanation: "The fall of Granada in 1492 marked the end of Muslim rule in the Iberian Peninsula." },
-            { question: "Blind Dolphins are found in which river?", options: ["Ganges River", "Nile River", "Indus River", "Yangtze River"], answer: 2, explanation: "The Indus river dolphin, also known as the blind dolphin, is native to the Indus River in Pakistan." },
-            { question: "On 18th May 1974, India exploded its first nuclear device under what code name?", options: ["Operation Blue Star", "Operation Gibraltar", "Operation Smiling Buddha", "Operation Rakshak"], answer: 2, explanation: "India's first successful nuclear bomb test on 18 May 1974 was code-named 'Smiling Buddha'." },
-            { question: "Which crop has the longest period between cultivation and harvest?", options: ["Cotton", "Sugarcane", "Rice", "Wheat"], answer: 1, explanation: "Sugarcane has a long growing season, typically lasting from 9 to 24 months depending on the climate." },
-            { question: "The Farakka Dam on the river Ganga is disputed between which two countries?", options: ["India and Pakistan", "India and Nepal", "India and China", "India and Bangladesh"], answer: 3, explanation: "The Farakka Barrage is a source of long-running dispute between India and Bangladesh over water rights." },
-            { question: "Which dam was constructed by India in violation of the 'Indus Water Treaty'?", options: ["Salal Dam", "Baglihar Dam", "Wullar Barrage", "All of the above"], answer: 1, explanation: "Pakistan has raised objections against the Baglihar Dam, claiming it violates the Indus Waters Treaty." },
-            { question: "What is meant by a causeway?", options: ["A raised path", "Marsh soil", "Salty ocean", "Road on Hill"], answer: 0, explanation: "A causeway is a raised road or track across low or wet ground." },
-            { question: "The painting 'Night Watch' belongs to which artist?", options: ["Michelangelo", "Picasso", "Leonardo", "Rembrandt van Rijn"], answer: 3, explanation: "'The Night Watch' is a famous 1642 painting by Dutch artist Rembrandt van Rijn." },
-            { question: "What is Big Ben?", options: ["Clock", "Tower", "Cinema", "Road"], answer: 0, explanation: "Big Ben is the nickname for the Great Bell of the striking clock at the north end of the Palace of Westminster in London." },
-            { question: "Which is considered the wisest bird in European folklore?", options: ["Owl", "Eagle", "Parrot", "Sparrow"], answer: 0, explanation: "The owl is often a symbol of wisdom and knowledge in Western cultures." },
-            { question: "What is the name of the Russian oil and gas company that is a major supplier to European countries?", options: ["BSGO Company", "Gazprom Company", "Gestapo Company", "Philips Oil and Gas Company"], answer: 1, explanation: "Gazprom is a large Russian majority state-owned multinational energy corporation." },
-            { question: "In which year did European rulers capture Palestine from the Muslims during the First Crusade?", options: ["1095", "1099", "1115", "1199"], answer: 1, explanation: "The Crusaders captured Jerusalem and parts of Palestine in 1099 during the First Crusade." },
-            { question: "What is the Ivy League?", options: ["A group of Eight Universities in USA", "A group of People in Switzerland", "A football league tournament", "A group of Islands in Atlantic Ocean"], answer: 0, explanation: "The Ivy League is an American collegiate athletic conference comprising eight private research universities in the Northeastern United States." },
-            { question: "The Taliban movement started in 1994 from which city of Afghanistan?", options: ["Kabul", "Herat", "Kandahar", "None of these"], answer: 2, explanation: "The Taliban movement originated in the southern city of Kandahar in 1994." },
-            { question: "The term 'Digital Divide' is related to what?", options: ["Economics", "Socio-economic difference in technology era", "Political Science", "Journalism"], answer: 1, explanation: "The digital divide refers to the gap between demographics and regions that have access to modern information and communications technology and those that don't or have restricted access." },
-            { question: "What is the name of the place where the World Trade Center (USA) was located?", options: ["Ground Zero", "Paradise Point", "Golden Point", "Golden City Point"], answer: 0, explanation: "Ground Zero is the site of the former World Trade Center towers, which were destroyed in the September 11 attacks." },
-            { question: "The Muslim people of China's Xinjiang province are called:", options: ["Uighur", "Bantu", "Hutu", "Berber"], answer: 0, explanation: "The Uighurs are a Turkic ethnic group originating from and culturally affiliated with the general region of Central and East Asia." },
-            { question: "What is 'Ikebana'?", options: ["Japanese Art of flower arrangement", "Greek Art of fighting", "Art of dancing and music", "None of the above"], answer: 0, explanation: "Ikebana is the Japanese art of flower arrangement." },
-            { question: "Gestapo was the secret police organization of which country?", options: ["Italy", "Russia", "Germany", "USA"], answer: 2, explanation: "The Gestapo was the official secret police of Nazi Germany and in German-occupied Europe." },
-            { question: "Which of the following are primary colours?", options: ["Red, Blue, Green", "White, Red, Black", "Black, Red, Blue", "Green, Red, Black"], answer: 0, explanation: "In the additive color model (used for light), the primary colors are Red, Green, and Blue (RGB)." },
-            { question: "Which of the following inventions is the oldest?", options: ["Clock", "Microscope", "Barometer", "Cycle"], answer: 0, explanation: "The mechanical clock was invented in the 13th century, predating the microscope (17th c.), barometer (17th c.), and modern bicycle (19th c.)." },
-            { question: "What was the Holocaust?", options: ["Killing of Jews during World War I", "Killing of Jews during World War II", "Killing of Germans during World War II", "Killing of Japanese during World War II"], answer: 1, explanation: "The Holocaust was the genocide of European Jews during World War II by Nazi Germany and its collaborators." },
-            { question: "What is Choreography?", options: ["Art of dancing", "Art of music", "Art of gardening", "Art of fight"], answer: 0, explanation: "Choreography is the art or practice of designing sequences of movements of physical bodies in which motion, form, or both are specified." },
-            { question: "A writ directing a person to produce a prisoner at a certain time and place is called:", options: ["Writ of Quo Warranto", "Writ of Certiorari", "Writ of Prohibition", "Writ of Habeas Corpus"], answer: 3, explanation: "Habeas Corpus is a legal recourse through which a person can report an unlawful detention or imprisonment to a court." },
-            { question: "Which of the following woman Prime Ministers has had the longest tenure?", options: ["Indira Gandhi", "Benazir Bhutto", "Sirimavo Bandaranaike", "Sheikh Hasina"], answer: 3, explanation: "Sheikh Hasina of Bangladesh has served as prime minister for over 19 years in total, making her the longest-serving female head of government in history." },
-            { question: "Harry Potter is the famous character created by:", options: ["J.K. Rowling", "J.F. Marshal", "R.V. Menin", "None of these"], answer: 0, explanation: "J.K. Rowling is the British author who created the Harry Potter series." },
-            { question: "Which of the following civilizations was located on the banks of the Tigris river?", options: ["Sumerian civilization", "Indus civilization", "Egyptian civilization", "Greek civilization"], answer: 0, explanation: "The Sumerian civilization developed in Mesopotamia, between the Tigris and Euphrates rivers." },
-            { question: "In which year did Egypt nationalize the Suez Canal?", options: ["1950", "1954", "1956", "1960"], answer: 2, explanation: "On 26 July 1956, Egyptian President Gamal Abdel Nasser announced the nationalization of the Suez Canal Company." },
-            { question: "What is 'Armageddon'?", options: ["A final battle between nations which will end the world", "A last day of Universe", "A name of film", "None of the above"], answer: 0, explanation: "In some religious beliefs, Armageddon is the prophesied location of a gathering of armies for a battle during the end times." },
-            { question: "Skylab, a space laboratory launched in 1973, belonged to which country?", options: ["USSR", "USA", "Britain", "China"], answer: 1, explanation: "Skylab was the first space station launched and operated by NASA (USA)." },
-            { question: "In which year did Skylab break up in the atmosphere and fall back to Earth?", options: ["1977", "1978", "1979", "1980"], answer: 2, explanation: "Skylab fell back to Earth on July 11, 1979, with debris scattering across the Indian Ocean and Western Australia." },
-            { question: "The majority of the 'Kurdish' population lives in which country?", options: ["Afghanistan", "Turkey", "Iraq", "Jordan"], answer: 1, explanation: "While Kurds are spread across several countries, the largest population resides in Turkey." },
-            { question: "The Universal Declaration of Human Rights was adopted by the United Nations on:", options: ["10 December 1948", "10 December 1950", "10 December 1954", "10 December 1960"], answer: 0, explanation: "The UN General Assembly adopted the Universal Declaration of Human Rights on 10 December 1948." },
-            { question: "What was Pan-Islamism, originated in the 19th c. Ottoman Empire?", options: ["Movement for uniting the Islamic Nations", "Movement for uniting the Arabic Nations", "Movement for establishing Pan-Arabism", "Movement for re-establishing Caliphate"], answer: 0, explanation: "Pan-Islamism is a political ideology advocating the unity of Muslims under one Islamic country or state." },
-            { question: "What is the name of the iceberg that sank the Titanic in 1912?", options: ["It was not named", "Iceberg A-68", "An iceberg from Greenland", "An iceberg from the Jakobshavn Glacier"], answer: 2, explanation: "The iceberg that the Titanic struck was believed to have originated from a glacier in Greenland. Icebergs are not individually named." },
-            { question: "Watergate scandal of 1972 involved which American president?", options: ["John F. Kennedy", "Lyndon B. Johnson", "Richard Nixon", "Jimmy Carter"], answer: 2, explanation: "The Watergate scandal was a major political scandal in the United States involving the administration of U.S. President Richard Nixon." },
-            { question: "Which of these is the symbol of the Republican Party in the USA?", options: ["Donkey", "Elephant", "Eagle", "Lion"], answer: 1, explanation: "The elephant is the traditional symbol for the Republican Party in the United States." },
-            { question: "Which of these is the symbol of the Democratic Party in the USA?", options: ["Donkey", "Elephant", "Eagle", "Lion"], answer: 0, explanation: "The donkey is the traditional symbol for the Democratic Party in the United States." },
-            { question: "The study, theory, and practice of government and politics is called:", options: ["Sociology", "Economics", "Political Science", "History"], answer: 2, explanation: "Political science is the academic discipline that deals with the theory and practice of politics and the description and analysis of political systems and political behavior." },
-            { question: "Cyprus gained independence from Britain in 1960. When was it divided into the Greek Republic of Southern Cyprus and Turkish Republic of Northern Cyprus?", options: ["1964", "1974", "1983", "1991"], answer: 1, explanation: "Following a coup in 1974, Turkey invaded and occupied the northern part of the island, leading to its de facto division." },
-            { question: "The second Islamic Summit conference was held in Lahore in which year?", options: ["1971", "1972", "1973", "1974"], answer: 3, explanation: "The second summit of the Organisation of Islamic Cooperation (OIC) was held in Lahore, Pakistan, in February 1974." },
-            { question: "The Russian equivalent of the American Pentagon is:", options: ["Kremlin", "Duma", "KGB Headquarters", "Red Square"], answer: 0, explanation: "The Kremlin in Moscow is a fortified complex that serves as the official residence of the President of Russia and is the symbolic center of the Russian government." },
-            { question: "Who was the first man to reach the South Pole in 1911?", options: ["Roald Amundsen", "Robert Scott", "Ernest Shackleton", "None of these"], answer: 0, explanation: "Norwegian explorer Roald Amundsen was the first person to reach the South Pole, on December 14, 1911." },
-            { question: "Who was the first black president of South Africa?", options: ["Nelson Mandela", "Robert Mugabe", "Thabo Mbeki", "Martin Luther King"], answer: 0, explanation: "Nelson Mandela served as the first black president of South Africa from 1994 to 1999." },
-            { "question": "The term for the political and social separation of races, formerly practiced in South Africa, is:", "options": ["Apartheid", "Segregation", "Feminism", "None of these"], "answer": 0, "explanation": "Apartheid was a system of institutionalized racial segregation that existed in South Africa and South West Africa from 1948 until the early 1990s." },
-            { "question": "The 'Balfour Declaration' of 1917 was a public statement issued by the British government announcing support for the establishment of a 'national home for the Jewish people' in:", "options": ["Egypt", "Syria", "Palestine", "Iraq"], "answer": 2, "explanation": "The Balfour Declaration was a pivotal document that supported the Zionist aim of establishing a Jewish national home in Palestine." },
-            { "question": "What is a 'Regatta'?", "options": ["A religion", "A leader of the Community", "A boat or yacht race", "A branch of the Buddha religion"], "answer": 2, "explanation": "A regatta is a sporting event consisting of a series of boat or yacht races." },
-            { "question": "The city of 'Skopje' in Yugoslavia was destroyed by an earthquake in which year?", "options": ["1960", "1963", "1965", "1970"], "answer": 1, "explanation": "The 1963 Skopje earthquake was a major disaster that destroyed 80% of the city, which was then part of the Socialist Republic of Macedonia, Yugoslavia." },
-            { "question": "Who founded Buddhism in India?", "options": ["Cyrus", "Gautama Buddha", "Ashoka", "Alexander the Great"], "answer": 1, "explanation": "Buddhism was founded by Siddhartha Gautama, known as the Buddha, in the 6th century BCE in India." },
-            { "question": "What is 'bootlegging'?", "options": ["Form of smuggling", "Form of drug", "Form of Muslim religion", "None of these"], "answer": 0, "explanation": "Bootlegging refers to the illegal manufacture, distribution, or sale of goods, especially alcoholic beverages." },
-            { "question": "What is demography?", "options": ["Art of growing vegetables", "Art of making maps and charts", "Art of drawing pots", "Study of human populations"], "answer": 3, "explanation": "Demography is the statistical study of populations, especially human beings, including their size, structure, and distribution." },
-            { "question": "When did Challenger's crew, a space shuttle of NASA, die shortly after liftoff?", "options": ["June 2, 1985", "January 28, 1986", "January 20, 1985", "January 20, 1987"], "answer": 1, "explanation": "The Space Shuttle Challenger disaster occurred on January 28, 1986, when it broke apart 73 seconds into its flight, killing all seven crew members." },
-            { "question": "Which religion do Chinese people peacefully follow?", "options": ["Shintoism", "Buddhism", "Confucianism", "Taoism"], "answer": 2, "explanation": "Confucianism is a system of philosophical and ethical teachings, often described as a religion, that has deeply influenced Chinese culture." },
-            { "question": "The word 'Dinosaur' means:", "options": ["Terrible Lizard", "Giant Beast", "Big Dragon", "Blood-lust Beast"], "answer": 0, "explanation": "The term 'dinosaur' was coined by Sir Richard Owen in 1842 and is derived from Greek, meaning 'terrible lizard'." },
-            { "question": "Which language was declared an international language in 1887?", "options": ["Esperanto", "German", "UK English", "Latin"], "answer": 0, "explanation": "Esperanto was created in the late 19th century by L. L. Zamenhof as an easy-to-learn, politically neutral language that would transcend nationality." },
-            { "question": "The term 'ethnic cleansing' refers to the expulsion of a particular ethnic group by force. This was notably used to describe events in:", "options": ["Bosnia-Herzegovina", "Chechnya", "Palestine", "Kashmir"], "answer": 0, "explanation": "The term 'ethnic cleansing' gained widespread use during the Bosnian War (1992-1995) to refer to the persecution of Bosnian Muslims." },
-            { "question": "What is referred to by the term 'Fax'?", "options": ["Transmission of images over a telephone line", "Transmission of images over a radio link", "Transmission of images over a computer link", "None of these"], "answer": 0, "explanation": "Fax (short for facsimile) is the telephonic transmission of scanned printed material (both text and images)." },
-            { "question": "Fresco is a method of painting on:", "options": ["Fresh plaster", "Dry wall", "Canvas", "Wood"], "answer": 0, "explanation": "Fresco is a technique of mural painting executed upon freshly laid, or wet lime plaster." },
-            { "question": "Which craft is heavier than air and flies, in which only its engine provides the lift?", "options": ["Aeroplane", "Helicopter", "Glider", "None of these"], "answer": 1, "explanation": "A helicopter is a type of rotorcraft in which lift and thrust are supplied by horizontally spinning rotors, allowing it to take off and land vertically." },
-            { "question": "Greenwich Mean Time (GMT) was established in:", "options": ["1880", "1884", "1890", "1892"], "answer": 1, "explanation": "At the International Meridian Conference in 1884, Greenwich was adopted as the prime meridian of the world, establishing GMT." },
-            { "question": "What is the standard time for calculating time all across the globe?", "options": ["Greenwich Mean Time (GMT)", "Standard Time", "Local Time", "None of these"], "answer": 0, "explanation": "Greenwich Mean Time (GMT) is the mean solar time at the Royal Observatory in Greenwich, London, which is used as the basis for the world's time zones." },
-            { "question": "The city of Florence in Italy is famous for:", "options": ["Art and architecture", "Textiles", "Automobiles", "None of these"], "answer": 0, "explanation": "Florence is renowned as the birthplace of the Renaissance and is famous for its art galleries and architecture." },
-            { "question": "The 'Great Wall of China' was built by the dynasty of:", "options": ["Han", "Qin", "Ming", "Tang"], "answer": 1, "explanation": "While several dynasties worked on the wall, the first emperor of the Qin Dynasty, Qin Shi Huang, is credited with starting its major construction." },
-            { "question": "What is 'Green Revolution'?", "options": ["Increased agricultural production", "Agri Revolution", "A green revolution", "Agri Revolution"], "answer": 0, "explanation": "The Green Revolution refers to a period of technology transfer initiatives that saw a significant increase in agricultural production worldwide." },
-            { "question": "What is the name given to the killing of Jews in Secret Wars by Nazis?", "options": ["Jews cleansing", "Ethnic cleansing", "Mass killing", "Holocaust"], "answer": 3, "explanation": "The Holocaust was the systematic, state-sponsored persecution and murder of six million Jews by the Nazi regime and its collaborators." },
-            { "question": "Who was the youngest elected President of the USA?", "options": ["Harry Truman", "John F. Kennedy", "Andrew Jackson", "None of these"], "answer": 1, "explanation": "John F. Kennedy was inaugurated at age 43, making him the youngest person to be elected president of the United States." },
-            { "question": "The wireless telegraphy was pioneered in 1895 by:", "options": ["Thomas Edison", "Guglielmo Marconi", "Alexander Graham Bell", "Charles Thomas"], "answer": 1, "explanation": "Guglielmo Marconi is credited as the inventor of the radio, and he pioneered long-distance radio transmission." },
-            { "question": "In which language was the Holy Quran first translated?", "options": ["Latin", "Greek", "Persian", "None of these"], "answer": 0, "explanation": "The first translation of the Quran was into Persian, but among the given European options, the first complete translation was into Latin in 1143." },
-            { "question": "A socialist state is one that is ruled by which party?", "options": ["A socialist or communist party", "Some members very close to the ruling family", "A government announced by the Queen", "None of these"], "answer": 0, "explanation": "A socialist state is a state constitutionally dedicated to the establishment of socialism." },
-            { "question": "How many states are there in the USA?", "options": ["52", "50", "48", "46"], "answer": 1, "explanation": "The United States of America is a federal republic consisting of 50 states." },
-            { "question": "Which is the largest state (Population Wise) of India?", "options": ["Kerala", "Uttar Pradesh", "Madhya Pradesh", "None of these"], "answer": 1, "explanation": "Uttar Pradesh is the most populous state in India, with a population of over 200 million people." },
-            { "question": "Which economist whose theory provides a means of support for population control?", "options": ["Thomas Robert Malthus", "Adam Smith", "Keynes", "None of these"], "answer": 0, "explanation": "Thomas Robert Malthus argued that population growth would always tend to outrun the food supply and that betterment of humankind is impossible without stern limits on reproduction." },
-            { "question": "Which is the second largest continent (in terms of area)?", "options": ["Asia", "Africa", "Europe", "None of these"], "answer": 1, "explanation": "Africa is the world's second-largest and second-most-populous continent, after Asia in both cases." },
-            { "question": "Who is the founder of 'Wikinews'?", "options": ["Jimmy Wales", "Rowly Roscario", "Bill Gates", "Julian Assange (Australian)"], "answer": 0, "explanation": "Wikinews is a free-content news wiki and a project of the Wikimedia Foundation, co-founded by Jimmy Wales." },
-            { "question": "Which country suffered the maximum in World War II?", "options": ["UK", "Japan", "Germany", "Russia"], "answer": 3, "explanation": "The Soviet Union (of which Russia was the largest part) suffered the highest number of casualties, both military and civilian, during World War II." },
-            { "question": "Which of the following states shares the border of 'Aral Sea'?", "options": ["Uzbekistan and Kazakhstan", "Kyrgyzstan and Tajikistan", "Kazakhstan and Turkmenistan", "Iran and Iraq"], "answer": 0, "explanation": "The Aral Sea is an endorheic lake lying between Kazakhstan in the north and Uzbekistan in the south." },
-            { "question": "Magna Carta is a:", "options": ["Constitution of the British", "A constitution", "A constitution of African countries", "None of the above"], "answer": 0, "explanation": "Magna Carta, signed in 1215, is a royal charter of rights that is a foundational document of English constitutional law." },
-            { "question": "Who was the President of the USA during World War I?", "options": ["Woodrow Wilson", "George Truman", "Abraham Lincoln", "None of these"], "answer": 0, "explanation": "Woodrow Wilson was the 28th U.S. president, serving from 1913 to 1921 and leading the country through World War I." },
-            { "question": "New Zealand was the first country in the world to grant women the right to vote, in 1893, but when did they get the right to stand for the New Zealand legislature?", "options": ["1919", "1920", "1930", "1942"], "answer": 0, "explanation": "While New Zealand women gained the right to vote in 1893, they were not eligible to stand for parliament until 1919." },
-            { "question": "East Timor was the colony of which European power before Indonesia captured it?", "options": ["Spain", "Portugal", "Netherlands", "France"], "answer": 1, "explanation": "East Timor was a colony of Portugal for centuries before being invaded by Indonesia in 1975." },
-            { "question": "Which statement is true?", "options": ["American Naval Base 'Diego Garcia' is in Europe", "American Naval Base 'Diego Garcia' is in Indian Ocean", "American Naval Base 'Diego Garcia' is in Arctic Ocean", "American Naval Base 'Diego Garcia' is in Iraq"], "answer": 1, "explanation": "Diego Garcia is an island of the British Indian Ocean Territory, an overseas territory of the United Kingdom. It hosts a large US naval base." },
-            { "question": "Name the first country that made silk about 4000 years ago.", "options": ["Egypt", "India", "China", "Japan"], "answer": 2, "explanation": "The production of silk originated in Neolithic China some 6,000 years ago." },
-            { "question": "What are 'Negroes', 'Mongoloids', and 'Caucasians'?", "options": ["Human races", "Ancient tribes", "Wars of 1st century", "Seaports"], "answer": 0, "explanation": "These are terms from an outdated model of classifying human populations into different races based on physical traits." },
-            { "question": "Which of the following animals can hear ultrasonic sound?", "options": ["Cat", "Bat", "Rat", "All of these"], "answer": 3, "explanation": "Bats, cats, rats, and many other animals can hear sounds in the ultrasonic range, which is above the frequency of human hearing." },
-            { "question": "The Statue of Liberty was a gift to the USA from which country?", "options": ["UK", "France", "Germany", "Spain"], "answer": 1, "explanation": "The Statue of Liberty was a gift of friendship from the people of France to the United States and is a universal symbol of freedom and democracy." },
-            { "question": "The religion 'Judaism' is related to:", "options": ["Jews", "Christians", "Muslims", "None of these"], "answer": 0, "explanation": "Judaism is the ethnic religion of the Jewish people." },
-            { "question": "Who gave the idea of 'Perestroika'?", "options": ["Nikita Khrushchev", "Leonid Brezhnev", "Mikhail Gorbachev", "None of these"], "answer": 2, "explanation": "Perestroika ('Restructuring') was a political movement for reformation within the Communist Party of the Soviet Union during the 1980s, widely associated with Soviet leader Mikhail Gorbachev." },
-            { "question": "Who introduced the principle of the Doctrine of Lapse?", "options": ["Clive", "Cornwallis", "Hastings", "Dalhousie"], "answer": 3, "explanation": "The Doctrine of Lapse was an annexation policy applied by the British East India Company in India until 1859. The policy is most commonly associated with Lord Dalhousie." },
-            { "question": "What do you understand by 'Inter se'?", "options": ["Between themselves", "On the way", "Both of these", "None of these"], "answer": 0, "explanation": "'Inter se' is a Latin phrase meaning 'among or between themselves', typically used in a legal context." }
+            { question: "Where is Temple Tree situated?", options: ["USA", "UK", "Sri Lanka", "India"], answer: 2, explanation: "Temple Trees is the official residence of the Prime Minister of Sri Lanka." },
+            { question: "Where is Damascus, a city, located?", options: ["Iraq", "Syria", "Lebanon", "Jordan"], answer: 1, explanation: "Damascus is the capital city of Syria." },
+            { question: "Where is the Kremlin, a historic fortified complex, located?", options: ["Germany", "Russia", "France", "Poland"], answer: 1, explanation: "The Moscow Kremlin is a fortified complex in the center of Moscow, overlooking the Moskva River." },
+            { question: "Where is the Elysee Palace, the official residence of the President of France, located?", options: ["Lyon", "Marseille", "Paris", "Nice"], answer: 2, explanation: "The Élysée Palace is in Paris and is the official residence of the President of the French Republic." },
+            { question: "Where is Mount Kilimanjaro located?", options: ["Kenya", "Tanzania", "Uganda", "South Africa"], answer: 1, explanation: "Mount Kilimanjaro is a dormant volcano in Tanzania." },
+            { question: "The Hanging Gardens, one of the Seven Wonders of the Ancient World, were located in:", options: ["Egypt", "Greece", "Babylon", "Rome"], answer: 2, explanation: "The Hanging Gardens of Babylon were described as a remarkable feat of engineering with an ascending series of tiered gardens." },
+            { question: "Where is the 'Wailing Wall' located?", options: ["Rome", "Athens", "Jerusalem", "Mecca"], answer: 2, explanation: "The Wailing Wall, or Western Wall, is located in the Old City of Jerusalem." },
+            { question: "Where is the world's highest mountain system, the Himalayas, located?", options: ["Europe", "Asia", "Africa", "South America"], answer: 1, explanation: "The Himalayas are a mountain range in Asia separating the plains of the Indian subcontinent from the Tibetan Plateau." },
+            { question: "Where is the USA's film industry, Hollywood, located?", options: ["New York", "Chicago", "Los Angeles", "San Francisco"], answer: 2, explanation: "Hollywood is a neighborhood in the central region of Los Angeles, California." },
+            { question: "Where was the world's first atomic bomb dropped on August 6, 1945?", options: ["Nagasaki", "Tokyo", "Hiroshima", "Kyoto"], answer: 2, explanation: "The United States dropped an atomic bomb on the city of Hiroshima in Japan on August 6, 1945." },
+            { question: "What is the name of the place where the manuscripts of the Old Testament were kept in Golden Temple, Amritsar?", options: ["Akal Takht", "Harmandir Sahib", "Darshani Deori", "None of these"], answer: 0, explanation: "The Akal Takht is one of five takhts (seats of power) of the Sikhs, located in the Harmandir Sahib (Golden Temple) complex." },
+            { question: "Where are the headquarters of the US Department of Defense, The Pentagon, located?", options: ["New York", "Washington D.C.", "Arlington, Virginia", "Los Angeles"], answer: 2, explanation: "The Pentagon is located in Arlington County, Virginia, across the Potomac River from Washington, D.C." },
+            { question: "Where is the Taklamakan Desert located?", options: ["Mongolia", "China", "Kazakhstan", "Russia"], answer: 1, explanation: "The Taklamakan Desert is a sandy desert in Southwest Xinjiang, Northwest China." },
+            { question: "Where is the world's largest desert, the Sahara, located?", options: ["Asia", "Africa", "Australia", "South America"], answer: 1, explanation: "The Sahara is a desert on the African continent." },
+            { question: "Where is the Qutub Minar located?", options: ["Mumbai", "Delhi", "Agra", "Jaipur"], answer: 1, explanation: "The Qutub Minar is a minaret and 'victory tower' that forms part of the Qutb complex, a UNESCO World Heritage Site in Delhi, India." },
+            { question: "Where does the River Thames flow?", options: ["Paris", "Rome", "London", "Berlin"], answer: 2, explanation: "The River Thames is a river that flows through southern England, including London." },
+            { question: "Where is the official residence of the President of the USA, the White House, located?", options: ["New York", "Washington D.C.", "Chicago", "Boston"], answer: 1, explanation: "The White House is the official residence and workplace of the president of the United States, located in Washington, D.C." },
+            { question: "Where is Waterloo, the site of Napoleon's final defeat, located?", options: ["France", "Germany", "Belgium", "UK"], answer: 2, explanation: "Waterloo is a municipality in Wallonia, located in the province of Walloon Brabant, Belgium." },
+            { question: "Where is the Statue of Liberty located?", options: ["Washington D.C.", "Boston", "New York Harbor", "Philadelphia"], answer: 2, explanation: "The Statue of Liberty is a colossal neoclassical sculpture on Liberty Island in New York Harbor." },
+            { question: "Where are the Victoria Falls located?", options: ["On the border of Zimbabwe and Zambia", "Brazil", "Argentina", "Canada"], answer: 0, explanation: "Victoria Falls is a waterfall on the Zambezi River in southern Africa, which provides habitat for several unique species of plants and animals." },
+            { question: "Where is the 'West Bank' territory located?", options: ["Between Israel and Jordan", "Syria", "Egypt", "Lebanon"], answer: 0, explanation: "The West Bank is a landlocked territory near the Mediterranean coast of Western Asia, bordered by Jordan to the east and Israel to the south, west, and north." },
+            { question: "Where are the Pyramids of Giza located?", options: ["Luxor", "Cairo", "Aswan", "Alexandria"], answer: 1, explanation: "The Great Pyramids of Giza are located on the outskirts of Cairo, Egypt." },
+            { question: "Which countries are situated around the Black Sea?", options: ["Turkey, Syria, Bulgaria", "Bulgaria, Romania, Turkey", "Lebanon, Syria, Cyprus, Turkey", "Greece, Albania, Italy"], answer: 1, explanation: "The Black Sea is bordered by Ukraine, Romania, Bulgaria, Turkey, Georgia, and Russia." },
+            { question: "Where is Tahrir Square, a major public town square, located?", options: ["Tripoli, Libya", "Cairo, Egypt", "Tunis, Tunisia", "Damascus, Syria"], answer: 1, explanation: "Tahrir Square, also known as 'Martyr Square', is a major public town square in Downtown Cairo, Egypt." },
+            { question: "Where is Downing Street, the official residence of the British Prime Minister, located?", options: ["Manchester", "Birmingham", "London", "Liverpool"], answer: 2, explanation: "10 Downing Street in London is the official residence and office of the Prime Minister of the United Kingdom." },
+            { question: "Where is Wall Street, the financial district, located?", options: ["London", "Tokyo", "New York", "Hong Kong"], answer: 2, explanation: "Wall Street is a street in the Financial District of Lower Manhattan in New York City." },
+            { question: "Where is the 'Forbidden City', a palace complex, located?", options: ["Shanghai", "Beijing", "Hong Kong", "Xi'an"], answer: 1, explanation: "The Forbidden City is a palace complex in central Beijing, China." },
+            { question: "Where is the world's largest building by volume, the Boeing Everett Factory, located?", options: ["California", "Washington", "Texas", "Florida"], answer: 1, explanation: "The Boeing Everett Factory in Washington is the largest building in the world by volume." },
+            { question: "Where are the Alps, one of the great mountain range systems of Europe, located?", options: ["Spanning across 8 countries in Europe", "Only in Switzerland", "Only in Austria", "In Russia"], answer: 0, explanation: "The Alps are a mountain range system that stretches across eight Alpine countries in Europe." },
+            { question: "Where is the ancient city of Babylon located?", options: ["Modern-day Iran", "Modern-day Iraq", "Modern-day Syria", "Modern-day Egypt"], answer: 1, explanation: "The ruins of Babylon are located in modern-day Iraq." },
+            { "question": "The famous 'Leaning Tower' is located in which city?", "options": ["Rome", "Florence", "Pisa", "Venice"], "answer": 2, "explanation": "The Leaning Tower of Pisa is the campanile, or freestanding bell tower, of the cathedral of the Italian city of Pisa." },
+            { "question": "Where is the 'Great Barrier Reef', the world's largest coral reef system, located?", "options": ["Off the coast of California", "Off the coast of Queensland, Australia", "In the Caribbean Sea", "In the Red Sea"], "answer": 1, "explanation": "The Great Barrier Reef is located in the Coral Sea, off the coast of Queensland, Australia." },
+            { "question": "Where is the 'Christ the Redeemer' statue located?", "options": ["Mexico City, Mexico", "Lima, Peru", "Rio de Janeiro, Brazil", "Buenos Aires, Argentina"], "answer": 2, "explanation": "Christ the Redeemer is an Art Deco statue of Jesus Christ in Rio de Janeiro, Brazil." },
+            { "question": "Where is the ancient city of Petra located?", "options": ["Egypt", "Jordan", "Israel", "Saudi Arabia"], "answer": 1, "explanation": "Petra is a famous archaeological site in Jordan's southwestern desert." },
+            { "question": "Where is the 'Sistine Chapel', famous for its frescoes by Michelangelo, located?", "options": ["Florence", "Rome", "Vatican City", "Milan"], "answer": 2, "explanation": "The Sistine Chapel is a chapel in the Apostolic Palace, in Vatican City." },
+            { "question": "Where is the world's tallest building, the Burj Khalifa, located?", "options": ["Shanghai, China", "Dubai, UAE", "New York, USA", "Mecca, Saudi Arabia"], "answer": 1, "explanation": "The Burj Khalifa is a skyscraper in Dubai, United Arab Emirates." },
+            { "question": "Where is the ancient Inca citadel 'Machu Picchu' located?", "options": ["Colombia", "Ecuador", "Peru", "Bolivia"], "answer": 2, "explanation": "Machu Picchu is a 15th-century Inca citadel located in the Eastern Cordillera of southern Peru." },
+            { "question": "Where is the 'Acropolis', an ancient citadel containing the Parthenon, located?", "options": ["Rome, Italy", "Athens, Greece", "Cairo, Egypt", "Istanbul, Turkey"], "answer": 1, "explanation": "The Acropolis of Athens is an ancient citadel located on a rocky outcrop above the city of Athens." },
+            { "question": "Where is the famous opera house 'La Scala' located?", "options": ["Vienna, Austria", "Paris, France", "Milan, Italy", "London, UK"], "answer": 2, "explanation": "La Scala is a famous opera house in Milan, Italy." },
+            { "question": "Where is the 'Hermitage Museum', one of the largest art museums in the world, located?", "options": ["Moscow, Russia", "Saint Petersburg, Russia", "Paris, France", "London, UK"], "answer": 1, "explanation": "The State Hermitage Museum is a museum of art and culture in Saint Petersburg, Russia." },
+            { "question": "Where is 'Stonehenge', a prehistoric monument, located?", "options": ["Ireland", "Scotland", "Wiltshire, England", "Wales"], "answer": 2, "explanation": "Stonehenge is a prehistoric monument on Salisbury Plain in Wiltshire, England." },
+            { "question": "Where is the 'Angkor Wat' temple complex located?", "options": ["Thailand", "Vietnam", "Cambodia", "Laos"], "answer": 2, "explanation": "Angkor Wat is a temple complex in Cambodia and the largest religious monument in the world." },
+            { "question": "Where is the 'Golden Gate Bridge' located?", "options": ["New York City", "San Francisco", "Los Angeles", "Seattle"], "answer": 1, "explanation": "The Golden Gate Bridge is a suspension bridge spanning the Golden Gate, the one-mile-wide strait connecting San Francisco Bay and the Pacific Ocean." },
+            { "question": "Where is the 'Mount Rushmore' National Memorial located?", "options": ["Wyoming", "Montana", "South Dakota", "Colorado"], "answer": 2, "explanation": "Mount Rushmore National Memorial is centered on a colossal sculpture carved into the granite face of Mount Rushmore in the Black Hills in Keystone, South Dakota." },
+            { "question": "Where is the 'Niagara Falls' located?", "options": ["On the border between Canada and the USA", "Only in Canada", "Only in the USA", "In Mexico"], "answer": 0, "explanation": "Niagara Falls is a group of three waterfalls at the southern end of Niagara Gorge, spanning the border between the province of Ontario in Canada and the state of New York in the United States." },
+            { "question": "Where is the 'Eiffel Tower' located?", "options": ["Berlin, Germany", "Rome, Italy", "Paris, France", "Madrid, Spain"], "answer": 2, "explanation": "The Eiffel Tower is a wrought-iron lattice tower on the Champ de Mars in Paris, France." },
+            { "question": "Where is the 'Taj Mahal' located?", "options": ["Delhi, India", "Mumbai, India", "Agra, India", "Jaipur, India"], "answer": 2, "explanation": "The Taj Mahal is an ivory-white marble mausoleum on the south bank of the Yamuna river in the Indian city of Agra." },
+            { "question": "Where is the 'Louvre Museum', the world's largest art museum, located?", "options": ["London, UK", "Paris, France", "New York, USA", "Rome, Italy"], "answer": 1, "explanation": "The Louvre Museum is the world's largest art museum and a historic monument in Paris, France." },
+            { "question": "Where is the 'Red Square' located?", "options": ["Beijing, China", "Moscow, Russia", "Warsaw, Poland", "Kyiv, Ukraine"], "answer": 1, "explanation": "Red Square is one of the oldest and largest squares in Moscow, Russia." },
+            { "question": "Where is the 'Brandenburg Gate', an 18th-century neoclassical monument, located?", "options": ["Vienna, Austria", "Prague, Czech Republic", "Berlin, Germany", "Budapest, Hungary"], "answer": 2, "explanation": "The Brandenburg Gate is an 18th-century neoclassical monument in Berlin, Germany." },
+            { "question": "Where is the 'Grand Canyon' located?", "options": ["Utah", "Nevada", "Arizona", "Colorado"], "answer": 2, "explanation": "The Grand Canyon is a steep-sided canyon carved by the Colorado River in Arizona, United States." },
+            { "question": "Where is the 'Serengeti National Park', famous for its annual migration of wildebeest, located?", "options": ["Kenya", "Tanzania", "South Africa", "Ethiopia"], "answer": 1, "explanation": "The Serengeti National Park is a large national park in northern Tanzania." },
+            { "question": "Where is the 'Galapagos Islands', known for their unique wildlife, located?", "options": ["Off the coast of Chile", "Off the coast of Ecuador", "Off the coast of Colombia", "Off the coast of Peru"], "answer": 1, "explanation": "The Galápagos Islands are an archipelago of volcanic islands around the equator in the Pacific Ocean, belonging to Ecuador." },
+            { "question": "Where is 'Mecca', the holiest city in Islam, located?", "options": ["UAE", "Qatar", "Saudi Arabia", "Oman"], "answer": 2, "explanation": "Mecca is a city in the Hejazi region of Saudi Arabia." },
+            { "question": "Where is 'Vatican City', the smallest independent state in the world, located?", "options": ["Within Rome, Italy", "Within Milan, Italy", "On an island in the Mediterranean", "Bordering France"], "answer": 0, "explanation": "Vatican City is an independent city-state enclaved within Rome, Italy." },
+            { "question": "Where is the ancient city of 'Troy' located?", "options": ["Greece", "Italy", "Turkey", "Egypt"], "answer": 2, "explanation": "The archaeological site of Troy is located in modern-day Turkey." },
+            { "question": "Where is the 'Dead Sea', a salt lake known for its high salinity, located?", "options": ["Bordering Israel and Jordan", "In Egypt", "In Syria", "In Saudi Arabia"], "answer": 0, "explanation": "The Dead Sea is a salt lake bordered by Jordan to the east and Israel and the West Bank to the west." },
+            { "question": "Where is 'Silicon Valley', a global center for high technology and innovation, located?", "options": ["Southern California", "Northern California", "Texas", "Washington"], "answer": 1, "explanation": "Silicon Valley is a region in the southern part of the San Francisco Bay Area in Northern California." },
+            { "question": "Where is 'Pamplona', famous for the running of the bulls, located?", "options": ["Portugal", "France", "Spain", "Italy"], "answer": 2, "explanation": "Pamplona is the capital of the Navarre province in northern Spain." },
+            { "question": "Where is 'Timbuktu', a historical center of Islamic scholarship, located?", "options": ["Nigeria", "Niger", "Mali", "Chad"], "answer": 2, "explanation": "Timbuktu is a city in the West African nation of Mali." },
+            { "question": "Where is the 'Amazon Rainforest', the world's largest tropical rainforest, primarily located?", "options": ["Argentina", "Peru", "Brazil", "Colombia"], "answer": 2, "explanation": "The vast majority of the Amazon Rainforest (about 60%) is contained within Brazil." },
+            { "question": "Where is 'Mount Fuji', an active volcano and Japan's tallest peak, located?", "options": ["On the island of Hokkaido", "On the island of Honshu", "On the island of Kyushu", "On the island of Shikoku"], "answer": 1, "explanation": "Mount Fuji is located on the island of Honshu and is the highest mountain in Japan." },
+            { "question": "Where is the 'Loch Ness', famous for alleged sightings of a monster, located?", "options": ["Ireland", "Wales", "England", "Scotland"], "answer": 3, "explanation": "Loch Ness is a large, deep, freshwater loch in the Scottish Highlands." },
+            { "question": "Where is the 'Sahara Desert', the largest hot desert in the world, located?", "options": ["Southern Africa", "Northern Africa", "The Middle East", "Central Asia"], "answer": 1, "explanation": "The Sahara Desert covers much of Northern Africa." },
+            { "question": "Where is 'Mount Everest', the Earth's highest mountain above sea level, located?", "options": ["In India", "In China", "On the border of Nepal and China", "In Bhutan"], "answer": 2, "explanation": "Mount Everest is located in the Mahalangur Himal sub-range of the Himalayas, on the border between Nepal and the Tibet Autonomous Region of China." },
+            { "question": "Where is the 'Gobi Desert', a large desert region in Asia, located?", "options": ["In Western China and Southern Mongolia", "In India and Pakistan", "In Kazakhstan and Uzbekistan", "In Iran and Afghanistan"], "answer": 0, "explanation": "The Gobi Desert covers parts of Northern and Northwestern China and of Southern Mongolia." },
+            { "question": "Where is 'Angel Falls', the world's tallest uninterrupted waterfall, located?", "options": ["Brazil", "Colombia", "Venezuela", "Guyana"], "answer": 2, "explanation": "Angel Falls is a waterfall in Venezuela." },
+            { "question": "Where is the 'Mariana Trench', the deepest oceanic trench on Earth, located?", "options": ["In the Atlantic Ocean", "In the Indian Ocean", "In the western Pacific Ocean", "In the Arctic Ocean"], "answer": 2, "explanation": "The Mariana Trench is located in the western Pacific Ocean, to the east of the Mariana Islands." },
+            { "question": "Where is the 'Panama Canal', an artificial waterway connecting the Atlantic and Pacific oceans, located?", "options": ["Colombia", "Costa Rica", "Panama", "Nicaragua"], "answer": 2, "explanation": "The Panama Canal is located in Panama." },
+            { "question": "Where is the 'Suez Canal', an artificial sea-level waterway connecting the Mediterranean Sea to the Red Sea, located?", "options": ["In Egypt", "In Saudi Arabia", "In Jordan", "In Israel"], "answer": 0, "explanation": "The Suez Canal is located in Egypt." },
+            { "question": "Where is the 'Strait of Gibraltar', a narrow strait connecting the Atlantic Ocean to the Mediterranean Sea, located?", "options": ["Between Spain and Morocco", "Between Italy and Sicily", "Between Greece and Turkey", "Between France and the UK"], "answer": 0, "explanation": "The Strait of Gibraltar separates the Iberian Peninsula in Europe from Morocco in Africa." },
+            { "question": "Where is the 'Bermuda Triangle', a region where a number of aircraft and ships are said to have disappeared, located?", "options": ["In the western part of the North Atlantic Ocean", "In the Pacific Ocean", "In the Indian Ocean", "In the Caribbean Sea"], "answer": 0, "explanation": "The Bermuda Triangle is a loosely defined region in the western part of the North Atlantic Ocean." },
+            { "question": "Where is 'Area 51', a highly classified United States Air Force facility, located?", "options": ["Arizona", "New Mexico", "Nevada", "California"], "answer": 2, "explanation": "Area 51 is located in the southern portion of Nevada in the western United States." },
+            { "question": "Where is the 'Chernobyl Nuclear Power Plant', site of a major nuclear disaster, located?", "options": ["Russia", "Belarus", "Ukraine", "Poland"], "answer": 2, "explanation": "The Chernobyl Nuclear Power Plant is a closed nuclear power plant near the abandoned city of Pripyat in northern Ukraine." },
+            { "question": "Where is the 'Hollywood Walk of Fame' located?", "options": ["Beverly Hills", "Hollywood Boulevard, Los Angeles", "Santa Monica", "Malibu"], "answer": 1, "explanation": "The Hollywood Walk of Fame comprises more than 2,690 five-pointed terrazzo and brass stars embedded in the sidewalks along 15 blocks of Hollywood Boulevard and three blocks of Vine Street in Hollywood, California." },
+            { "question": "Where is the 'Alhambra', a palace and fortress complex of the Moorish rulers, located?", "options": ["Seville, Spain", "Cordoba, Spain", "Granada, Spain", "Madrid, Spain"], "answer": 2, "explanation": "The Alhambra is a palace and fortress complex located in Granada, Andalusia, Spain." },
+            { "question": "Where is the 'Neuschwanstein Castle', a 19th-century Romanesque Revival palace, located?", "options": ["Austria", "Switzerland", "Bavaria, Germany", "France"], "answer": 2, "explanation": "Neuschwanstein Castle is a 19th-century historicist palace on a rugged hill above the village of Hohenschwangau near Füssen in southwest Bavaria, Germany." },
+            { "question": "Where is the 'Blue Lagoon', a geothermal spa, located?", "options": ["Norway", "Sweden", "Finland", "Iceland"], "answer": 3, "explanation": "The Blue Lagoon is a geothermal spa in southwestern Iceland." },
+            { "question": "Where is the 'Ha Long Bay', known for its emerald waters and thousands of towering limestone islands, located?", "options": ["Thailand", "Vietnam", "Philippines", "Malaysia"], "answer": 1, "explanation": "Hạ Long Bay is a UNESCO World Heritage Site and popular travel destination in Quảng Ninh Province, Vietnam." },
+            { "question": "Where is the 'Victoria and Alfred Waterfront', a popular tourist destination, located?", "options": ["Durban, South Africa", "Cape Town, South Africa", "Port Elizabeth, South Africa", "Johannesburg, South Africa"], "answer": 1, "explanation": "The Victoria & Alfred Waterfront in Cape Town is situated on the Atlantic shore, Table Bay Harbour, the City of Cape Town and Table Mountain." },
+            { "question": "Where is 'Robben Island', where Nelson Mandela was imprisoned, located?", "options": ["Off the coast of Durban", "Off the coast of Cape Town", "In the Indian Ocean", "Near Johannesburg"], "answer": 1, "explanation": "Robben Island is an island in Table Bay, 6.9 kilometres west of the coast of Bloubergstrand, Cape Town, South Africa." },
+            { "question": "Where is the 'Champs-Élysées', one of the world's most famous avenues, located?", "options": ["Rome", "London", "Paris", "Berlin"], "answer": 2, "explanation": "The Avenue des Champs-Élysées is an avenue in the 8th arrondissement of Paris, France." },
+            { "question": "Where is the 'Las Vegas Strip', known for its concentration of resort hotels and casinos, located?", "options": ["California", "Arizona", "Nevada", "Utah"], "answer": 2, "explanation": "The Las Vegas Strip is a stretch of South Las Vegas Boulevard in Clark County, Nevada." },
+            { "question": "Where is the 'French Quarter', the oldest neighborhood in the city, located?", "options": ["New Orleans", "Charleston", "Savannah", "Boston"], "answer": 0, "explanation": "The French Quarter, also known as the Vieux Carré, is the oldest neighborhood in the city of New Orleans." },
+            { "question": "Where is 'Bourbon Street', famous for its nightlife, located?", "options": ["In the heart of the French Quarter in New Orleans", "In Miami", "In Las Vegas", "In New York City"], "answer": 0, "explanation": "Bourbon Street is a historic street in the heart of the French Quarter of New Orleans." },
+            { "question": "Where is the 'Times Square', a major commercial intersection and tourist destination, located?", "options": ["Los Angeles", "Chicago", "New York City", "Boston"], "answer": 2, "explanation": "Times Square is a major commercial intersection, tourist destination, entertainment center, and neighborhood in the Midtown Manhattan section of New York City." },
+            { "question": "Where is the 'Statue of David' by Michelangelo located?", "options": ["Rome", "Florence", "Venice", "Milan"], "answer": 1, "explanation": "Michelangelo's David is housed in the Galleria dell'Accademia in Florence, Italy." },
+            { "question": "Where is the 'Mona Lisa' by Leonardo da Vinci displayed?", "options": ["Uffizi Gallery, Florence", "Prado Museum, Madrid", "Louvre Museum, Paris", "British Museum, London"], "answer": 2, "explanation": "The Mona Lisa is on permanent display at the Louvre Museum in Paris." },
+            { "question": "Where is the 'Sagrada Família', a large unfinished Roman Catholic minor basilica, located?", "options": ["Madrid, Spain", "Lisbon, Portugal", "Barcelona, Spain", "Seville, Spain"], "answer": 2, "explanation": "The Basílica de la Sagrada Família is a large unfinished Roman Catholic minor basilica in the Eixample district of Barcelona, Catalonia, Spain." }
         ];
 
         // Shuffle questions and assign "special question"
@@ -423,9 +416,7 @@
         }
 
         function initializeQuizQuestions() {
-            // FIX: Use all available questions and shuffle them.
-            // The check for 100 questions which caused the error has been removed.
-            quizQuestions = shuffleArray([...allQuizQuestions]);
+            quizQuestions = shuffleArray([...allQuizQuestions]).slice(0, 100);
         }
 
 
@@ -471,7 +462,7 @@
 
         // Functions
         function updateLiveDate() {
-            const quizDate = new Date('2025-07-28T00:00:00');
+            const quizDate = new Date('2025-07-29T00:00:00');
             const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             const formattedDate = quizDate.toLocaleDateString('en-US', options);
             liveDateSpan.textContent = formattedDate;
@@ -599,10 +590,11 @@
             prevButton.classList.toggle('cursor-not-allowed', currentQuestionIndex === 0);
             prevButton.classList.toggle('cursor-pointer', currentQuestionIndex !== 0);
 
+            // Use visibility to hide the 'Next' button on the last question to preserve layout
             if (currentQuestionIndex === quizQuestions.length - 1) {
-                nextButton.textContent = 'Submit Quiz';
+                nextButton.style.visibility = 'hidden';
             } else {
-                nextButton.textContent = 'Next';
+                nextButton.style.visibility = 'visible';
             }
         }
 
@@ -610,14 +602,6 @@
             if (direction === 'next') {
                 if (currentQuestionIndex < quizQuestions.length - 1) {
                     loadQuestion(currentQuestionIndex + 1);
-                } else {
-                    if (!quizCompleted) {
-                        showModal("Are you sure you want to submit the quiz?", "confirm", (confirmed) => {
-                            if (confirmed) {
-                                submitQuiz();
-                            }
-                        });
-                    }
                 }
             } else if (direction === 'prev') {
                 if (currentQuestionIndex > 0) {
@@ -636,8 +620,7 @@
             const formattedFinalTime = `${finalMinutes.toString().padStart(2, '0')}:${finalSeconds.toString().padStart(2, '0')}`;
 
             resultNameSpan.textContent = userName;
-            // FIX: Display score out of the actual number of questions
-            resultScoreSpan.textContent = `${score} / ${quizQuestions.length}`;
+            resultScoreSpan.textContent = score;
             resultTimeSpan.textContent = formattedFinalTime;
             resultAttemptedSpan.textContent = questionsAttempted;
 
@@ -674,8 +657,8 @@
             const username = usernameInput.value.toUpperCase();
             const password = passwordInput.value;
 
-            // Updated login credentials for July 28
-            if (username === '28JULY' && password === 'free') {
+            // Updated login credentials for July 29
+            if (username === '29JULY' && password === 'free') {
                 loginPage.classList.add('hidden');
                 candidateInfoPage.classList.remove('hidden');
                 loginError.classList.add('hidden');
@@ -694,8 +677,7 @@
                 startTimer();
                 loadQuestion(currentQuestionIndex);
             } else {
-                // FIX: Show the name error message if name is not entered
-                nameError.classList.remove('hidden');
+                nameError.classList.add('hidden');
             }
         });
 
